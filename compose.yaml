@@ -1,0 +1,42 @@
+# EAP IRIS image MUST already be loaded locally; never push this runtime.
+services:
+  iris:
+    image: ${IRIS_IMAGE:?Set IRIS_IMAGE to the exact locally loaded build154 image}
+    pull_policy: never
+    init: true
+    restart: unless-stopped
+    environment:
+      SILENTSHIFT_IRIS_USERNAME: ${SILENTSHIFT_IRIS_USERNAME:?Reviewer account required}
+      SILENTSHIFT_IRIS_PASSWORD: ${SILENTSHIFT_IRIS_PASSWORD:?Reviewer password required}
+      SILENTSHIFT_VIEWER_USERNAME: ${SILENTSHIFT_VIEWER_USERNAME:?Viewer account required}
+      SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?Viewer password required}
+      SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?Gateway password required}
+      SILENTSHIFT_MODEL: ${SILENTSHIFT_MODEL:-gpt-5-nano}
+      SILENTSHIFT_LLM_BASE_URL: ${SILENTSHIFT_LLM_BASE_URL:-}
+      SILENTSHIFT_LLM_API_KEY: ${SILENTSHIFT_LLM_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - ./:/opt/silentshift:ro
+      - iris-manager:/usr/irissys/mgr
+    healthcheck:
+      test: ['CMD-SHELL', 'iris qlist IRIS | cut -d "^" -f 4 | grep -q running']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+  gateway:
+    image: ${WEBGATEWAY_IMAGE:-containers.intersystems.com/intersystems/webgateway:2026.1}
+    init: true
+    restart: unless-stopped
+    depends_on:
+      iris:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:52773:80'
+    environment:
+      ISC_CSP_CONF_FILE: /silentshift-gateway/CSP.conf
+      ISC_CSP_INI_FILE: /silentshift-gateway/CSP.ini
+    volumes:
+      - ./docker/CSP.conf:/silentshift-gateway/CSP.conf:ro
+      - ./.local/gateway/CSP.ini:/silentshift-gateway/CSP.ini
+volumes:
+  iris-manager:

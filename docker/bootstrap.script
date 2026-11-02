@@ -1,0 +1,9 @@
+zn "SILENTSHIFT"
+set sc=$system.OBJ.LoadDir("/opt/silentshift/src","k",,1)
+if $system.Status.IsError(sc) { write "SILENTSHIFT_LOAD_FAILED",! halt }
+set sc=$system.OBJ.CompilePackage("SilentShift","ck")
+if $system.Status.IsError(sc) { write "SILENTSHIFT_COMPILE_FAILED",! halt }
+set sc=##class(SilentShift.Setup).Install()
+if $system.Status.IsError(sc) { write $system.Status.GetErrorText(sc),! halt }
+write "SILENTSHIFT_BOOTSTRAP_OK",!
+halt
