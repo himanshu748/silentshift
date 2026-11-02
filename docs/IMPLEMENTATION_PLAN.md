@@ -5,7 +5,7 @@
 | 0 Research | Official sources, local audit | Pin154 APIs/rules; inspect Docker, credentials, disk | Rules/native research complete; EAP login and runtime blocked |
 | 1 Native foundation | Official image, runnable Docker | Compile classes; ingest through service/process/operation; SQL receipt and Visual Trace | Source implemented; native compilation/execution blocked |
 | 2 Native AI Hub | M1, supported tool-capable model | Native evidence tools + structured proposal from a production case | Adapter/tools implemented; native run blocked |
-| 3 Semantic safety | M1–2, pure engine | Five scenarios + adversarial/duplicate/stale tests; no unsafe deliveries | 107 local tests passed; actual native scenarios blocked |
+| 3 Semantic safety | M1–2, pure engine | Five scenarios + adversarial/duplicate/stale tests; no unsafe deliveries | 111 local tests passed; actual native scenarios blocked |
 | 4 Workbench | Real API contract | Functional seven routes, actual cases, scenario injection, reviews; browser desktop/mobile/keyboard/reduced motion | Seven views implemented; 20 disconnected browser checks passed; connected journey blocked |
 | 5 Evaluation | Frozen fixtures, M3 | Actual rule-only/native/final metrics, denominators and nullable usage | Local 5/5 observed; native metrics null/denominator 0; capture API implemented/uncompiled |
 | 6 Reliability | M3–4 | Auth, duplicate/restart, timeout/late result, malicious data, malformed proposal | Native failure paths gate release |

@@ -9,6 +9,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from compose_support import compose_command
+
 
 def command(args: list[str]) -> dict:
     try:
@@ -22,13 +24,16 @@ def command(args: list[str]) -> dict:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     free = shutil.disk_usage(root).free / 1024**3
+    compose_cli = compose_command()
+    compose = command(compose_cli + ["version", "--short"]) if compose_cli else {"ok": False, "error": "Modern Docker Compose not found"}
+    compose["command"] = compose_cli
     report = {
         "architecture": platform.machine(), "python": platform.python_version(),
         "free_disk_gib": round(free, 2),
         "credentials_present": {name: bool(os.environ.get(name)) for name in (
             "SILENTSHIFT_LLM_API_KEY", "OPENAI_API_KEY", "SILENTSHIFT_IRIS_USERNAME", "SILENTSHIFT_IRIS_PASSWORD")},
         "docker": command(["docker", "version", "--format", "{{json .Server.Version}}"]),
-        "compose": command(["docker", "compose", "version", "--short"]),
+        "compose": compose,
         "local_images": command(["docker", "images", "--format", "{{.Repository}}:{{.Tag}}"]),
         "node": command(["node", "--version"]),
         "notes": ["Credential presence does not prove provider authorization or credits.",

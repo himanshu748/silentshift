@@ -11,6 +11,8 @@ import subprocess
 import sys
 import time
 
+from compose_support import compose_command
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -69,9 +71,9 @@ def main() -> int:
     if shutil.which('docker') is None:
         print('Docker CLI is unavailable. Install/start Docker or Colima before native bootstrap.', file=sys.stderr)
         return 2
-    compose_available = run(['docker', 'compose', 'version'], quiet=True, check=False)
-    if compose_available.returncode:
-        print('Docker Compose v2 is unavailable. Configure docker compose before native bootstrap.', file=sys.stderr)
+    compose_cli = compose_command(env)
+    if compose_cli is None:
+        print('Modern Docker Compose is unavailable. Configure docker compose or docker-compose (version 2+) before bootstrap.', file=sys.stderr)
         return 2
     daemon_available = run(['docker', 'info', '--format', '{{.ServerVersion}}'], quiet=True, check=False)
     if daemon_available.returncode:
@@ -86,7 +88,7 @@ def main() -> int:
     if loaded.returncode:
         print('Required IRIS image is not loaded. Download the official EAP kit, then use --image-archive.', file=sys.stderr)
         return 2
-    compose = ['docker', 'compose', '--env-file', '.env']
+    compose = compose_cli + ['--env-file', '.env']
     run(compose + ['config', '--quiet'], quiet=True)
     local = ROOT / '.local' / 'gateway'
     local.mkdir(parents=True, exist_ok=True, mode=0o700)
