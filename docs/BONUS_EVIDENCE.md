@@ -2,7 +2,7 @@
 
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build 154 ARM64. No new hosting, publishing, forum posts, registry publication or form submissions are authorized. Earlier public core source and the questionnaire receipt are historical facts; this work does not update external services.
+Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build 154 ARM64. The user authorized publishing the verified source to GitHub `main` on November 4. Hosting, article/registry publication and form submissions remain outside scope. The earlier questionnaire receipt is a separate historical fact.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
 |---|---:|---|

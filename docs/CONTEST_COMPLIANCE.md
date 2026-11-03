@@ -56,7 +56,7 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 | Native execution | LOCALLY_VERIFIED: actual 154 production, native agent tools, five scenario outcomes; synthetic simulator scope |
 | Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
 | Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
-| Public repository | CONFIRMED core at [b836d2d](https://github.com/himanshu748/silentshift/tree/b836d2d); current extensions are committed locally and unpushed |
+| Public repository | CONFIRMED: verified extensions through [61b7278](https://github.com/himanshu748/silentshift/commit/61b7278) published on `main`, November 4 |
 | OEX application | SAVED_DRAFT earlier, with contest checkbox and idea link; not sent for approval |
 | Contest registration | NOT_STARTED externally; no separate registered-entry confirmation |
 | Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |

@@ -1,8 +1,8 @@
 # Open Exchange application copy
 
-Prepared locally. Publish the reviewed source changes before using this copy;
-the linked public repository currently contains the earlier core. No application
-or contest form was submitted by this work.
+Prepared locally. The linked public `main` branch now includes the verified
+sponsor extensions through `61b7278`. No application or contest form was
+submitted by this work.
 
 ## Name and summary
 
@@ -59,9 +59,8 @@ hosted demonstration is provided.
 | Technologies | InterSystems IRIS AI Hub, Interoperability, Embedded Python, Workflow Engine, IRIS Vector Search, React, Ollama, Docker, IPM |
 | Video / hosted demo | Leave empty until an actual published URL is checked |
 
-The source links address `main`, which currently contains the earlier core.
-The sponsor extensions are local commits. Check the rendered links after the
-user publishes the reviewed branch. Select only categories the portal offers.
+The source links address public `main`, including the verified sponsor
+extensions. Select only categories the portal offers.
 
 ## Verified bonus support
 

@@ -6,7 +6,7 @@ An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is 
 
 The same incoming value can be legitimate: an effective approved amendment authorizing `20 CASE` lets the order proceed. SilentShift makes that distinction using independent reference records, a native IRIS AI Hub investigation and deterministic Embedded Python policy.
 
-**[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public core source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
+**[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
 
 ## Follow the evidence to a decision
 
@@ -193,7 +193,7 @@ Unknown references, malformed agent output, evidence gaps and dependency failure
 
 [PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Open Exchange copy](docs/OPEN_EXCHANGE_COPY.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. An Open Exchange draft was saved with the contest checkbox and dedicated idea link; it was not sent for approval or registered as an entry. The questionnaire has a submitted receipt. Articles remain local drafts, and a local video is not a YouTube publication. No bonus award is claimed from implementation alone. Current work is local; publishing and hosting require separate authorization.
+The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. An Open Exchange draft was saved with the contest checkbox and dedicated idea link; it was not sent for approval or registered as an entry. The questionnaire has a submitted receipt. Articles remain local drafts, and a local video is not a YouTube publication. No bonus award is claimed from implementation alone. The verified sponsor extensions are published on `main`. Hosting, article/registry publication and application/contest submissions still require separate authorization.
 
 ## License and attribution
 

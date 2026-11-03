@@ -1,4 +1,4 @@
-<!-- LOCAL DRAFT — NOT PUBLISHED. Public core source URL verified; current extension changes and article remain local pending release review and separate publication authorization. -->
+<!-- ARTICLE DRAFT — NOT PUBLISHED TO DEVELOPER COMMUNITY. Verified source and extensions are on public GitHub main; article publication requires separate authorization. -->
 
 # Check business meaning before delivering an IRIS transaction
 

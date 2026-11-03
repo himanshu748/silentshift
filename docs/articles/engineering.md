@@ -1,4 +1,4 @@
-<!-- LOCAL DRAFT — NOT PUBLISHED. Public core source verified; native Workflow proof 43/43 in docs/evidence/workflow.json. Current extension changes and article remain local pending release review and separate publication authorization. -->
+<!-- ARTICLE DRAFT — NOT PUBLISHED TO DEVELOPER COMMUNITY. Verified source and extensions are on public GitHub main; article publication requires separate authorization. -->
 
 # A held transaction needs a review that survives failure
 
