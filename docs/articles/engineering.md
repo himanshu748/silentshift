@@ -1,75 +1,126 @@
-<!-- ARTICLE DRAFT — NOT PUBLISHED TO DEVELOPER COMMUNITY. Verified source and extensions are on public GitHub main; article publication requires separate authorization. -->
+# Recoverable human review in IRIS: from approval to one delivery
 
-> Preparation note — exclude from the published article: replace `<OPEN_EXCHANGE_APP_URL>` below with the checked public application URL after acceptance. The Open Exchange application is a saved draft. The article body starts at the title.
+An operator approves a held transaction. The server saves the decision, then native Workflow completion fails. The browser receives HTTP 503.
 
-# A held transaction needs a review that survives failure
+At that point, an ordinary “Try again” button asks the operator to guess what happened. Did the approval persist? Is another reason required? Would a second click create another delivery?
 
-Holding a questionable transaction is only the start. The operator still needs to understand the evidence, record a decision and know whether the destination received it. If completion fails after the decision is saved, asking the operator to start again creates a second uncertainty.
+SilentShift treats this interruption as a recoverable state. The saved decision remains visible, the case stays held, and **Resume recorded review** continues the original request. In the controlled recovery test, that continuation completed the native task and produced one destination-simulator receipt.
 
-SilentShift gives that review a native IRIS Workflow task. The original message, approved references, AI recommendation and deterministic policy stay with the investigation. The worklist owns the human task; the browser displays its persisted state.
+This article explains the boundary between the decision, native task completion and delivery. All transactions are synthetic; the destination is an IRIS simulator.
 
-The demonstration uses synthetic orders and payments. Delivery means a receipt in an IRIS destination simulator, with no real shipment or payment.
+## Put the human wait in native Workflow
 
-## Give a hold an owner
+SilentShift investigates changes in business meaning inside an IRIS interoperability production. Its AI Hub agent gathers evidence and proposes a route; Embedded Python policy determines whether the evidence permits release. The [first article](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) explains the contract comparison and the agent's read-only tools.
 
-SilentShift catches changes in business meaning even when a message is technically valid. For example, `20 CASE` cannot replace an approved commitment of `240 EA` without approved conversion or amendment evidence. An effective amendment can make that same incoming value legitimate.
+A held investigation still needs an owner. SilentShift uses a separate durable [`Coordinator`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow/Coordinator.cls) Business Process to send a `ReviewRequest` asynchronously to an `EnsLib.Workflow.Operation`. The task handler extends `EnsLib.Workflow.TaskResponse`.
 
-The native AI Hub agent investigates through four read-only, case-scoped tools. It recommends a decision. Embedded Python policy independently checks the evidence before IRIS chooses delivery, quarantine or review.
+The coordinator can wait for the native deferred response without keeping the original HTTP request or an operation job occupied while a human considers the case. The original investigation finishes in its held state; the native task owns the longer human wait.
 
-A new review or quarantine hold asks a separate native coordinator Business Process to create a task through `EnsLib.Workflow.Operation`. The task appears in the `ReviewWorklist` role. The demo configures one authorized reviewer; it does not claim a tested multi-user assignment scheme. The original processing request can finish while the human task waits durably.
+The demo configures one reviewer in the native `ReviewWorklist` role. That membership is separate from the IRIS `SSReview` permission checked by the application. A new decision requires both the authorized application identity and the corresponding native reviewer/task association. Multi-user allocation and escalation are outside this implementation.
 
-The operator opens the reviewer-only Review view to see pending native tasks, then reads the case, references, precedent evidence, policy reasons and native task state together. Critical contradictions cannot be manually approved. A valid human decision requires reviewer permission, a reason, a current case version and an idempotency key.
+The workbench reads pending tasks from the native worklist through the API and opens their investigation evidence. A browser label cannot establish that a task is actionable: the server verifies its case, role, assignment and worklist association.
 
-![Actual pending native Workflow tasks in the SilentShift Review view](https://raw.githubusercontent.com/himanshu748/silentshift/main/docs/assets/review-native-worklist.png)
+![Pending native Workflow tasks in the SilentShift Review view](https://raw.githubusercontent.com/himanshu748/silentshift/main/docs/assets/review-native-worklist.png)
 
-## Separate a recorded decision from a completed route
+## Persist the decision before attempting completion
 
-The review API first checks policy and claims the native task for the authorized reviewer. It commits a review receipt containing the action, reason, identity, original case version and key. It then completes the native task and applies the permitted route.
+The review request carries four application fields. This illustrative body shows their shape; its version and key are examples:
 
-If native completion fails after that commit, SilentShift returns an unavailable response and preserves `completion_pending`. The case stays held. The product offers **Resume recorded review**, reconstructing the exact request from its server-side receipt. The operator can inspect the reason but cannot silently change it into a different request.
+```json
+{
+  "action": "approve",
+  "reason": "The approved amendment covers this event.",
+  "expected_version": 12,
+  "idempotency_key": "review-example-001"
+}
+```
 
-A retry carries the original version, even when later workflow events have advanced the case version. IRIS recognizes the existing receipt, resumes completion and retains one destination receipt. A new key cannot replace an already committed native-task decision.
+The server derives reviewer identity from the authenticated request. It checks a new decision against the current case version, requires a bounded reason, evaluates deterministic policy and claims the native task. Approval cannot override a critical contradiction, and the native task callback repeats the authorization check.
 
-The native callback also checks reviewer authority and the matching committed receipt. Calling the Workflow action directly cannot bypass the application's policy.
+[`Store.Review`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Store.cls) then commits the case update, a `ReviewAction` receipt and the review event in one IRIS transaction. The receipt retains the action, reason, reviewer, original case version and idempotency key. The workflow status becomes `completion_pending`.
 
-## Test the interruption, then use the product to recover
+Only after that commit does the application synchronize native completion. The native ownership claim has its own persistence; no application transaction spans the Workflow engine's deferred-response enqueue path. Treating those operations as one indivisible transaction would conceal the interruption the product must recover from.
 
-We exercised a controlled completion failure on a new synthetic case. Its eleven-reference snapshot exceeded the model's evidence budget, so inference was skipped and the case entered review. The approved references were preserved for human inspection.
+The resulting states are deliberately distinct:
 
-The test temporarily made that task's native deferred-response destination invalid. The review API returned HTTP 503 after committing the approval; the native task remained incomplete, the route stayed `REVIEW`, and there were zero delivery receipts. The original native token was restored immediately.
+| Observed state | Persisted review decision | Native completion confirmed | Simulator delivery |
+|---|---|---|---|
+| Awaiting a reviewer | No | No | None |
+| `completion_pending` | Yes | Not yet | Held during synchronization failure |
+| Completed approval and delivery | Yes | Yes | One receipt in the verified journey |
+| Completed rejection | Yes | Yes | None |
 
-After reconnecting to the workbench, the persisted case offered its original review for resumption. The modal displayed the original version and locked reason. One click completed the native task and delivered once to the simulator. The first decision's identity, reason, version and key remained unchanged.
+A committed decision therefore does not make the UI claim that delivery succeeded. The native task and destination receipt provide the remaining evidence.
 
-A separate conflicting-evidence case exercised rejection with zero deliveries, viewer denial, stale-version rejection and direct native-action denial. Its model request timed out safely; the receipt does not count that request as a successful native recommendation. The [43-check review evidence](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/workflow.json) separates this recovery experiment from the five-case model evaluation.
+## Check the receipt before checking a retry's version
 
-The [54-check native worklist receipt](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json) verifies the pending-task API, rejection and two simultaneous identical approvals. Both approval requests returned 200 and produced one review receipt, one native completion response and one delivery. Separate workbench actions completed approval and rejection. The controlled failure above remains narrower evidence; recovery from every outage, crash or external destination failure is unverified.
+Versioning and idempotency solve different problems. `expected_version` prevents a new decision based on stale evidence. The idempotency key identifies a decision that may already have committed.
 
-## Make the effect visible at the boundary
+The distinction becomes visible after a failure. Saving the first decision advances the case version. Native workflow events can advance it again. A retry of the same decision still carries its original version; replacing that version would change the request the operator authorized.
 
-A saved decision, a completed native task and a destination effect are separate facts. SilentShift preserves all three. The operator can inspect the task state and recorded decision, then count the actual simulator receipts. An earlier file acknowledgement also remains an immutable snapshot of the outcome it first observed; a later review changes the case instead of rewriting that earlier acknowledgement.
+The implementation checks for the receipt before applying the new-decision version check. Its control flow can be summarized as follows; this is explanatory pseudocode:
 
-The same discipline applies to agent observability. Each actual local provider HTTP request and response is recorded in the original case's interoperability session. Native tool reads and the final policy remain distinguishable from the model call. A successful model answer is evidence of a recommendation; the simulator receipt establishes the included destination's effect. Unknown usage and provider retry fields remain explicitly unavailable.
+```text
+lock case
+receipt = lookup(case_id, idempotency_key)
 
-## Try the same review journey
+if receipt exists:
+    require identical authenticated reviewer and request fingerprint
+    unlock case
+    resume native completion
+else:
+    require current case version and an undecided native task
+    require reviewer authority, reason and policy permission
+    claim native task
+    commit case + review receipt + review event
+    unlock case
+    synchronize native completion
+```
 
-Follow the [native setup](https://github.com/himanshu748/silentshift/blob/main/README.md#native-build-154-setup) with an authorized Community AI Hub build 154 image and your own private configuration. Bootstrap installs the native worklist and coordinator without calling a model. The enclosing investigation wait is configurable from 10 through 120 seconds and defaults to 60; the tested constrained local 4B setup explicitly uses 120. Expiry keeps the case held and does not establish provider cancellation.
+The fingerprint includes the authenticated reviewer and canonical request body. Reusing the same key with a different reason, action or version is a conflict. Choosing a new key also cannot replace an already committed task decision. These checks give a retry a narrow meaning: continue the recorded decision.
 
-To inspect pending tasks through the current product, connect as the configured reviewer, open **Review**, select a task and follow its investigation. Eligible approval requires a reason; rejection is available for a critical contradiction while approval stays blocked. The [current queue verifier](https://github.com/himanshu748/silentshift/blob/main/scripts/verify_native_review_queue.py) creates isolated synthetic cases whose evidence-budget guard skips LLM inference:
+The workbench reflects that rule. **Resume recorded review** reconstructs the original request from the server-side receipt and displays its locked reason. It does not silently turn a recovery attempt into a fresh approval.
+
+## Serialize completion separately from decision persistence
+
+The case lock protects the decision commit. [`SyncCompletion`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow/Support.cls) uses a separate completion lock so concurrent exact-key retries cannot independently enqueue the same native response.
+
+Before completing a task, the server verifies the task/case binding, reviewer assignment and matching committed receipt. For approval, it re-evaluates policy. The task's `OnAction` callback uses that same authorization boundary, so invoking a native Workflow action directly cannot bypass the application decision.
+
+There is another failure window inside native completion: the worklist item can be removed before its deferred response is successfully enqueued. Recovery cannot rely exclusively on finding that item again. The completion code checks the persisted task and receipt, then resumes through the guarded task callback when needed. The pending-task API also includes receipt-backed held cases so this intermediate state remains discoverable.
+
+At the final boundary, the simulator destination independently checks policy and persists a unique receipt. The concurrency test sent two simultaneous identical approvals. Both requests returned HTTP 200; the observed result was one review receipt, one native completion response and one delivery.
+
+That is the demonstrated guarantee for this persisted simulator. A real shipment or payment endpoint would need its own effect and retry contract; these tests do not establish exactly-once behavior for arbitrary external systems.
+
+## Inject the failure after the commit
+
+The useful recovery test interrupts the gap between saving a decision and completing its effect. A validation error before persistence would exercise a different path.
+
+For the controlled experiment, a synthetic case had an eleven-reference snapshot, exceeding the agent's evidence budget. Inference was skipped and the case entered review with its approved evidence preserved. The test temporarily made the native task's deferred-response destination invalid, then submitted an otherwise eligible approval.
+
+The API returned HTTP 503 after the approval committed. Inspection showed `completion_pending`, routing `REVIEW` and zero deliveries. The original native token was restored immediately.
+
+After reconnecting, the operator could see the saved reason and original version. **Resume recorded review** completed the native task and delivered once. Repeating the original request preserved the same decision and the same one delivery.
+
+The [recovery receipt](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/workflow.json) records that experiment. The separate [worklist receipt](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json) covers concurrent identical approvals, rejection and pending-task reads. Viewer denial, stale-version rejection and direct native-action denial were also exercised. These are controlled tests of specific boundaries; they do not cover every crash, outage or external destination failure.
+
+## Reproduce the boundary through the product
+
+Start with the [native build-154 setup](https://github.com/himanshu748/silentshift#native-build-154-setup), using the official licensed AI Hub image and private local configuration. Bootstrap installs the coordinator and worklist without making a model call.
+
+To create isolated synthetic review cases and exercise the queue, approval, rejection and concurrency paths without LLM inference, run:
 
 ```sh
 uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 ```
 
-The separate recovery verifier creates one new local-model conflict investigation and a no-model boundary case:
+The separate controlled recovery verifier creates a no-model boundary case and makes one local-model conflict investigation:
 
 ```sh
 uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
 ```
 
-Use the explicit flag only with the documented local inference route. Inspect the investigation in the workbench, then compare its native worklist state, recorded decision and simulator receipt. The [source](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow) shows the native task lifecycle; the [build notes](https://github.com/himanshu748/silentshift/blob/main/docs/BUILD_STATUS.md) state the tested scope and remaining limits.
+Use the local inference configuration documented in the repository. Open **Review** as the configured reviewer and inspect the task's investigation. Compare the saved review receipt, native task state and simulator receipt before and after recovery. The [captioned demo](https://youtu.be/a4dOcqu89EA) shows the workbench and native components; the [reproduction guide](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md) supplies the shorter operator walkthrough.
 
-The operator can resume the recorded decision and inspect the one simulator receipt. The saved reason, version and key stay attached to that decision.
-
-**Source and installation:** [SilentShift on GitHub](https://github.com/himanshu748/silentshift)
-
-**Open Exchange application:** [SilentShift on Open Exchange](<OPEN_EXCHANGE_APP_URL>)
+[Open Exchange application](https://openexchange.intersystems.com/package/SilentShift) · [Source and installation](https://github.com/himanshu748/silentshift) · [Native Workflow implementation](https://github.com/himanshu748/silentshift/tree/main/src/SilentShift/Workflow)

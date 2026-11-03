@@ -5,7 +5,7 @@ It is a 2:30 captioned edit of actual recorded application and native-trace
 captures: 1920×1080, H.264, 30 fps, AAC silence, burned-in captions and an embedded
 English caption track. The separate [English SRT](../evidence/video/silentshift-demo.srt)
 is suitable for YouTube's caption upload. There is no generated narration or music.
-No video has been uploaded by this preparation work.
+Published November 4, 2026: [https://youtu.be/a4dOcqu89EA](https://youtu.be/a4dOcqu89EA). Public playback exposes 1080p HD and English captions; anonymous oEmbed returned HTTP 200 with the expected title and author.
 
 ## Title
 
@@ -50,10 +50,10 @@ A ready raster thumbnail is [the unit-comparison frame](../evidence/video/thumbn
 2. Paste the title, description and tags above. Answer audience/disclosure questions truthfully; this captioned edit uses recorded synthetic application data and no generated voice.
 3. In Studio, open **Subtitles** → select the video → **Add language** → English → under Subtitles, **Add** → **Upload file** → **With timing** → **Continue** → choose `silentshift-demo.srt` → **Save**. Check the captions against playback. YouTube also supports caption upload during the video-upload flow.
 4. Finish YouTube's checks and choose visibility permitted by the contest. **Public** is the safest judge-access choice. Publish only when you are ready.
-5. Copy the actual watch URL, open it while signed out and confirm 1080p playback and captions. Use that URL for `<YOUTUBE_VIDEO_URL>` in the README, Open Exchange copy and overview article. Never paste the placeholder into a live form.
-6. After the application is public, optionally append `Open Exchange: <OPEN_EXCHANGE_APP_URL>` to the live description, replacing the token with its checked public URL. Omit that line until the URL exists.
+5. The saved watch URL is `https://youtu.be/a4dOcqu89EA`; the README, Open Exchange and articles now link it. Anonymous metadata access and authenticated 1080p/caption playback were verified; a complete signed-out playback check remains in the final checklist.
+6. After application approval, optionally append `Open Exchange: https://openexchange.intersystems.com/package/SilentShift` to the live description and verify the link.
 
-Video publication and bonus acceptance remain manual. The final ordered handoff,
+Video publication is complete; bonus acceptance remains an organizer decision. The final ordered handoff,
 including the application and articles, is [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
 
 Official instructions checked November 4: [Upload videos](https://support.google.com/youtube/answer/57407?hl=en) and [Add subtitles and captions](https://support.google.com/youtube/answer/2734796?hl=en).

@@ -1,6 +1,6 @@
 # Open Exchange application copy
 
-Prepared locally for the user to paste. Source is public; the Open Exchange application remains an earlier saved draft. This document does not submit, publish or register anything.
+The fields below were saved to [SilentShift 0.1.0](https://openexchange.intersystems.com/package/SilentShift) on November 4, 2026. The portal confirmed **Your application was sent for approval successfully** and **Sent for approval**. The application page shows **Awaiting Review**. Contest entry and public registry availability remain unconfirmed.
 
 ## Fields to paste
 
@@ -48,7 +48,7 @@ Start with [the operator walkthrough](https://github.com/himanshu748/silentshift
 
 Source: [github.com/himanshu748/silentshift](https://github.com/himanshu748/silentshift)
 
-Demo video: `<YOUTUBE_VIDEO_URL>`
+Demo video: `https://youtu.be/a4dOcqu89EA`
 
 ### Tags
 
@@ -64,31 +64,20 @@ AI Hub, Interoperability, Embedded Python, Workflow Engine, Vector Search, Objec
 | About URL | `https://github.com/himanshu748/silentshift` |
 | Documentation URL | `https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md` |
 | License URL | `https://github.com/himanshu748/silentshift/blob/main/LICENSE` |
-| YouTube URL | `<YOUTUBE_VIDEO_URL>` |
+| YouTube URL | `https://youtu.be/a4dOcqu89EA` |
 | Ideas Portal link | `https://ideas.intersystems.com/ideas/DPI-I-689` |
 | Call to Action label | `Run SilentShift` |
 | AI / ML selections | Select both; the application uses native agent inference and neural embeddings. |
 | Submit to Contest | Check for **InterSystems Programming Contest: AI Agents in Interoperability Workflows**. |
-| Publish in Package manager | Check when the user requests public IPM publication; a clean local installation is verified, but public registry publication/install remain unverified. |
+| Publish in Package manager | Checked in the saved approval request. Clean local installation verified; public registry publication/install unverified. |
 | Demo URL | Leave empty: there is no hosted application. Put the published video in YouTube URL. |
-| Community Article URL | Leave empty until an article is actually published. |
+| Community Article URL | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Workflow recovery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery); both submitted for moderation and associated with the app. |
 
-## Preparation notes — do not paste into the description
+## Saved submission and remaining clicks
 
-- Replace `<YOUTUBE_VIDEO_URL>` only after the uploaded video's playback and access are checked. Remove its description line if submitting without a published video; never paste a placeholder into a live URL field.
-- The future public application URL is `<OPEN_EXCHANGE_APP_URL>`. Obtain it from the accepted public application page. The portal's private edit URL is not the application link for an article or README.
-- Use only offered technology/category choices that match the implementation. Tags can be selected or created. All five extension receipts are linked from [the bonus evidence](BONUS_EVIDENCE.md); they are engineering evidence, not awarded points.
-- The short description is a separate catalog field. Paste only its sentence, not the section heading. Copy the Full Description from its first paragraph through its demo line; the later tables and manual steps are preparation material.
+1. Completed: **My Applications → SilentShift → Edit → Save**, with the video URL, dedicated DPI-I-689 field, contest selection and Package Manager option. Both original article URLs are saved in **Community Article URL**. The technical rewrites changed their slugs; canonical links are in the table above and need a final association/redirect check.
+2. Completed: **Send for approval → New version 0.1.0 → Release date November 4, 2026 → release notes → Send**. The portal returned **Your application was sent for approval successfully** and now offers **Cancel approval**. Do not cancel or create a duplicate application.
+3. Pending: after moderation publishes the app, open [contest 49](https://openexchange.intersystems.com/contest/49) → **Apply → SilentShift → complete entry**. Keep the separate contest confirmation. The actual current Apply dialog says this account has no published app and requires publication before selection.
+4. Pending: verify both article moderation results and the public IPM listing/install. The saved Package Manager checkbox and displayed IPM badge alone do not prove registry availability.
 
-## Manual approval and contest clicks
-
-These are instructions for the user, verified read-only against official documentation on **November 4, 2026**. No click below has been performed by this preparation work.
-
-1. Sign in to [Open Exchange](https://openexchange.intersystems.com/), open the avatar menu and enter **Developer portal**. Open the applications list: the submission guide calls it **All applications**; the editing guide calls it **Your Applications**. Select the existing **SilentShift** draft or its edit action. Create **New Application** only if that draft is absent. [Official editing route](https://docs.openexchange.intersystems.com/apps/update/), [submission route](https://docs.openexchange.intersystems.com/apps/submit/).
-2. Paste the fields above. Recheck any content populated from GitHub, then set the contest checkbox and dedicated Ideas Portal link. Add only real published resource URLs. Request package-manager publication only if choosing to proceed with that separate external step. [Official field and package-manager guidance](https://docs.openexchange.intersystems.com/apps/submit/), [IPM publication guide](https://docs.openexchange.intersystems.com/apps/ipm/).
-3. Click **Save**, then **Preview**. Inspect the rendered description, source/setup links, technology selections, idea link and any video. Saving retains a draft; previewing does not publish it. [Official draft/preview behavior](https://docs.openexchange.intersystems.com/apps/submit/).
-4. When ready to request moderation, click **Send for Approval**. Retain the confirmation and status shown by the portal. This requests review; publication occurs after acceptance. For later edits to an already public app, the documented choices are **Send edits** for information changes or **Release app** when deliberately creating a release. [Initial approval](https://docs.openexchange.intersystems.com/apps/submit/), [later edits](https://docs.openexchange.intersystems.com/apps/update/).
-5. Treat contest registration as a separate gate. The standard documented path is [contest 49](https://openexchange.intersystems.com/contest/49) → **Apply** → select the application. The public application's **Contest** tab or the developer-portal application dropdown are documented alternatives. Read back and retain an actual contest-entry confirmation; the saved checkbox or application approval request alone does not prove registration. [Official contest paths](https://docs.openexchange.intersystems.com/contest/apply/).
-6. The standard contest guide assumes a published app. For this event, the organizer permits submission before Open Exchange approval, provided the package works during evaluation. The actual pending-approval registration path remains unverified; if the portal blocks selection, preserve that state and use the official contest channel for clarification. Do not assume the approval request registered the entry. [Contest-specific organizer clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows).
-
-After acceptance, replace `<OPEN_EXCHANGE_APP_URL>` in the README and both article drafts with the real public URL, verify it without editor privileges, and record application publication and contest registration separately.
+The [official submission guide](https://docs.openexchange.intersystems.com/apps/submit/), [contest paths](https://docs.openexchange.intersystems.com/contest/apply/) and [IPM publication guide](https://docs.openexchange.intersystems.com/apps/ipm/) describe separate gates. See [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) for points and the remaining order of work.

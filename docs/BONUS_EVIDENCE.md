@@ -2,7 +2,7 @@
 
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build 154 ARM64. The user authorized publishing the verified source to GitHub `main` on November 4. Hosting, article/registry publication and form submissions remain outside scope. The earlier questionnaire receipt is a separate historical fact.
+Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build 154 ARM64. The user authorized publishing the verified source to GitHub `main` on November 4. The user subsequently authorized submission preparation to be executed: video publication, the OEX approval request and both article submissions are recorded below. Hosting remains outside scope. Moderation, contest registration and public registry installation are separate gates.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
 |---|---:|---|
@@ -119,19 +119,19 @@ The official ARM64 154U container began without the namespace/application or a s
 
 Approved-amendment case `E13308D8-D7B2-11F1-8CC1-0B0AF26491C5`, session 64, delivered once. [Same session at Destination](assets/ipm-clean-destination-visual-trace.png) · [install commands and driver](IPM.md) · [final gate](evidence/step5-gate.json).
 
-Two driver handoff errors were repaired in the same retained fresh container: CPF staging on tmpfs and transition from Docker's exclusive `none` network. Installation and the five-case evaluation each ran once. The isolated containers are now stopped; the original production remains healthy. Python 172 (including 29 packaging tests), TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. No runtime binary, image or registry package was published. The organizer's IPM publication requirement remains manual.
+Two driver handoff errors were repaired in the same retained fresh container: CPF staging on tmpfs and transition from Docker's exclusive `none` network. Installation and the five-case evaluation each ran once. The isolated containers are now stopped; the original production remains healthy. Python 172 (including 29 packaging tests), TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. No runtime binary or image was published. The OEX Package Manager option is now saved in the approval request; public registry availability and installation remain unverified.
 
 ## Other eligible technology and manual work
 
-Embedded Python (3 potential points) and Docker (2) are already part of the verified core. The five frozen scenarios are demonstrations, not a general accuracy benchmark; deterministic rules also score5/5 on them. The agent adds inspectable investigation, not a measured accuracy uplift.
+Embedded Python (3 potential points) and Docker (2) are already part of the verified core. The five frozen scenarios are demonstrations, not a general accuracy benchmark; deterministic rules also score 5/5 on them. The agent adds inspectable investigation, not a measured accuracy uplift.
 
 | Manual/external item | State |
 |---|---|
-| YouTube demonstration (3) | Verified [2:30, 1080p H.264/AAC captioned MP4](../evidence/video/silentshift-demo.mp4), 3,561,558 bytes; full decode and caption round-trip passed. [Upload copy](YOUTUBE_UPLOAD.md) ready. No YouTube upload performed. |
-| Developer Community articles (2+1) | Local [overview](articles/overview.md) and [engineering story](articles/engineering.md) drafts; no publication. |
+| YouTube demonstration (3) | [Public video](https://youtu.be/a4dOcqu89EA), 2:30, 1080p H.264/AAC with English captions. Anonymous oEmbed HTTP 200; actual player 1080p HD and English captions observed. Organizer acceptance unconfirmed. |
+| Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both show **On moderation**; public acceptance unconfirmed. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
-| IPM publication (2) | Clean local install and native execution verified; user must publish and verify the public-registry install. No registry publication performed. |
-| Open Exchange / contest | Earlier saved draft, not sent for approval or confirmed registered. Finished [local application copy](OPEN_EXCHANGE_COPY.md) is ready for the user. |
+| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. Anonymous public 0.1.0 listing/manifest returned 404; public registry installation unverified. |
+| Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. Contest Apply still requires publication; no contest-entry confirmation. |
 | Online demo (2) | Not hosted; explicitly outside the current authorization. |
 | PEX / vendor bug bonuses | No required Java/.NET boundary or verified vendor defect; no claim. |
 

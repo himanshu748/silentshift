@@ -1,88 +1,101 @@
-<!-- ARTICLE DRAFT — NOT PUBLISHED TO DEVELOPER COMMUNITY. Verified source and extensions are on public GitHub main; article publication requires separate authorization. -->
+# Catching semantic failures in an IRIS interoperability production
 
-> Preparation note — exclude from the published article: replace `<OPEN_EXCHANGE_APP_URL>` and `<YOUTUBE_VIDEO_URL>` below with checked public URLs. The Open Exchange application is a saved draft and the video is not uploaded. The article body starts at the title.
+An integration accepts an order for `20 CASE`. The JSON parses, the required fields are present, and the destination is reachable. The approved contract, however, specifies `240 EA`.
 
-# Check business meaning before delivering an IRIS transaction
+A developer might recognize a plausible explanation: twenty cases of twelve items. That explanation becomes dangerous when the integration treats it as permission. The message contains no approved pack size, and a plausible conversion does not establish what the partner agreed to send.
 
-A supplier sends `20 CASE` for an order whose approved contract specifies `240 EA`. The JSON is valid. The integration can accept and deliver it without a transport error. There is still no approved conversion between those units.
+SilentShift holds that order before delivery and assembles the evidence an integration operator needs to resolve it. It runs inside an InterSystems IRIS interoperability production, using a native AI Hub agent to investigate and Embedded Python policy to authorize the route. The examples below use synthetic transactions and an IRIS destination simulator.
 
-SilentShift investigates this gap inside an InterSystems IRIS interoperability production. The demonstration uses synthetic orders, payments and reference records. Its destination is a persisted IRIS simulator, so testing a containment decision cannot change a real shipment or payment.
+## Define the business commitment before asking the model
 
-![An approved amendment and its simulator delivery in the working SilentShift application](https://raw.githubusercontent.com/himanshu748/silentshift/main/docs/assets/native-approved-delivery.png)
+The central comparison is between a message and the approved reference records effective when its business event occurred. A surprising value alone proves very little.
 
-## The same change can deserve a different decision
+Consider two investigations with the same incoming quantity and unit:
 
-The [frozen scenarios](https://github.com/himanshu748/silentshift/blob/main/fixtures/v1/README.md) include a useful pair. Scenario A holds the supplier's unapproved quantity/unit change. Scenario C supplies an approved amendment authorizing `20 CASE`, effective before the event time; the earlier `240 EA` contract has expired. C should reach the destination.
+| Incoming order | Reference evidence at event time | Required outcome |
+|---|---|---|
+| `20 CASE` | Active approved contract requires `240 EA`; no authorized transformation | Hold the contradiction |
+| `20 CASE` | Approved amendment requires `20 CASE`; its predecessor has expired | Permit delivery when the remaining release checks pass |
 
-The payment example compares `12550` minor EUR units with an interface contract requiring `125.50` major units. Numeric equivalence does not authorize an interface transformation: SilentShift checks the declared representation without inventing a conversion or a monetary-loss estimate.
+The second row prevents the detector from becoming a blanket change blocker. An old value differs, but the business has authorized the new one.
 
-The remaining scenarios cover conflicting peer references without release authority and a hostile recommendation. That last case explicitly injects a validator test proposal after a native agent reply and preserves the real reply separately. It tests the policy veto without pretending that an injected answer came from the model.
-
-## Keep the decision inside the production
-
-The implemented path is:
+The [assessment engine](https://github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py) makes this distinction before routing. Reference validity uses a half-open interval:
 
 ```text
-Partner Business Service → Semantic Business Process
-  → reference and native AI Hub Operations
-  → Embedded Python policy → destination or quarantine Operation
+effective_from <= occurred_at < effective_to
 ```
 
-The native agent reads the current message, approved contracts, related records and similar precedents through four server-bound tools. It proposes `ALLOW`, `QUARANTINE` or `REQUEST_REVIEW`, with evidence IDs, an explanation and uncertainty. It cannot select another case, execute arbitrary SQL, mutate a contract or deliver a transaction.
+An open-ended reference omits the upper bound. Overlapping approved records that disagree produce unresolved evidence; the engine cannot select whichever record makes delivery convenient. An amendment must also have a retrieved approved predecessor with a valid temporal relationship. Matching the current value is insufficient if that lineage is missing.
 
-Local embeddings and IRIS `VECTOR_COSINE` retrieve procedural guidance and precedent evidence. The fourth tool reads up to three actual resolved cases or approved amendments, with source IDs and scores. The operator can follow the source from the evidence view. Prior delivery remains context: a native test retrieved past deliveries, and deterministic policy still vetoed a valid-looking ALLOW proposal for a current critical contradiction.
+Authority is explicit. Reference records come from the server's reference store; message fields cannot promote themselves to approved evidence. Peer records may expose a concern, but even agreeing peers cannot grant release authority.
 
-[Deterministic policy](https://github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py) independently checks the evidence and proposal. Critical contradictions stay quarantined. Missing evidence, malformed output and uncertain findings require a hold or review. The destination rechecks authorization before creating a unique receipt. Human release also requires reviewer permission, a reason, the current case version and an idempotency key.
+Representation also belongs to the contract. In the payment example, `12550` minor EUR units and `125.50` major units describe the same numeric amount after a conversion. An interface expecting major units can still receive the wrong representation. SilentShift compares the declared amount and scale using exact decimal values and preserves the original payload. Its normalization helpers do not repair or rewrite a transaction during routing.
 
-Automatic delivery requires a valid native `ALLOW` proposal and independent release eligibility. The agent's bounded task is evidence investigation and a proposed decision. The five fixtures are also solvable by the rule-only baseline; they establish no AI accuracy improvement.
+## Give the agent a bounded investigation
 
-An unresolved case can become a native Workflow task. The operator sees its evidence, records an authorized decision and can resume a committed review if native completion fails. Critical contradictions retain their release veto. The [review-recovery walkthrough](https://github.com/himanshu748/silentshift/blob/main/docs/articles/engineering.md) explains that distinct journey.
+The agent helps the operator connect the message, reference records and relevant history. Its tools expose four narrow reads:
 
-## Run the native application
+| Tool | Evidence it contributes |
+|---|---|
+| `GetCurrentMessage` | The transaction under investigation |
+| `GetApprovedContracts` | Approved contract evidence for that case |
+| `GetRelatedRecords` | Related records already bound to the investigation |
+| `find_similar_precedents` | Up to three resolved cases or approved amendments, with source IDs and similarity scores |
 
-The recorded native environment uses Community AI Hub `2026.3.0AI.154.0` on ARM64 and local Qwen3 4B through an OpenAI-compatible Ollama endpoint. Load the official image locally first. Current kit availability and the organizer's newer-build exception are recorded in the [version notes](https://github.com/himanshu748/silentshift/blob/main/docs/CONTEST_COMPLIANCE.md); the measured core runs are for 154.
+The [tool implementation](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/AI/EvidenceTools.cls) binds access to a server-selected case. The model cannot supply an arbitrary case ID, execute SQL, amend a contract or call the destination.
 
-```sh
-git clone https://github.com/himanshu748/silentshift silentshift
-cd silentshift
-cp .env.example .env
-chmod 600 .env
-uv sync --locked
+The native `%AI.Agent` reads those tools and returns a small proposal: `decision`, `evidence_ids`, `explanation` and `uncertainty`. The allowed decisions are `ALLOW`, `QUARANTINE` and `REQUEST_REVIEW`. The response is parsed and validated before it can influence routing. Unknown evidence IDs, an unexpected schema or malformed output cannot become a release decision.
+
+The recorded setup uses local Ollama `qwen3-silentshift:4b-instruct`. The session is bounded to six iterations and 700 output tokens per request. The enclosing production wait is separately bounded; expiry leaves the case held. That timeout does not establish that the provider has cancelled its work.
+
+## Keep relevance separate from authority
+
+Precedent retrieval answers a useful operator question: has a similar case been resolved before? Local `all-minilm:22m` embeddings populate 384-dimensional native IRIS `VECTOR` columns; cosine search returns source records and scores.
+
+A high score measures similarity. It cannot establish that the current partner has an approved conversion, that an amendment was effective at this event time, or that yesterday's release applies today.
+
+SilentShift therefore keeps precedent retrieval outside the authoritative contract comparison. A retrieved delivery can inform the recommendation and guide the operator to a prior resolution. It cannot remove a critical finding. A [native veto test](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/precedent-veto.json) retrieved earlier deliveries and then supplied a valid-looking `ALLOW` proposal for a current critical contradiction. Policy retained the hold.
+
+This boundary lets retrieval add context without making historical mistakes self-reinforcing.
+
+## Authorize delivery at the production boundary
+
+The processing path stays inside IRIS:
+
+```text
+Partner Business Service
+  → Semantic Business Process
+      → reference reads + native AI Hub investigation
+      → Embedded Python assessment and policy
+  → destination Operation OR quarantine/review
 ```
 
-Set the loaded image tag, unique viewer/reviewer/gateway credentials and model configuration in `.env`, following the [README](https://github.com/himanshu748/silentshift/blob/main/README.md). The process wait defaults to 60 seconds; the tested resource-constrained local 4B setup uses an explicit `SILENTSHIFT_AGENT_WAIT_SECONDS=120`, within its accepted 10–120 second range. A timeout holds the case and does not prove that the provider stopped working. Then start IRIS and the workbench:
+The agent's proposal passes through [`validate_policy`](https://github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py). Automatic delivery requires a resolved comparison to approved evidence, a complete valid recommendation, all required evidence citations, uncertainty at or below `0.35`, and no critical contradiction or duplicate event. The agent must also propose `ALLOW`.
 
-```sh
-uv run --env-file .env python scripts/doctor.py
-uv run --env-file .env python scripts/bootstrap.py
-npm --prefix web ci
-npm --prefix web run dev -- --port 5173 --strictPort
-```
+A model concern can keep an otherwise eligible case in review. It cannot turn inconclusive evidence into a verified business contradiction. Conversely, an optimistic explanation cannot release a case that deterministic assessment has classified as critical.
 
-Bootstrap seeds references without creating cases or calling a model. Open `http://127.0.0.1:5173`, connect an IRIS account and select a Scenario Lab experiment. To reproduce all five native investigations, use the configured local inference route:
+The destination [rechecks authorization](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Store.cls) before persisting a unique simulator receipt. This matters because the final effect deserves its own guard, even when earlier processing has already evaluated policy.
 
-```sh
-uv run --env-file .env python scripts/verify_native.py --allow-model-calls
-```
+For the operator, the result is one investigation containing the original payload, reference snapshot, tool reads, policy checks and destination receipt. Eligible holds can proceed through native Workflow review; critical contradictions remain blocked from approval. The [companion article](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) follows the failure and recovery behavior of that human decision.
 
-## Follow the recommendation through to its effect
+![An approved amendment and its simulator delivery in SilentShift](https://raw.githubusercontent.com/himanshu748/silentshift/main/docs/assets/native-approved-delivery.png)
 
-The [clean IPM installation](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/ipm-clean-install.json) began on an official build 154U instance without a source mount. After explicit setup, its five-case native run recorded **4/5 expected agent proposals and 5/5 expected final decisions**, with all four tools read. The approved amendment delivered once; the other four cases had zero deliveries. The conflicting-reference case shows why the distinction matters: the model proposed quarantine, while policy retained the required review route.
+## Trace the recommendation to the business outcome
 
-These are five frozen synthetic cases, also solved by the deterministic baseline. They establish the demonstrated workflow and containment checks, not an accuracy uplift or a general performance result. The [evidence guide](https://github.com/himanshu748/silentshift/blob/main/docs/BONUS_EVIDENCE.md) links separate native checks for provider tracing, Workflow decisions, precedent retrieval, partner-file intake and installation. Retained failures remain inspectable.
+An operator investigating a held order needs to distinguish a provider failure, a missing reference, an invalid proposal and a deliberate policy veto.
 
-## What the native integration made visible
+SilentShift records each actual local LLM HTTP exchange as a typed interoperability request/response pair in the original case session. Visual Trace connects those pairs to native tool reads and the final route. The [recorded examples](https://github.com/himanshu748/silentshift/blob/main/docs/AI_TRACING.md) include a successful investigation and a real upstream HTTP 400 that left the case held with zero deliveries.
 
-The native AI Hub integration keeps evidence reads inside the case's interoperability session. Typed provider request/response messages make each actual local HTTP exchange visible in Visual Trace. The verified failure probe recorded a real Ollama HTTP 400 and stayed held with zero simulator deliveries. This helps connect an operator's question—why did this transaction stop?—to the call that failed.
+Persistent provider messages contain metadata rather than raw prompt and response bodies: model, instruction version, correlation, duration, HTTP outcome and bounded tool-call metadata. Usage belongs to the particular response when available. Session totals, billing cost and provider retry classification remain unavailable. These distinctions prevent a trace from implying measurements it never collected.
 
-Local Qwen3 4B avoided a paid cloud-provider dependency for these runs. Its response time still depended on local resources: cold or loaded attempts timed out, while the recorded successful repeat used a warmed model and serialized execution. A bounded process wait keeps that uncertainty from authorizing delivery. It does not prove provider cancellation.
+## Read the result at two levels
 
-HTTP response usage is retained when present. Unknown provider retry counts, session totals and billing-derived cost remain unavailable rather than being inferred. Local hardware and energy costs were not measured. External delivery, broader model trials and production capacity remain unverified.
+The [clean installed production run](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/ipm-clean-install.json) produced four of five expected model proposals and all five expected final routes. The approved amendment delivered once; the other four cases had zero deliveries. In the conflicting-reference case, the model proposed quarantine while deterministic policy preserved the required review route.
 
-Start with A and C in the [judge walkthrough](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md). Compare their effective reference records, policy checks, native session IDs and delivery receipts.
+Those results test two different contracts: whether the agent produced the expected proposal, and whether the application contained or delivered correctly. Reporting only the final five-of-five result would hide the model disagreement.
 
-**Source and installation:** [SilentShift on GitHub](https://github.com/himanshu748/silentshift)
+The five frozen scenarios are also solved by the rule-only baseline. They demonstrate the integrated investigation and containment behavior; they do not establish an AI accuracy improvement or production readiness. External destinations, broader datasets and production capacity remain untested.
 
-**Open Exchange application:** [SilentShift on Open Exchange](<OPEN_EXCHANGE_APP_URL>)
+To inspect the difference yourself, follow the [native build-154 setup](https://github.com/himanshu748/silentshift#native-build-154-setup), then run scenarios A and C in the workbench. Compare their effective references before reading the recommendation. A should remain held; C should have one simulator receipt. The [2:30 captioned demo](https://youtu.be/a4dOcqu89EA) shows that sequence and the native components behind it.
 
-**Demo video:** [Watch the walkthrough](<YOUTUBE_VIDEO_URL>)
+[Open Exchange application](https://openexchange.intersystems.com/package/SilentShift) · [Source and installation](https://github.com/himanshu748/silentshift) · [Reproduction guide](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md)

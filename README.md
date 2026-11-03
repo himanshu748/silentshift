@@ -8,9 +8,9 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
 
-**Demo video:** [Watch the walkthrough](<YOUTUBE_VIDEO_URL>) · **Open Exchange application:** [SilentShift on Open Exchange](<OPEN_EXCHANGE_APP_URL>)
+**Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-Publication links are pending; the Open Exchange application is a saved draft. The [2:30 captioned MP4](evidence/video/silentshift-demo.mp4) and [upload copy](docs/YOUTUBE_UPLOAD.md) are ready locally. Replace these placeholders only with checked public URLs.
+The public video plays at 1080p with English captions. Open Exchange is **awaiting review**; the two [technical articles](docs/articles/overview.md) are submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
 
 ## Follow the evidence to a decision
 
@@ -197,7 +197,7 @@ Unknown references, malformed agent output, evidence gaps and dependency failure
 
 [PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Open Exchange copy](docs/OPEN_EXCHANGE_COPY.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. An Open Exchange draft was saved with the contest checkbox and dedicated idea link; it was not sent for approval or registered as an entry. The questionnaire has a submitted receipt. Articles remain local drafts, and a local video is not a YouTube publication. No bonus award is claimed from implementation alone. The verified sponsor extensions are published on `main`. Hosting, article/registry publication and application/contest submissions still require separate authorization.
+The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. The demo is public on YouTube. Open Exchange version 0.1.0 has been sent for approval with the contest option, Package Manager option and dedicated DPI-I-689 link saved. Both Developer Community articles are submitted for moderation. The contest Apply dialog still requires a published application, so registration is unconfirmed. Public IPM availability and installation remain unverified; the questionnaire already has a submitted receipt. No organizer award is claimed. See the [remaining submission steps](docs/SUBMISSION_CHECKLIST.md).
 
 ## License and attribution
 

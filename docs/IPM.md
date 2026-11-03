@@ -360,8 +360,7 @@ also remain explicit runtime steps.
 
 ## Publish and verify the public package
 
-**Manual steps; no public publication or registry installation has been
-performed.** Sources were rechecked on **2026-11-04**. The [official publication
+**Publication requested through Open Exchange on 2026-11-04; moderation is pending.** The saved 0.1.0 application has **Publish in Package Manager** checked and shows **Sent for approval**. Anonymous registry listing and manifest reads returned 404; public registry installation has not been performed. Sources were rechecked on **2026-11-04**. The [official publication
 guide](https://docs.openexchange.intersystems.com/apps/ipm/) makes Open Exchange
 the gateway to `pm.community.intersystems.com`. The CLI `publish` action targets
 a separately configured publishing registry. Public Community publication uses

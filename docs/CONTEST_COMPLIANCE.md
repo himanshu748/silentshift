@@ -27,7 +27,7 @@ The [EAP documentation](https://github.com/intersystems-community/ai-hub-eap) wa
 
 [Open Exchange application instructions](https://docs.openexchange.intersystems.com/apps/submit/) require authentication, New Application, metadata and repository details, then **Send for Approval**. Saving produces a draft; sending initiates review, and acceptance publishes it. Prepare the license URL, categories, technologies, descriptions, logo, and applicable demo/documentation/video links. The [contest guide](https://docs.openexchange.intersystems.com/contest/apply/) describes Apply from the contest, app page, or developer portal and generally says the app must be published first.
 
-The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **Observed behavior of registering an Awaiting Review application remains unverified.** Preserve the actual OEX submission receipt and separate contest-registration confirmation; a repository, draft or approval request alone proves neither contest entry nor acceptance.
+The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **November 4 readback:** after the app was sent for approval, Apply still reported no published application and required publication first. No pending-review registration path was available in that dialog. Preserve the actual OEX submission receipt and separate contest-registration confirmation; a repository, draft or approval request alone proves neither contest entry nor acceptance.
 
 ### Authenticated workflow recheck, 2026-11-02
 
@@ -43,7 +43,7 @@ The [competition terms](https://openexchange.intersystems.com/markdown?url=/asse
 
 ## Bonus clarifications visible November 3
 
-Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift's local provider-call traces, screenshots and field map are now verified in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The earlier OEX draft has the idea link; publishing current source and submitting the application remain manual gates.
+Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift's local provider-call traces, screenshots and field map are now verified in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The public source and saved OEX approval request both include the idea link; application moderation and contest registration remain pending.
 
 Tatiana's newer [announcement reply to Doc](https://community.intersystems.com/node/590306) resolves the earlier IPM question: publish the package; installation is checked on AI Hub 154; include `<SystemRequirements Version=">=2026.3" Interoperability="enabled"/>`. Her subsequent 109 reply permits a declared matching build. If IPM is pursued, retain the actual registry-install result for the declared runtime. A manifest alone is not a published, working package.
 
@@ -57,8 +57,8 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 | Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
 | Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
 | Public repository | CONFIRMED: verified extensions through [61b7278](https://github.com/himanshu748/silentshift/commit/61b7278) published on `main`, November 4 |
-| OEX application | SAVED_DRAFT earlier, with contest checkbox and idea link; not sent for approval |
-| Contest registration | NOT_STARTED externally; no separate registered-entry confirmation |
+| OEX application | SENT_FOR_APPROVAL, version 0.1.0; contest and Package Manager options, video and idea link saved. Application page: Awaiting Review |
+| Contest registration | BLOCKED_BY_APP_PUBLICATION in the observed Apply dialog; no registered-entry confirmation |
 | Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |
 | Questionnaire | Submitted earlier; actual confirmation retained in the bonus ledger |
 
