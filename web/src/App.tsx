@@ -11,6 +11,7 @@ import {
   KeyRound,
   LayoutDashboard,
   LockKeyhole,
+  Menu,
   RefreshCw,
   ShieldCheck,
   X,
@@ -28,6 +29,7 @@ import {
   SystemHealth,
 } from "./Views";
 import { AppContext, Badge, Button, InlineError, Modal } from "./ui";
+import Landing from "./Landing";
 
 const views = [
   "investigations",
@@ -229,12 +231,29 @@ function ConnectDialog({
   );
 }
 
+function isLandingRoute() {
+  const hash = window.location.hash.slice(1);
+  return !hash || hash === "landing" || hash.startsWith("landing/");
+}
+
 export default function App() {
+  const [landing, setLanding] = useState(isLandingRoute);
+  const [username, setUsername] = useState<string | null>(null);
+  useEffect(() => {
+    const listener = () => setLanding(isLandingRoute());
+    window.addEventListener("hashchange", listener);
+    return () => window.removeEventListener("hashchange", listener);
+  }, []);
+  // Public product information never mounts the authenticated API hooks.
+  return landing ? <Landing /> : <WorkbenchApp username={username} setUsername={setUsername} />;
+}
+
+function WorkbenchApp({ username, setUsername }: { username: string | null; setUsername: (value: string | null) => void }) {
   const [route, setRoute] = useState(readRoute);
   const [epoch, setEpoch] = useState(0);
   const [connect, setConnect] = useState(false);
-  const [username, setUsername] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [navigationOpen, setNavigationOpen] = useState(false);
   const health = useApi("/api/health", HealthSchema, epoch);
   const refresh = useCallback(() => setEpoch((value) => value + 1), []);
   const openConnect = useCallback(() => setConnect(true), []);
@@ -251,6 +270,7 @@ export default function App() {
   useEffect(() => {
     document.title = `${navigation.find((item) => item.id === route.view)?.label ?? "Investigations"} · SilentShift`;
     window.scrollTo({ top: 0, behavior: "instant" });
+    setNavigationOpen(false);
   }, [route.view]);
   useEffect(() => {
     if (toast) {
@@ -282,7 +302,7 @@ export default function App() {
         Skip to content
       </a>
       <div className="app-shell">
-        <aside className="sidebar">
+        <aside className={`sidebar ${navigationOpen ? "navigation-open" : ""}`}>
           <a
             href="#investigations"
             aria-label="SilentShift investigations"
@@ -290,6 +310,16 @@ export default function App() {
           >
             <Brand />
           </a>
+          <button
+            className="button ghost navigation-toggle"
+            type="button"
+            aria-expanded={navigationOpen}
+            aria-controls="workspace-navigation"
+            onClick={() => setNavigationOpen((open) => !open)}
+          >
+            {navigationOpen ? <X size={18} /> : <Menu size={18} />}
+            Navigation
+          </button>
           <div className="workspace-switch">
             <span className="workspace-avatar">
               <Command size={15} />
@@ -298,9 +328,8 @@ export default function App() {
               <strong>Integrity workspace</strong>
               <small>Synthetic demonstration</small>
             </div>
-            <ChevronDown size={13} />
           </div>
-          <nav aria-label="Main navigation">
+          <nav id="workspace-navigation" aria-label="Main navigation">
             {(["Workspace", "Validation"] as const).map((group) => (
               <div className="nav-group" key={group}>
                 <div className="nav-group-label">{group}</div>
@@ -315,11 +344,6 @@ export default function App() {
                     >
                       <Icon size={17} strokeWidth={1.6} />
                       <span>{label}</span>
-                      {id === "scenarios" && (
-                        <span className="nav-lab-mark" aria-hidden="true">
-                          ↗
-                        </span>
-                      )}
                     </a>
                   ))}
               </div>
@@ -338,7 +362,7 @@ export default function App() {
               <p>
                 Community Early Access
                 <br />
-                Required contest build
+                Verified runtime
               </p>
             </div>
             <a
@@ -362,7 +386,7 @@ export default function App() {
               <span
                 className={`connection-pill ${connected ? "mint" : "muted"}`}
               >
-                <span className="status-dot" />
+                <Activity size={13} aria-hidden="true" />
                 {status}
               </span>
               <span className="topbar-divider" />
@@ -406,6 +430,7 @@ export default function App() {
               <span className="footer-glyph" />
               Signal over noise. Substance over success codes.
             </span>
+            <a className="text-link" href="#landing">Product overview</a>
             <Badge>Synthetic demonstration</Badge>
           </footer>
         </div>

@@ -82,9 +82,10 @@ ClassMethod ErrorResponse(error As %Exception.AbstractException) As %Status
 
 ClassMethod StrictJSON(value As %String) As %String [ Language = python ]
 {
-    import json, sys
-    if '/opt/silentshift/python' not in sys.path:
-        sys.path.insert(0, '/opt/silentshift/python')
+    import iris, json, sys
+    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
+    if asset_python not in sys.path:
+        sys.path.insert(0, asset_python)
     from silentshift.engine import strict_loads
     try:
         parsed = strict_loads(value)
@@ -168,7 +169,7 @@ ClassMethod Overview() As %Status
 ClassMethod FixtureData() As %DynamicObject
 {
     Set file = ##class(%Stream.FileCharacter).%New()
-    Set sc = file.LinkToFile("/opt/silentshift/fixtures/v1/scenarios.json")
+    Set sc = file.LinkToFile(##class(SilentShift.IPM).AssetPath("fixtures/v1/scenarios.json"))
     $$$ThrowOnError(sc)
     Return ##class(%DynamicObject).%FromJSON(file)
 }
@@ -250,7 +251,7 @@ ClassMethod Health() As %Status
         Set sc=##class(Ens.Director).GetProductionStatus(.name,.state)
         $$$ThrowOnError(sc)
         Set running=(state=$$$eProductionStateRunning) && (name="SilentShift.Production")
-        Set configured=($SYSTEM.Util.GetEnviron("SILENTSHIFT_LLM_API_KEY")'="") || ($SYSTEM.Util.GetEnviron("OPENAI_API_KEY")'="")
+        Set configured=$$$ISOK(##class(SilentShift.Provider.Lease).LocalHost(.localHost)) && ##class(SilentShift.Provider.Lease).TemporaryStoreSafe()
         Set production={"name":(name),"running":(running),"state_code":(state)}
         If name="" Do production.%Set("name","SilentShift.Production")
         Set agent={"configured":(configured),"last_success_at":null,"availability":"not_probed","model":($SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL"))}
@@ -294,12 +295,13 @@ ClassMethod Evaluations() As %Status
 
 ClassMethod Aggregate(artifactJSON As %String) As %String [ Language = python ]
 {
-    import json, sys
-    if '/opt/silentshift/python' not in sys.path:
-        sys.path.insert(0, '/opt/silentshift/python')
+    import iris, json, sys
+    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
+    if asset_python not in sys.path:
+        sys.path.insert(0, asset_python)
     from silentshift.engine import strict_loads
     from silentshift.evaluation import aggregate_native, load_dataset
-    dataset = load_dataset('/opt/silentshift/fixtures/v1/scenarios.json')
+    dataset = load_dataset(iris.cls('SilentShift.IPM').AssetPath('fixtures/v1/scenarios.json'))
     return json.dumps(aggregate_native(strict_loads(artifactJSON, max_bytes=2000000), dataset), allow_nan=False, separators=(',', ':'))
 }
 

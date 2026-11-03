@@ -90,6 +90,17 @@ function label(value: string) {
     .replace(/^./, (letter) => letter.toUpperCase());
 }
 
+async function openNavigation(page: Page) {
+  const toggle = page.getByRole("button", { name: "Navigation", exact: true });
+  if (await toggle.isVisible()) {
+    if ((await toggle.getAttribute("aria-expanded")) !== "true") {
+      await toggle.focus();
+      await page.keyboard.press("Enter");
+    }
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  }
+}
+
 async function login(page: Page, credentials = viewer) {
   await expect(
     page.getByRole("button", { name: "Connect", exact: true }),
@@ -268,7 +279,7 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
     );
   }
   const comparison = page.getByRole("region", {
-    name: "Semantic comparison; scroll horizontally for reference values",
+    name: "Semantic comparison",
     exact: true,
   });
   await comparison.focus();
@@ -281,15 +292,12 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
   expect(outline.style).toBe("solid");
   expect(outline.width).toBeGreaterThanOrEqual(2);
   if (testInfo.project.name === "mobile-native") {
-    expect(
-      await comparison.evaluate((node) => node.scrollWidth > node.clientWidth),
-    ).toBe(true);
-    await expect
-      .poll(() => comparison.evaluate((node) => node.scrollLeft), {
-        message:
-          "Keyboard users can reveal the reference column in the narrow evidence table",
-      })
-      .toBeGreaterThan(0);
+    expect(await comparison.evaluate((node) => node.scrollWidth <= node.clientWidth + 1)).toBe(true);
+    for (const row of await page.locator(".evidence-table tbody tr").all()) {
+      await row.scrollIntoViewIfNeeded();
+      await expect(row.locator("td").nth(1)).toBeInViewport();
+      await expect(row.locator("td").nth(2)).toBeInViewport();
+    }
   }
   const firstReference = actual.references[0]!;
   const reference = page
@@ -349,6 +357,25 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
   await evidence(page, testInfo, "evidence-viewer");
 });
 
+test("a delivered amendment shows its actual evidence and simulator outcome", async ({ page }, testInfo) => {
+  const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+  const delivered = cases.items.find((item) => item.scenario_id === "approved-amendment" && item.routing === "DELIVERED" && item.policy?.decision === "ALLOW");
+  if (!delivered) throw new Error("An existing delivered amendment is required; this suite never injects a fixture.");
+  const actual = await read(`/cases/${encodeURIComponent(delivered.id)}`, CaseSchema);
+  expect(actual.delivery_count).toBe(1);
+  expect(actual.delivery_receipt).toBeTruthy();
+  await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
+  await login(page);
+  await expect(page.locator(".case-detail-heading")).toContainText(actual.id);
+  await expect(page.locator(".decision-strip strong")).toHaveText("Allow");
+  await expect(page.locator(".decision-strip")).toContainText("destination simulator");
+  await expect(page.locator(".trace-box .copy-row code")).toHaveText(String(actual.trace_id));
+  await expect(page.getByRole("button", { name: "Approve release", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("group", { name: "Reference snapshot", exact: true }).locator(".reference-record")).toHaveCount(actual.references.length);
+  await assertHealthyRenderedPage(page);
+  await evidence(page, testInfo, "approved-delivery");
+});
+
 test("all seven routes expose real read-only API state and no invented metrics", async ({
   page,
 }, testInfo) => {
@@ -365,6 +392,7 @@ test("all seven routes expose real read-only API state and no invented metrics",
   ] as const;
   for (const [route, heading, endpoint] of routes) {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await openNavigation(page);
     const pending = endpoint
       ? page.waitForResponse(
           (response) =>
@@ -451,6 +479,28 @@ test("all seven routes expose real read-only API state and no invented metrics",
   await evidence(page, testInfo, "health");
 });
 
+test("selecting another queued case returns to its visible disposition", async ({ page }) => {
+  const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+  const target = cases.items.find((item) => item.id !== selected.id && item.policy && item.routing !== "PROCESSING");
+  if (!target) throw new Error("A second persisted native case is needed for case-navigation verification.");
+  await page.goto(`/#investigations/${encodeURIComponent(selected.id)}`);
+  await login(page);
+  await expect(page.locator(".case-detail-heading")).toContainText(selected.id);
+  const toggle = page.getByRole("button", { name: "Expand investigation queue", exact: true });
+  if (await toggle.isVisible()) {
+    await toggle.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("button", { name: "Collapse investigation queue", exact: true })).toHaveAttribute("aria-expanded", "true");
+  }
+  await page.locator(".case-list-item").filter({ hasText: target.id }).click();
+  await expect(page.locator(".case-detail-heading")).toContainText(target.id);
+  await expect(page.locator(".case-detail-heading")).toBeInViewport();
+  await expect(page.locator(".decision-strip strong")).toHaveText(label(target.policy!.decision));
+  await expect(page.locator(".decision-strip")).toBeInViewport();
+  if (await toggle.isVisible()) await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await assertHealthyRenderedPage(page);
+});
+
 test("reviewer UI retains critical-policy veto and dialog keyboard safety without a mutation", async ({
   page,
 }, testInfo) => {
@@ -510,6 +560,7 @@ test("keyboard navigation, reduced motion and memory-only session lifecycle rema
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
   await login(page);
+  await openNavigation(page);
   await page.getByRole("link", { name: "Scenario Lab", exact: true }).focus();
   await page.keyboard.press("Enter");
   await expect(

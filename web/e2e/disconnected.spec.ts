@@ -62,6 +62,12 @@ test('navigation remains usable with reduced motion and captures actual UI', asy
   const directory = path.resolve('..', 'evidence', 'browser');
   await mkdir(directory, { recursive: true });
   await page.screenshot({ path: path.join(directory, `${testInfo.project.name}.png`), fullPage: true });
+  const navigation = page.getByRole('button', { name: 'Navigation', exact: true });
+  if (await navigation.isVisible()) {
+    await navigation.focus();
+    await page.keyboard.press('Enter');
+    await expect(navigation).toHaveAttribute('aria-expanded', 'true');
+  }
   await page.getByRole('link', { name: 'Scenario Lab', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Scenario Lab', exact: true })).toBeVisible();
 });

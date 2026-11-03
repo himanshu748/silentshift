@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Exercise actual IRIS REST → production → native agent → policy → route.
 
-This command makes FIVE native investigations. Run only with a configured local
-model or an explicitly authorized provider budget. No mock server is supported.
+This command makes FIVE native investigations through the configured local
+Ollama route. No external provider or mock server is supported.
 Credentials are read from the environment and never written into evidence.
 """
 from __future__ import annotations
@@ -63,7 +63,7 @@ class Client:
             headers["Content-Type"] = "application/json"
         request = Request(self.base + path, data=raw, headers=headers, method="POST" if raw is not None else "GET")
         try:
-            with self.opener.open(request, timeout=100) as response:
+            with self.opener.open(request, timeout=180) as response:
                 result = response.read(2_000_001)
                 if len(result) > 2_000_000:
                     raise ValueError("Response exceeded evidence size bound")

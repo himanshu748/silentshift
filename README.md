@@ -2,23 +2,23 @@
 
 **Catch the lies hidden inside successful integrations.**
 
-SilentShift compares technically valid orders and payments with independent business contracts, asks a native IRIS AI Hub agent to investigate the evidence, and constrains its recommendation with deterministic policy before delivery or quarantine.
+An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order before the included destination simulator accepts it, then gives the integration operator the message, contract and reason in one investigation.
 
-**Native core verified on Community AI Hub build154U.** All five frozen synthetic scenarios passed through the real Business Service, Business Process, native agent/tools, Embedded Python policy and routing Operations. A fresh-volume installation repeated the5/5 result. Public source/submission preparation remains in progress; no public deployment or contest confirmation is claimed. See [build status](docs/BUILD_STATUS.md) for evidence and remaining gates.
+The same incoming value can be legitimate: an effective approved amendment authorizing `20 CASE` lets the order proceed. SilentShift makes that distinction using independent reference records, a native IRIS AI Hub investigation and deterministic Embedded Python policy.
 
-## What is implemented
+**[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public core source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
 
-- Native Business Service → Business Process → reference/AI/destination/quarantine Operations, with SQL-backed case snapshots, append-only audit and idempotent simulator receipts.
-- A native `%AI.Agent` with three case-scoped read-only evidence tools, structured recommendations and bounded iterations/tokens. It never controls routing directly.
-- An Embedded Python semantic and safety engine for units, currency scales, products, business units, effective amendments, conflicting authority and event-time semantics.
-- Seven API-backed workbench views, authenticated reviews, raw message inspection, scenario replay and measured evaluation records. Offline state contains no operational seed data.
-- Five frozen synthetic scenarios, independent ground-truth rationales and a checksum. Scenario E visibly injects a hostile validator input **after** a native reply; it preserves the actual model response separately.
+## Follow the evidence to a decision
 
-The destination is an IRIS-persisted simulator. The first passing native run had4/5 correct model proposals and5/5 final decisions; the fresh-volume repeat had5/5 proposals and5/5 final decisions, with zero unsafe deliveries in both. These are two runs of five synthetic examples. The deterministic baseline also solves all five, so there is no demonstrated AI accuracy uplift or general performance claim. Session token totals and billing cost remain unavailable.
+Open an investigation to compare the original partner payload with its immutable reference snapshot. Inspect what the agent actually read, why policy held or released the message, and whether the simulator recorded a delivery. A trace ID connects that investigation to its native IRIS production session.
 
-**Start with the [judge walkthrough](docs/JUDGE_GUIDE.md)** for the actual held/delivered pair, native reproduction steps and [all four trial results](docs/evidence/native-summary.json), including failed attempts.
+The agent proposes through three read-only, case-scoped evidence tools. Server policy owns the route: missing evidence, conflicting authority, malformed answers and timeouts cannot justify automatic delivery. A reviewer can resolve an eligible hold with a reason, version and idempotency key; critical contradictions retain their release veto. Native Workflow preserves the human task, including a recorded decision whose completion needs to be resumed.
 
-![A real currency investigation held by deterministic policy](docs/assets/native-currency-quarantine.png)
+![An approved amendment inspected in the working local application, with one simulator delivery](docs/assets/native-approved-delivery.png)
+
+The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides seven API-backed views, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
+
+**Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment, external ERP/bank delivery or contest registration is claimed.
 
 ## Local checks without IRIS
 
@@ -62,6 +62,8 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
 
 ## Native build 154 setup
 
+**Runtime availability:** SilentShift is verified on **2026.3.0AI.154.0** and its build guard intentionally requires that version. The November 3 [organizer clarification](https://community.intersystems.com/node/590306) permits the newer **2027.1.0AI.109.0** after older kits were removed from the portal, and says judges will use an entry's declared build. SilentShift has not been verified on 109. These instructions require an authorized build 154 kit already obtained from InterSystems; contact the official program if it is no longer listed. This repository cannot redistribute the kit.
+
 1. Sign in to the [official AI Hub EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). Download Community **2026.3.0AI.154.0** for the Docker host's architecture. The [official template](https://github.com/intersystems-community/ai-hub-dev-template/tree/37280e3d0252f1034cdd5b32f0eeea55ff34ffa7) documents local image loading. No EAP software is bundled here.
 2. Start Docker with a modern Compose CLI and enough host storage for its VM, EAP image and persistent manager volume. Setup detects either `docker compose` or standalone `docker-compose` version 2+. A remote Docker context may be used with a source checkout on that host; ordinary remote Docker bind mounts do not upload the local repository. Do not create a paid host or subscription without authorization.
 3. Load the official archive outside this repository:
@@ -72,7 +74,7 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
    ```
 
 4. Copy `.env.example` to `.env` and restrict it with `chmod 600 .env`. Set `IRIS_IMAGE` to the exact loaded tag. Supply distinct viewer/reviewer account names and unique passwords, plus a gateway password. Use literal `KEY=value` entries; single-quote values containing `$` or `#`. Do not add inline comments or shell commands. Existing accounts are preserved by setup; their configured credentials must actually match.
-5. Configure a supported tool-capable model. The native SDK supports an OpenAI-compatible provider, including local Ollama. Its model must support function calling and be reachable from IRIS. Set `SILENTSHIFT_MODEL`, `SILENTSHIFT_LLM_BASE_URL` and `SILENTSHIFT_LLM_API_KEY` explicitly for local inference. An existing cloud key does not grant permission to spend. No provider charges are authorized by this setup.
+5. Configure the local Ollama model `qwen3-silentshift:4b-instruct` and its IRIS-reachable `SILENTSHIFT_LLM_BASE_URL`. The provider gateway rejects other models and remote routes. It issues a short-lived capability for each native investigation; no external provider key is required.
 6. Run:
 
    ```sh
@@ -86,18 +88,20 @@ The gateway binds to `127.0.0.1:52773`; native 1972 is internal. The IRIS manage
 
 ### Local Ollama configuration
 
-The verified local option preserves Qwen3's tool template with an explicit8192-token context and temperature0.2. The base4B instruct model is about2.5GB. These commands download weights and create an alias; they do not invoke inference or a paid provider:
+The verified local option preserves Qwen3's tool template with an explicit 8192-token context and temperature 0.2. The base 4B instruct model is about 2.5 GB. These commands download weights and create an alias; they do not invoke inference or a paid provider:
 
 ```sh
 ollama pull qwen3:4b-instruct
 ollama create qwen3-silentshift:4b-instruct -f config/Ollama.4b.Modelfile
 ```
 
-Set `SILENTSHIFT_MODEL=qwen3-silentshift:4b-instruct`, `SILENTSHIFT_LLM_API_KEY=ollama` and, for Colima, `SILENTSHIFT_LLM_BASE_URL=http://host.lima.internal:11434/v1/`. Verify reachability from the IRIS container; this address reaches the existing host loopback service. For Docker Desktop use its documented host address. The adapter uses build154's `extra_params` for `reasoning_effort=none`; strict parsing never repairs a model answer. Other supported providers remain configurable. The earlier1.7B configuration is retained for reproducing failed trials and is not the verified default.
+Set `SILENTSHIFT_MODEL=qwen3-silentshift:4b-instruct` and, for Colima, `SILENTSHIFT_LLM_BASE_URL=http://host.lima.internal:11434/v1/`. Verify reachability from the IRIS container; this address reaches the existing host loopback service. For Docker Desktop use its documented host address. The model adapter uses build 154's `extra_params` for `reasoning_effort=none`; strict parsing never repairs a model answer. The live transport accepts only this local model and known local Ollama hostnames. The earlier 1.7B configuration is retained for reproducing failed trials and is not the verified default.
+
+The native process wait defaults to 60 seconds. Set `SILENTSHIFT_AGENT_WAIT_SECONDS=120` before bootstrap for the tested resource-constrained local 4B configuration; only integers from 10 through 120 are accepted. One later adapter investigation took 117.491 seconds and completed within that explicit 120-second wait. Earlier 60-second attempts timed out and stayed held. A longer wait changes the local request deadline, not release policy, and a timeout does not establish provider cancellation.
 
 ## Prove the native journey
 
-Use the reviewer account for the complete safety gate. The following command invokes five native investigations, plus idempotent retries that must reuse the same case/receipt. Run it only with local inference or an explicitly authorized provider budget:
+Use the reviewer account for the complete safety gate. The following command invokes five native investigations, plus idempotent retries that must reuse the same case/receipt. This command invokes the configured local model:
 
 ```sh
 uv run --env-file .env python scripts/verify_native.py --allow-model-calls
@@ -112,6 +116,50 @@ uv run --env-file .env python scripts/verify_native_boundaries.py
 ```
 
 Use `--context`/`--container` when your Docker naming differs. Network-loss recovery, provider cancellation, real external delivery and broader stochastic trials remain unverified; a process timeout does not prove provider cancellation.
+
+Every local provider HTTP call now produces typed interoperability request and response messages in the original case session. The approved-amendment case in session374 made four calls (headers381–388), then delivered once. The explicit SDK failure probe in session316 recorded a real Ollama HTTP400 and stayed quarantined with zero deliveries. [Successful trace](docs/assets/provider-success-visual-trace.png) · [failure trace](docs/assets/provider-failure-visual-trace.png).
+
+```sh
+uv run python scripts/verify_native_provider.py --inspect-case CASE_ID
+```
+
+The [native AI Hub guide](docs/NATIVE_AI_HUB.md) maps each field, reproduces the failure and compares the scope with Langfuse. Unknown provider retries and billing cost stay null; actual HTTP response usage is distinct from session totals. Historical invocation/tool evidence remains in [AI_TRACING.md](docs/AI_TRACING.md). [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) is the implemented idea; organizer acceptance is unconfirmed.
+
+Native Workflow has its own focused verifier. It creates one local-model conflict investigation and one no-model boundary case:
+
+```sh
+uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
+```
+
+The [recorded 43-check result](docs/evidence/workflow.json) includes rejection with zero deliveries and recovery after a real postcommit HTTP 503: the UI resumed the original recorded reason, version and key, completed the native task and produced exactly one simulator receipt. This is a controlled deferred-completion failure, not a general crash-recovery guarantee.
+
+## Optional local intake and procedural guidance
+
+### Accept partner JSON from a ready-file inbox
+
+The custom native inbound adapter is dormant by default. Set `SILENTSHIFT_PARTNER_FILES_ENABLED=1` before bootstrap to opt in. Bootstrap creates `.local/partner-inbox` with mode `0700`; Compose mounts it at the adapter's fixed `/var/opt/silentshift/partner-inbox` path. Keep it owned for the trusted operator and container `irisowner`; partner payloads cannot choose a directory.
+
+Write the raw UTF-8 partner **message** JSON to `<name>.json.part`, close it, then atomically rename it to `<name>.json.ready` on the same filesystem. Do not wrap it in a Scenario Lab request. Names contain 1–80 ASCII letters, digits, hyphens or underscores and begin with a letter or digit. The same server validation and reference authority apply as at `POST /messages`.
+
+The adapter claims `.work`, retains the exact input bytes in `.done` or `.hold`, and writes `<name>.json.ack.json` from the persisted outcome. The acknowledgment includes its input SHA-256, case/trace IDs, policy result and simulator receipt. An acknowledgment is evidence of the recorded outcome; inspect its status and delivery count. Uncertain dispatches and exhausted retries need operator inspection. Keep fewer than 256 active files per suffix and plan retention explicitly; the adapter deletes no input or archive.
+
+The [verification driver](scripts/verify_native_adapter.py) documents activation, bounded test calls and read-only `--inspect-file` use. Its original failed attempts are retained separately from the later successful delivery; the [build ledger](docs/BUILD_STATUS.md) records those scopes.
+
+### Retrieve procedures without changing contract authority
+
+Optional procedural retrieval embeds five synthetic runbooks using local `all-minilm:22m` and searches their real 384-dimensional IRIS vectors with `VECTOR_COSINE`. Set `SILENTSHIFT_EMBED_BASE_URL` to the IRIS-reachable local Ollama base address, for example `http://host.lima.internal:11434` with Colima, and `SILENTSHIFT_EMBED_MODEL=all-minilm:22m`. Only the explicit local Ollama port 11434 route is accepted. Ensure the model is installed locally before opting in; bootstrap does not download it or seed embeddings.
+
+Seed the procedures and run six authored retrieval probes explicitly:
+
+```sh
+uv run python scripts/verify_native_runbooks.py --allow-local-embedding-calls
+```
+
+This performs local embedding calls but creates no LLM investigation. The workbench preserves the top two retrieved procedures; the current prompt passes at most one 400-character excerpt through `GetRelatedRecords`. Procedures guide investigation and never authorize a conversion, amendment or release. This is procedural guidance, not a verified search over previous investigations or a relevance benchmark.
+
+### Package the native backend with IPM
+
+Follow the [IPM guide](docs/IPM.md) for source staging, the pinned client, installed asset checks and operator-managed upgrade/recovery. Real IPM 0.10.10 local loading and package generation have been exercised in an existing namespace. Archive/UAT checks, a clean second-instance installation and public registry installation are separate gates; consult the current receipt before claiming them. The package does not configure credentials, start the production or call a model merely by being installed.
 
 ## API and data boundaries
 
@@ -132,7 +180,7 @@ Unknown references, malformed agent output, evidence gaps and dependency failure
 
 [PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. Open Exchange and contest confirmation remain separate blocked milestones. No bonuses are marked earned from source inspection.
+The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. An Open Exchange draft was saved with the contest checkbox and dedicated idea link; it was not sent for approval or registered as an entry. The questionnaire has a submitted receipt. Articles remain local drafts, and a local video is not a YouTube publication. No bonus award is claimed from implementation alone. Current work is local; publishing and hosting require separate authorization.
 
 ## License and attribution
 

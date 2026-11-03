@@ -36,11 +36,40 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             Do detail.%Set("critical", assessment.%Get("critical"), "boolean")
             Set sc = ##class(SilentShift.Store).AddEvent(id, "semantic_check_completed", detail.%ToJSON())
             $$$ThrowOnError(sc)
-            Set detail = {"implementation": "native-ai-hub", "timeout_seconds": 60, "provider_cancellation_verified": false}
+            // Retrieve supporting procedures outside native agent callbacks.
+            // Oversized evidence is rejected before any model (including an
+            // embedding model) is invoked. Procedures grant no release rights.
+            Set approvedCount = 0, peerCount = 0
+            For index = 0:1:references.%Size()-1 {
+                If references.%Get(index).%Get("authority") = "approved" {
+                    Set approvedCount = approvedCount + 1
+                } Else {
+                    Set peerCount = peerCount + 1
+                }
+            }
+            If (approvedCount <= 10) && (peerCount <= 10) {
+                Set stage = "supporting-procedures"
+                Set optionalStatus = ..SendRequestSync("Runbooks", request, .runbookReply, 10)
+                Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "matches": [], "decision_authority": false, "failure_code": "RUNBOOK_RETRIEVAL_UNAVAILABLE"}
+                If $$$ISOK(optionalStatus), $ISOBJECT(runbookReply), runbookReply.BodyJSON '= "" {
+                    Set context = ##class(%DynamicObject).%FromJSON(runbookReply.BodyJSON)
+                }
+                Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+                Do body.%Set("runbook_context", context)
+                Set sc = ##class(SilentShift.Store).SaveCase(id, body.%ToJSON())
+                $$$ThrowOnError(sc)
+                Set detail = {"status": (context.%Get("status")), "implementation": "IRIS VECTOR_COSINE", "match_count": (context.%Get("matches").%Size()), "decision_authority": false}
+                Set sc = ##class(SilentShift.Store).AddEvent(id, "runbook_retrieved", detail.%ToJSON())
+                $$$ThrowOnError(sc)
+                // Optional context cannot veto an otherwise valid case, and
+                // cannot supply missing contract evidence or authorize ALLOW.
+            }
+            Set agentWait = ##class(SilentShift.AI.Investigator).WaitSeconds()
+            Set detail = {"implementation": "native-ai-hub", "timeout_seconds": (agentWait), "provider_cancellation_verified": false}
             Set sc = ##class(SilentShift.Store).AddEvent(id, "agent_invoked", detail.%ToJSON())
             $$$ThrowOnError(sc)
             Set stage = "agent-investigation", raw = "", metadata = {"mode": "native-ai-hub", "status": "failed", "failure_code": "AI_UNAVAILABLE_OR_TIMEOUT"}
-            Set sc = ..SendRequestSync("Investigator", request, .agentReply, 60)
+            Set sc = ..SendRequestSync("Investigator", request, .agentReply, agentWait)
             If $$$ISOK(sc), $ISOBJECT(agentReply) {
                 Set raw = agentReply.RecommendationJSON
                 If agentReply.MetadataJSON '= "" Set metadata = ##class(%DynamicObject).%FromJSON(agentReply.MetadataJSON)
@@ -90,6 +119,26 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
         If $ISOBJECT(policy), policy.%Get("downstream_permitted") Set target = "Destination"
         Set sc = ..SendRequestSync(target, request, .routeReply, 10)
         $$$ThrowOnError(sc)
+        // Only newly processed REQUEST_REVIEW outcomes create native tasks.
+        // Existing benchmark/history cases are never scanned or backfilled.
+        If request.Action '= "review_route" {
+            Set routed = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+            If routed.%Get("routing") = "REVIEW" {
+                Set workflow = {"engine": "native-iris-workflow", "status": "queued", "role": "ReviewWorklist", "requested_at": (##class(SilentShift.TraceEvent).UTC()), "completion_received": false}
+                Set sc = ##class(SilentShift.Store).SetWorkflow(id, workflow.%ToJSON(), "workflow_task_requested")
+                $$$ThrowOnError(sc)
+                Set sc = ..SendRequestAsync("ReviewCoordinator", request, 0, "", "Create native semantic review")
+                $$$ThrowOnError(sc)
+                // Bounded wait for task linkage only; human completion is
+                // durable asynchronous work in the separate coordinator BP.
+                For attempt = 1:1:20 {
+                    Set routed = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+                    Set workflow = routed.%Get("workflow")
+                    If workflow.%Get("task_id") '= "" Quit
+                    Hang .1
+                }
+            }
+        }
         Set response.BodyJSON = ##class(SilentShift.Store).CaseJSON(id)
         Return $$$OK
     } Catch error {

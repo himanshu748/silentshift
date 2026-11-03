@@ -1,0 +1,85 @@
+{
+  "duration": 120,
+  "fps": 30,
+  "output_size": [1920, 1080],
+  "source_url": "https://github.com/himanshu748/silentshift",
+  "scope": "Edited walkthrough · recorded native cases · synthetic data · IRIS destination simulator",
+  "scenes": [
+    {
+      "id": "opening", "start": 0, "end": 9,
+      "chapter": "The problem",
+      "headline": "A valid message can carry the wrong meaning.",
+      "caption": "SilentShift checks business meaning before IRIS delivers an integration message.",
+      "source": "evidence/browser/landing-root.png", "crop": [0, 0, 1280, 720],
+      "layout": "wide", "source_label": "Recorded product page"
+    },
+    {
+      "id": "currency", "start": 9, "end": 22,
+      "chapter": "Recorded case B",
+      "headline": "The payment looks plausible. The contract disagrees.",
+      "caption": "Partner: 12550 minor units. Approved contract: 125.50 major units. The declared fields differ.",
+      "source": "web/public/evidence/native-currency-workbench.png", "crop": [468, 163, 1416, 926],
+      "layout": "split", "source_label": "Actual currency investigation",
+      "facts": ["12550 | minor", "125.50 | major"]
+    },
+    {
+      "id": "hold", "start": 22, "end": 33,
+      "chapter": "Recorded case B",
+      "headline": "No conversion without approved evidence.",
+      "caption": "The verified contradiction remains quarantined. No destination simulator receipt was created.",
+      "source": "web/public/evidence/native-currency-workbench.png", "crop": [488, 470, 1416, 752],
+      "layout": "wide", "source_label": "Edited close-up of the actual evidence and policy"
+    },
+    {
+      "id": "amendment", "start": 33, "end": 47,
+      "chapter": "Separate recorded cases A and C",
+      "headline": "Changed units need an approved amendment.",
+      "caption": "A is held: 20 CASE contradicts 240 EA. In C, an effective approved amendment authorizes 20 CASE.",
+      "source": "evidence/browser/demo/unit-quarantine-full.png", "crop": [488, 290, 1416, 1080],
+      "layout": "split", "source_label": "Actual case A; C's approved amendment shown in the next recorded case",
+      "facts": ["A: 20 CASE / 240 EA", "C: 20 CASE / 20 CASE"]
+    },
+    {
+      "id": "delivery", "start": 47, "end": 58,
+      "chapter": "Recorded case C",
+      "headline": "An approved change can continue.",
+      "caption": "The current amendment matches. C was delivered exactly once to the IRIS destination simulator.",
+      "source": "web/public/evidence/native-approved-workbench.png", "crop": [468, 163, 1416, 926],
+      "layout": "wide", "source_label": "Actual approved-reference lineage and allow result"
+    },
+    {
+      "id": "tools", "start": 58, "end": 74,
+      "chapter": "Evidence before permission",
+      "headline": "The agent recommends. Policy controls delivery.",
+      "caption": "Three scoped reads: current message, approved contracts and related records. No tool can deliver a message.",
+      "source": "evidence/browser/demo/approved-agent-full.png", "crop": [488, 469, 1155, 740],
+      "layout": "split", "source_label": "Actual Agent view; three scoped reads confirmed in the native trace record",
+      "facts": ["Current message", "Approved contracts", "Related records"]
+    },
+    {
+      "id": "trace", "start": 74, "end": 91,
+      "chapter": "A route an operator can explain",
+      "headline": "Keep the explanation with the transaction.",
+      "caption": "Recorded C trace 52 contains invocation and tool spans in the same native production session.",
+      "source": "evidence/browser/demo/approved-timeline-full.png", "crop": [533, 1092, 1155, 1420],
+      "layout": "split", "source_label": "Actual expanded Timeline event; native production session 52",
+      "facts": ["Case C: native session 52", "8 invocation/tool messages", "Provider rounds unverified"]
+    },
+    {
+      "id": "outcomes", "start": 91, "end": 105,
+      "chapter": "Measured on frozen synthetic cases",
+      "headline": "Five cases. Five controlled final outcomes.",
+      "caption": "Recorded Nov 2 fresh-volume repeat: 5/5. Rule-only baseline: 5/5. No AI accuracy uplift demonstrated.",
+      "source": "evidence/browser/demo/evaluation-full.png", "crop": [264, 439, 1394, 770],
+      "layout": "wide", "source_label": "Actual Evaluations screen; five synthetic cases, not general accuracy"
+    },
+    {
+      "id": "close", "start": 105, "end": 120,
+      "chapter": "Try the native production",
+      "headline": "Catch meaning before delivery.",
+      "caption": "Inspect the source. Load authorized build 154. Run the same native IRIS production locally.",
+      "source": "evidence/browser/landing-root.png", "crop": [0, 0, 1280, 720],
+      "layout": "closing", "source_label": "Source and installation instructions: README.md"
+    }
+  ]
+}

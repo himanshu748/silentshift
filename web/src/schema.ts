@@ -70,6 +70,25 @@ export const CaseSchema = z
     trace_id: z.union([z.string(), z.number()]).nullable(),
     trace_url: z.string().optional(),
     review: JsonObject.nullable(),
+    workflow: z.object({
+      engine: z.literal("native-iris-workflow"),
+      status: z.enum(["queued", "pending", "completion_pending", "completed"]),
+      role: Text,
+      task_id: z.union([Text, z.number()]).optional(),
+      completion_received: z.boolean(),
+    }).passthrough().optional(),
+    runbook_context: z.object({
+      status: z.enum(["retrieved", "unavailable"]),
+      implementation: Text,
+      decision_authority: z.literal(false),
+      matches: z.array(z.object({
+        id: Text,
+        title: Text,
+        guidance: Text,
+        similarity: z.number().finite().min(-1).max(1),
+        decision_authority: z.literal(false),
+      }).passthrough()).max(2),
+    }).passthrough().optional(),
   })
   .passthrough();
 export type Investigation = z.infer<typeof CaseSchema>;

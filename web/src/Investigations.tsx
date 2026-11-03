@@ -4,12 +4,14 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
   ArrowDownToLine,
   ArrowRight,
   Check,
+  ChevronDown,
   ChevronRight,
   FileJson2,
   Fingerprint,
@@ -52,6 +54,12 @@ import {
 // An absent or pending permission observation grants no reviewer controls.
 // The server still authorizes every mutation independently.
 export const ReviewPermissionContext = createContext(false);
+
+function recordedAction(value: unknown): "APPROVE" | "REJECT" | null {
+  if (value === "approve" || value === "APPROVE") return "APPROVE";
+  if (value === "reject" || value === "REJECT") return "REJECT";
+  return null;
+}
 
 function checksFor(
   item: Investigation,
@@ -97,7 +105,7 @@ function Evidence({ item }: { item: Investigation }) {
         <div
           className="table-scroll"
           role="region"
-          aria-label="Semantic comparison; scroll horizontally for reference values"
+          aria-label="Semantic comparison"
           tabIndex={0}
         >
           <table className="evidence-table">
@@ -112,9 +120,6 @@ function Evidence({ item }: { item: Investigation }) {
               {findings.map((finding, index) => (
                 <tr key={`${finding.code}-${index}`}>
                   <td>
-                    <span
-                      className={`finding-mark ${toneFor(finding.severity)}`}
-                    />{" "}
                     <code>{finding.field}</code>
                     <small>{humanize(finding.code)}</small>
                     <p>{finding.explanation}</p>
@@ -125,11 +130,13 @@ function Evidence({ item }: { item: Investigation }) {
                     </div>
                   </td>
                   <td>
+                    <span className="mobile-value-label" aria-hidden="true">Partner value</span>
                     <code className={toneFor(finding.severity)}>
                       {display(finding.observed)}
                     </code>
                   </td>
                   <td>
+                    <span className="mobile-value-label" aria-hidden="true">Reference / requirement</span>
                     <code>{display(finding.expected)}</code>
                   </td>
                 </tr>
@@ -165,7 +172,7 @@ function Evidence({ item }: { item: Investigation }) {
         </Badge>
       </div>
       {item.references.length ? (
-        <div className="reference-list">
+        <div className="reference-list" role="group" aria-label="Reference snapshot">
           {item.references.map((reference, index) => (
             <details
               className="reference-record"
@@ -197,6 +204,29 @@ function Evidence({ item }: { item: Investigation }) {
           No independent reference records were returned. Missing evidence
           cannot authorize an automatic release.
         </Notice>
+      )}
+      {item.runbook_context && (
+        <section className="reference-heading" aria-label="Supporting procedures">
+          <div className="section-header">
+            <div>
+              <h3>Supporting procedures</h3>
+              <p>Retrieved by IRIS vector search. Text similarity grants no release permission.</p>
+            </div>
+          </div>
+          {item.runbook_context.status === "unavailable" ? (
+            <p className="small subtle">Procedural guidance is unavailable. Approved evidence and policy still determine the route.</p>
+          ) : item.runbook_context.matches.length ? (
+            <div className="reference-list">
+              {item.runbook_context.matches.map((procedure) => (
+                <details className="reference-record" key={procedure.id}>
+                  <summary><ChevronRight size={15} /><span>{procedure.title}</span><Badge>Similarity {procedure.similarity.toFixed(2)}</Badge></summary>
+                  <p>{procedure.guidance}</p>
+                  <p className="small subtle">Supporting context · {procedure.id} · No contract authority</p>
+                </details>
+              ))}
+            </div>
+          ) : <p className="small subtle">No procedure met the retrieval threshold.</p>}
+        </section>
       )}
     </>
   );
@@ -291,28 +321,37 @@ function ReviewDialog({
   onClose: () => void;
   onComplete: (result: Investigation) => void;
 }) {
-  const [reason, setReason] = useState("");
+  const savedAction = recordedAction(item.review?.action);
+  const recorded: { action: "APPROVE" | "REJECT"; reason: string; expected_version: number; idempotency_key: string } | null = item.workflow && item.review
+    && savedAction
+    && typeof item.review.reason === "string"
+    && typeof item.review.expected_version === "number"
+    && typeof item.review.idempotency_key === "string"
+      ? { action: savedAction, reason: item.review.reason,
+          expected_version: item.review.expected_version, idempotency_key: item.review.idempotency_key }
+      : null;
+  const [reason, setReason] = useState(recorded?.reason ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
-  const [requestKey, setRequestKey] = useState<string | null>(null);
+  const [submittedRequest, setSubmittedRequest] = useState<{
+    action: "APPROVE" | "REJECT"; reason: string; expected_version: number; idempotency_key: string;
+  } | null>(recorded);
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (busy || reason.trim().length < 8) return;
-    const key = requestKey ?? crypto.randomUUID();
-    setRequestKey(key);
+    const body = submittedRequest ?? { action, reason: reason.trim(), expected_version: item.version, idempotency_key: crypto.randomUUID() };
+    setSubmittedRequest(body);
     setBusy(true);
     setError(null);
     try {
+      // Refresh persisted state before retrying an uncertain outcome. Reuse
+      // the complete original request, including its original case version.
+      if (submittedRequest) await request(`/api/cases/${encodeURIComponent(item.id)}`, CaseSchema);
       const result = await request(
         `/api/cases/${encodeURIComponent(item.id)}/review`,
         CaseSchema,
         {
-          body: {
-            action,
-            reason: reason.trim(),
-            expected_version: item.version,
-            idempotency_key: key,
-          },
+          body,
         },
       );
       onComplete(result);
@@ -339,7 +378,7 @@ function ReviewDialog({
       <div className="review-context">
         <span>Case</span>
         <code>{item.id}</code>
-        <Badge>Version {item.version}</Badge>
+        <Badge>{recorded ? "Original version" : "Version"} {submittedRequest?.expected_version ?? item.version}</Badge>
       </div>
       <form onSubmit={submit}>
         <label className="field-label" htmlFor="review-reason">
@@ -352,18 +391,16 @@ function ReviewDialog({
           value={reason}
           onChange={(event) => {
             setReason(event.target.value);
-            setRequestKey(null);
           }}
           placeholder="Describe the evidence supporting this action…"
           maxLength={2000}
-          disabled={busy}
+          disabled={busy || submittedRequest !== null}
           required
           minLength={8}
         />
         {error !== null && <InlineError error={error} />}
         <p className="form-hint">
-          A retry reuses the same idempotency key. A changed case is rejected by
-          version checks.
+          {submittedRequest ? "Retry resumes this exact recorded request. Its reason and original version stay fixed." : "IRIS checks the case version and preserves one review receipt. An uncertain result can be resumed safely."}
         </p>
         <div className="modal-actions">
           <Button type="button" onClick={onClose}>
@@ -377,7 +414,7 @@ function ReviewDialog({
           >
             {busy
               ? "Recording action…"
-              : action === "APPROVE"
+              : submittedRequest ? "Resume recorded review" : action === "APPROVE"
                 ? "Request release"
                 : "Reject transaction"}
           </Button>
@@ -407,12 +444,8 @@ export function CaseDetail({
     <div className={`case-layout ${compact ? "case-layout-compact" : ""}`}>
       <article className="case-evidence">
         <div className="case-detail-heading">
-          <div className="section-kicker">
-            <Fingerprint size={14} /> Investigation{" "}
-            <span className="mono">{item.id}</span>
-          </div>
           <div className="detail-title-row">
-            <h2>
+            <h2 tabIndex={-1}>
               {item.assessment
                 ? humanize(item.assessment.classification)
                 : "Investigation in progress"}
@@ -426,6 +459,11 @@ export function CaseDetail({
             <span aria-hidden="true">/</span>
             <code>{item.event_id}</code>
           </p>
+          <div className="case-identifier">
+            <Fingerprint size={13} aria-hidden="true" />
+            <span>Investigation</span>
+            <code>{item.id}</code>
+          </div>
         </div>
         <div
           className={`decision-strip ${toneFor(item.policy?.decision ?? "")}`}
@@ -537,11 +575,14 @@ export function CaseDetail({
           {item.policy ? (
             <>
               <DecisionBadge value={item.policy.decision} />
-              <ul className="policy-reasons">
+              <details className="policy-rationale">
+                <summary>Decision reasons</summary>
+                <ul className="policy-reasons">
                 {item.policy.reasons.map((reason, index) => (
                   <li key={index}>{reason}</li>
                 ))}
-              </ul>
+                </ul>
+              </details>
               <ul className="policy-checks">
                 {checks.map((check, index) => (
                   <li
@@ -561,10 +602,10 @@ export function CaseDetail({
                     ) : (
                       <span className="unknown-check">?</span>
                     )}
-                    <div>
-                      <strong>{check.label}</strong>
+                    <details className="policy-check-detail">
+                      <summary>{check.label}</summary>
                       {check.reason && <p>{check.reason}</p>}
-                    </div>
+                    </details>
                   </li>
                 ))}
               </ul>
@@ -597,6 +638,12 @@ export function CaseDetail({
         {held && (
           <div className="aside-section review-actions">
             <div className="section-kicker">Reviewer actions</div>
+            {item.workflow && item.review && recordedAction(item.review.action) ? (
+              <>
+                <p className="small subtle">A review is recorded. Resume its native task completion and route using the original request.</p>
+                <Button disabled={!canReview} onClick={() => setReview(recordedAction(item.review?.action))}>Resume recorded review</Button>
+              </>
+            ) : <>
             <Button
               icon={ArrowDownToLine}
               onClick={() => setReview("APPROVE")}
@@ -625,6 +672,17 @@ export function CaseDetail({
                   ? "Critical contradictions require a corrected event or reference and a new investigation."
                   : "Reviewer permission, a reason and a current case version are required."}
             </p>
+            </>}
+          </div>
+        )}
+        {item.workflow && (
+          <div className="aside-section">
+            <div className="section-kicker">Native review task</div>
+            <Metadata>
+              <MetaRow label="Status">{humanize(item.workflow.status)}</MetaRow>
+              <MetaRow label="Task" mono>{display(item.workflow.task_id)}</MetaRow>
+              <MetaRow label="Worklist">{item.workflow.role}</MetaRow>
+            </Metadata>
           </div>
         )}
         {item.review && (
@@ -663,6 +721,9 @@ export default function Investigations({
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
   const [polls, setPolls] = useState(0);
+  const [queueExpanded, setQueueExpanded] = useState(false);
+  const detailRegion = useRef<HTMLDivElement>(null);
+  const openedCase = useRef<string | null>(null);
   const { inspectCase } = useActions();
   const activeId = caseId ?? cases.data?.items[0]?.id;
   const detail = useApi(
@@ -671,6 +732,15 @@ export default function Investigations({
     refresh * 1000 + polls,
   );
   useEffect(() => setPolls(0), [activeId]);
+  useEffect(() => {
+    // The old queue scroll position must not become the new case's viewport.
+    // Wait for its actual record; polling and refreshes of the same case keep
+    // the operator's reading position and keyboard focus.
+    if (!caseId || !detail.data || detail.data.id !== activeId || openedCase.current === detail.data.id) return;
+    openedCase.current = detail.data.id;
+    window.scrollTo({ top: 0, behavior: "instant" });
+    detailRegion.current?.querySelector<HTMLElement>(".detail-title-row h2")?.focus({ preventScroll: true });
+  }, [activeId, caseId, detail.data]);
   useEffect(() => {
     if (detail.data?.routing === "PROCESSING" && polls < 30) {
       const timeout = window.setTimeout(
@@ -707,13 +777,24 @@ export default function Investigations({
         </a>
       </PageHeading>
       <div className="workbench">
-        <aside className="case-queue" aria-label="Investigation queue">
+        <aside className={`case-queue ${queueExpanded ? "queue-expanded" : ""}`} aria-label="Investigation queue">
           <div className="queue-heading">
             <h2>Investigation queue</h2>
             <span className="count mono">
               {cases.data ? cases.data.total : "—"}
             </span>
+            <button
+              type="button"
+              className="icon-button queue-toggle"
+              aria-label={queueExpanded ? "Collapse investigation queue" : "Expand investigation queue"}
+              aria-expanded={queueExpanded}
+              aria-controls="investigation-queue-content"
+              onClick={() => setQueueExpanded((open) => !open)}
+            >
+              <ChevronDown size={18} />
+            </button>
           </div>
+          <div className="queue-content" id="investigation-queue-content">
           <div className="queue-controls">
             <label className="search-input">
               <Search size={15} />
@@ -772,12 +853,16 @@ export default function Investigations({
                   <button
                     className={`case-list-item ${activeId === item.id ? "selected" : ""}`}
                     aria-pressed={activeId === item.id}
-                    onClick={() => inspectCase(item.id)}
+                    onClick={() => {
+                      inspectCase(item.id);
+                      setQueueExpanded(false);
+                      window.scrollTo({ top: 0, behavior: "instant" });
+                      if (detail.data?.id === item.id) {
+                        detailRegion.current?.querySelector<HTMLElement>(".detail-title-row h2")?.focus({ preventScroll: true });
+                      }
+                    }}
                   >
                     <span className="case-item-top">
-                      <span
-                        className={`queue-marker ${toneFor(item.policy?.decision ?? "")}`}
-                      />
                       <code>{item.id}</code>
                       <time dateTime={item.received_at}>
                         {shortTime(item.received_at)}
@@ -803,15 +888,15 @@ export default function Investigations({
             </ol>
           )}
           <div className="queue-footer">
-            <span className="status-dot" />
             <span>
               {cases.data
-                ? `${items.length} shown · first ${cases.data.limit} records`
+                ? `${items.length} shown from the first ${cases.data.limit} records`
                 : "Native records only"}
             </span>
           </div>
+          </div>
         </aside>
-        <div className="investigation-main">
+        <div className="investigation-main" ref={detailRegion}>
           {detail.data ? (
             <>
               <CaseDetail item={detail.data} key={detail.data.id} />
@@ -831,14 +916,11 @@ export default function Investigations({
             <ErrorState error={detail.error} />
           ) : (
             <div className="workbench-empty">
-              <div className="empty-eyebrow">
-                <span className="status-dot" /> Evidence workbench
-              </div>
               <div className="empty-emblem">
                 <GitCompareArrows size={38} strokeWidth={1.1} />
                 <span />
               </div>
-              <h2>Trust begins with evidence.</h2>
+              <h2>Evidence workbench</h2>
               <p>
                 Compare the message that arrived with the business meaning that
                 was approved. Every finding, recommendation and route stays

@@ -1,0 +1,31 @@
+{
+  "version": "silentshift-runbooks/1.0.0",
+  "scope": "Synthetic investigation procedures; supporting context, never contract authority or permission to release.",
+  "documents": [
+    {
+      "id": "runbook:units:v1",
+      "title": "Investigate quantity and unit changes",
+      "text": "An order can keep its JSON schema while switching from individual pieces to cases or cartons. Compare the quantity and the unit with the independent purchase agreement effective at event time. A packaging convention is not an approved conversion. Preserve both submitted and approved values. Ask the partner for a corrected event or a signed effective amendment. Keep a verified critical quantity or unit contradiction held; an earlier similar transaction cannot authorize it."
+    },
+    {
+      "id": "runbook:money:v1",
+      "title": "Investigate currency and decimal scale",
+      "text": "Payments can drift when cents or other minor units are submitted where an agreement requires dollars or another major-unit scale. Inspect amount, currency and the explicit amount scale together. Use exact decimal arithmetic. A numerically plausible conversion does not authorize changing the declared business contract. Preserve the original fields and request corrected payment evidence. A confirmed currency or scale contradiction cannot be released by a reviewer override."
+    },
+    {
+      "id": "runbook:amendment:v1",
+      "title": "Recognize an effective approved amendment",
+      "text": "A legitimate contractual change may differ from an older purchase agreement. Inspect the approved amendment, its superseded reference and the effective dates at the event's occurrence time. Cite the full reference lineage. When the event exactly matches the currently effective approved amendment and all release checks pass, the change can be allowed. Historical similarity or a later amendment cannot substitute for an amendment effective for this event."
+    },
+    {
+      "id": "runbook:authority:v1",
+      "title": "Resolve conflicting reference authority",
+      "text": "Two peer records may disagree about the same product or quantity. Similarity, recency and majority vote cannot create approved contractual authority. Separate peer evidence from approved contracts. Where no approved record resolves the disagreement, keep the transaction for human review and request authoritative evidence. Do not label uncertain peer conflict as a verified critical contradiction merely because the agent expresses concern."
+    },
+    {
+      "id": "runbook:time:v1",
+      "title": "Inspect event time, freshness and replay",
+      "text": "Received time and event occurrence time have different meanings. Select the contract effective at the event's occurrence time and inspect old or future-dated messages. A source and event identifier must preserve the original payload across retries. Replaying an identical event reuses the existing case and delivery receipt. Reusing an identifier with different content is a conflict; a new timestamp must not silently cause a second downstream effect."
+    }
+  ]
+}

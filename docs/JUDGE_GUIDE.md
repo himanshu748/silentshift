@@ -1,27 +1,31 @@
 # Try SilentShift
 
-An order can pass its JSON and transport checks while changing the meaning of a purchase. SilentShift investigates that gap before the included destination simulator accepts it. The core runs inside InterSystems IRIS: Business Service → Business Process → native AI Hub agent and scoped tools → Embedded Python policy → routing Operations.
+An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift gives the integration operator the evidence to hold that order before the included destination simulator accepts it.
 
-The strongest demonstration is a pair of orders: hold a unit change without authority, then allow a change backed by an effective approved amendment. Conflicting references remain a separate review outcome. The browser shows the evidence behind each result.
+Start with two investigations: **Quantity mismatch** holds that unsupported change; **Approved amendment** allows the same incoming value because an approved amendment is effective at event time. Compare the authority behind the decisions, then inspect the actual simulator receipt.
 
-## Inspect an actual result
+The decision stays inside InterSystems IRIS: Business Service → Business Process → native AI Hub agent and scoped tools → Embedded Python policy → routing Operations. The agent proposes; deterministic server policy owns the route. All supplied messages and references are synthetic.
 
-These screenshots show persisted synthetic records from local Community AI Hub154U and Qwen3 4B inference. They are captures of the working application, not live hosted access.
+## See the operator's decision
+
+These screenshots show persisted records from local Community AI Hub 154U and Qwen3 4B inference. They are captures of the working application, not live hosted access.
 
 ![Currency fields disagree with an approved contract; server policy holds the message](assets/native-currency-quarantine.png)
 
 ![A browser-injected approved amendment was allowed and delivered to the simulator](assets/native-approved-delivery.png)
 
-The second screenshot is case `D39226FC-D6B8-11F1-956F-F285F08CEB87`, native trace42. It was injected through Scenario Lab after the fresh-volume benchmark. Delivery is to the IRIS simulator, not an external ERP or bank.
+The second screenshot is case `D39226FC-D6B8-11F1-956F-F285F08CEB87`, native trace 42. It was injected through Scenario Lab after the fresh-volume benchmark. Delivery is to the IRIS simulator, not an external ERP or bank.
+
+The payment example checks a declared interface contract: `12550` minor units versus `125.50` major units. Numeric equivalence does not authorize a transformation. The hold does not establish a 100× monetary loss.
 
 ## Reproduce the complete journey
 
 1. Follow the [README setup](../README.md#native-build-154-setup), including the separately licensed EAP image and local model. Bootstrap never invokes a model or seeds operational cases.
 2. Start the workbench, connect with the local configured account, and open **Scenario Lab**.
-3. Choose **Quantity mismatch**. Inspect the submitted quantity/unit and independent contract, then click **Inject into IRIS** once. Keep the displayed run ID. Inspect the returned investigation: a critical contradiction must be held with zero simulator deliveries. The agent cannot infer a CASE→EA conversion.
+3. Choose **Quantity mismatch**. Inspect `20 CASE` against the independent `240 EA` contract, then click **Inject into IRIS** once. Keep the displayed run ID. A critical contradiction must be held with zero simulator deliveries. The agent cannot infer a CASE→EA conversion.
 4. Choose **Approved amendment** and inject once. Inspect both the earlier contract and effective amendment, the native agent's actual reads, the release checks and the delivered case. Retrying the same injection must reuse its case and receipt.
 5. Run the conflict example. Without sufficient approved authority, its final route must be **Review**. A model concern alone is not proof of a critical contradiction.
-6. Inspect **Timeline**, **Payload**, **Agent** and the recorded native trace ID. Visual Trace requires a portal account with the appropriate interoperability permissions; application viewer rights do not grant administrative access.
+6. Inspect **Timeline**, **Payload**, **Agent** and the recorded native trace ID. The investigation preserves the original message, selected reference snapshot, actual evidence reads, policy checks and route. Visual Trace requires a portal account with the appropriate interoperability permissions; application viewer rights do not grant administrative access.
 
 To capture all five scenarios plus replay and critical-release checks, use local inference and run:
 
@@ -31,29 +35,45 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls
 
 This performs real model work. Scenario E deliberately injects a labeled hostile validator proposal after a native answer; the original model response remains separate. It demonstrates containment of unsafe input to policy, not a claim that the model spontaneously produced that attack.
 
-## Measured results and limits
+## Resolve a review without losing the decision
 
-The [machine-readable public summary](evidence/native-summary.json) includes all four retained trials and hashes of their full local exports. Raw local evidence and runtime images remain outside Git.
+A review-eligible hold creates a native IRIS Workflow task. An authorized reviewer supplies a reason, the current case version and an idempotency key. A critical contradiction cannot be approved through this path.
 
-| Native trial | Model proposals | Final outcomes | Unsafe simulator releases |
-|---|---:|---:|---:|
-| Initial1.7B trial | Incomplete; one empty answer | Benchmark rejected | No deliveries observed |
-| First4B trial, policy1.0 | 2/5 | 3/5 | 0/4 |
-|4B, policy1.1 | 4/5 | 5/5 | 0/4 |
-| Fresh-volume4B repeat, policy1.1 | 5/5 | 5/5 | 0/4 |
+If native task completion fails after the decision is recorded, the case remains held with `completion_pending`. **Resume recorded review** carries the saved reason, original version and key; it does not create a replacement decision. The [engineering walkthrough](articles/engineering.md) explains the controlled failure and actual UI recovery that completed one task and produced exactly one simulator delivery.
 
-These are five frozen synthetic cases per trial. The deterministic baseline also solves all five; no AI accuracy uplift is demonstrated. The agent provides an inspectable, evidence-bound recommendation and can veto release; deterministic policy constrains what may happen afterward. Session-wide token totals and billing cost are unavailable; the final response's token usage is a narrower measurement. The clean repeat's mean agent time was24,664.2ms, p9537,431ms across five cases, not a throughput result.
+The focused verification command creates one local-model conflict investigation and a separate no-model boundary case:
 
-The fresh installation began with zero cases and evaluations. Its trace IDs were2,10,18,26,34, with one delivery for the approved amendment and zero for the other four cases. Separate native checks exercised permission denials, malformed/blank reviews, optimistic versions, concurrent idempotent approval, human rejection, restart persistence and oversized evidence containment. See [build status](BUILD_STATUS.md) for their exact scopes.
+```sh
+uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
+```
+
+The [43-check receipt](evidence/workflow.json) includes rejection with zero deliveries, authorization/version checks and the postcommit HTTP 503 recovery. This proves the documented deferred-completion journey, not every outage or crash path.
 
 ## What to assess against the rubric
 
 | Official criterion | Inspect |
 |---|---|
-| Complexity | A complete native production, scoped tool retrieval, versioned independent references and transaction-protected simulator effects. |
+| Complexity | A complete native production, scoped tool retrieval, versioned independent references, native human-task completion and transaction-protected simulator effects. |
 | Clarity of Instructions | Exact runtime/provider, load/start/check commands, five-case verifier and this walkthrough. |
 | Developer Experience | Local inference, source-only distribution, empty-volume installation evidence, typed API and separate host/native/browser checks. |
 | Applicability | Pre-delivery contradictions in orders/payments, effective amendments and conflicting authority; all supplied data is synthetic. |
 | Usability | Evidence comparison, distinct quarantine/review/delivered states, explicit reviewer gates, desktop/mobile and keyboard behavior. |
 
-This maps observable evidence to the [official criteria](https://openexchange.intersystems.com/contest/49); it does not predict a judge's score. Public deployment, provider-side cancellation, broad repeated-trial performance and real external delivery remain outside the verified boundary.
+This maps observable evidence to the [official criteria](https://openexchange.intersystems.com/contest/49); it does not predict a judge's score. Optional adapter intake, procedural vector guidance and IPM setup are documented in the [README](../README.md#optional-local-intake-and-procedural-guidance). Their evidence gates remain separate from the core journey and any organizer award.
+
+## Evidence appendix
+
+The [machine-readable public summary](evidence/native-summary.json) includes all four retained trials and hashes of their full local exports. Raw local evidence and runtime images remain outside Git.
+
+| Native trial | Model proposals | Final outcomes | Unsafe simulator releases |
+|---|---:|---:|---:|
+| Initial 1.7B trial | Incomplete; one empty answer | Benchmark rejected | No deliveries observed |
+| First 4B trial, policy 1.0 | 2/5 | 3/5 | 0/4 |
+| 4B, policy 1.1 | 4/5 | 5/5 | 0/4 |
+| Fresh-volume 4B repeat, policy 1.1 | 5/5 | 5/5 | 0/4 |
+
+These are historical trials of five frozen synthetic cases each. The deterministic baseline also solves all five; no AI accuracy uplift is demonstrated. The agent provides an inspectable, evidence-bound recommendation and can veto release; deterministic policy constrains what may happen afterward. Session-wide token totals and billing cost are unavailable; the final response's token usage is a narrower measurement. The clean repeat's mean agent time was 24,664.2 ms, with p95 of 37,431 ms across five cases. These measurements do not describe current optional-feature latency or throughput.
+
+The fresh installation began with zero cases and evaluations. Its trace IDs were 2, 10, 18, 26 and 34, with one delivery for the approved amendment and zero for the other four cases. Separate native checks exercised permission denials, malformed/blank reviews, optimistic versions, concurrent idempotent approval, human rejection, restart persistence and oversized evidence containment. See [build status](BUILD_STATUS.md) for their exact scopes.
+
+The [46-check trace receipt](evidence/traceability.json) covers whole native `Chat` invocations and actual evidence-tool spans, including a pre-model failure. It does not establish capture of every provider request/response or per-provider-round statistics. Public deployment, provider-side cancellation, broad repeated-trial performance and real external delivery remain outside the verified boundary.

@@ -31,8 +31,10 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
             }
         }
         Set request.CaseId = id
-        // All callees have separate pools. The agent wait inside Semantic is 60s.
-        Set sc = ..SendRequestSync("Semantic", request, .response, 90)
+        // Separate pools; allow the explicit agent budget plus bounded
+        // reference/procedure/routing waits and native task linkage overhead.
+        Set outerWait = ##class(SilentShift.AI.Investigator).WaitSeconds() + 35
+        Set sc = ..SendRequestSync("Semantic", request, .response, outerWait)
         If $$$ISERR(sc) Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: production did not complete; event remains persisted and held")
         Set pOutput.BodyJSON = response.BodyJSON
         Return $$$OK

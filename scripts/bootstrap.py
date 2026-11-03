@@ -61,6 +61,10 @@ def main() -> int:
     if not (ROOT / '.env').exists():
         print('Create .env from .env.example first; Compose uses the same file', file=sys.stderr)
         return 2
+    wait = env.get('SILENTSHIFT_AGENT_WAIT_SECONDS', '60')
+    if not re.fullmatch(r'[0-9]{1,3}', wait) or not 10 <= int(wait) <= 120:
+        print('SILENTSHIFT_AGENT_WAIT_SECONDS must be an integer from10 to120', file=sys.stderr)
+        return 2
 
     def run(arguments: list[str], *, data: str | None = None, quiet: bool = False, check: bool = True) -> subprocess.CompletedProcess:
         # Captured failures are deliberately not echoed: container diagnostics
@@ -92,15 +96,19 @@ def main() -> int:
     run(compose + ['config', '--quiet'], quiet=True)
     local = ROOT / '.local' / 'gateway'
     local.mkdir(parents=True, exist_ok=True, mode=0o700)
+    # Separate writable hand-off directory; the rest of the checkout remains
+    # read-only in IRIS. Bootstrap does not create any incoming partner files.
+    (ROOT / '.local' / 'partner-inbox').mkdir(parents=True, exist_ok=True, mode=0o700)
     ini = local / 'CSP.ini'
     password = env['SILENTSHIFT_GATEWAY_PASSWORD']
     ini.write_text('[SYSTEM]\nSystem_Manager=127.0.0.1\nDefault_Server=IRIS\n'
-                   'Server_Response_Timeout=120\nQueued_Request_Timeout=120\n'
+                   'Server_Response_Timeout=180\nQueued_Request_Timeout=180\n'
                    '[SYSTEM_INDEX]\nIRIS=Enabled\n[IRIS]\nIp_Address=iris\nTCP_Port=1972\n'
                    'Minimum_Server_Connections=2\nMaximum_Session_Connections=8\n'
                    'Username=CSPSystem\nPassword=' + password + '\nConnection_Security_Level=0\n'
-                   '[APP_PATH_INDEX]\n/silentshift=Enabled\n/csp=Enabled\n'
+                   '[APP_PATH_INDEX]\n/silentshift=Enabled\n/silentshift-provider=Enabled\n/csp=Enabled\n'
                    '[APP_PATH:/silentshift]\nDefault_Server=IRIS\n'
+                   '[APP_PATH:/silentshift-provider]\nDefault_Server=IRIS\n'
                    '[APP_PATH:/csp]\nDefault_Server=IRIS\n')
     ini.chmod(0o600)
     print('Starting locally loaded IRIS runtime...')

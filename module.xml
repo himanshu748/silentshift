@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26">
+  <Document name="silentshift.ZPM">
+    <Module>
+      <Name>silentshift</Name>
+      <Version>0.1.0</Version>
+      <Description>Native IRIS semantic integration checks with evidence-bound agent proposals and deterministic routing policy.</Description>
+      <Keywords>interoperability,ai-agents,semantic-integrity</Keywords>
+      <Author>
+        <Organization>SilentShift contributors</Organization>
+        <License>MIT</License>
+      </Author>
+      <Packaging>module</Packaging>
+      <SystemRequirements Version=">=2026.3" Interoperability="enabled" IPMVersion=">=0.9.0"/>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="SilentShift.AI.EvidenceTools.CLS"/>
+      <Resource Name="SilentShift.AI.Investigator.CLS"/>
+      <Resource Name="SilentShift.API.CLS"/>
+      <Resource Name="SilentShift.Adapter.PartnerJSON.CLS"/>
+      <Resource Name="SilentShift.Bridge.CLS"/>
+      <Resource Name="SilentShift.Data.AuditEvent.CLS"/>
+      <Resource Name="SilentShift.Data.CaseRecord.CLS"/>
+      <Resource Name="SilentShift.Data.Delivery.CLS"/>
+      <Resource Name="SilentShift.Data.Evaluation.CLS"/>
+      <Resource Name="SilentShift.Data.Reference.CLS"/>
+      <Resource Name="SilentShift.Data.ReviewAction.CLS"/>
+      <Resource Name="SilentShift.Data.Runbook.CLS"/>
+      <Resource Name="SilentShift.IPM.CLS"/>
+      <Resource Name="SilentShift.Message.CLS"/>
+      <Resource Name="SilentShift.Operation.AITrace.CLS"/>
+      <Resource Name="SilentShift.Operation.Destination.CLS"/>
+      <Resource Name="SilentShift.Operation.Investigation.CLS"/>
+      <Resource Name="SilentShift.Operation.Quarantine.CLS"/>
+      <Resource Name="SilentShift.Operation.References.CLS"/>
+      <Resource Name="SilentShift.Operation.Runbooks.CLS"/>
+      <Resource Name="SilentShift.Process.Semantic.CLS"/>
+      <Resource Name="SilentShift.Production.CLS"/>
+      <Resource Name="SilentShift.Provider.API.CLS"/>
+      <Resource Name="SilentShift.Provider.BoundedBinaryStream.CLS"/>
+      <Resource Name="SilentShift.Provider.CallRequest.CLS"/>
+      <Resource Name="SilentShift.Provider.CallResponse.CLS"/>
+      <Resource Name="SilentShift.Provider.Forwarder.CLS"/>
+      <Resource Name="SilentShift.Provider.Ingress.CLS"/>
+      <Resource Name="SilentShift.Provider.Lease.CLS"/>
+      <Resource Name="SilentShift.Reply.CLS"/>
+      <Resource Name="SilentShift.Runbooks.CLS"/>
+      <Resource Name="SilentShift.Service.Partner.CLS"/>
+      <Resource Name="SilentShift.Service.PartnerFiles.CLS"/>
+      <Resource Name="SilentShift.Setup.CLS"/>
+      <Resource Name="SilentShift.Store.CLS"/>
+      <Resource Name="SilentShift.TraceEvent.CLS"/>
+      <Resource Name="SilentShift.Workflow.Coordinator.CLS"/>
+      <Resource Name="SilentShift.Workflow.ReviewRequest.CLS"/>
+      <Resource Name="SilentShift.Workflow.ReviewTask.CLS"/>
+      <Resource Name="SilentShift.Workflow.Support.CLS"/>
+      <Invoke Class="SilentShift.IPM" Method="CheckTarget" Phase="Compile" When="After" CheckStatus="true"/>
+      <FileCopy Name="python/silentshift/__init__.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/__init__.py"/>
+      <FileCopy Name="python/silentshift/engine.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/engine.py"/>
+      <FileCopy Name="python/silentshift/evaluation.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/evaluation.py"/>
+      <FileCopy Name="python/silentshift/embeddings.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/embeddings.py"/>
+      <FileCopy Name="fixtures/v1/scenarios.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/scenarios.json"/>
+      <FileCopy Name="fixtures/v1/manifest.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/manifest.json"/>
+      <FileCopy Name="fixtures/v1/README.md" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/README.md"/>
+      <FileCopy Name="fixtures/runbooks.json" Target="${mgrdir}silentshift/${namespace}/fixtures/runbooks.json"/>
+      <FileCopy Name="LICENSE" Target="${mgrdir}silentshift/${namespace}/LICENSE"/>
+      <Invoke Class="SilentShift.IPM" Method="ConfigureAssets" Phase="Activate" When="After" CheckStatus="true">
+        <Arg>${mgrdir}silentshift/${namespace}/</Arg>
+      </Invoke>
+      <Invoke Class="SilentShift.IPM" Method="PrepareUninstall" Phase="Clean" When="Before" CheckStatus="true">
+        <Arg>${mgrdir}silentshift/${namespace}/</Arg>
+      </Invoke>
+      <AfterInstallMessage>Classes and assets installed in SILENTSHIFT. No production, security configuration or model calls were started by this package. Read docs/IPM.md in the source repository; configure the required environment before explicitly calling SilentShift.Setup.Install().</AfterInstallMessage>
+    </Module>
+  </Document>
+</Export>

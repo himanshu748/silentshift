@@ -1,62 +1,57 @@
-# Bonus evidence
+# Sponsor technology evidence
 
-Checked **2026-11-03** against the [official bonus announcement and organizer replies](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). The list may change. **5 potential points have local implementation evidence; organizer awards are unconfirmed.** Future points below are not earned. Bonuses are described as voting points, not a published weighting of the five Expert Jury dimensions.
+SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-| Bonus | Points | Published requirement | SilentShift evidence/status |
-|---|---:|---|---|
-| Embedded Python | 3 | Use Embedded Python | LOCALLY_VERIFIED / AWARD_UNCONFIRMED: [Bridge.cls](../src/SilentShift/Bridge.cls), [engine.py](../python/silentshift/engine.py); actual production assessments/policy in the five-case native and fresh-install records |
-| Docker | 2 | IRIS runs in Docker | LOCALLY_VERIFIED / AWARD_UNCONFIRMED: official ARM64 Community154U, gateway and bootstrap; fresh-volume empty start and run `0503b649-ee6f-495e-be37-166db508377c` passed |
-| Custom adapter | 2 | Custom inbound/outbound adapter used in production | NOT_STARTED; ordinary Business Service alone is insufficient |
-| Vector Search | 2 | Use IRIS vector search | NOT_STARTED; require actual retrieval and evidence |
-| Workflow Engine | 2 | Use native Workflow Engine in production | NOT_STARTED; a custom review table alone is insufficient |
-| YouTube | 3 | Product demonstration on YouTube | NOT_STARTED; local video alone is insufficient |
-| Online demo | 2 | Cloud-hosted application demo | NOT_STARTED; require live IRIS workflow and accessible URL |
-| ZPM/IPM | 2 | Publish installable package | NOT_STARTED; require public install command and test |
-| Community Idea | 4 maximum | Implement a Community Opportunity idea | IN_PROGRESS / UNAWARDED: user-authorized DPI-I-689 trace work has started; evidence gate below is not yet satisfied |
-| First DC article | 2 | New article explains project/use | NOT_STARTED; require published URL |
-| Second DC article | 1 | Second article or translation | NOT_STARTED; require published URL |
-| Questionnaire | 1 | Submit feedback questionnaire | NOT_STARTED; require receipt |
-| PEX | 3 | Java/.NET PEX in interoperability production | OUT_OF_SCOPE |
-| AI Hub bugs | 2–3 | First reproducible report; second adds one point | NOT_STARTED; never invent a bug |
-| Embedded Python bugs | 2–3 | First reproducible report; second adds one point | NOT_STARTED |
+Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build154 ARM64. No new hosting, publishing, forum posts, registry publication or form submissions are authorized. Earlier public core source and the questionnaire receipt are historical facts; this work does not update external services.
 
-Local proof is retained in `evidence/native/clean-install-initial.json`, `evidence/native/clean-install.json`, the native run/evaluation records, and `evidence/browser/browser-scenario-delivered.png`. These are private/ignored artifacts, not public proof URLs. Publish reviewed evidence extracts with the source and installation guide; retain the actual OEX bonus decision separately. See [BUILD_STATUS.md](BUILD_STATUS.md) for the current ledger and [CONTEST_COMPLIANCE.md](CONTEST_COMPLIANCE.md) for submission gates.
+| Requested extension | Potential points | Verified behavior / remaining gate |
+|---|---:|---|
+| DPI-I-689 provider traceability |4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all40 persisted provider messages passed correlation checks. Actual Ollama400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
+| Native Workflow Engine |2 | Existing native task implementation passed43 checks, including real approve/reject and deferred-completion recovery. Dedicated Review API/view and explicit native-task concurrency proof are the next step. |
+| IRIS Vector Search precedents |2 | Five local procedural runbooks have real384-dimensional vectors and native cosine retrieval. They are **not** past-case/amendment precedents. Fourth tool and precedent evidence remain pending. |
+| Custom inbound adapter |2 | Live ready-file intake previously created held cases and then delivered an approved amendment once after a wait-budget fix. Revalidation after the new integrations remains pending. |
+| IPM package |2 | Real local load/package/UAT passed in the existing namespace. A fresh-container installation remains pending. Registry publication is manual and not authorized here. |
 
-## DPI-I-689: useful extension, not four points already earned
+## 1. Each LLM call belongs to its business case
 
-[DPI-I-689 — Use InterSystems Interoperability as a Traceability tool for GenAI LLM pipelines](https://ideas.intersystems.com/ideas/DPI-I-689) has Community Opportunity status in the November 3 research. Semion Makarov's replies to Aziz Cotrim and MxSalata on the [official bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) clarify:
+A whole investigation span hides which model exchange failed. `ProviderIngress` now sends one `SilentShift.Provider.CallRequest` to `ProviderForwarder` per SDK HTTP call; the typed `CallResponse` is paired by native `Ens.MessageHeader.CorrespondingMessageId`. Both carry the original case session and invocation span. The gateway forwards only to the configured local Ollama route. The deterministic policy still decides delivery.
 
-- Vector Search is optional for this idea.
-- Multiple entries may implement the same idea.
-- The idea bonus is capped at 4 per entry, irrespective of the number of ideas.
-- Link the implemented idea in README and OEX's dedicated idea-link section; provide a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful context.
+Executed full native run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8` passed **5/5**, with zero unsafe deliveries. Read-only inspection of all five cases verified all20 request/response pairs. After the final transport guards, run `00d3f243-3532-4166-ab31-0ac05d3f1f39` again passed5/5; ten transport checks,164 pytest tests, TypeScript/build,30 disconnected and12 native browser checks passed ([gate](evidence/step1-gate.json)). Reproduction:
 
-**Current gap / work in progress:** The user has authorized the trace-bonus implementation. At this documentation checkpoint, SilentShift's trace/session/audit data does not yet provide verified prompt-version attribution and explicit spans for each provider call. A case trace ID or a tool-event list alone does not substantiate the implementation. The four points remain unclaimed; later observed trace evidence must replace this checkpoint before claiming satisfaction.
+```sh
+uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step1-provider-five.json
+uv run python scripts/verify_native_provider.py --inspect-case EB3307BB-D772-11F1-82EF-EED820A70F55 --output evidence/native/step1-provider-success.json
+uv run python scripts/verify_native_provider.py --inspect-case B073F1D4-D772-11F1-82EF-EED820A70F55 --require-failure --output evidence/native/step1-provider-failure.json
+python3 scripts/render_native_trace.py --session 374 --output evidence/local/provider-success.svg
+```
 
-The engineering acceptance gate is to make actual provider calls inspectable in native Visual Trace, correlated with the case/session and model/prompt version, including observed latency, tool/retrieval events, errors, retries and fallback. Usage/cost must stay null where the runtime does not expose them. Retain a successful example and a failure example with reproducible commands, a trace screenshot, a metadata-field map and a short comparison of the supported scope with Langfuse. This is SilentShift's proposed evidence standard, not an assertion that every optional observability feature is required by the organizer. Redact credentials and bound payloads before publication.
+Case IDs refer to this retained local namespace. On a new install, use IDs returned by a new native run. The exact failure-generation command is in [NATIVE_AI_HUB.md](NATIVE_AI_HUB.md); it invokes the real SDK with an intentionally invalid format, causing local Ollama to return400 before inference. It is an explicit synthetic transport diagnostic, separate from the frozen five scenarios.
 
-The original [DPI-I-439](https://ideas.intersystems.com/ideas/DPI-I-439) AI-test-automation extension stays deferred. Generating test prose is insufficient, and implementing a second idea cannot add another four points. Do not expand scope merely to collect a second idea link.
+| Observation | Case / session / native headers | Final state |
+|---|---|---|
+| Approved amendment |`EB3307BB-D772-11F1-82EF-EED820A70F55` /374 /381↔382,383↔384,385↔386,387↔388 | Four actual HTTP200 exchanges; DELIVERED, one simulator receipt |
+| Protocol failure |`B073F1D4-D772-11F1-82EF-EED820A70F55` /316 /318↔319 | Actual HTTP400, failure caught; QUARANTINED, zero receipts |
 
-## Prioritized points roadmap
+![Successful native Visual Trace](assets/provider-success-visual-trace.png)
 
-The totals are **conditional planning arithmetic**, not awarded or guaranteed scores. No feature, publication, questionnaire or external action was completed by writing this document.
+![Failed provider exchange and quarantine](assets/provider-failure-visual-trace.png)
 
-| Order | Concrete completion gate | Additional potential points | Conditional total including current 5 |
-|---|---|---:|---:|
-| 0 | Finish the judge pack, publish reviewed source, complete OEX application and separately verify contest entry | Eligibility first | 5 locally supported, awards unconfirmed |
-| 1 | Implement and observe the DPI-I-689 trace gate above; README/OEX links and reproducible evidence | 4 | 9 |
-| 2 | Publish a truthful YouTube demonstration of the actual native journey | 3 | 12 |
-| 3 | Publish a new DC article explaining the product, setup and evidence | 2 | 14 |
-| 4 | Publish a second distinct DC article or translation | 1 | 15 |
-| 5 | Submit the official feedback questionnaire and retain its confirmation | 1 | 16 |
+These PNGs were captured from authenticated `EnsPortal.VisualTrace.zen` in the live namespace. The SVG export is separately identified as the installed vendor renderer, not a portal screenshot. Reviewer portal access is scoped to trace reads; resend and production control are not granted.
 
-This is a possible **16-point route only if every requirement is satisfied and accepted**. Draft materials locally first. Articles, video publication and questionnaire submission need the user's applicable explicit authorization; this roadmap does not grant it. Generated narration, if used, must use Deepgram under the standing agreement. Do not add paid model calls, hosting, purchases or billing changes.
+Messages retain metadata, tool names/IDs, model, prompt version, timing, HTTP outcomes and explicit retry/fallback fields. Prompts, arguments, raw provider bodies and capabilities are not persisted in those messages. Actual HTTP response usage is recorded only when present; unknown usage, provider retries and billing cost are null. See the [field map and Langfuse comparison](NATIVE_AI_HUB.md). Interrupted raw transport nodes live in nonjournaled IRISTEMP and are swept on a later lease opening; unconditional physical cleanup latency is not proven. A nonidentity upstream encoding is rejected after native HTTP reading, which can use a native temporary file before rejection.
 
-Custom adapter, native Workflow Engine, Vector Search and IPM remain lower-priority options: each must improve the actual product and be executed/verified. The current custom review records do not establish native Workflow Engine usage. A source manifest does not establish a published IPM package. An online-demo bonus needs live IRIS; a static replay site does not qualify. These options are excluded from the conditional 16 above.
+## Other eligible technology and manual work
 
-## Resolved and remaining external details
+Embedded Python (3 potential points) and Docker (2) are already part of the verified core. The five frozen scenarios are demonstrations, not a general accuracy benchmark; deterministic rules also score5/5 on them. The agent adds inspectable investigation, not a measured accuracy uplift.
 
-- The formerly unanswered IPM question now has an organizer response on the [contest announcement](https://community.intersystems.com/node/590306): publish on IPM, include `<SystemRequirements Version=">=2026.3" Interoperability="enabled"/>`, and verify registry installation on the declared supported runtime. The reply names build154; a subsequent reply permits declared Community109 with corresponding judge setup. SilentShift remains verified only on154.
-- AI Hub RAG may count as IRIS Vector Search; this does not mean SilentShift currently implements it.
-- The contest page's “0 Bonuses” display for all eight listed entries is not a validated score audit. No competitor's bonus eligibility or final award was independently confirmed.
-- Native repairs or crashes are not automatically reproducible vendor bugs or earned bug bonuses. No bug report, article, questionnaire or organizer message was sent by this documentation task.
+| Manual/external item | State |
+|---|---|
+| YouTube demonstration (3) | Local demo script/captures prepared; no uploaded video. Rendering is blocked by the installed ffmpeg/x265 library mismatch. |
+| Developer Community articles (2+1) | Local [overview](articles/overview.md) and [engineering story](articles/engineering.md) drafts; no publication. |
+| Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
+| IPM publication (2) | User-managed after clean-install evidence; not published to a registry. |
+| Open Exchange / contest | Earlier saved draft, not sent for approval or confirmed registered. Final copy will remain local for the user. |
+| Online demo (2) | Not hosted; explicitly outside the current authorization. |
+| PEX / vendor bug bonuses | No required Java/.NET boundary or verified vendor defect; no claim. |
+
+Criteria are from the [official bonus announcement](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) and [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689). Organizer awards, eligibility and saved contest state remain separate from engineering evidence. [JUDGE_GUIDE.md](JUDGE_GUIDE.md) describes the product journey; [BUILD_STATUS.md](BUILD_STATUS.md) retains detailed history.

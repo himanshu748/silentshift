@@ -1,12 +1,31 @@
 # Build status
 
+Updated 2026-11-03 IST. The local operator journey catches semantic contradictions before the IRIS destination simulator accepts them. External publication and contest entry remain separate; the current work is local-only.
+
+## Ordered sponsor extensions
+
+| Step | Current verified state |
+|---|---|
+| 1. Provider traceability | **Passed.** Full native run `00d3f243-3532-4166-ab31-0ac05d3f1f39`:5/5 expected routes, native investigations and four actual provider calls per case. Ten transport contract checks passed. Actual local HTTP400 failure remains held. Authenticated native Visual Trace screenshots and paired metadata are in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). |
+| 2. Native human review | Existing native task implementation/recovery verified earlier; dedicated Review API/view and native-task concurrency gate pending. |
+| 3. Case/amendment precedents | Pending. Existing procedural vectors are explicitly separate from the requested precedent search. |
+| 4. Custom inbound adapter | Earlier live held/delivered files observed; final integration revalidation pending. |
+| 5. Clean IPM installation | Existing-namespace load/package/UAT passed; fresh-container install pending. Registry publication excluded. |
+
+Step1 checks: **164 pytest tests**, TypeScript and web build passed, **30 disconnected/landing** and **12 connected desktop/mobile** browser checks passed. [Gate summary](evidence/step1-gate.json). Model and embeddings are local only. Source changes will be committed locally after each gate; no push, hosting, forum post or form submission is authorized.
+
+The public core source at `b836d2d` and the earlier saved OEX draft/questionnaire receipt remain historical external states. Current extensions have not been pushed. Unknown cost/provider retries stay null. Synthetic fixed cases establish neither production readiness nor general AI accuracy uplift.
+
+<details>
+<summary>Earlier core and extension receipts, retained for provenance</summary>
+
 Updated 2026-11-03 IST. **Core native verification and a fresh-volume five-scenario repeat passed. Overall release/submission is still in progress.**
 
 ## Observed checks
 
 | Check | Result | Scope |
 |---|---|---|
-| Python / Hypothesis | **116 passed** (2.51s latest observed) | Exact decimals, policy safety, metadata/build/redirect checks; host tests separate from native proof |
+| Python / Hypothesis | **135 passed** | Exact decimals, policy safety, metadata/build/redirect checks, read-only trace inspection, local embedding route/output validation |
 | Full native run | **5/5 final outcomes; passed=true** | Run20e7b28c-f317-4ad5-b585-49f19bd5e1e5, actual Community ARM64 Build154U, Qwen3 4B, policy1.1 |
 | Native model proposals | **4/5 correct, 5/5 schema-valid** | All five read message/contracts/related evidence; policy converted the model's unverified conflict quarantine to review |
 | Fresh-volume installation | **Passed; 5/5 proposals and final outcomes** | Started with zero cases/evaluations; all21core classes compiled; run0503b649-ee6f-495e-be37-166db508377c, traces2/10/18/26/34 |
@@ -18,12 +37,17 @@ Updated 2026-11-03 IST. **Core native verification and a fresh-volume five-scena
 | Native access | **11/11 passed** | Anonymous401, viewer review403, critical reviewer release403, strict JSON, numeric pagination |
 | Native malformed reviews | **5/5 passed** | Invalid reason/key/version types rejected; held state unchanged |
 | Review workflow | **3/3 rejection +4/4 approval/concurrency passed** | REJECTED state, blank reason422, stale version409, concurrent/repeat approval one simulator receipt; no model calls |
+| Native Workflow Engine | **43/43 passed** | Task80 rejected with zero deliveries; task94 retained a committed review after real503, resumed through actual UI and completed/delivered once. Native headers114/134 prove deferred responses; original key repeat preserved version/receipt. Initial D model request timed out safely, separate from task proof. |
 | Reference boundaries | **26/26 native assertions passed** | Eleven-approved/eleven-peer scopes; actual Partner/Semantic/Investigator headers, REVIEW, zero deliveries, model_invoked=false |
+| Native traceability | **46/46 checks passed; 23 core classes compiled** | New C/session52 delivered once; A/session68 held with zero deliveries; session84 evidence-limit skip made no model call. Actual headers/bodies/audit links verified; whole-Chat/tool scope only |
 | Restart persistence | Six captured cases matched after container restart | Payloads/references/policies/audit prefixes retained; zero deliveries |
 | Container recreation / rebootstrap | Passed;16cases +1failed evaluation retained | Restored namespace mapping; all21core classes compiled |
 | TypeScript / build | Passed after permission/null-metric repairs | Workbench source; no deployment claim |
-| Connected Chromium | **8/8 passed in16.3s**,1440×960 and390×844 | Real reads, seven routes, currency field comparisons, role affordances, keyboard/reduced motion and route scroll restoration |
-| Disconnected Chromium | **20 passed in10.2s** before the current design pass | Genuine unreachable upstream; repeat after Hallmark UI changes |
+| Connected Chromium | **10/10 passed in21.8s**,1440×960 and390×844 | Real reads, seven routes, paired mobile values, case-selection navigation, reviewer veto/dialog, keyboard/reduced motion, memory-only auth |
+| Disconnected Chromium | **20/20 passed in21.8s** after Hallmark | Genuine unreachable upstream, all seven views and keyboard/mobile navigation |
+| Public landing Chromium | **10/10 passed in12.0s** | Zero API requests, real static proof assets, workbench CTA, keyboard focus, reduced motion and320px layout; fresh non-author Hallmark review found one pending public-source link |
+| Feedback questionnaire | **Submitted; official receipt observed** | User's stated views, verified technical facts and no publicity consent; bonus award remains unconfirmed |
+| Hallmark UI review | Rendered seven routes;35captures;0FAIL/0REFLEX | One kept warning was a changing API-check clock. Fresh review found two residual eyebrows, now promoted to factual headings; targeted recapture pending |
 | Secret scan / Git | Earlier staged scan passed; two local commits | Final diff/scan/milestone commit pending; no public repository |
 
 ## Native evidence
@@ -46,9 +70,11 @@ Scenario E injects a labeled hostile validator proposal after an actual native r
 
 ## Remaining release gates
 
-1. User-requested Hallmark UI pass and build154 trace instrumentation; verify their real behavior before making new claims.
+1. Dedicated landing page implemented and interaction-verified. Add its actual public source/setup link after repository publication. Native Workflow, custom file adapter, supporting vector retrieval and IPM package are under integration verification; their source alone does not establish bonus completion.
 2. Network-loss/late-model recovery and repeated stochastic trials remain limits; no production readiness claim.
 3. Final privacy/diff review, coherent local commit, public repository and remote CI.
 4. Demo materials, actual Open Exchange application and separate contest confirmation. No deployment, YouTube publication, OEX application or contest entry is claimed.
 
 The authenticated OEX Apply dialog showed no published application on this account. No separate pre-development registration was found; OEX publication/approval and contest application are separate. Rules/deadline and organizer clarification are in `CONTEST_COMPLIANCE.md`.
+
+</details>

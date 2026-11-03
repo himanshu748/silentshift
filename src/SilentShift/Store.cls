@@ -121,7 +121,7 @@ ClassMethod SaveCase(id As %String, caseJSON As %String) As %Status
             Return $$$ERROR($$$GeneralError, "APP_CONFLICT: investigation version changed")
         }
         // These fields can only be set at ingestion or by SnapshotReferences.
-        For field = "id", "event_id", "source", "received_at", "message", "raw_payload", "scenario_id", "dataset_version", "clock", "synthetic", "references", "fault" {
+        For field = "id", "event_id", "source", "received_at", "message", "raw_payload", "scenario_id", "dataset_version", "clock", "synthetic", "references", "fault", "workflow" {
             If current.%IsDefined(field) {
                 If field = "synthetic" {
                     Do incoming.%Set(field, current.%Get(field), "boolean")
@@ -299,6 +299,9 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         If $ISOBJECT(prior) {
             If prior.Fingerprint '= fingerprint Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: review key was reused with different content"))
             Lock -^SilentShift.Lock("case", id)
+            Set locked = 0
+            Set sc = ##class(SilentShift.Workflow.Support).SyncCompletion(id, reviewer)
+            $$$ThrowOnError(sc)
             Return ..CaseJSON(id)
         }
         Set record = ##class(SilentShift.Data.CaseRecord).%OpenId(id)
@@ -321,6 +324,19 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
             Do policy.%Set("reasons", ["An authorized reviewer rejected this transaction."])
             Do policy.%Set("checks", [{"code": "HUMAN_REJECTION", "passed": true, "reason": "Reviewer identity, reason, version and idempotency were validated."}])
         }
+        Set workflow = body.%Get("workflow")
+        If $ISOBJECT(workflow) {
+            If $ISOBJECT(body.%Get("review")) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: native workflow review is already decided; reuse its original review key"))
+            // Claim only after version and deterministic policy validation.
+            // Native claim persists independently; no user transaction spans
+            // the native engine's deferred-response enqueue/completion path.
+            Set sc = ##class(SilentShift.Workflow.Support).Claim(id, workflow, reviewer, record.Version, .claim)
+            $$$ThrowOnError(sc)
+            Do workflow.%Set("status", "completion_pending")
+            Do workflow.%Set("claimed_by", reviewer)
+            Do workflow.%Set("claimed_at", claim.%Get("claimed_at"))
+            Do body.%Set("workflow", workflow)
+        }
         Set review = {"action": (action), "reason": (reason), "reviewer": (reviewer), "at": (##class(SilentShift.Bridge).Now()), "idempotency_key": (token), "expected_version": (record.Version)}
         Do body.%Set("review", review)
         Do body.%Set("policy_recommendation", proposed)
@@ -339,6 +355,9 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         $$$ThrowOnError(sc)
         TCOMMIT
         Lock -^SilentShift.Lock("case", id)
+        Set locked = 0
+        Set sc = ##class(SilentShift.Workflow.Support).SyncCompletion(id, reviewer)
+        $$$ThrowOnError(sc)
         Return ..CaseJSON(id)
     } Catch error {
         If $TLEVEL TROLLBACK
@@ -347,6 +366,52 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         Set text = $SYSTEM.Status.GetErrorText(error.AsStatus())
         If text [ "APP_" Throw error
         Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: review could not be persisted"))
+    }
+}
+
+/// Internal workflow metadata boundary. Native task/case association is fixed;
+/// generic SaveCase updates cannot overwrite asynchronous workflow receipts.
+ClassMethod SetWorkflow(id As %String, fieldsJSON As %String, eventKind As %String) As %Status
+{
+    Set locked = 0
+    Try {
+        If ($LENGTH(fieldsJSON) > 4096) || ($EXTRACT(eventKind, 1, 9) '= "workflow_") Return $$$ERROR($$$GeneralError, "APP_INVALID: workflow metadata is invalid")
+        Set fields = ##class(%DynamicObject).%FromJSON(fieldsJSON)
+        Lock +^SilentShift.Lock("case", id):5
+        If '$TEST Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: workflow case update is busy")
+        Set locked = 1, record = ##class(SilentShift.Data.CaseRecord).%OpenId(id)
+        If '$ISOBJECT(record) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_NOT_FOUND: workflow case does not exist"))
+        // Review retains an OREF while a deferred response can update this row
+        // in another job. Refresh under the case lock before merging receipts.
+        Set sc = record.%Reload()
+        $$$ThrowOnError(sc)
+        Set body = ##class(%DynamicObject).%FromJSON(record.Body), workflow = body.%Get("workflow")
+        If '$ISOBJECT(workflow) Set workflow = {}
+        If fields.%IsDefined("task_id"), workflow.%Get("task_id") '= "", fields.%Get("task_id") '= workflow.%Get("task_id") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: workflow task association cannot change"))
+        Set before = workflow.%ToJSON(), iterator = fields.%GetIterator()
+        While iterator.%GetNext(.field, .value) {
+            Do workflow.%Set(field, value, fields.%GetTypeOf(field))
+        }
+        If workflow.%ToJSON() = before {
+            Lock -^SilentShift.Lock("case", id)
+            Return $$$OK
+        }
+        Do body.%Set("workflow", workflow)
+        Set record.Version = record.Version + 1
+        Do body.%Set("version", record.Version)
+        Set record.Body = body.%ToJSON()
+        TSTART
+        Set sc = record.%Save()
+        $$$ThrowOnError(sc)
+        Set sc = ..AddEvent(id, eventKind, fields.%ToJSON())
+        $$$ThrowOnError(sc)
+        TCOMMIT
+        Lock -^SilentShift.Lock("case", id)
+        Return $$$OK
+    } Catch error {
+        If $TLEVEL TROLLBACK
+        If locked Lock -^SilentShift.Lock("case", id)
+        Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native workflow metadata synchronization failed")
     }
 }
 

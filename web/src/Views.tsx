@@ -3,8 +3,6 @@ import {
   Activity,
   ArrowRight,
   ArrowUpRight,
-  Beaker,
-  Braces,
   Check,
   ChevronRight,
   CircleHelp,
@@ -19,7 +17,6 @@ import {
   Layers3,
   Play,
   Plus,
-  Scale,
   Server,
   ShieldCheck,
   ShieldX,
@@ -135,19 +132,11 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
       </PageHeading>
       <div className="lab-intro">
         <div>
-          <span className="section-kicker">
-            Technically successful ≠ semantically correct
-          </span>
-          <h2>Put meaning under pressure.</h2>
+          <h2>Technically successful ≠ semantically correct</h2>
           <p>
             Five controlled experiments. Independent reference records. One
             inspectable route.
           </p>
-        </div>
-        <div className="lab-intro-mark" aria-hidden="true">
-          <Braces size={30} strokeWidth={1.2} />
-          <span />
-          <Scale size={27} strokeWidth={1.2} />
         </div>
       </div>
       {!catalog.data ? (
@@ -165,6 +154,7 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
               <button
                 className={`scenario-choice ${scenario?.id === item.id ? "selected" : ""}`}
                 key={item.id}
+                aria-pressed={scenario?.id === item.id}
                 onClick={() => {
                   setSelectedId(item.id);
                   setError(null);
@@ -193,11 +183,9 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
             {scenario ? (
               <>
                 <div className="scenario-heading">
-                  <div className="section-kicker">
-                    <Beaker size={14} /> {scenario.id}
-                  </div>
                   <h2>{scenario.name.replace(/^[A-E] [·•] /, "")}</h2>
                   <p>{scenario.summary}</p>
+                  <code className="scenario-id">{scenario.id}</code>
                 </div>
                 {scenario.id === "unsafe-agent-output" && (
                   <Notice tone="amber" icon={ShieldX}>
@@ -206,6 +194,47 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
                     deterministic policy, not a claim that the model produced
                     that recommendation.
                   </Notice>
+                )}
+                <div className="scenario-run">
+                  <div>
+                    <strong>Ready for a native run</strong>
+                    <p>
+                      Creates a persisted case through the IRIS Business
+                      Service. A live agent call may be made.
+                    </p>
+                  </div>
+                  <Button
+                    icon={Play}
+                    kind="primary"
+                    disabled={running}
+                    onClick={run}
+                  >
+                    {running
+                      ? "Waiting for IRIS…"
+                      : error && runId && resultScenario === scenario.id
+                        ? "Retry same injection"
+                        : "Inject into IRIS"}
+                  </Button>
+                </div>
+                {running && (
+                  <div className="run-pending" role="status">
+                    <Database size={18} />
+                    <div>
+                      <strong>Request sent to IRIS</strong>
+                      <p>
+                        IRIS is investigating this event. Keep the run ID for a
+                        safe retry if the connection is interrupted.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {error !== null && <InlineError error={error} />}
+                {runId && resultScenario === scenario.id && (
+                  <div className="run-id">
+                    <span>Run ID</span>
+                    <code>{runId}</code>
+                    <CopyButton value={runId} label="Copy run ID" />
+                  </div>
                 )}
                 <div className="expected-result">
                   <div>
@@ -256,55 +285,12 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
                     </p>
                   </div>
                 </div>
-                <div className="scenario-run">
-                  <div>
-                    <strong>Ready for a native run</strong>
-                    <p>
-                      Creates a persisted case through the IRIS Business
-                      Service. A live agent call may be made.
-                    </p>
-                  </div>
-                  <Button
-                    icon={Play}
-                    kind="primary"
-                    disabled={running}
-                    onClick={run}
-                  >
-                    {running
-                      ? "Waiting for IRIS…"
-                      : error && runId && resultScenario === scenario.id
-                        ? "Retry same injection"
-                        : "Inject into IRIS"}
-                  </Button>
-                </div>
-                {running && (
-                  <div className="run-pending" role="status">
-                    <Database size={18} />
-                    <div>
-                      <strong>Request sent to IRIS</strong>
-                      <p>
-                        IRIS is investigating this event. Keep the run ID for a
-                        safe retry if the connection is interrupted.
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {error !== null && <InlineError error={error} />}
-                {runId && resultScenario === scenario.id && (
-                  <div className="run-id">
-                    <span>Run ID</span>
-                    <code>{runId}</code>
-                    <CopyButton value={runId} label="Copy run ID" />
-                  </div>
-                )}
                 {result && resultScenario === scenario.id && (
                   <section className="observed-result">
                     <div className="section-header">
                       <div>
-                        <div className="section-kicker">
-                          Observed native result
-                        </div>
                         <h3>
+                          Observed native result:{" "}
                           {result.policy
                             ? humanize(result.policy.decision)
                             : "Processing"}
@@ -676,7 +662,7 @@ export function Messages({ refresh }: { refresh: number }) {
               </select>
             </label>
             <span className="small subtle">
-              {items.length} of {cases.data.total} records · limit{" "}
+              {items.length} of {cases.data.total} records, limit{" "}
               {cases.data.limit}
             </span>
           </div>
@@ -724,6 +710,20 @@ export function Messages({ refresh }: { refresh: number }) {
       )}
     </>
   );
+}
+
+function usageSummary(value: unknown): string {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return "Not collected";
+  const counters = Object.values(value).filter(
+    (entry): entry is Record<string, unknown> => Boolean(entry) && typeof entry === "object" && !Array.isArray(entry),
+  );
+  const recorded = counters.filter((counter) => typeof counter.value === "number" && Number.isFinite(counter.value));
+  if (!recorded.length) return "Not collected";
+  const observations = recorded.filter((counter) => typeof counter.observed_records === "number" && typeof counter.total_records === "number");
+  const coverage = observations.length
+    ? `, ${Math.min(...observations.map((counter) => counter.observed_records as number))}/${Math.max(...observations.map((counter) => counter.total_records as number))} records observed`
+    : "";
+  return `${recorded.length} counter${recorded.length === 1 ? "" : "s"} recorded${coverage}`;
 }
 
 export function Evaluations({ refresh }: { refresh: number }) {
@@ -792,12 +792,12 @@ export function Evaluations({ refresh }: { refresh: number }) {
               <div className="panel-header">
                 <div>
                   <span className="section-kicker">
-                    Recorded evaluation · {dateTime(run.created_at)}
+                    Recorded evaluation on {dateTime(run.created_at)}
                   </span>
                   <h2 className="mono">{run.id}</h2>
                 </div>
                 <Badge tone={run.native.passed ? "mint" : "amber"}>
-                  {run.native.status}
+                  {humanize(run.native.status)}
                 </Badge>
               </div>
               <div className="evaluation-record">
@@ -872,10 +872,7 @@ export function Evaluations({ refresh }: { refresh: number }) {
                 <div className="evaluation-usage">
                   <span>
                     Model usage:{" "}
-                    {run.native.model_usage === null ||
-                    run.native.model_usage === undefined
-                      ? "Not recorded"
-                      : "Included in the measured record"}
+                    {usageSummary(run.native.model_usage)}
                   </span>
                   <span>
                     Model cost:{" "}
@@ -929,14 +926,13 @@ export function Policies({ refresh }: { refresh: number }) {
           <ShieldCheck size={31} strokeWidth={1.3} />
         </div>
         <div>
-          <span className="section-kicker">An explicit trust boundary</span>
-          <h2>Reasoning is not authorization.</h2>
+          <h2>Explicit trust boundary</h2>
           <p>
-            Inspect the policy version and checks returned by IRIS. Every case
+            Agent reasoning remains a recommendation. Inspect the policy version and checks returned by IRIS. Every case
             records the checks that permitted or denied its route.
           </p>
         </div>
-        <span className="mono">AI → POLICY → ROUTE</span>
+        <span className="policy-flow">AI → policy → route</span>
       </div>
       {!data.data ? (
         <div className="panel">
@@ -1010,9 +1006,6 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
       </PageHeading>
       <div className="health-metrics">
         <article className="panel health-status">
-          <span className="health-icon">
-            <Server size={23} />
-          </span>
           <span className="section-kicker">Native production</span>
           <h2>
             {health.data
@@ -1033,9 +1026,6 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
           )}
         </article>
         <article className="panel health-status">
-          <span className="health-icon">
-            <KeyRound size={23} />
-          </span>
           <span className="section-kicker">Agent configuration</span>
           <h2>
             {health.data
@@ -1052,9 +1042,6 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
           )}
         </article>
         <article className="panel health-status">
-          <span className="health-icon">
-            <Layers3 size={23} />
-          </span>
           <span className="section-kicker">Reported runtime build</span>
           <h2 className="build-number mono">
             {health.data?.build ?? "Unavailable"}
@@ -1113,8 +1100,7 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
         <section className="panel setup-panel">
           <div className="panel-header">
             <div>
-              <span className="section-kicker">Required native gate</span>
-              <h2>Connect the substance.</h2>
+              <h2>Native production connection</h2>
               <p>
                 The workbench needs a running build 154 production. It contains
                 no mock operational backend.
@@ -1177,7 +1163,7 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
             <code>IRIS_API_ORIGIN</code>
             <p>
               The Vite development proxy forwards same-origin API requests to
-              the configured IRIS Web Gateway. Credentials stay in this tab's
+              the configured IRIS Web Gateway. Credentials stay in this tab’s
               memory.
             </p>
           </div>

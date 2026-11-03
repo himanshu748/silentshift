@@ -11,6 +11,8 @@ ClassMethod Install() As %Status
         If $NAMESPACE '= "SILENTSHIFT" Return $$$ERROR($$$GeneralError, "APP_INVALID: install requires SILENTSHIFT namespace")
         Set sc = ..SecurityConfig()
         $$$ThrowOnError(sc)
+        Set sc = ##class(SilentShift.Workflow.Support).Configure()
+        $$$ThrowOnError(sc)
         // Dynamic SQL checks table privileges independently of database RW.
         // Only the application-scoped role receives these fixed read grants.
         For table = "CaseRecord", "Reference", "AuditEvent", "Delivery", "ReviewAction", "Evaluation" {
@@ -92,6 +94,31 @@ ClassMethod SecurityConfig() As %Status [ Private ]
         }
         $$$ThrowOnError(sc)
     }
+    // The SDK supplies an opaque per-investigation Bearer, not an IRIS user's
+    // password. This role exists only while the fixed internal REST handler
+    // executes. Its handler authorizes the lease before reading a request body.
+    Set transportRole = "SSProviderTransport"
+    Set transportResources = "%DB_SILENTSHIFT:RW,%DB_IRISTEMP:RW,%Service_EmbeddedPython:U"
+    If ##class(Security.Roles).Exists(transportRole) {
+        Kill roleProperties
+        Set roleProperties("Resources") = transportResources, roleProperties("GrantedRoles") = ""
+        Set sc = ##class(Security.Roles).Modify(transportRole, .roleProperties)
+    } Else {
+        Set sc = ##class(Security.Roles).Create(transportRole, "Local SDK transport application only", transportResources, "")
+    }
+    $$$ThrowOnError(sc)
+    // Native Visual Trace is read-only and available only during the scoped
+    // portal application for an already-authorized reviewer. No resend,
+    // production control, database write or permanent user role is granted.
+    Set traceRole = "SSNativeTrace", traceResources = "%Ens_MessageTrace:U,%Ens_Portal:U,%DB_SILENTSHIFT:R"
+    If ##class(Security.Roles).Exists(traceRole) {
+        Kill roleProperties
+        Set roleProperties("Resources") = traceResources, roleProperties("GrantedRoles") = ""
+        Set sc = ##class(Security.Roles).Modify(traceRole, .roleProperties)
+    } Else {
+        Set sc = ##class(Security.Roles).Create(traceRole, "SilentShift native trace read access in portal only", traceResources, "")
+    }
+    $$$ThrowOnError(sc)
     For role = "SSViewer", "SSReviewer" {
         Set username = $SYSTEM.Util.GetEnviron($SELECT(role = "SSViewer": "SILENTSHIFT_VIEWER_USERNAME", 1: "SILENTSHIFT_IRIS_USERNAME"))
         Set password = $SYSTEM.Util.GetEnviron($SELECT(role = "SSViewer": "SILENTSHIFT_VIEWER_PASSWORD", 1: "SILENTSHIFT_IRIS_PASSWORD"))
@@ -127,8 +154,9 @@ ClassMethod SecurityConfig() As %Status [ Private ]
         Set properties("Recurse") = 1, properties("UseCookies") = 0
         // Official MatchRoles format is MatchRole:TargetRole. It adds only
         // database access during this REST application's execution, never the
-        // SSReview permission. The generic portal gets no added role.
-        Set properties("MatchRoles") = $SELECT(path = "/silentshift": "SSViewer:SSApplication", 1: "")
+        // SSReview permission. The native portal grants only trace reads to
+        // configured reviewers; viewers keep their application-only access.
+        Set properties("MatchRoles") = $SELECT(path = "/silentshift": "SSViewer:SSApplication", 1: "SSReviewer:SSNativeTrace")
         If path = "/silentshift" Set properties("DispatchClass") = "SilentShift.API"
         If ##class(Security.Applications).Exists(path) {
             Set sc = ##class(Security.Applications).Modify(path, .properties)
@@ -137,6 +165,20 @@ ClassMethod SecurityConfig() As %Status [ Private ]
         }
         $$$ThrowOnError(sc)
     }
+    Kill properties
+    Set properties("NameSpace") = "SILENTSHIFT", properties("Enabled") = 1
+    Set properties("AutheEnabled") = 64, properties("Resource") = ""
+    Set properties("Recurse") = 1, properties("UseCookies") = 0
+    Set properties("DispatchClass") = "SilentShift.Provider.API"
+    // Empty MatchRole is the native always-grant APPLICATION role syntax.
+    // It grants no permanent role to UnknownUser or the reviewer/viewer users.
+    Set properties("MatchRoles") = ":"_transportRole
+    If ##class(Security.Applications).Exists("/silentshift-provider") {
+        Set sc = ##class(Security.Applications).Modify("/silentshift-provider", .properties)
+    } Else {
+        Set sc = ##class(Security.Applications).Create("/silentshift-provider", .properties)
+    }
+    $$$ThrowOnError(sc)
     Return $$$OK
 }
 }

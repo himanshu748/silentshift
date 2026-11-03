@@ -11,13 +11,16 @@ services:
       SILENTSHIFT_VIEWER_USERNAME: ${SILENTSHIFT_VIEWER_USERNAME:?Viewer account required}
       SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?Viewer password required}
       SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?Gateway password required}
-      SILENTSHIFT_MODEL: ${SILENTSHIFT_MODEL:-gpt-5-nano}
+      SILENTSHIFT_MODEL: ${SILENTSHIFT_MODEL:-qwen3-silentshift:4b-instruct}
+      SILENTSHIFT_AGENT_WAIT_SECONDS: ${SILENTSHIFT_AGENT_WAIT_SECONDS:-60}
       SILENTSHIFT_LLM_BASE_URL: ${SILENTSHIFT_LLM_BASE_URL:-}
-      SILENTSHIFT_LLM_API_KEY: ${SILENTSHIFT_LLM_API_KEY:-}
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      SILENTSHIFT_EMBED_BASE_URL: ${SILENTSHIFT_EMBED_BASE_URL:-}
+      SILENTSHIFT_EMBED_MODEL: ${SILENTSHIFT_EMBED_MODEL:-all-minilm:22m}
+      SILENTSHIFT_PARTNER_FILES_ENABLED: ${SILENTSHIFT_PARTNER_FILES_ENABLED:-0}
     volumes:
       - ./:/opt/silentshift:ro
       - iris-manager:/usr/irissys/mgr
+      - ./.local/partner-inbox:/var/opt/silentshift/partner-inbox
     healthcheck:
       test: ['CMD-SHELL', 'iris qlist IRIS | cut -d "^" -f 4 | grep -q running']
       interval: 10s

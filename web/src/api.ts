@@ -33,7 +33,7 @@ export async function request<T>(
   const controller = new AbortController();
   const onAbort = () => controller.abort();
   options.signal?.addEventListener("abort", onAbort, { once: true });
-  const timeout = window.setTimeout(() => controller.abort("timeout"), 100_000);
+  const timeout = window.setTimeout(() => controller.abort("timeout"), 180_000);
   const headers: Record<string, string> = { Accept: "application/json" };
   if (authorization) headers.Authorization = authorization;
   if (options.body !== undefined || options.rawBody !== undefined)
@@ -134,7 +134,7 @@ export async function request<T>(
     if (controller.signal.aborted)
       throw new ApiError(
         "REQUEST_TIMEOUT",
-        "IRIS did not answer within 100 seconds. The request may still be processing; refresh before creating a new run.",
+        "IRIS did not answer within 180 seconds. The request may still be processing; refresh before creating a new run.",
       );
     throw new ApiError(
       "IRIS_UNAVAILABLE",
