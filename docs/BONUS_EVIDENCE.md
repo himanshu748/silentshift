@@ -9,7 +9,7 @@ Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minil
 | DPI-I-689 provider traceability |4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all40 persisted provider messages passed correlation checks. Actual Ollama400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
 | Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view.54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
 | IRIS Vector Search precedents |2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into384-dimensional IRIS VECTOR rows. Top3case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed.5/5 native retained; award unconfirmed. |
-| Custom inbound adapter |2 | Live ready-file intake previously created held cases and then delivered an approved amendment once after a wait-budget fix. Revalidation after the new integrations remains pending. |
+| Custom inbound adapter |2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
 | IPM package |2 | Real local load/package/UAT passed in the existing namespace. A fresh-container installation remains pending. Registry publication is manual and not authorized here. |
 
 ## 1. Each LLM call belongs to its business case
@@ -85,6 +85,24 @@ The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed5/5 with all four nati
 [Mobile capture](assets/precedent-evidence-mobile.png) · [walkthrough and commands](PRECEDENTS.md) · [full gate](evidence/step3-gate.json).
 
 Python172, TypeScript/build,32 disconnected/landing and16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
+
+## 4. A partner file reaches the same safety decision
+
+`SilentShift.Adapter.PartnerJSON` extends `Ens.InboundAdapter` and runs on the production's `PartnerFiles` Business Service beside REST intake. Its fixed trusted inbox accepts atomic ready-file drops. Original bytes, bounded processing, dispatch markers and immutable outcome acknowledgements keep retries from creating another delivery.
+
+```sh
+uv run python scripts/verify_native_adapter.py --allow-local-model-calls --output evidence/native/step4-adapter-repeat.json
+uv run python scripts/verify_native_adapter.py --inspect-file adapter-a0a5ad658f154bb0badf7ff97ae9bf3d-allow
+uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step4-five.json
+```
+
+The [82-check receipt](evidence/adapter.json) proves case `D23769A0-D7B0-11F1-9980-CA5720F48492`, session 1610, delivered once; `E10A0F45-D7B0-11F1-9980-CA5720F48492`, session 1636, stayed quarantined with zero receipts. Both made all four native reads. Ack-write recovery, different-name event replay, same-name redrop, exact retained bytes/hashes, malformed/oversized/internal-envelope rejection and symlink refusal passed.
+
+![File intake in authenticated native Visual Trace](assets/adapter-visual-trace.png)
+
+[Same session at Destination](assets/adapter-destination-visual-trace.png) · [operator walkthrough and limits](PARTNER_INBOX.md). An earlier trial needed native review before delivery; its held acknowledgement correctly remained an earlier snapshot. Verifier comparison failures are retained separately from the passing independent repeat.
+
+Full native run `a96c814e-0606-41a1-b469-10f1f94885a9` passed **5/5**. Python 172, TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. [Gate summary](evidence/step4-gate.json). No external partner filesystem or destination is claimed.
 
 ## Other eligible technology and manual work
 

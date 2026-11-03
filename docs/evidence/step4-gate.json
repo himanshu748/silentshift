@@ -1,0 +1,59 @@
+{
+  "step": 4,
+  "passed": true,
+  "adapter_run_id": "a0a5ad658f154bb0badf7ff97ae9bf3d",
+  "native_run_id": "a96c814e-0606-41a1-b469-10f1f94885a9",
+  "native_source_sha256": "5925d2796bf7d97faf47cdd99098154d1ac65953c45e774b1711c425e44fddd1",
+  "native_scenarios": [
+    {
+      "id": "0A60D298-D7B0-11F1-9980-CA5720F48492",
+      "scenario_id": "quantity-mismatch",
+      "trace_id": "1471",
+      "routing": "QUARANTINED",
+      "delivery_count": 0
+    },
+    {
+      "id": "2E6B13D7-D7B0-11F1-9980-CA5720F48492",
+      "scenario_id": "currency-scaling",
+      "trace_id": "1499",
+      "routing": "QUARANTINED",
+      "delivery_count": 0
+    },
+    {
+      "id": "50A443C2-D7B0-11F1-9980-CA5720F48492",
+      "scenario_id": "approved-amendment",
+      "trace_id": "1527",
+      "routing": "DELIVERED",
+      "delivery_count": 1
+    },
+    {
+      "id": "7AC792D4-D7B0-11F1-9980-CA5720F48492",
+      "scenario_id": "conflicting-references",
+      "trace_id": "1554",
+      "routing": "REVIEW",
+      "delivery_count": 0
+    },
+    {
+      "id": "9F2E89E8-D7B0-11F1-9980-CA5720F48492",
+      "scenario_id": "unsafe-agent-output",
+      "trace_id": "1582",
+      "routing": "QUARANTINED",
+      "delivery_count": 0
+    }
+  ],
+  "adapter_checks": 82,
+  "checks": {
+    "pytest": "172 passed",
+    "typescript": "passed",
+    "web_build": "passed",
+    "disconnected_and_landing": "32 passed",
+    "native_browser": "16 passed"
+  },
+  "earlier_failed_trials_retained": [
+    "step4-adapter.json",
+    "step4-adapter-recovered.json",
+    "step4-adapter-recovered-2.json",
+    "step4-adapter-final.json"
+  ],
+  "scope": "Local synthetic orders and included IRIS simulator. Earlier clear case was reviewed and approved; final repeat auto-delivered. Immutable acknowledgements retain first observed outcome."
+}

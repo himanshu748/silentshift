@@ -53,6 +53,10 @@ The [54-check receipt](evidence/review-queue.json) includes native task listing,
 
 In the current quantity or unsafe-output case, open **Similar precedents** below the reference snapshot. Inspect the three actual source IDs and cosine scores, then follow a source-case link. Prior deliveries are context; the current critical contradiction stays held. The [native vector walkthrough](PRECEDENTS.md) includes source validation, fourth-tool reads and a validALLOW proposal that policy vetoed. The current five-case run passed5/5 with four actual tools; payment history is empty and shown honestly.
 
+## Accept the same order from a partner file
+
+A partner that cannot call REST can drop a ready file into the trusted inbox. The custom native adapter sends it through the same production and deterministic policy. The [file walkthrough](PARTNER_INBOX.md) shows an actual delivery and critical quarantine in Visual Trace, plus retries and acknowledgement recovery without a second receipt. Both cases used all four evidence tools; the full native gate retained 5/5.
+
 ## What to assess against the rubric
 
 | Official criterion | Inspect |

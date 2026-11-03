@@ -25,6 +25,9 @@ completion claim; the queued job is preserved for native operator recovery.
 Keep fewer than 256 active files per suffix; archive retention is operator-owned.
 
 This driver writes ONLY uniquely named synthetic files in .local/partner-inbox.
+If the model requests review of the CLEAR test order, it approves that isolated
+native task only after validating the current deterministic assessment and all
+four actual evidence reads. This is review test coverage, not an AI release.
 It never changes production configuration, compiles classes, deletes case data,
 calls an external provider, or retries a new model case after a failed assertion.
 Read-only --inspect-file exports existing adapter state and never submits data.
@@ -112,30 +115,38 @@ def record(client: Client, case_id: str) -> dict:
     return item
 
 
-def verify_case(args, client, name: str, raw: bytes, route: str, count: int) -> dict:
+def verify_case(args, client, name: str, raw: bytes, route: str, count: int, *, ack_snapshot: dict | None = None) -> dict:
     ack = wait_for(lambda: acknowledgment(name), "actual outcome acknowledgment")
     wait_for(lambda: path(name, ".done").is_file(), "retained original")
     state = inspect(args, name)
     item = record(client, ack["case_id"])
     headers = state["headers"]
     digest = hashlib.sha256(raw).hexdigest()
+    ack_route = ack_snapshot["routing"] if ack_snapshot else route
+    ack_count = ack_snapshot["delivery_count"] if ack_snapshot else count
+    ack_policy = "REQUEST_REVIEW" if ack_snapshot and ack_route == "REVIEW" else item["policy"]["decision"]
     checks = {
         "one_actual_adapter_dispatch": sum(h["source"] == "PartnerFiles" and h["target"] == "Semantic" for h in headers) == 1,
         "one_actual_native_investigation": sum(h["source"] == "Semantic" and h["target"] == "Investigator" for h in headers) == 1,
-        "model_returned_three_reads": item["agent"]["mode"] == "native-ai-hub" and item["agent"]["status"] == "returned" and all(item["agent"]["tool_reads"][k] >= 1 for k in ("message", "contracts", "related")),
-        "expected_persisted_outcome": item["routing"] == ack["routing"] == route and item["delivery_count"] == ack["delivery_count"] == count,
+        "model_returned_four_reads": item["agent"]["mode"] == "native-ai-hub" and item["agent"]["status"] == "returned" and all(item["agent"]["tool_reads"].get(k, 0) >= 1 for k in ("message", "contracts", "related", "precedents")),
+        "native_precedent_retrieval": any(h["source"] == "Semantic" and h["target"] == "Precedents" for h in headers),
+        "precedents_have_no_release_authority": (item.get("precedent_context") or {}).get("decision_authority") is False,
+        "expected_persisted_outcome": item["routing"] == route and item["delivery_count"] == count,
+        "immutable_ack_matches_observed_outcome": ack["routing"] == ack_route and ack["delivery_count"] == ack_count,
         "actual_trace_association": bool(item["trace_id"]) and str(item["trace_id"]) == str(ack["trace_id"]) == str(state["trace_id"]),
         "raw_bytes_retained": path(name, ".done").read_bytes() == raw and item["raw_payload"].encode() == raw,
         "byte_count_and_digest": ack["input_sha256"] == state["input_sha256"] == digest and ack["input_bytes"] == state["input_bytes"] == len(raw),
         "general_catalog_server_clock": state["scenario_id"] == "" and state["clock"] == state["received_at"] and state["reference_count"] >= 1,
-        "ack_matches_policy": ack["status"] == "COMPLETED" and ack["policy_decision"] == item["policy"]["decision"],
-        "receipt_truthful": (ack["delivery_receipt"] is None if count == 0 else ack["delivery_receipt"]["case_id"] == item["id"] and ack["delivery_receipt"]["destination"] == "included-iris-simulator"),
+        "ack_matches_policy": ack["status"] == "COMPLETED" and ack["policy_decision"] == ack_policy,
+        "receipt_truthful": (ack["delivery_receipt"] is None if ack_count == 0 else isinstance(ack["delivery_receipt"], dict) and ack["delivery_receipt"]["case_id"] == item["id"] and ack["delivery_receipt"]["destination"] == "included-iris-simulator"),
         "ack_completion_not_still_held": state["completed"] is True and state["held"] is False,
     }
     # Export only scoped metadata, never original partner data, prompts or responses.
     context = item.get("runbook_context") or {}
     supporting = {"status": context.get("status"), "implementation": context.get("implementation"), "model": context.get("model"), "dimensions": context.get("dimensions"), "match_count": len(context.get("matches") or []), "decision_authority": context.get("decision_authority")}
-    return {"file": name, "case_id": item["id"], "trace_id": item["trace_id"], "routing": item["routing"], "ack": ack, "native_state": state, "runbook_context": supporting, "checks": checks}
+    precedents = item.get("precedent_context") or {}
+    precedent_metadata = {"status": precedents.get("status"), "model": precedents.get("model"), "dimensions": precedents.get("dimensions"), "match_count": len(precedents.get("matches") or []), "decision_authority": precedents.get("decision_authority")}
+    return {"file": name, "case_id": item["id"], "trace_id": item["trace_id"], "routing": item["routing"], "ack": ack, "native_state": state, "runbook_context": supporting, "precedent_context": precedent_metadata, "checks": checks}
 
 
 def main() -> int:
@@ -144,6 +155,7 @@ def main() -> int:
     parser.add_argument("--context")
     parser.add_argument("--container")
     parser.add_argument("--allow-local-model-calls", action="store_true", help="Authorize exactly two new synthetic local model cases")
+    parser.add_argument("--resume-run", type=Path, help="Resume this driver's failed first ack test without another first case; requires local-model opt-in for the second case")
     parser.add_argument("--inspect-file", help="Read existing state only; no compilation, input writes or model calls")
     parser.add_argument("--output", type=Path, help="Defaults to adapter.json for a live run; separate contracts/inspection artifacts otherwise")
     args = parser.parse_args()
@@ -183,7 +195,10 @@ def main() -> int:
         status, health = client.call("/health")
         if status != 200 or not native_build(health.get("build")) or health.get("production", {}).get("running") is not True:
             raise ValueError("Actual native build154 production is unavailable")
-        run_id = uuid.uuid4().hex
+        previous = json.loads(args.resume_run.read_text()) if args.resume_run else None
+        if previous is not None and (previous.get("passed") is not False or previous.get("new_model_cases_requested") != 1 or previous.get("cases") or not re.fullmatch(r"[a-f0-9]{32}", previous.get("run_id", ""))):
+            raise ValueError("Resume requires a failed first-case adapter receipt")
+        run_id = previous["run_id"] if previous else uuid.uuid4().hex
         artifact["run_id"] = run_id
         timestamp = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         message = {"event_id": "file-" + run_id, "correlation_id": "file-" + run_id, "source": "silentshift-native-file-test", "kind": "order", "occurred_at": timestamp, "contract_id": "PO-2048", "business_unit": "EU-WEST", "product_id": "P-ALLOY-8", "quantity": "240", "unit": "EA", "notes": "Synthetic native file adapter verification; no external partner delivery."}
@@ -192,19 +207,41 @@ def main() -> int:
         # Deliberate ack-only failure. The only directory removed below is this
         # exact empty synthetic obstruction; production/model jobs remain intact.
         obstruction = path(allow, ".ack.json")
-        obstruction.mkdir(mode=0o770)
+        if previous:
+            if previous["ack_failure"]["native_state"]["file"] != allow:
+                raise ValueError("Resume filename does not match original run")
+            raw = path(allow, ".done" if path(allow, ".done").is_file() else ".work").read_bytes()
+            message = json.loads(raw)
+            if (hashlib.sha256(raw).hexdigest() != previous["ack_failure"]["native_state"]["input_sha256"] or message.get("event_id") != "file-" + run_id or message.get("source") != "silentshift-native-file-test"):
+                raise ValueError("Resume input differs from the driver's original synthetic file")
+            artifact["resumed_from"] = {"receipt": args.resume_run.name, "case_id": previous["ack_failure"]["native_state"]["case_id"], "new_first_case_created": False}
+            if previous.get("explicit_review"):
+                artifact["explicit_review"] = previous["explicit_review"]
+        else:
+            obstruction.mkdir(mode=0o770)
+            submit(allow, raw)
         artifact["new_model_cases_requested"] = 1
-        submit(allow, raw)
-        held = wait_for(lambda: (s if (s := inspect(args, allow))["held"] and s["case_id"] else None), "bounded ack failure hold", seconds=150)
+        completed = inspect(args, allow) if previous else None
+        held = completed if completed and completed["completed"] else wait_for(lambda: (s if (s := inspect(args, allow))["held"] and s["case_id"] else None), "bounded ack failure hold", seconds=150)
         held_case = record(client, held["case_id"])
-        artifact["ack_failure"] = {"native_state": held, "routing": held_case["routing"], "delivery_count": held_case["delivery_count"]}
-        if held_case["routing"] != "DELIVERED" or held_case["delivery_count"] != 1 or not path(allow, ".work").is_file():
+        artifact["ack_failure"] = previous["ack_failure"] if completed and completed["completed"] else {"native_state": held, "routing": held_case["routing"], "delivery_count": held_case["delivery_count"]}
+        if held_case["routing"] == "REVIEW":
+            if (held_case.get("assessment", {}).get("classification") != "CLEAR" or held_case["assessment"].get("critical") is not False or held_case.get("agent", {}).get("status") != "returned" or not all(held_case["agent"].get("tool_reads", {}).get(k, 0) >= 1 for k in ("message", "contracts", "related", "precedents"))):
+                raise ValueError("Synthetic order is not eligible for the driver's explicit review")
+            request = {"action": "APPROVE", "reason": "Synthetic adapter recovery test: current approved contract and CLEAR deterministic assessment match 240 EA; historical concerns confer no authority.", "expected_version": held_case["version"], "idempotency_key": "adapter-review-" + run_id}
+            status, _ = client.call("/cases/" + held["case_id"] + "/review", request)
+            if status != 200:
+                raise ValueError("Native review of the clear synthetic order failed")
+            held_case = record(client, held["case_id"])
+            artifact["explicit_review"] = {"case_id": held["case_id"], "original_route": "REVIEW", "action": "APPROVE", "http_status": status, "reason": request["reason"], "version_before": request["expected_version"], "version_after": held_case["version"]}
+        if held_case["routing"] != "DELIVERED" or held_case["delivery_count"] != 1 or not (path(allow, ".work").is_file() or path(allow, ".done").is_file()):
             raise ValueError("Ack failure did not preserve the completed native job and original")
-        obstruction.rmdir()
-        resumed = native(args, f'set sc=##class(SilentShift.Test.AdapterChecks).ResumeHeld("{allow}")\nwrite "ADAPTER_RESUME=",$SYSTEM.Status.IsOK(sc),!', "ADAPTER_RESUME=")
-        if resumed != "1":
-            raise ValueError("Ack retry hold could not be resumed")
-        first = verify_case(args, client, allow, raw, "DELIVERED", 1)
+        if not (completed and completed["completed"]):
+            obstruction.rmdir()
+            resumed = native(args, f'set sc=##class(SilentShift.Test.AdapterChecks).ResumeHeld("{allow}")\nwrite "ADAPTER_RESUME=",$SYSTEM.Status.IsOK(sc),!', "ADAPTER_RESUME=")
+            if resumed != "1":
+                raise ValueError("Ack retry hold could not be resumed")
+        first = verify_case(args, client, allow, raw, "DELIVERED", 1, ack_snapshot=artifact["ack_failure"] if artifact.get("explicit_review") else None)
         first["checks"]["ack_failure_recovered_same_case"] = first["case_id"] == held["case_id"] and first["trace_id"] == held_case["trace_id"]
         artifact["cases"].append(first)
         if not all(first["checks"].values()):
@@ -222,7 +259,7 @@ def main() -> int:
         submit(duplicate, raw)
         dup = verify_case(args, client, duplicate, raw, "DELIVERED", 1)
         artifact["duplicate"] = dup
-        artifact["checks"]["duplicate_event_same_case_receipt"] = dup["case_id"] == first["case_id"] and dup["trace_id"] == first["trace_id"] and dup["ack"]["delivery_receipt"] == first["ack"]["delivery_receipt"] and dup["ack"]["duplicate_event"] is True
+        artifact["checks"]["duplicate_event_same_case_receipt"] = all(dup["checks"].values()) and dup["case_id"] == first["case_id"] and dup["trace_id"] == first["trace_id"] and dup["ack"]["delivery_receipt"]["case_id"] == first["case_id"] and record(client, first["case_id"])["delivery_count"] == 1 and dup["ack"]["duplicate_event"] is True
         submit(allow, raw)
         wait_for(lambda: not path(allow, ".ready").exists() and not path(allow, ".work").exists() and any(INBOX.glob(allow + ".json.duplicate.*")), "same filename idempotent redrop")
         artifact["checks"]["same_file_same_ack"] = acknowledgment(allow) == first["ack"] and record(client, first["case_id"])["delivery_count"] == 1
@@ -248,6 +285,10 @@ def main() -> int:
         return 0 if artifact["passed"] else 1
     except (ValueError, KeyError, TypeError, OSError, TimeoutError, subprocess.TimeoutExpired) as error:
         artifact["error"] = str(error) if isinstance(error, ValueError) else type(error).__name__
+        trace = error.__traceback__
+        while trace and trace.tb_next:
+            trace = trace.tb_next
+        artifact["error_location"] = {"file": Path(trace.tb_frame.f_code.co_filename).name, "line": trace.tb_lineno} if trace else None
         print("FAILED: " + artifact["error"], file=sys.stderr)
         return 1
     finally:

@@ -12,11 +12,11 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 Open an investigation to compare the original partner payload with its immutable reference snapshot. Inspect what the agent actually read, why policy held or released the message, and whether the simulator recorded a delivery. A trace ID connects that investigation to its native IRIS production session.
 
-The agent proposes through three read-only, case-scoped evidence tools. Server policy owns the route: missing evidence, conflicting authority, malformed answers and timeouts cannot justify automatic delivery. A reviewer can resolve an eligible hold with a reason, version and idempotency key; critical contradictions retain their release veto. Native Workflow preserves the human task, including a recorded decision whose completion needs to be resumed.
+The agent proposes through four read-only, case-scoped evidence tools: current message, approved contracts, related records and similar precedents. Server policy owns the route: missing evidence, conflicting authority, malformed answers and timeouts cannot justify automatic delivery. A reviewer can resolve an eligible hold with a reason, version and idempotency key; critical contradictions retain their release veto. Native Workflow preserves the human task, including a recorded decision whose completion needs to be resumed.
 
 ![An approved amendment inspected in the working local application, with one simulator delivery](docs/assets/native-approved-delivery.png)
 
-The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides seven API-backed views, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
+The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides eight API-backed views, including the native Review queue, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
 
 **Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment, external ERP/bank delivery or contest registration is claimed.
 
@@ -42,7 +42,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-The browser suite starts its own loopback Vite server with an intentionally unreachable upstream. It tests genuine failure states at 1440×960 and 390×844, all seven routes, keyboard focus, login failure and reduced motion. It does **not** prove connected cases or native integration. Screenshots are saved under `evidence/browser/`.
+The browser suite starts its own loopback Vite server with an intentionally unreachable upstream. It tests genuine failure states at 1440×960 and 390×844, all eight workbench routes, keyboard focus, login failure and reduced motion. It does **not** prove connected cases or native integration. Screenshots are saved under `evidence/browser/`.
 
 With the real native stack and an existing critical case running, opt into the separate read-only browser suite:
 
@@ -117,7 +117,7 @@ uv run --env-file .env python scripts/verify_native_boundaries.py
 
 Use `--context`/`--container` when your Docker naming differs. Network-loss recovery, provider cancellation, real external delivery and broader stochastic trials remain unverified; a process timeout does not prove provider cancellation.
 
-Every local provider HTTP call now produces typed interoperability request and response messages in the original case session. The approved-amendment case in session374 made four calls (headers381–388), then delivered once. The explicit SDK failure probe in session316 recorded a real Ollama HTTP400 and stayed quarantined with zero deliveries. [Successful trace](docs/assets/provider-success-visual-trace.png) · [failure trace](docs/assets/provider-failure-visual-trace.png).
+Every local provider HTTP call produces typed interoperability request and response messages in the original case session. The retained approved-amendment case in session 374 made four calls (headers 381–388), then delivered once. The explicit SDK failure probe in session 316 recorded a real Ollama HTTP 400 and stayed quarantined with zero deliveries. Current four-tool runs made two exchanges per case. [Successful trace](docs/assets/provider-success-visual-trace.png) · [failure trace](docs/assets/provider-failure-visual-trace.png).
 
 ```sh
 uv run python scripts/verify_native_provider.py --inspect-case CASE_ID
@@ -133,7 +133,7 @@ uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 
 The [54-check receipt](docs/evidence/review-queue.json) includes reviewer-only task listing, rejection, two concurrent identical approvals, one review receipt, one native completion response and one simulator delivery. The workbench also completed [actual approve and reject actions](docs/evidence/review-ui.json), shown in the [native worklist](docs/assets/review-native-worklist.png). These isolated synthetic cases skip LLM inference at the evidence-budget guard; existing procedural retrieval can use local embeddings. They do not alter the five evaluation cases.
 
-The earlier controlled postcommit HTTP503 recovery remains documented in [the Workflow receipt](docs/evidence/workflow.json) and [engineering story](docs/articles/engineering.md). Resume the original recorded request after an uncertain outcome; changing its reason, version or key creates a different decision and is rejected.
+The earlier controlled postcommit HTTP 503 recovery remains documented in [the Workflow receipt](docs/evidence/workflow.json) and [engineering story](docs/articles/engineering.md). Resume the original recorded request after an uncertain outcome; changing its reason, version or key creates a different decision and is rejected.
 
 ## Optional local intake and procedural guidance
 
@@ -143,9 +143,9 @@ The custom native inbound adapter is dormant by default. Set `SILENTSHIFT_PARTNE
 
 Write the raw UTF-8 partner **message** JSON to `<name>.json.part`, close it, then atomically rename it to `<name>.json.ready` on the same filesystem. Do not wrap it in a Scenario Lab request. Names contain 1–80 ASCII letters, digits, hyphens or underscores and begin with a letter or digit. The same server validation and reference authority apply as at `POST /messages`.
 
-The adapter claims `.work`, retains the exact input bytes in `.done` or `.hold`, and writes `<name>.json.ack.json` from the persisted outcome. The acknowledgment includes its input SHA-256, case/trace IDs, policy result and simulator receipt. An acknowledgment is evidence of the recorded outcome; inspect its status and delivery count. Uncertain dispatches and exhausted retries need operator inspection. Keep fewer than 256 active files per suffix and plan retention explicitly; the adapter deletes no input or archive.
+The adapter claims `.work`, retains the exact input bytes in `.done` or `.hold`, and writes `<name>.json.ack.json` from the persisted outcome. The acknowledgment includes its input SHA-256, case/trace IDs, policy result and simulator receipt. It preserves the first observed outcome: a later review decision changes the case, while its earlier held acknowledgement stays unchanged. Inspect the acknowledgement's timestamp and delivery count, then follow the case for current state. Uncertain dispatches and exhausted retries need operator inspection. Keep fewer than 256 active files per suffix and plan retention explicitly; the adapter deletes no input or archive.
 
-The [verification driver](scripts/verify_native_adapter.py) documents activation, bounded test calls and read-only `--inspect-file` use. Its original failed attempts are retained separately from the later successful delivery; the [build ledger](docs/BUILD_STATUS.md) records those scopes.
+The [file walkthrough](docs/PARTNER_INBOX.md) shows actual ready-file delivery and critical quarantine, with native Visual Trace screenshots. All 82 adapter assertions passed, including acknowledgement recovery and replay without another receipt. The [verification driver](scripts/verify_native_adapter.py) documents activation, bounded test calls and read-only `--inspect-file` use. Earlier failed attempts remain retained separately.
 
 ### Retrieve procedures without changing contract authority
 
@@ -180,6 +180,7 @@ All endpoints are under `/silentshift/api`, protected by IRIS password authentic
 | Endpoint | Behavior |
 |---|---|
 | `GET /health`, `/overview`, `/cases`, `/cases/:id` | Actual production/configuration, counts and evidence; bounded pagination |
+| `GET /reviews` | Reviewer-only pending native Workflow tasks, case versions and recorded completion recovery |
 | `POST /messages` | Strict partner JSON only; server selects reference authority; exact decimal strings or integers for business numbers |
 | `GET /scenarios`, `POST /scenarios/:id/run` | Synthetic fixed-clock replay; required stable UUID `run_id` |
 | `POST /cases/:id/review` | `APPROVE`/`REJECT`, reason, expected version and idempotency key; critical contradictions cannot be bypassed |
