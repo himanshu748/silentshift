@@ -1,5 +1,12 @@
 # Build status
 
+## Submission package — November 4
+
+Feature freeze retained: no application/runtime feature changes. The [2:30 MP4](../evidence/video/silentshift-demo.mp4) is verified at 1920×1080 / 30 fps, H.264 with AAC silence, burned-in captions, embedded English captions and [SRT](../evidence/video/silentshift-demo.srt). Size: 3,561,558 bytes; SHA and source crops are in its [manifest](../evidence/video/silentshift-demo.json). Full audio/video decoding, exact caption readback and decoded-frame inspection passed. Homebrew ffmpeg/ffprobe 9.0.2 repaired the earlier x265 loader mismatch. Python 172, TypeScript and the web build passed again; existing native gates below remain retained, with no new model calls for this documentation/media work.
+
+[YouTube copy](YOUTUBE_UPLOAD.md), [OEX fields](OPEN_EXCHANGE_COPY.md), both article drafts, [IPM publication instructions](IPM.md#publish-and-verify-the-public-package) and the [ordered manual checklist](SUBMISSION_CHECKLIST.md) are prepared. No YouTube/OEX/DC/registry publication, approval request or contest submission was performed.
+
+
 Updated 2026-11-03 IST. The local operator journey catches semantic contradictions before the IRIS destination simulator accepts them. External publication and contest entry remain separate; the current work is local-only.
 
 ## Ordered sponsor extensions

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compose actual product captures, then invoke the installed browser demo renderer.
 
-This is an edited, silent walkthrough. No interactions or model calls are staged.
+This is an edited, captioned walkthrough. No interactions or model calls are staged.
 Frames, hashes, captions and the exact render configuration remain inspectable.
 """
 
@@ -120,19 +120,20 @@ def override_shot(scene: dict, value: str | None, label: str) -> None:
 
 
 def trace_facts(scenes: list[dict]) -> dict:
-    path = ROOT / "docs/evidence/traceability.json"
+    path = ROOT / "docs/evidence/provider-calls.json"
     evidence = json.loads(path.read_text())
-    case = next((case for case in evidence["cases"] if case.get("scenario_id") == "approved-amendment"
+    case = next((case for case in evidence["success_cases"]["cases"] if case.get("scenario_id") == "approved-amendment"
                  and case.get("routing") == "DELIVERED" and case.get("delivery_count") == 1), None)
     if not case:
         raise ValueError("No recorded approved delivery in the reviewed trace evidence")
-    count = sum(header.get("target") == "AITrace" for header in case["native_headers"])
-    if count < 1 or not all(case["agent"]["tool_reads"].get(name, 0) > 0 for name in ("message", "contracts", "related")):
-        raise ValueError("Recorded trace does not establish all three scoped tool reads")
+    requests = [m["call_id"] for m in case["provider_messages"] if m["event_kind"] == "provider_request"]
+    responses = [m["call_id"] for m in case["provider_messages"] if m["event_kind"] == "provider_response"]
+    count = len(requests)
+    if count < 1 or len(set(requests)) != count or sorted(requests) != sorted(responses) or len(case["provider_messages"]) != count * 2 or not all(case["checks"].values()):
+        raise ValueError("Recorded native provider request/response pairs are incomplete")
     scene = next(scene for scene in scenes if scene["id"] == "trace")
-    scene["caption"] = f"Recorded C trace {case['trace_id']} contains invocation and tool spans in the same native production session."
-    scene["facts"] = [f"C: native session {case['trace_id']}", f"{count} invocation/tool messages", "Provider rounds unverified"]
-    return {"source": source_name(path), "sha256": digest(path), "case_id": case["case_id"], "trace_id": case["trace_id"], "ai_trace_messages": count}
+    scene["caption"] = f"Recorded native session {case['trace_id']}: {count} actual provider exchanges, each with its own request and response. Policy retains release authority."
+    return {"source": source_name(path), "sha256": digest(path), "case_id": case["case_id"], "trace_id": case["trace_id"], "provider_exchanges": count}
 
 
 def compose(scene: dict, fonts: dict[str, Path], scope: str, source_url: str | None) -> Image.Image:
@@ -181,7 +182,7 @@ def srt_time(seconds: float) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="config/demo/product.json")
-    parser.add_argument("--output", default="evidence/local/silentshift-product-walkthrough.mp4")
+    parser.add_argument("--output", default="evidence/video/silentshift-demo.mp4")
     parser.add_argument("--work-dir", default="work/product-demo")
     parser.add_argument("--renderer", default="~/.codex/skills/browser-video-recording/scripts/render_browser_demo.py")
     parser.add_argument("--source-url")
@@ -198,8 +199,8 @@ def main() -> int:
         parsed = urlparse(args.source_url)
         if parsed.scheme != "https" or parsed.hostname not in {"github.com", "gitlab.com"} or parsed.username or parsed.password or parsed.query or parsed.fragment:
             parser.error("Use the verified public HTTPS GitHub/GitLab repository URL without credentials or query parameters")
-    if tuple(config["output_size"]) != SIZE or config["fps"] != 30 or config["duration"] != 120:
-        parser.error("This storage-bounded composition is fixed at1920x1080/30fps/120seconds")
+    if tuple(config["output_size"]) != SIZE or config["fps"] != 30 or not 120 <= config["duration"] <= 180:
+        parser.error("Use 1920x1080 / 30fps and a duration from 120 through 180 seconds")
     scenes = config["scenes"]
     for index, scene in enumerate(scenes):
         expected = 0 if index == 0 else scenes[index - 1]["end"]
@@ -210,9 +211,11 @@ def main() -> int:
     proof = trace_facts(scenes)
     by_id = {scene["id"]: scene for scene in scenes}
     override_shot(by_id["amendment"], args.unit_shot, "Actual case A; C's approved amendment shown in the next recorded case")
-    override_shot(by_id["tools"], args.agent_shot, "Actual recorded Agent view; scoped read-only evidence")
+    if args.agent_shot:
+        parser.error("The current edit uses the fourth-tool precedent view; update --config explicitly for other captures")
     override_shot(by_id["trace"], args.timeline_shot, f"Actual recorded Timeline view; native session {proof['trace_id']}")
-    override_shot(by_id["outcomes"], args.evaluation_shot, "Actual recorded Evaluations; five synthetic cases, not general accuracy")
+    if args.evaluation_shot:
+        parser.error("Update --config explicitly to add a recorded evaluation capture")
     work.mkdir(parents=True, exist_ok=True)
     output.parent.mkdir(parents=True, exist_ok=True)
     fonts = font_files(work)
@@ -238,8 +241,8 @@ def main() -> int:
     render_path.write_text(json.dumps(render_config, indent=2) + "\n")
     captions = "\n\n".join(f"{index + 1}\n{srt_time(scene['start'])} --> {srt_time(scene['end'])}\n{scene['headline']}\n{scene['caption']}" for index, scene in enumerate(scenes))
     output.with_suffix(".srt").write_text(captions + "\n")
-    manifest = {"kind": "edited-screenshot-product-walkthrough", "scope": config["scope"], "duration": 120,
-                "fps": 30, "output_size": list(SIZE), "audio": "none", "source_url": args.source_url,
+    manifest = {"kind": "edited-screenshot-product-walkthrough", "scope": config["scope"], "duration": config["duration"],
+                "fps": 30, "output_size": list(SIZE), "audio": "AAC silence; no generated narration or music", "source_url": args.source_url,
                 "config_sha256": digest(config_path), "script_sha256": digest(Path(__file__)), "trace_proof": proof,
                 "inputs": inputs, "rendered": False, "captions": [{key: scene[key] for key in ("id", "start", "end", "headline", "caption")} for scene in scenes]}
     manifest_path = output.with_suffix(".json")
@@ -255,12 +258,19 @@ def main() -> int:
             parser.error(f"Missing local tool: {executable}")
     if shutil.disk_usage(output.parent).free < 700 * 1024 * 1024:
         parser.error("Less than700MiB free; preserve working space before video encoding")
-    subprocess.run([sys.executable, str(renderer), "--config", str(render_path), "--output", str(output)], check=True)
-    probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "stream=codec_name,codec_type,width,height,r_frame_rate", "-show_entries", "format=duration,size", "-of", "json", str(output)]))
+    picture = work / "picture.mp4"
+    subprocess.run([sys.executable, str(renderer), "--config", str(render_path), "--output", str(picture)], check=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(picture), "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                    "-i", str(output.with_suffix(".srt")), "-map", "0:v:0", "-map", "1:a:0", "-map", "2:s:0",
+                    "-c:v", "copy", "-c:a", "aac", "-b:a", "96k", "-c:s", "mov_text", "-metadata:s:s:0", "language=eng",
+                    "-t", str(config["duration"]), "-movflags", "+faststart", str(output)], check=True)
+    probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "stream=codec_name,codec_type,width,height,r_frame_rate,pix_fmt", "-show_entries", "format=duration,size", "-of", "json", str(output)]))
     streams = probe.get("streams", [])
     video = next((stream for stream in streams if stream["codec_type"] == "video"), {})
-    if len(streams) != 1 or video.get("width") != 1920 or video.get("height") != 1080 or video.get("r_frame_rate") != "30/1" or abs(float(probe["format"]["duration"]) - 120) > .1:
-        raise ValueError("Encoded artifact failed duration, resolution, frame-rate or silent-output verification")
+    audio = next((stream for stream in streams if stream["codec_type"] == "audio"), {})
+    subtitle = next((stream for stream in streams if stream["codec_type"] == "subtitle"), {})
+    if (len(streams) != 3 or video.get("codec_name") != "h264" or video.get("pix_fmt") != "yuv420p" or video.get("width") != 1920 or video.get("height") != 1080 or video.get("r_frame_rate") != "30/1" or audio.get("codec_name") != "aac" or subtitle.get("codec_name") != "mov_text" or abs(float(probe["format"]["duration"]) - config["duration"]) > .1):
+        raise ValueError("Encoded artifact failed H.264/AAC/caption, duration, resolution or frame-rate verification")
     thumbnail = output.with_suffix(".png")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "65", "-i", str(output), "-frames:v", "1", "-update", "1", str(thumbnail)], check=True)
     manifest.update(rendered=True, renderer_sha256=digest(renderer), video_sha256=digest(output), ffprobe=probe,

@@ -8,6 +8,10 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
 
+**Demo video:** [Watch the walkthrough](<YOUTUBE_VIDEO_URL>) · **Open Exchange application:** [SilentShift on Open Exchange](<OPEN_EXCHANGE_APP_URL>)
+
+Publication links are pending; the Open Exchange application is a saved draft. The [2:30 captioned MP4](evidence/video/silentshift-demo.mp4) and [upload copy](docs/YOUTUBE_UPLOAD.md) are ready locally. Replace these placeholders only with checked public URLs.
+
 ## Follow the evidence to a decision
 
 Open an investigation to compare the original partner payload with its immutable reference snapshot. Inspect what the agent actually read, why policy held or released the message, and whether the simulator recorded a delivery. A trace ID connects that investigation to its native IRIS production session.
@@ -69,7 +73,7 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
 3. Load the official archive outside this repository:
 
    ```sh
-   docker load -i "/absolute/path/to/official-build 154-docker.tar.gz"
+   docker load -i "/absolute/path/to/official-build154-docker.tar.gz"
    docker images
    ```
 

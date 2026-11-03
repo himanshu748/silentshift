@@ -347,9 +347,10 @@ REST applications, the Web Gateway service and CallIn, seeds synthetic approved
 references, configures workflow and starts `SilentShift.Production`. Existing
 application users are preserved. Review these instance-wide security changes
 before using a shared instance. The package activation does not perform them.
-Configure a separate Web Gateway as in [README.md](../README.md), and a local
-tool-capable model or an explicitly authorized provider before running model
-scenarios. Provider access is not bundled or funded by IPM.
+Configure a separate Web Gateway as in [README.md](../README.md), the local
+`qwen3-silentshift:4b-instruct` model and local `all-minilm:22m` embeddings before
+running model scenarios. The current transport accepts only the documented local
+route. Model weights are not bundled by IPM.
 
 The React workbench remains a separate frontend (`npm --prefix web ci`, then
 the documented development proxy or production reverse proxy). The IPM module
@@ -359,28 +360,168 @@ also remain explicit runtime steps.
 
 ## Publish and verify the public package
 
-The [official Open Exchange IPM publication guide](https://docs.openexchange.intersystems.com/apps/ipm/)
-requires a public GitHub/GitLab repository with `module.xml` at its root, tested
-IPM loading/packaging, and an Open Exchange application with **Publish in Package
-manager** selected. Open Exchange is the gateway to the public Community IPM
-registry. Submission, moderation/approval, and registry availability are
-different states. A local package, test-registry publication or Open Exchange
-draft does not establish public publication.
+**Manual steps; no public publication or registry installation has been
+performed.** Sources were rechecked on **2026-11-04**. The [official publication
+guide](https://docs.openexchange.intersystems.com/apps/ipm/) makes Open Exchange
+the gateway to `pm.community.intersystems.com`. The CLI `publish` action targets
+a separately configured publishing registry. Public Community publication uses
+the Open Exchange form below; it does not require inventing a registry account,
+token or direct-upload endpoint.
 
-Once the approved package is actually listed in the public registry, configure
-a read-only Community registry on a clean test instance as documented by the
-[IPM CLI](https://github.com/intersystems/ipm/wiki/02.-CLI-commands), and execute:
+### 1. Publish through Open Exchange
 
-```objectscript
-zpm "search silentshift"
-zpm "install silentshift 0.1.0"
+1. Confirm that the [public repository](https://github.com/himanshu748/silentshift)
+   contains root-level [module.xml](https://github.com/himanshu748/silentshift/blob/main/module.xml),
+   module `silentshift`, version `0.1.0`, license and the full 43-class source.
+   Keep the published source revision and the verified archive receipt together.
+   The local archive above is already tested; include no EAP kit, derived image,
+   IRIS database, credentials or private logs in a release.
+2. Sign in and open the existing
+   [SilentShift draft](https://openexchange.intersystems.com/portal/products/SilentShift/edit).
+   Use [the application copy](OPEN_EXCHANGE_COPY.md), set the repository URL,
+   actual video URL and idea link, and select **Publish in Package Manager**.
+   Declare the tested **2026.3.0AI.154.0 ARM64 Community** runtime.
+3. Use **Save** and **Preview**, review the fields, then manually click
+   **Send for Approval**. Retain the saved submission state and, when approved,
+   the actual public application URL. Follow any moderation instructions.
+4. Wait for the `silentshift` **0.1.0** listing in the public registry and run the
+   fresh registry verification below. OEX approval, registry availability and
+   contest entry each need their own confirmation. An app draft or checked box
+   alone is insufficient.
+
+The organizer's [IPM clarification](https://community.intersystems.com/node/590306)
+requires publication and checks installation on the declared AI Hub build. The
+later build-109 allowance does not establish SilentShift compatibility with
+109: this package intentionally guards its tested build **154**. The module's
+`SystemRequirements` remain explicit. The potential **2-point** IPM bonus stays
+unconfirmed until publication, real registry installation and organizer review.
+
+### 2. Optional private/test-registry publish command
+
+The official guide also recommends testing a publish operation against a
+registry the developer controls or the linked test registry. This is a separate
+external write, performed only if the user chooses it. It does not publish to
+the public Community registry. Use an isolated stopped build-154 SILENTSHIFT
+namespace with the module already loaded. Ask the registry operator for the
+actual URL and username; replace both placeholders before running. Supply
+`SILENTSHIFT_IPM_REGISTRY_PASSWORD` privately to the IRIS process.
+
+Enter `zpm`, then run these at the **IPM prompt**:
+
+```text
+repo -r -n TestPublish -url <REGISTRY_URL_FROM_OPERATOR> -username <REGISTRY_USERNAME> -password-env SILENTSHIFT_IPM_REGISTRY_PASSWORD -publish 1
+repo -list
+publish silentshift
+quit
 ```
 
-Retain registry URL, returned name/version, archive digest where available and
-all clean-install/native verification results. The contest IPM gate is only
-evidenced after the real public installation succeeds on the declared build.
+Inspect the target shown by `repo -list` before publishing. IPM 0.10.10's
+[credential handling](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Repo/Definition.cls)
+supports `-password-env`; no password value belongs in command history or
+transcripts. Authentication and acceptance for a user-owned/test registry have
+not been exercised here. No test-registry username or token is assumed.
+
+### 3. Verify installation from the public registry in a fresh instance
+
+Use a **new official build-154 instance**, separate from the retained filesystem
+proof and the existing application runtime. Provision the empty
+interoperability namespace **SILENTSHIFT**, its database/resource, Embedded
+Python CallIn prerequisite and pinned **IPM 0.10.10** as described above. Keep
+production stopped, omit source mounts, and do not copy a source stage, local
+archive or application classes into this instance. Only the later diagnostic
+class is copied separately. The existing `verify_ipm_clean.py` driver installs
+from its local filesystem repository; its receipt proves that specific source.
+
+Before public installation, capture the actual terminal output:
+
+```objectscript
+write $namespace,!, $zversion,!
+write ##class(%Dictionary.CompiledClass).%ExistsId("SilentShift.Setup"),!
+write $data(^SilentShift.Config("AssetRoot")),!
+```
+
+Expected namespace/build: **SILENTSHIFT / 154U** on this ARM64 target. Both final
+values must be **0**. Capture the absence of `/opt/silentshift` and the instance's
+mount list as well. Do not substitute a previously installed namespace.
+
+Enter `zpm`. Run each command at the **IPM prompt**, retaining success/error
+output and stopping on an error:
+
+```text
+version
+config set analytics 0
+repo -list
+repo -r -n PublicCommunity -url https://pm.community.intersystems.com/ -user "" -pass "" -publish 0 -read-only 1
+repo -list
+search -versions silentshift
+install PublicCommunity/silentshift 0.1.0
+list-installed silentshift
+history find -Daction=install -Dpackage=silentshift
+quit
+```
+
+The empty credentials select anonymous public access; no publishing permission
+is enabled. If this URL is already configured under a different name, use that
+listed name consistently instead of `PublicCommunity`, with publishing disabled;
+the [pinned remote-repository code](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Repo/Remote/Definition.cls)
+rejects duplicate URLs. `search` shows repository headings; verify that version
+**0.1.0** appears under the public URL. The qualified `install` pins the source,
+so a local cache/filesystem package cannot establish this gate. These forms are
+supported by the [pinned CLI implementation](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Main.cls).
+The older `-synchronous` modifier is deprecated in 0.10.10 and is omitted here.
+
+After successful installation, at the ObjectScript prompt:
+
+```objectscript
+set module=##class(%IPM.Storage.Module).NameOpen("silentshift")
+write module.VersionString,!
+write ##class(SilentShift.IPM).AssetRoot(),!
+set sc=##class(SilentShift.IPM).RequireStopped()
+do $system.Status.DisplayError(sc)
+set sc=$system.OBJ.Load("<COPIED_DIAGNOSTIC_DIRECTORY>/IPMChecks.cls","ck")
+do $system.Status.DisplayError(sc)
+set sc=##class(SilentShift.Test.IPMChecks).Run()
+do $system.Status.DisplayError(sc)
+```
+
+Replace `<COPIED_DIAGNOSTIC_DIRECTORY>` with the actual path containing only the
+separately copied `tests/iris/IPMChecks.cls`. Require version **0.1.0**, the
+namespace-specific manager asset root, successful statuses and
+`SILENTSHIFT_IPM_CHECKS_OK path_rejections=10 deterministic_cases=5 module_origins=4 ai_runs=0`.
+Record zero rows in the eight SilentShift data tables plus native ReviewTask and
+Worklist, as the local clean driver does. No case, delivery or model call should
+be caused by package installation.
+
+For the complete post-registry native gate, separately configure the private
+runtime environment and isolated gateway, run explicit `Setup.Install()`, index
+the approved amendment and record the separate SDK warmup as above. Then run
+the actual API verifier against that instance's **own** port:
+
+```sh
+uv run --env-file .env python scripts/verify_native.py \
+  --api http://127.0.0.1:<REGISTRY_TEST_GATEWAY_PORT>/silentshift/api \
+  --allow-model-calls --output .local/ipm/public-registry-native-five.json
+```
+
+This later command invokes the five local model investigations; run it only
+when that inference is explicitly authorized and idle. Require `passed`,
+`native_verified` and `evaluation_persisted` to be true, five accepted cases,
+all four tools, expected routes and zero unsafe releases. Keep the separate
+diagnostic out of that evaluation.
+
+Retain registry URL, search output, version, source-qualified install command,
+history record, `$ZVERSION`, client version/checksum, pristine-state checks,
+installed module origins, empty-state checks and any later native export.
+Record the public artifact's own digest when retained; it may be rebuilt and
+must not be assumed byte-identical to the local 75,003-byte archive. The pinned
+[remote package service](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Repo/Remote/PackageService.cls)
+checks the registry's supplied SHA-1 when present; label an independently
+computed SHA-256 distinctly. Redact credentials and any install capabilities
+before sharing a receipt. Until these steps actually run, keep
+`public_registry_install_verified` and `registry_published` **false**.
+
 No registry publication, Open Exchange submission, paid call or runtime restart
-is performed by `package_ipm.py`.
+is performed by `package_ipm.py` or by this documentation update.
 
 Use `python3 scripts/inspect_ipm.py /path/to/generated.tgz` to inspect the real
 archive without extracting it. It canonicalizes the repeated path separators

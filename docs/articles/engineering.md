@@ -1,5 +1,7 @@
 <!-- ARTICLE DRAFT — NOT PUBLISHED TO DEVELOPER COMMUNITY. Verified source and extensions are on public GitHub main; article publication requires separate authorization. -->
 
+> Preparation note — exclude from the published article: replace `<OPEN_EXCHANGE_APP_URL>` below with the checked public application URL after acceptance. The Open Exchange application is a saved draft. The article body starts at the title.
+
 # A held transaction needs a review that survives failure
 
 Holding a questionable transaction is only the start. The operator still needs to understand the evidence, record a decision and know whether the destination received it. If completion fails after the decision is saved, asking the operator to start again creates a second uncertainty.
@@ -17,6 +19,8 @@ The native AI Hub agent investigates through four read-only, case-scoped tools. 
 A new review or quarantine hold asks a separate native coordinator Business Process to create a task through `EnsLib.Workflow.Operation`. The task appears in the `ReviewWorklist` role. The demo configures one authorized reviewer; it does not claim a tested multi-user assignment scheme. The original processing request can finish while the human task waits durably.
 
 The operator opens the reviewer-only Review view to see pending native tasks, then reads the case, references, precedent evidence, policy reasons and native task state together. Critical contradictions cannot be manually approved. A valid human decision requires reviewer permission, a reason, a current case version and an idempotency key.
+
+![Actual pending native Workflow tasks in the SilentShift Review view](https://raw.githubusercontent.com/himanshu748/silentshift/main/docs/assets/review-native-worklist.png)
 
 ## Separate a recorded decision from a completed route
 
@@ -38,13 +42,25 @@ After reconnecting to the workbench, the persisted case offered its original rev
 
 A separate conflicting-evidence case exercised rejection with zero deliveries, viewer denial, stale-version rejection and direct native-action denial. Its model request timed out safely; the receipt does not count that request as a successful native recommendation. The [43-check review evidence](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/workflow.json) separates this recovery experiment from the five-case model evaluation.
 
-A later [54-check native worklist run](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json) verified the pending-task API, rejection and two simultaneous identical approvals. Both approval requests returned 200 and produced one review receipt, one native completion response and one delivery. Separate workbench actions completed approval and rejection. The controlled failure above remains narrower evidence; recovery from every outage, crash or external destination failure is unverified.
+The [54-check native worklist receipt](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json) verifies the pending-task API, rejection and two simultaneous identical approvals. Both approval requests returned 200 and produced one review receipt, one native completion response and one delivery. Separate workbench actions completed approval and rejection. The controlled failure above remains narrower evidence; recovery from every outage, crash or external destination failure is unverified.
+
+## Make the effect visible at the boundary
+
+A saved decision, a completed native task and a destination effect are separate facts. SilentShift preserves all three. The operator can inspect the task state and recorded decision, then count the actual simulator receipts. An earlier file acknowledgement also remains an immutable snapshot of the outcome it first observed; a later review changes the case instead of rewriting that earlier acknowledgement.
+
+The same discipline applies to agent observability. Each actual local provider HTTP request and response is recorded in the original case's interoperability session. Native tool reads and the final policy remain distinguishable from the model call. A successful model answer is evidence of a recommendation; the simulator receipt establishes the included destination's effect. Unknown usage and provider retry fields remain explicitly unavailable.
 
 ## Try the same review journey
 
 Follow the [native setup](https://github.com/himanshu748/silentshift/blob/main/README.md#native-build-154-setup) with an authorized Community AI Hub build 154 image and your own private configuration. Bootstrap installs the native worklist and coordinator without calling a model. The enclosing investigation wait is configurable from 10 through 120 seconds and defaults to 60; the tested constrained local 4B setup explicitly uses 120. Expiry keeps the case held and does not establish provider cancellation.
 
-The focused verifier creates one new local-model conflict investigation and a separate no-model boundary case:
+To inspect pending tasks through the current product, connect as the configured reviewer, open **Review**, select a task and follow its investigation. Eligible approval requires a reason; rejection is available for a critical contradiction while approval stays blocked. The [current queue verifier](https://github.com/himanshu748/silentshift/blob/main/scripts/verify_native_review_queue.py) creates isolated synthetic cases whose evidence-budget guard skips LLM inference:
+
+```sh
+uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
+```
+
+The separate recovery verifier creates one new local-model conflict investigation and a no-model boundary case:
 
 ```sh
 uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
@@ -53,3 +69,7 @@ uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
 Use the explicit flag only with the documented local inference route. Inspect the investigation in the workbench, then compare its native worklist state, recorded decision and simulator receipt. The [source](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow) shows the native task lifecycle; the [build notes](https://github.com/himanshu748/silentshift/blob/main/docs/BUILD_STATUS.md) state the tested scope and remaining limits.
 
 The operator can resume the recorded decision and inspect the one simulator receipt. The saved reason, version and key stay attached to that decision.
+
+**Source and installation:** [SilentShift on GitHub](https://github.com/himanshu748/silentshift)
+
+**Open Exchange application:** [SilentShift on Open Exchange](<OPEN_EXCHANGE_APP_URL>)

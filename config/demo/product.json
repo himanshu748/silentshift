@@ -1,85 +1,213 @@
 {
-  "duration": 120,
+  "duration": 150,
   "fps": 30,
-  "output_size": [1920, 1080],
+  "output_size": [
+    1920,
+    1080
+  ],
   "source_url": "https://github.com/himanshu748/silentshift",
-  "scope": "Edited walkthrough · recorded native cases · synthetic data · IRIS destination simulator",
+  "scope": "Recorded native cases · synthetic data · IRIS destination simulator · captioned edit",
   "scenes": [
     {
-      "id": "opening", "start": 0, "end": 9,
-      "chapter": "The problem",
+      "id": "opening",
+      "start": 0,
+      "end": 8,
+      "chapter": "Before delivery",
       "headline": "A valid message can carry the wrong meaning.",
-      "caption": "SilentShift checks business meaning before IRIS delivers an integration message.",
-      "source": "evidence/browser/landing-root.png", "crop": [0, 0, 1280, 720],
-      "layout": "wide", "source_label": "Recorded product page"
+      "caption": "SilentShift compares the business commitment with approved records before the destination accepts it.",
+      "source": "docs/assets/demo-landing.jpg",
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "layout": "wide",
+      "source_label": "Recorded product page"
     },
     {
-      "id": "currency", "start": 9, "end": 22,
-      "chapter": "Recorded case B",
-      "headline": "The payment looks plausible. The contract disagrees.",
-      "caption": "Partner: 12550 minor units. Approved contract: 125.50 major units. The declared fields differ.",
-      "source": "web/public/evidence/native-currency-workbench.png", "crop": [468, 163, 1416, 926],
-      "layout": "split", "source_label": "Actual currency investigation",
-      "facts": ["12550 | minor", "125.50 | major"]
+      "id": "amendment",
+      "start": 8,
+      "end": 24,
+      "chapter": "Recorded quantity mismatch",
+      "headline": "20 CASE is not an approved promise of 240 EA.",
+      "caption": "Transport and JSON checks can succeed. Without approved evidence, SilentShift cannot infer a CASE-to-EA conversion.",
+      "source": "docs/assets/demo-unit-quarantine.jpg",
+      "crop": [
+        488,
+        500,
+        1155,
+        1100
+      ],
+      "layout": "split",
+      "source_label": "Actual quantity-mismatch investigation; original values and reference snapshot",
+      "facts": [
+        "Partner: 20 CASE",
+        "Contract: 240 EA"
+      ]
     },
     {
-      "id": "hold", "start": 22, "end": 33,
-      "chapter": "Recorded case B",
-      "headline": "No conversion without approved evidence.",
-      "caption": "The verified contradiction remains quarantined. No destination simulator receipt was created.",
-      "source": "web/public/evidence/native-currency-workbench.png", "crop": [488, 470, 1416, 752],
-      "layout": "wide", "source_label": "Edited close-up of the actual evidence and policy"
+      "id": "hold",
+      "start": 24,
+      "end": 36,
+      "chapter": "Contain the contradiction",
+      "headline": "Hold the order before it reaches the destination.",
+      "caption": "The critical contradiction stays quarantined with zero simulator receipts. An agent or reviewer cannot override that veto.",
+      "source": "docs/assets/demo-unit-quarantine.jpg",
+      "crop": [
+        488,
+        180,
+        1416,
+        1040
+      ],
+      "layout": "wide",
+      "source_label": "Recorded critical hold; policy and business comparison are persisted"
     },
     {
-      "id": "amendment", "start": 33, "end": 47,
-      "chapter": "Separate recorded cases A and C",
-      "headline": "Changed units need an approved amendment.",
-      "caption": "A is held: 20 CASE contradicts 240 EA. In C, an effective approved amendment authorizes 20 CASE.",
-      "source": "evidence/browser/demo/unit-quarantine-full.png", "crop": [488, 290, 1416, 1080],
-      "layout": "split", "source_label": "Actual case A; C's approved amendment shown in the next recorded case",
-      "facts": ["A: 20 CASE / 240 EA", "C: 20 CASE / 20 CASE"]
+      "id": "delivery",
+      "start": 36,
+      "end": 53,
+      "chapter": "Separate recorded approved amendment",
+      "headline": "The same incoming value can be legitimate.",
+      "caption": "An effective approved amendment authorizes 20 CASE. Current authority permits one delivery to the IRIS simulator.",
+      "source": "web/public/evidence/native-approved-workbench.png",
+      "crop": [
+        488,
+        220,
+        1416,
+        926
+      ],
+      "layout": "wide",
+      "source_label": "Actual approved-amendment case and one simulator delivery"
     },
     {
-      "id": "delivery", "start": 47, "end": 58,
-      "chapter": "Recorded case C",
-      "headline": "An approved change can continue.",
-      "caption": "The current amendment matches. C was delivered exactly once to the IRIS destination simulator.",
-      "source": "web/public/evidence/native-approved-workbench.png", "crop": [468, 163, 1416, 926],
-      "layout": "wide", "source_label": "Actual approved-reference lineage and allow result"
+      "id": "precedents",
+      "start": 53,
+      "end": 70,
+      "chapter": "Similar precedents",
+      "headline": "See similar history. Keep current authority.",
+      "caption": "The fourth read-only tool returns scored resolved cases and amendments. A past delivery cannot release a current critical order.",
+      "source": "docs/assets/precedent-evidence-desktop.png",
+      "crop": [
+        480,
+        0,
+        1180,
+        655
+      ],
+      "layout": "split",
+      "source_label": "Actual Similar precedents view; native IRIS VECTOR search with local embeddings",
+      "facts": [
+        "Top 3 with source IDs",
+        "Local 384-D vectors",
+        "No release authority"
+      ]
     },
     {
-      "id": "tools", "start": 58, "end": 74,
-      "chapter": "Evidence before permission",
-      "headline": "The agent recommends. Policy controls delivery.",
-      "caption": "Three scoped reads: current message, approved contracts and related records. No tool can deliver a message.",
-      "source": "evidence/browser/demo/approved-agent-full.png", "crop": [488, 469, 1155, 740],
-      "layout": "split", "source_label": "Actual Agent view; three scoped reads confirmed in the native trace record",
-      "facts": ["Current message", "Approved contracts", "Related records"]
+      "id": "trace",
+      "start": 70,
+      "end": 86,
+      "chapter": "Native Visual Trace",
+      "headline": "Each model exchange belongs to its case.",
+      "caption": "Actual AI Hub provider calls have native request and response messages under the original case session.",
+      "source": "docs/assets/provider-success-visual-trace.png",
+      "crop": [
+        170,
+        60,
+        1525,
+        790
+      ],
+      "layout": "wide",
+      "source_label": "Separate recorded approved case; actual native Visual Trace session 374"
     },
     {
-      "id": "trace", "start": 74, "end": 91,
-      "chapter": "A route an operator can explain",
-      "headline": "Keep the explanation with the transaction.",
-      "caption": "Recorded C trace 52 contains invocation and tool spans in the same native production session.",
-      "source": "evidence/browser/demo/approved-timeline-full.png", "crop": [533, 1092, 1155, 1420],
-      "layout": "split", "source_label": "Actual expanded Timeline event; native production session 52",
-      "facts": ["Case C: native session 52", "8 invocation/tool messages", "Provider rounds unverified"]
+      "id": "workflow",
+      "start": 86,
+      "end": 101,
+      "chapter": "Native Workflow review",
+      "headline": "Give an eligible hold a human next step.",
+      "caption": "Review lists real native Workflow tasks. The reviewer inspects current evidence; critical contradictions remain blocked.",
+      "source": "docs/assets/review-native-worklist.png",
+      "crop": [
+        240,
+        90,
+        1260,
+        620
+      ],
+      "layout": "wide",
+      "source_label": "Actual reviewer worklist and pending native task; selected synthetic review case"
     },
     {
-      "id": "outcomes", "start": 91, "end": 105,
-      "chapter": "Measured on frozen synthetic cases",
-      "headline": "Five cases. Five controlled final outcomes.",
-      "caption": "Recorded Nov 2 fresh-volume repeat: 5/5. Rule-only baseline: 5/5. No AI accuracy uplift demonstrated.",
-      "source": "evidence/browser/demo/evaluation-full.png", "crop": [264, 439, 1394, 770],
-      "layout": "wide", "source_label": "Actual Evaluations screen; five synthetic cases, not general accuracy"
+      "id": "review",
+      "start": 101,
+      "end": 115,
+      "chapter": "A recorded review decision",
+      "headline": "Approve with a reason. Preserve one receipt.",
+      "caption": "The actual approved review completed its native task and delivered once. Versions and idempotency protect repeated decisions.",
+      "source": "docs/assets/review-approved-delivery.png",
+      "crop": [
+        240,
+        90,
+        1260,
+        620
+      ],
+      "layout": "wide",
+      "source_label": "Actual workbench approval result; case 299A6FC4, one native completion and one receipt"
     },
     {
-      "id": "close", "start": 105, "end": 120,
-      "chapter": "Try the native production",
+      "id": "adapter",
+      "start": 115,
+      "end": 129,
+      "chapter": "Partners can send a file",
+      "headline": "A ready file enters the same native production.",
+      "caption": "The custom inbound adapter claims a partner JSON file and sends it through the same investigation and deterministic policy.",
+      "source": "docs/assets/adapter-visual-trace.png",
+      "crop": [
+        0,
+        0,
+        845,
+        700
+      ],
+      "layout": "split",
+      "source_label": "Actual file intake: PartnerFiles to Semantic; native session 1610",
+      "facts": [
+        ".json.part -> .ready",
+        "Original bytes retained",
+        "Replay keeps the case"
+      ]
+    },
+    {
+      "id": "adapter-result",
+      "start": 129,
+      "end": 138,
+      "chapter": "One persisted file outcome",
+      "headline": "Delivery and retry stay tied to one case.",
+      "caption": "The file reached Destination once. A separate critical file stayed quarantined; acknowledgement recovery did not redispatch.",
+      "source": "docs/assets/adapter-destination-visual-trace.png",
+      "crop": [
+        0,
+        200,
+        1250,
+        715
+      ],
+      "layout": "wide",
+      "source_label": "Same recorded file session 1610; actual Destination request and reply"
+    },
+    {
+      "id": "close",
+      "start": 138,
+      "end": 150,
+      "chapter": "Run the native production",
       "headline": "Catch meaning before delivery.",
-      "caption": "Inspect the source. Load authorized build 154. Run the same native IRIS production locally.",
-      "source": "evidence/browser/landing-root.png", "crop": [0, 0, 1280, 720],
-      "layout": "closing", "source_label": "Source and installation instructions: README.md"
+      "caption": "Inspect the source and reproduce the build-154 workflow. Five synthetic final outcomes passed; the rule-only baseline also passed.",
+      "source": "docs/assets/demo-landing.jpg",
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "layout": "closing",
+      "source_label": "Real local application · source and setup on public main"
     }
   ]
 }

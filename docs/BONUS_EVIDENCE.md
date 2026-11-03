@@ -127,7 +127,7 @@ Embedded Python (3 potential points) and Docker (2) are already part of the veri
 
 | Manual/external item | State |
 |---|---|
-| YouTube demonstration (3) | Local demo script/captures prepared; no uploaded video. Rendering is blocked by the installed ffmpeg/x265 library mismatch. |
+| YouTube demonstration (3) | Verified [2:30, 1080p H.264/AAC captioned MP4](../evidence/video/silentshift-demo.mp4), 3,561,558 bytes; full decode and caption round-trip passed. [Upload copy](YOUTUBE_UPLOAD.md) ready. No YouTube upload performed. |
 | Developer Community articles (2+1) | Local [overview](articles/overview.md) and [engineering story](articles/engineering.md) drafts; no publication. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
 | IPM publication (2) | Clean local install and native execution verified; user must publish and verify the public-registry install. No registry publication performed. |
