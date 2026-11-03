@@ -1,6 +1,6 @@
 # SilentShift
 
-**Catch the lies hidden inside successful integrations.**
+**Catch wrong business meaning before delivery.**
 
 An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order before the included destination simulator accepts it, then gives the integration operator the message, contract and reason in one investigation.
 
@@ -171,7 +171,7 @@ The first seed indexed 15 actual resolved demo cases and one approved amendment.
 
 ### Package the native backend with IPM
 
-Follow the [IPM guide](docs/IPM.md) for source staging, the pinned client, installed asset checks and operator-managed upgrade/recovery. Real IPM 0.10.10 local loading and package generation have been exercised in an existing namespace. Archive/UAT checks, a clean second-instance installation and public registry installation are separate gates; consult the current receipt before claiming them. The package does not configure credentials, start the production or call a model merely by being installed.
+Follow the [IPM guide](docs/IPM.md) for a verified clean installation of the 43-class, nine-asset backend. IPM 0.10.10 installed it from a local filesystem repository on a fresh build-154 instance with no source mount. Installed Python origins and empty application tables passed; after explicit setup, the real API repeated all five final outcomes with four native tools. The package does not configure credentials, start the production or call a model merely by being installed. Public-registry installation and publication remain user-managed and unverified.
 
 ## API and data boundaries
 
@@ -191,7 +191,7 @@ Unknown references, malformed agent output, evidence gaps and dependency failure
 
 ## Documentation and submission
 
-[PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Demo script](docs/DEMO_SCRIPT.md)
+[PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Open Exchange copy](docs/OPEN_EXCHANGE_COPY.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
 The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. Official rules and organizer clarifications are linked in the compliance document. A public repository alone is not a contest entry. An Open Exchange draft was saved with the contest checkbox and dedicated idea link; it was not sent for approval or registered as an entry. The questionnaire has a submitted receipt. Articles remain local drafts, and a local video is not a YouTube publication. No bonus award is claimed from implementation alone. Current work is local; publishing and hosting require separate authorization.
 

@@ -51,11 +51,15 @@ The [54-check receipt](evidence/review-queue.json) includes native task listing,
 
 ## Compare a past outcome with current authority
 
-In the current quantity or unsafe-output case, open **Similar precedents** below the reference snapshot. Inspect the three actual source IDs and cosine scores, then follow a source-case link. Prior deliveries are context; the current critical contradiction stays held. The [native vector walkthrough](PRECEDENTS.md) includes source validation, fourth-tool reads and a validALLOW proposal that policy vetoed. The current five-case run passed5/5 with four actual tools; payment history is empty and shown honestly.
+In the current quantity or unsafe-output case, open **Similar precedents** below the reference snapshot. Inspect the three actual source IDs and cosine scores, then follow a source-case link. Prior deliveries are context; the current critical contradiction stays held. The [native vector walkthrough](PRECEDENTS.md) includes source validation, fourth-tool reads and a valid ALLOW proposal that policy vetoed. The current five-case run passed 5/5 with four actual tools; payment history is empty and shown honestly.
 
 ## Accept the same order from a partner file
 
 A partner that cannot call REST can drop a ready file into the trusted inbox. The custom native adapter sends it through the same production and deterministic policy. The [file walkthrough](PARTNER_INBOX.md) shows an actual delivery and critical quarantine in Visual Trace, plus retries and acknowledgement recovery without a second receipt. Both cases used all four evidence tools; the full native gate retained 5/5.
+
+## Install the backend as a package
+
+The [IPM path](IPM.md) installs the backend into a fresh interoperability namespace without mounting the source checkout. A real local `zpm install` on build 154 passed manager-origin and empty-state checks; after explicit setup its API repeated all five final routes with four native tools. [Installation/native receipt](evidence/ipm-clean-install.json). Public-registry installation and publication remain unverified.
 
 ## What to assess against the rubric
 

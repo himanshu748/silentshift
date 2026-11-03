@@ -24,9 +24,9 @@ Partner Business Service → Semantic Business Process
   → Embedded Python policy → destination or quarantine Operation
 ```
 
-The native agent reads the current message, approved contracts and related records through three server-bound tools. It proposes `ALLOW`, `QUARANTINE` or `REQUEST_REVIEW`, with evidence IDs, an explanation and uncertainty. It cannot select another case, execute arbitrary SQL, mutate a contract or deliver a transaction.
+The native agent reads the current message, approved contracts, related records and similar precedents through four server-bound tools. It proposes `ALLOW`, `QUARANTINE` or `REQUEST_REVIEW`, with evidence IDs, an explanation and uncertainty. It cannot select another case, execute arbitrary SQL, mutate a contract or deliver a transaction.
 
-Optional vector retrieval adds a short procedure excerpt to the related-record context. Real 384-dimensional local embeddings and IRIS `VECTOR_COSINE` retrieve this procedural guidance. A runbook is not an approved contract, and a retrieval match cannot authorize a unit conversion or release. This existing feature does not establish search over previous investigations.
+Local embeddings and IRIS `VECTOR_COSINE` retrieve procedural guidance and precedent evidence. The fourth tool reads up to three actual resolved cases or approved amendments, with source IDs and scores. The operator can follow the source from the evidence view. Prior delivery remains context: a native test retrieved past deliveries and still vetoed a valid-looking ALLOW proposal for a current critical contradiction.
 
 [Deterministic policy](https://github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py) independently checks the evidence and proposal. Critical contradictions stay quarantined. Missing evidence, malformed output and uncertain findings require a hold or review. The destination rechecks authorization before creating a unique receipt. Human release also requires reviewer permission, a reason, the current case version and an idempotency key.
 
@@ -55,7 +55,7 @@ npm --prefix web ci
 npm --prefix web run dev -- --port 5173 --strictPort
 ```
 
-Bootstrap seeds references without creating cases or calling a model. Open `http://127.0.0.1:5173`, connect an IRIS account and select a Scenario Lab experiment. To reproduce all five native investigations, use local inference or an explicitly authorized provider budget:
+Bootstrap seeds references without creating cases or calling a model. Open `http://127.0.0.1:5173`, connect an IRIS account and select a Scenario Lab experiment. To reproduce all five native investigations, use the configured local inference route:
 
 ```sh
 uv run --env-file .env python scripts/verify_native.py --allow-model-calls
@@ -65,6 +65,6 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls
 
 The first passing run produced 4/5 correct model proposals and 5/5 final decisions. A fresh-volume installation started with zero cases/evaluations and repeated 5/5 proposals and final decisions. Both runs recorded zero unsafe deliveries across four hold-eligible cases. Separate browser checks exercised desktop/mobile reads and an approved-amendment injection that delivered once.
 
-The [evidence summary](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/native-summary.json) retains failed trials too. These small synthetic core runs establish the documented journey; later extensions need their own checks. External delivery, broader model trials and provider cancellation remain unverified. Session token totals and billing cost are unavailable. Recorded whole-invocation and tool-span messages link an investigation to its IRIS production session; [the tracing guide](https://github.com/himanshu748/silentshift/blob/main/docs/AI_TRACING.md) explains that historical scope. This receipt does not establish visibility into every provider request/response or per-provider-round statistics.
+The [evidence summary](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/native-summary.json) retains failed trials too. The current four-tool native gate also passed 5/5. Workflow approval/rejection and file intake ran separately in the live production. The [bonus evidence](https://github.com/himanshu748/silentshift/blob/main/docs/BONUS_EVIDENCE.md) retains those scopes and failed trials. Every provider exchange now has a typed native request/response pair under its case session, including a local HTTP 400 failure. Unknown provider retry counts and billing cost stay null; HTTP response usage is recorded only when present. External delivery, broader trials and provider cancellation remain unverified.
 
 Start with A and C in the [judge walkthrough](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md). Compare their effective reference records, policy checks, native session IDs and delivery receipts.

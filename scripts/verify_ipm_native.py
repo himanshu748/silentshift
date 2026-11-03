@@ -19,7 +19,7 @@ from inspect_ipm import inspect
 from package_ipm import ROOT, stage
 
 TABLES = tuple('SilentShift_Data.' + name for name in (
-    'CaseRecord', 'Reference', 'AuditEvent', 'Delivery', 'ReviewAction', 'Evaluation', 'Runbook'
+    'CaseRecord', 'Reference', 'AuditEvent', 'Delivery', 'ReviewAction', 'Evaluation', 'Runbook', 'Precedent'
 )) + ('SilentShift_Workflow.ReviewTask', 'EnsLib_Workflow.Worklist')
 
 

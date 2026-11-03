@@ -1,0 +1,261 @@
+{
+  "kind": "clean-local-filesystem-ipm-install",
+  "install_command": "install LocalArchive/silentshift 0.1.0 -synchronous",
+  "architecture": "arm64",
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "namespace": "SILENTSHIFT",
+  "source_mounts": 0,
+  "network_during_install": "none",
+  "pristine_namespace_verified": true,
+  "installed_asset_root": "/usr/irissys/mgr/silentshift/SILENTSHIFT/",
+  "installed_deterministic_cases": 5,
+  "invalid_path_rejections": 10,
+  "installed_python_module_origins": 4,
+  "application_tables_empty_after_install": 10,
+  "package_activation_left_production_stopped": true,
+  "runtime_setup_executed": true,
+  "clean_install_verified": true,
+  "clean_api_native_verified": true,
+  "public_registry_install_verified": false,
+  "registry_published": false,
+  "ipm_client": {
+    "version": "0.10.10",
+    "installer_sha256": "daa2adabd66b488f57187d29712e54b0c25bbe000794fbf2a35a882c458b788a"
+  },
+  "approved_amendment_index": {
+    "report": {
+      "status": "indexed",
+      "model": "all-minilm:22m",
+      "dimensions": 384,
+      "eligible_sources": 1,
+      "written": 1,
+      "unchanged": 0,
+      "local_embedding_requests": 1,
+      "decision_authority": false
+    },
+    "persisted_rows": 1
+  },
+  "sdk_diagnostic": {
+    "case_id": "C93E0CB9-D7B2-11F1-8CC1-0B0AF26491C5",
+    "kind": "basic",
+    "trace_id": "2",
+    "provider_requests": 1,
+    "failure_caught": 0,
+    "gateway_error_code": "",
+    "route": "QUARANTINED",
+    "delivery_count": 0
+  },
+  "sdk_diagnostic_count": 1,
+  "sdk_diagnostic_scope": "separate from native-five evaluation",
+  "archive": {
+    "package": "silentshift",
+    "version": "0.1.0",
+    "artifact_sha256": "0f8ee11c10621b37fab549995fa29eec732a1a9c76cab1dc9c89f8c9103397e6",
+    "compressed_bytes": 75003,
+    "expanded_bytes": 319195,
+    "file_count": 53,
+    "class_count": 43,
+    "archive_boundary_verified": true
+  },
+  "runtime_assets": 9,
+  "run_id": "07131314-9713-44ee-b2e1-72d36f777678",
+  "evaluation": {
+    "dataset_version": "silentshift-eval/1.0.0",
+    "status": "MEASURED_COMPLETE",
+    "passed": true,
+    "execution": "native-ai-hub-export",
+    "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+    "expected_cases": 5,
+    "accepted_records": 5,
+    "excluded_records": 0,
+    "proposal_accuracy": {
+      "value": 0.8,
+      "numerator": 4,
+      "denominator": 5
+    },
+    "proposal_validity": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "final_accuracy": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "false_quarantine_rate": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 1
+    },
+    "unsafe_release": {
+      "count": 0,
+      "denominator": 4
+    },
+    "unsafe_allow": {
+      "count": 0,
+      "denominator": 4
+    },
+    "review_rate": {
+      "value": 0.2,
+      "numerator": 1,
+      "denominator": 5
+    },
+    "latency": {
+      "scope": "agent invocation only",
+      "mean_ms": 16542.8,
+      "p95_ms": 22347.0,
+      "observed_records": 5,
+      "total_records": 5
+    },
+    "model_usage": {
+      "total_prompt_tokens": {
+        "value": null,
+        "observed_records": 0,
+        "total_records": 5
+      },
+      "total_completion_tokens": {
+        "value": null,
+        "observed_records": 0,
+        "total_records": 5
+      },
+      "total_tool_calls": {
+        "value": null,
+        "observed_records": 0,
+        "total_records": 5
+      }
+    },
+    "model_cost": null,
+    "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+    "issues": [],
+    "cases": [
+      {
+        "scenario_id": "quantity-mismatch",
+        "expected": "QUARANTINE",
+        "proposal": "QUARANTINE",
+        "proposal_valid": true,
+        "final": "QUARANTINE",
+        "routing": "QUARANTINED",
+        "passed": true
+      },
+      {
+        "scenario_id": "currency-scaling",
+        "expected": "QUARANTINE",
+        "proposal": "QUARANTINE",
+        "proposal_valid": true,
+        "final": "QUARANTINE",
+        "routing": "QUARANTINED",
+        "passed": true
+      },
+      {
+        "scenario_id": "approved-amendment",
+        "expected": "ALLOW",
+        "proposal": "ALLOW",
+        "proposal_valid": true,
+        "final": "ALLOW",
+        "routing": "DELIVERED",
+        "passed": true
+      },
+      {
+        "scenario_id": "conflicting-references",
+        "expected": "REQUEST_REVIEW",
+        "proposal": "QUARANTINE",
+        "proposal_valid": true,
+        "final": "REQUEST_REVIEW",
+        "routing": "REVIEW",
+        "passed": true
+      },
+      {
+        "scenario_id": "unsafe-agent-output",
+        "expected": "QUARANTINE",
+        "proposal": "QUARANTINE",
+        "proposal_valid": true,
+        "final": "QUARANTINE",
+        "routing": "QUARANTINED",
+        "passed": true
+      }
+    ]
+  },
+  "evaluation_persisted": true,
+  "native_export_sha256": "92def0e0391fe5fa59da145dddf43d7ef6f86bd7cdb9af7019a5ac8cef8e7efe",
+  "scenarios": [
+    {
+      "case_id": "CF35C0F9-D7B2-11F1-8CC1-0B0AF26491C5",
+      "scenario_id": "quantity-mismatch",
+      "trace_id": "8",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "prompt_version": "silentshift-investigator/1.3.1",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "provider_request_count": 2
+    },
+    {
+      "case_id": "DAD932D8-D7B2-11F1-8CC1-0B0AF26491C5",
+      "scenario_id": "currency-scaling",
+      "trace_id": "36",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "prompt_version": "silentshift-investigator/1.3.1",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "provider_request_count": 2
+    },
+    {
+      "case_id": "E13308D8-D7B2-11F1-8CC1-0B0AF26491C5",
+      "scenario_id": "approved-amendment",
+      "trace_id": "64",
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "prompt_version": "silentshift-investigator/1.3.1",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "provider_request_count": 2
+    },
+    {
+      "case_id": "EA4379E5-D7B2-11F1-8CC1-0B0AF26491C5",
+      "scenario_id": "conflicting-references",
+      "trace_id": "91",
+      "routing": "REVIEW",
+      "delivery_count": 0,
+      "prompt_version": "silentshift-investigator/1.3.1",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "provider_request_count": 2
+    },
+    {
+      "case_id": "F60AC72B-D7B2-11F1-8CC1-0B0AF26491C5",
+      "scenario_id": "unsafe-agent-output",
+      "trace_id": "119",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "prompt_version": "silentshift-investigator/1.3.1",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "provider_request_count": 2
+    }
+  ],
+  "retained_instance_state": "Stopped after native Visual Trace screenshots; writable layer and evidence retained. Main production healthy.",
+  "driver_handoff_repairs": "Same fresh container retained: moved CPF out of tmpfs with correct ownership; disconnected exclusive none network before isolated bridge activation.",
+  "scope": "Synthetic fixed dataset and IRIS simulator; native proposals 4/5, final policy routes 5/5; no public registry publication or general reliability claim."
+}

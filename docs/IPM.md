@@ -5,19 +5,42 @@ standard-library Python code, and synthetic fixture assets. Installation does
 not configure security, start a production, ingest a message, call a model,
 download an embedding model, or send a partner delivery.
 
-On **2026-11-03**, the official IPM **0.10.10** client successfully loaded and
-packaged this module in the existing, stopped SILENTSHIFT namespace on official
-ARM64 build **154U**. Archive inspection verified **33 declared classes, nine
-runtime assets and one manifest**. Installed checks passed all **five
-deterministic cases, ten invalid-path checks and four Python module origins**
-below `/usr/irissys/mgr/silentshift/SILENTSHIFT/`. All nine application/workflow
-table row counts matched their pre-install values, and production was left
-stopped. No model calls ran. The private receipt and logs are under
-`.local/ipm/runs/20261103T095512282951Z/`.
+On **2026-11-03**, IPM **0.10.10** successfully installed the current **43-class,
+nine-asset** package into a new official ARM64 build-**154U** instance using the
+literal `install LocalArchive/silentshift 0.1.0 -synchronous` command. The
+SILENTSHIFT namespace and application classes were absent before installation;
+the instance had no source mount or `/opt/silentshift` directory. The installed
+Python modules resolved below `/usr/irissys/mgr/silentshift/SILENTSHIFT/`.
 
-This proves local IPM loading/packaging in an existing namespace. **It does not
-prove a clean installation, a public-registry installation or publication, and
-does not establish the contest's clean-install bonus.** Those gates remain open.
+Package checks passed **five deterministic cases, ten invalid paths and four
+module origins**. All **ten application/workflow tables were empty** after
+installation, and package activation left production stopped. After separate,
+explicit setup, a real local embedding indexed **one approved amendment**; one
+quarantined SDK warmup diagnostic was recorded separately. The subsequent
+real-API native evaluation passed all **five final policy/routing cases**, with
+all **four evidence tools read once per case**, persisted evaluation and zero
+unsafe releases. Agent proposals matched **four of five** cases; deterministic
+server policy enforced the correct review route for conflicting references.
+These are synthetic fixed-clock checks, not operational reliability claims.
+
+The archive contains **53 files** and is **75,003 bytes**, SHA-256:
+
+```text
+0f8ee11c10621b37fab549995fa29eec732a1a9c76cab1dc9c89f8c9103397e6
+```
+
+Private source-package receipts are under
+`.local/ipm/runs/20261103T180920827053Z/`; the clean installation receipt is under
+`.local/ipm/clean-runs/silentshift-ipm-clean-20261103/resume-20261103T181358112209Z/`.
+The final receipt, SDK diagnostic, amendment-index counters and native-five
+export are under
+`.local/ipm/clean-runs/silentshift-ipm-clean-20261103/native-20261103T181705297435Z/`.
+The same fresh container was retained through two driver handoff repairs; the
+package installation and five-case native evaluation each ran once.
+
+This proves a **clean local IPM install and native API journey** from the
+inspected archive. **Public-registry installation and publication remain
+unverified**, and contest bonus eligibility/publication remains a separate gate.
 
 For an existing, already bootstrapped runtime, the operator can run the bounded
 local verification wrapper **after stopping intake and the production**:
@@ -31,7 +54,7 @@ central bootstrap. The wrapper requires SILENTSHIFT, exact build 154 and a
 stopped production, rebuilds a fresh source stage, optionally imports the pinned
 client only if absent, runs real IPM load/package, inspects the archive, runs the
 installed deterministic checks and compares before/after row counts in all
-seven data tables plus ReviewTask/Worklist. It never invokes Setup.Install and
+eight data tables (including Precedent) plus ReviewTask/Worklist. It never invokes Setup.Install and
 leaves the production stopped for the operator to resume. Private logs and a
 scope-labeled receipt go under `.local/ipm/runs/`. It proves local loading in an
 existing namespace, **not a clean installation or public-registry install**.
@@ -150,6 +173,134 @@ regressions** through IRIS Embedded Python. These use the fixture's labeled
 accuracy. The test invokes no model and creates no case or delivery records.
 It also checks the resolved `__file__` of all four installed Python modules, so
 an import still pointing at `/opt/silentshift` cannot pass as installed assets.
+
+## Clean local installation through the real install command
+
+`scripts/verify_ipm_clean.py` prepares a **local-only** verification path. Its
+default is a read-only plan; a plan is not installation evidence. It requires a
+fresh, real IPM-generated archive matching the current manifest and assets,
+the already loaded official build-154 image, and the pinned IPM installer above.
+It never pulls an image, downloads IPM, publishes a package or changes an
+existing container, network or volume.
+
+Generate the fresh archive in a separately authorized, stopped build namespace
+using the existing wrapper. Do not use the earlier 33-class artifact for the
+current 43-class source. Keep the receipt and archive together, then plan the
+clean verification with the archive's actual path:
+
+```sh
+python3 scripts/verify_ipm_clean.py --archive /absolute/path/to/silentshift-0.1.0.tgz
+```
+
+The plan verifies archive boundaries and installer checksum, confirms that the
+image is already loaded and the new resource names are unused, and checks host
+and Colima VM disk space. The driver refuses to start below **1.8 GiB host free
+space or 3 GiB VM Docker free space** and repeats the check immediately before
+creation. An initial check on 2026-11-03 observed host **2.5 GiB** free and VM
+Docker filesystem **5.3 GiB** free. A later host recheck fell to **1.1 GiB**, below
+the safety floor; execution was deferred. After idle local models were unloaded,
+the actual run started with **5.2 GiB** host free space, without deleting files.
+A new writable container layer was estimated to need **0.8–1.3
+GiB**, depending on IRIS database/journal growth; this is not a measured limit.
+The 6.89 GB image layers are shared. There is no new manager volume or source
+bind mount, and `/tmp` uses a bounded 192 MiB memory filesystem. The driver
+retains created resources and evidence for review; it never deletes them to
+make a retry appear clean. Recheck space after generating a package.
+
+With execution explicitly authorized, add `--execute` and choose a fresh name:
+
+```sh
+python3 scripts/verify_ipm_clean.py \
+  --archive /absolute/path/to/silentshift-0.1.0.tgz \
+  --container silentshift-ipm-clean-step5 --execute
+```
+
+The new container starts from the loaded image by immutable image ID, with
+networking disabled and no `/opt/silentshift` directory. Before installation,
+the driver proves that the SILENTSHIFT namespace and application classes are
+absent. It then explicitly creates an empty interoperability namespace and
+enables `%Service_CallIn` on **this new instance only**, preserving the service's
+authentication settings. CallIn is an administrator prerequisite for Embedded
+Python, separate from package activation. The pinned IPM installer is imported
+only into SILENTSHIFT.
+
+The inspected archive is extracted into an isolated local filesystem repository.
+The following are **real IPM CLI commands**, with statuses retained:
+
+```objectscript
+zpm "config set analytics 0"
+zpm "repo -name LocalArchive -fs -depth 2 -path /home/irisowner/silentshift-ipm-release/repository/"
+zpm "install LocalArchive/silentshift 0.1.0 -synchronous"
+```
+
+This uses the official pinned
+[filesystem repository definition](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Repo/Filesystem/Definition.cls)
+and [package service](https://github.com/intersystems/ipm/blob/v0.10.10/src/cls/IPM/Repo/Filesystem/PackageService.cls):
+the repository reads the archived manifest and returns an archive to IPM's
+normal installer. No registry server or publish operation is involved. This
+can prove a literal `install` in a clean instance; it does **not** prove a
+Community registry listing or public-registry installation. For comparison,
+the separately documented offline `zpm "load /path/to/archive.tgz"` route is
+archive loading and must be named accordingly.
+
+After installation, the driver loads the diagnostic class separately, verifies
+the manager-directory module origins and all five deterministic cases, rejects
+ten invalid paths, verifies all ten application/workflow tables are empty, and
+checks that production remains stopped. The receipt records the input archive
+SHA-256, image ID, actual `$ZVERSION`, client version, install command and proof
+scope. Logs and receipts use mode **0600** under
+`.local/ipm/clean-runs/<new-container-name>/`; the directory uses mode **0700**.
+An installation receipt is written before any optional runtime setup.
+
+Runtime setup and native model validation are separate explicit flags. The
+following command also creates an isolated gateway on localhost port **52783**,
+uses the private environment, calls `SilentShift.Setup.Install()` and checks
+authenticated API health without submitting a case:
+
+```sh
+python3 scripts/verify_ipm_clean.py \
+  --archive /absolute/path/to/silentshift-0.1.0.tgz \
+  --container silentshift-ipm-clean-step5 --execute --activate-runtime \
+  --env-file .env
+```
+
+The tested configuration is local `qwen3-silentshift:4b-instruct`, local
+`all-minilm:22m`, and a **120-second** agent budget. Both endpoints must be
+explicit local Ollama HTTP addresses on port 11434. The driver rejects missing
+or remote provider endpoints and never downloads a model. Credentials are
+passed through a private environment file and never included in printed plans
+or command arguments. The gateway receives only its two generated config
+files; the IRIS container receives no source mount.
+
+To additionally run the existing real-API five-case native verifier, include
+`--allow-model-calls` **in the initial invocation above**. That flag authorizes
+the following separate local steps:
+
+1. Index the single approved amendment from the installed synthetic fixtures
+   with `IndexAmendments(.report)`. Record the actual embedding-request counter,
+   persisted row count, model and dimensions. Create no invented resolved cases.
+2. Copy only `tests/iris/ProviderProbe.cls` and run one real native SDK `basic`
+   diagnostic to warm the local model. Require caught **0**, provider requests
+   **1**, route **QUARANTINED**, delivery count **0**, and real case/session IDs.
+   Record this synthetic diagnostic separately; exclude it from benchmark totals.
+3. Run five local native investigations and their idempotency/policy/evaluation
+   checks through the real API.
+
+A successful native receipt must report five cases, all four evidence
+tools, native traces, expected routing and a persisted evaluation. It is
+separate from deterministic package checks. Do not rerun the creation command
+with the same name to add a later phase: existing resources are deliberately
+refused. An interrupted run leaves its named resources and failure-stage
+receipt for operator inspection, without touching the existing runtime.
+
+The recorded run above executed these gates. It also retained the original
+pristine-state and installation logs when recovering from file-handoff and
+network-transition failures. `--resume-pristine` is restricted to the exact
+container ID, image ID, archive hash and recorded pre-namespace state; execution
+rechecks namespace absence before changing anything. Installed instances must
+not be treated as pristine retries. Input files are staged in the irisowner
+home directory, outside `/tmp`; explicit activation disconnects Docker's
+exclusive `none` network before attaching the new isolated gateway network.
 
 ## Installed paths and explicit setup
 

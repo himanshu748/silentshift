@@ -1,6 +1,6 @@
 # Contest compliance
 
-Rechecked against the linked primary sources on **2026-11-03**. This records rules and observed status, not contest acceptance. Runtime evidence belongs in [BUILD_STATUS.md](BUILD_STATUS.md); points in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md); the eight-entry comparison in [COMPETITIVE_REVIEW.md](COMPETITIVE_REVIEW.md). Recheck external status immediately before submission.
+Rechecked against the linked primary sources on **2026-11-03**. This records rules and observed status, not contest acceptance. Runtime evidence belongs in [BUILD_STATUS.md](BUILD_STATUS.md); points in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md); the earlier public-entry comparison in [COMPETITIVE_REVIEW.md](COMPETITIVE_REVIEW.md). Recheck external status immediately before submission.
 
 ## Entry requirements and schedule
 
@@ -43,7 +43,7 @@ The [competition terms](https://openexchange.intersystems.com/markdown?url=/asse
 
 ## Bonus clarifications visible November 3
 
-Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift does not yet satisfy this evidence gate.
+Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift's local provider-call traces, screenshots and field map are now verified in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The earlier OEX draft has the idea link; publishing current source and submitting the application remain manual gates.
 
 Tatiana's newer [announcement reply to Doc](https://community.intersystems.com/node/590306) resolves the earlier IPM question: publish the package; installation is checked on AI Hub 154; include `<SystemRequirements Version=">=2026.3" Interoperability="enabled"/>`. Her subsequent 109 reply permits a declared matching build. If IPM is pursued, retain the actual registry-install result for the declared runtime. A manifest alone is not a published, working package.
 
@@ -56,13 +56,14 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 | Native execution | LOCALLY_VERIFIED: actual 154 production, native agent tools, five scenario outcomes; synthetic simulator scope |
 | Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
 | Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
-| Public repository | PREPARED locally; no accessible public source URL confirmed |
-| OEX application | NOT_STARTED externally; no application receipt/status confirmed |
+| Public repository | CONFIRMED core at [b836d2d](https://github.com/himanshu748/silentshift/tree/b836d2d); current extensions are committed locally and unpushed |
+| OEX application | SAVED_DRAFT earlier, with contest checkbox and idea link; not sent for approval |
 | Contest registration | NOT_STARTED externally; no separate registered-entry confirmation |
-| Bonuses | 5 potential points have local implementation evidence; organizer awards unconfirmed; future items are not earned |
+| Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |
+| Questionnaire | Submitted earlier; actual confirmation retained in the bonus ledger |
 
 Local evidence: `evidence/native/clean-install-initial.json` (empty initial state), `evidence/native/clean-install.json` (run `0503b649-ee6f-495e-be37-166db508377c`, passed), and `evidence/browser/browser-scenario-delivered.png` (actual C delivery, trace42). These artifacts are ignored/private; publish only reviewed, redacted extracts. See `BUILD_STATUS.md` for current measurements and limits.
 
-The [contest page](https://openexchange.intersystems.com/contest/49) displayed eight entries, all showing “0 Bonuses.” This is a displayed value, **not** evidence that their implementations have no eligible bonuses or that scoring is finalized. The competitive review separates public claims, static inspection and actual execution.
+The latest November 3 read-only check of the [contest page](https://openexchange.intersystems.com/contest/49) displayed nine entries. The earlier eight-entry comparison is a historical snapshot. Displayed bonus counts do not establish implementation eligibility or final scoring. The competitive review separates public claims, static inspection and actual execution.
 
 No submission, bonus, production-readiness or prize claim follows from this research document.

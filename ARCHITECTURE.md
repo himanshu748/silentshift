@@ -5,14 +5,21 @@ flowchart LR
  UI[React evidence workbench] -->|authenticated REST| API[IRIS REST dispatch]
  API --> S[Partner Business Service]
  S --> P[Semantic Business Process]
+ F[Partner ready-file inbox] --> C[Custom inbound adapter / PartnerFiles Service]
+ C --> P
  P --> R[Reference Business Operation]
+ P --> B[Runbooks / Precedents Operations]
+ B --> X[(Local embeddings / IRIS VECTOR)]
  P --> E[Embedded Python assessment]
  P --> A[AI investigation Business Operation]
  A --> N[Native AI Hub agent]
  N --> T[Case-scoped read-only tools]
+ N --> G[ProviderIngress / ProviderForwarder request-response pairs]
+ G --> O[Local Ollama]
  P --> V[Deterministic policy]
  V --> D[Destination Operation]
  V --> Q[Quarantine Operation]
+ Q --> W[ReviewCoordinator / native Workflow worklist]
  P --> DB[(IRIS SQL cases / references / audit / receipts)]
 ```
 
@@ -20,7 +27,7 @@ flowchart LR
 
 IRIS owns ingestion, durable case records, independent reference snapshots, agent invocation, policy, reviews and delivery. The browser is a client, never the source of decisions. Python is a small pure semantic library called **inside IRIS Embedded Python**. Its host-side tests prove local functions, not interoperability.
 
-`SilentShift.Production` wires Partner, Semantic, References, Investigator, Destination and Quarantine hosts. The request envelope carries a server case ID; the original event lives immutably in the case record. The Business Process retrieves references through an Operation, then calls the pure Python assessment, the native agent Operation with a request deadline, and policy. A late model response has no routing authority. Operations recheck persisted authorization before side effects.
+`SilentShift.Production` wires REST and file Services, Semantic, reference/retrieval/AI Operations, provider transport, Workflow, Destination and Quarantine. The request envelope carries a server case ID; the original event lives immutably in the case record. Retrieval Operations return context; Semantic owns case persistence before invoking the agent. Four read-only tools expose the current message, approved contracts, related records and a bound precedent snapshot. A late model or retrieval response has no routing authority. Operations recheck persisted authorization before side effects.
 
 ## Persistence and consistency
 
@@ -34,13 +41,13 @@ Unfinished cases remain visibly processing/held after failures. Recovery re-runs
 
 The native `%AI.Agent` uses only verified SDK patterns pinned in `docs/NATIVE_AI_HUB.md`. Tools bind CaseId on the server, retrieve bounded records, and expose no arbitrary SQL, shell, URLs or mutations. Message notes are untrusted data. The recommendation JSON uses an exact schema and known evidence IDs. The policy checks all release evidence and authoritative contradictions independently of model prose. Agent failure produces a held/review decision, never a hidden successful fallback.
 
-Iteration/token caps bound model work. The enclosing synchronous Operation timeout bounds the Business Process wait; it does not prove provider-side cancellation. Record this limitation and test late results on154. Provider usage/cost remains null unless the actual runtime exposes and records it. No spending is authorized by the presence of a key.
+Iteration/token caps bound model work. The enclosing synchronous Operation timeout bounds the Business Process wait; it does not prove provider-side cancellation. Each actual provider HTTP call receives native request/response messages in the original case session. Unknown usage, provider retries and billing cost remain null. The transport accepts only the configured local model and known local Ollama hosts. See [AI tracing](docs/AI_TRACING.md) for metadata and temporary transport limits.
 
 ## Authentication and deployment
 
 IRIS password authentication protects the REST web application; a viewer resource controls reads/ingestion and an additional reviewer resource controls review mutations. Credentials are kept in browser memory only and sent over the local same-origin API; remote use requires TLS. The default Docker ports bind to loopback. Source may be public; EAP archives/runtime images may not be redistributed. Docker loads the officially downloaded build154 image locally, then mounts/copies source for compilation. No public runtime image pull or registry push is part of setup.
 
-Build154 uses a separate Web Gateway (NoPWS packaging). The gateway sidecar and authenticated HTTP API have been exercised against the official ARM64 kit, and all21core native classes compile. A fresh manager volume started with zero cases/evaluations and repeated all five expected native outcomes. Subsequent integration changes need their own verification.
+Build 154 uses a separate Web Gateway (NoPWS packaging). The gateway and authenticated API run against the official ARM64 kit; the current package declares 43 native classes. A fresh manager volume repeated the core five scenarios. Each sponsor extension has its own gate in [BONUS_EVIDENCE.md](docs/BONUS_EVIDENCE.md); source compilation alone does not establish execution.
 
 ## Evidence and failure behavior
 

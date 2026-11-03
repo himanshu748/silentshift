@@ -12,11 +12,11 @@ The demonstration uses synthetic orders and payments. Delivery means a receipt i
 
 SilentShift catches changes in business meaning even when a message is technically valid. For example, `20 CASE` cannot replace an approved commitment of `240 EA` without approved conversion or amendment evidence. An effective amendment can make that same incoming value legitimate.
 
-The native AI Hub agent investigates through three read-only, case-scoped tools. It recommends a decision. Embedded Python policy independently checks the evidence before IRIS chooses delivery, quarantine or review.
+The native AI Hub agent investigates through four read-only, case-scoped tools. It recommends a decision. Embedded Python policy independently checks the evidence before IRIS chooses delivery, quarantine or review.
 
-A new review outcome asks a separate native coordinator Business Process to create a task through `EnsLib.Workflow.Operation`. The task appears in the `ReviewWorklist` role. The demo configures one authorized reviewer; it does not claim a tested multi-user assignment scheme. The original processing request can finish while the human task waits durably.
+A new review or quarantine hold asks a separate native coordinator Business Process to create a task through `EnsLib.Workflow.Operation`. The task appears in the `ReviewWorklist` role. The demo configures one authorized reviewer; it does not claim a tested multi-user assignment scheme. The original processing request can finish while the human task waits durably.
 
-The operator sees the current case, reference snapshot, policy reasons, native task ID and task state together. Critical contradictions cannot be manually approved. A valid human decision requires reviewer permission, a reason, a current case version and an idempotency key.
+The operator opens the reviewer-only Review view to see pending native tasks, then reads the case, references, precedent evidence, policy reasons and native task state together. Critical contradictions cannot be manually approved. A valid human decision requires reviewer permission, a reason, a current case version and an idempotency key.
 
 ## Separate a recorded decision from a completed route
 
@@ -38,7 +38,7 @@ After reconnecting to the workbench, the persisted case offered its original rev
 
 A separate conflicting-evidence case exercised rejection with zero deliveries, viewer denial, stale-version rejection and direct native-action denial. Its model request timed out safely; the receipt does not count that request as a successful native recommendation. The [43-check review evidence](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/workflow.json) separates this recovery experiment from the five-case model evaluation.
 
-This is a tested deferred-completion failure and reconnect journey. It is not proof of recovery from every network outage, host crash or external destination failure.
+A later [54-check native worklist run](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json) verified the pending-task API, rejection and two simultaneous identical approvals. Both approval requests returned 200 and produced one review receipt, one native completion response and one delivery. Separate workbench actions completed approval and rejection. The controlled failure above remains narrower evidence; recovery from every outage, crash or external destination failure is unverified.
 
 ## Try the same review journey
 
@@ -52,4 +52,4 @@ uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
 
 Use the explicit flag only with the documented local inference route. Inspect the investigation in the workbench, then compare its native worklist state, recorded decision and simulator receipt. The [source](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow) shows the native task lifecycle; the [build notes](https://github.com/himanshu748/silentshift/blob/main/docs/BUILD_STATUS.md) state the tested scope and remaining limits.
 
-A useful hold should lead to a clear next action. SilentShift keeps the decision recoverable and the delivery count inspectable, even when the first completion attempt fails.
+The operator can resume the recorded decision and inspect the one simulator receipt. The saved reason, version and key stay attached to that decision.
