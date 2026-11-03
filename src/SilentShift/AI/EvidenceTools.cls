@@ -12,6 +12,7 @@ Property CaseId As %String;
 Property MessageReads As %Integer [ InitialExpression = 0 ];
 Property ContractReads As %Integer [ InitialExpression = 0 ];
 Property RelatedReads As %Integer [ InitialExpression = 0 ];
+Property ReferenceTruncated As %Boolean [ InitialExpression = 0 ];
 
 /// Read the original message for the server-bound investigation. No case ID is accepted from the model.
 Method GetCurrentMessage() As %String
@@ -58,7 +59,11 @@ Method GetApprovedContracts() As %String
     Do detail.%Set("truncated", truncated, "boolean")
     Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
     $$$ThrowOnError(sc)
-    Set ..ContractReads = ..ContractReads + 1
+    If truncated {
+        Set ..ReferenceTruncated = 1
+    } Else {
+        Set ..ContractReads = ..ContractReads + 1
+    }
     Quit encoded
 }
 
@@ -91,7 +96,11 @@ Method GetRelatedRecords() As %String
     Do detail.%Set("truncated", truncated, "boolean")
     Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
     $$$ThrowOnError(sc)
-    Set ..RelatedReads = ..RelatedReads + 1
+    If truncated {
+        Set ..ReferenceTruncated = 1
+    } Else {
+        Set ..RelatedReads = ..RelatedReads + 1
+    }
     Quit encoded
 }
 

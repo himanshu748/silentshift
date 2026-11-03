@@ -11,8 +11,10 @@
 | 2:10–2:40 | Evidence timeline and measured evaluation export | State dataset version and denominator. The five-case rule baseline already solves these cases; do not claim an AI uplift. Usage/cost displayed only if recorded. |
 | 2:40–3:00 | README setup, source-only image loading, native architecture | “Every integration can succeed technically. SilentShift verifies whether it succeeded semantically.” |
 
-## Reproducible alternate walkthrough while runtime is blocked
+## Detailed walkthrough and recording evidence
 
-Run `uv run pytest -q`, then `PYTHONPATH=python uv run python -m silentshift.evaluation --dataset fixtures/v1/scenarios.json`. Show exact fixture/reference comparisons and local policy results. Explain that the native AI Hub, production trace, clean installation and live Scenario Lab remain unverified. This walkthrough is local engineering evidence and cannot be presented as a functioning native demo or online-demo bonus.
+The native gate passed twice, including a fresh-volume installation. The [judge guide](JUDGE_GUIDE.md) is the detailed app walkthrough permitted by the submission rules. It includes actual screenshots, native commands and all retained trial results. A separate browser-injected approved amendment was delivered with native trace42; the five-case clean benchmark used traces2,10,18,26,34. Keep those runs distinct in narration and captions.
+
+Record only after confirming the local stack is running and the current source passes its checks. A silent screen recording with concise captions can show the workflow without generated narration. A local recording alone does not earn the YouTube bonus: a public YouTube URL and observed publication are required. No video publication is claimed yet. Deepgram remains the exclusive provider for generated narration; do not silently substitute another voice service.
 
 Retain screen recordings only from actual execution. Do not splice different case traces into a single claimed run. Screenshots of unavailable state are interface evidence only.

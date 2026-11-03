@@ -18,7 +18,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { clearCredentials, request, setCredentials, useApi } from "./api";
 import { HealthSchema } from "./schema";
-import Investigations from "./Investigations";
+import Investigations, { ReviewPermissionContext } from "./Investigations";
 import {
   Evaluations,
   Messages,
@@ -250,6 +250,7 @@ export default function App() {
   }, []);
   useEffect(() => {
     document.title = `${navigation.find((item) => item.id === route.view)?.label ?? "Investigations"} · SilentShift`;
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [route.view]);
   useEffect(() => {
     if (toast) {
@@ -378,24 +379,28 @@ export default function App() {
               </Button>
             </div>
           </header>
-          <main
-            className="main-content"
-            id="main-content"
-            tabIndex={-1}
-            key={route.view}
+          <ReviewPermissionContext.Provider
+            value={health.data?.permissions?.review === true}
           >
-            {route.view === "investigations" && (
-              <Investigations refresh={epoch} caseId={route.caseId} />
-            )}
-            {route.view === "scenarios" && <ScenarioLab refresh={epoch} />}
-            {route.view === "overview" && (
-              <Overview refresh={epoch} health={health} />
-            )}
-            {route.view === "messages" && <Messages refresh={epoch} />}
-            {route.view === "evaluations" && <Evaluations refresh={epoch} />}
-            {route.view === "policies" && <Policies refresh={epoch} />}
-            {route.view === "health" && <SystemHealth health={health} />}
-          </main>
+            <main
+              className="main-content"
+              id="main-content"
+              tabIndex={-1}
+              key={route.view}
+            >
+              {route.view === "investigations" && (
+                <Investigations refresh={epoch} caseId={route.caseId} />
+              )}
+              {route.view === "scenarios" && <ScenarioLab refresh={epoch} />}
+              {route.view === "overview" && (
+                <Overview refresh={epoch} health={health} />
+              )}
+              {route.view === "messages" && <Messages refresh={epoch} />}
+              {route.view === "evaluations" && <Evaluations refresh={epoch} />}
+              {route.view === "policies" && <Policies refresh={epoch} />}
+              {route.view === "health" && <SystemHealth health={health} />}
+            </main>
+          </ReviewPermissionContext.Provider>
           <footer className="app-footer">
             <span>
               <span className="footer-glyph" />

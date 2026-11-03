@@ -1,4 +1,7 @@
 zn "SILENTSHIFT"
+set sc=##class(Ens.Director).GetProductionStatus(.production,.state)
+if $system.Status.IsError(sc) { write "SILENTSHIFT_STATUS_FAILED",! halt }
+if state=1 { if production'="SilentShift.Production" { write "SILENTSHIFT_OTHER_PRODUCTION_RUNNING",! halt } set sc=##class(Ens.Director).StopProduction(10,0) if $system.Status.IsError(sc) { write "SILENTSHIFT_STOP_FAILED",! halt } }
 set sc=$system.OBJ.LoadDir("/opt/silentshift/src","k",,1)
 if $system.Status.IsError(sc) { write "SILENTSHIFT_LOAD_FAILED",! halt }
 set sc=$system.OBJ.CompilePackage("SilentShift","ck")

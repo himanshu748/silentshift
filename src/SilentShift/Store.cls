@@ -91,9 +91,15 @@ ClassMethod AddEvent(id As %String, kind As %String, detailJSON As %String) As %
 {
     Try {
         If (id = "") || (kind = "") || ($LENGTH(kind) > 80) || ($LENGTH(detailJSON) > 32768) Return $$$ERROR($$$GeneralError, "APP_INVALID: audit record is invalid")
-        Set canonical = ##class(SilentShift.Bridge).Canonical(detailJSON)
+        // Native tool callbacks enter from the AI Hub runtime. Keep their
+        // read/audit path in ObjectScript instead of nesting Embedded Python
+        // inside that foreign-function callback. Details are bounded JSON
+        // constructed by trusted server methods; ingress uses strict Python
+        // validation before it can reach this internal audit method.
+        Set canonical = ##class(%DynamicObject).%FromJSON(detailJSON).%ToJSON()
         Set event = ##class(SilentShift.Data.AuditEvent).%New()
-        Set event.CaseId = id, event.Kind = kind, event.RecordedAt = ##class(SilentShift.Bridge).Now(), event.Detail = canonical
+        Set at = $TRANSLATE($ZDATETIME($ZTIMESTAMP,3,1,6), " ", "T")_"Z"
+        Set event.CaseId = id, event.Kind = kind, event.RecordedAt = at, event.Detail = canonical
         Return event.%Save()
     } Catch error {
         Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: audit record could not be persisted")
@@ -116,7 +122,13 @@ ClassMethod SaveCase(id As %String, caseJSON As %String) As %Status
         }
         // These fields can only be set at ingestion or by SnapshotReferences.
         For field = "id", "event_id", "source", "received_at", "message", "raw_payload", "scenario_id", "dataset_version", "clock", "synthetic", "references", "fault" {
-            If current.%IsDefined(field) Do incoming.%Set(field, current.%Get(field))
+            If current.%IsDefined(field) {
+                If field = "synthetic" {
+                    Do incoming.%Set(field, current.%Get(field), "boolean")
+                } Else {
+                    Do incoming.%Set(field, current.%Get(field))
+                }
+            }
         }
         Do incoming.%Remove("events")
         Do incoming.%Remove("audit_event_count")
@@ -137,11 +149,22 @@ ClassMethod SaveCase(id As %String, caseJSON As %String) As %Status
 ClassMethod ReferenceJSON(contractId As %String, scenarioId As %String = "") As %String
 {
     Set statement = ##class(%SQL.Statement).%New()
-    Set sc = statement.%Prepare("SELECT TOP 101 Body FROM SilentShift_Data.Reference WHERE ContractId = ? AND ScenarioScope = ? ORDER BY ReferenceId")
+    // IRIS stores the empty ObjectScript scope as SQL NULL. Bound equality to
+    // an empty string does not retrieve the general-ingress approved catalog.
+    Set sql = "SELECT TOP 101 Body FROM SilentShift_Data.Reference WHERE ContractId = ? AND ScenarioScope "
+    Set sql = sql_$SELECT(scenarioId = "": "IS NULL", 1: "= ?")_" ORDER BY ReferenceId"
+    Set sc = statement.%Prepare(sql)
     $$$ThrowOnError(sc)
-    Set rows = statement.%Execute(contractId, scenarioId), result = []
+    If scenarioId = "" {
+        Set rows = statement.%Execute(contractId)
+    } Else {
+        Set rows = statement.%Execute(contractId, scenarioId)
+    }
+    Set result = []
     If rows.%SQLCODE < 0 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: SQL read failed"))
-    While rows.%Next() Do result.%Push(##class(%DynamicObject).%FromJSON(rows.%Get("Body")))
+    While rows.%Next() {
+        Do result.%Push(##class(%DynamicObject).%FromJSON(rows.%Get("Body")))
+    }
     If result.%Size() > 100 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: reference set exceeds safety limit"))
     Return result.%ToJSON()
 }
@@ -185,17 +208,28 @@ ClassMethod RelatedJSON(id As %String) As %String
     Set current = ##class(SilentShift.Data.CaseRecord).%OpenId(id)
     If '$ISOBJECT(current) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_NOT_FOUND: investigation does not exist"))
     Set statement = ##class(%SQL.Statement).%New()
-    Set sc = statement.%Prepare("SELECT TOP 10 CaseId,Body FROM SilentShift_Data.CaseRecord WHERE ContractId = ? AND CaseId <> ? AND ReceivedAt <= ? ORDER BY ReceivedAt DESC,CaseId DESC")
+    // Frozen scenarios are separate synthetic worlds, even when a contract ID
+    // is reused. Never mix their histories into another scenario's context.
+    Set sql = "SELECT TOP 3 CaseId,Body FROM SilentShift_Data.CaseRecord WHERE ContractId = ? AND CaseId <> ? AND ReceivedAt <= ? AND ScenarioId "
+    Set sql = sql_$SELECT(current.ScenarioId = "": "IS NULL", 1: "= ?")_" ORDER BY ReceivedAt DESC,CaseId DESC"
+    Set sc = statement.%Prepare(sql)
     $$$ThrowOnError(sc)
-    Set rows = statement.%Execute(current.ContractId, id, current.ReceivedAt), related = [], reviewed = []
+    If current.ScenarioId = "" {
+        Set rows = statement.%Execute(current.ContractId, id, current.ReceivedAt)
+    } Else {
+        Set rows = statement.%Execute(current.ContractId, id, current.ReceivedAt, current.ScenarioId)
+    }
+    Set related = [], reviewed = []
     If rows.%SQLCODE < 0 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: SQL read failed"))
     While rows.%Next() {
         Set candidate = ##class(%DynamicObject).%FromJSON(rows.%Get("Body"))
-        Set item = {"id": (candidate.%Get("id")), "message": (candidate.%Get("message")), "received_at": (candidate.%Get("received_at")), "routing": (candidate.%Get("routing")), "review": (candidate.%Get("review"))}
+        Set assessment = candidate.%Get("assessment"), classification = "not_assessed"
+        If $ISOBJECT(assessment) Set classification = assessment.%Get("classification")
+        Set item = {"id": (candidate.%Get("id")), "received_at": (candidate.%Get("received_at")), "classification": (classification), "routing": (candidate.%Get("routing")), "review": (candidate.%Get("review")), "is_contract_authority": false}
         Do related.%Push(item)
         If $ISOBJECT(candidate.%Get("review")) Do reviewed.%Push(item)
     }
-    Set result = {"related_records": (related), "reviewed_cases": (reviewed), "limit": 10}
+    Set result = {"related_records": (related), "reviewed_cases": (reviewed), "limit": 3, "history_is_contract_authority": false}
     Return result.%ToJSON()
 }
 
@@ -214,6 +248,8 @@ ClassMethod ListCases(limit As %Integer = 50, offset As %Integer = 0) As %String
     }
     &sql(SELECT COUNT(*) INTO :total FROM SilentShift_Data.CaseRecord)
     Set result = {"items": (items), "total": (total), "limit": (limit), "offset": (offset)}
+    Do result.%Set("limit", limit, "number")
+    Do result.%Set("offset", offset, "number")
     Return result.%ToJSON()
 }
 
@@ -245,7 +281,13 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
     If '$SYSTEM.Security.Check("SSReview", "U") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_FORBIDDEN: reviewer permission is required"))
     If (reviewer = "") || (reviewer '= $USERNAME) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_FORBIDDEN: reviewer identity is invalid"))
     Set request = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Canonical(requestJSON))
-    Set action = request.%Get("action"), reason = request.%Get("reason"), token = request.%Get("idempotency_key")
+    For field = "action", "reason", "idempotency_key" {
+        If request.%GetTypeOf(field) '= "string" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review text fields must be strings"))
+    }
+    If request.%GetTypeOf("expected_version") '= "number" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review version must be an integer"))
+    Set expectedVersion = request.%Get("expected_version") + 0
+    If (expectedVersion < 1) || ((expectedVersion \ 1) '= expectedVersion) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review version must be a positive integer"))
+    Set action = request.%Get("action"), reason = $ZSTRIP(request.%Get("reason"), "<>W"), token = request.%Get("idempotency_key")
     If (action '= "approve") && (action '= "reject") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review action is invalid"))
     If ($LENGTH(reason) < 3) || ($LENGTH(reason) > 2000) || (token = "") || ($LENGTH(token) > 160) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review requires a bounded reason and idempotency key"))
     Set reviewKey = ##class(SilentShift.Bridge).PairHash(id, token)
@@ -269,6 +311,16 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         Set proposed = {"decision": (decision), "evidence_ids": (assessment.%Get("evidence_ids")), "explanation": (reason), "uncertainty": 0}
         Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(), proposed.%ToJSON()))
         If action = "approve", 'policy.%Get("downstream_permitted") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_FORBIDDEN: deterministic policy forbids this release"))
+        If action = "reject" {
+            // An authorized human rejection is a workflow disposition, not a
+            // model allegation of a verified semantic contradiction.
+            Do policy.%Set("decision", "QUARANTINE")
+            Do policy.%Set("decision_source", "authorized-human-rejection")
+            Do policy.%Set("downstream_permitted", 0, "boolean")
+            Do policy.%Set("release_eligible", 0, "boolean")
+            Do policy.%Set("reasons", ["An authorized reviewer rejected this transaction."])
+            Do policy.%Set("checks", [{"code": "HUMAN_REJECTION", "passed": true, "reason": "Reviewer identity, reason, version and idempotency were validated."}])
+        }
         Set review = {"action": (action), "reason": (reason), "reviewer": (reviewer), "at": (##class(SilentShift.Bridge).Now()), "idempotency_key": (token), "expected_version": (record.Version)}
         Do body.%Set("review", review)
         Do body.%Set("policy_recommendation", proposed)
@@ -350,6 +402,8 @@ ClassMethod Hold(id As %String) As %Status
     If $ISOBJECT(policy), policy.%Get("downstream_permitted") Return $$$ERROR($$$GeneralError, "APP_CONFLICT: quarantine received an allow decision")
     Set route = "REVIEW"
     If $ISOBJECT(policy), policy.%Get("decision") = "QUARANTINE" Set route = "QUARANTINED"
+    Set review = body.%Get("review")
+    If $ISOBJECT(review), review.%Get("action") = "reject" Set route = "REJECTED"
     // Replaying an already-applied hold (including a review retry) must not
     // increment the case version or append another routing side effect.
     If body.%Get("routing") = route Return $$$OK

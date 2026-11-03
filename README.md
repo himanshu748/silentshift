@@ -4,7 +4,7 @@
 
 SilentShift compares technically valid orders and payments with independent business contracts, asks a native IRIS AI Hub agent to investigate the evidence, and constrains its recommendation with deterministic policy before delivery or quarantine.
 
-**Status: source implemented; mandatory native runtime verification blocked.** The ObjectScript production and AI Hub adapter have not compiled or run on build 154 in this environment. No public deployment, provider call, Open Exchange application or contest registration is claimed. See [build status](docs/BUILD_STATUS.md) for actual evidence and remaining gates.
+**Native core verified on Community AI Hub build154U.** All five frozen synthetic scenarios passed through the real Business Service, Business Process, native agent/tools, Embedded Python policy and routing Operations. A fresh-volume installation repeated the5/5 result. Public source/submission preparation remains in progress; no public deployment or contest confirmation is claimed. See [build status](docs/BUILD_STATUS.md) for evidence and remaining gates.
 
 ## What is implemented
 
@@ -14,7 +14,11 @@ SilentShift compares technically valid orders and payments with independent busi
 - Seven API-backed workbench views, authenticated reviews, raw message inspection, scenario replay and measured evaluation records. Offline state contains no operational seed data.
 - Five frozen synthetic scenarios, independent ground-truth rationales and a checksum. Scenario E visibly injects a hostile validator input **after** a native reply; it preserves the actual model response separately.
 
-The destination is an IRIS-persisted simulator, not a connected ERP or bank. The initial five-case deterministic baseline solves all five examples; this dataset does not demonstrate improved AI accuracy. Native investigation quality, latency and cost remain unmeasured.
+The destination is an IRIS-persisted simulator. The first passing native run had4/5 correct model proposals and5/5 final decisions; the fresh-volume repeat had5/5 proposals and5/5 final decisions, with zero unsafe deliveries in both. These are two runs of five synthetic examples. The deterministic baseline also solves all five, so there is no demonstrated AI accuracy uplift or general performance claim. Session token totals and billing cost remain unavailable.
+
+**Start with the [judge walkthrough](docs/JUDGE_GUIDE.md)** for the actual held/delivered pair, native reproduction steps and [all four trial results](docs/evidence/native-summary.json), including failed attempts.
+
+![A real currency investigation held by deterministic policy](docs/assets/native-currency-quarantine.png)
 
 ## Local checks without IRIS
 
@@ -40,6 +44,14 @@ npm run test:e2e
 
 The browser suite starts its own loopback Vite server with an intentionally unreachable upstream. It tests genuine failure states at 1440×960 and 390×844, all seven routes, keyboard focus, login failure and reduced motion. It does **not** prove connected cases or native integration. Screenshots are saved under `evidence/browser/`.
 
+With the real native stack and an existing critical case running, opt into the separate read-only browser suite:
+
+```sh
+SILENTSHIFT_NATIVE_E2E=1 npm --prefix web run test:e2e:native
+```
+
+It authenticates using the private local configuration, checks actual evidence/trace data, reviewer permissions and mobile keyboard scrolling. It sends no scenario or review mutations and uses no network mocks.
+
 Start the workbench separately:
 
 ```sh
@@ -48,14 +60,14 @@ npm --prefix web run dev -- --port 5173 --strictPort
 
 Open `http://127.0.0.1:5173`. Until the native stack is available, records and metrics stay unavailable. The static build requires an API reverse proxy when hosted; Vite's proxy is development-only. Do not publish a disconnected static build as a working native demo.
 
-## Native build 154 setup — not yet clean-install verified
+## Native build 154 setup
 
 1. Sign in to the [official AI Hub EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). Download Community **2026.3.0AI.154.0** for the Docker host's architecture. The [official template](https://github.com/intersystems-community/ai-hub-dev-template/tree/37280e3d0252f1034cdd5b32f0eeea55ff34ffa7) documents local image loading. No EAP software is bundled here.
 2. Start Docker with a modern Compose CLI and enough host storage for its VM, EAP image and persistent manager volume. Setup detects either `docker compose` or standalone `docker-compose` version 2+. A remote Docker context may be used with a source checkout on that host; ordinary remote Docker bind mounts do not upload the local repository. Do not create a paid host or subscription without authorization.
 3. Load the official archive outside this repository:
 
    ```sh
-   docker load -i /absolute/path/to/official-build 154-docker.tar.gz
+   docker load -i "/absolute/path/to/official-build154-docker.tar.gz"
    docker images
    ```
 
@@ -72,6 +84,17 @@ Bootstrap validates the image and credentials, renders ignored `.local/gateway/C
 
 The gateway binds to `127.0.0.1:52773`; native 1972 is internal. The IRIS manager volume retains SQL state. **Do not run `docker compose down -v` on retained evidence.** Use ordinary stop/start for recovery testing. Read `.local/bootstrap.log` locally after a bootstrap failure; do not publish diagnostics containing secrets.
 
+### Local Ollama configuration
+
+The verified local option preserves Qwen3's tool template with an explicit8192-token context and temperature0.2. The base4B instruct model is about2.5GB. These commands download weights and create an alias; they do not invoke inference or a paid provider:
+
+```sh
+ollama pull qwen3:4b-instruct
+ollama create qwen3-silentshift:4b-instruct -f config/Ollama.4b.Modelfile
+```
+
+Set `SILENTSHIFT_MODEL=qwen3-silentshift:4b-instruct`, `SILENTSHIFT_LLM_API_KEY=ollama` and, for Colima, `SILENTSHIFT_LLM_BASE_URL=http://host.lima.internal:11434/v1/`. Verify reachability from the IRIS container; this address reaches the existing host loopback service. For Docker Desktop use its documented host address. The adapter uses build154's `extra_params` for `reasoning_effort=none`; strict parsing never repairs a model answer. Other supported providers remain configurable. The earlier1.7B configuration is retained for reproducing failed trials and is not the verified default.
+
 ## Prove the native journey
 
 Use the reviewer account for the complete safety gate. The following command invokes five native investigations, plus idempotent retries that must reuse the same case/receipt. Run it only with local inference or an explicitly authorized provider budget:
@@ -82,7 +105,13 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls
 
 It checks actual build 154/production status, anonymous denial, all three native evidence reads, nonempty trace IDs, expected policy/routing, one or zero simulator receipts, safe replay, critical reviewer-release denial and persisted evaluation agreement. Evidence goes to ignored `evidence/native/latest.json`. The Evaluations view reads the server-persisted report. A viewer-only execution cannot pass the critical reviewer-policy gate.
 
-Inspect Visual Trace in IRIS using the recorded session ID and an appropriately privileged portal account. Also test separate viewer review denial, direct database access denial, gateway/authentication, duplicate concurrency, restart persistence, agent/network failure and late results. Provider cancellation is not proven by an Operation timeout. These additional gates remain unverified.
+Inspect Visual Trace in IRIS using the recorded session ID and an appropriately privileged portal account. Actual checks also cover viewer denial, critical-release veto, typed/blank review reasons, rejection resolution, concurrent approval with one receipt, and restart/recreation persistence. Reference-limit integration tests invoke no model and preserve their isolated synthetic rows:
+
+```sh
+uv run --env-file .env python scripts/verify_native_boundaries.py
+```
+
+Use `--context`/`--container` when your Docker naming differs. Network-loss recovery, provider cancellation, real external delivery and broader stochastic trials remain unverified; a process timeout does not prove provider cancellation.
 
 ## API and data boundaries
 

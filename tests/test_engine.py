@@ -59,6 +59,18 @@ def test_peers_that_agree_still_cannot_authorize_release():
     assert validate_policy(assessment, allow(assessment))["decision"] == "REQUEST_REVIEW"
 
 
+@pytest.mark.parametrize("context", ["clear", "missing", "conflict"])
+def test_model_quarantine_cannot_claim_unverified_contradiction(context):
+    case = copy.deepcopy(SCENARIOS[3]) if context == "conflict" else clean_case()
+    references = [] if context == "missing" else case["references"]
+    assessment = assess(case["message"], references, NOW)
+    assert assessment["critical"] is False
+    proposal = {**allow(assessment), "decision": "QUARANTINE"}
+    policy = validate_policy(assessment, proposal)
+    assert policy["decision"] == "REQUEST_REVIEW"
+    assert policy["downstream_permitted"] is False
+
+
 def test_conflicting_approved_references_cannot_be_selected_away():
     case = clean_case()
     conflict = {**case["references"][0], "id": "contract:other", "unit": "CASE"}

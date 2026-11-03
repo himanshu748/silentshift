@@ -11,6 +11,12 @@ ClassMethod Install() As %Status
         If $NAMESPACE '= "SILENTSHIFT" Return $$$ERROR($$$GeneralError, "APP_INVALID: install requires SILENTSHIFT namespace")
         Set sc = ..SecurityConfig()
         $$$ThrowOnError(sc)
+        // Dynamic SQL checks table privileges independently of database RW.
+        // Only the application-scoped role receives these fixed read grants.
+        For table = "CaseRecord", "Reference", "AuditEvent", "Delivery", "ReviewAction", "Evaluation" {
+            Set sc = $SYSTEM.SQL.Security.GrantPrivilege("SELECT", "SilentShift_Data."_table, "TABLE", "SSApplication")
+            $$$ThrowOnError(sc)
+        }
         Set data = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON())
         Set scenarios = data.%Get("scenarios")
         For index = 0:1:scenarios.%Size()-1 {
@@ -75,7 +81,7 @@ ClassMethod SecurityConfig() As %Status [ Private ]
     // Database authority is application-scoped, never permanently granted to
     // viewer/reviewer users. Reinstall also repairs earlier owned role grants.
     For role = "SSViewer", "SSReviewer", "SSApplication" {
-        Set resources = $SELECT(role = "SSViewer": "SSView:U", role = "SSReviewer": "SSReview:U", 1: "%DB_SILENTSHIFT:RW")
+        Set resources = $SELECT(role = "SSViewer": "SSView:U", role = "SSReviewer": "SSReview:U", 1: "%DB_SILENTSHIFT:RW,%Service_EmbeddedPython:U")
         Set inherited = $SELECT(role = "SSReviewer": "SSViewer", 1: "")
         If ##class(Security.Roles).Exists(role) {
             Kill roleProperties
@@ -107,6 +113,12 @@ ClassMethod SecurityConfig() As %Status [ Private ]
     Kill properties
     Set properties("Enabled") = 1, properties("AutheEnabled") = 32
     Set sc = ##class(Security.Services).Modify("%Service_WebGateway", .properties)
+    $$$ThrowOnError(sc)
+    // Embedded Python requires CallIn enabled. Modify only Enabled so the
+    // existing authentication bitmap and resource permissions remain intact.
+    Kill callInProperties
+    Set callInProperties("Enabled") = 1
+    Set sc = ##class(Security.Services).Modify("%Service_CallIn", .callInProperties)
     $$$ThrowOnError(sc)
     For path = "/silentshift", "/csp/silentshift" {
         Kill properties

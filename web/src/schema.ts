@@ -94,6 +94,7 @@ export const HealthSchema = z
       })
       .passthrough(),
     components: z.array(z.object({ name: Text, status: Text }).passthrough()),
+    permissions: z.object({ review: z.boolean() }).passthrough().optional(),
   })
   .passthrough();
 export type Health = z.infer<typeof HealthSchema>;
@@ -161,7 +162,7 @@ export const EvaluationsSchema = z
               false_quarantine_rate: RatioSchema,
               unsafe_release: z
                 .object({
-                  count: z.number().int().nonnegative(),
+                  count: z.number().int().nonnegative().nullable(),
                   denominator: z.number().int().nonnegative(),
                 })
                 .passthrough(),

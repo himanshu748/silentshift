@@ -57,7 +57,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
                     Do metadata.%Set("output_status", "malformed")
                 }
             }
-            Do metadata.%Set("raw_response", raw)
+            If (raw '= "") || 'metadata.%IsDefined("raw_response") Do metadata.%Set("raw_response", raw)
             Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
             Do body.%Set("agent", metadata)
             If $ISOBJECT(recommendation) Do body.%Set("recommendation", recommendation)

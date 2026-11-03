@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -42,6 +49,10 @@ import {
   useActions,
 } from "./ui";
 
+// An absent or pending permission observation grants no reviewer controls.
+// The server still authorizes every mutation independently.
+export const ReviewPermissionContext = createContext(false);
+
 function checksFor(
   item: Investigation,
 ): { label: string; passed: boolean | null; reason: string }[] {
@@ -83,7 +94,12 @@ function Evidence({ item }: { item: Investigation }) {
         </Badge>
       </div>
       {findings.length ? (
-        <div className="table-scroll">
+        <div
+          className="table-scroll"
+          role="region"
+          aria-label="Semantic comparison; scroll horizontally for reference values"
+          tabIndex={0}
+        >
           <table className="evidence-table">
             <thead>
               <tr>
@@ -382,6 +398,7 @@ export function CaseDetail({
     "evidence",
   );
   const [review, setReview] = useState<"APPROVE" | "REJECT" | null>(null);
+  const canReview = useContext(ReviewPermissionContext);
   const { refresh, notify } = useActions();
   const closeReview = useCallback(() => setReview(null), []);
   const checks = checksFor(item);
@@ -583,22 +600,30 @@ export function CaseDetail({
             <Button
               icon={ArrowDownToLine}
               onClick={() => setReview("APPROVE")}
-              disabled={item.assessment?.critical !== false}
+              disabled={!canReview || item.assessment?.critical !== false}
               title={
-                item.assessment?.critical !== false
-                  ? "Critical or unassessed cases require corrected evidence and a new investigation."
-                  : "All release gates will be rechecked by IRIS."
+                !canReview
+                  ? "This session does not have IRIS reviewer permission."
+                  : item.assessment?.critical !== false
+                    ? "Critical or unassessed cases require corrected evidence and a new investigation."
+                    : "All release gates will be rechecked by IRIS."
               }
             >
               Approve release
             </Button>
-            <Button icon={ShieldX} onClick={() => setReview("REJECT")}>
+            <Button
+              icon={ShieldX}
+              disabled={!canReview}
+              onClick={() => setReview("REJECT")}
+            >
               Reject transaction
             </Button>
             <p className="small subtle">
-              {item.assessment?.critical
-                ? "Critical contradictions require a corrected event or reference and a new investigation."
-                : "Reviewer permission, a reason and a current case version are required."}
+              {!canReview
+                ? "Review actions require IRIS reviewer permission to release or reject transactions."
+                : item.assessment?.critical
+                  ? "Critical contradictions require a corrected event or reference and a new investigation."
+                  : "Reviewer permission, a reason and a current case version are required."}
             </p>
           </div>
         )}
@@ -609,7 +634,7 @@ export function CaseDetail({
           </div>
         )}
       </aside>
-      {review && (
+      {review && canReview && (
         <ReviewDialog
           item={item}
           action={review}

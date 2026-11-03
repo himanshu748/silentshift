@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-POLICY_VERSION = "silentshift-policy/1.0.0"
+POLICY_VERSION = "silentshift-policy/1.1.0"
 SCHEMA_VERSION = "silentshift-message/1"
 MAX_AGE = timedelta(hours=24)
 MAX_FUTURE = timedelta(minutes=5)
@@ -352,7 +352,11 @@ def validate_policy(assessment: Any, recommendation: Any, duplicate: bool = Fals
         release_eligible = not critical and covered and resolved and confident
         if not critical:
             proposed = recommendation["decision"]
-            decision = "ALLOW" if proposed == "ALLOW" and release_eligible else ("QUARANTINE" if proposed == "QUARANTINE" else "REQUEST_REVIEW")
+            # A model's concern cannot turn inconclusive evidence into a
+            # verified contradiction. Keep it held for a reviewer instead.
+            decision = "ALLOW" if proposed == "ALLOW" and release_eligible else "REQUEST_REVIEW"
+            if proposed != "ALLOW":
+                reasons.append("Agent concerns without a verified critical contradiction require human review.")
     return {"decision": decision, "reasons": list(dict.fromkeys(reasons)) or ["Recommendation satisfies all deterministic release gates."],
             "checks": checks, "policy_version": POLICY_VERSION,
             "release_eligible": release_eligible, "downstream_permitted": decision == "ALLOW"}

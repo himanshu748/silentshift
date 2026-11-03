@@ -9,6 +9,7 @@ Local functions, browser failure paths, native integrations and external submiss
 | Evaluation | Checksum, missing/partial native data, wrong build, invalid tools, routing disagreement and null metrics | Pytest evaluation tests; `python -m silentshift.evaluation` |
 | Frontend static | Strict types and production bundle | `npm --prefix web run check` and `npm --prefix web run build` |
 | Browser failure path | Seven screens, native disconnection, no invented data, login failure, keyboard, mobile, reduced motion | Browser test command and actual screenshots; not native success evidence |
+| Connected browser reads | Actual cases/evidence/policy/timeline, viewer/reviewer affordances, seven routes, mobile horizontal keyboard scroll, reduced motion | `SILENTSHIFT_NATIVE_E2E=1 npm --prefix web run test:e2e:native`; no mocks or mutations |
 | Native vertical slice | Service → process → native agent/tools → policy → persisted route | `uv run python scripts/verify_native.py --allow-model-calls` with configured runtime and authorized inference |
 | Native safety | All five scenarios, idempotent retry and critical manual-release veto | Verification script, SQL receipts and Visual Trace |
 | Permission isolation | Anonymous denied; viewer review denied; reviewer safe approval/rejection | Separate viewer/reviewer credentials and actual REST calls |

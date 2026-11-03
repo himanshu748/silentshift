@@ -15,10 +15,12 @@ spec.loader.exec_module(native)
 @pytest.mark.parametrize("version,expected", [
     ("2026.3.0AI.154.0", True),
     ("IRIS for UNIX Version2026.3.0AI (Build154)", True),
+    ("IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT", True),
     ("2026.3.0AI.154.0.1", False),
     ("2026.3.0AI.1154.0", False),
     ("2026.3.0AI (Build1154)", False),
     ("2026.3.0AI (Build162)", False),
+    ("2026.3.0AI (Build154U1)", False),
 ])
 def test_build_gate(version, expected):
     assert native.native_build(version) is expected
@@ -79,4 +81,6 @@ def test_evaluation_receipt_must_match_observed_native_results():
     assert not native.capture_matches({**receipt, "case_ids": ["b", "a"]}, "run-id", ["a", "b"], evaluation)
     assert not native.capture_matches({**receipt, "native": {**evaluation, "accepted_records": 4}}, "run-id", ["a", "b"], evaluation)
     failed = {**evaluation, "passed": False}
-    assert not native.capture_matches({**receipt, "native": failed}, "run-id", ["a", "b"], failed)
+    # A failed benchmark can still be faithfully persisted. Persistence is
+    # independent of the main verifier's separate evaluation-passed gate.
+    assert native.capture_matches({**receipt, "native": failed}, "run-id", ["a", "b"], failed)

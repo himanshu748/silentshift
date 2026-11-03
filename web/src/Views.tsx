@@ -283,8 +283,8 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
                     <div>
                       <strong>Request sent to IRIS</strong>
                       <p>
-                        The interface is waiting for the native API. No staged
-                        trace is played.
+                        IRIS is investigating this event. Keep the run ID for a
+                        safe retry if the connection is interrupted.
                       </p>
                     </div>
                   </div>
@@ -838,9 +838,9 @@ export function Evaluations({ refresh }: { refresh: number }) {
                   <article>
                     <span>Unsafe releases</span>
                     <strong
-                      className={`mono ${run.native.unsafe_release.count > 0 ? "coral" : "mint"}`}
+                      className={`mono ${run.native.unsafe_release.count === null ? "muted" : run.native.unsafe_release.count > 0 ? "coral" : "mint"}`}
                     >
-                      {run.native.unsafe_release.count}
+                      {run.native.unsafe_release.count ?? "Not measured"}
                     </strong>
                     <small className="mono">
                       of {run.native.unsafe_release.denominator} cases

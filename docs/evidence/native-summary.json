@@ -1,0 +1,815 @@
+{
+  "schema": "silentshift-public-evidence/1",
+  "compiled_on": "2026-11-03",
+  "scope": "Client-observed local native trials. Synthetic fixed-clock fixtures, destination simulator; no third-party attestation or general accuracy claim.",
+  "trials": [
+    {
+      "run_id": "10d447f7-2c55-4b9f-acfe-e22a265854b7",
+      "created_at": "2026-11-02T11:25:30.501373+00:00",
+      "source_artifact_sha256": "26f45ac5106e49109dfa1c16b681b8e961c9c63d7e2576a71010d3f8444d74e0",
+      "iris_version": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+      "production": "SilentShift.Production",
+      "passed": false,
+      "native_verified": false,
+      "evaluation": {
+        "dataset_version": "silentshift-eval/1.0.0",
+        "status": "NOT_RUN",
+        "passed": false,
+        "execution": "native-ai-hub-export",
+        "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+        "expected_cases": 5,
+        "accepted_records": 0,
+        "excluded_records": 0,
+        "proposal_accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "proposal_validity": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "final_accuracy": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "false_quarantine_rate": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "unsafe_release": {
+          "count": null,
+          "denominator": 0
+        },
+        "unsafe_allow": {
+          "count": null,
+          "denominator": 0
+        },
+        "review_rate": {
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        },
+        "latency": {
+          "scope": "agent invocation only",
+          "mean_ms": null,
+          "p95_ms": null,
+          "observed_records": 0,
+          "total_records": 0
+        },
+        "model_usage": {
+          "total_prompt_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 0
+          },
+          "total_completion_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 0
+          },
+          "total_tool_calls": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 0
+          }
+        },
+        "model_cost": null,
+        "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+        "issues": [
+          "Actual HTTP, native tool, trace and routing verification has not been attested by the verification script."
+        ],
+        "cases": []
+      },
+      "cases": [
+        {
+          "case_id": "E705AEF7-D6AF-11F1-ABB7-36E9B6954C25",
+          "scenario_id": "quantity-mismatch",
+          "trace_id": "90",
+          "model": "qwen3-silentshift:1.7b",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "F30BC656-D6AF-11F1-ABB7-36E9B6954C25",
+          "scenario_id": "currency-scaling",
+          "trace_id": "98",
+          "model": "qwen3-silentshift:1.7b",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "FBE14F1D-D6AF-11F1-ABB7-36E9B6954C25",
+          "scenario_id": "approved-amendment",
+          "trace_id": "106",
+          "model": "qwen3-silentshift:1.7b",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "065A879B-D6B0-11F1-ABB7-36E9B6954C25",
+          "scenario_id": "conflicting-references",
+          "trace_id": "114",
+          "model": "qwen3-silentshift:1.7b",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "12D4135E-D6B0-11F1-ABB7-36E9B6954C25",
+          "scenario_id": "unsafe-agent-output",
+          "trace_id": "122",
+          "model": "qwen3-silentshift:1.7b",
+          "agent_status": "failed",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        }
+      ]
+    },
+    {
+      "run_id": "11b884ec-23ee-4ddc-8d31-a98192ab7e7f",
+      "created_at": "2026-11-02T11:44:07.645379+00:00",
+      "source_artifact_sha256": "453ed5174aa18aeb703aacb9ee10c1d9c8a0136181306f9e94faea57344f759d",
+      "iris_version": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+      "production": "SilentShift.Production",
+      "passed": false,
+      "native_verified": true,
+      "evaluation": {
+        "dataset_version": "silentshift-eval/1.0.0",
+        "status": "MEASURED_COMPLETE",
+        "passed": false,
+        "execution": "native-ai-hub-export",
+        "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+        "expected_cases": 5,
+        "accepted_records": 5,
+        "excluded_records": 0,
+        "proposal_accuracy": {
+          "value": 0.4,
+          "numerator": 2,
+          "denominator": 5
+        },
+        "proposal_validity": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "final_accuracy": {
+          "value": 0.6,
+          "numerator": 3,
+          "denominator": 5
+        },
+        "false_quarantine_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "unsafe_release": {
+          "count": 0,
+          "denominator": 4
+        },
+        "unsafe_allow": {
+          "count": 0,
+          "denominator": 4
+        },
+        "review_rate": {
+          "value": 0.2,
+          "numerator": 1,
+          "denominator": 5
+        },
+        "latency": {
+          "scope": "agent invocation only",
+          "mean_ms": 20536.8,
+          "p95_ms": 39525.0,
+          "observed_records": 5,
+          "total_records": 5
+        },
+        "model_usage": {
+          "total_prompt_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_completion_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_tool_calls": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          }
+        },
+        "model_cost": null,
+        "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+        "issues": [],
+        "cases": [
+          {
+            "scenario_id": "quantity-mismatch",
+            "expected": "QUARANTINE",
+            "proposal": "ALLOW",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "currency-scaling",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "approved-amendment",
+            "expected": "ALLOW",
+            "proposal": "ALLOW",
+            "proposal_valid": true,
+            "final": "REQUEST_REVIEW",
+            "routing": "REVIEW",
+            "passed": false
+          },
+          {
+            "scenario_id": "conflicting-references",
+            "expected": "REQUEST_REVIEW",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": false
+          },
+          {
+            "scenario_id": "unsafe-agent-output",
+            "expected": "QUARANTINE",
+            "proposal": "ALLOW",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          }
+        ]
+      },
+      "cases": [
+        {
+          "case_id": "78230A9D-D6B2-11F1-BBFF-1E8B4A9F24E4",
+          "scenario_id": "quantity-mismatch",
+          "trace_id": "131",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "84DAA435-D6B2-11F1-BBFF-1E8B4A9F24E4",
+          "scenario_id": "currency-scaling",
+          "trace_id": "139",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "8A9E9B74-D6B2-11F1-BBFF-1E8B4A9F24E4",
+          "scenario_id": "approved-amendment",
+          "trace_id": "147",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "92CE29CD-D6B2-11F1-BBFF-1E8B4A9F24E4",
+          "scenario_id": "conflicting-references",
+          "trace_id": "155",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "9E58A603-D6B2-11F1-BBFF-1E8B4A9F24E4",
+          "scenario_id": "unsafe-agent-output",
+          "trace_id": "163",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.0.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        }
+      ]
+    },
+    {
+      "run_id": "20e7b28c-f317-4ad5-b585-49f19bd5e1e5",
+      "created_at": "2026-11-02T11:53:08.291461+00:00",
+      "source_artifact_sha256": "295b36289a463eaa92957e9ab5f80696071225475f686b49c2d2fb22cec00dc7",
+      "iris_version": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+      "production": "SilentShift.Production",
+      "passed": true,
+      "native_verified": true,
+      "evaluation": {
+        "dataset_version": "silentshift-eval/1.0.0",
+        "status": "MEASURED_COMPLETE",
+        "passed": true,
+        "execution": "native-ai-hub-export",
+        "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+        "expected_cases": 5,
+        "accepted_records": 5,
+        "excluded_records": 0,
+        "proposal_accuracy": {
+          "value": 0.8,
+          "numerator": 4,
+          "denominator": 5
+        },
+        "proposal_validity": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "final_accuracy": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "false_quarantine_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "unsafe_release": {
+          "count": 0,
+          "denominator": 4
+        },
+        "unsafe_allow": {
+          "count": 0,
+          "denominator": 4
+        },
+        "review_rate": {
+          "value": 0.2,
+          "numerator": 1,
+          "denominator": 5
+        },
+        "latency": {
+          "scope": "agent invocation only",
+          "mean_ms": 25914.4,
+          "p95_ms": 43434.0,
+          "observed_records": 5,
+          "total_records": 5
+        },
+        "model_usage": {
+          "total_prompt_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_completion_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_tool_calls": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          }
+        },
+        "model_cost": null,
+        "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+        "issues": [],
+        "cases": [
+          {
+            "scenario_id": "quantity-mismatch",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "currency-scaling",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "approved-amendment",
+            "expected": "ALLOW",
+            "proposal": "ALLOW",
+            "proposal_valid": true,
+            "final": "ALLOW",
+            "routing": "DELIVERED",
+            "passed": true
+          },
+          {
+            "scenario_id": "conflicting-references",
+            "expected": "REQUEST_REVIEW",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "REQUEST_REVIEW",
+            "routing": "REVIEW",
+            "passed": true
+          },
+          {
+            "scenario_id": "unsafe-agent-output",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          }
+        ]
+      },
+      "cases": [
+        {
+          "case_id": "A9F9D262-D6B3-11F1-9E74-C6FEE86A49ED",
+          "scenario_id": "quantity-mismatch",
+          "trace_id": "173",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "B8F240B2-D6B3-11F1-9E74-C6FEE86A49ED",
+          "scenario_id": "currency-scaling",
+          "trace_id": "181",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "C19F93C7-D6B3-11F1-9E74-C6FEE86A49ED",
+          "scenario_id": "approved-amendment",
+          "trace_id": "189",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "ALLOW",
+          "routing": "DELIVERED",
+          "delivery_count": 1
+        },
+        {
+          "case_id": "CCE070D4-D6B3-11F1-9E74-C6FEE86A49ED",
+          "scenario_id": "conflicting-references",
+          "trace_id": "197",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "DE7D3CCD-D6B3-11F1-9E74-C6FEE86A49ED",
+          "scenario_id": "unsafe-agent-output",
+          "trace_id": "205",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        }
+      ]
+    },
+    {
+      "run_id": "0503b649-ee6f-495e-be37-166db508377c",
+      "created_at": "2026-11-02T12:22:58.280010+00:00",
+      "source_artifact_sha256": "f59b62a27c95a525db685f7d4e122227f184199207a854e04bca96d7f317f952",
+      "iris_version": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+      "production": "SilentShift.Production",
+      "passed": true,
+      "native_verified": true,
+      "evaluation": {
+        "dataset_version": "silentshift-eval/1.0.0",
+        "status": "MEASURED_COMPLETE",
+        "passed": true,
+        "execution": "native-ai-hub-export",
+        "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+        "expected_cases": 5,
+        "accepted_records": 5,
+        "excluded_records": 0,
+        "proposal_accuracy": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "proposal_validity": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "final_accuracy": {
+          "value": 1.0,
+          "numerator": 5,
+          "denominator": 5
+        },
+        "false_quarantine_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "unsafe_release": {
+          "count": 0,
+          "denominator": 4
+        },
+        "unsafe_allow": {
+          "count": 0,
+          "denominator": 4
+        },
+        "review_rate": {
+          "value": 0.2,
+          "numerator": 1,
+          "denominator": 5
+        },
+        "latency": {
+          "scope": "agent invocation only",
+          "mean_ms": 24664.2,
+          "p95_ms": 37431.0,
+          "observed_records": 5,
+          "total_records": 5
+        },
+        "model_usage": {
+          "total_prompt_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_completion_tokens": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          },
+          "total_tool_calls": {
+            "value": null,
+            "observed_records": 0,
+            "total_records": 5
+          }
+        },
+        "model_cost": null,
+        "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+        "issues": [],
+        "cases": [
+          {
+            "scenario_id": "quantity-mismatch",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "currency-scaling",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          },
+          {
+            "scenario_id": "approved-amendment",
+            "expected": "ALLOW",
+            "proposal": "ALLOW",
+            "proposal_valid": true,
+            "final": "ALLOW",
+            "routing": "DELIVERED",
+            "passed": true
+          },
+          {
+            "scenario_id": "conflicting-references",
+            "expected": "REQUEST_REVIEW",
+            "proposal": "REQUEST_REVIEW",
+            "proposal_valid": true,
+            "final": "REQUEST_REVIEW",
+            "routing": "REVIEW",
+            "passed": true
+          },
+          {
+            "scenario_id": "unsafe-agent-output",
+            "expected": "QUARANTINE",
+            "proposal": "QUARANTINE",
+            "proposal_valid": true,
+            "final": "QUARANTINE",
+            "routing": "QUARANTINED",
+            "passed": true
+          }
+        ]
+      },
+      "cases": [
+        {
+          "case_id": "D88A5765-D6B7-11F1-956F-F285F08CEB87",
+          "scenario_id": "quantity-mismatch",
+          "trace_id": "2",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "E9A7DA37-D6B7-11F1-956F-F285F08CEB87",
+          "scenario_id": "currency-scaling",
+          "trace_id": "10",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "F1D56108-D6B7-11F1-956F-F285F08CEB87",
+          "scenario_id": "approved-amendment",
+          "trace_id": "18",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "ALLOW",
+          "routing": "DELIVERED",
+          "delivery_count": 1
+        },
+        {
+          "case_id": "FDD9B470-D6B7-11F1-956F-F285F08CEB87",
+          "scenario_id": "conflicting-references",
+          "trace_id": "26",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "delivery_count": 0
+        },
+        {
+          "case_id": "0CF98171-D6B8-11F1-956F-F285F08CEB87",
+          "scenario_id": "unsafe-agent-output",
+          "trace_id": "34",
+          "model": "qwen3-silentshift:4b-instruct",
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1
+          },
+          "policy_version": "silentshift-policy/1.1.0",
+          "decision": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "delivery_count": 0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "The deterministic baseline solves all five frozen cases; no AI accuracy uplift demonstrated.",
+    "Scenario E injects labeled hostile validator input after a native reply, preserving the original response.",
+    "Session usage totals, billing cost, provider cancellation, broad stochastic trials and external delivery remain unverified.",
+    "An early exporter conflated evaluation persistence with a passing result. The first failed trial was persisted despite the historical false flag; that exporter was repaired."
+  ],
+  "clean_install_initial": {
+    "health_http": 200,
+    "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "production": {
+      "name": "SilentShift.Production",
+      "running": true,
+      "state_code": 1
+    },
+    "model": "qwen3-silentshift:4b-instruct",
+    "cases_http": 200,
+    "initial_cases": 0,
+    "evaluations_http": 200,
+    "initial_evaluations": 0
+  }
+}

@@ -40,7 +40,7 @@ Iteration/token caps bound model work. The enclosing synchronous Operation timeo
 
 IRIS password authentication protects the REST web application; a viewer resource controls reads/ingestion and an additional reviewer resource controls review mutations. Credentials are kept in browser memory only and sent over the local same-origin API; remote use requires TLS. The default Docker ports bind to loopback. Source may be public; EAP archives/runtime images may not be redistributed. Docker loads the officially downloaded build154 image locally, then mounts/copies source for compilation. No public runtime image pull or registry push is part of setup.
 
-Build154 may require a separate Web Gateway (NoPWS packaging). The setup supplies a gateway sidecar configuration rather than asserting the container serves HTTP. Verify the actual downloaded kit and exact gateway compatibility before claiming clean installation. Full setup and ObjectScript compilation remain blocked until the kit is available.
+Build154 uses a separate Web Gateway (NoPWS packaging). The gateway sidecar and authenticated HTTP API have been exercised against the official ARM64 kit, and all21core native classes compile. A fresh manager volume started with zero cases/evaluations and repeated all five expected native outcomes. Subsequent integration changes need their own verification.
 
 ## Evidence and failure behavior
 

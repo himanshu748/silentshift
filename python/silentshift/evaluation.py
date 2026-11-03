@@ -62,7 +62,7 @@ def _build154(version: Any) -> bool:
     if re.search(r"(?<![\d.])2026\.3\.0AI\.154\.0(?![\d.])", version, re.I):
         return True
     return (bool(re.search(r"(?<![\d.])2026\.3\.0AI(?![\d.])", version, re.I))
-            and bool(re.search(r"\bBuild\s*154\b", version, re.I)))
+            and bool(re.search(r"\bBuild\s*154(?:U)?\b", version, re.I)))
 
 
 def _number(value: Any) -> bool:

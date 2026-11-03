@@ -32,8 +32,7 @@ def native_build(value: object) -> bool:
 
 def capture_matches(captured: object, run_id: str, case_ids: list[str], evaluation: dict) -> bool:
     return (isinstance(captured, dict) and captured.get("id") == run_id
-            and captured.get("case_ids") == case_ids and captured.get("native") == evaluation
-            and evaluation.get("passed") is True)
+            and captured.get("case_ids") == case_ids and captured.get("native") == evaluation)
 
 
 class DenyRedirects(HTTPRedirectHandler):
@@ -168,7 +167,7 @@ def main() -> int:
         case_ids = [str(record["id"]) for record in records]
         capture_status, captured = client.call("/evaluations", {"run_id": run_id, "case_ids": case_ids})
         artifact["evaluation_persisted"] = capture_status == 200 and capture_matches(captured, run_id, case_ids, artifact["evaluation"])
-        artifact["passed"] = native_verified and artifact["evaluation_persisted"] and all(all(value is True for key, value in item.items() if key != "scenario_id") for item in checks)
+        artifact["passed"] = native_verified and artifact["evaluation_persisted"] and artifact["evaluation"].get("passed") is True and all(all(value is True for key, value in item.items() if key != "scenario_id") for item in checks)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(artifact, indent=2, allow_nan=False) + "\n")
         print(f"Evidence saved: {args.output}")

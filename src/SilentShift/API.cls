@@ -60,10 +60,23 @@ ClassMethod ErrorResponse(error As %Exception.AbstractException) As %Status
     // Only stable application codes leave the server. ObjectScript/provider
     // exception text may contain credentials or internal filesystem paths.
     Set message = error.DisplayString()
-    If message [ "CONFLICT" Return ..Fail(409,"CONFLICT","The record changed or an idempotency key was reused with different content.")
-    If message [ "NOT_FOUND" Return ..Fail(404,"NOT_FOUND","The requested record was not found.")
-    If message [ "FORBIDDEN" Return ..Fail(403,"FORBIDDEN","This action is not permitted by the current policy or permissions.")
-    If message [ "INVALID" Return ..Fail(422,"INVALID_REQUEST","The request does not satisfy the API contract.")
+    // Keep one bounded, redacted server-only diagnostic for operator recovery.
+    // Never store request objects or headers, and never return this to a client.
+    Try {
+        Set diagnostic = message
+        For name="SILENTSHIFT_IRIS_PASSWORD","SILENTSHIFT_VIEWER_PASSWORD","SILENTSHIFT_GATEWAY_PASSWORD","SILENTSHIFT_LLM_API_KEY","OPENAI_API_KEY" {
+            Set secret=$SYSTEM.Util.GetEnviron(name)
+            If secret'="" Set diagnostic=$REPLACE(diagnostic,secret,"[REDACTED]")
+        }
+        Set detail={"timestamp":($ZTIMESTAMP),"message":($EXTRACT(diagnostic,1,2048)),"effective_roles":($ROLES)}
+        Set ^SilentShift.Diagnostics("last_api_error")=detail.%ToJSON()
+    } Catch diagnosticError {
+        // A failure to write diagnostics must not change the safe API response.
+    }
+    If message [ "APP_CONFLICT" Return ..Fail(409,"CONFLICT","The record changed or an idempotency key was reused with different content.")
+    If message [ "APP_NOT_FOUND" Return ..Fail(404,"NOT_FOUND","The requested record was not found.")
+    If message [ "APP_FORBIDDEN" Return ..Fail(403,"FORBIDDEN","This action is not permitted by the current policy or permissions.")
+    If (message [ "APP_INVALID") || (message [ "INVALID_REQUEST") || (message [ "INVALID_EVALUATION") Return ..Fail(422,"INVALID_REQUEST","The request does not satisfy the API contract.")
     Return ..Fail(503,"IRIS_OPERATION_FAILED","IRIS could not complete this operation. Inspect the native event log; no release is assumed.")
 }
 
@@ -73,9 +86,12 @@ ClassMethod StrictJSON(value As %String) As %String [ Language = python ]
     if '/opt/silentshift/python' not in sys.path:
         sys.path.insert(0, '/opt/silentshift/python')
     from silentshift.engine import strict_loads
-    parsed = strict_loads(value)
+    try:
+        parsed = strict_loads(value)
+    except (ValueError, TypeError, RecursionError):
+        return ""
     if not isinstance(parsed, dict):
-        raise ValueError("INVALID_REQUEST")
+        return ""
     return json.dumps(parsed, allow_nan=False, separators=(",", ":"), sort_keys=True)
 }
 
@@ -85,11 +101,8 @@ ClassMethod Body(Output raw As %String) As %DynamicObject
     If %request.Content.Size > 131072 Throw ##class(%Exception.General).%New("INVALID_REQUEST")
     Do %request.Content.Rewind()
     Set raw = %request.Content.Read(131073)
-    Try {
-        Set normalized = ..StrictJSON(raw)
-    } Catch malformed {
-        Throw ##class(%Exception.General).%New("INVALID_REQUEST")
-    }
+    Set normalized = ..StrictJSON(raw)
+    If normalized="" Throw ##class(%Exception.General).%New("INVALID_REQUEST")
     Return ##class(%DynamicObject).%FromJSON(normalized)
 }
 
@@ -98,9 +111,11 @@ ClassMethod Dispatch(envelope As %DynamicObject) As %Status
     Try {
         Set sc = ##class(Ens.Director).CreateBusinessService("Partner",.service)
         $$$ThrowOnError(sc)
-        Set sc = service.ProcessInput(envelope.%ToJSON(),.result)
+        Set input = ##class(%Stream.GlobalCharacter).%New()
+        Do input.Write(envelope.%ToJSON())
+        Set sc = service.ProcessInput(input,.result)
         $$$ThrowOnError(sc)
-        Return ..JSON(result)
+        Return ..JSON(result.BodyJSON)
     } Catch error {
         Return ..ErrorResponse(error)
     }
@@ -164,10 +179,10 @@ ClassMethod Scenarios() As %Status
         Set data = ..FixtureData(), items = []
         For i=0:1:data.scenarios.%Size()-1 {
             Set source=data.scenarios.%Get(i)
-            Set item={"id":(source.id),"name":(source.name),"summary":(source.summary),"message":(source.message),"references":(source.references),"ground_truth":(source.ground_truth)}
+            Set item={"id":(source.id),"name":(source.name),"summary":(source.summary),"message":(source.message),"references":(source.references),"ground_truth":(source.%Get("ground_truth"))}
             Do items.%Push(item)
         }
-        Set result={"version":(data.dataset_version),"clock":(data.clock),"scenarios":(items),"synthetic":true}
+        Set result={"version":(data.%Get("dataset_version")),"clock":(data.clock),"scenarios":(items),"synthetic":true}
         Return ..JSON(result.%ToJSON())
     } Catch error {
         Return ..ErrorResponse(error)
@@ -188,10 +203,11 @@ ClassMethod RunScenario(id As %String) As %Status
         // A run is deliberately anchored to the frozen dataset clock. It is a
         // labeled replay, not a claim that a historic event arrived live today.
         Set message=selected.message
-        Set message.event_id=message.event_id_"-"_runId, message.correlation_id=runId
-        Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":(id),"dataset_version":(data.dataset_version),"clock":(data.clock)}
+        Do message.%Set("event_id",message.%Get("event_id")_"-"_runId)
+        Do message.%Set("correlation_id",runId)
+        Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":(id),"dataset_version":(data.%Get("dataset_version")),"clock":(data.clock)}
         If id="unsafe-agent-output" {
-            Do envelope.%Set("fault",selected.test_recommendation)
+            Do envelope.%Set("fault",selected.%Get("test_recommendation"))
         }
         Return ..Dispatch(envelope)
     } Catch error {
@@ -224,7 +240,7 @@ ClassMethod Policies() As %Status
     Do rules.%Push({"id":"UNCERTAINTY_BOUNDED","description":"Uncertainty above 0.35 requires review."})
     Do rules.%Push({"id":"NOT_DUPLICATE","description":"A duplicate source/event key returns the existing case and never repeats delivery."})
     Do rules.%Push({"id":"REVIEW_AUTHORIZATION","description":"Review requires SSReview, a reason, current version and idempotency key."})
-    Set result={"version":"silentshift-policy/1.0.0","rules":(rules),"automatic_transformations":false}
+    Set result={"version":"silentshift-policy/1.1.0","rules":(rules),"automatic_transformations":false}
     Return ..JSON(result.%ToJSON())
 }
 
@@ -266,7 +282,9 @@ ClassMethod Evaluations() As %Status
         Set sc=statement.%Prepare("SELECT TOP 20 Body FROM SilentShift_Data.Evaluation ORDER BY CreatedAt DESC")
         $$$ThrowOnError(sc)
         Set rows=statement.%Execute(), items=[]
-        While rows.%Next() Do items.%Push(##class(%DynamicObject).%FromJSON(rows.%Get("Body")))
+        While rows.%Next() {
+            Do items.%Push(##class(%DynamicObject).%FromJSON(rows.%Get("Body")))
+        }
         Set result={"items":(items),"limit":20}
         Return ..JSON(result.%ToJSON())
     } Catch error {
@@ -299,8 +317,8 @@ ClassMethod CaptureEvaluation() As %Status
             If (id="") || (seen[("|"_id_"|")) Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
             Set seen=seen_id_"|"
             Set record=##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
-            If record.message.correlation_id'=runId Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
-            If record.%Get("dataset_version")'=data.dataset_version Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
+            If record.message.%Get("correlation_id")'=runId Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
+            If record.%Get("dataset_version")'=data.%Get("dataset_version") Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
             Set agent=record.%Get("agent"), trace=record.%Get("trace_id")
             If '$ISOBJECT(agent) Throw ##class(%Exception.General).%New("INVALID_EVALUATION")
             If (agent.%Get("mode")'="native-ai-hub") || (agent.%Get("status")'="returned") || (trace="") Set verified=0
@@ -312,7 +330,7 @@ ClassMethod CaptureEvaluation() As %Status
             }
             Do records.%Push(record)
         }
-        Set artifact={"dataset_version":(data.dataset_version),"iris_version":($ZVERSION),"production":"SilentShift.Production","records":(records)}
+        Set artifact={"dataset_version":(data.%Get("dataset_version")),"iris_version":($ZVERSION),"production":"SilentShift.Production","records":(records)}
         Do artifact.%Set("native_verified",verified,"boolean")
         Set native=##class(%DynamicObject).%FromJSON(..Aggregate(artifact.%ToJSON()))
         Set canonicalIds=##class(SilentShift.Bridge).Canonical(ids.%ToJSON())
@@ -324,7 +342,7 @@ ClassMethod CaptureEvaluation() As %Status
             Set result=existing.Body
         } Else {
             Set created=##class(SilentShift.Bridge).Now()
-            Set body={"id":(runId),"created_at":(created),"dataset_version":(data.dataset_version),"case_ids":(ids),"native":(native)}
+            Set body={"id":(runId),"created_at":(created),"dataset_version":(data.%Get("dataset_version")),"case_ids":(ids),"native":(native)}
             Set entry=##class(SilentShift.Data.Evaluation).%New()
             Set entry.RunId=runId,entry.CreatedAt=created,entry.CaseIds=canonicalIds,entry.Body=body.%ToJSON()
             Set sc=entry.%Save()
