@@ -14,6 +14,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
   <Route Url="/api/health" Method="GET" Call="Health"/>
   <Route Url="/api/overview" Method="GET" Call="Overview"/>
   <Route Url="/api/cases" Method="GET" Call="Cases"/>
+  <Route Url="/api/reviews" Method="GET" Call="Reviews"/>
   <Route Url="/api/cases/:id" Method="GET" Call="Case"/>
   <Route Url="/api/cases/:id/review" Method="POST" Call="Review"/>
   <Route Url="/api/messages" Method="POST" Call="Ingest"/>
@@ -152,6 +153,21 @@ ClassMethod Case(id As %String) As %Status
         Set result = ##class(SilentShift.Store).CaseJSON(id)
         If (result="") || (result="null") Return ..Fail(404,"NOT_FOUND","Investigation not found.")
         Return ..JSON(result)
+    } Catch error {
+        Return ..ErrorResponse(error)
+    }
+}
+
+/// Native reviewer worklist only. Completed tasks leave this pending queue;
+/// committed decisions with unfinished synchronization remain resumable.
+ClassMethod Reviews() As %Status
+{
+    Try {
+        Set sc = ##class(SilentShift.Workflow.Support).Identity($USERNAME)
+        $$$ThrowOnError(sc)
+        Set limit = $GET(%request.Data("limit",1),50), offset = $GET(%request.Data("offset",1),0)
+        If (limit'?1.3N) || (limit<1) || (limit>100) || (offset'?1.9N) Return ..Fail(422,"INVALID_PAGINATION","Use limit 1–100 and a nonnegative offset.")
+        Return ..JSON(##class(SilentShift.Workflow.Support).PendingJSON($USERNAME,limit,offset))
     } Catch error {
         Return ..ErrorResponse(error)
     }

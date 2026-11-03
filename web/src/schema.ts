@@ -102,6 +102,25 @@ export const CasesSchema = z
   })
   .passthrough();
 
+export const ReviewTaskSchema = z.object({
+  task_id: Text,
+  case_id: Text,
+  role: z.literal("ReviewWorklist"),
+  status: z.enum(["pending", "completion_pending"]),
+  assigned_to: z.string().nullable(),
+  created_at: Text,
+  case_version: z.number().int().positive(),
+  title: Text,
+}).passthrough();
+export const ReviewsSchema = z.object({
+  engine: z.literal("native-iris-workflow"),
+  items: z.array(ReviewTaskSchema).max(100),
+  total: z.number().int().nonnegative(),
+  limit: z.number().int().positive().max(100),
+  offset: z.number().int().nonnegative(),
+}).passthrough();
+export type ReviewTask = z.infer<typeof ReviewTaskSchema>;
+
 export const HealthSchema = z
   .object({
     build: Text,

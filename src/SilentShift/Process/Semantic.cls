@@ -119,11 +119,11 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
         If $ISOBJECT(policy), policy.%Get("downstream_permitted") Set target = "Destination"
         Set sc = ..SendRequestSync(target, request, .routeReply, 10)
         $$$ThrowOnError(sc)
-        // Only newly processed REQUEST_REVIEW outcomes create native tasks.
+        // Newly processed review and quarantine holds create native tasks.
         // Existing benchmark/history cases are never scanned or backfilled.
         If request.Action '= "review_route" {
             Set routed = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
-            If routed.%Get("routing") = "REVIEW" {
+            If (routed.%Get("routing") = "REVIEW") || (routed.%Get("routing") = "QUARANTINED") {
                 Set workflow = {"engine": "native-iris-workflow", "status": "queued", "role": "ReviewWorklist", "requested_at": (##class(SilentShift.TraceEvent).UTC()), "completion_received": false}
                 Set sc = ##class(SilentShift.Store).SetWorkflow(id, workflow.%ToJSON(), "workflow_task_requested")
                 $$$ThrowOnError(sc)

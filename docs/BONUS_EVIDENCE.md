@@ -7,7 +7,7 @@ Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minil
 | Requested extension | Potential points | Verified behavior / remaining gate |
 |---|---:|---|
 | DPI-I-689 provider traceability |4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all40 persisted provider messages passed correlation checks. Actual Ollama400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
-| Native Workflow Engine |2 | Existing native task implementation passed43 checks, including real approve/reject and deferred-completion recovery. Dedicated Review API/view and explicit native-task concurrency proof are the next step. |
+| Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view.54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
 | IRIS Vector Search precedents |2 | Five local procedural runbooks have real384-dimensional vectors and native cosine retrieval. They are **not** past-case/amendment precedents. Fourth tool and precedent evidence remain pending. |
 | Custom inbound adapter |2 | Live ready-file intake previously created held cases and then delivered an approved amendment once after a wait-budget fix. Revalidation after the new integrations remains pending. |
 | IPM package |2 | Real local load/package/UAT passed in the existing namespace. A fresh-container installation remains pending. Registry publication is manual and not authorized here. |
@@ -39,6 +39,32 @@ Case IDs refer to this retained local namespace. On a new install, use IDs retur
 These PNGs were captured from authenticated `EnsPortal.VisualTrace.zen` in the live namespace. The SVG export is separately identified as the installed vendor renderer, not a portal screenshot. Reviewer portal access is scoped to trace reads; resend and production control are not granted.
 
 Messages retain metadata, tool names/IDs, model, prompt version, timing, HTTP outcomes and explicit retry/fallback fields. Prompts, arguments, raw provider bodies and capabilities are not persisted in those messages. Actual HTTP response usage is recorded only when present; unknown usage, provider retries and billing cost are null. See the [field map and Langfuse comparison](NATIVE_AI_HUB.md). Interrupted raw transport nodes live in nonjournaled IRISTEMP and are swept on a later lease opening; unconditional physical cleanup latency is not proven. A nonidentity upstream encoding is rejected after native HTTP reading, which can use a native temporary file before rejection.
+
+## 2. A human hold becomes a native task
+
+The operator opens **Review**, selects a native task, reads the case evidence and records a reason. New review and quarantine holds travel through `ReviewCoordinator` to the real `EnsLib.Workflow.Operation` host `ReviewWorklist`. Native role membership is restricted to the configured reviewer; every action also requires the IRIS `SSReview` resource. Critical contradiction tasks offer rejection, while approval remains vetoed by server policy. Historical holds are preserved and require a new investigation before a new decision.
+
+```sh
+uv run --env-file .env python scripts/bootstrap.py
+uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases --output evidence/native/step2-review-queue.json
+uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step2-five.json
+SILENTSHIFT_NATIVE_E2E=1 uv run --env-file .env npm --prefix web run test:e2e:native
+```
+
+[Native queue receipt](evidence/review-queue.json): **54 checks passed**. Two simultaneous identical approvals returned200 and produced exactly one `ReviewAction`, one native deferred completion response and one simulator delivery. Rejection produced one review receipt/response and zero deliveries. Blank reasons, stale versions, viewer actions and changed content under the same idempotency key were rejected. Completed tasks left the pending queue. These isolated cases skip LLM inference; existing procedural retrieval can use local embeddings.
+
+| Actual workbench action | Case / native task / original session | Observed result |
+|---|---|---|
+| Approve |`299A6FC4-D7A2-11F1-A52E-F6A33E81404C` /628 /772 | Native task completed; one review receipt, one native response, one delivery |
+| Reject |`29AE87CC-D7A2-11F1-A52E-F6A33E81404C` /637 /783 | Native task completed; one review receipt, one native response, zero deliveries |
+
+[UI receipt](evidence/review-ui.json) · [approval capture](assets/review-approved-delivery.png) · [rejection capture](assets/review-rejected.png).
+
+![Real pending native tasks in the workbench](assets/review-native-worklist.png)
+
+![Native deferred Workflow response after actual UI approval](assets/review-workflow-visual-trace.png)
+
+The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed5/5; all four held cases have real native tasks. Python164, TypeScript/build,32 disconnected/landing and14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
 
 ## Other eligible technology and manual work
 

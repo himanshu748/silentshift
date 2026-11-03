@@ -3,7 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const routes = [
-  ['investigations', 'Investigations'], ['scenarios', 'Scenario Lab'],
+  ['investigations', 'Investigations'], ['reviews', 'Review'], ['scenarios', 'Scenario Lab'],
   ['overview', 'Overview'], ['messages', 'Message Explorer'],
   ['evaluations', 'Evaluations'], ['policies', 'Policies'], ['health', 'System Health'],
 ] as const;

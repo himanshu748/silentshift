@@ -12,6 +12,7 @@ import {
   HealthSchema,
   OverviewSchema,
   PoliciesSchema,
+  ReviewsSchema,
   ScenariosSchema,
 } from "../src/schema";
 import type { Health, Investigation } from "../src/schema";
@@ -52,6 +53,7 @@ const observations = new WeakMap<
   }
 >();
 let api: APIRequestContext;
+let reviewerApi: APIRequestContext;
 let health: Health;
 let selected: Investigation;
 
@@ -68,8 +70,8 @@ function parse<T>(payload: unknown, schema: z.ZodType<T>): T {
   return parsed.data;
 }
 
-async function read<T>(endpoint: string, schema: z.ZodType<T>): Promise<T> {
-  const response = await api
+async function read<T>(endpoint: string, schema: z.ZodType<T>, asReviewer = false): Promise<T> {
+  const response = await (asReviewer ? reviewerApi : api)
     .get(`${apiBase!.replace(/\/$/, "")}${endpoint}`)
     .catch(() => {
       // API transport call logs can include request headers on a timeout.
@@ -179,6 +181,12 @@ test.beforeAll(async () => {
     },
     timeout: 20_000,
   });
+  reviewerApi = await request.newContext({
+    extraHTTPHeaders: {
+      Authorization: `Basic ${Buffer.from(`${reviewer.username}:${reviewer.password}`).toString("base64")}`,
+    },
+    timeout: 20_000,
+  });
   health = await read("/health", HealthSchema);
   expect(health.build).toMatch(/2026\.3\.0AI.*154/);
   expect(health.production.running).toBe(true);
@@ -205,6 +213,7 @@ test.beforeAll(async () => {
 
 test.afterAll(async () => {
   await api?.dispose();
+  await reviewerApi?.dispose();
 });
 
 test.beforeEach(async ({ page }) => {
@@ -315,15 +324,15 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
     await expect(
       page.getByRole("link", { name: "Open IRIS Visual Trace" }),
     ).toHaveAttribute("href", actual.trace_url);
-  await expect(
-    page.getByRole("button", { name: "Approve release", exact: true }),
-  ).toBeDisabled();
-  await expect(
-    page.getByRole("button", { name: "Reject transaction", exact: true }),
-  ).toBeDisabled();
-  await expect(
-    page.getByText("Review actions require IRIS reviewer permission", { exact: false }),
-  ).toBeVisible();
+  if (actual.workflow?.task_id) {
+    await expect(page.getByRole("button", { name: "Approve release", exact: true })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Reject transaction", exact: true })).toBeDisabled();
+    await expect(page.getByText("Review actions require IRIS reviewer permission", { exact: false })).toBeVisible();
+  } else {
+    await expect(page.getByRole("button", { name: "Approve release", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Reject transaction", exact: true })).toHaveCount(0);
+    await expect(page.getByText("Critical contradictions require a corrected event or reference and a new investigation.", { exact: true })).toBeVisible();
+  }
 
   const evidenceTab = page.getByRole("tab", { name: "Evidence", exact: true });
   await evidenceTab.focus();
@@ -376,7 +385,7 @@ test("a delivered amendment shows its actual evidence and simulator outcome", as
   await evidence(page, testInfo, "approved-delivery");
 });
 
-test("all seven routes expose real read-only API state and no invented metrics", async ({
+test("all eight routes expose real read-only state or reviewer permission", async ({
   page,
 }, testInfo) => {
   await page.goto("/#overview");
@@ -386,6 +395,7 @@ test("all seven routes expose real read-only API state and no invented metrics",
     ["scenarios", "Scenario Lab", "/api/scenarios"],
     ["overview", "Overview", "/api/overview"],
     ["messages", "Message Explorer", "/api/cases"],
+    ["reviews", "Review", null],
     ["evaluations", "Evaluations", "/api/evaluations"],
     ["policies", "Policies", "/api/policies"],
     ["health", "System Health", null],
@@ -465,6 +475,9 @@ test("all seven routes expose real read-only API state and no invented metrics",
         await expect(page.locator(".rules-list")).toContainText(
           actual.rules[0].description,
         );
+    } else if (route === "reviews") {
+      await expect(page.getByRole("heading", { name: "Reviewer permission required", exact: true })).toBeVisible();
+      await expect(page.locator(".review-task")).toHaveCount(0);
     } else {
       await expect(page.locator(".build-number")).toHaveText(health.build);
       await expect(page.locator(".health-status").first()).toContainText(
@@ -501,51 +514,60 @@ test("selecting another queued case returns to its visible disposition", async (
   await assertHealthyRenderedPage(page);
 });
 
-test("reviewer UI retains critical-policy veto and dialog keyboard safety without a mutation", async ({
-  page,
-}, testInfo) => {
-  await page.goto(`/#investigations/${encodeURIComponent(selected.id)}`);
+test("native Review worklist matches actual tasks and preserves dialog keyboard safety", async ({ page }, testInfo) => {
+  const denied = await api.get(`${apiBase!.replace(/\/$/, "")}/reviews?limit=50&offset=0`).catch(() => {
+    throw new Error("Viewer worklist permission check failed; sensitive transport details suppressed.");
+  });
+  expect(denied.status()).toBe(403);
+  const tasks = await read("/reviews?limit=50&offset=0", ReviewsSchema, true);
+  if (!tasks.items.length) throw new Error("Prepare an actual pending native review task; this read-only suite never creates one.");
+  const target = tasks.items[0]!;
+  const actual = await read(`/cases/${encodeURIComponent(target.case_id)}`, CaseSchema, true);
+  expect(String(actual.workflow?.task_id)).toBe(target.task_id);
+  await page.goto(`/#reviews/${encodeURIComponent(target.case_id)}`);
   await login(page, reviewer);
-  await expect(page.locator(".case-detail-heading")).toContainText(selected.id);
-  const approve = page.getByRole("button", {
-    name: "Approve release",
-    exact: true,
-  });
-  const reject = page.getByRole("button", {
-    name: "Reject transaction",
-    exact: true,
-  });
+  await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
+  await expect(page.locator(".review-task")).toHaveCount(tasks.items.length);
+  expect(await page.locator(".review-task").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-task-id")))).toEqual(tasks.items.map((task) => task.task_id));
+  await expect(page.locator(".review-worklist-heading")).toContainText(String(tasks.total));
+  await expect(page.locator(".case-detail-heading")).toContainText(target.case_id);
+  await expect(page.locator(".review-task.selected")).toContainText(target.task_id);
+  await expect(page.locator(".review-task.selected")).toContainText(`v${target.case_version}`);
+  await expect(page.locator(".case-provenance")).toContainText("Native review task");
+  const reject = page.getByRole("button", { name: "Reject transaction", exact: true });
   await expect(reject).toBeEnabled();
-  await expect(approve).toBeDisabled();
-  await expect(approve).toHaveAttribute("title", /Critical or unassessed/);
+  if (actual.assessment?.critical) await expect(page.getByRole("button", { name: "Approve release", exact: true })).toBeDisabled();
   await reject.click();
-  const dialog = page.getByRole("dialog", {
-    name: "Reject this transaction",
-    exact: true,
-  });
+  const dialog = page.getByRole("dialog", { name: "Reject this transaction", exact: true });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByLabel("Reason", { exact: false })).toBeFocused();
-  await expect(
-    dialog.getByRole("button", { name: "Reject transaction", exact: true }),
-  ).toBeDisabled();
+  await expect(dialog.getByRole("button", { name: "Reject transaction", exact: true })).toBeDisabled();
   await page.keyboard.press("Shift+Tab");
-  await expect(
-    dialog.getByRole("button", { name: "Close dialog", exact: true }),
-  ).toBeFocused();
+  await expect(dialog.getByRole("button", { name: "Close dialog", exact: true })).toBeFocused();
   await page.keyboard.press("Shift+Tab");
-  await expect(
-    dialog.getByRole("button", { name: "Cancel", exact: true }),
-  ).toBeFocused();
+  await expect(dialog.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
   await page.keyboard.press("Tab");
-  await expect(
-    dialog.getByRole("button", { name: "Close dialog", exact: true }),
-  ).toBeFocused();
+  await expect(dialog.getByRole("button", { name: "Close dialog", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(dialog).toHaveCount(0);
   await expect(reject).toBeFocused();
   await assertHealthyRenderedPage(page);
-  await page.locator(".review-actions").scrollIntoViewIfNeeded();
-  await evidence(page, testInfo, "reviewer-policy-veto");
+  await evidence(page, testInfo, "native-review-worklist");
+});
+
+test("critical quarantines retain the reviewer release veto", async ({ page }) => {
+  await page.goto(`/#investigations/${encodeURIComponent(selected.id)}`);
+  await login(page, reviewer);
+  await expect(page.locator(".case-detail-heading")).toContainText(selected.id);
+  if (selected.workflow?.task_id) {
+    await expect(page.getByRole("button", { name: "Approve release", exact: true })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Reject transaction", exact: true })).toBeEnabled();
+  } else {
+    await expect(page.getByRole("button", { name: "Approve release", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Reject transaction", exact: true })).toHaveCount(0);
+  }
+  await expect(page.getByText("Critical contradictions require a corrected event or reference and a new investigation.", { exact: true })).toBeVisible();
+  await assertHealthyRenderedPage(page);
 });
 
 test("keyboard navigation, reduced motion and memory-only session lifecycle remain usable", async ({

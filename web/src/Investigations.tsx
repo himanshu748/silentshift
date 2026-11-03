@@ -440,6 +440,7 @@ export function CaseDetail({
   const closeReview = useCallback(() => setReview(null), []);
   const checks = checksFor(item);
   const held = item.routing === "QUARANTINED" || item.routing === "REVIEW";
+  const nativeTask = Boolean(item.workflow?.task_id);
   return (
     <div className={`case-layout ${compact ? "case-layout-compact" : ""}`}>
       <article className="case-evidence">
@@ -638,7 +639,15 @@ export function CaseDetail({
         {held && (
           <div className="aside-section review-actions">
             <div className="section-kicker">Reviewer actions</div>
-            {item.workflow && item.review && recordedAction(item.review.action) ? (
+            {!nativeTask ? (
+              <p className="small subtle">
+                {item.assessment?.critical
+                  ? "Critical contradictions require a corrected event or reference and a new investigation."
+                  : item.workflow
+                    ? "The native review task is being created. Refresh before acting on this hold."
+                    : "This historical hold has no native review task. Start a new investigation with the corrected event and current approved references."}
+              </p>
+            ) : item.workflow && item.review && recordedAction(item.review.action) ? (
               <>
                 <p className="small subtle">A review is recorded. Resume its native task completion and route using the original request.</p>
                 <Button disabled={!canReview} onClick={() => setReview(recordedAction(item.review?.action))}>Resume recorded review</Button>
@@ -692,7 +701,7 @@ export function CaseDetail({
           </div>
         )}
       </aside>
-      {review && canReview && (
+      {review && canReview && nativeTask && (
         <ReviewDialog
           item={item}
           action={review}

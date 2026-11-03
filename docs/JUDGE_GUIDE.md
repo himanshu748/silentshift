@@ -37,17 +37,17 @@ This performs real model work. Scenario E deliberately injects a labeled hostile
 
 ## Resolve a review without losing the decision
 
-A review-eligible hold creates a native IRIS Workflow task. An authorized reviewer supplies a reason, the current case version and an idempotency key. A critical contradiction cannot be approved through this path.
+New review and quarantine holds create native IRIS Workflow tasks. Open **Review** as the configured reviewer to see the actual pending worklist. An authorized reviewer supplies a reason, the current case version and an idempotency key. A critical contradiction cannot be approved through this path.
 
 If native task completion fails after the decision is recorded, the case remains held with `completion_pending`. **Resume recorded review** carries the saved reason, original version and key; it does not create a replacement decision. The [engineering walkthrough](articles/engineering.md) explains the controlled failure and actual UI recovery that completed one task and produced exactly one simulator delivery.
 
-The focused verification command creates one local-model conflict investigation and a separate no-model boundary case:
+The pending-worklist verification creates two isolated synthetic boundary cases without LLM inference (procedural retrieval may use local embeddings):
 
 ```sh
-uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
+uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 ```
 
-The [43-check receipt](evidence/workflow.json) includes rejection with zero deliveries, authorization/version checks and the postcommit HTTP 503 recovery. This proves the documented deferred-completion journey, not every outage or crash path.
+The [54-check receipt](evidence/review-queue.json) includes native task listing, rejection with zero deliveries and two simultaneous identical approvals producing one review receipt, one native completion response and one simulator delivery. The [actual workbench actions](evidence/review-ui.json) independently completed approve/reject. The earlier [43-check receipt](evidence/workflow.json) retains the controlled postcommit503 recovery. This does not prove every outage or crash path.
 
 ## What to assess against the rubric
 

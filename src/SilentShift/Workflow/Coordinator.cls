@@ -9,7 +9,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
     Set response = ##class(SilentShift.Reply).%New()
     Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(request.CaseId))
     Set workflow = body.%Get("workflow")
-    If body.%Get("routing") '= "REVIEW" Return $$$OK
+    If (body.%Get("routing") '= "REVIEW") && (body.%Get("routing") '= "QUARANTINED") Return $$$OK
     If $ISOBJECT(workflow), workflow.%Get("task_id") '= "" Return $$$OK
     Set task = ##class(SilentShift.Workflow.ReviewRequest).%New()
     Set task.CaseId = request.CaseId, task.CaseVersion = body.%Get("version")
@@ -17,6 +17,8 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
     Set task.%Subject = "SilentShift semantic review: "_request.CaseId
     Set task.%Message = "Review the independently retrieved case evidence in SilentShift. Native completion requires its authorized policy-checked review receipt."
     Set task.%Actions = "APPROVE,REJECT"
+    Set assessment = body.%Get("assessment")
+    If $ISOBJECT(assessment), assessment.%Get("classification") = "VERIFIED_CONTRADICTION" Set task.%Actions = "REJECT"
     Set task.%UserName = "", task.%Title = ""
     Return ..SendRequestAsync("ReviewWorklist", task, 1, "semantic-human-review", "Native semantic review task")
 }

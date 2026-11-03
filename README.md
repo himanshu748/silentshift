@@ -125,13 +125,15 @@ uv run python scripts/verify_native_provider.py --inspect-case CASE_ID
 
 The [native AI Hub guide](docs/NATIVE_AI_HUB.md) maps each field, reproduces the failure and compares the scope with Langfuse. Unknown provider retries and billing cost stay null; actual HTTP response usage is distinct from session totals. Historical invocation/tool evidence remains in [AI_TRACING.md](docs/AI_TRACING.md). [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) is the implemented idea; organizer acceptance is unconfirmed.
 
-Native Workflow has its own focused verifier. It creates one local-model conflict investigation and one no-model boundary case:
+Held transactions now enter a native IRIS Workflow worklist. Connect as the configured reviewer and open **Review** to inspect pending tasks, their original case evidence and policy. A critical contradiction permits rejection; approval remains blocked. Completed tasks leave the pending worklist, while the case keeps the reason, original version, idempotency key and native task receipt. Historical holds are readable and require a new investigation before a new review decision.
 
 ```sh
-uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
+uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 ```
 
-The [recorded 43-check result](docs/evidence/workflow.json) includes rejection with zero deliveries and recovery after a real postcommit HTTP 503: the UI resumed the original recorded reason, version and key, completed the native task and produced exactly one simulator receipt. This is a controlled deferred-completion failure, not a general crash-recovery guarantee.
+The [54-check receipt](docs/evidence/review-queue.json) includes reviewer-only task listing, rejection, two concurrent identical approvals, one review receipt, one native completion response and one simulator delivery. The workbench also completed [actual approve and reject actions](docs/evidence/review-ui.json), shown in the [native worklist](docs/assets/review-native-worklist.png). These isolated synthetic cases skip LLM inference at the evidence-budget guard; existing procedural retrieval can use local embeddings. They do not alter the five evaluation cases.
+
+The earlier controlled postcommit HTTP503 recovery remains documented in [the Workflow receipt](docs/evidence/workflow.json) and [engineering story](docs/articles/engineering.md). Resume the original recorded request after an uncertain outcome; changing its reason, version or key creates a different decision and is rejected.
 
 ## Optional local intake and procedural guidance
 

@@ -4,6 +4,8 @@ Include %occStatus
 /// from IRIS security roles; only the configured reviewer is enrolled.
 Class SilentShift.Workflow.Support Extends %RegisteredObject
 {
+Parameter MAXPENDINGSCAN = 1000;
+
 ClassMethod Configure() As %Status
 {
     Set reviewer = $SYSTEM.Util.GetEnviron("SILENTSHIFT_IRIS_USERNAME")
@@ -32,6 +34,110 @@ ClassMethod Identity(reviewer As %String) As %Status
     If '$ISOBJECT(user) Return $$$ERROR($$$GeneralError, "APP_FORBIDDEN: native workflow reviewer is unavailable")
     If 'user.IsActive Return $$$ERROR($$$GeneralError, "APP_FORBIDDEN: native workflow reviewer is inactive")
     Return $$$OK
+}
+
+/// Pending work comes from the native worklist, not the displayed case state.
+/// Receipt-backed recovery also covers a worklist consumed before completion
+/// synchronization. Both scans are bounded; overflow never hides the total.
+ClassMethod PendingJSON(reviewer As %String, limit As %Integer = 50, offset As %Integer = 0) As %String
+{
+    Set sc = ..Identity(reviewer)
+    $$$ThrowOnError(sc)
+    If (limit < 1) || (limit > 100) || (offset < 0) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review pagination is invalid"))
+    Set statement = ##class(%SQL.Statement).%New()
+    Set sc = statement.%Prepare("SELECT TOP 1001 ID,Task FROM EnsLib_Workflow.Worklist WHERE UserName = ? ORDER BY ID DESC")
+    $$$ThrowOnError(sc)
+    Set rows = statement.%Execute(reviewer), scanned = 0
+    If rows.%SQLCODE < 0 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native reviewer worklist could not be read"))
+    While rows.%Next() {
+        Set scanned = scanned+1
+        If scanned > ..#MAXPENDINGSCAN Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native reviewer worklist exceeds the bounded queue scan"))
+        Set item = ..PendingItem(rows.%Get("Task"),reviewer,rows.%Get("ID"))
+        If $ISOBJECT(item) {
+            Set taskId = item.%Get("task_id"), seen(taskId) = 1
+            Set sort = item.%Get("created_at")_"|"_taskId
+            Set pending(sort) = item.%ToJSON()
+        }
+    }
+    // The indexed held-state and receipt checks avoid scanning all cases.
+    // Actual objects below still establish native task/identity binding.
+    Set statement = ##class(%SQL.Statement).%New()
+    Set sc = statement.%Prepare("SELECT TOP 1001 C.CaseId FROM SilentShift_Data.CaseRecord C WHERE C.Routing IN ('REVIEW','QUARANTINED') AND EXISTS (SELECT 1 FROM SilentShift_Data.ReviewAction R WHERE R.CaseId = C.CaseId) ORDER BY C.ReceivedAt DESC,C.CaseId DESC")
+    $$$ThrowOnError(sc)
+    Set rows = statement.%Execute(), scanned = 0
+    If rows.%SQLCODE < 0 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review recovery queue could not be read"))
+    While rows.%Next() {
+        Set scanned = scanned+1
+        If scanned > ..#MAXPENDINGSCAN Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review recovery exceeds the bounded queue scan"))
+        Set record = ##class(SilentShift.Data.CaseRecord).%OpenId(rows.%Get("CaseId"))
+        If $ISOBJECT(record) {
+            Set body = ##class(%DynamicObject).%FromJSON(record.Body), workflow = body.%Get("workflow")
+            If $ISOBJECT(workflow) {
+                Set taskId = workflow.%Get("task_id")
+                If (taskId '= "") && '$DATA(seen(taskId)) {
+                    Set item = ..PendingItem(taskId,reviewer)
+                    If $ISOBJECT(item) {
+                        Set seen(taskId) = 1, sort = item.%Get("created_at")_"|"_taskId
+                        Set pending(sort) = item.%ToJSON()
+                    }
+                }
+            }
+        }
+    }
+    Set items = [], sort = "", total = 0
+    For {
+        Set sort = $ORDER(pending(sort),-1)
+        Quit:sort=""
+        If (total >= offset) && (items.%Size() < limit) Do items.%Push(##class(%DynamicObject).%FromJSON(pending(sort)))
+        Set total = total+1
+    }
+    Set result = {"engine":"native-iris-workflow","items":(items),"total":(total),"limit":(limit),"offset":(offset)}
+    Do result.%Set("total",total,"number"), result.%Set("limit",limit,"number"), result.%Set("offset",offset,"number")
+    Return result.%ToJSON()
+}
+
+ClassMethod PendingItem(taskId As %String, reviewer As %String, worklistId As %String = "") As %DynamicObject [ Private ]
+{
+    Set task = ##class(SilentShift.Workflow.ReviewTask).%OpenId(taskId)
+    // Other applications can share the native worklist table.
+    If '$ISOBJECT(task) Return ""
+    If 'task.%IsA("SilentShift.Workflow.ReviewTask") Return ""
+    If task.%RoleName '= "ReviewWorklist" Return ""
+    Set id = task.CaseId, record = ##class(SilentShift.Data.CaseRecord).%OpenId(id)
+    If '$ISOBJECT(record) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review task has no case"))
+    If (record.Routing '= "REVIEW") && (record.Routing '= "QUARANTINED") Return ""
+    Set body = ##class(%DynamicObject).%FromJSON(record.Body), workflow = body.%Get("workflow"), review = body.%Get("review")
+    If '$ISOBJECT(workflow) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review task association is missing"))
+    If (workflow.%Get("engine") '= "native-iris-workflow") || (workflow.%Get("task_id") '= task.%Id()) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review task association differs"))
+    Set assigned = task.%TaskStatus.AssignedTo
+    If (assigned '= "") && (assigned '= reviewer) Return ""
+    If $ISOBJECT(review) {
+        If (review.%Get("reviewer") '= reviewer) || (assigned '= reviewer) Return ""
+        Set key = ##class(SilentShift.Bridge).PairHash(id,review.%Get("idempotency_key"))
+        If '##class(SilentShift.Data.ReviewAction).%ExistsId(key) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native review recovery receipt is missing"))
+        Set status = "completion_pending"
+    } Else {
+        If task.%TaskStatus.IsComplete Return ""
+        Set status = "pending"
+    }
+    If worklistId = "" Set worklistId = workflow.%Get("worklist_id")
+    If worklistId '= workflow.%Get("worklist_id") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native reviewer worklist association differs"))
+    Set work = ##class(EnsLib.Workflow.Worklist).%OpenId(worklistId)
+    If $ISOBJECT(work) {
+        If (work.UserGetObjectId() '= reviewer) || (work.TaskGetObjectId() '= task.%Id()) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native reviewer worklist scope differs"))
+    } ElseIf status '= "completion_pending" {
+        Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_UNAVAILABLE: pending native reviewer worklist is unavailable"))
+    }
+    Set created = workflow.%Get("created_at")
+    If created = "" Set created = task.%TaskStatus.TimeCreated
+    Set message = body.%Get("message"), title = "Semantic review"
+    If $ISOBJECT(message) {
+        Set title = $SELECT(message.%Get("kind")="order":"Order",message.%Get("kind")="payment":"Payment",1:"Transaction")_" · "_$EXTRACT(message.%Get("contract_id"),1,160)
+    }
+    Set item = {"role":"ReviewWorklist","status":(status),"assigned_to":null,"title":(title)}
+    Do item.%Set("task_id",task.%Id(),"string"), item.%Set("case_id",id,"string"), item.%Set("created_at",created,"string"), item.%Set("case_version",record.Version,"number")
+    If assigned '= "" Do item.%Set("assigned_to",assigned,"string")
+    Return item
 }
 
 ClassMethod Claim(id As %String, workflow As %DynamicObject, reviewer As %String, expectedVersion As %Integer, Output claim As %DynamicObject) As %Status
@@ -83,6 +189,23 @@ ClassMethod AuthorizeCompletion(id As %String, taskId As %String, reviewer As %S
 /// Called only after the review receipt commits. Retrying the SAME review key
 /// repairs a failed completion without repeating the decision or delivery.
 ClassMethod SyncCompletion(id As %String, reviewer As %String) As %Status
+{
+    // Store.Review releases the case lock before entering here. Exact-key
+    // retries serialize only completion, so one native deferred response is
+    // enqueued. SetWorkflow retains its separate short case-update lock.
+    Set locked = 0
+    Try {
+        Lock +^SilentShift.Lock("workflow-completion",id):5
+        If '$TEST Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native workflow synchronization is busy; retry the same review key")
+        Set locked = 1, sc = ..CompleteLocked(id,reviewer)
+    } Catch error {
+        Set sc = $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: review is committed; retry the same review key to finish native workflow synchronization")
+    }
+    If locked Lock -^SilentShift.Lock("workflow-completion",id)
+    Return sc
+}
+
+ClassMethod CompleteLocked(id As %String, reviewer As %String) As %Status [ Private ]
 {
     Try {
         Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id)), workflow = body.%Get("workflow")

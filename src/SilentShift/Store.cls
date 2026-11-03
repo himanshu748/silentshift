@@ -325,18 +325,21 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
             Do policy.%Set("checks", [{"code": "HUMAN_REJECTION", "passed": true, "reason": "Reviewer identity, reason, version and idempotency were validated."}])
         }
         Set workflow = body.%Get("workflow")
-        If $ISOBJECT(workflow) {
-            If $ISOBJECT(body.%Get("review")) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: native workflow review is already decided; reuse its original review key"))
-            // Claim only after version and deterministic policy validation.
-            // Native claim persists independently; no user transaction spans
-            // the native engine's deferred-response enqueue/completion path.
-            Set sc = ##class(SilentShift.Workflow.Support).Claim(id, workflow, reviewer, record.Version, .claim)
-            $$$ThrowOnError(sc)
-            Do workflow.%Set("status", "completion_pending")
-            Do workflow.%Set("claimed_by", reviewer)
-            Do workflow.%Set("claimed_at", claim.%Get("claimed_at"))
-            Do body.%Set("workflow", workflow)
-        }
+        // Historical custom holds remain readable, but new decisions must
+        // claim a real native task. The prior-receipt branch above preserves
+        // exact-key recovery without creating a replacement decision.
+        If '$ISOBJECT(workflow) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: a native workflow task is required for a new review decision"))
+        If workflow.%Get("engine") '= "native-iris-workflow" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: a native workflow task is required for a new review decision"))
+        If $ISOBJECT(body.%Get("review")) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: native workflow review is already decided; reuse its original review key"))
+        // Claim only after version and deterministic policy validation.
+        // Native claim persists independently; no user transaction spans
+        // the native engine's deferred-response enqueue/completion path.
+        Set sc = ##class(SilentShift.Workflow.Support).Claim(id, workflow, reviewer, record.Version, .claim)
+        $$$ThrowOnError(sc)
+        Do workflow.%Set("status", "completion_pending")
+        Do workflow.%Set("claimed_by", reviewer)
+        Do workflow.%Set("claimed_at", claim.%Get("claimed_at"))
+        Do body.%Set("workflow", workflow)
         Set review = {"action": (action), "reason": (reason), "reviewer": (reviewer), "at": (##class(SilentShift.Bridge).Now()), "idempotency_key": (token), "expected_version": (record.Version)}
         Do body.%Set("review", review)
         Do body.%Set("policy_recommendation", proposed)

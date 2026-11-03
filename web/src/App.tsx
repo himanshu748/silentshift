@@ -14,6 +14,7 @@ import {
   Menu,
   RefreshCw,
   ShieldCheck,
+  UserRoundCheck,
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -30,9 +31,11 @@ import {
 } from "./Views";
 import { AppContext, Badge, Button, InlineError, Modal } from "./ui";
 import Landing from "./Landing";
+import Reviews from "./Reviews";
 
 const views = [
   "investigations",
+  "reviews",
   "scenarios",
   "overview",
   "messages",
@@ -60,6 +63,12 @@ const navigation: {
     group: "Workspace",
   },
   {
+    id: "reviews",
+    label: "Review",
+    icon: UserRoundCheck,
+    group: "Workspace",
+  },
+  {
     id: "messages",
     label: "Message Explorer",
     icon: FileJson2,
@@ -83,7 +92,7 @@ function readRoute(): { view: View; caseId?: string } {
     return {
       view,
       caseId:
-        view === "investigations" && caseId
+        (view === "investigations" || view === "reviews") && caseId
           ? decodeURIComponent(caseId)
           : undefined,
     };
@@ -414,6 +423,9 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
             >
               {route.view === "investigations" && (
                 <Investigations refresh={epoch} caseId={route.caseId} />
+              )}
+              {route.view === "reviews" && (
+                <Reviews refresh={epoch} caseId={route.caseId} health={health} />
               )}
               {route.view === "scenarios" && <ScenarioLab refresh={epoch} />}
               {route.view === "overview" && (

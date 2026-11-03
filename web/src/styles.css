@@ -2541,3 +2541,32 @@ input, textarea { caret-color: var(--mint); }
 
 .queue-filter select { border: 1px solid var(--muted); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); padding: var(--space-4) var(--space-8); }
 .workbench-empty { max-width: none; margin: 0; }
+
+/* Native review worklist: the task identity stays beside its case evidence. */
+.review-worklist-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); margin: var(--space-24) 0 var(--space-12); }
+.review-worklist-heading > div { display: flex; align-items: center; gap: var(--space-8); }
+.review-worklist-heading h2 { font-size: var(--text-14); }
+.review-worklist-heading svg { color: var(--amber); flex-shrink: 0; }
+.review-worklist-heading p { margin: 0; color: var(--secondary); font-size: var(--text-12); max-width: 390px; }
+.reviews-workbench { display: grid; grid-template-columns: 224px minmax(0,1fr); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
+.review-task-queue { min-width: 0; background: var(--rail); border-right: 1px solid var(--border); }
+.review-task-list { list-style: none; margin: 0; padding: var(--space-4); max-height: 760px; overflow-y: auto; }
+.review-task { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-12); border-radius: var(--radius-sm); color: var(--text); text-decoration: none; }
+.review-task:hover, .review-task.selected { background: var(--elevated); }
+.review-task.selected { box-shadow: inset 2px 0 var(--amber); }
+.review-task-top, .review-task-bottom { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); font-size: var(--text-12); color: var(--secondary); }
+.review-task strong { font-size: var(--text-13); overflow-wrap: anywhere; }
+.review-task-case { color: var(--secondary); font-size: var(--text-12); overflow-wrap: anywhere; }
+.review-task-owner { font-size: var(--text-12); color: var(--secondary); overflow-wrap: anywhere; }
+.review-task-detail { min-width: 0; }
+.review-pagination { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); margin-top: var(--space-16); color: var(--secondary); font-size: var(--text-12); }
+.review-pagination > div { display: flex; gap: var(--space-8); }
+@media (max-width: 760px) {
+  .review-worklist-heading { align-items: flex-start; flex-direction: column; gap: var(--space-8); }
+  .reviews-workbench { display: block; }
+  .review-task-queue { border-right: 0; border-bottom: 1px solid var(--border); }
+  .review-task-list { max-height: 300px; }
+  .review-pagination { align-items: flex-start; flex-direction: column; }
+  .review-pagination > div { width: 100%; }
+  .review-pagination .button { flex: 1; min-width: 0; }
+}

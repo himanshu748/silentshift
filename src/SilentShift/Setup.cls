@@ -19,6 +19,11 @@ ClassMethod Install() As %Status
             Set sc = $SYSTEM.SQL.Security.GrantPrivilege("SELECT", "SilentShift_Data."_table, "TABLE", "SSApplication")
             $$$ThrowOnError(sc)
         }
+        // The pending reviewer API reads its native worklist through SQL. Task
+        // actions still require Identity/Claim and the policy-checked receipt;
+        // this application-only grant adds no engine mutation privilege.
+        Set sc = $SYSTEM.SQL.Security.GrantPrivilege("SELECT", "EnsLib_Workflow.Worklist", "TABLE", "SSApplication")
+        $$$ThrowOnError(sc)
         Set data = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON())
         Set scenarios = data.%Get("scenarios")
         For index = 0:1:scenarios.%Size()-1 {

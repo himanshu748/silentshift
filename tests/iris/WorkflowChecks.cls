@@ -7,6 +7,12 @@ ClassMethod Inspect(id As %String) As %String
 {
     Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id)), workflow = body.%Get("workflow")
     Set result = {"case_id": (id), "routing": (body.%Get("routing")), "version": (body.%Get("version")), "delivery_count": (body.%Get("delivery_count")), "policy": (body.%Get("policy")), "review": (body.%Get("review")), "workflow": (workflow), "trace_id": (body.%Get("trace_id")), "native_headers": [], "workflow_events": []}
+    &sql(SELECT COUNT(*) INTO :reviewReceipts FROM SilentShift_Data.ReviewAction WHERE CaseId = :id)
+    If SQLCODE < 0 Throw ##class(%Exception.General).%New("WORKFLOW_REVIEW_RECEIPT_READ_FAILED")
+    &sql(SELECT COUNT(*) INTO :deliveryReceipts FROM SilentShift_Data.Delivery WHERE CaseId = :id)
+    If SQLCODE < 0 Throw ##class(%Exception.General).%New("WORKFLOW_DELIVERY_RECEIPT_READ_FAILED")
+    Do result.%Set("review_receipt_count",reviewReceipts,"number")
+    Do result.%Set("delivery_receipt_count",deliveryReceipts,"number")
     Set agent = body.%Get("agent")
     If $ISOBJECT(agent) {
         Set summary = {"caller_status": (agent.%Get("status")), "caller_failure_code": (agent.%Get("failure_code")), "model_invoked": null}
@@ -27,6 +33,9 @@ ClassMethod Inspect(id As %String) As %String
     If SQLCODE < 0 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Native role membership read failed"))
     Do native.%Set("role_membership_count", members)
     Do result.%Set("native_task", native)
+    &sql(SELECT COUNT(*) INTO :completionHeaders FROM Ens.MessageHeader WHERE SourceConfigName = 'ReviewWorklist' AND TargetConfigName = 'ReviewCoordinator' AND MessageBodyClassName = 'SilentShift.Workflow.ReviewTask' AND MessageBodyId = :taskId)
+    If SQLCODE < 0 Throw ##class(%Exception.General).%New("WORKFLOW_COMPLETION_HEADER_READ_FAILED")
+    Do result.%Set("native_completion_response_count",completionHeaders,"number")
     Set headers = result.%Get("native_headers"), events = result.%Get("workflow_events")
     Set stmt = ##class(%SQL.Statement).%New(), sc = stmt.%Prepare("SELECT TOP 100 ID,SessionId,SourceConfigName,TargetConfigName,MessageBodyClassName,MessageBodyId FROM Ens.MessageHeader WHERE SessionId = ? ORDER BY ID")
     $$$ThrowOnError(sc)

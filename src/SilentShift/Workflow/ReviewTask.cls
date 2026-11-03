@@ -28,7 +28,7 @@ Method OnNewTask(pRequest As EnsLib.Workflow.TaskRequest) As %Status
             Lock -^SilentShift.Lock("workflow", id)
             Return sc
         }
-        If body.%Get("routing") '= "REVIEW" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Workflow requires a held review case"))
+        If (body.%Get("routing") '= "REVIEW") && (body.%Get("routing") '= "QUARANTINED") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Workflow requires a held case"))
         TSTART
         Set sc = ##super(pRequest)
         $$$ThrowOnError(sc)
