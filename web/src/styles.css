@@ -2570,3 +2570,22 @@ input, textarea { caret-color: var(--mint); }
   .review-pagination > div { width: 100%; }
   .review-pagination .button { flex: 1; min-width: 0; }
 }
+
+.precedent-evidence > .section-header { align-items: flex-start; }
+.precedent-list { list-style: none; margin: var(--space-16) 0 0; padding: 0; }
+.precedent-match { padding: var(--space-16) 0; border-top: 1px solid var(--border); min-width: 0; }
+.precedent-match-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--space-8); color: var(--secondary); font-size: var(--text-12); }
+.precedent-similarity { color: var(--purple); }
+.precedent-match h4 { margin: var(--space-8) 0; font-size: var(--text-14); }
+.precedent-match > p { color: var(--secondary); font-size: var(--text-13); overflow-wrap: anywhere; }
+.precedent-identifiers { display: grid; gap: var(--space-8); margin: var(--space-16) 0; font-size: var(--text-12); }
+.precedent-identifiers > div { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: var(--space-12); }
+.precedent-identifiers dt { color: var(--secondary); }
+.precedent-identifiers dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.precedent-identifiers code, .precedent-identifiers a { font-size: inherit; }
+.agent-tool-reads { margin-block: var(--space-24); }
+.agent-tool-reads h3 { margin-bottom: var(--space-8); font-size: var(--text-14); }
+@media (max-width: 760px) {
+  .precedent-evidence > .section-header { flex-wrap: wrap; }
+  .precedent-identifiers > div { grid-template-columns: minmax(0,1fr); gap: var(--space-4); }
+}

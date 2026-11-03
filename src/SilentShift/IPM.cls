@@ -72,7 +72,7 @@ ClassMethod PrepareUninstall(root As %String) As %Status
         If $NAMESPACE '= "SILENTSHIFT" Return $$$ERROR($$$GeneralError, "SilentShift uninstall requires SILENTSHIFT")
         Set sc = ..RequireStopped()
         $$$ThrowOnError(sc)
-        For table = "SilentShift_Data.CaseRecord", "SilentShift_Data.Reference", "SilentShift_Data.AuditEvent", "SilentShift_Data.Delivery", "SilentShift_Data.ReviewAction", "SilentShift_Data.Evaluation", "SilentShift_Data.Runbook", "SilentShift_Workflow.ReviewTask", "EnsLib_Workflow.Worklist", "Ens.MessageHeader" {
+        For table = "SilentShift_Data.CaseRecord", "SilentShift_Data.Reference", "SilentShift_Data.AuditEvent", "SilentShift_Data.Delivery", "SilentShift_Data.ReviewAction", "SilentShift_Data.Evaluation", "SilentShift_Data.Runbook", "SilentShift_Data.Precedent", "SilentShift_Workflow.ReviewTask", "EnsLib_Workflow.Worklist", "Ens.MessageHeader" {
             Set query = ##class(%SQL.Statement).%New()
             Set sc = query.%Prepare("SELECT TOP 1 1 FROM "_table)
             $$$ThrowOnError(sc)

@@ -74,7 +74,7 @@ Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String,
 {
     Try {
         If (caseId '= ..TraceCaseId) || '$ISOBJECT(..TraceBuffer) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace scope mismatch"))
-        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
+        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") && (toolName '= "find_similar_precedents") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
         If ..TraceBuffer.%Size() >= 24 {
             Set ..TraceCaptureFailures = ..TraceCaptureFailures + 1
             Return

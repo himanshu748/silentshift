@@ -73,6 +73,19 @@ def _identity_free(message: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in message.items() if key not in {"event_id", "correlation_id"}}
 
 
+def _required_reads(agent: dict[str, Any]) -> tuple[str, ...]:
+    """Keep historical three-tool exports distinct from the current catalog."""
+    required = ("message", "contracts", "related")
+    prompt = agent.get("prompt_version")
+    version = re.fullmatch(r"silentshift-investigator/(\d+)\.(\d+)\.(\d+)", prompt) if isinstance(prompt, str) else None
+    catalog = agent.get("tool_catalog_version")
+    catalog_version = re.fullmatch(r"silentshift-evidence-tools/(\d+)", catalog) if isinstance(catalog, str) else None
+    if ((version is not None and tuple(map(int, version.groups())) >= (1, 3, 0))
+            or (catalog_version is not None and int(catalog_version.group(1)) >= 2)):
+        return required + ("precedents",)
+    return required
+
+
 def aggregate_native(artifact: Any, dataset: dict[str, Any]) -> dict[str, Any]:
     """Aggregate persisted actual native records; never fill absent runs with fixtures.
 
@@ -119,10 +132,12 @@ def aggregate_native(artifact: Any, dataset: dict[str, Any]) -> dict[str, Any]:
             continue
         agent = record.get("agent")
         reads = agent.get("tool_reads") if isinstance(agent, dict) else None
+        required_reads = _required_reads(agent) if isinstance(agent, dict) else ("message", "contracts", "related")
         if (not isinstance(agent, dict) or agent.get("mode") != "native-ai-hub"
                 or not isinstance(reads, dict)
-                or any(not _number(reads.get(name)) or reads[name] < 1 for name in ("message", "contracts", "related"))):
-            issues.append(prefix + " lacks the three required native read-only tool invocations.")
+                or any(not _number(reads.get(name)) or reads[name] < 1 for name in required_reads)):
+            count = "four" if len(required_reads) == 4 else "three"
+            issues.append(prefix + f" lacks the {count} required native read-only tool invocations.")
             continue
         policy = record.get("policy")
         if not isinstance(policy, dict) or not isinstance(policy.get("decision"), str) or policy["decision"] not in DECISIONS:

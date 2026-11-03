@@ -228,6 +228,42 @@ function Evidence({ item }: { item: Investigation }) {
           ) : <p className="small subtle">No procedure met the retrieval threshold.</p>}
         </section>
       )}
+      {item.precedent_context && (
+        <section className="reference-heading precedent-evidence" aria-label="Similar precedents">
+          <div className="section-header">
+            <div>
+              <h3>Similar precedents</h3>
+              <p>Earlier resolved cases and approved amendments, ranked by cosine similarity.</p>
+            </div>
+            <Badge>No release authority</Badge>
+          </div>
+          <p className="small subtle">Precedents add context. Current approved references and deterministic policy still decide this transaction.</p>
+          {item.precedent_context.status === "unavailable" ? (
+            <Notice tone="amber">Precedent retrieval is unavailable. Inspect the preserved reference snapshot and policy checks.</Notice>
+          ) : item.precedent_context.matches.length ? (
+            <ol className="precedent-list">
+              {item.precedent_context.matches.map((precedent) => (
+                <li className="precedent-match" data-precedent-id={precedent.precedent_id} key={precedent.precedent_id}>
+                  <div className="precedent-match-heading">
+                    <span>{precedent.source_type === "resolved_case" ? "Resolved case" : "Approved amendment"}</span>
+                    <span className="precedent-similarity mono">Cosine similarity {precedent.similarity.toFixed(3)}</span>
+                  </div>
+                  <h4>{humanize(precedent.kind)} · {humanize(precedent.outcome)}</h4>
+                  <p>{precedent.summary}</p>
+                  <dl className="precedent-identifiers">
+                    <div><dt>Source</dt><dd>{precedent.source_type === "resolved_case" ? <a className="text-link mono" href={`#investigations/${encodeURIComponent(precedent.source_id)}`}>{precedent.source_id}</a> : <code>{precedent.source_id}</code>}</dd></div>
+                    <div><dt>Precedent</dt><dd><code>{precedent.precedent_id}</code></dd></div>
+                    <div><dt>Contract</dt><dd><code>{precedent.contract_id}</code></dd></div>
+                  </dl>
+                  {precedent.synthetic === true ? <Badge>Synthetic source</Badge> : precedent.synthetic === null ? <Badge>Source label not recorded</Badge> : null}
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="small subtle">No similar records were returned for this case.</p>
+          )}
+        </section>
+      )}
     </>
   );
 }
@@ -267,6 +303,7 @@ export function Timeline({ item }: { item: Investigation }) {
 }
 
 function AgentView({ item }: { item: Investigation }) {
+  const reads = item.agent?.tool_reads;
   return (
     <>
       <Notice tone="purple" icon={Sparkles}>
@@ -288,6 +325,22 @@ function AgentView({ item }: { item: Investigation }) {
                 : "Not recorded"}
             </MetaRow>
           </Metadata>
+          {reads && (
+            <section className="agent-tool-reads" aria-label="Evidence tool reads">
+              <h3>Evidence tool reads</h3>
+              <p className="small subtle">Counts come from the recorded callbacks for this investigation.</p>
+              <Metadata>
+                {([
+                  ["message", "Current message"],
+                  ["contracts", "Approved contracts"],
+                  ["related", "Related records"],
+                  ["precedents", "Similar precedents"],
+                ] as const).map(([key, label]) => (
+                  <MetaRow label={label} key={key} mono><span data-tool-read={key}>{typeof reads[key] === "number" ? reads[key] : "Not recorded"}</span></MetaRow>
+                ))}
+              </Metadata>
+            </section>
+          )}
           <JsonBlock value={item.agent} title="Native agent activity" />
         </>
       ) : (

@@ -21,6 +21,35 @@ const Finding = z
   })
   .passthrough();
 
+const AgentObservation = z.object({
+  tool_reads: z.object({
+    message: z.number().int().nonnegative().optional(),
+    contracts: z.number().int().nonnegative().optional(),
+    related: z.number().int().nonnegative().optional(),
+    precedents: z.number().int().nonnegative().optional(),
+  }).passthrough().nullable().optional(),
+}).catchall(z.unknown());
+
+export const PrecedentContextSchema = z.object({
+  status: z.enum(["retrieved", "unavailable"]),
+  implementation: z.literal("IRIS VECTOR_COSINE"),
+  model: z.literal("all-minilm:22m"),
+  dimensions: z.literal(384),
+  matches: z.array(z.object({
+    precedent_id: Text,
+    source_id: Text,
+    source_type: z.enum(["resolved_case", "approved_amendment"]),
+    contract_id: Text,
+    kind: Text,
+    summary: Text.max(400),
+    outcome: Text,
+    similarity: z.number().finite().min(-1).max(1),
+    synthetic: z.boolean().nullable(),
+    decision_authority: z.literal(false),
+  }).passthrough()).max(3),
+  decision_authority: z.literal(false),
+}).passthrough();
+
 export const CaseSchema = z
   .object({
     id: Text,
@@ -40,7 +69,7 @@ export const CaseSchema = z
       .passthrough()
       .nullable(),
     recommendation: JsonObject.nullable(),
-    agent: JsonObject.nullable(),
+    agent: AgentObservation.nullable(),
     policy: z
       .object({
         decision: Decision,
@@ -89,6 +118,7 @@ export const CaseSchema = z
         decision_authority: z.literal(false),
       }).passthrough()).max(2),
     }).passthrough().optional(),
+    precedent_context: PrecedentContextSchema.optional(),
   })
   .passthrough();
 export type Investigation = z.infer<typeof CaseSchema>;

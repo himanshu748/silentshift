@@ -8,7 +8,7 @@ Updated 2026-11-03 IST. The local operator journey catches semantic contradictio
 |---|---|
 | 1. Provider traceability | **Passed.** Full native run `00d3f243-3532-4166-ab31-0ac05d3f1f39`:5/5 expected routes, native investigations and four actual provider calls per case. Ten transport contract checks passed. Actual local HTTP400 failure remains held. Authenticated native Visual Trace screenshots and paired metadata are in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). |
 | 2. Native human review | **Passed.** Reviewer-only native task API/view,54 queue/concurrency checks, actual UI approve/reject and native deferred responses. Full run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed5/5; all four held cases have tasks. [Gate](evidence/step2-gate.json). |
-| 3. Case/amendment precedents | Pending. Existing procedural vectors are explicitly separate from the requested precedent search. |
+| 3. Case/amendment precedents | **Passed.** Native384-dimensional VECTOR, actual resolved-case/amendment indexing, top3scoped search/fourth tool/UI and native misleading-precedent veto. Warmed serial run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed5/5.172Python/32disconnected/16native browser checks passed. Earlier timeout trials retained. [Gate](evidence/step3-gate.json). |
 | 4. Custom inbound adapter | Earlier live held/delivered files observed; final integration revalidation pending. |
 | 5. Clean IPM installation | Existing-namespace load/package/UAT passed; fresh-container install pending. Registry publication excluded. |
 

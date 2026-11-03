@@ -104,6 +104,54 @@ def test_changed_semantics_and_missing_native_tools_are_excluded():
     assert report["excluded_records"] == 2
 
 
+@pytest.mark.parametrize("prompt_version", ["silentshift-investigator/1.0.0", "silentshift-investigator/1.2.0"])
+def test_historical_three_tool_catalog_remains_accepted(prompt_version):
+    artifact = synthetic_export_for_aggregator_test()
+    for record in artifact["records"]:
+        record["agent"]["prompt_version"] = prompt_version
+    report = aggregate_native(artifact, DATASET)
+    assert report["accepted_records"] == 5
+    assert report["passed"]
+
+
+@pytest.mark.parametrize("prompt_version", ["silentshift-investigator/1.3.0", "silentshift-investigator/1.10.0", "silentshift-investigator/2.0.0"])
+def test_current_prompt_requires_actual_fourth_read(prompt_version):
+    artifact = synthetic_export_for_aggregator_test()
+    for record in artifact["records"]:
+        record["agent"].update({"prompt_version": prompt_version, "tool_catalog_version": "silentshift-evidence-tools/1"})
+        record["agent"]["tool_reads"]["precedents"] = 1
+    artifact["records"][0]["agent"]["tool_reads"]["precedents"] = 0
+    del artifact["records"][1]["agent"]["tool_reads"]["precedents"]
+    artifact["records"][2]["agent"]["tool_reads"]["precedents"] = True
+    report = aggregate_native(artifact, DATASET)
+    assert report["accepted_records"] == 2
+    assert report["excluded_records"] == 3
+    assert sum("four required" in issue for issue in report["issues"]) == 3
+    assert not report["passed"]
+
+
+def test_explicit_current_catalog_requires_fourth_read_with_older_prompt():
+    artifact = synthetic_export_for_aggregator_test()
+    for record in artifact["records"]:
+        record["agent"].update({"prompt_version": "silentshift-investigator/1.2.0", "tool_catalog_version": "silentshift-evidence-tools/2"})
+        record["agent"]["tool_reads"]["precedents"] = 1
+    del artifact["records"][0]["agent"]["tool_reads"]["precedents"]
+    report = aggregate_native(artifact, DATASET)
+    assert report["accepted_records"] == 4
+    assert report["excluded_records"] == 1
+    assert "four required" in report["issues"][0]
+
+
+def test_current_four_tool_catalog_is_accepted_with_all_observed_reads():
+    artifact = synthetic_export_for_aggregator_test()
+    for record in artifact["records"]:
+        record["agent"].update({"prompt_version": "silentshift-investigator/1.3.0", "tool_catalog_version": "silentshift-evidence-tools/2"})
+        record["agent"]["tool_reads"]["precedents"] = 1
+    report = aggregate_native(artifact, DATASET)
+    assert report["accepted_records"] == 5
+    assert report["passed"]
+
+
 def test_unsafe_delivery_uses_persisted_routing_even_if_policy_says_quarantine():
     artifact = synthetic_export_for_aggregator_test()
     artifact["records"][0]["routing"] = "DELIVERED"

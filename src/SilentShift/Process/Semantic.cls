@@ -61,6 +61,20 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
                 Set detail = {"status": (context.%Get("status")), "implementation": "IRIS VECTOR_COSINE", "match_count": (context.%Get("matches").%Size()), "decision_authority": false}
                 Set sc = ##class(SilentShift.Store).AddEvent(id, "runbook_retrieved", detail.%ToJSON())
                 $$$ThrowOnError(sc)
+                Set stage = "similar-precedents"
+                Set optionalStatus = ..SendRequestSync("Precedents", request, .precedentReply, 10)
+                Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "model": "all-minilm:22m", "dimensions": 384, "matches": [], "decision_authority": false, "failure_code": "PRECEDENT_RETRIEVAL_UNAVAILABLE"}
+                If $$$ISOK(optionalStatus), $ISOBJECT(precedentReply), precedentReply.BodyJSON '= "" {
+                    Set context = ##class(%DynamicObject).%FromJSON(precedentReply.BodyJSON)
+                }
+                Do context.%Set("case_id",id)
+                Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+                Do body.%Set("precedent_context",context)
+                Set sc = ##class(SilentShift.Store).SaveCase(id,body.%ToJSON())
+                $$$ThrowOnError(sc)
+                Set detail = {"status":(context.%Get("status")),"implementation":"IRIS VECTOR_COSINE","match_count":(context.%Get("matches").%Size()),"decision_authority":false}
+                Set sc = ##class(SilentShift.Store).AddEvent(id,"precedents_retrieved",detail.%ToJSON())
+                $$$ThrowOnError(sc)
                 // Optional context cannot veto an otherwise valid case, and
                 // cannot supply missing contract evidence or authorize ALLOW.
             }
@@ -119,6 +133,15 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
         If $ISOBJECT(policy), policy.%Get("downstream_permitted") Set target = "Destination"
         Set sc = ..SendRequestSync(target, request, .routeReply, 10)
         $$$ThrowOnError(sc)
+        // Completed source records become future evidence in a separate pool.
+        // Indexing cannot change policy, case state or the committed receipt.
+        Set routed = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+        If (routed.%Get("routing") = "DELIVERED") || (routed.%Get("routing") = "REJECTED") {
+            Set indexRequest = ##class(SilentShift.Message).%New()
+            Set indexRequest.CaseId = id, indexRequest.Action = "index_precedent"
+            Set indexStatus = ..SendRequestAsync("Precedents",indexRequest,0,"","Index resolved precedent")
+            If $$$ISERR(indexStatus) Set ignored = ##class(SilentShift.Store).AddEvent(id,"precedent_index_enqueue_failed",{"code":"PRECEDENT_INDEX_UNAVAILABLE","decision_authority":false}.%ToJSON())
+        }
         // Newly processed review and quarantine holds create native tasks.
         // Existing benchmark/history cases are never scanned or backfilled.
         If request.Action '= "review_route" {

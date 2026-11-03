@@ -124,7 +124,7 @@ def main() -> int:
             agent = record.get("agent") or {}
             reads = agent.get("tool_reads") or {}
             native = (agent.get("mode") == "native-ai-hub" and agent.get("status") == "returned"
-                      and all(isinstance(reads.get(k), (int, float)) and reads[k] >= 1 for k in ("message", "contracts", "related")))
+                      and all(isinstance(reads.get(k), (int, float)) and not isinstance(reads[k], bool) and reads[k] >= 1 for k in ("message", "contracts", "related", "precedents")))
             trace = bool(str(record.get("trace_id") or "").strip())
             correct = (record.get("policy") or {}).get("decision") == scenario["ground_truth"]["decision"]
             held = scenario["ground_truth"]["decision"] != "ALLOW"

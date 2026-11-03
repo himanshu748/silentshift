@@ -69,7 +69,7 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
 3. Load the official archive outside this repository:
 
    ```sh
-   docker load -i "/absolute/path/to/official-build154-docker.tar.gz"
+   docker load -i "/absolute/path/to/official-build 154-docker.tar.gz"
    docker images
    ```
 
@@ -107,7 +107,7 @@ Use the reviewer account for the complete safety gate. The following command inv
 uv run --env-file .env python scripts/verify_native.py --allow-model-calls
 ```
 
-It checks actual build 154/production status, anonymous denial, all three native evidence reads, nonempty trace IDs, expected policy/routing, one or zero simulator receipts, safe replay, critical reviewer-release denial and persisted evaluation agreement. Evidence goes to ignored `evidence/native/latest.json`. The Evaluations view reads the server-persisted report. A viewer-only execution cannot pass the critical reviewer-policy gate.
+It checks actual build 154/production status, anonymous denial, all four native evidence reads, nonempty trace IDs, expected policy/routing, one or zero simulator receipts, safe replay, critical reviewer-release denial and persisted evaluation agreement. Evidence goes to ignored `evidence/native/latest.json`. The Evaluations view reads the server-persisted report. A viewer-only execution cannot pass the critical reviewer-policy gate.
 
 Inspect Visual Trace in IRIS using the recorded session ID and an appropriately privileged portal account. Actual checks also cover viewer denial, critical-release veto, typed/blank review reasons, rejection resolution, concurrent approval with one receipt, and restart/recreation persistence. Reference-limit integration tests invoke no model and preserve their isolated synthetic rows:
 
@@ -158,6 +158,16 @@ uv run python scripts/verify_native_runbooks.py --allow-local-embedding-calls
 ```
 
 This performs local embedding calls but creates no LLM investigation. The workbench preserves the top two retrieved procedures; the current prompt passes at most one 400-character excerpt through `GetRelatedRecords`. Procedures guide investigation and never authorize a conversion, amendment or release. This is procedural guidance, not a verified search over previous investigations or a relevance benchmark.
+
+### Find a precedent without borrowing its authority
+
+The **Similar precedents** panel shows up to three real resolved cases or approved amendments with source IDs, outcomes and cosine scores. Local `all-minilm:22m` produces 384-dimensional embeddings stored in a native IRIS `VECTOR` column. The production retrieves them before the native agent's fourth read-only tool, `find_similar_precedents`. Current contracts and deterministic policy remain the release authority.
+
+```sh
+uv run python scripts/verify_native_precedents.py --seed --allow-local-embedding-calls
+```
+
+The first seed indexed 15 actual resolved demo cases and one approved amendment. New completed cases are indexed through the production. The current five-case run passed 5/5 with all four reads; a retrieved past delivery could not release a critical current order. See [the precedent walkthrough](docs/PRECEDENTS.md) for commands, screenshots, the misleading-history test and exact runtime limits. The successful repeat used a warmed local model and serialized execution; cold or loaded attempts that timed out are retained separately.
 
 ### Package the native backend with IPM
 

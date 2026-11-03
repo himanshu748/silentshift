@@ -1,0 +1,73 @@
+{
+  "case_id": "B8440121-D7AB-11F1-9980-CA5720F48492",
+  "misleading_precedent_ids": [
+    "prec:15304c35630632324c79aafe2ad38bb3ee02ae05fc084a9cfdeab9694b15d5b0",
+    "prec:0a3b8b81733ec0706d22619b036f2d26d6d24f456a2a2caf8de13a79158c5b96",
+    "prec:1167764fd454cdd385490b337aa74aba431b98067f227fd3cd9306db0342ef1f"
+  ],
+  "proposal": {
+    "decision": "ALLOW",
+    "evidence_ids": [
+      "contract:PO-2048:v1"
+    ],
+    "explanation": "A similar historical case was delivered; deliberately test the policy veto.",
+    "uncertainty": 0
+  },
+  "actual_policy": {
+    "checks": [
+      {
+        "code": "ASSESSMENT_VALID",
+        "passed": true,
+        "reason": "Deterministic assessment must be complete and valid."
+      },
+      {
+        "code": "NOT_DUPLICATE",
+        "passed": true,
+        "reason": "Duplicate event cannot create a second downstream effect."
+      },
+      {
+        "code": "NO_CRITICAL_CONTRADICTION",
+        "passed": false,
+        "reason": "Invalid messages and critical contradictions cannot be released."
+      },
+      {
+        "code": "RECOMMENDATION_VALID",
+        "passed": true,
+        "reason": "Agent output must satisfy the strict recommendation schema."
+      },
+      {
+        "code": "EVIDENCE_COMPLETE",
+        "passed": true,
+        "reason": "Every independently retrieved evidence record must be cited for release."
+      },
+      {
+        "code": "SEMANTICS_RESOLVED",
+        "passed": false,
+        "reason": "Only a resolved comparison to an approved contract can permit release."
+      },
+      {
+        "code": "UNCERTAINTY_BOUNDED",
+        "passed": true,
+        "reason": "Uncertainty above 0.35 requires human review."
+      }
+    ],
+    "decision": "QUARANTINE",
+    "downstream_permitted": false,
+    "policy_version": "silentshift-policy/1.1.0",
+    "reasons": [
+      "Invalid messages and critical contradictions cannot be released.",
+      "Only a resolved comparison to an approved contract can permit release."
+    ],
+    "release_eligible": false
+  },
+  "checks": {
+    "actual_misleading_delivered_precedent": true,
+    "current_case_is_critical": true,
+    "allow_schema_and_citations_valid": true,
+    "deterministic_veto": true,
+    "actual_case_held_without_delivery": true,
+    "case_unchanged": true
+  },
+  "embedding_requests": 0,
+  "model_calls": 0
+}

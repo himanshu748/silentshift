@@ -160,7 +160,7 @@ Method ResponseMetadata(raw As %String, response As SilentShift.Provider.CallRes
             Set item = source.%Get(index), function = item.%Get("function"), name = "unrecognized"
             If $ISOBJECT(function) {
                 Set candidate = function.%Get("name")
-                If (candidate = "GetCurrentMessage") || (candidate = "GetApprovedContracts") || (candidate = "GetRelatedRecords") Set name = candidate
+                If (candidate = "GetCurrentMessage") || (candidate = "GetApprovedContracts") || (candidate = "GetRelatedRecords") || (candidate = "find_similar_precedents") Set name = candidate
             }
             Set id = item.%Get("id"), safeId = ""
             If ($LENGTH(id) <= 96) && (id ? 1.96(1AN,1"_",1"-")) Set safeId = id

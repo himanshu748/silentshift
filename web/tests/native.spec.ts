@@ -385,6 +385,52 @@ test("a delivered amendment shows its actual evidence and simulator outcome", as
   await evidence(page, testInfo, "approved-delivery");
 });
 
+test("precedent evidence matches real case-scoped vector results and recorded tool reads", async ({ page }, testInfo) => {
+  const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+  const candidate = cases.items.find((item) => item.precedent_context?.status === "retrieved" && item.precedent_context.matches.length > 0 && (item.agent?.tool_reads?.precedents ?? 0) > 0);
+  if (!candidate) throw new Error("Prepare an actual native case with retrieved precedents and an observed fourth tool read; this suite never creates one.");
+  const actual = await read(`/cases/${encodeURIComponent(candidate.id)}`, CaseSchema);
+  const context = actual.precedent_context!;
+  expect(context.implementation).toBe("IRIS VECTOR_COSINE");
+  expect(context.model).toBe("all-minilm:22m");
+  expect(context.dimensions).toBe(384);
+  expect(context.decision_authority).toBe(false);
+  expect(context.matches.length).toBeLessThanOrEqual(3);
+  expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.3.1");
+  await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
+  await login(page);
+  await expect(page.locator(".case-detail-heading")).toContainText(actual.id);
+  const precedents = page.getByRole("region", { name: "Similar precedents", exact: true });
+  await expect(precedents).toBeVisible();
+  await expect(precedents).toContainText("No release authority");
+  await expect(precedents.locator(".precedent-match")).toHaveCount(context.matches.length);
+  for (const precedent of context.matches) {
+    expect(precedent.decision_authority).toBe(false);
+    expect(Number.isFinite(precedent.similarity)).toBe(true);
+    expect(precedent.similarity).toBeGreaterThanOrEqual(-1);
+    expect(precedent.similarity).toBeLessThanOrEqual(1);
+    const row = precedents.locator(".precedent-match").filter({ hasText: precedent.precedent_id });
+    await expect(row).toContainText(precedent.source_id);
+    await expect(row).toContainText(precedent.summary);
+    await expect(row).toContainText(label(precedent.outcome));
+    await expect(row.locator(".precedent-similarity")).toHaveText(`Cosine similarity ${precedent.similarity.toFixed(3)}`);
+    await expect(row.getByText("Synthetic source", { exact: true })).toHaveCount(precedent.synthetic === true ? 1 : 0);
+    await expect(row.getByText("Source label not recorded", { exact: true })).toHaveCount(precedent.synthetic === null ? 1 : 0);
+    if (precedent.source_type === "resolved_case") {
+      expect(precedent.source_id).not.toBe(actual.id);
+      await expect(row.getByRole("link", { name: precedent.source_id, exact: true })).toHaveAttribute("href", `#investigations/${encodeURIComponent(precedent.source_id)}`);
+    } else await expect(row).toContainText("Approved amendment");
+    expect(await row.evaluate((node) => node.scrollWidth <= node.clientWidth + 1)).toBe(true);
+  }
+  await page.getByRole("tab", { name: "Agent", exact: true }).click();
+  await expect(page.getByRole("region", { name: "Evidence tool reads", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tool-read="precedents"]')).toHaveText(String(actual.agent!.tool_reads!.precedents));
+  await page.getByRole("tab", { name: "Evidence", exact: true }).click();
+  await precedents.scrollIntoViewIfNeeded();
+  await assertHealthyRenderedPage(page);
+  await evidence(page, testInfo, "precedent-evidence");
+});
+
 test("all eight routes expose real read-only state or reviewer permission", async ({
   page,
 }, testInfo) => {

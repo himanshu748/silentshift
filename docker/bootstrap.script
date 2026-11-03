@@ -6,6 +6,9 @@ set sc=$system.OBJ.LoadDir("/opt/silentshift/src","k",,1)
 if $system.Status.IsError(sc) { write "SILENTSHIFT_LOAD_FAILED",! halt }
 set sc=$system.OBJ.CompilePackage("SilentShift","ck")
 if $system.Status.IsError(sc) { write "SILENTSHIFT_COMPILE_FAILED",! halt }
+; Source installation explicitly selects its matching mounted Python/assets.
+; An earlier IPM activation can otherwise leave a stale manager asset root.
+set ^SilentShift.Config("AssetRoot")="/opt/silentshift"
 set sc=##class(SilentShift.Setup).Install()
 if $system.Status.IsError(sc) { write $system.Status.GetErrorText(sc),! halt }
 write "SILENTSHIFT_BOOTSTRAP_OK",!

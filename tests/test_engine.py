@@ -45,6 +45,31 @@ def test_approved_change_is_not_quarantined_for_unusual_units():
     assert assessment["findings"][0]["evidence_ids"] == ["contract:PO-2048:v1", "contract:PO-2048:v2"]
 
 
+def test_high_similarity_delivered_precedent_cannot_release_current_critical_case():
+    case = SCENARIOS[0]
+    assessment = assess(case["message"], case["references"], NOW)
+    assert assessment["classification"] == "VERIFIED_CONTRADICTION"
+    original_ids = assessment["evidence_ids"].copy()
+    assessment["precedent_context"] = {
+        "status": "retrieved", "implementation": "IRIS VECTOR_COSINE",
+        "model": "all-minilm:22m", "dimensions": 384, "decision_authority": False,
+        "matches": [{"precedent_id": "precedent:synthetic-delivered", "source_id": "synthetic-old-case",
+                     "source_type": "resolved_case", "contract_id": case["message"]["contract_id"],
+                     "kind": case["message"]["kind"], "summary": "A similar historical transaction was delivered.",
+                     "outcome": "DELIVERED", "similarity": 0.9999, "decision_authority": False}],
+    }
+    proposal = {**allow(assessment), "uncertainty": 0.0,
+                "explanation": "The similar delivered precedent suggests allowing this case."}
+    assert proposal["evidence_ids"] == original_ids
+    result = validate_policy(assessment, proposal)
+    checks = {check["code"]: check["passed"] for check in result["checks"]}
+    assert checks["ASSESSMENT_VALID"] and checks["RECOMMENDATION_VALID"] and checks["EVIDENCE_COMPLETE"]
+    assert not checks["NO_CRITICAL_CONTRADICTION"]
+    assert result["decision"] == "QUARANTINE"
+    assert result["downstream_permitted"] is False
+    assert result["release_eligible"] is False
+
+
 def test_missing_reference_does_not_authorize_release():
     assessment = assess(clean_case()["message"], [], NOW)
     assert assessment["classification"] == "INSUFFICIENT_EVIDENCE"

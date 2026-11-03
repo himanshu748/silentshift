@@ -60,7 +60,7 @@ def main() -> int:
                 "context_never_authority": context.get("decision_authority") is False and all(m.get("decision_authority") is False for m in context.get("matches", [])),
                 "native_agent_read_related": agent.get("status") == "returned" and (agent.get("tool_reads") or {}).get("related", 0) >= 1,
                 "retrieval_before_investigation": "runbook_retrieved" in kinds and "agent_invoked" in kinds and kinds.index("runbook_retrieved") < kinds.index("agent_invoked"),
-                "known_prompt": agent.get("prompt_version") in {"silentshift-investigator/1.1.0", "silentshift-investigator/1.2.0"},
+                "known_prompt": agent.get("prompt_version") in {"silentshift-investigator/1.1.0", "silentshift-investigator/1.2.0", "silentshift-investigator/1.3.0", "silentshift-investigator/1.3.1"},
             }
             artifact["case"] = {"id": case["id"], "trace_id": case.get("trace_id"), "routing": case.get("routing"),
                                 "delivery_count": case.get("delivery_count"), "context": context,

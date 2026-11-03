@@ -60,7 +60,10 @@ def validate(observed: dict, *, budget: bool = False) -> dict[str, bool]:
     invocation_id = tracing.get("invocation_id")
     trace_headers = [h for h in headers if h["body_class"] == "SilentShift.TraceEvent"]
     audits = observed["trace_audits"]
-    expected_minimum = 1 if budget else 8
+    tools = ("GetCurrentMessage", "GetApprovedContracts", "GetRelatedRecords")
+    if agent.get("prompt_version") in {"silentshift-investigator/1.3.0", "silentshift-investigator/1.3.1"}:
+        tools += ("find_similar_precedents",)
+    expected_minimum = 1 if budget else 2 + 2 * len(tools)
     terminal_kind = "invocation_skipped" if budget else "invocation_completed"
     terminal = [s for s in spans if s["event_kind"] == terminal_kind]
     checks = {
@@ -71,7 +74,7 @@ def validate(observed: dict, *, budget: bool = False) -> dict[str, bool]:
         "audit_header_association": {a["message_header_id"] for a in audits} == {h["id"] for h in trace_headers},
         "case_and_invocation_association": bool(spans) and all(s["case_id"] == observed["case_id"] and str(s["production_session_id"]) == trace_id and (s["span_id"] == invocation_id or s["parent_span_id"] == invocation_id) for s in spans),
         "no_capture_or_enqueue_failures": tracing.get("enqueue_failures") == 0 and tracing.get("capture_failures") == 0,
-        "known_granularity_and_prompt_version": bool(spans) and agent.get("prompt_version") in {"silentshift-investigator/1.0.0", "silentshift-investigator/1.1.0", "silentshift-investigator/1.2.0"} and all(s["granularity"] == "agent_invocation_and_tool" and s["prompt_version"] == agent["prompt_version"] for s in spans),
+        "known_granularity_and_prompt_version": bool(spans) and agent.get("prompt_version") in {"silentshift-investigator/1.0.0", "silentshift-investigator/1.1.0", "silentshift-investigator/1.2.0", "silentshift-investigator/1.3.0", "silentshift-investigator/1.3.1"} and all(s["granularity"] == "agent_invocation_and_tool" and s["prompt_version"] == agent["prompt_version"] for s in spans),
         "honest_usage_retry_fallback_fields": bool(spans) and all(s["usage_scope"] == "final_response_only" and s["session_totals"] is None and s["provider_round_usage"] is None and s["provider_round_count"] is None and s["provider_retry_count"] is None and s["billing_cost"] is None and s["application_retry_count"] == 0 and s["fallback_used"] is False for s in spans),
         "bounded_metadata_without_content": bool(spans) and all(len(json.dumps(s).encode()) <= 8192 and s["content_retained"] is False and not ({"prompt", "arguments", "content", "api_key", "raw_response"} & s.keys()) for s in spans),
         "one_terminal_invocation": len(terminal) == 1,
@@ -83,12 +86,11 @@ def validate(observed: dict, *, budget: bool = False) -> dict[str, bool]:
             "held_without_delivery": observed["routing"] == "REVIEW" and observed["delivery_count"] == 0,
         })
     else:
-        tools = ("GetCurrentMessage", "GetApprovedContracts", "GetRelatedRecords")
         starts = [s for s in spans if s["event_kind"] == "invocation_started"]
         completed = [s for s in spans if s["event_kind"] == "tool_completed"]
         checks.update({
             "actual_native_chat_returned": len(starts) == 1 and len(terminal) == 1 and terminal[0]["native_chat_returned"] is True and terminal[0]["model_invoked"] is True and agent["status"] == "returned",
-            "three_actual_tool_spans": all(any(s["tool_name"] == name and s["status"] == "completed" for s in completed) for name in tools),
+            "all_required_tool_spans": all(any(s["tool_name"] == name and s["status"] == "completed" for s in completed) for name in tools),
             "paired_actual_tool_spans": all(sum(s["span_id"] == t["span_id"] and s["event_kind"] == "tool_started" for s in spans) == 1 and t["duration_ms"] is not None and t["duration_ms"] >= 0 and bool(t["started_at"]) and bool(t["finished_at"]) for t in completed),
             "final_usage_matches_sdk_response": len(terminal) == 1 and terminal[0]["final_response_usage"] == agent.get("response_usage") and terminal[0]["duration_ms"] is not None,
         })

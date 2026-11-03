@@ -49,6 +49,10 @@ uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 
 The [54-check receipt](evidence/review-queue.json) includes native task listing, rejection with zero deliveries and two simultaneous identical approvals producing one review receipt, one native completion response and one simulator delivery. The [actual workbench actions](evidence/review-ui.json) independently completed approve/reject. The earlier [43-check receipt](evidence/workflow.json) retains the controlled postcommit503 recovery. This does not prove every outage or crash path.
 
+## Compare a past outcome with current authority
+
+In the current quantity or unsafe-output case, open **Similar precedents** below the reference snapshot. Inspect the three actual source IDs and cosine scores, then follow a source-case link. Prior deliveries are context; the current critical contradiction stays held. The [native vector walkthrough](PRECEDENTS.md) includes source validation, fourth-tool reads and a validALLOW proposal that policy vetoed. The current five-case run passed5/5 with four actual tools; payment history is empty and shown honestly.
+
 ## What to assess against the rubric
 
 | Official criterion | Inspect |

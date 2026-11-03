@@ -72,12 +72,12 @@ ClassMethod ChatCompletions() As %Status
         If (messages.%ClassName(1) '= "%Library.DynamicArray") || (messages.%Size() < 1) || (messages.%Size() > 32) Return ..Fail(422,"PROVIDER_MESSAGES_BOUNDS")
         Set names = [], tools = payload.%Get("tools")
         If $ISOBJECT(tools) {
-            If (tools.%ClassName(1) '= "%Library.DynamicArray") || (tools.%Size() > 3) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
+            If (tools.%ClassName(1) '= "%Library.DynamicArray") || (tools.%Size() > 4) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
             For index = 0:1:tools.%Size()-1 {
                 Set item = tools.%Get(index), function = item.%Get("function")
                 If '$ISOBJECT(function) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Set name = function.%Get("name")
-                If (name '= "GetCurrentMessage") && (name '= "GetApprovedContracts") && (name '= "GetRelatedRecords") Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
+                If (name '= "GetCurrentMessage") && (name '= "GetApprovedContracts") && (name '= "GetRelatedRecords") && (name '= "find_similar_precedents") Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Do names.%Push(name)
             }
         }

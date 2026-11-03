@@ -8,7 +8,7 @@ Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minil
 |---|---:|---|
 | DPI-I-689 provider traceability |4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all40 persisted provider messages passed correlation checks. Actual Ollama400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
 | Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view.54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
-| IRIS Vector Search precedents |2 | Five local procedural runbooks have real384-dimensional vectors and native cosine retrieval. They are **not** past-case/amendment precedents. Fourth tool and precedent evidence remain pending. |
+| IRIS Vector Search precedents |2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into384-dimensional IRIS VECTOR rows. Top3case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed.5/5 native retained; award unconfirmed. |
 | Custom inbound adapter |2 | Live ready-file intake previously created held cases and then delivered an approved amendment once after a wait-budget fix. Revalidation after the new integrations remains pending. |
 | IPM package |2 | Real local load/package/UAT passed in the existing namespace. A fresh-container installation remains pending. Registry publication is manual and not authorized here. |
 
@@ -65,6 +65,26 @@ SILENTSHIFT_NATIVE_E2E=1 uv run --env-file .env npm --prefix web run test:e2e:na
 ![Native deferred Workflow response after actual UI approval](assets/review-workflow-visual-trace.png)
 
 The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed5/5; all four held cases have real native tasks. Python164, TypeScript/build,32 disconnected/landing and14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
+
+## 3. Similar history stays separate from current authority
+
+An operator can open **Similar precedents** beside the current reference snapshot, inspect actual source IDs, outcomes and cosine scores, and follow a resolved-case link. The production's `Precedents` operation performs the local embedding and native SQL search; `find_similar_precedents` reads the bound snapshot. Neither can alter policy, references or a delivery receipt.
+
+```sh
+uv run python scripts/verify_native_precedents.py --seed --allow-local-embedding-calls
+uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step3-serial-five.json
+uv run python scripts/verify_native_precedents.py --inspect-case B8440121-D7AB-11F1-9980-CA5720F48492
+```
+
+The initial seed wrote16 actual vectors (15resolved cases, one approved amendment). Native metadata proves `%Library.Vector`,384dimensions,DOUBLE; native self-cosines and source bindings passed. Automatic production indexing raised the retained corpus to18 rows after new completed cases. [Source/vector proof](evidence/precedent-corpus.json).
+
+The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed5/5 with all four native reads. Each case made two actual provider exchanges; each exchange has a native request/response pair. Case `B8440121-D7AB-11F1-9980-CA5720F48492`, session1266, retrieved three previous deliveries and stayed quarantined with zero receipts. A separate native read-only test constructed a validALLOW with current citations and zero uncertainty; the critical policy veto remained. [Veto proof](evidence/precedent-veto.json) · [retrieval/tool/header proof](evidence/precedents.json).
+
+![Real scored precedent evidence](assets/precedent-evidence-desktop.png)
+
+[Mobile capture](assets/precedent-evidence-mobile.png) · [walkthrough and commands](PRECEDENTS.md) · [full gate](evidence/step3-gate.json).
+
+Python172, TypeScript/build,32 disconnected/landing and16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
 
 ## Other eligible technology and manual work
 
