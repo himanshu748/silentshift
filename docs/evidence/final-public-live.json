@@ -1,0 +1,308 @@
+{
+  "source": "public-registry",
+  "version": "0.2.0",
+  "image_id": "sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713",
+  "source_mounts": 0,
+  "execution_mode": "live",
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "install_command": "install silentshift",
+  "installed_version": "0.2.0",
+  "production_started": true,
+  "full_native_unit_suite_passed": true,
+  "registry_install_verified": true,
+  "unit_pass_output": [
+    "TestContracts passed",
+    "TestIterator passed",
+    "SilentShift.Test.AdapterChecks passed",
+    "TestAuthorizationRejectsUnknownCapability passed",
+    "TestExpiredCapability passed",
+    "TestMetadataOnlyMessages passed",
+    "TestPerCallModelTokensAndLatency passed",
+    "TestPlaybackCannotLookLikeLiveInference passed",
+    "SilentShift.Test.ProviderChecks passed",
+    "TestPlaybackScopeAndCriticalPolicy passed",
+    "TestRecordedResponseProgression passed",
+    "SilentShift.Test.ReplayChecks passed",
+    "TestApprovedReferenceLimit passed",
+    "TestPeerReferenceLimit passed",
+    "SilentShift.Test.RuntimeChecks passed",
+    "TestTypedMetadata passed",
+    "SilentShift.Test.TraceChecks passed",
+    "(root) passed"
+  ],
+  "unit_classes": 5,
+  "unit_methods": 12,
+  "native_five": {
+    "run_id": "551762a8-c679-4c70-a117-511ea8b29b49",
+    "native_verified": true,
+    "checks": [
+      {
+        "scenario_id": "quantity-mismatch",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "currency-scaling",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "approved-amendment",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "conflicting-references",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "unsafe-agent-output",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      }
+    ],
+    "evaluation": {
+      "dataset_version": "silentshift-eval/1.0.0",
+      "status": "MEASURED_COMPLETE",
+      "passed": true,
+      "execution": "native-ai-hub-export",
+      "provenance": "Metadata validated; source authenticity depends on the actual native verification script and retained traces.",
+      "expected_cases": 5,
+      "accepted_records": 5,
+      "excluded_records": 0,
+      "proposal_accuracy": {
+        "value": 0.8,
+        "numerator": 4,
+        "denominator": 5
+      },
+      "proposal_validity": {
+        "value": 1.0,
+        "numerator": 5,
+        "denominator": 5
+      },
+      "final_accuracy": {
+        "value": 1.0,
+        "numerator": 5,
+        "denominator": 5
+      },
+      "false_quarantine_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "unsafe_release": {
+        "count": 0,
+        "denominator": 4
+      },
+      "unsafe_allow": {
+        "count": 0,
+        "denominator": 4
+      },
+      "review_rate": {
+        "value": 0.2,
+        "numerator": 1,
+        "denominator": 5
+      },
+      "latency": {
+        "scope": "agent invocation only",
+        "mean_ms": 33901.6,
+        "p95_ms": 37167.0,
+        "observed_records": 5,
+        "total_records": 5
+      },
+      "model_usage": {
+        "total_prompt_tokens": {
+          "value": null,
+          "observed_records": 0,
+          "total_records": 5
+        },
+        "total_completion_tokens": {
+          "value": null,
+          "observed_records": 0,
+          "total_records": 5
+        },
+        "total_tool_calls": {
+          "value": null,
+          "observed_records": 0,
+          "total_records": 5
+        }
+      },
+      "model_cost": null,
+      "model_cost_note": "No billing-derived cost supplied; no estimates inferred from tokens.",
+      "issues": [],
+      "cases": [
+        {
+          "scenario_id": "quantity-mismatch",
+          "expected": "QUARANTINE",
+          "proposal": "QUARANTINE",
+          "proposal_valid": true,
+          "final": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "passed": true
+        },
+        {
+          "scenario_id": "currency-scaling",
+          "expected": "QUARANTINE",
+          "proposal": "QUARANTINE",
+          "proposal_valid": true,
+          "final": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "passed": true
+        },
+        {
+          "scenario_id": "approved-amendment",
+          "expected": "ALLOW",
+          "proposal": "ALLOW",
+          "proposal_valid": true,
+          "final": "ALLOW",
+          "routing": "DELIVERED",
+          "passed": true
+        },
+        {
+          "scenario_id": "conflicting-references",
+          "expected": "REQUEST_REVIEW",
+          "proposal": "QUARANTINE",
+          "proposal_valid": true,
+          "final": "REQUEST_REVIEW",
+          "routing": "REVIEW",
+          "passed": true
+        },
+        {
+          "scenario_id": "unsafe-agent-output",
+          "expected": "QUARANTINE",
+          "proposal": "QUARANTINE",
+          "proposal_valid": true,
+          "final": "QUARANTINE",
+          "routing": "QUARANTINED",
+          "passed": true
+        }
+      ]
+    },
+    "evaluation_persisted": true,
+    "passed": true
+  },
+  "cases": [
+    {
+      "id": "195B5F0F-D829-11F1-B511-77102A78FA25",
+      "scenario_id": "quantity-mismatch",
+      "session_id": "30",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "agent_mode": "native-ai-hub",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "id": "3000ECBE-D829-11F1-B511-77102A78FA25",
+      "scenario_id": "currency-scaling",
+      "session_id": "58",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "agent_mode": "native-ai-hub",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "id": "4154532A-D829-11F1-B511-77102A78FA25",
+      "scenario_id": "approved-amendment",
+      "session_id": "86",
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "agent_mode": "native-ai-hub",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "id": "57F90324-D829-11F1-B511-77102A78FA25",
+      "scenario_id": "conflicting-references",
+      "session_id": "113",
+      "routing": "REVIEW",
+      "delivery_count": 0,
+      "agent_mode": "native-ai-hub",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "id": "6C911B2E-D829-11F1-B511-77102A78FA25",
+      "scenario_id": "unsafe-agent-output",
+      "session_id": "141",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "agent_mode": "native-ai-hub",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    }
+  ],
+  "live_preparation": {
+    "approved_amendment_index": {
+      "report": {
+        "status": "indexed",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "eligible_sources": 1,
+        "written": 1,
+        "unchanged": 0,
+        "local_embedding_requests": 1,
+        "decision_authority": false
+      },
+      "persisted_rows": 1
+    },
+    "sdk_diagnostic_count": 1,
+    "sdk_diagnostic": {
+      "case_id": "11FE84A2-D829-11F1-B511-77102A78FA25",
+      "kind": "basic",
+      "trace_id": "24",
+      "provider_requests": 1,
+      "failure_caught": 0,
+      "gateway_error_code": "",
+      "route": "QUARANTINED",
+      "delivery_count": 0
+    }
+  }
+}

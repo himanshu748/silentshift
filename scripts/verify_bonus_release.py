@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Explicit fresh-container load/registry install, native tests and recorded playback.
+"""Explicit fresh-container registry/load install, native tests and replay or live checks.
 
 Only uniquely named new local resources are created. Existing stacks and the
 Docker default context are untouched. Credentials and command logs stay private.
@@ -17,11 +17,17 @@ import time
 
 from fetch_ipm import SHA256, SIZE
 from package_ipm import ROOT, stage
-from verify_ipm_clean import command, private_write, runtime_environment, space, activate
+from verify_ipm_clean import (
+    RELEASE, activate, command, prepare_native, private_write, runtime_environment, space,
+)
 from verify_ipm_native import literal
 
 
 def execute(args):
+    if args.execution_mode == 'live' and not args.allow_model_calls:
+        raise ValueError('Live verification requires --allow-model-calls for local inference')
+    if args.install_latest and args.source != 'public-registry':
+        raise ValueError('--install-latest requires --source public-registry')
     if not re.fullmatch(r'silentshift-bonus-(load|registry)-[a-z0-9-]{1,35}', args.container):
         raise ValueError('Use a new silentshift-bonus-load-* or silentshift-bonus-registry-* container')
     docker=['docker','--context',args.context]
@@ -36,10 +42,10 @@ def execute(args):
         raise ValueError('Pinned official IPM 0.10.10 installer is missing/mismatched')
     before_space=space(args)
     runtime=runtime_environment(args)
-    runtime['SILENTSHIFT_PROVIDER_MODE']='recorded-replay'
+    runtime['SILENTSHIFT_PROVIDER_MODE']=args.execution_mode
     plan={'container':args.container,'source':args.source,'version':args.version,
         'image_id':image['Id'],'source_mounts':0,'existing_runtime_modified':False,
-        'execution_mode':'recorded-replay','space':before_space,'executed':False}
+        'execution_mode':args.execution_mode,'space':before_space,'executed':False}
     if not args.execute: return plan
     output=ROOT/'.local/ipm/bonus-runs'/args.container
     output.mkdir(parents=True,mode=0o700)
@@ -99,7 +105,8 @@ def execute(args):
             run([*docker,'network','disconnect','none',args.container],'12-disconnect-none')
             run([*docker,'network','connect','bridge',args.container],'13-registry-egress')
             cli('repo -r -n PublicCommunity -url https://pm.community.intersystems.com/ -user "" -pass "" -publish 0 -read-only 1','14-public-repo')
-            install_command='install PublicCommunity/silentshift '+args.version+' -synchronous'
+            install_command=('install silentshift' if args.install_latest else
+                'install PublicCommunity/silentshift '+args.version+' -synchronous')
         print('IPM '+install_command,flush=True)
         cli(install_command,'15-install')
         version_text=session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\n'
@@ -110,7 +117,7 @@ def execute(args):
             cli('package silentshift -path '+base+'/export/','17-package')
             run([*docker,'cp',args.container+':'+base+'/export.tgz',str(output/('silentshift-'+args.version+'.tgz'))],'18-export')
         run([*docker,'cp',str(ROOT/'tests/iris'),args.container+':'+base+'/tests'],'19-tests')
-        print('Starting the installed native production (recorded playback mode)...',flush=True)
+        print('Starting the installed native production ('+args.execution_mode+')...',flush=True)
         if args.source=='public-registry':
             run([*docker,'network','disconnect','bridge',args.container],'20-disconnect-egress')
             run([*docker,'network','connect','none',args.container],'21-isolate-before-activation')
@@ -130,23 +137,41 @@ def execute(args):
         if ('**FAILED**' in unit or 'Some tests FAILED' in unit
                 or not all('SilentShift.Test.'+name+' passed' in unit for name in required_classes)):
             raise RuntimeError('Native test assertions failed; runner status alone is not test success')
-        phase='recorded playback'
         child={**os.environ,**runtime}
-        print('Running the no-key synthetic playback example...',flush=True)
-        run([os.sys.executable,str(ROOT/'scripts/trace_example.py'),'--api',
-            f'http://127.0.0.1:{args.api_port}/silentshift/api','--context',args.context,
-            '--container',args.container,'--output',str(output/'replay.json')],
-            '27-replay',env=child,timeout=300)
-        replay=json.loads((output/'replay.json').read_text())
+        replay=None; native_five=None; preparation=None
+        if args.execution_mode == 'recorded-replay':
+            phase='recorded playback'
+            print('Running the no-key synthetic playback example...',flush=True)
+            run([os.sys.executable,str(ROOT/'scripts/trace_example.py'),'--api',
+                f'http://127.0.0.1:{args.api_port}/silentshift/api','--context',args.context,
+                '--container',args.container,'--output',str(output/'replay.json')],
+                '27-replay',env=child,timeout=300)
+            replay=json.loads((output/'replay.json').read_text())
+        else:
+            phase='local embedding and SDK diagnostic'
+            run([*docker,'exec',args.container,'mkdir','-p',RELEASE],'27-diagnostic-directory')
+            preparation=prepare_native(output,args.container,docker,session,run)
+            phase='five live local investigations'
+            print('Running five real local Ollama investigations...',flush=True)
+            run([os.sys.executable,str(ROOT/'scripts/verify_native.py'),'--api',
+                f'http://127.0.0.1:{args.api_port}/silentshift/api','--allow-model-calls',
+                '--output',str(output/'native-five.json')],'28-native-five',env=child,timeout=1500)
+            native_five=json.loads((output/'native-five.json').read_text())
+            if not native_five.get('passed') or not native_five.get('native_verified') or len(native_five.get('checks',[])) != 5:
+                raise RuntimeError('Live native verification did not pass all five cases')
         receipt={**plan,'executed':True,'runtime':re.search(r'SS_RUNTIME=([^\r\n]+)',pristine).group(1),
             'install_command':install_command,'installed_version':args.version,
             'production_started':True,'full_native_unit_suite_passed':True,
-            'unit_output':unit,'replay':replay,'registry_install_verified':args.source=='public-registry',
+            'unit_output':unit,'replay':replay,'native_five':native_five,'live_preparation':preparation,
+            'registry_install_verified':args.source=='public-registry',
             'registry_published':args.source=='public-registry','retained_resources':True}
         private_write(output/'receipt.json',json.dumps(receipt,indent=2)+'\n')
         print(json.dumps({'receipt':str(output/'receipt.json'),'source':args.source,
-            'version':args.version,'unit_suite_passed':True,'replay_passed':replay['passed'],
-            'session_id':replay['session_id'],'visual_trace_url':replay['visual_trace_url']}),flush=True)
+            'version':args.version,'unit_suite_passed':True,
+            'replay_passed':replay['passed'] if replay else None,
+            'native_five_passed':native_five['passed'] if native_five else None,
+            'session_id':replay['session_id'] if replay else None,
+            'visual_trace_url':replay['visual_trace_url'] if replay else None}),flush=True)
         return receipt
     except Exception:
         private_write(output/'failure.json',json.dumps({'phase':phase,'retained_resources':True,'existing_runtime_modified':False})+'\n')
@@ -158,6 +183,9 @@ def main():
     p.add_argument('--source',choices=['load','public-registry'],required=True)
     p.add_argument('--container',required=True)
     p.add_argument('--version',default='0.2.0')
+    p.add_argument('--install-latest',action='store_true',help='Use literal public zpm install silentshift; still require the expected installed version')
+    p.add_argument('--execution-mode',choices=['recorded-replay','live'],default='recorded-replay')
+    p.add_argument('--allow-model-calls',action='store_true',help='Permit only the configured local Ollama live verification')
     p.add_argument('--context',default='colima-silentshift')
     p.add_argument('--vm-profile',default='silentshift')
     p.add_argument('--image',default='silentshift-iris:2026.3.0AI.154.0')
@@ -167,7 +195,7 @@ def main():
     p.add_argument('--min-host-free-gib',type=float,default=1.8)
     p.add_argument('--min-vm-free-gib',type=float,default=3)
     p.add_argument('--execute',action='store_true')
-    a=p.parse_args();a.activate_runtime=True;a.allow_model_calls=False
+    a=p.parse_args();a.activate_runtime=True
     try:result=execute(a)
     except (OSError,ValueError,RuntimeError,subprocess.TimeoutExpired) as e:p.exit(1,'Verification stopped: '+str(e)+'\n')
     if not a.execute:print(json.dumps(result,indent=2))

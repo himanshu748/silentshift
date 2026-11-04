@@ -44,7 +44,7 @@ Only after that commit does the application synchronize native completion. The n
 The resulting states are deliberately distinct:
 
 | Observed state | Persisted review decision | Native completion confirmed | Simulator delivery |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Awaiting a reviewer | No | No | None |
 | `completion_pending` | Yes | Not yet | Held during synchronization failure |
 | Completed approval and delivery | Yes | Yes | One receipt in the verified journey |

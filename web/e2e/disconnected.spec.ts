@@ -71,3 +71,20 @@ test('navigation remains usable with reduced motion and captures actual UI', asy
   await page.getByRole('link', { name: 'Scenario Lab', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Scenario Lab', exact: true })).toBeVisible();
 });
+
+
+test('quick navigation works with keyboard and restores focus on Escape',async({page})=>{
+  await page.goto('/#investigations');
+  const trigger=page.getByRole('button',{name:'Go to workspace',exact:true});
+  await trigger.click();
+  const dialog=page.getByRole('dialog',{name:'Go to workspace',exact:true});
+  await expect(dialog.getByLabel('Find a view or investigation')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+  await page.keyboard.press('Control+k');
+  await dialog.getByLabel('Find a view or investigation').fill('Review');
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#reviews$/);
+  await expect(page.getByRole('heading',{name:'Review',exact:true})).toBeVisible();
+  await expect(dialog).toHaveCount(0);
+});

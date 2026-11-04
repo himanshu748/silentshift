@@ -14,6 +14,7 @@ import {
   Menu,
   RefreshCw,
   ShieldCheck,
+  Search,
   UserRoundCheck,
   X,
 } from "lucide-react";
@@ -254,15 +255,101 @@ export default function App() {
     return () => window.removeEventListener("hashchange", listener);
   }, []);
   // Public product information never mounts the authenticated API hooks.
-  return landing ? <Landing /> : <WorkbenchApp username={username} setUsername={setUsername} />;
+  return landing ? (
+    <Landing />
+  ) : (
+    <WorkbenchApp username={username} setUsername={setUsername} />
+  );
 }
 
-function WorkbenchApp({ username, setUsername }: { username: string | null; setUsername: (value: string | null) => void }) {
+function QuickSwitch({ onClose }: { onClose: () => void }) {
+  const [query, setQuery] = useState("");
+  const matches = navigation.filter((item) =>
+    item.label.toLowerCase().includes(query.toLowerCase().trim()),
+  );
+  const caseId =
+    /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(
+      query.trim(),
+    );
+  return (
+    <Modal
+      title="Go to workspace"
+      description="Find a view or paste a complete investigation ID."
+      onClose={onClose}
+    >
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (caseId) {
+            window.location.hash = `investigations/${encodeURIComponent(query.trim())}`;
+            onClose();
+          } else if (matches[0]) {
+            window.location.hash = matches[0].id;
+            onClose();
+          }
+        }}
+      >
+        <label className="sr-only" htmlFor="workspace-query">
+          Find a view or investigation
+        </label>
+        <input
+          id="workspace-query"
+          data-autofocus
+          autoComplete="off"
+          placeholder="Try Review, Scenario Lab, or a case ID…"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <nav
+          className="quick-switch-results"
+          aria-label="Matching workspace views"
+        >
+          {caseId ? (
+            <a
+              href={`#investigations/${encodeURIComponent(query.trim())}`}
+              onClick={onClose}
+            >
+              <Search size={17} />
+              <span>Open investigation</span>
+              <small>{query.trim().slice(0, 8)}</small>
+            </a>
+          ) : (
+            matches.map(({ id, label, icon: Icon }) => (
+              <a key={id} href={`#${id}`} onClick={onClose}>
+                <Icon size={17} />
+                <span>{label}</span>
+                <ArrowUpRight size={14} />
+              </a>
+            ))
+          )}
+          {!caseId && matches.length === 0 && (
+            <p>
+              No matching view. Paste a full case ID to open its investigation.
+            </p>
+          )}
+        </nav>
+        <p className="quick-switch-hint">
+          Enter opens the first match. Tab moves through results. Escape closes.
+        </p>
+      </form>
+    </Modal>
+  );
+}
+
+function WorkbenchApp({
+  username,
+  setUsername,
+}: {
+  username: string | null;
+  setUsername: (value: string | null) => void;
+}) {
   const [route, setRoute] = useState(readRoute);
   const [epoch, setEpoch] = useState(0);
   const [connect, setConnect] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [navigationOpen, setNavigationOpen] = useState(false);
+  const [quickSwitch, setQuickSwitch] = useState(false);
+  const closeQuickSwitch = useCallback(() => setQuickSwitch(false), []);
   const health = useApi("/api/health", HealthSchema, epoch);
   const refresh = useCallback(() => setEpoch((value) => value + 1), []);
   const openConnect = useCallback(() => setConnect(true), []);
@@ -271,6 +358,21 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
     window.location.hash = `investigations/${encodeURIComponent(id)}`;
   }, []);
   const notify = useCallback((message: string) => setToast(message), []);
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.key.toLowerCase() === "k" &&
+        !connect
+      ) {
+        event.preventDefault();
+        if (document.querySelector('[aria-modal="true"]') && !quickSwitch) return;
+        setQuickSwitch((value) => !value);
+      }
+    };
+    window.addEventListener("keydown", listener);
+    return () => window.removeEventListener("keydown", listener);
+  }, [connect, quickSwitch]);
   useEffect(() => {
     const listener = () => setRoute(readRoute());
     window.addEventListener("hashchange", listener);
@@ -313,8 +415,8 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
       <div className="app-shell">
         <aside className={`sidebar ${navigationOpen ? "navigation-open" : ""}`}>
           <a
-            href="#investigations"
-            aria-label="SilentShift investigations"
+            href="#landing"
+            aria-label="SilentShift product home"
             className="brand-link"
           >
             <Brand />
@@ -392,6 +494,16 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
               <strong>{current.label}</strong>
             </div>
             <div className="topbar-actions">
+              <button
+                className="workspace-jump"
+                onClick={() => setQuickSwitch(true)}
+                aria-label="Go to workspace"
+                title="Go to workspace (⌘K or Ctrl+K)"
+              >
+                <Search size={15} />
+                <span>Go to…</span>
+                <kbd>⌘ K</kbd>
+              </button>
               <span
                 className={`connection-pill ${connected ? "mint" : "muted"}`}
               >
@@ -425,7 +537,11 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
                 <Investigations refresh={epoch} caseId={route.caseId} />
               )}
               {route.view === "reviews" && (
-                <Reviews refresh={epoch} caseId={route.caseId} health={health} />
+                <Reviews
+                  refresh={epoch}
+                  caseId={route.caseId}
+                  health={health}
+                />
               )}
               {route.view === "scenarios" && <ScenarioLab refresh={epoch} />}
               {route.view === "overview" && (
@@ -442,11 +558,14 @@ function WorkbenchApp({ username, setUsername }: { username: string | null; setU
               <span className="footer-glyph" />
               Signal over noise. Substance over success codes.
             </span>
-            <a className="text-link" href="#landing">Product overview</a>
+            <a className="text-link" href="#landing">
+              Product overview
+            </a>
             <Badge>Synthetic demonstration</Badge>
           </footer>
         </div>
       </div>
+      {quickSwitch && <QuickSwitch onClose={closeQuickSwitch} />}
       {connect && (
         <ConnectDialog
           currentUser={username}

@@ -598,6 +598,7 @@ export function CaseDetail({
         </div>
         <section
           id={`panel-${item.id}`}
+          key={tab}
           className="detail-body"
           role="tabpanel"
           aria-labelledby={`tab-${item.id}-${tab}`}
@@ -832,7 +833,7 @@ export default function Investigations({
       <PageHeading
         eyebrow="Operations / semantic integrity"
         title="Investigations"
-        description="Successful delivery. Questionable meaning. Follow the evidence."
+        description="Follow the message from original payload to approved evidence and outcome."
       >
         <a className="button secondary" href="#scenarios">
           Open Scenario Lab <ArrowRight size={15} />

@@ -5,12 +5,18 @@ SilentShift holds a technically valid order or payment when its business meaning
 Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, **2026.3.0AI.154.0 (Build 154U), ARM64**. The user authorized publishing the verified source to GitHub `main` on November 4. The user subsequently authorized submission preparation to be executed: video publication, the OEX approval request and both article submissions are recorded below. Hosting remains outside scope. Moderation and registry installation remain separate gates. SilentShift is now visibly listed in contest 49.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
-|---|---:|---|
-| DPI-I-689 provider traceability |4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all 40 persisted provider messages passed correlation checks. Actual Ollama 400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
-| Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view. 54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
-| IRIS Vector Search precedents |2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into 384-dimensional IRIS VECTOR rows. Top 3 case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed. 5/5 native retained; award unconfirmed. |
-| Custom inbound adapter |2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
-| IPM package |2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. Public 0.2.0 install, production startup, full native suite and replay passed on a new build-154 container; no points are claimed awarded. |
+| --- | ---: | --- |
+| DPI-I-689 provider traceability | 4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all 40 persisted provider messages passed correlation checks. Actual Ollama 400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
+| Native Workflow Engine | 2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view. 54 native queue/concurrency checks and actual workbench approve/reject passed; full native 5/5 retained. Award unconfirmed. |
+| IRIS Vector Search precedents | 2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into 384-dimensional IRIS VECTOR rows. Top 3 case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed. 5/5 native retained; award unconfirmed. |
+| Custom inbound adapter | 2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
+| IPM package | 2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. Public 0.2.0 install, production startup, full native suite and replay passed on a new build-154 container; no points are claimed awarded. |
+
+## Final public-install verification — November 4
+
+Two additional pristine official build-154 containers installed public native package **0.2.0** with the literal `install silentshift`, with no source mounts. Both passed the entire native suite (five classes / 12 methods) and explicitly started the production. Recorded replay passed **12/12**, session **24**, four executed tools, five recorded provider exchanges and zero deliveries. The separate live local-Ollama run passed **5/5** final routes with four tools each, sessions **30, 58, 86, 113, 141**. Its one SDK warmup and one amendment embedding are disclosed separately. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json) · [commands and output](FINAL_PASS_REPORT.md).
+
+The owner portal has the dedicated idea association and IPM option saved. Anonymous retrieval still returned the older OEX 0.1.0 listing, so latest description/idea visibility remains pending; runtime verification alone does not establish that every organizer requirement is publicly visible. Both articles are now public. Online hosting is **Not claimed** because of the displayed EAP licence. One AI Hub bug is a reproduced, unfiled draft; the historical crash candidate is not a confirmed Embedded Python defect. [Current bonus states](SUBMISSION_CHECKLIST.md).
 
 ## November 4 release verification: 0.2.0
 
@@ -19,7 +25,7 @@ The existing live transport already recorded model, prompt version, response tok
 ### Requested LLM-call metadata audit
 
 | Requested field | Actual persisted message property / boundary |
-|---|---|
+| --- | --- |
 | Prompt / version | `PromptVersion=silentshift-investigator/1.3.1`; raw prompt and content hash are not recorded |
 | Model and provider | `Model`, new `Provider`; local `qwen3-silentshift:4b-instruct` / `ollama/openai-compatible`, separately labeled recorded provider in replay |
 | Input/output tokens | Response `PromptTokens`, `CompletionTokens`, `TotalTokens` only when supplied; zero preserved, missing counts null in JSON; replay usage null |
@@ -67,9 +73,9 @@ python3 scripts/render_native_trace.py --session 374 --output evidence/local/pro
 Case IDs refer to this retained local namespace. On a new install, use IDs returned by a new native run. The exact failure-generation command is in [NATIVE_AI_HUB.md](NATIVE_AI_HUB.md); it invokes the real SDK with an intentionally invalid format, causing local Ollama to return 400 before inference. It is an explicit synthetic transport diagnostic, separate from the frozen five scenarios.
 
 | Observation | Case / session / native headers | Final state |
-|---|---|---|
-| Approved amendment |`EB3307BB-D772-11F1-82EF-EED820A70F55` /374 /381↔382,383↔384,385↔386,387↔388 | Four actual HTTP 200 exchanges; DELIVERED, one simulator receipt |
-| Protocol failure |`B073F1D4-D772-11F1-82EF-EED820A70F55` /316 /318↔319 | Actual HTTP 400, failure caught; QUARANTINED, zero receipts |
+| --- | --- | --- |
+| Approved amendment | `EB3307BB-D772-11F1-82EF-EED820A70F55` /374 /381↔382,383↔384,385↔386,387↔388 | Four actual HTTP 200 exchanges; DELIVERED, one simulator receipt |
+| Protocol failure | `B073F1D4-D772-11F1-82EF-EED820A70F55` /316 /318↔319 | Actual HTTP 400, failure caught; QUARANTINED, zero receipts |
 
 ![Successful native Visual Trace](assets/provider-success-visual-trace.png)
 
@@ -90,12 +96,12 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls --out
 SILENTSHIFT_NATIVE_E2E=1 uv run --env-file .env npm --prefix web run test:e2e:native
 ```
 
-[Native queue receipt](evidence/review-queue.json): **54 checks passed**. Two simultaneous identical approvals returned200 and produced exactly one `ReviewAction`, one native deferred completion response and one simulator delivery. Rejection produced one review receipt/response and zero deliveries. Blank reasons, stale versions, viewer actions and changed content under the same idempotency key were rejected. Completed tasks left the pending queue. These isolated cases skip LLM inference; existing procedural retrieval can use local embeddings.
+[Native queue receipt](evidence/review-queue.json): **54 checks passed**. Two simultaneous identical approvals returned 200 and produced exactly one `ReviewAction`, one native deferred completion response and one simulator delivery. Rejection produced one review receipt/response and zero deliveries. Blank reasons, stale versions, viewer actions and changed content under the same idempotency key were rejected. Completed tasks left the pending queue. These isolated cases skip LLM inference; existing procedural retrieval can use local embeddings.
 
 | Actual workbench action | Case / native task / original session | Observed result |
-|---|---|---|
-| Approve |`299A6FC4-D7A2-11F1-A52E-F6A33E81404C` /628 /772 | Native task completed; one review receipt, one native response, one delivery |
-| Reject |`29AE87CC-D7A2-11F1-A52E-F6A33E81404C` /637 /783 | Native task completed; one review receipt, one native response, zero deliveries |
+| --- | --- | --- |
+| Approve | `299A6FC4-D7A2-11F1-A52E-F6A33E81404C` /628 /772 | Native task completed; one review receipt, one native response, one delivery |
+| Reject | `29AE87CC-D7A2-11F1-A52E-F6A33E81404C` /637 /783 | Native task completed; one review receipt, one native response, zero deliveries |
 
 [UI receipt](evidence/review-ui.json) · [approval capture](assets/review-approved-delivery.png) · [rejection capture](assets/review-rejected.png).
 
@@ -103,7 +109,7 @@ SILENTSHIFT_NATIVE_E2E=1 uv run --env-file .env npm --prefix web run test:e2e:na
 
 ![Native deferred Workflow response after actual UI approval](assets/review-workflow-visual-trace.png)
 
-The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have real native tasks. Python 164, TypeScript/build,32 disconnected/landing and 14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
+The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have real native tasks. Python 164, TypeScript/build,32 disconnected/landing and 14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled 503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
 
 ## 3. Similar history stays separate from current authority
 
@@ -115,15 +121,15 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls --out
 uv run python scripts/verify_native_precedents.py --inspect-case B8440121-D7AB-11F1-9980-CA5720F48492
 ```
 
-The initial seed wrote 16 actual vectors (15 resolved cases, one approved amendment). Native metadata proves `%Library.Vector`,384dimensions,DOUBLE; native self-cosines and source bindings passed. Automatic production indexing raised the retained corpus to 18 rows after new completed cases. [Source/vector proof](evidence/precedent-corpus.json).
+The initial seed wrote 16 actual vectors (15 resolved cases, one approved amendment). Native metadata proves `%Library.Vector`,384 dimensions,DOUBLE; native self-cosines and source bindings passed. Automatic production indexing raised the retained corpus to 18 rows after new completed cases. [Source/vector proof](evidence/precedent-corpus.json).
 
-The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5 with all four native reads. Each case made two actual provider exchanges; each exchange has a native request/response pair. Case `B8440121-D7AB-11F1-9980-CA5720F48492`, session1266, retrieved three previous deliveries and stayed quarantined with zero receipts. A separate native read-only test constructed a valid ALLOW with current citations and zero uncertainty; the critical policy veto remained. [Veto proof](evidence/precedent-veto.json) · [retrieval/tool/header proof](evidence/precedents.json).
+The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5 with all four native reads. Each case made two actual provider exchanges; each exchange has a native request/response pair. Case `B8440121-D7AB-11F1-9980-CA5720F48492`, session 1266, retrieved three previous deliveries and stayed quarantined with zero receipts. A separate native read-only test constructed a valid ALLOW with current citations and zero uncertainty; the critical policy veto remained. [Veto proof](evidence/precedent-veto.json) · [retrieval/tool/header proof](evidence/precedents.json).
 
 ![Real scored precedent evidence](assets/precedent-evidence-desktop.png)
 
 [Mobile capture](assets/precedent-evidence-mobile.png) · [walkthrough and commands](PRECEDENTS.md) · [full gate](evidence/step3-gate.json).
 
-Python 172, TypeScript/build,32 disconnected/landing and16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a 12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
+Python 172, TypeScript/build,32 disconnected/landing and 16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a 12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
 
 ## 4. A partner file reaches the same safety decision
 
@@ -165,9 +171,9 @@ Two driver handoff errors were repaired in the same retained fresh container: CP
 Embedded Python (3 potential points) and Docker (2) are already part of the verified core. The five frozen scenarios are demonstrations, not a general accuracy benchmark; deterministic rules also score 5/5 on them. The agent adds inspectable investigation, not a measured accuracy uplift.
 
 | Manual/external item | State |
-|---|---|
+| --- | --- |
 | YouTube demonstration (3) | [Public video](https://youtu.be/a4dOcqu89EA), 2:30, 1080p H.264/AAC with English captions. Anonymous oEmbed HTTP 200; actual player 1080p HD and English captions observed. Organizer acceptance unconfirmed. |
-| Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both show **On moderation**; public acceptance unconfirmed. |
+| Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both are now publicly readable and each links the Open Exchange application; organizer bonus awards remain unconfirmed. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
 | IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. 0.2.0 published through OEX; clean public installation, production startup, full native suite and replay passed. See the current receipt above. |
 | Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. A later November 4 read confirmed SilentShift on the registered-app list for contest 49. |

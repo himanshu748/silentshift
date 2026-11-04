@@ -1,89 +1,31 @@
-# Open Exchange application copy
+# Open Exchange final update
 
-Release **0.2.0 published successfully** on November 4, 2026. The public app shows version 0.2.0, `zpm install silentshift` and its DPI-I-689 idea association. A clean public registry install passed production startup, all 12 native test methods and the recorded-provider API replay (12/12). The README-backed description refresh is separately **sent for approval**. Submit to Contest and Publish in Package Manager remain checked; SilentShift remains on contest 49.
+Frontend/product release **0.2.1**; native IPM backend remains **0.2.0**. Preserve Submit to Contest, Publish in Package Manager, the dedicated DPI-I-689 idea field and `https://youtu.be/a4dOcqu89EA`. Do not Cancel approval. The owner portal shows the newer release; anonymous web retrieval still showed 0.1.0, so latest public visibility remains pending moderation/readback.
 
-## Fields to paste
+## Release notes
 
-### Application Name
+Explore why a technically valid order is held with an interactive, clearly labeled synthetic walkthrough. Switch between an unsupported unit change and an effective approved amendment, select each investigation stage, or open the real workbench. Quick navigation supports ⌘K / Ctrl+K and complete case IDs; detail transitions respect reduced motion. Both technical articles are public and linked.
 
-SilentShift
+The unchanged native backend 0.2.0 passed two fresh public `install silentshift` checks, full native tests, recorded replay and five live local-model scenarios on official ARM64 build 154U. The frontend version is 0.2.1. The online-demo bonus is not claimed because the displayed EAP licence excludes demonstration use. Bug reports are drafts, not filed or accepted.
 
-### Short description
+## Description
 
-Catch wrong business meaning before delivery: native IRIS AI Hub investigation, deterministic policy and recoverable human review.
+Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The current owner-side README import is older than main; refresh it after pushing.
 
-### Full Description
-
-An order arrives as `20 CASE`. Its approved contract says `240 EA`. The transport succeeds and the JSON is valid, but there is no approved conversion explaining the change. SilentShift holds the order before delivery and gives the integration operator the original message, reference records and reason in one investigation.
-
-The same incoming value can be legitimate. An effective approved amendment can authorize `20 CASE`; SilentShift checks that authority at event time rather than guessing a conversion. The payment example makes the same distinction for interface contracts: `12550` minor EUR units and `125.50` major units may be numerically equivalent, but that does not authorize a representation change.
-
-### Investigate inside the native production
-
-SilentShift runs its decision inside an InterSystems IRIS interoperability production:
-
-```text
-Partner Business Service → Semantic Business Process
-  → reference, precedent and native AI Hub Operations
-  → Embedded Python policy → destination or quarantine Operation
-```
-
-The native AI Hub agent reads four case-scoped, read-only tools: the current message, approved contracts, related records and similar precedents. It proposes a recommendation with evidence IDs and uncertainty. Deterministic Embedded Python policy authorizes the final route. A previous delivery, a helpful runbook or an agent's explanation cannot override a critical contradiction in current approved evidence.
-
-### Give the operator a clear next action
-
-The React evidence workbench keeps the original payload, immutable reference snapshot, actual tool reads, policy checks and delivery receipt together. Similar precedents expose real source IDs, outcomes and cosine scores from native IRIS Vector Search. They supply context without borrowing authority from an earlier decision.
-
-Held cases become native IRIS Workflow tasks. Authorized reviewers can approve eligible cases or reject them with a reason, current version and idempotency key. Critical contradictions cannot be approved. If native completion fails after a decision is saved, **Resume recorded review** carries the original request forward. Each verified concurrent-approval and recovery journey produced one simulator delivery.
-
-Partners can submit raw message JSON through the authenticated API or a custom native ready-file adapter. The adapter retains exact input bytes, records the native case and trace, and writes an acknowledgement from the persisted outcome. Replays reuse the original case and receipt. Each actual local provider HTTP exchange also appears as a typed request/response pair in its case's native Visual Trace, including a verified failure path. Version 0.2.0 also supplies an explicitly labeled recorded-provider example: the same native agent and four tools execute without a fresh LLM call or external API key. The critical order remains held. The README links DPI-I-689 and compares this transaction-centered trace with Langfuse's observability, evaluations, dashboards and prompt management.
-
-### Run and inspect the demonstration
-
-The verified runtime is official ARM64 Community AI Hub **2026.3.0AI.154.0 (154U)**, with local Ollama `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings in 384-dimensional IRIS vectors. The 44-class, ten-asset 0.2.0 backend installed from the public community IPM registry into a fresh container without source mounts. Explicit setup, all 12 native test methods and the recorded-provider replay passed. A separate current live run returned **5/5 expected final outcomes** with all four native tools read. The replay produces no fresh inference and no delivery.
-
-All supplied orders, payments and references are synthetic. Delivery means a receipt in the included IRIS simulator. The five frozen scenarios are a coverage demonstration: the deterministic baseline also solves all five, so they establish no AI accuracy uplift or general production-readiness claim. No public hosted application is provided. Public IPM installation and the no-key recorded-provider recipe are documented separately, with their actual verification status in the README.
-
-Start with [the operator walkthrough](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md): hold the unsupported unit change, allow the effective amendment, then inspect a review task and native Visual Trace. The [README](https://github.com/himanshu748/silentshift#native-build-154-setup) provides exact runtime, model, installation and verification commands. The licensed EAP runtime and model weights are obtained separately.
-
-Source: [github.com/himanshu748/silentshift](https://github.com/himanshu748/silentshift)
-
-Demo video: `https://youtu.be/a4dOcqu89EA`
-
-### Tags
-
-```text
-AI Hub, Interoperability, Embedded Python, Workflow Engine, Vector Search, ObjectScript, Python, Docker, IPM
-```
-
-### URLs and selections
+## Fields
 
 | Field | Value |
-|---|---|
-| GitHub/GitLab URL | `https://github.com/himanshu748/silentshift` |
-| About URL | `https://github.com/himanshu748/silentshift` |
-| Documentation URL | `https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md` |
-| License URL | `https://github.com/himanshu748/silentshift/blob/main/LICENSE` |
-| YouTube URL | `https://youtu.be/a4dOcqu89EA` |
-| Ideas Portal link | `https://ideas.intersystems.com/ideas/DPI-I-689` |
-| Call to Action label | `Run SilentShift` |
-| AI / ML selections | Select both; the application uses native agent inference and neural embeddings. |
-| Submit to Contest | Check for **InterSystems Programming Contest: AI Agents in Interoperability Workflows**. |
-| Publish in Package manager | Keep checked. Public 0.2.0 installation/startup/native suite/replay verified; see the release ledger. |
-| Demo URL | Leave empty: there is no hosted application. Put the published video in YouTube URL. |
-| Community Article URL | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Workflow recovery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery); both submitted for moderation; verify the canonical associations after approval. |
+| --- | --- |
+| App name | SilentShift |
+| Short description | Catch wrong business meaning before delivery: native IRIS AI Hub investigation, deterministic policy and recoverable human review. |
+| Repository | https://github.com/himanshu748/silentshift |
+| Ideas Portal link | https://ideas.intersystems.com/ideas/DPI-I-689 |
+| YouTube | https://youtu.be/a4dOcqu89EA |
+| Native IPM package | silentshift 0.2.0; `zpm "install silentshift"` |
+| Submit to Contest | Keep checked for contest 49 |
+| Publish in Package Manager | Keep checked |
+| Demo URL | Empty; no hosted app |
+| Article one | https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production |
+| Article two | https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery |
 
-## 0.2.0 release notes
-
-Expose each local AI Hub provider exchange in the business-case Visual Trace, with explicit provider/model/prompt version, operation timing, available response tokens, safe HTTP errors and retry/fallback boundaries. Add a no-key recorded-provider example through the same queued operation, native agent and four read-only tools; replay is labeled and cannot release the critical synthetic case. Package 44 classes and ten assets with IPM 0.10.10 requirements. Verified target remains official ARM64 2026.3.0AI.154.0 (154U); five live final routes and the corrected native suite/replay passed. The README provides exact commands and a fair comparison with Langfuse.
-
-## Release actions (executed for 0.2.0)
-
-1. Push the fully checked 0.2.0 source to main.
-2. Developer Portal → My Applications → SilentShift → ellipsis → Add new release → Add new release. Enter 0.2.0, November 4, 2026 and the notes above. Publish the new release; preserve the existing app and any moderation request.
-3. Edit SilentShift, refresh the full description from the pushed README, preserve checked Submit to Contest and Publish in Package Manager, preserve the dedicated DPI-I-689 field and current video, then Save.
-4. Read back release status. Verify public 0.2.0 metadata, perform the clean public registry install in IPM.md and confirm SilentShift remains listed in contest 49. Pending approval is a separate state from a published registry package.
-
-The [official submission guide](https://docs.openexchange.intersystems.com/apps/submit/), [contest paths](https://docs.openexchange.intersystems.com/contest/apply/) and [IPM publication guide](https://docs.openexchange.intersystems.com/apps/ipm/) describe the portal workflow. No direct registry password or publishing API is invented.
-
-Saved description mode is **Use GitHub/GitLab README as long description**. The copy above is the product narrative alternative; the current listing reads the pushed README. The owner-facing app badge says Awaiting Review while the release remains published and the description request says sent for approval.
+The final browser connection failed twice before any listing mutation. The existing 0.2.0 owner release and pending approval are preserved; 0.2.1 below is prepared, not published. See FINAL_PASS_REPORT.md.

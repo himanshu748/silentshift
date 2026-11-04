@@ -10,7 +10,7 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). Open Exchange release **0.2.0** and its public IPM package are published; the refreshed description and two technical articles remain submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). The public IPM backend **0.2.0** is installed and verified. The owner portal shows the newer Open Exchange release, but anonymous retrieval still returned the older 0.1.0 listing; the description/idea refresh remains under review. Both technical articles are published. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
@@ -54,7 +54,7 @@ A capture of the native **Body** metadata panel is still pending an authorized a
 ### SilentShift (IRIS Interoperability) vs Langfuse
 
 | Dimension | SilentShift in IRIS | Langfuse |
-|---|---|---|
+| --- | --- | --- |
 | Where traces live | Native message headers/bodies in the case's interoperability session | LLM traces and observations in Langfuse Cloud or a self-hosted service |
 | Per-call data | Metadata-only request/response messages; case evidence stored separately | Instrumented inputs/outputs, model parameters, relationships and metadata |
 | Prompt versioning | Version string in source and each message; no prompt registry or content hash | Versioned prompts, labels and prompt-to-trace links |
@@ -80,6 +80,14 @@ The agent proposes through four read-only, case-scoped evidence tools: current m
 The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides eight API-backed views, including the native Review queue, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
 
 **Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment or external ERP/bank delivery is claimed.
+
+## Interface walkthrough
+
+Open the root page to explore the unsupported order and effective amendment. The interactive illustration changes the approved evidence and explains each stage; it sends no API request and is clearly labeled synthetic. **Open workbench** leads to the real authenticated application. Use **⌘K / Ctrl+K** to find a view or open a complete case ID. Detail transitions respect reduced motion. [UI study and verification](docs/UI_REVIEW.md).
+
+![Interactive landing page with the held-order comparison](docs/assets/ui-final-landing-desktop.jpg)
+
+There is **no hosted live demo**. The displayed EAP agreement restricts the downloaded runtime to internal evaluation and explicitly excludes demonstrations. We did not deploy it or claim the online-demo bonus. [Hosting decision and primary terms](docs/HOSTING_REVIEW.md).
 
 ## Local checks without IRIS
 
@@ -123,7 +131,7 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
 
 ## Native build 154 setup
 
-**Runtime availability:** SilentShift is verified on **2026.3.0AI.154.0** and its build guard intentionally requires that version. The November 3 [organizer clarification](https://community.intersystems.com/node/590306) permits the newer **2027.1.0AI.109.0** after older kits were removed from the portal, and says judges will use an entry's declared build. SilentShift has not been verified on 109. These instructions require an authorized build 154 kit already obtained from InterSystems; contact the official program if it is no longer listed. This repository cannot redistribute the kit.
+**Runtime availability:** SilentShift is verified on **2026.3.0AI.154.0** and its build guard intentionally requires that version. The November 3 [organizer clarification](https://community.intersystems.com/node/590306) permits the newer **2027.1.0AI.109.0 Community** after older kits were removed from the portal, and says judges will use an entry's declared build. SilentShift has not been verified on 109. These instructions require an authorized build 154 kit already obtained from InterSystems; contact the official program if it is no longer listed. This repository cannot redistribute the kit.
 
 1. Sign in to the [official AI Hub EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). Download Community **2026.3.0AI.154.0** for the Docker host's architecture. The [official template](https://github.com/intersystems-community/ai-hub-dev-template/tree/37280e3d0252f1034cdd5b32f0eeea55ff34ffa7) documents local image loading. No EAP software is bundled here.
 2. Start Docker with a modern Compose CLI and enough host storage for its VM, EAP image and persistent manager volume. Setup detects either `docker compose` or standalone `docker-compose` version 2+. A remote Docker context may be used with a source checkout on that host; ordinary remote Docker bind mounts do not upload the local repository. Do not create a paid host or subscription without authorization.
@@ -247,7 +255,7 @@ Installation alone configures no credentials, starts no production and calls no 
 All endpoints are under `/silentshift/api`, protected by IRIS password authentication plus `SSView`. Reviews require `SSReview`. Browser credentials live only in memory. Use TLS outside loopback. `SSApplication` grants database permissions during the REST application only; end-user roles have no permanent database write privilege.
 
 | Endpoint | Behavior |
-|---|---|
+| --- | --- |
 | `GET /health`, `/overview`, `/cases`, `/cases/:id` | Actual production/configuration, counts and evidence; bounded pagination |
 | `GET /reviews` | Reviewer-only pending native Workflow tasks, case versions and recorded completion recovery |
 | `POST /messages` | Strict partner JSON only; server selects reference authority; exact decimal strings or integers for business numbers |
@@ -260,16 +268,18 @@ Unknown references, malformed agent output, evidence gaps and dependency failure
 
 ## Developer Community articles
 
-Both articles were submitted for moderation. Replace these pending-publication entries with confirmed public URLs after approval:
+Both technical articles are publicly readable and link back to the Open Exchange application:
 
-- Semantic validation: **publication pending** ([submitted canonical URL](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production)); [repository article](docs/articles/overview.md).
-- Recoverable human review: **publication pending** ([submitted canonical URL](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery)); [repository article](docs/articles/engineering.md).
+- [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production)
+- [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery)
+
+The articles describe their recorded experiments; those historical counts are separate from later verification runs.
 
 ## Documentation and submission
 
 [PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Open Exchange copy](docs/OPEN_EXCHANGE_COPY.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. The demo is public on YouTube, SilentShift appears in contest 49, and the dedicated DPI-I-689 link and Package Manager option are saved in Open Exchange. Both Developer Community articles remain submitted for moderation. The questionnaire already has a submitted receipt. Current release and registry-install results are in the [submission checklist](docs/SUBMISSION_CHECKLIST.md); no organizer award is claimed.
+The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. The demo is public on YouTube, SilentShift appears in contest 49, and the dedicated DPI-I-689 link and Package Manager option are saved in Open Exchange. Both Developer Community articles are publicly readable and link the application. The questionnaire already has a submitted receipt. Current release and registry-install results are in the [submission checklist](docs/SUBMISSION_CHECKLIST.md); no organizer award is claimed.
 
 ## License and attribution
 

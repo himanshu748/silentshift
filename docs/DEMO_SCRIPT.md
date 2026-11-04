@@ -10,7 +10,7 @@ is an IRIS simulator. That scope stays on screen. No cursor clicks are staged.
 The AAC track is silent; no generated narration or music is used.
 
 | Time | Story | Actual material |
-|---|---|---|
+| --- | --- | --- |
 | 0:00–0:08 | Valid transport can conceal wrong business meaning. | Recorded product landing page |
 | 0:08–0:24 | `20 CASE` cannot replace `240 EA` without approved authority. | Actual quantity-mismatch evidence, with a closer crop of the values |
 | 0:24–0:36 | Keep the critical order held before delivery. | Same recorded critical hold and deterministic policy |

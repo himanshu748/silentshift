@@ -25,7 +25,7 @@ The live run `a0a5ad658f154bb0badf7ff97ae9bf3d` passed all contract, iterator,
 outcome, replay and invalid-input checks. Two actual model investigations ran:
 
 | File outcome | Case / original native session | Result |
-|---|---|---|
+| --- | --- | --- |
 | `240 EA` agrees with its approved contract | `D23769A0-D7B0-11F1-9980-CA5720F48492` / 1610 | DELIVERED; one simulator receipt |
 | Unsupported `20 CASE` commitment | `E10A0F45-D7B0-11F1-9980-CA5720F48492` / 1636 | QUARANTINED; zero receipts |
 

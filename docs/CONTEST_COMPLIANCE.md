@@ -7,7 +7,7 @@ Rechecked against the linked primary sources on **2026-11-03**. This records rul
 [Contest 49](https://openexchange.intersystems.com/contest/49) requires a functional, original IRIS interoperability workflow using an IRIS AI Hub agent for a decision. IRIS and IRIS for Health are supported. Source must be open on GitHub/GitLab, with an English README containing installation and a video or detailed walkthrough. At most three entries per developer are accepted. Judging covers **Complexity, Clarity of Instructions, Developer Experience, Applicability, and Usability**; no numerical weights were published on the inspected page.
 
 | Event | Published time | India time (UTC+05:30) |
-|---|---|---|
+| --- | --- | --- |
 | Registration closes | 2026-11-08 23:59:59 EST | **2026-11-09 10:29:59 IST** |
 | Voting | November 9–15, 2026 | See announcement for exact boundaries |
 
@@ -31,7 +31,7 @@ The contest-specific October 21 [organizer clarification](https://community.inte
 
 ### Authenticated workflow recheck, 2026-11-02
 
-The published instructions list no separate pre-development participant application. This is an inference from the documented app-based submission process, supported by the authenticated UI: after SSO login, clicking contest49 Apply reported that this account has no published Open Exchange applications. The modal instructed: submit an application, send it for approval, then submit the published application to the contest. No app or contest entry was created by this check. The organizer's pending-approval exception remains relevant near the deadline, but the UI path for a pending application is still unverified. Local screenshot: `evidence/browser/contest-application-prerequisite.png`.
+The published instructions list no separate pre-development participant application. This is an inference from the documented app-based submission process, supported by the authenticated UI: after SSO login, clicking contest 49 Apply reported that this account has no published Open Exchange applications. The modal instructed: submit an application, send it for approval, then submit the published application to the contest. No app or contest entry was created by this check. The organizer's pending-approval exception remains relevant near the deadline, but the UI path for a pending application is still unverified. Local screenshot: `evidence/browser/contest-application-prerequisite.png`.
 
 EAP access is separate from contest registration. On November 2 the authenticated portal exposed `iris_arm64-community-2026.3.0AI.154.0-docker.tar.gz`; the user explicitly accepted the [Early Access terms](https://evaluation.intersystems.com/Eval/early-access/tos) before its checkbox/download. That archive was subsequently loaded and the native workflow verified; see the build ledger. This historical observation is **not** proof that 154 remains downloadable today, or acceptance of separate contest terms. Screenshot: `evidence/browser/eap-download-approved.png`.
 
@@ -52,7 +52,7 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 ## Evidence and external gates
 
 | Gate | Observed position at this update |
-|---|---|
+| --- | --- |
 | Native execution | LOCALLY_VERIFIED: actual 154 production, native agent tools, five scenario outcomes; synthetic simulator scope |
 | Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
 | Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
@@ -62,7 +62,7 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 | Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |
 | Questionnaire | Submitted earlier; actual confirmation retained in the bonus ledger |
 
-Local evidence: `evidence/native/clean-install-initial.json` (empty initial state), `evidence/native/clean-install.json` (run `0503b649-ee6f-495e-be37-166db508377c`, passed), and `evidence/browser/browser-scenario-delivered.png` (actual C delivery, trace42). These artifacts are ignored/private; publish only reviewed, redacted extracts. See `BUILD_STATUS.md` for current measurements and limits.
+Local evidence: `evidence/native/clean-install-initial.json` (empty initial state), `evidence/native/clean-install.json` (run `0503b649-ee6f-495e-be37-166db508377c`, passed), and `evidence/browser/browser-scenario-delivered.png` (actual C delivery, trace 42). These artifacts are ignored/private; publish only reviewed, redacted extracts. See `BUILD_STATUS.md` for current measurements and limits.
 
 The latest November 3 read-only check of the [contest page](https://openexchange.intersystems.com/contest/49) displayed nine entries. The earlier eight-entry comparison is a historical snapshot. Displayed bonus counts do not establish implementation eligibility or final scoring. The competitive review separates public claims, static inspection and actual execution.
 

@@ -50,7 +50,7 @@ The pending-worklist verification creates two isolated synthetic boundary cases 
 uv run python scripts/verify_native_review_queue.py --allow-new-synthetic-cases
 ```
 
-The [54-check receipt](evidence/review-queue.json) includes native task listing, rejection with zero deliveries and two simultaneous identical approvals producing one review receipt, one native completion response and one simulator delivery. The [actual workbench actions](evidence/review-ui.json) independently completed approve/reject. The earlier [43-check receipt](evidence/workflow.json) retains the controlled postcommit503 recovery. This does not prove every outage or crash path.
+The [54-check receipt](evidence/review-queue.json) includes native task listing, rejection with zero deliveries and two simultaneous identical approvals producing one review receipt, one native completion response and one simulator delivery. The [actual workbench actions](evidence/review-ui.json) independently completed approve/reject. The earlier [43-check receipt](evidence/workflow.json) retains the controlled postcommit 503 recovery. This does not prove every outage or crash path.
 
 ## Compare a past outcome with current authority
 
@@ -67,7 +67,7 @@ The [IPM path](IPM.md) installs the backend into a fresh interoperability namesp
 ## What to assess against the rubric
 
 | Official criterion | Inspect |
-|---|---|
+| --- | --- |
 | Complexity | A complete native production, scoped tool retrieval, versioned independent references, native human-task completion and transaction-protected simulator effects. |
 | Clarity of Instructions | Exact runtime/provider, load/start/check commands, five-case verifier and this walkthrough. |
 | Developer Experience | Local inference, source-only distribution, empty-volume installation evidence, typed API and separate host/native/browser checks. |
@@ -81,7 +81,7 @@ This maps observable evidence to the [official criteria](https://openexchange.in
 The [machine-readable public summary](evidence/native-summary.json) includes all four retained trials and hashes of their full local exports. Raw local evidence and runtime images remain outside Git.
 
 | Native trial | Model proposals | Final outcomes | Unsafe simulator releases |
-|---|---:|---:|---:|
+| --- | ---: | ---: | ---: |
 | Initial 1.7B trial | Incomplete; one empty answer | Benchmark rejected | No deliveries observed |
 | First 4B trial, policy 1.0 | 2/5 | 3/5 | 0/4 |
 | 4B, policy 1.1 | 4/5 | 5/5 | 0/4 |

@@ -30,3 +30,7 @@ Motion personality is Corporate: 100ms hover, 160ms feedback and 220ms panel ent
 ## Verification
 
 Check desktop 1440×960 and mobile 390×844, keyboard tab/focus, modal Escape, reduced motion, semantic names, overflow and contrast. Verify connected states against actual native records when runtime is available. Disconnected and empty-state browser tests are useful but do not prove the native journey.
+
+## Interactive product entry
+
+The landing page leads with a user-controlled, explicitly synthetic comparison. Its two authority states and four selectable stages explain the core decision without pretending to run native work. Real API-backed investigations remain in the workbench. The logo returns to the product entry; ⌘K / Ctrl+K opens navigation or a full case ID. The illustrated playback is bounded below three seconds with Reset, and reduced motion selects the final stage immediately. [UI_REVIEW.md](docs/UI_REVIEW.md) records references and verification.

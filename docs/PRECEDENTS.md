@@ -49,7 +49,7 @@ Inspection is read-only and verifies the actual reciprocal `Semantic → Precede
 
 Run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed **5/5 native and final outcomes** with prompt `silentshift-investigator/1.3.1`. Each case read all four tools. On this run the SDK batched the four tool requests in one response, so each investigation made two actual provider HTTP calls; both calls have native request/response pairs. The five final routes were quarantine, quarantine, delivered once, review, quarantine. The deterministic baseline also solves these five examples; no accuracy uplift is claimed.
 
-The current quantity case `B8440121-D7AB-11F1-9980-CA5720F48492`, native session1266, retrieved three real prior deliveries and stayed quarantined with zero deliveries. A separate native read-only check presented a valid `ALLOW` with every current citation and zero uncertainty; policy vetoed it because the current contradiction is critical. A Python regression also tests a misleading delivered precedent with similarity0.9999.
+The current quantity case `B8440121-D7AB-11F1-9980-CA5720F48492`, native session 1266, retrieved three real prior deliveries and stayed quarantined with zero deliveries. A separate native read-only check presented a valid `ALLOW` with every current citation and zero uncertainty; policy vetoed it because the current contradiction is critical. A Python regression also tests a misleading delivered precedent with similarity 0.9999.
 
 Synthetic fixture partitions deliberately share `PO-2048`; the precedent search can retrieve a completed case from a different partition as non-authoritative context. The current case's independent reference snapshot stays isolated. This supplies a concrete misleading-history demonstration, not measured operational relevance.
 
@@ -59,7 +59,7 @@ Synthetic fixture partitions deliberately share `PO-2048`; the precedent search 
 
 ## Runtime boundary
 
-The successful full run used a warmed local model and serialized model execution. Two earlier trials missed native completion gates under load, while policy continued to hold unsafe cases. A real response took65.9seconds; a further same-sized request appeared after about60seconds, consistent with an SDK timeout/retry. Provider retry classification remains null. Prompt1.3.1 uses a192-token ceiling and at most24words of final explanation; the full evidence remains in the workbench. The native wait remains120seconds, and provider cancellation is unverified.
+The successful full run used a warmed local model and serialized model execution. Two earlier trials missed native completion gates under load, while policy continued to hold unsafe cases. A real response took 65.9 seconds; a further same-sized request appeared after about 60 seconds, consistent with an SDK timeout/retry. Provider retry classification remains null. Prompt 1.3.1 uses a 192-token ceiling and at most 24 words of final explanation; the full evidence remains in the workbench. The native wait remains 120 seconds, and provider cancellation is unverified.
 
 For a controlled warm-up through the same native gateway:
 

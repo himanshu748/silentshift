@@ -588,6 +588,9 @@ test("native Review worklist matches actual tasks and preserves dialog keyboard 
   await expect(dialog).toBeVisible();
   await expect(dialog.getByLabel("Reason", { exact: false })).toBeFocused();
   await expect(dialog.getByRole("button", { name: "Reject transaction", exact: true })).toBeDisabled();
+  await page.keyboard.press("Control+k");
+  await expect(page.getByRole("dialog")).toHaveCount(1);
+  await expect(dialog.getByLabel("Reason", { exact: false })).toBeFocused();
   await page.keyboard.press("Shift+Tab");
   await expect(dialog.getByRole("button", { name: "Close dialog", exact: true })).toBeFocused();
   await page.keyboard.press("Shift+Tab");

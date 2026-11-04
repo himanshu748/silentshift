@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { ArrowUpRight, Check, ShieldCheck, X } from "lucide-react";
 import "./landing.css";
+import FlowPreview from "./FlowPreview";
 
 export default function Landing() {
   useEffect(() => {
-    document.title = "SilentShift · Catch wrong data in successful integrations";
+    document.title = "SilentShift · Catch what status codes miss";
     const section = document.getElementById(window.location.hash.slice(1));
     if (section) section.scrollIntoView({ behavior: "instant", block: "start" });
     else window.scrollTo({ top: 0, behavior: "instant" });
@@ -30,24 +31,18 @@ export default function Landing() {
         <section className="landing-container landing-hero" aria-labelledby="landing-title">
           <div className="landing-hero-heading">
             <div>
-              <h1 id="landing-title">Catch wrong data in successful integrations.</h1>
-              <p>SilentShift checks business meaning before IRIS delivers an integration message.</p>
+              <div className="landing-product-label"><span /> Semantic integrity for IRIS</div>
+              <h1 id="landing-title">Catch what <br /><span>status codes miss.</span></h1>
+              <p>The request succeeded. The business meaning changed. Investigate orders and payments against approved evidence before anything reaches its destination.</p>
               <div className="landing-actions">
                 <a className="landing-button landing-primary" href="#investigations">Open workbench <ArrowUpRight size={18} aria-hidden="true" /></a>
                 <a className="landing-button landing-secondary" href="#landing/proof">Inspect measured evidence</a>
               </div>
             </div>
           </div>
-          <figure className="landing-product">
-            <a href="/evidence/native-currency-workbench.png" target="_blank" rel="noreferrer" aria-label="Open full-size capture of the native currency investigation">
-              <picture>
-                <source media="(max-width: 600px)" srcSet="/evidence/native-currency-mobile.png" />
-                <img src="/evidence/native-currency-workbench.png" alt="Actual SilentShift investigation: 12550 minor currency units contradict 125.50 major units; deterministic policy quarantines the message." width="1440" height="960" fetchPriority="high" />
-              </picture>
-            </a>
-            <figcaption>Recorded native investigation, synthetic payment event held from the destination simulator.</figcaption>
-          </figure>
+          <FlowPreview />
         </section>
+        <div className="landing-tech-strip landing-container"><span>One native production.</span><span>AI Hub investigation</span><span>Deterministic policy</span><span>Human review</span><span>Visual Trace</span></div>
         <section className="landing-container landing-contrast" aria-labelledby="landing-contract-title">
           <div className="landing-section-heading">
             <h2 id="landing-contract-title">Changed units need approved evidence.</h2>
@@ -100,8 +95,8 @@ export default function Landing() {
               <li><h3>3. Validate the permission</h3><p>Embedded Python blocks unverified release.</p></li>
               <li><h3>4. Route and preserve</h3><p>Business Operations persist every outcome.</p><code>SilentShift.Production</code></li>
             </ol>
-            <a className="landing-text-link" href="/evidence/traceability.json" target="_blank" rel="noreferrer">Read recorded traces <ArrowUpRight size={16} aria-hidden="true" /></a>
-            <p className="landing-scope-note">Invocation/tool spans; provider rounds unverified.</p>
+            <a className="landing-text-link" href="/evidence/provider-calls.json" target="_blank" rel="noreferrer">Read recorded traces <ArrowUpRight size={16} aria-hidden="true" /></a>
+            <p className="landing-scope-note">Recorded native invocation, tool and per-provider-call evidence. Current verification is linked in the repository.</p>
           </div>
         </section>
         <section className="landing-container landing-proof" id="landing/proof" aria-labelledby="landing-proof-title">
@@ -124,6 +119,16 @@ export default function Landing() {
             <a className="landing-text-link" href="/evidence/native-summary.json" target="_blank" rel="noreferrer">Trial records, including failures <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="landing-scope-note">November 2, 2026. Synthetic cases, not general accuracy.</p>
+          <figure className="landing-product">
+            <a href="/evidence/native-currency-workbench.png" target="_blank" rel="noreferrer" aria-label="Open full-size capture of the native currency investigation">
+              <picture>
+                <source media="(max-width: 600px)" srcSet="/evidence/native-currency-mobile.png" />
+                <img src="/evidence/native-currency-workbench.png" alt="Actual SilentShift investigation: 12550 minor currency units contradict 125.50 major units; deterministic policy quarantines the message." width="1440" height="960" fetchPriority="high" />
+              </picture>
+            </a>
+            <figcaption>Recorded native investigation, synthetic payment event held from the destination simulator.</figcaption>
+          </figure>
+
         </section>
         <section className="landing-setup" id="landing/setup" aria-labelledby="landing-setup-title">
           <div className="landing-container landing-setup-layout">

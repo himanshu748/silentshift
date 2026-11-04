@@ -1,5 +1,17 @@
 # Build status
 
+## Final pass and interactive UI — November 4, 2026
+
+The native backend remains **0.2.0**, verified on official ARM64 Community **2026.3.0AI.154.0 (154U)**. Two new clean public installs used the literal **`install silentshift`** command. Each started the production and passed all **five native test classes / 12 methods**. Recorded replay passed **12/12**, session **24**, port 52823. The separate live install passed **5/5 final routes**, all four tools per case, sessions **30, 58, 86,113,141**, port 52833. One SDK warmup and one amendment embedding are disclosed separately from that five-case score. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json).
+
+The frontend is **0.2.1**: an interactive synthetic authority comparison and user-controlled stage walkthrough replace the screenshot-only hero; quick navigation supports ⌘K / Ctrl+K and full case IDs. Short detail transitions and reduced-motion behavior preserve the native workflows. **38** landing/disconnected checks and **16** connected checks passed; the final layout subset passed **6/6**. Python **174 passed in 5.74s**, final TypeScript/production build passed (Vite **1.69s**) with the existing Lucide directive warnings. [UI study and evidence](UI_REVIEW.md).
+
+Both Developer Community articles are now publicly readable and link SilentShift on Open Exchange. Contest 49 still lists SilentShift. Owner OEX preview and anonymous retrieval disagree on the latest visible version; the pending approval request is preserved. Public-registry installation is verified independently of listing moderation. The final shipping receipt is in FINAL_PASS_REPORT.md.
+
+One valid-UDL AI Hub tool-name generator defect was reproduced locally without inference; a second historical signal-11 candidate has five log entries but no minimal isolated repro. Both are [drafts only](bug-reports/README.md). No bug bonus is claimed awarded. The EAP hosting terms explicitly exclude demonstrations; no public host was created. [Hosting decision](HOSTING_REVIEW.md).
+
+The user approved removing only the failed stopped container `silentshift-bonus-load-final-20261104`, recovering about 854 MB. No volumes or successful test instances were removed. Saved source/evidence/models and the original production remain.
+
 ## Current bonus release — November 4, 2026
 
 The verified target remains official ARM64 Community **2026.3.0AI.154.0 (Build 154U)**. Version **0.2.0** adds explicit provider metadata and recorded responses through the same native agent and queued operation. Replay performs no fresh inference and preserves the critical policy veto.
@@ -24,10 +36,10 @@ The local operator journey catches semantic contradictions before the IRIS desti
 ## Ordered sponsor extensions
 
 | Step | Current verified state |
-|---|---|
+| --- | --- |
 | 1. Provider traceability | **Passed.** Full native run `00d3f243-3532-4166-ab31-0ac05d3f1f39`:5/5 expected routes, native investigations and four actual provider calls per case. Ten transport contract checks passed. Actual local HTTP 400 failure remains held. Authenticated native Visual Trace screenshots and paired metadata are in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). |
-| 2. Native human review | **Passed.** Reviewer-only native task API/view,54 queue/concurrency checks, actual UI approve/reject and native deferred responses. Full run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have tasks. [Gate](evidence/step2-gate.json). |
-| 3. Case/amendment precedents | **Passed.** Native384-dimensional VECTOR, actual resolved-case/amendment indexing, top 3 scoped search/fourth tool/UI and native misleading-precedent veto. Warmed serial run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5. 172 Python / 32 disconnected / 16 native browser checks passed. Earlier timeout trials retained. [Gate](evidence/step3-gate.json). |
+| 2. Native human review | **Passed.** Reviewer-only native task API/view, 54 queue/concurrency checks, actual UI approve/reject and native deferred responses. Full run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have tasks. [Gate](evidence/step2-gate.json). |
+| 3. Case/amendment precedents | **Passed.** Native 384-dimensional VECTOR, actual resolved-case/amendment indexing, top 3 scoped search/fourth tool/UI and native misleading-precedent veto. Warmed serial run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5. 172 Python / 32 disconnected / 16 native browser checks passed. Earlier timeout trials retained. [Gate](evidence/step3-gate.json). |
 | 4. Custom inbound adapter | **Passed.** All 82 native contract/iterator/file assertions passed, including delivery, quarantine, ack-write recovery and replay. Four native tools per case; full run `a96c814e-0606-41a1-b469-10f1f94885a9` passed 5/5. Python 172, disconnected 32, native browser 16, TypeScript/build passed. [Gate](evidence/step4-gate.json). |
 | 5. Clean IPM installation | **Passed locally.** Real `install LocalArchive/silentshift 0.1.0 -synchronous`, fresh official 154U, 43 classes / nine assets, no source mount, manager module origins and ten empty tables. After explicit setup, native run `07131314-9713-44ee-b2e1-72d36f777678` passed 5/5 final routes (4/5 model proposals), four tools per case. Registry publication/install remain unverified. [Gate](evidence/step5-gate.json). |
 
@@ -43,30 +55,30 @@ Updated 2026-11-03 IST. **Core native verification and a fresh-volume five-scena
 ## Observed checks
 
 | Check | Result | Scope |
-|---|---|---|
+| --- | --- | --- |
 | Python / Hypothesis | **135 passed** | Exact decimals, policy safety, metadata/build/redirect checks, read-only trace inspection, local embedding route/output validation |
-| Full native run | **5/5 final outcomes; passed=true** | Run20e7b28c-f317-4ad5-b585-49f19bd5e1e5, actual Community ARM64 Build154U, Qwen3 4B, policy1.1 |
+| Full native run | **5/5 final outcomes; passed=true** | Run 20e7b28c-f317-4ad5-b585-49f19bd5e1e5, actual Community ARM64 Build 154U, Qwen3 4B, policy1.1 |
 | Native model proposals | **4/5 correct, 5/5 schema-valid** | All five read message/contracts/related evidence; policy converted the model's unverified conflict quarantine to review |
-| Fresh-volume installation | **Passed; 5/5 proposals and final outcomes** | Started with zero cases/evaluations; all21core classes compiled; run0503b649-ee6f-495e-be37-166db508377c, traces2/10/18/26/34 |
-| Browser Scenario Lab | **Actual injection and delivery passed** | Approved amendment caseD39226FC-D6B8-11F1-956F-F285F08CEB87, trace42; opened persisted evidence/policy; distinct from benchmark cases |
+| Fresh-volume installation | **Passed; 5/5 proposals and final outcomes** | Started with zero cases/evaluations; all 21 core classes compiled; run 0503b649-ee6f-495e-be37-166db508377c, traces 2/10/18/26/34 |
+| Browser Scenario Lab | **Actual injection and delivery passed** | Approved amendment case D39226FC-D6B8-11F1-956F-F285F08CEB87, trace 42; opened persisted evidence/policy; distinct from benchmark cases |
 | Safety / routes | **0/4 unsafe releases** | Quantity/currency/unsafe-output held; conflict reviewed; approved amendment delivered once |
 | Duplicate / reviewer gate | Passed in actual native run | Replays retained case/receipt/count; reviewer could not release critical contradiction; evaluation matched server metrics |
-| Agent latency | Mean25,914.4ms; p9543,434ms | Five synthetic cases, agent invocation only; not throughput/general performance evidence |
+| Agent latency | Mean 25,914.4 ms; p95 43,434 ms | Five synthetic cases, agent invocation only; not throughput/general performance evidence |
 | Usage/cost | Session totals and billing cost null | Numeric final-response usage separate; no paid provider calls |
-| Native access | **11/11 passed** | Anonymous401, viewer review403, critical reviewer release403, strict JSON, numeric pagination |
+| Native access | **11/11 passed** | Anonymous 401, viewer review 403, critical reviewer release 403, strict JSON, numeric pagination |
 | Native malformed reviews | **5/5 passed** | Invalid reason/key/version types rejected; held state unchanged |
-| Review workflow | **3/3 rejection +4/4 approval/concurrency passed** | REJECTED state, blank reason422, stale version409, concurrent/repeat approval one simulator receipt; no model calls |
-| Native Workflow Engine | **43/43 passed** | Task80 rejected with zero deliveries; task94 retained a committed review after real503, resumed through actual UI and completed/delivered once. Native headers114/134 prove deferred responses; original key repeat preserved version/receipt. Initial D model request timed out safely, separate from task proof. |
+| Review workflow | **3/3 rejection +4/4 approval/concurrency passed** | REJECTED state, blank reason 422, stale version 409, concurrent/repeat approval one simulator receipt; no model calls |
+| Native Workflow Engine | **43/43 passed** | Task 80 rejected with zero deliveries; task 94 retained a committed review after real 503, resumed through actual UI and completed/delivered once. Native headers 114/134 prove deferred responses; original key repeat preserved version/receipt. Initial D model request timed out safely, separate from task proof. |
 | Reference boundaries | **26/26 native assertions passed** | Eleven-approved/eleven-peer scopes; actual Partner/Semantic/Investigator headers, REVIEW, zero deliveries, model_invoked=false |
-| Native traceability | **46/46 checks passed; 23 core classes compiled** | New C/session52 delivered once; A/session68 held with zero deliveries; session84 evidence-limit skip made no model call. Actual headers/bodies/audit links verified; whole-Chat/tool scope only |
+| Native traceability | **46/46 checks passed; 23 core classes compiled** | New C/session 52 delivered once; A/session 68 held with zero deliveries; session 84 evidence-limit skip made no model call. Actual headers/bodies/audit links verified; whole-Chat/tool scope only |
 | Restart persistence | Six captured cases matched after container restart | Payloads/references/policies/audit prefixes retained; zero deliveries |
-| Container recreation / rebootstrap | Passed;16cases +1failed evaluation retained | Restored namespace mapping; all21core classes compiled |
+| Container recreation / rebootstrap | Passed; 16 cases +1 failed evaluation retained | Restored namespace mapping; all 21 core classes compiled |
 | TypeScript / build | Passed after permission/null-metric repairs | Workbench source; no deployment claim |
-| Connected Chromium | **10/10 passed in21.8s**,1440×960 and390×844 | Real reads, seven routes, paired mobile values, case-selection navigation, reviewer veto/dialog, keyboard/reduced motion, memory-only auth |
-| Disconnected Chromium | **20/20 passed in21.8s** after Hallmark | Genuine unreachable upstream, all seven views and keyboard/mobile navigation |
-| Public landing Chromium | **10/10 passed in12.0s** | Zero API requests, real static proof assets, workbench CTA, keyboard focus, reduced motion and320px layout; fresh non-author Hallmark review found one pending public-source link |
+| Connected Chromium | **10/10 passed in 21.8s**, 1440×960 and 390×844 | Real reads, seven routes, paired mobile values, case-selection navigation, reviewer veto/dialog, keyboard/reduced motion, memory-only auth |
+| Disconnected Chromium | **20/20 passed in 21.8s** after Hallmark | Genuine unreachable upstream, all seven views and keyboard/mobile navigation |
+| Public landing Chromium | **10/10 passed in 12.0s** | Zero API requests, real static proof assets, workbench CTA, keyboard focus, reduced motion and 320px layout; fresh non-author Hallmark review found one pending public-source link |
 | Feedback questionnaire | **Submitted; official receipt observed** | User's stated views, verified technical facts and no publicity consent; bonus award remains unconfirmed |
-| Hallmark UI review | Rendered seven routes;35captures;0FAIL/0REFLEX | One kept warning was a changing API-check clock. Fresh review found two residual eyebrows, now promoted to factual headings; targeted recapture pending |
+| Hallmark UI review | Rendered seven routes; 35 captures; 0 FAIL / 0 REFLEX | One kept warning was a changing API-check clock. Fresh review found two residual eyebrows, now promoted to factual headings; targeted recapture pending |
 | Secret scan / Git | Earlier staged scan passed; two local commits | Final diff/scan/milestone commit pending; no public repository |
 
 ## Native evidence
@@ -79,13 +91,13 @@ Scenario E injects a labeled hostile validator proposal after an actual native r
 
 ## Runtime repairs and limits
 
-- Official ARM64 Community2026.3.0AI.154.0 was downloaded after explicit EAP acceptance and loaded as `silentshift-iris:2026.3.0AI.154.0`. The user approved deleting only the3.2GiB installer archive; it is gone. Runtime/source/models/evidence remain.
-- Dedicated Colima profile/context `silentshift` / `colima-silentshift`; existing active Docker context preserved. VM2GiB, standalone Compose5.6.1, gateway loopback52773.
-- Ollama0.31.1, `qwen3-silentshift:4b-instruct`,8192-token context; earlier1.7B alias retained. No paid provider, Docker cloud, purchase or billing change.
+- Official ARM64 Community 2026.3.0AI.154.0 was downloaded after explicit EAP acceptance and loaded as `silentshift-iris:2026.3.0AI.154.0`. The user approved deleting only the 3.2 GiB installer archive; it is gone. Runtime/source/models/evidence remain.
+- Dedicated Colima profile/context `silentshift` / `colima-silentshift`; existing active Docker context preserved. VM 2 GiB, standalone Compose 5.6.1, gateway loopback 52773.
+- Ollama 0.31.1, `qwen3-silentshift:4b-instruct`,8192-token context; earlier 1.7B alias retained. No paid provider, Docker cloud, purchase or billing change.
 - Verified stream Business Service signature, underscore JSON property access, SQL NULL scope, numeric pagination and application-only SQL/Python grants. End users have no permanent DB/Python rights.
-- Early Chat/callback runs logged signal11 while audits nested Embedded Python. ObjectScript-only callback JSON/timestamps removed that boundary; later full native runs did not crash. This is observed application repair, not a vendor-confirmed defect/earned bug bonus.
-- Six iterations/700tokens per request, eight evidence reads, bounded content and a60s process wait. Oversized reference snapshots fail before any model call; callback truncation cannot count as complete. Provider cancellation remains unverified.
-- Policy1.1 sends unverified model concerns to review while critical/invalid/duplicate cases stay quarantined. Authenticated human rejection is explicit, auditable and held.
+- Early Chat/callback runs logged signal 11 while audits nested Embedded Python. ObjectScript-only callback JSON/timestamps removed that boundary; later full native runs did not crash. This is observed application repair, not a vendor-confirmed defect/earned bug bonus.
+- Six iterations/700 tokens per request, eight evidence reads, bounded content and a 60s process wait. Oversized reference snapshots fail before any model call; callback truncation cannot count as complete. Provider cancellation remains unverified.
+- Policy 1.1 sends unverified model concerns to review while critical/invalid/duplicate cases stay quarantined. Authenticated human rejection is explicit, auditable and held.
 
 ## Remaining release gates
 

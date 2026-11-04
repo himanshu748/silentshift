@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-test('public landing and section links never request the native API', async ({ page }) => {
+test('public landing and section links never request the native API', async ({ page }, testInfo) => {
   const apiRequests: string[] = [];
   const pageErrors: string[] = [];
   page.on('request', (request) => {
@@ -12,10 +12,14 @@ test('public landing and section links never request the native API', async ({ p
 
   for (const fragment of ['', '#landing', '#landing/proof', '#landing/pipeline', '#landing/setup']) {
     await page.goto(`/${fragment}`);
-    await expect(page.getByRole('heading', { name: 'Catch wrong data in successful integrations.', exact: true })).toBeVisible();
-    await expect(page).toHaveTitle('SilentShift · Catch wrong data in successful integrations');
+    await expect(page.getByRole('heading', { name: 'Catch what status codes miss.', exact: true })).toBeVisible();
+    await expect(page).toHaveTitle('SilentShift · Catch what status codes miss');
     await page.waitForLoadState('networkidle');
     expect(apiRequests).toEqual([]);
+    if (!fragment) {
+      await mkdir(path.resolve('..','evidence/browser'), {recursive:true});
+      await page.screenshot({path:path.resolve('..',`evidence/browser/landing-refresh-${testInfo.project.name}.png`)});
+    }
   }
   await page.getByRole('link', { name: 'Inspect measured evidence', exact: true }).click();
   await expect(page).toHaveURL(/#landing\/proof$/);
@@ -120,4 +124,32 @@ test('320px landing preserves readable actions without overflow and captures the
   const directory = path.resolve('..', 'evidence', 'browser', 'landing');
   await mkdir(directory, { recursive: true });
   await page.screenshot({ path: path.join(directory, `${testInfo.project.name}-320px.png`), fullPage: true });
+});
+
+
+test('illustrated decision changes with authority and walkthrough completes without API calls', async ({ page }) => {
+  const requests: string[]=[];
+  page.on('request',request=>{if(new URL(request.url()).pathname.startsWith('/api/')) requests.push(request.url());});
+  await page.goto('/');
+  await expect(page.getByText('Held before delivery',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Approved amendment',exact:true}).click();
+  await expect(page.getByText('Eligible for delivery',{exact:true})).toBeVisible();
+  await expect(page.locator('.flow-reference strong')).toHaveText('20 CASE');
+  await page.getByRole('button',{name:'Receive',exact:true}).click();
+  await expect(page.locator('.flow-step-detail')).toContainText('valid JSON');
+  await page.getByRole('button',{name:'Play the walkthrough',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Route',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:'Play the walkthrough',exact:true})).toBeVisible();
+  expect(requests).toEqual([]);
+});
+
+test('reduced motion keeps the decision interactive without animation', async ({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  await page.getByRole('button',{name:'Play the walkthrough',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Route',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('.flow-outcome')).toHaveCSS('animation-name','none');
+  await page.getByRole('button',{name:'Approved amendment',exact:true}).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Eligible for delivery',{exact:true})).toBeVisible();
 });

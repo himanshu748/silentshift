@@ -13,7 +13,7 @@ The central comparison is between a message and the approved reference records e
 Consider two investigations with the same incoming quantity and unit:
 
 | Incoming order | Reference evidence at event time | Required outcome |
-|---|---|---|
+| --- | --- | --- |
 | `20 CASE` | Active approved contract requires `240 EA`; no authorized transformation | Hold the contradiction |
 | `20 CASE` | Approved amendment requires `20 CASE`; its predecessor has expired | Permit delivery when the remaining release checks pass |
 
@@ -36,7 +36,7 @@ Representation also belongs to the contract. In the payment example, `12550` min
 The agent helps the operator connect the message, reference records and relevant history. Its tools expose four narrow reads:
 
 | Tool | Evidence it contributes |
-|---|---|
+| --- | --- |
 | `GetCurrentMessage` | The transaction under investigation |
 | `GetApprovedContracts` | Approved contract evidence for that case |
 | `GetRelatedRecords` | Related records already bound to the investigation |

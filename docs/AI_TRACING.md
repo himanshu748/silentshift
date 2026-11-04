@@ -7,7 +7,7 @@ SilentShift records native AI Hub investigations, evidence-tool spans, and indiv
 The November 3 local run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8` passed **5/5 end-to-end scenarios** with `qwen3-silentshift:4b-instruct`. Each investigation returned after four gateway requests and actual reads of all three evidence tools. Expected policy/routing, duplicate protection, and the critical reviewer-release veto passed. This is a synthetic fixed-clock evaluation on local Ollama, not production traffic or external-provider evidence.
 
 | Scenario | Case ID | Native session | Provider requests | Route / simulator deliveries |
-|---|---|---:|---:|---|
+| --- | --- | ---: | ---: | --- |
 | Quantity mismatch | `B6CECB92-D772-11F1-82EF-EED820A70F55` | 322 | 4 | QUARANTINED / 0 |
 | Currency scaling | `D6F59DAC-D772-11F1-82EF-EED820A70F55` | 348 | 4 | QUARANTINED / 0 |
 | Approved amendment | `EB3307BB-D772-11F1-82EF-EED820A70F55` | 374 | 4 | DELIVERED / 1 |
@@ -39,7 +39,7 @@ The fresh [`Ingress`](../src/SilentShift/Provider/Ingress.cls) service sets `%Pr
 Persisted bodies are [`CallRequest`](../src/SilentShift/Provider/CallRequest.cls) and [`CallResponse`](../src/SilentShift/Provider/CallResponse.cls), schema `silentshift-provider-call/1`, granularity `provider_http_call`.
 
 | Fields | Meaning and limit |
-|---|---|
+| --- | --- |
 | `call_id`, `case_id`, `production_session_id`, `invocation_span_id` | Server-bound pair and parent-investigation correlation. The verifier separately reads native header sessions and `CorrespondingMessageId`. |
 | `round` | Monotonic admitted gateway-request number, capped at eight; not an SDK iteration ID or classified retry count. |
 | `model`, `prompt_version` | Local model and instruction contract, currently `silentshift-investigator/1.2.0`; not a prompt-content hash. The failure probe uses `provider-protocol-probe/1`. |
@@ -137,7 +137,7 @@ The earlier November 3 [traceability export](evidence/traceability.json) passed 
 [Langfuse documents](https://langfuse.com/docs/observability/overview) LLM tracing with inputs/outputs, tools, usage, latency and relationships, together with cost analysis, scores, prompt management, experiments, and dashboards. SilentShift's specific benefit is that its metadata shares IRIS's actual operational session with evidence lookup, deterministic policy, and destination/hold messages. It adds no external telemetry service.
 
 | Need | SilentShift's observed scope |
-|---|---|
+| --- | --- |
 | Follow an AI proposal through a business transaction | Native session links reference lookup, investigation, provider pairs, policy consequence, and route. |
 | Inspect individual completion calls | Per-call timing, HTTP outcome, model/instruction version, advertised/requested tools, and response usage. |
 | Connect requested tools to actual reads | Provider metadata plus separate execution audits for three case-bound evidence tools. |

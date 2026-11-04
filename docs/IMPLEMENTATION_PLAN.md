@@ -3,7 +3,7 @@
 Updated November 3, 2026. An implemented feature, a local check and an externally confirmed submission are separate states.
 
 | Milestone | Acceptance | Observed state |
-|---|---|---|
+| --- | --- | --- |
 | 0 Research | Exact runtime APIs, current rules and environment | Official ARM64 build 154U loaded; current rules/bonus/competitor review in compliance documents. |
 | 1 Native foundation | Service → Process → Operations; persisted native trace | Passed; all 21 core classes compile and actual interoperability headers persist. |
 | 2 Native AI Hub | Native scoped tools and structured proposal in production | Passed in two complete benchmarks; three actual evidence reads in all five cases. |

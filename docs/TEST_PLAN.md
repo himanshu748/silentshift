@@ -3,7 +3,7 @@
 Local functions, browser failure paths, native integrations and external submission each need their own evidence.
 
 | Layer | Required cases | Command / acceptance |
-|---|---|---|
+| --- | --- | --- |
 | Pure semantic engine | Quantity/unit, currency/scale, product/business unit, effective amendment, conflicts, no refs, stale/future/time semantics, invalid decimals | `uv run pytest -q` |
 | Policy properties | Critical release veto, missing coverage, malformed/extra JSON, unknown evidence, duplicate effects, uncertainty | Hypothesis tests included in pytest |
 | Evaluation | Checksum, missing/partial native data, wrong build, invalid tools, routing disagreement and null metrics | Pytest evaluation tests; `python -m silentshift.evaluation` |
