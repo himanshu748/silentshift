@@ -1,6 +1,6 @@
 # Contest compliance
 
-Rechecked against the linked primary sources on **2026-11-03**. This records rules and observed status, not contest acceptance. Runtime evidence belongs in [BUILD_STATUS.md](BUILD_STATUS.md); points in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md); the earlier public-entry comparison in [COMPETITIVE_REVIEW.md](COMPETITIVE_REVIEW.md). Recheck external status immediately before submission.
+Rules reviewed against the linked primary sources on **2026-11-03**; publication and registration status rechecked **2026-11-04**. SilentShift is registered in contest 49, Open Exchange release **0.2.1** is public, and native IPM **0.2.0** has passed clean public installs. Listing edits remain **Awaiting Review**. The refreshed README and native Body screenshot are visible without signing in; the dedicated idea association is saved and visible only in the owner view. [Signed-out readback](evidence/public-visibility.json). Runtime evidence belongs in [BUILD_STATUS.md](BUILD_STATUS.md); bonus qualification in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Historical observations below are dated explicitly.
 
 ## Entry requirements and schedule
 
@@ -27,7 +27,7 @@ The [EAP documentation](https://github.com/intersystems-community/ai-hub-eap) wa
 
 [Open Exchange application instructions](https://docs.openexchange.intersystems.com/apps/submit/) require authentication, New Application, metadata and repository details, then **Send for Approval**. Saving produces a draft; sending initiates review, and acceptance publishes it. Prepare the license URL, categories, technologies, descriptions, logo, and applicable demo/documentation/video links. The [contest guide](https://docs.openexchange.intersystems.com/contest/apply/) describes Apply from the contest, app page, or developer portal and generally says the app must be published first.
 
-The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **November 4 readback:** after the app was sent for approval, Apply still reported no published application and required publication first. No pending-review registration path was available in that dialog. Preserve the actual OEX submission receipt and separate contest-registration confirmation; a repository, draft or approval request alone proves neither contest entry nor acceptance.
+The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **Earlier November 4 observation:** Apply initially reported no published application and required publication first. **Later verified state:** SilentShift appears among the contest's 15 registered applications, independently of pending listing edits. The earlier dialog is no longer a registration blocker. Preserve submission and registration receipts separately; a repository, draft or approval request alone proves neither.
 
 ### Authenticated workflow recheck, 2026-11-02
 
@@ -43,7 +43,7 @@ The [competition terms](https://openexchange.intersystems.com/markdown?url=/asse
 
 ## Bonus clarifications visible November 3
 
-Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift's local provider-call traces, screenshots and field map are now verified in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The public source and saved OEX approval request both include the idea link; application moderation and contest registration remain pending.
+Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift includes that comparison, actual native Body screenshots and reproducible replay/live commands in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The README link is public; the dedicated field is saved and visible to the owner but absent from the signed-out listing. Registration is confirmed; listing moderation and idea-field public visibility remain pending.
 
 Tatiana's newer [announcement reply to Doc](https://community.intersystems.com/node/590306) resolves the earlier IPM question: publish the package; installation is checked on AI Hub 154; include `<SystemRequirements Version=">=2026.3" Interoperability="enabled"/>`. Her subsequent 109 reply permits a declared matching build. If IPM is pursued, retain the actual registry-install result for the declared runtime. A manifest alone is not a published, working package.
 
@@ -56,9 +56,10 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 | Native execution | LOCALLY_VERIFIED: actual 154 production, native agent tools, five scenario outcomes; synthetic simulator scope |
 | Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
 | Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
-| Public repository | CONFIRMED: verified extensions through [61b7278](https://github.com/himanshu748/silentshift/commit/61b7278) published on `main`, November 4 |
-| OEX application | SENT_FOR_APPROVAL, version 0.1.0; contest and Package Manager options, video and idea link saved. Application page: Awaiting Review |
-| Contest registration | BLOCKED_BY_APP_PUBLICATION in the observed Apply dialog; no registered-entry confirmation |
+| Public repository | CONFIRMED: native metadata captures and documentation published on `main` in [1c3941b](https://github.com/himanshu748/silentshift/commit/1c3941b); [3dc3741](https://github.com/himanshu748/silentshift/commit/3dc3741) records the description submission |
+| OEX application | Release **0.2.1** public; refreshed README, native Body screenshot, video and install command visible anonymously. Listing edits Awaiting Review; dedicated idea field visible only to owner |
+| Public IPM | **0.2.0** installed from the community registry in two fresh containers; native suite, replay and live five-case results retained in [FINAL_PASS_REPORT.md](FINAL_PASS_REPORT.md) |
+| Contest registration | CONFIRMED: SilentShift appears among 15 registered applications on contest 49 in the latest anonymous readback |
 | Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |
 | Questionnaire | Submitted earlier; actual confirmation retained in the bonus ledger |
 
@@ -66,4 +67,4 @@ Local evidence: `evidence/native/clean-install-initial.json` (empty initial stat
 
 The latest November 3 read-only check of the [contest page](https://openexchange.intersystems.com/contest/49) displayed nine entries. The earlier eight-entry comparison is a historical snapshot. Displayed bonus counts do not establish implementation eligibility or final scoring. The competitive review separates public claims, static inspection and actual execution.
 
-No submission, bonus, production-readiness or prize claim follows from this research document.
+Registration and publication observations above are supported by their linked receipts. No awarded bonus, production-readiness or prize claim follows from them.

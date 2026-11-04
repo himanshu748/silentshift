@@ -1,5 +1,11 @@
 # Build status
 
+## Signed-out listing check — November 4, 2026
+
+The refreshed Open Exchange README and native Body image are now publicly visible in anonymous retrieval and a fresh Safari Private Browsing window. IPM install command, version **0.2.1**, video and article links remain present; native IPM stays **0.2.0**. The dedicated **Ideas to the app** section is still absent when signed out, although the owner view shows its correct DPI-I-689 URL. Listing edits remain **Awaiting Review** and contest 49 still lists SilentShift among 15 entries. [Readback and screenshot](evidence/public-visibility.json). No duplicate submission, release or approval cancellation was performed.
+
+Reconciled stale registration/publication claims in the compliance and competitive-review documents, preserving dated historical observations. Local documentation links, JSON receipt validation, screenshot SHA-256 and `git diff --check` passed; the known-pattern text scan found zero matches. This changes documentation only; application/native tests were not repeated, and no new model call or runtime modification occurred.
+
 ## Native metadata screenshots — November 4, 2026
 
 Captured the actual Visual Trace **Body** panel in Safari for success session **1667**, response header **1677** / body **1391**, and HTTP-400 diagnostic session **1807**, response header **1810** / body **1506**. Read-only inspection of both persisted cases passed; both remain quarantined with zero deliveries. No new provider call was made for the capture. [Images, exact values, commands and hashes](evidence/provider-body-captures.json).

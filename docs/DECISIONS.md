@@ -12,7 +12,7 @@
 | Local or authorized existing model only | Local Qwen3 via Ollama is available; no paid budget established | User supplies a different supported model and bounds |
 | Docker cloud left aside | Installed CLI has no Offload/remote context; user said “let it be” and is freeing disk space | User provides an existing host/entitlement |
 | Traceability before unrelated bonus features | User explicitly requests the Community Opportunity trace implementation; prove metadata on the installed 154 API | A relevant, verified bonus strengthens the workflow without delaying entry |
-| Separate implementation, publication and moderation | Public source, IPM 0.2.0 installs and contest presence are observed; latest anonymous OEX description/release visibility remains pending | Public readback confirms the latest approved fields |
+| Separate implementation, publication and moderation | Public source, IPM 0.2.0 installs, contest presence and OEX 0.2.1/updated README are observed. Dedicated idea association is visible only to the owner; listing edits remain Awaiting Review | Signed-out readback shows the dedicated association and moderation status changes |
 
 Official source/API pins and remaining SDK uncertainties are in `NATIVE_AI_HUB.md`; rules and deadline in `CONTEST_COMPLIANCE.md`.
 

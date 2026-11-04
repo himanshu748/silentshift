@@ -4,6 +4,8 @@ Frontend/product release **0.2.1** was submitted successfully and appears under 
 
 **Later November 4 evidence refresh:** README commit **1c3941b** adds the actual native Body metadata screenshots for sessions **1667** and **1807**. The editor's **Save → Send for approval → Send edits** flow succeeded. The owner preview shows the new screenshots and values; anonymous web retrieval still returns the earlier description, so public propagation is pending. This was a description-only submission; release **0.2.1** and native IPM **0.2.0** remain unchanged. [Submission confirmation](assets/oex-trace-description-submitted.png).
 
+**Subsequent signed-out check:** the refreshed README/native Body image is now public, in both anonymous retrieval and a new Safari Private Browsing window. The dedicated **Ideas to the app** section is absent without signing in and remains visible with the correct DPI-I-689 URL in the owner view. Listing status is still **Awaiting Review**. This narrows the remaining gate to moderation/idea-field visibility; the description needs no duplicate submission. [Readback](evidence/public-visibility.json).
+
 ## Release notes
 
 Explore why a technically valid order is held with an interactive, clearly labeled synthetic walkthrough. Switch between an unsupported unit change and an effective approved amendment, select each investigation stage, or open the real workbench. Quick navigation supports ⌘K / Ctrl+K and complete case IDs; detail transitions respect reduced motion. Both technical articles are public and linked.

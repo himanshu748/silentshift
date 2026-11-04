@@ -112,6 +112,8 @@ The documentation-only follow-up also ran `uv run pytest -q` (**174 passed in 3.
 
 ## Shipping receipt
 
+**Subsequent public readback:** the refreshed README/native Body image is now visible anonymously and in a new Safari Private Browsing window. The dedicated idea association is still absent in that signed-out view; the authenticated owner view retains the correct DPI-I-689 URL. Listing edits remain Awaiting Review. This closes the description-propagation gap, while keeping the narrower idea-field gate pending. [Readback receipt and signed-out screenshot](evidence/public-visibility.json). No additional listing submission or release was made for this readback.
+
 - **770baab** — `feat: add interactive product walkthrough and verify contest evidence`; pushed to `origin/main`. Remote `refs/heads/main` read back as `770baabd2c5e317918003dde05986eed476a75ef` before this documentation receipt.
 - Open Exchange frontend/product **0.2.1**: submission success observed; listed under Published releases, three releases total. The listing still has **Awaiting Review**. [Success confirmation](assets/oex-021-approval-submitted.jpg) · [release readback](assets/oex-021-release-readback.jpg).
 - Public IPM **0.2.0**: post-update anonymous metadata returned HTTP 200, unchanged reported artifact hash `198fc630f90cf990481dd93f64946e34596e1018`, size 7,914,399 bytes. No new native package publication is claimed. [Final publication receipt](evidence/final-publication.json).
