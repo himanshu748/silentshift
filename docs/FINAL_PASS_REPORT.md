@@ -106,6 +106,10 @@ HEADER_WRITE_AFTER_RESTORE=0
 
 The documentation-only follow-up also ran `uv run pytest -q` (**174 passed in 3.70s**), `npm --prefix web run check` (passed) and `npm --prefix web run build` (passed; Vite **724 ms**, existing Lucide directive warnings). The full fresh-container native suite and five-case results above remain the runtime gate; they were not rerun for screenshot/documentation changes.
 
+**Shipped:** commit **1c3941b** (`docs: capture native provider metadata and clarify trace access`) was pushed to `origin/main`; the remote hash matched `1c3941b0e9a7a2cb28e3167bec28c1bb52e0c323`. Native health returned **200**, production running **true**, and anonymous case access **401**. Screenshot hashes and local documentation links passed; the known-pattern text scan found zero matches. Both native screenshots were visually reviewed for credentials and session capabilities.
+
+**Open Exchange:** the README import was refreshed from that commit and **Send edits** returned “Your application was sent for approval successfully!” The owner preview now shows the native Body screenshot and both sessions' metadata. Release **0.2.1** remains unchanged, native IPM remains **0.2.0**, and listing edits remain **Awaiting Review**. The checked contest/IPM fields, dedicated DPI-I-689 URL, video and articles were preserved. Anonymous retrieval still showed the preceding description, so public propagation and dedicated idea-field visibility remain pending. Contest 49 independently listed SilentShift among **15 registered applications** after submission. [Submission screenshot](assets/oex-trace-description-submitted.png) · [readback receipt](evidence/trace-publication.json).
+
 ## Shipping receipt
 
 - **770baab** — `feat: add interactive product walkthrough and verify contest evidence`; pushed to `origin/main`. Remote `refs/heads/main` read back as `770baabd2c5e317918003dde05986eed476a75ef` before this documentation receipt.

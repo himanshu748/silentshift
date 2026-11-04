@@ -8,6 +8,8 @@ The user-approved temporary `%Ens_MessageContent:USE` and SQL `SELECT` on `Ens.M
 
 Documentation follow-up checks: **174 Python tests passed in 3.70s**, TypeScript check passed, production build passed (**724 ms**, existing Lucide warnings). Full native fresh-container results below are retained; no new five-case run is claimed for this evidence-only update.
 
+Commit **1c3941b** was pushed to `main` and imported into Open Exchange. The description-only update was sent for approval successfully; the owner preview shows the new captures. Release **0.2.1** and IPM **0.2.0** remain unchanged. Anonymous retrieval still shows the previous description; public propagation remains pending. Contest 49 still lists SilentShift, now among 15 entries. [Publication receipt](evidence/trace-publication.json).
+
 ## Final pass and interactive UI — November 4, 2026
 
 The native backend remains **0.2.0**, verified on official ARM64 Community **2026.3.0AI.154.0 (154U)**. Two new clean public installs used the literal **`install silentshift`** command. Each started the production and passed all **five native test classes / 12 methods**. Recorded replay passed **12/12**, session **24**, port 52823. The separate live install passed **5/5 final routes**, all four tools per case, sessions **30, 58, 86,113,141**, port 52833. One SDK warmup and one amendment embedding are disclosed separately from that five-case score. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json).

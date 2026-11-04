@@ -2,6 +2,8 @@
 
 Frontend/product release **0.2.1** was submitted successfully and appears under Published releases; native IPM remains **0.2.0**. The refreshed README/version are visible anonymously. Owner listing status remains **Awaiting Review**. Submit to Contest, Publish in Package Manager, dedicated DPI-I-689 field, both article URLs and video `https://youtu.be/a4dOcqu89EA` were preserved/read back. Never Cancel approval.
 
+**Later November 4 evidence refresh:** README commit **1c3941b** adds the actual native Body metadata screenshots for sessions **1667** and **1807**. The editor's **Save → Send for approval → Send edits** flow succeeded. The owner preview shows the new screenshots and values; anonymous web retrieval still returns the earlier description, so public propagation is pending. This was a description-only submission; release **0.2.1** and native IPM **0.2.0** remain unchanged. [Submission confirmation](assets/oex-trace-description-submitted.png).
+
 ## Release notes
 
 Explore why a technically valid order is held with an interactive, clearly labeled synthetic walkthrough. Switch between an unsupported unit change and an effective approved amendment, select each investigation stage, or open the real workbench. Quick navigation supports ⌘K / Ctrl+K and complete case IDs; detail transitions respect reduced motion. Both technical articles are public and linked.
@@ -10,7 +12,7 @@ The unchanged native backend 0.2.0 passed two fresh public `install silentshift`
 
 ## Description
 
-Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The owner-side README import was refreshed from commit 770baab and read back after submission.
+Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The owner-side README import was refreshed from commit **1c3941b** and read back after submission, including the Body screenshot, both trace IDs, token counts, operation durations and permission-restoration link.
 
 ## Fields
 
