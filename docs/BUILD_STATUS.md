@@ -1,5 +1,9 @@
 # Build status
 
+## Frozen-entry verification: declared runtime — November 4, 2026
+
+The retained public-registry instance reports **2026.3.0AI / Build 154U**, native package **0.2.0**. A new no-key judge replay passed **12/12**, session **59**: five provider pairs, four real native tool reads, `QUARANTINED`, zero deliveries, no fresh inference. [Command, exact runtime and metadata](evidence/freeze-build154-replay.json). This verifies the declared **2026.3.0AI.154.0** again; it is not the later fresh-clone test. No build 109 was run or added as supported.
+
 ## Frozen-entry verification: bug report — November 4, 2026
 
 Re-ran the two minimal `%AI.Tool` classes in the existing build-154 container's development `USER` namespace, outside `SILENTSHIFT`. The camel-case control compiled (`SS_CAMEL_OK=1`); the quoted underscore method failed in generated `%Invoke` (`SS_UNDERSCORE_OK=0`, `MPP5376`, missing subscript). No inference, external key, application-class change or permission change was needed. [Exact transcript and paste-ready issue](bug-reports/ai-hub-quoted-tool-name.md). The contest criteria point to the dedicated `ai-hub-eap-bugreports` tracker. Filing and organizer qualification are pending; the agent did not submit it. No build-109 claim is made.
