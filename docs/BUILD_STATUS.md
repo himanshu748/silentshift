@@ -1,5 +1,9 @@
 # Build status
 
+## Frozen-entry verification: fresh-download permission gap — November 4, 2026
+
+The first fresh GitHub clone reached a pristine build-154 container but failed before installing SilentShift: `fetch_ipm.py` produced the public installer at mode `0600`, Docker preserved UID 501, and IRIS reported `ERROR #5005: Cannot open file`. No clean-install pass is claimed for that attempt. The README now makes only the SHA-256-verified public installer readable (`chmod 644`); local `.env` credentials remain `0600`. This is a setup instruction correction, with no runtime feature change. One fresh retry remains; the first failed instance and logs are retained.
+
 ## Frozen-entry verification: consistent public copy — November 4, 2026
 
 README, bonus evidence, submission checklist and the prepared OEX description now distinguish **app 0.2.1**, **native IPM 0.2.0** and verified **IRIS 2026.3.0AI.154.0 / 154U**. All organizer awards remain unconfirmed; the idea association and AI Hub bug filing remain pending; online demo, PEX and the unisolated Embedded Python candidate are Not claimed. Historical counts/versions remain explicitly historical. The judge-guide command now uses the same allowed container-name prefix and port as the README. OEX edits are prepared for the user only; neither OEX nor the two published articles was changed.

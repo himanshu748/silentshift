@@ -56,12 +56,13 @@ This reference recipe uses **macOS/ARM64, Git, Python 3.11+, uv and an already r
    print("Created private local replay configuration; no provider keys.")
    PYCONFIG
    uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
+   chmod 644 .local/ipm/vendor/zpm-0.10.10.xml
    uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
      --execution-mode recorded-replay --container silentshift-bonus-registry-judge \
      --api-port 52843 --execute
    ```
 
-   The driver installs the public native package **0.2.0** with literal `zpm "install silentshift"` in a **new build-154 container without mounts**, configures the production, runs all **five native test classes / 12 methods**, then runs the API replay. App/workbench release **0.2.1** is a separate version. No file or credential is copied from a previous checkout. Local endpoint values satisfy setup validation; recorded replay makes no inference or embedding request. Existing container names are refused; choose a new name and free port for another run. Logs and local credentials remain in ignored `.local/` and `.env` files. The created containers are retained for inspection.
+   The `chmod` applies only to the checksum-verified public IPM installer so IRIS can read it after Docker copies it; `.env` remains private at mode `600`. The driver installs the public native package **0.2.0** with literal `zpm "install silentshift"` in a **new build-154 container without mounts**, configures the production, runs all **five native test classes / 12 methods**, then runs the API replay. App/workbench release **0.2.1** is a separate version. No file or credential is copied from a previous checkout. Local endpoint values satisfy setup validation; recorded replay makes no inference or embedding request. Existing container names are refused; choose a new name and free port for another run. Logs and local credentials remain in ignored `.local/` and `.env` files. The created containers are retained for inspection.
 
 2. Repeat the actual API journey and print its own session ID and clean portal URL:
 
