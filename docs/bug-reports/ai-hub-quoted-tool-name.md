@@ -12,7 +12,7 @@ Official ARM64 Community AI Hub **2026.3.0AI.154.0**. Exact `$ZVERSION`: `IRIS f
 
 ## Minimal reproduction
 
-Save these as `CamelCaseTool.cls` and `UnderscoreTool.cls` in a development environment running this build. Neither class uses a database, network, model or credential. The quoted method declaration is intentional; it is valid ObjectScript UDL.
+Save these as `/tmp/SS-CamelCaseTool.cls` and `/tmp/SS-UnderscoreTool.cls` in a development environment running this build. Neither class uses a database, network, model or credential. The quoted method declaration is intentional; it is valid ObjectScript UDL.
 
 ```objectscript
 Class SilentShift.Repro.CamelCaseTool Extends %AI.Tool

@@ -1,5 +1,13 @@
 # Build status
 
+## Frozen-entry final result — November 4, 2026
+
+Four requested documentation/evidence gaps are closed locally: the minimal AI Hub bug reproduces on 154U with filing text; declared-build replay passes 12/12; public README idea/trace/Langfuse evidence is prominent; app 0.2.1/native IPM 0.2.0 and unconfirmed bonus states are consistent. OEX and DC were not edited.
+
+**Clean-clone gate remains blocked after two attempts.** The first fresh clone reached pristine 154U but IPM could not read its mode-0600 installer. The README now adds `chmod 644` only for that public checksum-verified file. The fresh retry confirmed mode 0644 and private mode-0600 credentials, then stopped at the 1.8 GiB host disk floor before creating a container. No third attempt, new native-suite pass or clean-clone replay is claimed. [Exact commands, output, clone hashes and next step](JUDGE_VERIFICATION.md).
+
+Repository validation: **174 Python tests passed in 4.87s**, TypeScript and production build passed (existing Lucide warnings), **38 desktop/mobile browser checks passed in 1.0m**. The retained public-registry instance passed new replay session **59**, then was stopped. Earlier five-case live and full native unit receipts remain historical evidence. User-authorized cache/test-container cleanup preserved credentials, source, models and active applications; host capacity remains the blocker.
+
 ## Frozen-entry verification: fresh-download permission gap — November 4, 2026
 
 The first fresh GitHub clone reached a pristine build-154 container but failed before installing SilentShift: `fetch_ipm.py` produced the public installer at mode `0600`, Docker preserved UID 501, and IRIS reported `ERROR #5005: Cannot open file`. No clean-install pass is claimed for that attempt. The README now makes only the SHA-256-verified public installer readable (`chmod 644`); local `.env` credentials remain `0600`. This is a setup instruction correction, with no runtime feature change. One fresh retry remains; the first failed instance and logs are retained.

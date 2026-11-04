@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-11-04T18:26:44.183682+00:00",
+  "status": "blocked",
+  "application_version": "0.2.1",
+  "native_ipm_version": "0.2.0",
+  "declared_runtime": "2026.3.0AI.154.0 Community ARM64 (154U)",
+  "attempts": [
+    {
+      "attempt": "first",
+      "commit": "d116d735f577707a7b89b7c1cdc9fa1a819960b4",
+      "started_at": "2026-11-04T18:20:19.822582+00:00",
+      "status": "failed",
+      "commands": [
+        {
+          "block": 1,
+          "exit_code": 1
+        }
+      ],
+      "tracked_tree_clean": true,
+      "readme_sha256": "cfbe996abea6a848046c6d8324bc00119a7b4ffd948d060d558d36e96b490bd5",
+      "environment_names": [
+        "HOME",
+        "LANG",
+        "LC_ALL",
+        "PATH",
+        "TMPDIR"
+      ],
+      "provider_api_keys_supplied": false,
+      "credentials_generated_fresh": true,
+      "env_mode": "0o600",
+      "installer_mode": "0o600",
+      "native_unit_suite_run": false,
+      "judge_replay_run": false,
+      "output": "judge-first-output.txt",
+      "container_created": true,
+      "container": "silentshift-bonus-registry-judge",
+      "container_stopped": true,
+      "source_mounts": 0,
+      "failure": "IPM installer copied with mode 0600 and UID 501; IRIS cannot read it (ERROR #5005)",
+      "pristine_output": "\nNode: silentshift-bonus-registry-judge, Instance: IRIS\n\n%SYS>\nSS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT\n\n%SYS>\n\n%SYS>\nSS_PRISTINE_OK\n\n%SYS>\n",
+      "client_error_output": "\nNode: silentshift-bonus-registry-judge, Instance: IRIS\n\nSILENTSHIFT>\n\nLoad started on 11/04/2026 18:20:42\nUnable to open file. Skipping file: /home/irisowner/silentshift-bonus/zpm.xml\nDetected 1 errors during load.\n\nSILENTSHIFT>\n\nERROR #5005: Cannot open file '/home/irisowner/silentshift-bonus/zpm.xml'"
+    },
+    {
+      "attempt": "retry",
+      "commit": "37480de32f4de8890c486a6974ea1e1ea7d4c56c",
+      "started_at": "2026-11-04T18:23:28.239080+00:00",
+      "status": "failed",
+      "commands": [
+        {
+          "block": 1,
+          "exit_code": 1
+        }
+      ],
+      "tracked_tree_clean": true,
+      "readme_sha256": "0d8cff90c4bf6aef696d3be78d0c00c24e348853cace0736b30993127f739b9b",
+      "environment_names": [
+        "HOME",
+        "LANG",
+        "LC_ALL",
+        "PATH",
+        "TMPDIR"
+      ],
+      "provider_api_keys_supplied": false,
+      "credentials_generated_fresh": true,
+      "env_mode": "0o600",
+      "installer_mode": "0o644",
+      "native_unit_suite_run": false,
+      "judge_replay_run": false,
+      "output": "judge-retry-output.txt",
+      "container_created": false,
+      "failure": "Host free space below 1.8 GiB safety floor; no new container or IPM install",
+      "documented_retry_adjustments": {
+        "container": "silentshift-bonus-registry-judge-retry",
+        "api_port": 52853
+      }
+    }
+  ],
+  "retry_limit_reached": true,
+  "fresh_native_suite_passed": false,
+  "fresh_judge_replay_passed": false,
+  "post_attempt_host_free_bytes": 1638182912,
+  "host_floor_gib": 1.8,
+  "vm_floor_gib": 3,
+  "existing_runtime_replay": "freeze-build154-replay.json",
+  "repository_checks": {
+    "pytest": "174 passed in 4.87s",
+    "typescript": "passed",
+    "web_build": "passed with existing Lucide use-client bundling warnings",
+    "browser_e2e": "38 passed (1.0m); landing/disconnected suite"
+  },
+  "external_edits_performed": false
+}

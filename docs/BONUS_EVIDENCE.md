@@ -12,7 +12,11 @@ SilentShift holds a technically valid order or payment when its business meaning
 | Custom inbound adapter | 2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
 | IPM package | 2 | Verified: public native **0.2.0** installs with `zpm "install silentshift"` in fresh build-154 containers without source mounts. Explicit startup, full native suite, recorded replay and a separate five-case live run passed. Award unconfirmed. |
 
-## Final public-install verification — November 4
+## Current freeze-pass check
+
+The build-154 retained-instance replay passed **12/12**, session **59**. Two new clean-clone attempts did not complete: installer read permissions stopped the first; host storage preflight stopped the corrected retry. The current README path is **blocked**, not newly verified. [Exact commands, output and boundaries](JUDGE_VERIFICATION.md). Earlier public-install evidence below still records what ran; it is not presented as this new run.
+
+## Earlier public-install verification — November 4
 
 Two additional pristine official build-154 containers installed public native package **0.2.0** with the literal `install silentshift`, with no source mounts. Both passed the entire native suite (five classes / 12 methods) and explicitly started the production. Recorded replay passed **12/12**, session **24**, four executed tools, five recorded provider exchanges and zero deliveries. The separate live local-Ollama run passed **5/5** final routes with four tools each, sessions **30, 58, 86, 113, 141**. Its one SDK warmup and one amendment embedding are disclosed separately. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json) · [commands and output](FINAL_PASS_REPORT.md).
 
