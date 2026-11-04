@@ -2,9 +2,19 @@
 
 Current November 4 live run passed 5/5 with four tools; sessions 1667, 1695, 1723, 1750 and 1778. A new actual HTTP-400 diagnostic is session 1807. [Current live metadata](evidence/bonus-020-live.json) · [current failure](evidence/bonus-020-live-failure.json). No-key replay and exact field boundaries are documented below.
 
+The native **Body** panel is now captured for a [successful provider call in session 1667](assets/provider-success-body-safari.png) and the [HTTP-400 diagnostic in session 1807](assets/provider-failure-body-safari.png). These unedited Safari screenshots show persisted `CallResponse` properties, including model, prompt version, provider, execution mode, duration, HTTP status and available usage. The successful call returned 877 prompt tokens and 70 completion tokens in 37,125 ms; the diagnostic took 160 ms and returned no usage. Neither case was delivered. [Selected message values, reproducible read-only commands, hashes and permission restoration](evidence/provider-body-captures.json).
+
 Historical November 3 status: **the local provider-traced native journey passed all five scenarios on official ARM64 build 154U**, run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8`. Each `qwen3-silentshift:4b-instruct` investigation made four gateway requests, executed the three evidence tools, and persisted the expected policy/route. Approved amendment case `EB3307BB-D772-11F1-82EF-EED820A70F55` is native session 374; its four actual provider request/response pairs are headers 381–388. An isolated local SDK failure preserved upstream HTTP 400 in session 316, headers 318 ↔ 319, and remained held with zero deliveries. These are synthetic local cases, not hosted or production evidence. See [AI tracing](AI_TRACING.md), `BUILD_STATUS.md`, and the [public native summary](evidence/native-summary.json). Earlier runs and failures remain historical evidence.
 
 The [provider-message export](evidence/provider-calls.json) verifies all five cases' native pairs plus the failure pair: **42 metadata messages**. Authenticated native IRIS Visual Trace captures show the [successful transaction, session 374](assets/provider-success-visual-trace.png), and [contained failure, session 316](assets/provider-failure-visual-trace.png). These portal captures are separate from private vendor-rendered SVG exports.
+
+## Viewing native message properties
+
+Use a **local IRIS account**, not the InterSystems website identity. Open the case's clean `EnsPortal.VisualTrace.zen?SESSIONID=...` URL, select a `CallResponse` arrow, then **Body**. The default `SSNativeTrace` application role permits graph navigation; it deliberately does not grant message-content access.
+
+On the verified build 154U, displaying a message body requires both `%Ens_MessageContent:USE` and SQL `SELECT` on `Ens.MessageHeader` in namespace `SILENTSHIFT`. The content resource alone enables the tab but leaves the header lookup denied. An authorized operator manages these grants; changing a password is not a remedy for missing permissions. The November 4 capture used explicitly approved temporary grants to `SSNativeTrace`, then restored its exact original resources and removed the table grant. Independent checks returned SELECT **0** and write **0** after restoration. Default accounts and setup code are unchanged; no resend or production-control permission was added.
+
+The screenshots inspect existing retained sessions **1667** and **1807**, not a fresh inference or replay. Their [receipt](evidence/provider-body-captures.json) links each image to the selected native header/body and full metadata. Long IDs and tool JSON extend beyond the native panel's visible width; use the receipt for their complete values.
 
 ## Version boundary
 

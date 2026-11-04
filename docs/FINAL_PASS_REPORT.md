@@ -78,8 +78,33 @@ There is **no hosted demo**. The displayed EAP kit agreement limits internal eva
 
 - [Quoted underscore tool dispatch](bug-reports/ai-hub-quoted-tool-name.md): valid minimal UDL reproduced a generated-code failure on 154U, with a successful camel-case control. Ready for author review/filing; vendor acceptance unconfirmed.
 - [Callback signal 11 candidate](bug-reports/callback-signal11-candidate.md): five historical log entries and the application workaround are preserved, but there is no isolated minimal repro or stack attribution. Investigate before filing; no Embedded Python bug bonus claimed.
-- Organizer/moderator approval and bonus awards remain external decisions. A native metadata Body-panel screenshot still requires an account allowed to view that panel. Existing graph capture and body exports are distinguished.
+- Organizer/moderator approval and bonus awards remain external decisions. Native metadata Body-panel screenshots are now captured and matched to persisted records; the dedicated idea-field public readback remains pending.
 - Both articles and the video are public. The earlier questionnaire has its receipt; no new questionnaire submission is required. Personal eligibility is for the entrant to confirm.
+
+## Native metadata capture follow-up
+
+On November 4, the actual native Visual Trace **Body** panel was captured in Safari for retained live sessions **1667** and **1807**. The success screenshot selects header **1677**, body **1391**: HTTP 200, 37,125 ms, 877 prompt tokens and 70 completion tokens. The failure screenshot selects header **1810**, body **1506**: HTTP 400, `UPSTREAM_HTTP_ERROR`, 160 ms and unknown usage. Both cases remain quarantined with zero deliveries. No new model call was made for this capture.
+
+```sh
+uv run python scripts/verify_native_provider.py \
+  --context colima-silentshift --container silentshift-clean-iris-1 \
+  --inspect-case FD6A9743-D821-11F1-930B-DA4FD0E31490 \
+  --output .local/trace-capture/safari-success-verified.json
+uv run python scripts/verify_native_provider.py \
+  --context colima-silentshift --container silentshift-clean-iris-1 \
+  --inspect-case 36DC88F3-D824-11F1-A71B-4A5ECD1428BB --require-failure \
+  --output .local/trace-capture/safari-failure-verified.json
+```
+
+Both persisted receipts returned `"passed": true`; the [public capture receipt](evidence/provider-body-captures.json) includes every inspector check, selected native metadata and image SHA-256. The temporary content-resource and single-table SELECT grants were removed immediately afterward. Independent readback returned:
+
+```text
+RESTORED_RESOURCES=%DB_SILENTSHIFT:R,%Ens_MessageTrace:U,%Ens_Portal:U
+HEADER_SELECT_AFTER_RESTORE=0
+HEADER_WRITE_AFTER_RESTORE=0
+```
+
+The documentation-only follow-up also ran `uv run pytest -q` (**174 passed in 3.70s**), `npm --prefix web run check` (passed) and `npm --prefix web run build` (passed; Vite **724 ms**, existing Lucide directive warnings). The full fresh-container native suite and five-case results above remain the runtime gate; they were not rerun for screenshot/documentation changes.
 
 ## Shipping receipt
 

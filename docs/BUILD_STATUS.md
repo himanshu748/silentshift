@@ -1,5 +1,13 @@
 # Build status
 
+## Native metadata screenshots — November 4, 2026
+
+Captured the actual Visual Trace **Body** panel in Safari for success session **1667**, response header **1677** / body **1391**, and HTTP-400 diagnostic session **1807**, response header **1810** / body **1506**. Read-only inspection of both persisted cases passed; both remain quarantined with zero deliveries. No new provider call was made for the capture. [Images, exact values, commands and hashes](evidence/provider-body-captures.json).
+
+The user-approved temporary `%Ens_MessageContent:USE` and SQL `SELECT` on `Ens.MessageHeader` were removed immediately after capture. Independent readback confirmed the exact original role resources, SELECT **0** and write **0**. Passwords, setup code, native package **0.2.0**, frontend **0.2.1** and deterministic policy are unchanged. This closes the native Body screenshot gap; listing moderation and organizer awards remain separate.
+
+Documentation follow-up checks: **174 Python tests passed in 3.70s**, TypeScript check passed, production build passed (**724 ms**, existing Lucide warnings). Full native fresh-container results below are retained; no new five-case run is claimed for this evidence-only update.
+
 ## Final pass and interactive UI — November 4, 2026
 
 The native backend remains **0.2.0**, verified on official ARM64 Community **2026.3.0AI.154.0 (154U)**. Two new clean public installs used the literal **`install silentshift`** command. Each started the production and passed all **five native test classes / 12 methods**. Recorded replay passed **12/12**, session **24**, port 52823. The separate live install passed **5/5 final routes**, all four tools per case, sessions **30, 58, 86,113,141**, port 52833. One SDK warmup and one amendment embedding are disclosed separately from that five-case score. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json).
@@ -22,7 +30,7 @@ The verified target remains official ARM64 Community **2026.3.0AI.154.0 (Build 1
 
 The first source-load test required two assertion-expression repairs, then the full suite and replay passed. A second source container was stopped after a disk-floor pause and a post-restart readiness failure; its unverified inspector refinement was removed. The later public-registry run above is an independent clean success. No files or volumes were deleted; local VM disk capacity grew from 16 to 20 GiB. No paid service, external model provider or EAP image publication was used.
 
-Remaining: native message-body screenshot requires an existing administrator portal session; no password or permanent role change was made. Description/article moderation and organizer awards are separate from verification. Earlier 404/moderation-only observations below are historical.
+The native message-body screenshot gap was closed in the later capture above; no password or permanent role change was made. Listing moderation and organizer awards remain separate from verification. Earlier 404/moderation-only observations below are historical.
 
 ## Submission package — November 4
 
