@@ -2,13 +2,15 @@
 
 ## Current bonus release — November 4, 2026
 
-The verified target remains official ARM64 Community **2026.3.0AI.154.0 (Build 154U)**. Version **0.2.0** adds explicit provider metadata and a recorded-response path through the native AI Hub agent and the same queued interoperability operation. Replay performs no fresh inference and preserves the critical policy veto.
+The verified target remains official ARM64 Community **2026.3.0AI.154.0 (Build 154U)**. Version **0.2.0** adds explicit provider metadata and recorded responses through the same native agent and queued operation. Replay performs no fresh inference and preserves the critical policy veto.
 
-Current live regression: **5/5 final outcomes** on sessions 1667, 1695, 1723, 1750 and 1778; all four native tools per case, ten actual local provider request/response pairs. Python **172 passed**, TypeScript passed, production web build passed (existing Lucide directive warnings). [Current receipt](evidence/bonus-020-live.json).
+**Published and installed:** Open Exchange release 0.2.0 succeeded; public metadata/manifest returned 200. A fresh version-qualified community-registry install passed explicit production startup, all **five native test classes / 12 methods**, and API replay **12/12**, session **24**, zero deliveries. All **55** registry runtime/package files match the released source. [Receipt](evidence/bonus-020-registry-install.json). The README-backed description was separately sent for approval; SilentShift is still on contest 49.
 
-Fresh source load 0.2.0, corrected full native suite **five classes / 12 methods**, and replay **12/12** passed, session 24. The first test attempt failed assertions and is disclosed in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). Final clean load/public registry release status is maintained in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
+**Live:** 5/5 final outcomes on sessions 1667, 1695, 1723, 1750, 1778; four tools per case and ten real local provider pairs. The new protocol-failure case in session 1807 records actual HTTP 400 and stays quarantined. Python **172 passed in 3.13s**, TypeScript/build passed; staged source scan had zero findings/omissions. [Live receipt](evidence/bonus-020-live.json) · [failure receipt](evidence/bonus-020-live-failure.json).
 
-Public 0.1.0 registry metadata/manifest now return 200, and SilentShift is on contest 49. Earlier 404/moderation-only observations below are historical. No organizer award is claimed. A new native message-body screenshot remains blocked by portal permissions unless an existing administrator signs in; no password change was made.
+The first source-load test required two assertion-expression repairs, then the full suite and replay passed. A second source container was stopped after a disk-floor pause and a post-restart readiness failure; its unverified inspector refinement was removed. The later public-registry run above is an independent clean success. No files or volumes were deleted; local VM disk capacity grew from 16 to 20 GiB. No paid service, external model provider or EAP image publication was used.
+
+Remaining: native message-body screenshot requires an existing administrator portal session; no password or permanent role change was made. Description/article moderation and organizer awards are separate from verification. Earlier 404/moderation-only observations below are historical.
 
 ## Submission package — November 4
 

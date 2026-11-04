@@ -10,7 +10,7 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). Open Exchange shows the application as Published in the developer portal; the two technical articles remain submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). Open Exchange release **0.2.0** and its public IPM package are published; the refreshed description and two technical articles remain submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
@@ -47,6 +47,8 @@ Fresh-source example: session **24**, five recorded exchanges, four executed too
 
 ![Actual native provider request and response pairs in Visual Trace, live session 374](docs/assets/provider-success-visual-trace.png)
 
+A capture of the native **Body** metadata panel is still pending an authorized administrator session. Current values are available in the [live native-body export](docs/evidence/bonus-020-live.json) and [actual HTTP-400 failure export](docs/evidence/bonus-020-live-failure.json); neither JSON export is presented as a portal screenshot.
+
 **Recorded fields:** case/session/invocation/call IDs; provider, model and prompt **version**; request/response times, operation duration, byte counts, offered tools and returned tool-call IDs/names; finish reason; safe error code and HTTP status; zero application retries and false fallback. Live response token counts are recorded only when returned. Raw prompts, tool arguments and raw provider bodies are omitted. Billing cost, SDK/provider retry count and session-token totals remain unknown. Replay marks `execution_mode=recorded-replay`, keeps upstream status/usage null and records its fixture ID. [Exact field map and failure recipe](docs/NATIVE_AI_HUB.md).
 
 ### SilentShift (IRIS Interoperability) vs Langfuse
@@ -77,7 +79,7 @@ The agent proposes through four read-only, case-scoped evidence tools: current m
 
 The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides eight API-backed views, including the native Review queue, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
 
-**Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment or external ERP/bank delivery is claimed.
+**Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment or external ERP/bank delivery is claimed.
 
 ## Local checks without IRIS
 
@@ -230,7 +232,15 @@ The first seed indexed 15 actual resolved demo cases and one approved amendment.
 
 ### Package the native backend with IPM
 
-Follow the [IPM guide](docs/IPM.md) for the 44-class, ten-asset 0.2.0 backend and isolated verification commands. IPM 0.10.10 installed it from a local filesystem repository on a fresh build-154 instance with no source mount. Installed Python origins and empty application tables passed; after explicit setup, the real API repeated all five final outcomes with four native tools. The package does not configure credentials, start the production or call a model merely by being installed. Public IPM 0.1.0 is available; 0.2.0 publication and registry-install results are tracked in the [release ledger](docs/BONUS_EVIDENCE.md). In a prepared SILENTSHIFT namespace, the public install command is `zpm "install silentshift"`. Installation alone does not activate the production.
+Install the public **silentshift 0.2.0** backend in a prepared interoperability-enabled SILENTSHIFT namespace with IPM 0.10.10 or newer:
+
+```objectscript
+zpm "install silentshift"
+```
+
+The [verified public-registry test](docs/evidence/bonus-020-registry-install.json) used `install PublicCommunity/silentshift 0.2.0 -synchronous` in a fresh official ARM64 build-154 container without source mounts. All 55 runtime/package files (44 classes, ten assets and the manifest) matched the released source. After explicit setup, all five native test classes / 12 methods and the no-key API replay passed; replay session **24** contained five provider pairs and zero deliveries. The [IPM guide](docs/IPM.md) provides prerequisites, hooks, exact commands and publication details.
+
+Installation alone configures no credentials, starts no production and calls no model. The earlier 0.1.0 clean install also ran all five live scenarios; the current 0.2.0 live regression is separately [verified on the retained runtime](docs/evidence/bonus-020-live.json).
 
 ## API and data boundaries
 

@@ -1,6 +1,6 @@
 # Open Exchange application copy
 
-Release 0.2.0 copy, aligned with the current README. On November 4 the developer portal showed Published, the dedicated idea field and contest/IPM checkboxes were saved, public registry 0.1.0 metadata/manifest returned 200, and SilentShift appeared on contest 49. Current 0.2.0 moderation/install results are tracked in SUBMISSION_CHECKLIST.md.
+Release **0.2.0 published successfully** on November 4, 2026. The public app shows version 0.2.0, `zpm install silentshift` and its DPI-I-689 idea association. A clean public registry install passed production startup, all 12 native test methods and the recorded-provider API replay (12/12). The README-backed description refresh is separately **sent for approval**. Submit to Contest and Publish in Package Manager remain checked; SilentShift remains on contest 49.
 
 ## Fields to paste
 
@@ -40,7 +40,7 @@ Partners can submit raw message JSON through the authenticated API or a custom n
 
 ### Run and inspect the demonstration
 
-The verified runtime is official ARM64 Community AI Hub **2026.3.0AI.154.0 (154U)**, with local Ollama `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings in 384-dimensional IRIS vectors. The backend also passed a clean local IPM installation without a source mount. After explicit setup, that installed production returned **5/5 expected final outcomes** and **4/5 expected agent proposals**, with all four native tools read.
+The verified runtime is official ARM64 Community AI Hub **2026.3.0AI.154.0 (154U)**, with local Ollama `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings in 384-dimensional IRIS vectors. The 44-class, ten-asset 0.2.0 backend installed from the public community IPM registry into a fresh container without source mounts. Explicit setup, all 12 native test methods and the recorded-provider replay passed. A separate current live run returned **5/5 expected final outcomes** with all four native tools read. The replay produces no fresh inference and no delivery.
 
 All supplied orders, payments and references are synthetic. Delivery means a receipt in the included IRIS simulator. The five frozen scenarios are a coverage demonstration: the deterministic baseline also solves all five, so they establish no AI accuracy uplift or general production-readiness claim. No public hosted application is provided. Public IPM installation and the no-key recorded-provider recipe are documented separately, with their actual verification status in the README.
 
@@ -69,7 +69,7 @@ AI Hub, Interoperability, Embedded Python, Workflow Engine, Vector Search, Objec
 | Call to Action label | `Run SilentShift` |
 | AI / ML selections | Select both; the application uses native agent inference and neural embeddings. |
 | Submit to Contest | Check for **InterSystems Programming Contest: AI Agents in Interoperability Workflows**. |
-| Publish in Package manager | Keep checked. Public 0.1.0 metadata exists; current 0.2.0 installation results are in the release ledger. |
+| Publish in Package manager | Keep checked. Public 0.2.0 installation/startup/native suite/replay verified; see the release ledger. |
 | Demo URL | Leave empty: there is no hosted application. Put the published video in YouTube URL. |
 | Community Article URL | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Workflow recovery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery); both submitted for moderation; verify the canonical associations after approval. |
 
@@ -77,7 +77,7 @@ AI Hub, Interoperability, Embedded Python, Workflow Engine, Vector Search, Objec
 
 Expose each local AI Hub provider exchange in the business-case Visual Trace, with explicit provider/model/prompt version, operation timing, available response tokens, safe HTTP errors and retry/fallback boundaries. Add a no-key recorded-provider example through the same queued operation, native agent and four read-only tools; replay is labeled and cannot release the critical synthetic case. Package 44 classes and ten assets with IPM 0.10.10 requirements. Verified target remains official ARM64 2026.3.0AI.154.0 (154U); five live final routes and the corrected native suite/replay passed. The README provides exact commands and a fair comparison with Langfuse.
 
-## Release actions
+## Release actions (executed for 0.2.0)
 
 1. Push the fully checked 0.2.0 source to main.
 2. Developer Portal → My Applications → SilentShift → ellipsis → Add new release → Add new release. Enter 0.2.0, November 4, 2026 and the notes above. Publish the new release; preserve the existing app and any moderation request.
@@ -85,3 +85,5 @@ Expose each local AI Hub provider exchange in the business-case Visual Trace, wi
 4. Read back release status. Verify public 0.2.0 metadata, perform the clean public registry install in IPM.md and confirm SilentShift remains listed in contest 49. Pending approval is a separate state from a published registry package.
 
 The [official submission guide](https://docs.openexchange.intersystems.com/apps/submit/), [contest paths](https://docs.openexchange.intersystems.com/contest/apply/) and [IPM publication guide](https://docs.openexchange.intersystems.com/apps/ipm/) describe the portal workflow. No direct registry password or publishing API is invented.
+
+Saved description mode is **Use GitHub/GitLab README as long description**. The copy above is the product narrative alternative; the current listing reads the pushed README. The owner-facing app badge says Awaiting Review while the release remains published and the description request says sent for approval.

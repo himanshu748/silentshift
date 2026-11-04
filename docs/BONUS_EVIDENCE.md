@@ -10,7 +10,7 @@ Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minil
 | Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view. 54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
 | IRIS Vector Search precedents |2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into 384-dimensional IRIS VECTOR rows. Top 3 case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed. 5/5 native retained; award unconfirmed. |
 | Custom inbound adapter |2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
-| IPM package |2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. The 0.2.0 release and registry-install status are recorded below; no points are claimed awarded. |
+| IPM package |2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. Public 0.2.0 install, production startup, full native suite and replay passed on a new build-154 container; no points are claimed awarded. |
 
 ## November 4 release verification: 0.2.0
 
@@ -45,7 +45,11 @@ The actual API replay returned session **24**, five request/response pairs, all 
 
 ### Publication state
 
-Anonymous public 0.1.0 metadata and manifest returned HTTP 200 on November 4; its public archive is distinct from the historical local archive. Open Exchange's developer portal shows **Published** and the public contest page lists **SilentShift**. Version 0.2.0 publication and its public clean-install result are updated in the submission checklist after execution. A successful local `load` is never counted as a public `install`.
+Anonymous public 0.1.0 metadata and manifest returned HTTP 200 on November 4; its public archive is distinct from the historical local archive. Open Exchange's developer portal shows **Published** and the public contest page lists **SilentShift**. **Release 0.2.0 was published**, and anonymous metadata/manifest returned HTTP 200. A fresh `install PublicCommunity/silentshift 0.2.0 -synchronous` then passed production startup, all five native test classes / 12 methods and replay **12/12**, session **24**, on port **52813**. All 55 runtime/package files from the actual registry cache match the released source. [Complete public-install receipt](evidence/bonus-020-registry-install.json). The description refresh was sent separately for approval; the app still appears on contest 49. A successful local `load` is never counted as a public `install`.
+
+![Open Exchange 0.2.0 release confirmation](assets/oex-020-release-published.jpg)
+
+[Description sent for approval](assets/oex-020-description-sent.jpg) · [contest listing after release](assets/oex-contest-49-silentshift.jpg).
 
 ## 1. Each LLM call belongs to its business case
 
@@ -165,7 +169,7 @@ Embedded Python (3 potential points) and Docker (2) are already part of the veri
 | YouTube demonstration (3) | [Public video](https://youtu.be/a4dOcqu89EA), 2:30, 1080p H.264/AAC with English captions. Anonymous oEmbed HTTP 200; actual player 1080p HD and English captions observed. Organizer acceptance unconfirmed. |
 | Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both show **On moderation**; public acceptance unconfirmed. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
-| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. Earlier public reads returned 404; November 4 refresh returned 200 for 0.1.0 metadata/manifest. See the current release gate above. |
+| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. 0.2.0 published through OEX; clean public installation, production startup, full native suite and replay passed. See the current receipt above. |
 | Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. A later November 4 read confirmed SilentShift on the registered-app list for contest 49. |
 | Online demo (2) | Not hosted; explicitly outside the current authorization. |
 | PEX / vendor bug bonuses | No required Java/.NET boundary or verified vendor defect; no claim. |

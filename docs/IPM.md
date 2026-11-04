@@ -6,7 +6,7 @@ Installation imports classes and copies the standard-library Python modules, fro
 
 ## Public registry
 
-The public **0.1.0** metadata and manifest returned HTTP 200 on November 4, 2026. The 0.2.0 release and clean registry-install outcome are tracked in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md); source loading is a separate result.
+The public **0.2.0** metadata and manifest returned HTTP 200 on November 4, 2026. A **fresh public-registry install passed**, followed by explicit production startup, all five native test classes / 12 methods and the no-key API replay (12/12, session 24, zero deliveries). All 55 runtime/package files in the registry cache matched the released source. [Public-install receipt](evidence/bonus-020-registry-install.json). Source loading remains a separately identified result.
 
 In a prepared **SILENTSHIFT** namespace with IPM installed:
 
@@ -64,7 +64,7 @@ The result must be QUARANTINED, zero deliveries, five native provider pairs, fou
 
 ## Verify a public install in a second clean container
 
-After 0.2.0 is publicly available, use a new name and port:
+The following path was verified with container `silentshift-bonus-registry-20261104` on port 52813. To repeat, use a new name and port:
 
 ```sh
 uv run python scripts/verify_bonus_release.py --source public-registry \
@@ -77,6 +77,8 @@ This executes **`install PublicCommunity/silentshift 0.2.0 -synchronous`** again
 For live local inference, leave `SILENTSHIFT_PROVIDER_MODE=live` (the default), configure the local Ollama model/embedding endpoint and use the README bootstrap. `verify_native.py --allow-model-calls` exercises five actual local investigations. Replay is never counted as live model evidence.
 
 ## Publish through Open Exchange
+
+Release **0.2.0** was published successfully on November 4. The public app displays version 0.2.0, `zpm install silentshift`, and its linked DPI-I-689 idea. The description refresh was separately sent for approval; SilentShift remains listed in contest 49. [Release confirmation](assets/oex-020-release-published.jpg) · [description approval request](assets/oex-020-description-sent.jpg).
 
 The [official publication workflow](https://docs.openexchange.intersystems.com/apps/ipm/) uses Open Exchange to publish to the community registry. There is no separate direct-registry publishing step to invent.
 
