@@ -24,13 +24,14 @@ The no-key example replays one recorded assistant answer through the **same nati
 
 **Latest clean-clone check: blocked.** The first attempt exposed the installer permission step now included below; the second stopped below the host disk safety floor. [Exact commands, failures and remaining verification](docs/JUDGE_VERIFICATION.md). The retained build-154 replay passed separately; no fresh-clone pass is claimed.
 
-This reference recipe uses **macOS/ARM64, Git, Python 3.11+, uv and an already running Colima profile `silentshift` / Docker context `colima-silentshift`**. The official image must already be loaded as `silentshift-iris:2026.3.0AI.154.0`, with `containers.intersystems.com/intersystems/webgateway:2026.1` available locally. It requires at least **1.8 GiB free on the host and 3 GiB in the Docker VM**. The verifier's storage check uses Colima; other Docker platforms need an adapted harness. Obtain licensed runtime prerequisites through the [native setup](#native-build-154-setup). This recipe does **not** require Ollama, model downloads, a provider API key or frontend installation. Internet access is used for Git, Python dependencies, the pinned IPM installer and the public package registry.
+This reference recipe uses **macOS/ARM64, Git, Python 3.11+, uv and an already running Colima profile `silentshift` / Docker context `colima-silentshift`**. The official image must already be loaded as `silentshift-iris:2026.3.0AI.154.0`, with `containers.intersystems.com/intersystems/webgateway:2026.1` available locally. It requires at least **1.8 GiB free on the host and 3 GiB in the Docker VM**. The verifier's storage check uses Colima; other Docker platforms need an adapted harness. Obtain licensed runtime prerequisites through the [native setup](#native-build-154-setup). This recipe does **not** require Ollama, model downloads, a provider API key or frontend installation. Internet access is used for Git, Python dependencies, the pinned IPM installer and the public package registry. **Create the clone under a directory already shared with Colima.** The gateway binds two generated configuration files from the checkout; an unshared checkout can install the backend but cannot start the gateway. The directory check below stops before configuration or container creation if the VM cannot see the clone.
 
 1. Start from a fresh clone. Create only local application credentials; the script refuses to overwrite an existing `.env` and never prints passwords:
 
    ```sh
    git clone https://github.com/himanshu748/silentshift.git silentshift-judge
    cd silentshift-judge
+   colima ssh --profile silentshift -- test -d "$PWD"
    python3 - <<'PYCONFIG'
    import os
    from pathlib import Path

@@ -1,5 +1,9 @@
 # Build status
 
+## Resumed verification: shared-directory prerequisite
+
+The user resumed autonomous work. Clearing only inactive npx download caches recovered about 0.69 GiB and left the active cache entry intact. A new clean remote clone passed IPM-client loading with the documented installer permissions, public `install silentshift` at native version 0.2.0, and explicit production setup on 154U. Gateway creation then failed because this Colima profile shares only the existing project directory, not the sibling clone directory. No native test/replay pass is claimed for that attempt. The README now requires a shared clone location and checks VM visibility before creating configuration or containers. The next isolated clone will use that existing mount without changing/restarting the working VM.
+
 ## Frozen-entry final result — November 4, 2026
 
 Four requested documentation/evidence gaps are closed locally: the minimal AI Hub bug reproduces on 154U with filing text; declared-build replay passes 12/12; public README idea/trace/Langfuse evidence is prominent; app 0.2.1/native IPM 0.2.0 and unconfirmed bonus states are consistent. OEX and DC were not edited.
