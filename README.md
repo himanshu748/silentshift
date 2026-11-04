@@ -16,26 +16,59 @@ The public video plays at 1080p with English captions. SilentShift is listed in 
 
 SilentShift implements [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) by turning each admitted AI Hub provider exchange into an actual `CallRequest` / `CallResponse` pair in the original business-case session. A queued Business Operation records the model, provider, prompt version, elapsed operation time, returned tool names, HTTP outcome and available response-token counts. Deterministic policy still authorizes delivery; a trace is evidence of execution, not permission to release an order.
 
+**Judge shortcuts:** [keyless replay](#see-it-in-visual-trace) · [native metadata screenshot](#native-provider-metadata) · [Langfuse comparison](#silentshift-iris-interoperability-vs-langfuse). **Bonus status: Pending, organizer-unconfirmed.** The dedicated idea URL is saved in the owner portal but was absent in the last signed-out view; these public implementation details do not depend on that association appearing.
+
 ### See it in Visual Trace
 
 The no-key example replays one recorded assistant answer through the **same native AI Hub agent, evidence tools, provider ingress and queued operation** used in live mode. Tool envelopes are reconstructed; the four tools execute afresh. It creates only the frozen synthetic `20 CASE` versus `240 EA` case, which must stay held with no delivery. It performs no new inference and never reports the original recording's tokens as current usage.
 
-1. Complete the [native prerequisites](#native-build-154-setup), including the authorized build-154 image, private `.env` and pinned IPM installer. For an isolated source installation, run from this checkout:
+This reference recipe uses **macOS/ARM64, Git, Python 3.11+, uv and an already running Colima profile `silentshift` / Docker context `colima-silentshift`**. The official image must already be loaded as `silentshift-iris:2026.3.0AI.154.0`, with `containers.intersystems.com/intersystems/webgateway:2026.1` available locally. It requires at least **1.8 GiB free on the host and 3 GiB in the Docker VM**. The verifier's storage check uses Colima; other Docker platforms need an adapted harness. Obtain licensed runtime prerequisites through the [native setup](#native-build-154-setup). This recipe does **not** require Ollama, model downloads, a provider API key or frontend installation. Internet access is used for Git, Python dependencies, the pinned IPM installer and the public package registry.
+
+1. Start from a fresh clone. Create only local application credentials; the script refuses to overwrite an existing `.env` and never prints passwords:
 
    ```sh
+   git clone https://github.com/himanshu748/silentshift.git silentshift-judge
+   cd silentshift-judge
+   python3 - <<'PYCONFIG'
+   import os
+   from pathlib import Path
+   import secrets
+
+   values = {
+       "IRIS_IMAGE": "silentshift-iris:2026.3.0AI.154.0",
+       "SILENTSHIFT_IRIS_USERNAME": "ss-judge-reviewer",
+       "SILENTSHIFT_VIEWER_USERNAME": "ss-judge-viewer",
+       "SILENTSHIFT_IRIS_PASSWORD": secrets.token_urlsafe(24),
+       "SILENTSHIFT_VIEWER_PASSWORD": secrets.token_urlsafe(24),
+       "SILENTSHIFT_GATEWAY_PASSWORD": secrets.token_urlsafe(24),
+       "SILENTSHIFT_PROVIDER_MODE": "recorded-replay",
+       "SILENTSHIFT_AGENT_WAIT_SECONDS": "120",
+       "SILENTSHIFT_EMBED_BASE_URL": "http://host.lima.internal:11434/v1/",
+   }
+   lines = Path(".env.example").read_text().splitlines()
+   content = "\n".join(
+       line.split("=", 1)[0] + "=" + values[line.split("=", 1)[0]]
+       if "=" in line and line.split("=", 1)[0] in values else line
+       for line in lines
+   ) + "\n"
+   with os.fdopen(os.open(".env", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w") as out:
+       out.write(content)
+   print("Created private local replay configuration; no provider keys.")
+   PYCONFIG
    uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
-   uv run python scripts/verify_bonus_release.py --source load \
-     --container silentshift-bonus-load-example --api-port 52793 --execute
+   uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
+     --execution-mode recorded-replay --container silentshift-bonus-registry-judge \
+     --api-port 52843 --execute
    ```
 
-   The driver creates a **new** container without source mounts, loads IPM 0.2.0, explicitly configures the production, runs the full native test suite, and runs the replay. It refuses existing container names and preserves existing runtimes. Use `--context`, `--vm-profile` and `--image` for your Docker setup; defaults target the documented Colima profile. Gateway image and IPM must already be available. No Ollama inference or external key is needed for this mode.
+   The driver installs the public native package **0.2.0** with literal `zpm "install silentshift"` in a **new build-154 container without mounts**, configures the production, runs all **five native test classes / 12 methods**, then runs the API replay. App/workbench release **0.2.1** is a separate version. No file or credential is copied from a previous checkout. Local endpoint values satisfy setup validation; recorded replay makes no inference or embedding request. Existing container names are refused; choose a new name and free port for another run. Logs and local credentials remain in ignored `.local/` and `.env` files. The created containers are retained for inspection.
 
 2. Repeat the actual API journey and print its own session ID and clean portal URL:
 
    ```sh
    uv run python scripts/trace_example.py \
-     --api http://127.0.0.1:52793/silentshift/api \
-     --context colima-silentshift --container silentshift-bonus-load-example
+     --api http://127.0.0.1:52843/silentshift/api \
+     --context colima-silentshift --container silentshift-bonus-registry-judge
    ```
 
    Expected: `execution_mode=recorded-replay`, `fresh_inference=false`, `provider_pairs=5`, `four_tools=1_each`, `routing=QUARANTINED`, `delivery_count=0`, `checks=12/12; passed=true`. The driver compiles the native test helpers before this command; the metadata inspector reads actual persisted native headers and bodies.
@@ -43,7 +76,9 @@ The no-key example replays one recorded assistant answer through the **same nati
 3. Open the printed `EnsPortal.VisualTrace.zen?SESSIONID=...` URL. Sign in with a **local IRIS account** permitted to view native message bodies; an InterSystems website login is separate. The default reviewer can read the graph. Native **Body** access additionally requires administrator-managed `%Ens_MessageContent:USE` and SQL `SELECT` on `Ens.MessageHeader` in `SILENTSHIFT`. [Access details](docs/NATIVE_AI_HUB.md#viewing-native-message-properties). No password change is part of this recipe.
 4. Follow `Partner → Semantic` for intake and assessment, the reference/precedent operations for evidence, and `Semantic → Investigator` for native AI Hub. Each `ProviderIngress → ProviderForwarder` **CallRequest** and reciprocal **CallResponse** is a separate exchange in that same case session. Select **Body** to inspect its physical properties. `AITrace` carries actual tool-execution events; `Quarantine` and `ReviewCoordinator → ReviewWorklist` show the enforced hold and human task.
 
-Fresh-source replay: session **24**, five recorded exchanges, four executed tools, zero deliveries. [Replay evidence](docs/evidence/idea-replay-load.json). The screenshot below shows a separate **live** call in session **1667**, selected in the native Visual Trace **Body** panel: model, prompt version, provider, timing, tool-call metadata and returned token counts are physical message properties.
+### Native provider metadata
+
+Earlier fresh-source replay: session **24**, five recorded exchanges, four executed tools, zero deliveries. [Replay evidence](docs/evidence/idea-replay-load.json). The screenshot below shows a separate **live** call in session **1667**, selected in the native Visual Trace **Body** panel: model, prompt version, provider, timing, tool-call metadata and returned token counts are physical message properties.
 
 ![Native Visual Trace Body panel: live session 1667, model qwen3-silentshift:4b-instruct, 37125 ms, HTTP 200 and 877 input plus 70 output tokens](docs/assets/provider-success-body-safari.png)
 
@@ -131,7 +166,7 @@ Open `http://127.0.0.1:5173`. Until the native stack is available, records and m
 
 ## Native build 154 setup
 
-**Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** The build guard requires that exact version. The [November 4 replay recheck](docs/evidence/freeze-build154-replay.json) passed all 12 checks on it: session **59**, five provider pairs, four native tool reads and zero deliveries. No newer build is declared compatible or verified. Setup requires an authorized build-154 image already obtained from InterSystems; if it is no longer offered, contact the official program. This repository cannot redistribute the kit. The clean-clone verification below is separate from this retained-instance recheck.
+**Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** The build guard requires that exact version. The [November 4 replay recheck](docs/evidence/freeze-build154-replay.json) passed all 12 checks on it: session **59**, five provider pairs, four native tool reads and zero deliveries. No newer build is declared compatible or verified. Setup requires an authorized build-154 image already obtained from InterSystems; if it is no longer offered, contact the official program. This repository cannot redistribute the kit. The fresh-clone recipe above is separate from this retained-instance recheck.
 
 1. Sign in to the [official AI Hub EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). Download Community **2026.3.0AI.154.0** for the Docker host's architecture. The [official template](https://github.com/intersystems-community/ai-hub-dev-template/tree/37280e3d0252f1034cdd5b32f0eeea55ff34ffa7) documents local image loading. No EAP software is bundled here.
 2. Start Docker with a modern Compose CLI and enough host storage for its VM, EAP image and persistent manager volume. Setup detects either `docker compose` or standalone `docker-compose` version 2+. A remote Docker context may be used with a source checkout on that host; ordinary remote Docker bind mounts do not upload the local repository. Do not create a paid host or subscription without authorization.

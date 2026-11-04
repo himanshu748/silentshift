@@ -1,5 +1,9 @@
 # Build status
 
+## Frozen-entry verification: public idea evidence — November 4, 2026
+
+The README places DPI-I-689 immediately after the product introduction, with direct jumps to the native Body screenshot and fair Langfuse comparison. The keyless recipe now includes a fresh Git clone, generated private local credentials, explicit recorded-replay mode and public-registry install. It declares its preloaded licensed-image/Colima/storage prerequisites and distinguishes app 0.2.1 from native IPM 0.2.0. Dedicated OEX idea visibility and organizer qualification remain pending. No portal or article was edited. The exact fresh-clone run is the final verification step; no completion claim is made here.
+
 ## Frozen-entry verification: declared runtime — November 4, 2026
 
 The retained public-registry instance reports **2026.3.0AI / Build 154U**, native package **0.2.0**. A new no-key judge replay passed **12/12**, session **59**: five provider pairs, four real native tool reads, `QUARANTINED`, zero deliveries, no fresh inference. [Command, exact runtime and metadata](evidence/freeze-build154-replay.json). This verifies the declared **2026.3.0AI.154.0** again; it is not the later fresh-clone test. No build 109 was run or added as supported.
