@@ -1,6 +1,6 @@
 # Submission checklist
 
-Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / November 9 at 10:29:59 IST**. [Contest 49](https://openexchange.intersystems.com/contest/49) lists SilentShift among its registered applications. Verified means the linked behavior or publication was observed; it does not mean organizers awarded the points.
+Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / November 9 at 10:29:59 IST**. [Contest 49](https://openexchange.intersystems.com/contest/49) lists SilentShift among its registered applications. **App/OEX release: 0.2.1; public native IPM: 0.2.0; verified IRIS: 2026.3.0AI.154.0 Community (154U), ARM64.** Verified means the linked behavior or publication was observed. **Organizer award: unconfirmed for every bonus.** Pending identifies an additional filing, visibility or eligibility gate; Not claimed means no bonus is requested for that item.
 
 ## Every bonus
 
@@ -10,7 +10,7 @@ Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / No
 | Java/.NET PEX | 3 | Not claimed | No Java or .NET production extension implemented |
 | Native Workflow Engine | 2 | Verified | [54-check queue/concurrency receipt](evidence/review-queue.json), [actual UI approve/reject](evidence/review-ui.json) |
 | Custom interoperability adapter | 2 | Verified | [82-check file-intake receipt](evidence/adapter.json), [walkthrough](PARTNER_INBOX.md) |
-| Find a bug in AI Hub | 2 for first, +1 for second | Pending | [Quoted-method generator bug draft](bug-reports/ai-hub-quoted-tool-name.md) reproduced on 154U; not filed or vendor-confirmed |
+| Find a bug in AI Hub | 2 for first, +1 for second | Pending | [Quoted-method generator bug draft](bug-reports/ai-hub-quoted-tool-name.md) reproduced again on 154U; [compiler log](bug-reports/evidence/quoted-tool-build154.txt). User filing, vendor confirmation and organizer qualification remain pending |
 | Embedded Python | 3 | Verified | [Fresh installed native five-case run](evidence/final-public-live.json); deterministic assessment and policy execute inside IRIS |
 | IRIS Vector Search | 2 | Verified | [Native corpus/vector evidence](evidence/precedent-corpus.json), [critical-policy veto](evidence/precedent-veto.json); latest fresh run indexed an amendment with local embeddings |
 | Docker | 2 | Verified | [Fresh official 154U install](evidence/final-public-live.json), no source mounts |
@@ -22,7 +22,7 @@ Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / No
 | Second Developer Community article | 1 | Verified | [Public recoverable-review article](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery); body links SilentShift on OEX |
 | YouTube video | 3 | Verified | [Public demo](https://youtu.be/a4dOcqu89EA), [prior caption/1080p verification](evidence/submission-status.json); video URL present in the listing |
 
-[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score or ranking is claimed. The native implementation remains **2026.3.0AI.154.0 (Build 154U), ARM64**. Organizers also accept **2027.1.0AI.109.0 Community**, which was not tested here.
+[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score or ranking is claimed. The native implementation remains **2026.3.0AI.154.0 (Build 154U), ARM64**. No newer runtime is declared tested or compatible.
 
 ## Final technical gate
 
@@ -33,9 +33,9 @@ Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / No
 - Native runtime code and deterministic policy are unchanged; the frontend version is 0.2.1 and the separately installed native package remains 0.2.0.
 - Native Visual Trace **Body** captures: success session **1667** and failure session **1807**, matched to persisted headers **1677** and **1810**. Both read-only inspectors passed. Both temporary read grants were removed and checked. [Capture receipt](evidence/provider-body-captures.json).
 
-## Remaining actions
+## Remaining actions — user only
 
-1. **Finish OEX moderation/idea-field public readback.** Release **0.2.1**, the updated README/native Body capture, two articles, retained video and install command are now public. Native registry **0.2.0** remains unchanged. A fresh signed-out Safari window confirmed that the dedicated idea association is still missing, although the owner view shows the correct saved URL. Listing edits remain **Awaiting Review**. No further resubmission or cancellation is needed now. After moderation, check the right-hand **Ideas to the app** section; if still absent, ask OEX support to inspect the saved association. [Signed-out receipt](evidence/public-visibility.json).
-2. **File the reproducible AI Hub bug if you choose.** Review the draft and two tiny repro classes, then file through the official AI Hub issue channel. No issue was filed by the agent. Keep the historical signal-11 candidate separate until it has a minimal reproducer and stack attribution.
+1. **Apply the prepared OEX consistency edit when editing is available.** Use the [paste-ready description and exact field checklist](OPEN_EXCHANGE_COPY.md). Retain release **0.2.1**, native package **0.2.0**, the video/articles, checked **Submit to Contest** and checked IPM. Preserve DPI-I-689 in the dedicated field. Never cancel approval. After moderation, verify **Ideas to the app** while signed out; if still missing, ask OEX support to inspect the saved association. [Last public readback](evidence/public-visibility.json). No external edit was performed in this freeze pass.
+2. **File the AI Hub bug.** Copy the [exact title/body and log](bug-reports/ai-hub-quoted-tool-name.md) into the [official contest bug tracker](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/new). Add the issue URL to the evidence after filing; do not change its status to confirmed until the vendor/organizer responds. Keep the signal-11 candidate separate.
 3. **Articles and questionnaire need no duplicate submission.** Both articles are public and link OEX. The overview now distinguishes the current 192-token request budget from the 700-token ingress ceiling, with source links; the correction was saved in place and verified while signed out. Historical experiment results remain unchanged. [Correction receipt](evidence/article-clarification.json). Questionnaire confirmation is already retained.
 4. **Hosting remains stopped.** Obtain written vendor confirmation or an eligible separately licensed runtime before reconsidering a public demo. No paid host, card, provider or new subscription was used.

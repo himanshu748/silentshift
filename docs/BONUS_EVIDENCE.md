@@ -2,23 +2,23 @@
 
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, **2026.3.0AI.154.0 (Build 154U), ARM64**. The user authorized publishing the verified source to GitHub `main` on November 4. The user subsequently authorized submission preparation to be executed: video publication, the OEX approval request and both article submissions are recorded below. Hosting remains outside scope. Moderation and registry installation remain separate gates. SilentShift is now visibly listed in contest 49.
+**Application/workbench release: 0.2.1. Published native IPM package: 0.2.0. Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** Live evidence uses local `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings; recorded replay performs no new inference. No newer IRIS build is claimed. **Every organizer award remains unconfirmed**, including rows whose implementation or publication is Verified. The [submission checklist](SUBMISSION_CHECKLIST.md) is the current status index; dated experiments below retain their original version and results. No OEX or Developer Community edit was made in this freeze pass.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
 | --- | ---: | --- |
-| DPI-I-689 provider traceability | 4 | Every provider HTTP call has native typed request/response messages in the original session. Five actual cases each made four calls; all 40 persisted provider messages passed correlation checks. Actual Ollama 400 failure has its own pair. Authenticated native Visual Trace screenshots below. Organizer acceptance unconfirmed. |
+| DPI-I-689 provider traceability | 4 | Pending: admitted provider calls have typed request/response messages in the case session. The 0.2.0 live gate verified ten pairs across five cases; replay verified five pairs and four executed tools. Native Body screenshots and Langfuse comparison are public. Dedicated OEX association remains owner-visible / publicly absent at last check; organizer acceptance unconfirmed. |
 | Native Workflow Engine | 2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view. 54 native queue/concurrency checks and actual workbench approve/reject passed; full native 5/5 retained. Award unconfirmed. |
 | IRIS Vector Search precedents | 2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into 384-dimensional IRIS VECTOR rows. Top 3 case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed. 5/5 native retained; award unconfirmed. |
 | Custom inbound adapter | 2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
-| IPM package | 2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. Public 0.2.0 install, production startup, full native suite and replay passed on a new build-154 container; no points are claimed awarded. |
+| IPM package | 2 | Verified: public native **0.2.0** installs with `zpm "install silentshift"` in fresh build-154 containers without source mounts. Explicit startup, full native suite, recorded replay and a separate five-case live run passed. Award unconfirmed. |
 
 ## Final public-install verification — November 4
 
 Two additional pristine official build-154 containers installed public native package **0.2.0** with the literal `install silentshift`, with no source mounts. Both passed the entire native suite (five classes / 12 methods) and explicitly started the production. Recorded replay passed **12/12**, session **24**, four executed tools, five recorded provider exchanges and zero deliveries. The separate live local-Ollama run passed **5/5** final routes with four tools each, sessions **30, 58, 86, 113, 141**. Its one SDK warmup and one amendment embedding are disclosed separately. [Replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json) · [commands and output](FINAL_PASS_REPORT.md).
 
-OEX release 0.2.1 and the refreshed README are now visible in anonymous retrieval. The owner portal retains the dedicated idea association, checked IPM/contest options and an Awaiting Review badge. Anonymous extraction still omits the dedicated idea association; runtime verification alone does not establish that every organizer requirement is publicly visible. Both articles are now public. Online hosting is **Not claimed** because of the displayed EAP licence. One AI Hub bug is a reproduced, unfiled draft; the historical crash candidate is not a confirmed Embedded Python defect. [Current bonus states](SUBMISSION_CHECKLIST.md).
+At the November 4 public check, OEX release **0.2.1** and the refreshed README were visible in anonymous retrieval. The owner portal retains the dedicated idea association, checked IPM/contest options and an Awaiting Review badge. A fresh signed-out Safari window and anonymous extraction omitted the dedicated idea association; runtime verification alone does not establish that every organizer requirement is publicly visible. Both articles are now public. Online hosting is **Not claimed** because of the displayed EAP licence. One AI Hub bug is a reproduced, unfiled draft; the historical crash candidate is not a confirmed Embedded Python defect. [Current bonus states](SUBMISSION_CHECKLIST.md).
 
-## November 4 release verification: 0.2.0
+## Native package 0.2.0 verification — November 4 (app release is 0.2.1)
 
 The existing live transport already recorded model, prompt version, response tokens and operation duration. Version 0.2.0 adds physical provider/mode/replay/retry/fallback/cost-status properties and an explicitly labeled no-key replay through the same queued forwarder. It keeps deterministic release policy unchanged. The build remains **2026.3.0AI.154.0**, with exact observed `$ZVERSION` **IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT**. No build-109 result is claimed.
 
@@ -63,7 +63,7 @@ Anonymous public 0.1.0 metadata and manifest returned HTTP 200 on November 4; it
 
 A whole investigation span hides which model exchange failed. `ProviderIngress` now sends one `SilentShift.Provider.CallRequest` to `ProviderForwarder` per SDK HTTP call; the typed `CallResponse` is paired by native `Ens.MessageHeader.CorrespondingMessageId`. Both carry the original case session and invocation span. The gateway forwards only to the configured local Ollama route. The deterministic policy still decides delivery.
 
-Executed full native run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8` passed **5/5**, with zero unsafe deliveries. Read-only inspection of all five cases verified all 20 request/response pairs. After the final transport guards, run `00d3f243-3532-4166-ab31-0ac05d3f1f39` again passed 5/5; ten transport checks,164 pytest tests, TypeScript/build, 30 disconnected and 12 native browser checks passed ([gate](evidence/step1-gate.json)). Reproduction:
+Executed full native run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8` passed **5/5**, with zero unsafe deliveries. Read-only inspection of all five cases verified all 20 request/response pairs. After the final transport guards, run `00d3f243-3532-4166-ab31-0ac05d3f1f39` again passed 5/5; ten transport checks, 164 pytest tests, TypeScript/build, 30 disconnected and 12 native browser checks passed ([gate](evidence/step1-gate.json)). Reproduction:
 
 ```sh
 uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step1-provider-five.json
@@ -76,8 +76,8 @@ Case IDs refer to this retained local namespace. On a new install, use IDs retur
 
 | Observation | Case / session / native headers | Final state |
 | --- | --- | --- |
-| Approved amendment | `EB3307BB-D772-11F1-82EF-EED820A70F55` /374 /381↔382,383↔384,385↔386,387↔388 | Four actual HTTP 200 exchanges; DELIVERED, one simulator receipt |
-| Protocol failure | `B073F1D4-D772-11F1-82EF-EED820A70F55` /316 /318↔319 | Actual HTTP 400, failure caught; QUARANTINED, zero receipts |
+| Approved amendment | `EB3307BB-D772-11F1-82EF-EED820A70F55` / 374 / 381↔382, 383↔384, 385↔386, 387↔388 | Four actual HTTP 200 exchanges; DELIVERED, one simulator receipt |
+| Protocol failure | `B073F1D4-D772-11F1-82EF-EED820A70F55` / 316 / 318↔319 | Actual HTTP 400, failure caught; QUARANTINED, zero receipts |
 
 ![Successful native Visual Trace](assets/provider-success-visual-trace.png)
 
@@ -111,7 +111,7 @@ SILENTSHIFT_NATIVE_E2E=1 uv run --env-file .env npm --prefix web run test:e2e:na
 
 ![Native deferred Workflow response after actual UI approval](assets/review-workflow-visual-trace.png)
 
-The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have real native tasks. Python 164, TypeScript/build,32 disconnected/landing and 14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled 503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
+The post-feature run `b5bc69f5-4823-47fe-8e44-f7af579f8f50` passed 5/5; all four held cases have real native tasks. Python 164, TypeScript/build, 32 disconnected/landing and 14 native browser checks passed. [Gate summary](evidence/step2-gate.json). The earlier controlled 503 recovery remains separate historical evidence; general network-loss/crash recovery is not claimed.
 
 ## 3. Similar history stays separate from current authority
 
@@ -123,7 +123,7 @@ uv run --env-file .env python scripts/verify_native.py --allow-model-calls --out
 uv run python scripts/verify_native_precedents.py --inspect-case B8440121-D7AB-11F1-9980-CA5720F48492
 ```
 
-The initial seed wrote 16 actual vectors (15 resolved cases, one approved amendment). Native metadata proves `%Library.Vector`,384 dimensions,DOUBLE; native self-cosines and source bindings passed. Automatic production indexing raised the retained corpus to 18 rows after new completed cases. [Source/vector proof](evidence/precedent-corpus.json).
+The initial seed wrote 16 actual vectors (15 resolved cases, one approved amendment). Native metadata proves `%Library.Vector`, 384 dimensions, DOUBLE; native self-cosines and source bindings passed. Automatic production indexing raised the retained corpus to 18 rows after new completed cases. [Source/vector proof](evidence/precedent-corpus.json).
 
 The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5 with all four native reads. Each case made two actual provider exchanges; each exchange has a native request/response pair. Case `B8440121-D7AB-11F1-9980-CA5720F48492`, session 1266, retrieved three previous deliveries and stayed quarantined with zero receipts. A separate native read-only test constructed a valid ALLOW with current citations and zero uncertainty; the critical policy veto remained. [Veto proof](evidence/precedent-veto.json) · [retrieval/tool/header proof](evidence/precedents.json).
 
@@ -131,7 +131,7 @@ The full run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed 5/5 with all four nat
 
 [Mobile capture](assets/precedent-evidence-mobile.png) · [walkthrough and commands](PRECEDENTS.md) · [full gate](evidence/step3-gate.json).
 
-Python 172, TypeScript/build,32 disconnected/landing and 16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a 12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
+Python 172, TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. The successful native repeat used a warmed local model and serialized execution. Two earlier trials failed native completion gates under load; one concurrent browser run also missed a 12-second navigation assertion, then passed standalone and in the full serialized suite. These failures remain retained; there is no cold-start, broad relevance or production-capacity claim. Payment search currently returns no precedent, correctly shown as empty rather than invented history.
 
 ## 4. A partner file reaches the same safety decision
 
@@ -166,7 +166,7 @@ The official ARM64 154U container began without the namespace/application or a s
 
 Approved-amendment case `E13308D8-D7B2-11F1-8CC1-0B0AF26491C5`, session 64, delivered once. [Same session at Destination](assets/ipm-clean-destination-visual-trace.png) · [install commands and driver](IPM.md) · [final gate](evidence/step5-gate.json).
 
-Two driver handoff errors were repaired in the same retained fresh container: CPF staging on tmpfs and transition from Docker's exclusive `none` network. Installation and the five-case evaluation each ran once. The isolated containers are now stopped; the original production remains healthy. Python 172 (including 29 packaging tests), TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. No runtime binary or image was published. The OEX Package Manager option is now saved in the approval request; public registry availability and installation remain unverified.
+Two driver handoff errors were repaired in the same retained fresh container: CPF staging on tmpfs and transition from Docker's exclusive `none` network. Installation and the five-case evaluation each ran once. The isolated containers are now stopped; the original production remains healthy. Python 172 (including 29 packaging tests), TypeScript/build, 32 disconnected/landing and 16 native browser checks passed. No runtime binary or image was published. At this historical 0.1.0 checkpoint, public registry availability was unverified. The later public 0.2.0 install, startup and replay receipts above supersede that gate.
 
 ## Other eligible technology and manual work
 
@@ -177,9 +177,10 @@ Embedded Python (3 potential points) and Docker (2) are already part of the veri
 | YouTube demonstration (3) | [Public video](https://youtu.be/a4dOcqu89EA), 2:30, 1080p H.264/AAC with English captions. Anonymous oEmbed HTTP 200; actual player 1080p HD and English captions observed. Organizer acceptance unconfirmed. |
 | Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both are now publicly readable and each links the Open Exchange application; organizer bonus awards remain unconfirmed. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
-| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. 0.2.0 published through OEX; clean public installation, production startup, full native suite and replay passed. See the current receipt above. |
-| Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. A later November 4 read confirmed SilentShift on the registered-app list for contest 49. |
-| Online demo (2) | Not hosted; explicitly outside the current authorization. |
-| PEX / vendor bug bonuses | No required Java/.NET boundary or verified vendor defect; no claim. |
+| IPM publication (2) | Verified: public native 0.2.0 install, production startup, full native suite and replay passed. App/OEX release is 0.2.1. Award unconfirmed. |
+| Open Exchange / contest | [App release 0.2.1](https://openexchange.intersystems.com/package/SilentShift) and contest registration were public at the November 4 check. Listing edits remained **Awaiting Review**; dedicated idea visibility is pending. [Readback](evidence/public-visibility.json). |
+| Online demo (2) | **Not claimed**: no hosted app. The displayed EAP licence excludes demonstrations; [hosting review](HOSTING_REVIEW.md). |
+| AI Hub bug (2 for first, +1 for second) | Pending: [minimal quoted-tool defect and exact log](bug-reports/ai-hub-quoted-tool-name.md) reproduced again on 154U; user will file. Vendor and organizer confirmation are unconfirmed. |
+| PEX / Embedded Python bug | Not claimed: no Java/.NET PEX implementation; historical callback crash has no isolated, attributed vendor repro. |
 
 Criteria are from the [official bonus announcement](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) and [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689). Organizer awards, eligibility and saved contest state remain separate from engineering evidence. [JUDGE_GUIDE.md](JUDGE_GUIDE.md) describes the product journey; [BUILD_STATUS.md](BUILD_STATUS.md) retains detailed history.

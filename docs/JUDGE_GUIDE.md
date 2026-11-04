@@ -23,11 +23,12 @@ The payment example checks a declared interface contract: `12550` minor units ve
 
 ## Reproduce the complete journey
 
-For a no-key technical check, use the public native package in a fresh container. The [IPM prerequisites](IPM.md#reproduce-a-fresh-source-load) still apply: an authorized build-154 image, pinned IPM client, Web Gateway and private local configuration must already be available.
+For a no-key technical check, use the public native package in a fresh container. First complete the [README fresh-clone prerequisites and local credential steps](../README.md#see-it-in-visual-trace). The command below is the same install step; do not run it a second time with an already-created container name.
 
 ```sh
 uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
-  --container silentshift-judge-replay --api-port 52803 --execute
+  --execution-mode recorded-replay --container silentshift-bonus-registry-judge \
+  --api-port 52843 --execute
 ```
 
 The driver refuses an existing container name, performs `install silentshift` from the public registry, starts the production, runs the full native suite and exercises the recorded-provider API journey. Expected: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. It prints that run's session ID and Visual Trace URL. This executes the native agent and tools with a recorded provider answer; it performs no fresh inference. [Verified clean public replay](evidence/final-public-replay.json).

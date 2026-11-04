@@ -1,35 +1,64 @@
-# Open Exchange final update
+# Open Exchange — prepared edit for the user
 
-Frontend/product release **0.2.1** was submitted successfully and appears under Published releases; native IPM remains **0.2.0**. The refreshed README/version are visible anonymously. Owner listing status remains **Awaiting Review**. Submit to Contest, Publish in Package Manager, dedicated DPI-I-689 field, both article URLs and video `https://youtu.be/a4dOcqu89EA` were preserved/read back. Never Cancel approval.
+**Prepared only; not applied.** App/workbench release **0.2.1**, public native IPM **0.2.0**, verified runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. No newer build is claimed. At the last November 4 check, release 0.2.1 and the README were public, listing edits were **Awaiting Review**, and the dedicated idea association was visible to the owner but absent while signed out. [Recorded readback](evidence/public-visibility.json). These are separate states. No portal or Developer Community edit was made in this freeze pass.
 
-**Later November 4 evidence refresh:** README commit **1c3941b** adds the actual native Body metadata screenshots for sessions **1667** and **1807**. The editor's **Save → Send for approval → Send edits** flow succeeded. The owner preview shows the new screenshots and values; anonymous web retrieval still returns the earlier description, so public propagation is pending. This was a description-only submission; release **0.2.1** and native IPM **0.2.0** remain unchanged. [Submission confirmation](assets/oex-trace-description-submitted.png).
-
-**Subsequent signed-out check:** the refreshed README/native Body image is now public, in both anonymous retrieval and a new Safari Private Browsing window. The dedicated **Ideas to the app** section is absent without signing in and remains visible with the correct DPI-I-689 URL in the owner view. Listing status is still **Awaiting Review**. This narrows the remaining gate to moderation/idea-field visibility; the description needs no duplicate submission. [Readback](evidence/public-visibility.json).
-
-## Release notes
-
-Explore why a technically valid order is held with an interactive, clearly labeled synthetic walkthrough. Switch between an unsupported unit change and an effective approved amendment, select each investigation stage, or open the real workbench. Quick navigation supports ⌘K / Ctrl+K and complete case IDs; detail transitions respect reduced motion. Both technical articles are public and linked.
-
-The unchanged native backend 0.2.0 passed two fresh public `install silentshift` checks, full native tests, recorded replay and five live local-model scenarios on official ARM64 build 154U. The frontend version is 0.2.1. The online-demo bonus is not claimed because the displayed EAP licence excludes demonstration use. Bug reports are drafts, not filed or accepted.
-
-## Description
-
-Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The owner-side README import was refreshed from commit **1c3941b** and read back after submission, including the Body screenshot, both trace IDs, token counts, operation durations and permission-restoration link.
-
-## Fields
+## Fields to retain or correct
 
 | Field | Value |
 | --- | --- |
 | App name | SilentShift |
+| App release | 0.2.1 |
 | Short description | Catch wrong business meaning before delivery: native IRIS AI Hub investigation, deterministic policy and recoverable human review. |
 | Repository | https://github.com/himanshu748/silentshift |
-| Ideas Portal link | https://ideas.intersystems.com/ideas/DPI-I-689 |
+| Ideas Portal link — dedicated field | https://ideas.intersystems.com/ideas/DPI-I-689 |
 | YouTube | https://youtu.be/a4dOcqu89EA |
 | Native IPM package | silentshift 0.2.0; `zpm "install silentshift"` |
 | Submit to Contest | Keep checked for contest 49 |
-| Publish in Package Manager | Keep checked |
-| Demo URL | Empty; no hosted app |
+| Publish in Package Manager | Keep checked; do not relabel native 0.2.0 as 0.2.1 |
+| Demo URL | Empty; online demo Not claimed |
 | Article one | https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production |
 | Article two | https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery |
 
-The first browser connection failed twice and work paused. After the user resumed, access recovered and the update succeeded. [Submission confirmation](assets/oex-021-approval-submitted.jpg) · [0.2.1 release readback](assets/oex-021-release-readback.jpg) · [full receipt](FINAL_PASS_REPORT.md).
+## Full description — paste-ready
+
+### Catch wrong business meaning before delivery
+
+An order arrives as **20 CASE**. Its approved contract says **240 EA**. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order before the included destination simulator accepts it, then gives the integration operator the original message, contract and reason in one investigation.
+
+The same incoming value can be legitimate: an effective approved amendment authorizing **20 CASE** lets it proceed. A native IRIS AI Hub agent investigates independent reference records through four read-only tools. Deterministic Embedded Python policy makes the final routing decision. Similar precedents add context; they cannot override the current contract or release a critical contradiction.
+
+Operators can compare payload and reference values, inspect the agent's actual reads, follow the native trace, and resolve eligible holds through a recoverable Workflow review. Review decisions require a reason and a current version. Critical contradictions retain their release veto; concurrent identical approvals produce one simulator receipt. A custom inbound adapter brings ready files into the same production as REST intake.
+
+### See every model exchange in its business context
+
+SilentShift implements [Community Idea DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689): every admitted provider exchange becomes a native request/response pair in the case's interoperability session. Visual Trace exposes model, provider, prompt version, forwarding duration, tool names, HTTP outcome and returned usage when available. Unknown cost and provider retries remain null. Recorded replay explicitly omits current token usage because it performs no new inference.
+
+The [README's keyless judge recipe](https://github.com/himanshu748/silentshift#see-it-in-visual-trace) installs the public native package, starts the real production, runs its native tests and replays the unsupported-unit order through the actual agent and tools. It prints the case session and Visual Trace URL. This requires a locally available licensed build-154 image; it is not a hosted demo. Inspect the [native message-body screenshots](https://github.com/himanshu748/silentshift#native-provider-metadata) and the [comparison with Langfuse](https://github.com/himanshu748/silentshift#silentshift-iris-interoperability-vs-langfuse), including Langfuse's strengths in evals, dashboards and prompt management.
+
+### Run or watch
+
+**App/workbench: 0.2.1. Public native IPM package: 0.2.0. Verified runtime: InterSystems IRIS Community AI Hub 2026.3.0AI.154.0, ARM64 (154U).** No newer runtime is declared verified. In a prepared namespace with IPM, install the native backend with:
+
+```objectscript
+zpm "install silentshift"
+```
+
+[Installation and explicit production setup](https://github.com/himanshu748/silentshift/blob/main/docs/IPM.md) · [Source and README](https://github.com/himanshu748/silentshift) · [Captioned 1080p demo video](https://youtu.be/a4dOcqu89EA)
+
+Read the technical articles: [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery).
+
+### Evidence and contest status
+
+Native Workflow, the custom adapter, Embedded Python, IRIS Vector Search, Docker, public IPM installation, both articles, the video and the questionnaire have recorded execution or publication evidence. **All organizer bonus awards remain unconfirmed.** DPI-I-689 implementation evidence is public; the dedicated OEX association remains pending public visibility at the last check. One AI Hub generator defect reproduces on build 154U; its report is prepared but unfiled and unconfirmed. **Online demo, Java/.NET PEX and an Embedded Python bug bonus are Not claimed.** The [bonus checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) links each claim to its evidence.
+
+All examples use synthetic data and an IRIS destination simulator. Recorded replay proves native orchestration and policy behavior, not fresh inference or model accuracy. Separate live local-Ollama evidence retains five expected final routes. No real ERP/bank delivery, production readiness or awarded score is asserted.
+
+## Manual editing order
+
+1. Open your Open Exchange dashboard → **SilentShift → Edit**. If Awaiting Review prevents editing, wait for moderation; **never click Cancel approval**.
+2. Keep release **0.2.1**. Paste the full description above, or refresh the final pushed README if using OEX's README import. Preserve the existing public video and both article fields. No new release or native package version is required for this copy edit.
+3. Retain `https://ideas.intersystems.com/ideas/DPI-I-689` in the dedicated idea-links field. Keep **Submit to Contest** and **Publish in Package Manager** checked; verify `zpm "install silentshift"` remains visible. Leave the online demo URL empty.
+4. **Save**. If the editor offers **Send for approval → Send edits**, use that flow once. Do not cancel an existing approval to force an edit, untick the contest or submit another package.
+5. After moderation, open the public listing while signed out. Confirm release 0.2.1, the install command, video, articles and the dedicated **Ideas to the app** association. Check [contest 49](https://openexchange.intersystems.com/contest/49) still lists SilentShift. If the idea field remains missing, ask OEX support to inspect its saved association; do not mark the four-point bonus confirmed yourself.
+
+**Developer Community edits: none needed.** Both published articles already link OEX and the repository. **Questionnaire: do not submit again**; its confirmation is retained. File only the [prepared AI Hub report](bug-reports/ai-hub-quoted-tool-name.md) yourself; the historical callback-crash candidate remains unready.

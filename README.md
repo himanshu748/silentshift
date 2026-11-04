@@ -10,7 +10,7 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). Open Exchange release **0.2.1** is visible; the owner view still marks listing edits **Awaiting Review**. The separately installed public IPM backend remains **0.2.0**. Both technical articles are published. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). At the last November 4 public check, Open Exchange release **0.2.1** was visible; the owner view marked listing edits **Awaiting Review**. The separately installed public IPM backend remains **0.2.0**. Both technical articles are published. **Organizer bonus awards remain unconfirmed; online demo: Not claimed.** [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 

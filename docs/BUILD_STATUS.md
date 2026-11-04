@@ -1,5 +1,9 @@
 # Build status
 
+## Frozen-entry verification: consistent public copy — November 4, 2026
+
+README, bonus evidence, submission checklist and the prepared OEX description now distinguish **app 0.2.1**, **native IPM 0.2.0** and verified **IRIS 2026.3.0AI.154.0 / 154U**. All organizer awards remain unconfirmed; the idea association and AI Hub bug filing remain pending; online demo, PEX and the unisolated Embedded Python candidate are Not claimed. Historical counts/versions remain explicitly historical. The judge-guide command now uses the same allowed container-name prefix and port as the README. OEX edits are prepared for the user only; neither OEX nor the two published articles was changed.
+
 ## Frozen-entry verification: public idea evidence — November 4, 2026
 
 The README places DPI-I-689 immediately after the product introduction, with direct jumps to the native Body screenshot and fair Langfuse comparison. The keyless recipe now includes a fresh Git clone, generated private local credentials, explicit recorded-replay mode and public-registry install. It declares its preloaded licensed-image/Colima/storage prerequisites and distinguishes app 0.2.1 from native IPM 0.2.0. Dedicated OEX idea visibility and organizer qualification remain pending. No portal or article was edited. The exact fresh-clone run is the final verification step; no completion claim is made here.
