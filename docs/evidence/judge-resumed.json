@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-11-04T18:40:41.720039+00:00",
+  "status": "stopped_by_user",
+  "clean_clone_gate": "blocked",
+  "application_version": "0.2.1",
+  "native_ipm_version": "0.2.0",
+  "declared_runtime": "2026.3.0AI.154.0 Community ARM64 (154U)",
+  "runs": [
+    {
+      "attempt": "resumed",
+      "clone_head": "c92df33e0d44066e95c4bfb424676d2210ae4140",
+      "tracked_tree_clean": true,
+      "container": "silentshift-bonus-registry-judge-resumed",
+      "public_install_command": "install silentshift",
+      "installed_native_version": "0.2.0",
+      "markers": {
+        "03-pristine.log": [
+          "SS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+          "SS_PRISTINE_OK"
+        ],
+        "10-client.log": [
+          "SS_CLIENT_OK"
+        ],
+        "16-version.log": [
+          "SS_MODULE_VERSION=0.2.0",
+          "SS_VERSION_OK"
+        ],
+        "20-setup.log": [
+          "SS_RUNTIME_SETUP_OK"
+        ]
+      },
+      "source_mounts": [],
+      "stop_reason": "Gateway bind source not shared with Colima",
+      "native_unit_suite_completed": false,
+      "api_replay_completed": false,
+      "output": "judge-resumed-output.txt",
+      "gateway_error": "docker: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift-judge-verification-resumed/silentshift-judge/.local/ipm/bonus-runs/silentshift-bonus-registry-judge-resumed/CSP.conf\n\nRun 'docker run --help' for more information\n"
+    },
+    {
+      "attempt": "shared",
+      "clone_head": "ed270195b144987f9a7a9377aeaa920feb08c3ec",
+      "tracked_tree_clean": true,
+      "container": "silentshift-bonus-registry-judge-shared",
+      "public_install_command": "install silentshift",
+      "installed_native_version": "0.2.0",
+      "markers": {
+        "03-pristine.log": [
+          "SS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+          "SS_PRISTINE_OK"
+        ],
+        "10-client.log": [
+          "SS_CLIENT_OK"
+        ],
+        "16-version.log": [
+          "SS_MODULE_VERSION=0.2.0",
+          "SS_VERSION_OK"
+        ],
+        "20-setup.log": [
+          "SS_RUNTIME_SETUP_OK"
+        ]
+      },
+      "source_mounts": [],
+      "stop_reason": "Host disk safety floor reached before gateway startup",
+      "native_unit_suite_completed": false,
+      "api_replay_completed": false,
+      "output": "judge-shared-output.txt",
+      "harness_note": "SSH consumed the stdin-fed shell program before setup. Executed the remaining README commands from a script file with stdin=/dev/null in the same untouched clone. No new container existed before that correction."
+    }
+  ],
+  "no_new_model_calls": true,
+  "no_external_edits": true,
+  "third_resumed_provisioning_attempt": false
+}

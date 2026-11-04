@@ -1,6 +1,19 @@
 # Judge verification — feature freeze
 
-**Status: BLOCKED after two attempts. No fresh-clone install, native suite or replay pass is claimed.** Application/workbench **0.2.1**; published native IPM **0.2.0**; declared runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. No newer build was tested.
+**Status: BLOCKED; work stopped at the user’s request.** The resumed clean clones installed public IPM successfully and completed explicit setup, but the full native suite and API replay did not complete. No end-to-end clean-clone pass is claimed. Application/workbench **0.2.1**; published native IPM **0.2.0**; declared runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. No newer build was tested.
+
+
+## Resumed work and stopping point
+
+After the user resumed work, inactive npx download-cache cleanup recovered about **0.69 GiB**, preserving the active cache entry. Two further fresh GitHub clones installed public **silentshift 0.2.0** on build **154U** with no source mounts. Both reported `SS_CLIENT_OK`, `SS_MODULE_VERSION=0.2.0`, `SS_VERSION_OK` and `SS_RUNTIME_SETUP_OK`. This validates the documented public-installer permission correction. It does not establish a passing API health check or completed replay.
+
+- The first resumed clone failed at gateway creation because its sibling directory was not shared with the VM. The README now requires a Colima-visible checkout and checks that directory before setup. No VM mounts were changed.
+- The next clone was created under the existing shared directory. A local runner initially let SSH consume its script input, skipping setup; the remaining commands were then executed from a script file in the same untouched clone. Package installation and setup passed. The driver stopped at its host-space safety check before gateway startup.
+- The user then asked to stop and push. No further provisioning, tests or cleanup was attempted. The two test IRIS containers were stopped and retained; the user's working app was preserved. Full native unit and API replay checks remain unverified for these clones.
+
+[Exact markers, commit hashes and failures](evidence/judge-resumed.json) · [first resumed output](evidence/judge-resumed-output.txt) · [shared-directory output](evidence/judge-shared-output.txt). The prior commit's [GitHub CI passed](https://github.com/himanshu748/silentshift/actions/runs/41887425804). A read-only check still found SilentShift in contest 49, with OEX release 0.2.1 and the install command visible. The OEX description has not imported the newer recipe; its prepared edit remains for the user. [Readback](evidence/freeze-public-readback.json).
+
+## Earlier attempts — preserved history
 
 The first remote clone found a real setup-instruction gap: Docker copied the newly downloaded public IPM installer with mode `0600` and UID 501, preventing IRIS from opening it. The README now includes `chmod 644` for that checksum-verified public file only. The second remote clone confirmed installer mode `0644` and local credentials mode `0600`, then stopped at the host-storage preflight. The corrected installer has **not** yet been loaded by a successful fresh run. We stopped rather than making a third attempt.
 

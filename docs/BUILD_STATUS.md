@@ -1,5 +1,11 @@
 # Build status
 
+## Stopped and saved at the user’s request
+
+The resumed fresh clones verified the public IPM client permission correction, native **0.2.0** registry installation and explicit setup on **154U**. A sibling-clone gateway bind failed because that directory was not shared with Colima; the README prerequisite is corrected in **ed27019**. A new clone under the existing shared directory reached successful package install/setup, then stopped at the host disk floor before gateway creation. Full native tests and API replay did not complete. The user requested stopping; no more retries or cleanup were performed, and the two new test containers were stopped and retained. [Exact results](JUDGE_VERIFICATION.md).
+
+Read-only checks confirmed CI **c92df33** passed and SilentShift remains on contest 49. OEX still serves the older recipe; no OEX/DC edit or bug submission was made. Source/workbench versions, deterministic policy and working app are unchanged.
+
 ## Resumed verification: shared-directory prerequisite
 
 The user resumed autonomous work. Clearing only inactive npx download caches recovered about 0.69 GiB and left the active cache entry intact. A new clean remote clone passed IPM-client loading with the documented installer permissions, public `install silentshift` at native version 0.2.0, and explicit production setup on 154U. Gateway creation then failed because this Colima profile shares only the existing project directory, not the sibling clone directory. No native test/replay pass is claimed for that attempt. The README now requires a shared clone location and checks VM visibility before creating configuration or containers. The next isolated clone will use that existing mount without changing/restarting the working VM.

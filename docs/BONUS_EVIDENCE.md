@@ -14,7 +14,7 @@ SilentShift holds a technically valid order or payment when its business meaning
 
 ## Current freeze-pass check
 
-The build-154 retained-instance replay passed **12/12**, session **59**. Two new clean-clone attempts did not complete: installer read permissions stopped the first; host storage preflight stopped the corrected retry. The current README path is **blocked**, not newly verified. [Exact commands, output and boundaries](JUDGE_VERIFICATION.md). Earlier public-install evidence below still records what ran; it is not presented as this new run.
+The build-154 retained-instance replay passed **12/12**, session **59**. The resumed fresh clones installed public native 0.2.0 and completed setup on 154U, confirming the installer permission correction. Gateway startup, the full native suite and API replay remain incomplete after shared-directory and host-storage stops. The user requested stopping. The current README path remains **blocked** as an end-to-end check. [Exact commands, output and boundaries](JUDGE_VERIFICATION.md). Earlier public-install evidence below still records what ran; it is not presented as this new run.
 
 ## Earlier public-install verification — November 4
 

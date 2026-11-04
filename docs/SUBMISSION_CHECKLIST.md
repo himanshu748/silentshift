@@ -26,7 +26,7 @@ Checked November 4, 2026. Submission deadline: **November 8 at 23:59:59 EST / No
 
 ## Final technical gate
 
-**Current freeze-pass clean-clone gate: BLOCKED.** Two fresh GitHub clones were attempted. The first stopped at public-installer file permissions; the README correction is committed. The second stopped at the host disk floor before creating a container. No new clean install, native-suite pass or replay is claimed. [Commands and output](JUDGE_VERIFICATION.md). The retained-instance replay passed **12/12**, session **59**. The older successful gates below remain dated evidence, not a replacement for the blocked fresh-clone check.
+**Current freeze-pass clean-clone gate: BLOCKED; stopped at the user’s request.** Resumed fresh clones installed public native 0.2.0 and completed setup on 154U. The latest shared-directory attempt stopped at the host disk floor before gateway startup. No end-to-end fresh install, native-suite pass or API replay is claimed. [Commands and output](JUDGE_VERIFICATION.md). The retained-instance replay passed **12/12**, session **59**. The older successful gates below remain dated evidence, not a replacement for the blocked fresh-clone check.
 
 - Fresh public install with the literal unqualified command, explicit production startup and full native `%UnitTest`: **5 classes / 12 methods passed** in each isolated container.
 - No-key replay: **12/12 checks**, five paired provider exchanges, four real native tool reads, zero deliveries; session **24**, port **52823**.
