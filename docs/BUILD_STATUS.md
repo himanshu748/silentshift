@@ -1,5 +1,9 @@
 # Build status
 
+## Frozen-entry verification: bug report — November 4, 2026
+
+Re-ran the two minimal `%AI.Tool` classes in the existing build-154 container's development `USER` namespace, outside `SILENTSHIFT`. The camel-case control compiled (`SS_CAMEL_OK=1`); the quoted underscore method failed in generated `%Invoke` (`SS_UNDERSCORE_OK=0`, `MPP5376`, missing subscript). No inference, external key, application-class change or permission change was needed. [Exact transcript and paste-ready issue](bug-reports/ai-hub-quoted-tool-name.md). The contest criteria point to the dedicated `ai-hub-eap-bugreports` tracker. Filing and organizer qualification are pending; the agent did not submit it. No build-109 claim is made.
+
 ## Judge path and article clarification — November 4, 2026
 
 The judge guide now leads with the verified no-key public-registry replay and accurately reports public IPM **0.2.0** installation, the full **5-class / 12-method** native suite and separate **5/5** live route evidence. Its older invocation-only trace receipt is explicitly distinguished from the later provider-message exports and native Body captures.

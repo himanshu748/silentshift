@@ -1,0 +1,41 @@
+
+Node: baecfd96013f, Instance: IRIS
+
+USER>
+SS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+
+USER>
+
+Load started on 11/04/2026 18:07:42
+Loading file /tmp/SS-CamelCaseTool.cls as udl
+Compiling class SilentShift.Repro.CamelCaseTool
+Compiling routine SilentShift.Repro.CamelCaseTool.1
+Load finished successfully.
+
+USER>
+SS_CAMEL_OK=1
+
+USER>
+
+Load started on 11/04/2026 18:07:42
+Loading file /tmp/SS-UnderscoreTool.cls as udl
+Compiling class SilentShift.Repro.UnderscoreTool
+Compiling routine SilentShift.Repro.UnderscoreTool.1
+ERROR: SilentShift.Repro.UnderscoreTool.cls
+ERROR:  SilentShift.Repro.UnderscoreTool.1(4) : MPP5376 : Method or Property 'find' does not exist in this class.
+ TEXT:         "find_similar_precedents": ..find_similar_precedents(),
+ERROR: SilentShift.Repro.UnderscoreTool.cls(%Invoke+3) #1056: Missing subscript : '..find_similar_precedents(),' : Offset:61 [%Invoke+2^SilentShift.Repro.UnderscoreTool.1]
+ TEXT:         "find_similar_precedents": ..find_similar_precedents(),
+ERROR: SilentShift.Repro.UnderscoreTool.cls(%Invoke+4) #1026: Invalid command : ':' : Offset:33 [%Invoke+3^SilentShift.Repro.UnderscoreTool.1]
+ TEXT:                                  : ..%ToolError($$Error^%apiOBJ("<%AICore>ToolNotFound", toolname)))
+Detected 3 errors during load.
+
+USER>
+SS_UNDERSCORE_OK=0
+
+USER>
+
+ERROR #5475: Error compiling routine: SilentShift.Repro.UnderscoreTool.  Errors:  SilentShift.Repro.UnderscoreTool.cls
+ERROR:  SilentShift.Repro.UnderscoreTool.1(4) : MPP5376 : Method or Property 'find' does not exist in this class.
+ TEXT:         "find_similar_precedents": ..find_similar_precedents(),
+USER>

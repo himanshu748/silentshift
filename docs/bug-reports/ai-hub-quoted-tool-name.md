@@ -1,6 +1,10 @@
-# Draft: %AI.Tool generator does not quote an ObjectScript method name containing underscores
+# %AI.Tool generates an unquoted call for a valid quoted underscore method (154U)
 
-**Status:** locally reproduced on November 4, 2026; draft only, not filed or vendor-confirmed. Potential AI Hub bug qualification is for organizers to decide. No bonus is claimed awarded.
+**Filing URL:** https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/new
+
+The [official contest criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) link this dedicated AI Hub bug tracker. Use this document's heading as the issue title and copy from **Environment** through **Workaround** as the body.
+
+**Status:** reproduced again on November 4, 2026 at 18:07:42 UTC in the development `USER` namespace; no production classes changed. [Exact compiler transcript](evidence/quoted-tool-build154.txt). Draft only: not filed, vendor-confirmed or organizer-confirmed. No bonus is claimed awarded.
 
 ## Environment
 
@@ -8,12 +12,46 @@ Official ARM64 Community AI Hub **2026.3.0AI.154.0**. Exact `$ZVERSION`: `IRIS f
 
 ## Minimal reproduction
 
-The two small classes under [repro](repro/UnderscoreTool.cls) contain no database, business-data, network or LLM operation. The underscore method declaration is deliberately quoted, which is valid ObjectScript UDL. A camel-case method is the control.
+Save these as `CamelCaseTool.cls` and `UnderscoreTool.cls` in a development environment running this build. Neither class uses a database, network, model or credential. The quoted method declaration is intentional; it is valid ObjectScript UDL.
+
+```objectscript
+Class SilentShift.Repro.CamelCaseTool Extends %AI.Tool
+{
+Method FindSimilarPrecedents() As %String
+{
+    Return "ok"
+}
+}
+```
+
+```objectscript
+Class SilentShift.Repro.UnderscoreTool Extends %AI.Tool
+{
+Method "find_similar_precedents"() As %String
+{
+    Return "ok"
+}
+}
+```
+
+In an IRIS terminal, in a development namespace, load the two files (adjust their absolute paths):
+
+```objectscript
+write $zversion,!
+set sc=$system.OBJ.Load("/tmp/SS-CamelCaseTool.cls","ck")
+write "SS_CAMEL_OK=",$system.Status.IsOK(sc),!
+set sc=$system.OBJ.Load("/tmp/SS-UnderscoreTool.cls","ck")
+write "SS_UNDERSCORE_OK=",$system.Status.IsOK(sc),!
+do $system.Status.DisplayError(sc)
+```
+
+The exact commands used from the SilentShift checkout were:
 
 ```sh
 docker --context colima-silentshift cp docs/bug-reports/repro/CamelCaseTool.cls silentshift-clean-iris-1:/tmp/SS-CamelCaseTool.cls
 docker --context colima-silentshift cp docs/bug-reports/repro/UnderscoreTool.cls silentshift-clean-iris-1:/tmp/SS-UnderscoreTool.cls
-docker --context colima-silentshift exec -i silentshift-clean-iris-1 iris session IRIS -U SILENTSHIFT <<'IRIS'
+docker --context colima-silentshift exec -i silentshift-clean-iris-1 iris session IRIS -U USER <<'IRIS'
+write "SS_RUNTIME=",$zversion,!
 set sc=$system.OBJ.Load("/tmp/SS-CamelCaseTool.cls","ck")
 write "SS_CAMEL_OK=",$system.Status.IsOK(sc),!
 set sc=$system.OBJ.Load("/tmp/SS-UnderscoreTool.cls","ck")
@@ -41,7 +79,7 @@ TEXT: "find_similar_precedents": ..find_similar_precedents(),
 
 The generated call is unquoted. This is distinct from the first diagnostic attempt, whose unquoted UDL declaration was invalid application code and correctly rejected before generation; that mistake is not reported as a vendor bug.
 
-## Workaround used by SilentShift
+## Workaround
 
 `SilentShift.AI.EvidenceTools` overrides only its application `%Invoke` dispatch, keeping native discovery and `%Encode`. It checks the exact four-name allowlist and empty argument object, then invokes `.."find_similar_precedents"()`. No vendor class is modified. The current native five-case run executes all four tools with this workaround.
 
