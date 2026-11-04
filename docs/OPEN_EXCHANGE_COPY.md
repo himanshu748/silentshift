@@ -1,6 +1,6 @@
 # Open Exchange final update
 
-Frontend/product release **0.2.1**; native IPM backend remains **0.2.0**. Preserve Submit to Contest, Publish in Package Manager, the dedicated DPI-I-689 idea field and `https://youtu.be/a4dOcqu89EA`. Do not Cancel approval. The owner portal shows the newer release; anonymous web retrieval still showed 0.1.0, so latest public visibility remains pending moderation/readback.
+Frontend/product release **0.2.1** was submitted successfully and appears under Published releases; native IPM remains **0.2.0**. The refreshed README/version are visible anonymously. Owner listing status remains **Awaiting Review**. Submit to Contest, Publish in Package Manager, dedicated DPI-I-689 field, both article URLs and video `https://youtu.be/a4dOcqu89EA` were preserved/read back. Never Cancel approval.
 
 ## Release notes
 
@@ -10,7 +10,7 @@ The unchanged native backend 0.2.0 passed two fresh public `install silentshift`
 
 ## Description
 
-Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The current owner-side README import is older than main; refresh it after pushing.
+Use the pushed README as the long description. Its product story, reproducible setup and exact evidence boundaries are the source of truth. The owner-side README import was refreshed from commit 770baab and read back after submission.
 
 ## Fields
 
@@ -28,4 +28,4 @@ Use the pushed README as the long description. Its product story, reproducible s
 | Article one | https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production |
 | Article two | https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery |
 
-The final browser connection failed twice before any listing mutation. The existing 0.2.0 owner release and pending approval are preserved; 0.2.1 below is prepared, not published. See FINAL_PASS_REPORT.md.
+The first browser connection failed twice and work paused. After the user resumed, access recovered and the update succeeded. [Submission confirmation](assets/oex-021-approval-submitted.jpg) · [0.2.1 release readback](assets/oex-021-release-readback.jpg) · [full receipt](FINAL_PASS_REPORT.md).

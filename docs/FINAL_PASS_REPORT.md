@@ -68,7 +68,7 @@ The unreachable proxy errors in disconnected tests are intentional failure-state
 
 ## Listing, articles and hosting
 
-Owner-side OEX fields were read back: Submit to Contest, Publish in Package Manager and README import checked; dedicated DPI-I-689 link and `a4dOcqu89EA` video saved; install command visible. Owner preview showed release 0.2.0 and Awaiting Review, while anonymous web retrieval returned the older 0.1.0 page and no dedicated idea association. A fresh cookie-free HTTP request returned 403. Latest anonymous visibility is therefore pending, not verified. SilentShift was present on contest 49. The existing approval request was preserved.
+OEX release **0.2.1** appears under **Published releases (3)** with the prepared notes. Its refreshed README/version are also visible in anonymous web retrieval. The owner view retains **Awaiting Review** for listing edits. Submit to Contest and Publish in Package Manager remained checked; the dedicated DPI-I-689 field and YouTube `a4dOcqu89EA` remained saved. Both article URLs were added to their dedicated fields. No Cancel approval or Unpublish action was taken. The dedicated idea association is visible in the owner preview but absent from the anonymous extract, so its public-field readback remains pending. SilentShift was confirmed among **13 registered applications** on contest 49 after the update.
 
 Both [semantic-validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable-review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) articles are publicly readable and each links the Open Exchange application. The overview's 700-token passage describes its older recorded setup; the current prompt uses 192, so an author clarification remains useful. No duplicate post was created.
 
@@ -83,6 +83,10 @@ There is **no hosted demo**. The displayed EAP kit agreement limits internal eva
 
 ## Shipping receipt
 
-The initial browser connection failed twice before any listing mutation; the step was paused. After the user resumed work, browser access was restored. Final target-side release readback and pushed commits will be recorded below. The existing approval request and contest selection remain protected. Native IPM remains the independently verified 0.2.0 package; no new native package publication is claimed.
+- **770baab** — `feat: add interactive product walkthrough and verify contest evidence`; pushed to `origin/main`. Remote `refs/heads/main` read back as `770baabd2c5e317918003dde05986eed476a75ef` before this documentation receipt.
+- Open Exchange frontend/product **0.2.1**: submission success observed; listed under Published releases, three releases total. The listing still has **Awaiting Review**. [Success confirmation](assets/oex-021-approval-submitted.jpg) · [release readback](assets/oex-021-release-readback.jpg).
+- Public IPM **0.2.0**: post-update anonymous metadata returned HTTP 200, unchanged reported artifact hash `198fc630f90cf990481dd93f64946e34596e1018`, size 7,914,399 bytes. No new native package publication is claimed. [Final publication receipt](evidence/final-publication.json).
+- Contest 49: SilentShift remained registered after the update. Latest bonus award counts are organizer decisions, not inferred from local verification.
+- The initial browser connection failed twice and work paused; the user resumed work, access recovered and submission succeeded. This was not a moderation rejection.
 
-The final Python repeat returned `174 passed in 22.55s`. The staged known-pattern secret scan found **0** findings, with **three image files omitted**. Those three synthetic UI screenshots were inspected visually; automated binary and unknown-secret-format coverage is not claimed. No credentials, environment files or runtime binaries are staged.
+The final Python repeat returned `174 passed in 22.55s`. The staged known-pattern secret scan found **0** findings, with **three image files omitted** in the implementation commit. Those synthetic UI screenshots were inspected visually. The two later publication screenshots contain public listing data and were also inspected visually; automated binary/unknown-format coverage is not claimed. No credentials, environment files or runtime binaries are staged.

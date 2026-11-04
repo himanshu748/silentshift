@@ -2,7 +2,7 @@
 
 `silentshift` **0.2.0** packages 44 native classes and ten runtime assets. The verified target is official ARM64 IRIS Community AI Hub **2026.3.0AI.154.0**, reported by `$ZVERSION` as **2026.3.0AI (Build 154U)**. Build 109 has not been tested. The module requires IPM **0.10.10 or newer** and an interoperability-enabled **SILENTSHIFT** namespace.
 
-Installation imports classes and copies the standard-library Python modules, frozen scenarios, recorded-provider fixture and MIT license. It does not create accounts, activate web applications, start the production or call a model. The React workbench remains a separate build. The runtime image and model weights are not in the package.
+Installation imports classes and copies the standard-library Python modules, frozen scenarios, recorded-provider fixture and MIT license. It does not create accounts, activate web applications, start the production or call a model. The React workbench remains a separate build, currently frontend/product release **0.2.1**; the native package remains **0.2.0**. The runtime image and model weights are not in the package.
 
 ## Public registry
 
@@ -74,11 +74,21 @@ uv run python scripts/verify_bonus_release.py --source public-registry \
 
 This executes **`install PublicCommunity/silentshift 0.2.0 -synchronous`** against `https://pm.community.intersystems.com/` with empty credentials. No application source stage or local application archive supplies that installation. The test classes are copied separately only after package installation. Production startup, the full native test suite and the replay must pass against the installed package. A badge, public manifest or successful download alone is not this proof.
 
-For live local inference, leave `SILENTSHIFT_PROVIDER_MODE=live` (the default), configure the local Ollama model/embedding endpoint and use the README bootstrap. `verify_native.py --allow-model-calls` exercises five actual local investigations. Replay is never counted as live model evidence.
+The final pass additionally verified the literal unqualified install in two new containers:
+
+```sh
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
+  --container silentshift-bonus-registry-final-replay-20261104 --api-port 52823 --execute
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
+  --execution-mode live --allow-model-calls \
+  --container silentshift-bonus-registry-final-live-20261104 --api-port 52833 --execute
+```
+
+Those names now refer to retained evidence containers; choose fresh names/ports to repeat. Both executed **`install silentshift`**, started production and passed all 12 native test methods. Replay passed 12/12, session 24, zero deliveries. The separate live run passed all five final routes with four evidence tools per case, using only local Ollama inference/embeddings. Preparation included one SDK warmup and one amendment embedding. [Exact output](FINAL_PASS_REPORT.md) · [replay receipt](evidence/final-public-replay.json) · [live receipt](evidence/final-public-live.json). Replay is never counted as live inference.
 
 ## Publish through Open Exchange
 
-Release **0.2.0** was published successfully on November 4. The public app displays version 0.2.0, `zpm install silentshift`, and its linked DPI-I-689 idea. The description refresh was separately sent for approval; SilentShift remains listed in contest 49. [Release confirmation](assets/oex-020-release-published.jpg) · [description approval request](assets/oex-020-description-sent.jpg).
+Native package **0.2.0** was published successfully on November 4 and remains the verified registry version. OEX frontend/product release **0.2.1** was subsequently submitted and read back under Published releases; listing edits still show Awaiting Review. Its download archive still points to native backend 0.2.0. The dedicated idea field and IPM/contest choices are retained in the owner view; SilentShift remains in contest 49. [Release confirmation](assets/oex-020-release-published.jpg) · [description approval request](assets/oex-020-description-sent.jpg).
 
 The [official publication workflow](https://docs.openexchange.intersystems.com/apps/ipm/) uses Open Exchange to publish to the community registry. There is no separate direct-registry publishing step to invent.
 
