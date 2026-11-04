@@ -1,5 +1,8 @@
 # Try SilentShift
 
+For the DPI-I-689 example without an external API key or fresh inference, follow [See it in Visual Trace](../README.md#see-it-in-visual-trace). It runs the frozen unsupported-unit order through native AI Hub and all four tools using explicitly recorded provider responses, then prints its actual session URL. Recorded playback is labeled separately from the [current five live investigations](evidence/bonus-020-live.json).
+
+
 An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift gives the integration operator the evidence to hold that order before the included destination simulator accepts it.
 
 Start with two investigations: **Quantity mismatch** holds that unsupported change; **Approved amendment** allows the same incoming value because an approved amendment is effective at event time. Compare the authority behind the decisions, then inspect the actual simulator receipt.

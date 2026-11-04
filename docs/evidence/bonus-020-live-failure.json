@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-11-04T07:49:50.782410+00:00",
+  "granularity": "provider_http_call",
+  "cases": [
+    {
+      "case_id": "36DC88F3-D824-11F1-A71B-4A5ECD1428BB",
+      "scenario_id": "",
+      "trace_id": "1807",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "invocation_trace": {
+        "invocation_id": "36E82023-D824-11F1-A71B-4A5ECD1428BB"
+      },
+      "native_headers": [
+        {
+          "id": "1809",
+          "session_id": 1807,
+          "corresponding_message_id": 1810,
+          "source": "ProviderIngress",
+          "target": "ProviderForwarder",
+          "body_class": "SilentShift.Provider.CallRequest",
+          "body_id": "1505",
+          "created_at": "2026-11-04 07:49:07.974",
+          "processed_at": "2026-11-04 07:49:08.136"
+        },
+        {
+          "id": "1810",
+          "session_id": 1807,
+          "corresponding_message_id": 1809,
+          "source": "ProviderForwarder",
+          "target": "ProviderIngress",
+          "body_class": "SilentShift.Provider.CallResponse",
+          "body_id": "1506",
+          "created_at": "2026-11-04 07:49:08.137",
+          "processed_at": "2026-11-04 07:49:08.137"
+        }
+      ],
+      "provider_messages": [
+        {
+          "trace_schema": "silentshift-provider-call/1",
+          "granularity": "provider_http_call",
+          "event_kind": "provider_request",
+          "call_id": "371499F5-D824-11F1-A71B-4A5ECD1428BB",
+          "case_id": "36DC88F3-D824-11F1-A71B-4A5ECD1428BB",
+          "production_session_id": 1807,
+          "invocation_span_id": "36E82023-D824-11F1-A71B-4A5ECD1428BB",
+          "round": 1,
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "provider-protocol-probe/1",
+          "started_at": "2026-11-04T07:49:07.972712Z",
+          "request_bytes": 243,
+          "tool_names": [],
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "content_retained": false,
+          "payload_storage": "IRISTEMP_nonjournaled_until_relay_completion",
+          "billing_cost": null,
+          "usage_scope": "actual_http_response_only",
+          "provider": "ollama/openai-compatible",
+          "execution_mode": "live",
+          "replay_record_id": "",
+          "message_header_id": "1809"
+        },
+        {
+          "trace_schema": "silentshift-provider-call/1",
+          "granularity": "provider_http_call",
+          "event_kind": "provider_response",
+          "call_id": "371499F5-D824-11F1-A71B-4A5ECD1428BB",
+          "case_id": "36DC88F3-D824-11F1-A71B-4A5ECD1428BB",
+          "production_session_id": 1807,
+          "invocation_span_id": "36E82023-D824-11F1-A71B-4A5ECD1428BB",
+          "round": 1,
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "provider-protocol-probe/1",
+          "started_at": "2026-11-04T07:49:07.977006Z",
+          "finished_at": "2026-11-04T07:49:08.136847Z",
+          "duration_ms": 160,
+          "http_status": 400,
+          "upstream_http_status": 400,
+          "response_bytes": 198,
+          "error_code": "UPSTREAM_HTTP_ERROR",
+          "tool_calls": [],
+          "finish_reason": "",
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "content_retained": false,
+          "billing_cost": null,
+          "usage_scope": "actual_http_response_only",
+          "response_usage": null,
+          "provider": "ollama/openai-compatible",
+          "execution_mode": "live",
+          "replay_record_id": "",
+          "message_header_id": "1810"
+        }
+      ],
+      "transient_call_count": 0,
+      "checks": {
+        "actual_native_provider_request_response_pairs": true,
+        "original_case_session": true,
+        "original_invocation_span": true,
+        "bounded_sequential_gateway_calls": true,
+        "local_model_only": true,
+        "per_call_timing_and_http_outcome": true,
+        "honest_unknown_retry_and_cost": true,
+        "persistent_messages_metadata_only": true,
+        "temporary_payload_cleanup": true,
+        "real_provider_failure_visible": true
+      }
+    }
+  ],
+  "passed": true,
+  "transport_contract": {
+    "temporary_store_safe": true,
+    "entity_body_iris_temp": true,
+    "response_stream_tmp": true,
+    "raw_modes": true,
+    "unknown_bearer_rejected": true,
+    "maximum_calls": 8,
+    "maximum_bytes": 262144,
+    "native_http_log_level": 1,
+    "global_destination": "^/usr/irissys/mgr/iristemp/",
+    "outbound_utf8_bytes_exact": true,
+    "response_cap_before_allocation": true,
+    "identity_response_contract": true,
+    "nonidentity_response_rejected": true,
+    "replacement_response_sink_rejected": true
+  }
+}

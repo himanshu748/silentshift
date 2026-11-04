@@ -10,7 +10,62 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-The public video plays at 1080p with English captions. Open Exchange is **awaiting review**; the two [technical articles](docs/articles/overview.md) are submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+The public video plays at 1080p with English captions. SilentShift is listed in [contest 49](https://openexchange.intersystems.com/contest/49). Open Exchange shows the application as Published in the developer portal; the two technical articles remain submitted for moderation. [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+
+## Community Idea DPI-I-689: LLM tracing with Interoperability
+
+SilentShift implements [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) by turning each admitted AI Hub provider exchange into an actual `CallRequest` / `CallResponse` pair in the original business-case session. A queued Business Operation records the model, provider, prompt version, elapsed operation time, returned tool names, HTTP outcome and available response-token counts. Deterministic policy still authorizes delivery; a trace is evidence of execution, not permission to release an order.
+
+### See it in Visual Trace
+
+The no-key example replays one recorded assistant answer through the **same native AI Hub agent, evidence tools, provider ingress and queued operation** used in live mode. Tool envelopes are reconstructed; the four tools execute afresh. It creates only the frozen synthetic `20 CASE` versus `240 EA` case, which must stay held with no delivery. It performs no new inference and never reports the original recording's tokens as current usage.
+
+1. Complete the [native prerequisites](#native-build-154-setup), including the authorized build-154 image, private `.env` and pinned IPM installer. For an isolated source installation, run from this checkout:
+
+   ```sh
+   uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
+   uv run python scripts/verify_bonus_release.py --source load \
+     --container silentshift-bonus-load-example --api-port 52793 --execute
+   ```
+
+   The driver creates a **new** container without source mounts, loads IPM 0.2.0, explicitly configures the production, runs the full native test suite, and runs the replay. It refuses existing container names and preserves existing runtimes. Use `--context`, `--vm-profile` and `--image` for your Docker setup; defaults target the documented Colima profile. Gateway image and IPM must already be available. No Ollama inference or external key is needed for this mode.
+
+2. Repeat the actual API journey and print its own session ID and clean portal URL:
+
+   ```sh
+   uv run python scripts/trace_example.py \
+     --api http://127.0.0.1:52793/silentshift/api \
+     --context colima-silentshift --container silentshift-bonus-load-example
+   ```
+
+   Expected: `execution_mode=recorded-replay`, `fresh_inference=false`, `provider_pairs=5`, `four_tools=1_each`, `routing=QUARANTINED`, `delivery_count=0`, `checks=12/12; passed=true`. The driver compiles the native test helpers before this command; the metadata inspector reads actual persisted native headers and bodies.
+
+3. Open the printed `EnsPortal.VisualTrace.zen?SESSIONID=...` URL. Sign in using an existing account permitted to view native message bodies. The configured reviewer can read the graph; inspecting native **Body** properties requires additional administrator-managed message-content permission. Do not change passwords merely to run the replay.
+4. Follow `Partner → Semantic` for intake and assessment, the reference/precedent operations for evidence, and `Semantic → Investigator` for native AI Hub. Each `ProviderIngress → ProviderForwarder` **CallRequest** and reciprocal **CallResponse** is a separate exchange in that same case session. Select **Body** to inspect its physical properties. `AITrace` carries actual tool-execution events; `Quarantine` and `ReviewCoordinator → ReviewWorklist` show the enforced hold and human task.
+
+Fresh-source example: session **24**, five recorded exchanges, four executed tools, zero deliveries. [Machine-readable evidence](docs/evidence/idea-replay-load.json). The existing live capture below is session **374**, from the earlier three-tool approved-amendment run; it shows actual provider pairs and business routing. It is not a screenshot of replay metadata.
+
+![Actual native provider request and response pairs in Visual Trace, live session 374](docs/assets/provider-success-visual-trace.png)
+
+**Recorded fields:** case/session/invocation/call IDs; provider, model and prompt **version**; request/response times, operation duration, byte counts, offered tools and returned tool-call IDs/names; finish reason; safe error code and HTTP status; zero application retries and false fallback. Live response token counts are recorded only when returned. Raw prompts, tool arguments and raw provider bodies are omitted. Billing cost, SDK/provider retry count and session-token totals remain unknown. Replay marks `execution_mode=recorded-replay`, keeps upstream status/usage null and records its fixture ID. [Exact field map and failure recipe](docs/NATIVE_AI_HUB.md).
+
+### SilentShift (IRIS Interoperability) vs Langfuse
+
+| Dimension | SilentShift in IRIS | Langfuse |
+|---|---|---|
+| Where traces live | Native message headers/bodies in the case's interoperability session | LLM traces and observations in Langfuse Cloud or a self-hosted service |
+| Per-call data | Metadata-only request/response messages; case evidence stored separately | Instrumented inputs/outputs, model parameters, relationships and metadata |
+| Prompt versioning | Version string in source and each message; no prompt registry or content hash | Versioned prompts, labels and prompt-to-trace links |
+| Tokens and cost | Actual response usage when present; unknown counts/cost null; replay usage null | Ingested usage/cost, with supported inference from model/token/pricing definitions |
+| Latency | Forwarding-operation duration, including validation, I/O and parsing | Observation/trace latency and generation timing when instrumented |
+| Tool calls | Returned IDs/names plus distinct native execution events; arguments omitted | Nested tool observations with instrumented content and timing |
+| Human review | Native Workflow task creation in the intake trace; later review requests have their own sessions and persisted links | Instrument custom application/review spans and attach scores or annotations |
+| Replay and resend | Frozen recorded-provider example, event idempotency and native message navigation; resend permission is not granted to reviewers | Dataset experiments and prompt playground workflows; business-message redelivery needs application integration |
+| Retention and audit | Persistent IRIS messages and case audit; operator controls purge/retention. No automatic retention guarantee is asserted | Depends on Cloud plan or self-hosted retention/deletion configuration |
+| Setup and dependencies | Licensed AI Hub build 154, interoperability production and local Ollama for live mode; no Langfuse service | SDK/OpenTelemetry integration and Cloud or self-hosted Langfuse infrastructure |
+| When to choose it | An IRIS operator needs to connect one model exchange to a held/delivered business transaction | Choose Langfuse for dedicated evals, experiments, dashboards, prompt management and cross-application LLM observability |
+
+Comparison based on Langfuse's [observability](https://langfuse.com/docs/observability/overview), [prompt management](https://langfuse.com/docs/prompt-management/overview), [token/cost tracking](https://langfuse.com/docs/observability/features/token-and-cost-tracking) and [datasets/experiments](https://langfuse.com/docs/evaluation/experiments/datasets) documentation. This is a comparison of implemented scope, not feature parity.
 
 ## Follow the evidence to a decision
 
@@ -22,7 +77,7 @@ The agent proposes through four read-only, case-scoped evidence tools: current m
 
 The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides eight API-backed views, including the native Review queue, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
 
-**Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment, external ERP/bank delivery or contest registration is claimed.
+**Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment or external ERP/bank delivery is claimed.
 
 ## Local checks without IRIS
 
@@ -175,7 +230,7 @@ The first seed indexed 15 actual resolved demo cases and one approved amendment.
 
 ### Package the native backend with IPM
 
-Follow the [IPM guide](docs/IPM.md) for a verified clean installation of the 43-class, nine-asset backend. IPM 0.10.10 installed it from a local filesystem repository on a fresh build-154 instance with no source mount. Installed Python origins and empty application tables passed; after explicit setup, the real API repeated all five final outcomes with four native tools. The package does not configure credentials, start the production or call a model merely by being installed. Public-registry installation and publication remain user-managed and unverified.
+Follow the [IPM guide](docs/IPM.md) for the 44-class, ten-asset 0.2.0 backend and isolated verification commands. IPM 0.10.10 installed it from a local filesystem repository on a fresh build-154 instance with no source mount. Installed Python origins and empty application tables passed; after explicit setup, the real API repeated all five final outcomes with four native tools. The package does not configure credentials, start the production or call a model merely by being installed. Public IPM 0.1.0 is available; 0.2.0 publication and registry-install results are tracked in the [release ledger](docs/BONUS_EVIDENCE.md). In a prepared SILENTSHIFT namespace, the public install command is `zpm "install silentshift"`. Installation alone does not activate the production.
 
 ## API and data boundaries
 
@@ -193,11 +248,18 @@ All endpoints are under `/silentshift/api`, protected by IRIS password authentic
 
 Unknown references, malformed agent output, evidence gaps and dependency failures hold the message. No auto-repair transformation is applied. Source/event IDs deduplicate ingestion; changed content under the same key conflicts. Transactions and unique receipts protect only the included IRIS simulator; an external destination would need its own idempotency protocol.
 
+## Developer Community articles
+
+Both articles were submitted for moderation. Replace these pending-publication entries with confirmed public URLs after approval:
+
+- Semantic validation: **publication pending** ([submitted canonical URL](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production)); [repository article](docs/articles/overview.md).
+- Recoverable human review: **publication pending** ([submitted canonical URL](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery)); [repository article](docs/articles/engineering.md).
+
 ## Documentation and submission
 
 [PRD](PRD.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Native SDK evidence](docs/NATIVE_AI_HUB.md) · [Test plan](docs/TEST_PLAN.md) · [Security](SECURITY.md) · [Contest compliance](docs/CONTEST_COMPLIANCE.md) · [Submission ledger](docs/SUBMISSION_CHECKLIST.md) · [Open Exchange copy](docs/OPEN_EXCHANGE_COPY.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. The demo is public on YouTube. Open Exchange version 0.1.0 has been sent for approval with the contest option, Package Manager option and dedicated DPI-I-689 link saved. Both Developer Community articles are submitted for moderation. The contest Apply dialog still requires a published application, so registration is unconfirmed. Public IPM availability and installation remain unverified; the questionnaire already has a submitted receipt. No organizer award is claimed. See the [remaining submission steps](docs/SUBMISSION_CHECKLIST.md).
+The verified deadline is November 8 at 23:59:59 EST / November 9 at 10:29:59 IST. The demo is public on YouTube, SilentShift appears in contest 49, and the dedicated DPI-I-689 link and Package Manager option are saved in Open Exchange. Both Developer Community articles remain submitted for moderation. The questionnaire already has a submitted receipt. Current release and registry-install results are in the [submission checklist](docs/SUBMISSION_CHECKLIST.md); no organizer award is claimed.
 
 ## License and attribution
 

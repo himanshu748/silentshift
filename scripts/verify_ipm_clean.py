@@ -30,7 +30,7 @@ from package_ipm import ROOT
 from verify_ipm_native import TABLES, literal
 
 GIB = 1024 ** 3
-INSTALL_COMMAND = 'install LocalArchive/silentshift 0.1.0 -synchronous'
+INSTALL_COMMAND = 'install LocalArchive/silentshift 0.2.0 -synchronous'
 RELEASE = '/home/irisowner/silentshift-ipm-release'
 RUNTIME_KEYS = ('SILENTSHIFT_IRIS_USERNAME', 'SILENTSHIFT_IRIS_PASSWORD',
     'SILENTSHIFT_VIEWER_USERNAME', 'SILENTSHIFT_VIEWER_PASSWORD', 'SILENTSHIFT_GATEWAY_PASSWORD',

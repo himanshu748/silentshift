@@ -8,6 +8,15 @@ Class SilentShift.Provider.Lease Extends %RegisteredObject
 Parameter MAXBYTES = 262144;
 Parameter MAXCALLS = 8;
 
+/// Deployment-owned, never selected by an incoming partner message.
+ClassMethod ExecutionMode() As %String
+{
+    Set mode = $SYSTEM.Util.GetEnviron("SILENTSHIFT_PROVIDER_MODE")
+    If mode = "" Return "live"
+    If (mode '= "live") && (mode '= "recorded-replay") Throw ##class(%Exception.General).%New("PROVIDER_MODE_INVALID")
+    Return mode
+}
+
 ClassMethod Seconds() As %Integer
 {
     Set stamp = $ZTIMESTAMP
@@ -51,6 +60,11 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
     Set token = ""
     Try {
         If '..TemporaryStoreSafe() Return $$$ERROR($$$GeneralError,"PROVIDER_TEMP_MAPPING_REQUIRED")
+        Set mode = ..ExecutionMode()
+        If mode = "recorded-replay" {
+            Set sc = ##class(SilentShift.Provider.Replay).CheckCase(caseId)
+            $$$ThrowOnError(sc)
+        }
         Set sc = ..LocalHost(.host)
         $$$ThrowOnError(sc)
         If model '= "qwen3-silentshift:4b-instruct" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
@@ -62,6 +76,7 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
         Set token = $TRANSLATE($SYSTEM.Encryption.Base64Encode($SYSTEM.Encryption.GenCryptRand(32,1),1),"+/","-_")
         Set key = ..TokenKey(token), expires = ..Seconds()+##class(SilentShift.AI.Investigator).WaitSeconds()+5
         Set binding = {"CaseId":(caseId),"SessionId":(sessionId),"Model":(model),"PromptVersion":(promptVersion),"InvocationSpanId":(invocationSpan),"Host":(host),"Expires":(expires)}
+        Do binding.%Set("ExecutionMode", mode)
         Set ^CacheTemp.SilentShift.Provider("lease",key,"binding") = binding.%ToJSON()
         Set ^CacheTemp.SilentShift.Provider("lease",key,"count") = 0
         Return $$$OK
@@ -111,6 +126,11 @@ ClassMethod Claim(header As %String, raw As %String, Output request As SilentShi
         Set request.CaseId = binding.CaseId, request.ProductionSessionId = binding.SessionId
         Set request.InvocationSpanId = binding.InvocationSpanId, request.Round = round
         Set request.Model = binding.Model, request.PromptVersion = binding.PromptVersion
+        Set request.ExecutionMode = binding.%Get("ExecutionMode", "live")
+        If request.ExecutionMode = "recorded-replay" {
+            Set request.Provider = "recorded-ollama/openai-compatible"
+            Set request.ReplayRecordId = ##class(SilentShift.Provider.Replay).#RECORDID
+        }
         Set request.StartedAt = ##class(SilentShift.TraceEvent).UTC(), request.RequestBytes = $LENGTH(raw)
         Set request.ToolNamesJSON = tools
         Set call = request.CallId

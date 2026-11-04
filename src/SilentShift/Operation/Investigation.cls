@@ -63,7 +63,7 @@ Method BeginChat(model As %String, started As %String)
 {
     Set ..TraceChatStarted = started, ..TraceModel = model
     Set event = ..NewTrace("invocation_started", "agent_invocation", ..TraceInvocationId)
-    Set event.ModelInvoked = 1, event.Status = "started"
+    Set event.ModelInvoked = (event.ExecutionMode = "live"), event.Status = "started"
     Set event.StartedAt = ##class(SilentShift.TraceEvent).UTC(started)
     Do ..EnqueueTrace(event)
 }
@@ -92,6 +92,7 @@ Method NewTrace(eventKind As %String, spanKind As %String, spanId As %String) As
     Set event = ##class(SilentShift.TraceEvent).%New()
     Set event.CaseId = ..TraceCaseId, event.ProductionSessionId = ..%SessionId
     Set event.EventKind = eventKind, event.SpanKind = spanKind, event.SpanId = spanId
+    Set event.ExecutionMode = ##class(SilentShift.Provider.Lease).ExecutionMode()
     Set event.Model = ..TraceModel, event.PromptVersion = ##class(SilentShift.AI.Investigator).#PROMPTVERSION
     Return event
 }
@@ -114,7 +115,7 @@ Method FinishObservation(metadata As %DynamicObject) [ Private ]
     For index = 0:1:..TraceBuffer.%Size()-1 {
         Set item = ..TraceBuffer.%Get(index)
         Set event = ..NewTrace(item.%Get("event_kind"), "tool", item.%Get("span_id"))
-        Set event.ParentSpanId = ..TraceInvocationId, event.ModelInvoked = 1, event.Buffered = 1
+        Set event.ParentSpanId = ..TraceInvocationId, event.ModelInvoked = (event.ExecutionMode = "live"), event.Buffered = 1
         Set event.ToolName = item.%Get("tool_name"), event.StartedAt = ##class(SilentShift.TraceEvent).UTC(item.%Get("started"))
         Set event.Status = "started", event.EvidenceTruncated = item.%Get("truncated")
         Set event.FailureCode = item.%Get("failure_code")
@@ -126,11 +127,11 @@ Method FinishObservation(metadata As %DynamicObject) [ Private ]
         }
         Do ..EnqueueTrace(event)
     }
-    Set invoked = metadata.%Get("model_invoked", 0)
+    Set invoked = metadata.%Get("native_chat_invoked", metadata.%Get("model_invoked", 0))
     Set returned = metadata.%Get("native_chat_returned", 0)
     Set kind = $SELECT('invoked: "invocation_skipped", returned: "invocation_completed", 1: "invocation_failed")
     Set event = ..NewTrace(kind, $SELECT(invoked: "agent_invocation", 1: "investigation_preflight"), ..TraceInvocationId)
-    Set event.ModelInvoked = invoked, event.NativeChatReturned = returned
+    Set event.ModelInvoked = metadata.%Get("model_invoked", 0), event.NativeChatReturned = returned
     Set event.Status = $SELECT('invoked: "skipped", 1: metadata.%Get("status", "failed"))
     Set started = $SELECT(invoked: ..TraceChatStarted, 1: ..TraceRunStarted)
     Set event.StartedAt = ##class(SilentShift.TraceEvent).UTC(started)
@@ -147,7 +148,7 @@ Method FinishObservation(metadata As %DynamicObject) [ Private ]
     Do ..EnqueueTrace(event)
     Set trace = {"mode": "native-interoperability", "granularity": "agent_invocation_and_tool", "invocation_id": (..TraceInvocationId), "prompt_version": (event.PromptVersion), "enqueued_events": (..TraceEnqueued), "enqueue_failures": (..TraceEnqueueFailures), "capture_failures": (..TraceCaptureFailures), "persistence_status": "async_unverified", "sdk_provider_round_metadata_available": false, "provider_http_trace_available": true}
     Do metadata.%Set("trace", trace)
-    Do metadata.%Set("usage_scope", "final_response_only")
+    Do metadata.%Set("usage_scope", $SELECT(event.ExecutionMode = "recorded-replay":"unavailable_for_replay",1:"final_response_only"))
     Do metadata.%Set("session_totals", "", "null")
     Do metadata.%Set("provider_round_usage", "", "null")
     Do metadata.%Set("provider_retry_count", "", "null")

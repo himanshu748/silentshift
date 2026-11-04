@@ -48,6 +48,13 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
             Return $$$ERROR($$$GeneralError, "Native evidence reference limit exceeded")
         }
 
+        Set executionMode = ##class(SilentShift.Provider.Lease).ExecutionMode()
+        Do metadata.%Set("execution_mode", executionMode)
+        If executionMode = "recorded-replay" {
+            Do metadata.%Set("mode", "native-ai-hub-recorded-replay")
+            Do metadata.%Set("replay_record_id", ##class(SilentShift.Provider.Replay).#RECORDID)
+            Do metadata.%Set("inference_performed", 0, "boolean")
+        }
         Set url = $SYSTEM.Util.GetEnviron("SILENTSHIFT_LLM_BASE_URL")
         Set model = $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL")
         If model = "" Set model = "qwen3-silentshift:4b-instruct"
@@ -71,6 +78,12 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         $$$ThrowOnError(sc)
         Set settings = {"api_key": (providerToken), "base_url": "http://gateway/silentshift-provider/v1/"}
         Do metadata.%Set("provider_transport", {"implementation": "native-interoperability", "granularity": "provider_http_call", "production_session_id": (traceObserver.%SessionId), "invocation_span_id": (traceObserver.TraceInvocationId), "usage_scope": "actual_http_response_only", "billing_cost": null})
+        Set transport = metadata.%Get("provider_transport")
+        Do transport.%Set("execution_mode", executionMode)
+        If executionMode = "recorded-replay" {
+            Do transport.%Set("granularity", "recorded_provider_response")
+            Do transport.%Set("usage_scope", "unavailable_for_replay")
+        }
         Set stage = "provider-initialization"
         Set provider = ##class(%AI.Provider).Create("openai", settings)
         Set agent = ##class(%AI.Agent).%New(provider)
@@ -124,7 +137,9 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         If localQwen Set prompt = prompt_$CHAR(10)_"/no_think"
         Set chatStarted = $ZTIMESTAMP
         Do metadata.%Set("chat_started_at", ##class(SilentShift.TraceEvent).UTC(chatStarted))
-        Do metadata.%Set("model_invoked", 1, "boolean")
+        Do metadata.%Set("model_invoked", executionMode = "live", "boolean")
+        Do metadata.%Set("native_chat_invoked", 1, "boolean")
+        Do metadata.%Set("inference_performed", executionMode = "live", "boolean")
         Set metadataJSON = metadata.%ToJSON()
         If $ISOBJECT(traceObserver) Do traceObserver.BeginChat(model, chatStarted)
         Set response = agent.Chat(session, prompt)

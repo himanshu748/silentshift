@@ -8,6 +8,14 @@ Property InvocationSpanId As %String(MAXLEN = 80);
 Property Round As %Integer;
 Property Model As %String(MAXLEN = 160);
 Property PromptVersion As %String(MAXLEN = 80);
+Property Provider As %String(MAXLEN = 80) [ InitialExpression = "ollama/openai-compatible" ];
+Property ExecutionMode As %String(MAXLEN = 32) [ InitialExpression = "live" ];
+Property ReplayRecordId As %String(MAXLEN = 80);
+Property ApplicationRetryCount As %Integer [ InitialExpression = 0 ];
+Property ProviderRetryCount As %Integer;
+Property FallbackUsed As %Boolean [ InitialExpression = 0 ];
+Property BillingCost As %Numeric;
+Property CostStatus As %String(MAXLEN = 32) [ InitialExpression = "unavailable" ];
 Property StartedAt As %String(MAXLEN = 40);
 Property FinishedAt As %String(MAXLEN = 40);
 Property DurationMS As %Integer;
@@ -31,6 +39,14 @@ Method AsJSON() As %String
     If ..CompletionTokens '= "" Do usage.%Set("completion_tokens", ..CompletionTokens, "number")
     If ..TotalTokens '= "" Do usage.%Set("total_tokens", ..TotalTokens, "number")
     If usage.%Size() Do item.%Set("response_usage", usage)
+    Do item.%Set("provider", ..Provider)
+    Do item.%Set("execution_mode", ..ExecutionMode)
+    Do item.%Set("replay_record_id", ..ReplayRecordId)
+    If ..ExecutionMode = "recorded-replay" {
+        Do item.%Set("granularity", "recorded_provider_response")
+        Do item.%Set("usage_scope", "unavailable_for_replay")
+        Do item.%Set("replay_scope", "Recorded assistant content; reconstructed tool/envelope messages; no upstream inference")
+    }
     Return item.%ToJSON()
 }
 }

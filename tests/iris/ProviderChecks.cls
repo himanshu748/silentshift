@@ -25,6 +25,49 @@ Method TestMetadataOnlyMessages()
     Do $$$AssertTrue('data.%IsDefined("raw_response") && 'data.%IsDefined("arguments"))
 }
 
+Method TestPerCallModelTokensAndLatency()
+{
+    Set request = ##class(SilentShift.Provider.CallRequest).%New()
+    Set request.CallId = "metadata-values", request.CaseId = "synthetic-case", request.ProductionSessionId = 42
+    Set request.Model = "qwen3-silentshift:4b-instruct", request.PromptVersion = "test-prompt/1"
+    Set data = ##class(%DynamicObject).%FromJSON(request.AsJSON())
+    Do $$$AssertEquals(data.%Get("provider"),"ollama/openai-compatible")
+    Do $$$AssertEquals(data.%Get("model"),request.Model)
+    Do $$$AssertEquals(data.%Get("prompt_version"),"test-prompt/1")
+    Do $$$AssertEquals(data.%Get("production_session_id"),42)
+    Set response = ##class(SilentShift.Provider.CallResponse).%New()
+    Set response.Provider = request.Provider, response.Model = request.Model, response.PromptVersion = request.PromptVersion
+    Set response.DurationMS = 123, response.PromptTokens = 257, response.CompletionTokens = 17, response.TotalTokens = 274
+    Set response.HTTPStatus = 200, response.UpstreamHTTPStatus = 200
+    Set response.ToolCallsJSON = "[{""id"":""call-1"",""name"":""GetCurrentMessage"",""arguments_omitted"":true}]"
+    Set data = ##class(%DynamicObject).%FromJSON(response.AsJSON()), usage = data.%Get("response_usage")
+    Do $$$AssertEquals(data.%Get("duration_ms"),123)
+    Do $$$AssertEquals(usage.%Get("prompt_tokens"),257)
+    Do $$$AssertEquals(usage.%Get("completion_tokens"),17)
+    Do $$$AssertEquals(usage.%Get("total_tokens"),274)
+    Do $$$AssertEquals(data.%Get("usage_scope"),"actual_http_response_only")
+    Do $$$AssertEquals(data.%Get("tool_calls").%Size(),1)
+    Do $$$AssertEquals(data.%GetTypeOf("billing_cost"),"null")
+    Set response.PromptTokens = 0
+    Set data = ##class(%DynamicObject).%FromJSON(response.AsJSON())
+    Do $$$AssertEquals(data.%Get("response_usage").%Get("prompt_tokens"),0)
+}
+
+Method TestPlaybackCannotLookLikeLiveInference()
+{
+    Set response = ##class(SilentShift.Provider.CallResponse).%New()
+    Set response.ExecutionMode = "recorded-replay", response.Provider = "recorded-ollama/openai-compatible"
+    Set response.ReplayRecordId = ##class(SilentShift.Provider.Replay).#RECORDID
+    Set response.HTTPStatus = 200, response.DurationMS = 0
+    Set data = ##class(%DynamicObject).%FromJSON(response.AsJSON())
+    Do $$$AssertEquals(data.%Get("granularity"),"recorded_provider_response")
+    Do $$$AssertEquals(data.%Get("usage_scope"),"unavailable_for_replay")
+    Do $$$AssertEquals(data.%GetTypeOf("response_usage"),"null")
+    Do $$$AssertEquals(data.%GetTypeOf("upstream_http_status"),"null")
+    Do $$$AssertEquals(data.%Get("replay_record_id"),##class(SilentShift.Provider.Replay).#RECORDID)
+    Do $$$AssertEquals(data.%GetTypeOf("billing_cost"),"null")
+}
+
 Method TestAuthorizationRejectsUnknownCapability()
 {
     Do $$$AssertTrue('##class(SilentShift.Provider.Lease).AuthorizeBearer("",.binding))

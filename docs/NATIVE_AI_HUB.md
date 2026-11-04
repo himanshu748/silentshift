@@ -1,6 +1,8 @@
 # Native AI Hub integration evidence
 
-Updated 2026-11-03. Status: **the local provider-traced native journey passed all five scenarios on official ARM64 build 154U**, run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8`. Each `qwen3-silentshift:4b-instruct` investigation made four gateway requests, executed the three evidence tools, and persisted the expected policy/route. Approved amendment case `EB3307BB-D772-11F1-82EF-EED820A70F55` is native session 374; its four actual provider request/response pairs are headers 381–388. An isolated local SDK failure preserved upstream HTTP 400 in session 316, headers 318 ↔ 319, and remained held with zero deliveries. These are synthetic local cases, not hosted or production evidence. See [AI tracing](AI_TRACING.md), `BUILD_STATUS.md`, and the [public native summary](evidence/native-summary.json). Earlier runs and failures remain historical evidence.
+Current November 4 live run passed 5/5 with four tools; sessions 1667, 1695, 1723, 1750 and 1778. A new actual HTTP-400 diagnostic is session 1807. [Current live metadata](evidence/bonus-020-live.json) · [current failure](evidence/bonus-020-live-failure.json). No-key replay and exact field boundaries are documented below.
+
+Historical November 3 status: **the local provider-traced native journey passed all five scenarios on official ARM64 build 154U**, run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8`. Each `qwen3-silentshift:4b-instruct` investigation made four gateway requests, executed the three evidence tools, and persisted the expected policy/route. Approved amendment case `EB3307BB-D772-11F1-82EF-EED820A70F55` is native session 374; its four actual provider request/response pairs are headers 381–388. An isolated local SDK failure preserved upstream HTTP 400 in session 316, headers 318 ↔ 319, and remained held with zero deliveries. These are synthetic local cases, not hosted or production evidence. See [AI tracing](AI_TRACING.md), `BUILD_STATUS.md`, and the [public native summary](evidence/native-summary.json). Earlier runs and failures remain historical evidence.
 
 The [provider-message export](evidence/provider-calls.json) verifies all five cases' native pairs plus the failure pair: **42 metadata messages**. Authenticated native IRIS Visual Trace captures show the [successful transaction, session 374](assets/provider-success-visual-trace.png), and [contained failure, session 316](assets/provider-failure-visual-trace.png). These portal captures are separate from private vendor-rendered SVG exports.
 
@@ -72,7 +74,7 @@ If $$$ISERR(sc) Quit sc
 Set tools = ##class(SilentShift.AI.EvidenceTools).%New()
 Set tools.CaseId = caseId
 Do agent.ToolManager.AddTool(tools)
-Set session = agent.CreateSession({"max_iterations": 6, "max_tokens": 700})
+Set session = agent.CreateSession({"max_iterations": 6, "max_tokens": 192})
 Set response = agent.Chat(session, "Investigate the current transaction.")
 Set rawRecommendation = response.Content
 ```
@@ -110,11 +112,11 @@ The [EAP README](https://github.com/intersystems-community/ai-hub-eap/blob/cf50d
 
 Until those observations exist, label the native integration **implemented/unverified** or **blocked**, never complete.
 
-## Implemented adapter contract (compiled on build154U)
+## Implemented adapter contract (compiled on build 154U)
 
 `src/SilentShift/AI/Investigator.cls` implements the business-process entry point `Run(caseId, assessmentJSON, .recommendationJSON, .metadataJSON)`. It constructs native `%AI.Provider` and `%AI.Agent` objects, initializes the agent, and registers the bound `EvidenceTools` object. The helper itself is a `%RegisteredObject` to avoid overriding the SDK agent's own `Run` method.
 
-`src/SilentShift/AI/EvidenceTools.cls` exposes only three application methods: `GetCurrentMessage`, `GetApprovedContracts` and `GetRelatedRecords`. The adapter inspects `%Discover()` and rejects any catalog other than those three exact names. Successful reads produce bounded audit metadata, and the invocation must observe all three reads before returning a proposal. No routing/review method, model-chosen case ID, generic SQL, shell or filesystem tool is registered. Reads are capped at eight successful calls per investigation; each response is capped at 16 KiB, with approved/peer references capped at ten. History contains at most three same-contract, same-scenario summaries, explicitly marked as context without contract authority.
+`src/SilentShift/AI/EvidenceTools.cls` exposes four application methods: `GetCurrentMessage`, `GetApprovedContracts`, `GetRelatedRecords` and `find_similar_precedents`. The adapter inspects `%Discover()` and rejects any catalog other than those four exact names. Successful reads produce bounded audit metadata, and the invocation must observe all four reads before returning a proposal. No routing/review method, model-chosen case ID, generic SQL, shell or filesystem tool is registered. Reads are capped at eight successful calls per investigation; each response is capped at 16 KiB, with approved/peer references capped at ten. History contains at most three same-contract, same-scenario summaries, explicitly marked as context without contract authority.
 
 Current configuration uses `SILENTSHIFT_MODEL=qwen3-silentshift:4b-instruct` and an explicit local `SILENTSHIFT_LLM_BASE_URL`, normally `http://host.lima.internal:11434/v1/` on the observed Colima target. The provider lease enforces both values. The earlier external-key environment variables are not read by the current investigator; the gateway capability replaces them. `SILENTSHIFT_AGENT_WAIT_SECONDS` accepts 10–120, defaults to 60, and the tested local setup uses 120. A timeout contains the case and does not establish provider cancellation.
 
@@ -124,7 +126,7 @@ Metadata reports `mode=native-ai-hub`, actual model identity, elapsed time, limi
 
 The discovery allowlist passed on build 154. Direct instance registration and native tool dispatch produce persisted `agent_tool_read` audit rows. Partial reads, empty answers and timeouts were observed and rejected. The earliest policy 1.0 run was 3/5 correct without unsafe delivery; later five-case runs passed, including the provider-traced run above. Neither native execution nor valid JSON alone proves a correct decision. Recovery evidence remains scoped to the separately documented tests.
 
-For explicitly local Qwen3 inference, session configuration uses `extra_params: {"reasoning_effort":"none"}` with six iterations and700 output tokens per request. Build154's installed `iris_llm`2.0.0 completion adapter documents that provider-specific options go through `extra_params`; unknown top-level fields are dropped by its native deserializer. [Ollama0.31.1's own request conversion](https://github.com/ollama/ollama/blob/v0.31.1/openai/openai.go#L591-L618) maps `none` to `think=false`. The prompt's `/no_think` soft instruction alone is insufficient evidence of that setting. No reasoning text is extracted or turned into an answer. The correct build154 dynamic-object type method is `%GetTypeOf`. The prompt asks for sequential tools, but no supported hard parallel-tool switch was found; actual audits establish which calls happened.
+For explicitly local Qwen3 inference, session configuration uses `extra_params: {"reasoning_effort":"none"}` with six iterations and 192 output tokens per request. Build154's installed `iris_llm`2.0.0 completion adapter documents that provider-specific options go through `extra_params`; unknown top-level fields are dropped by its native deserializer. [Ollama0.31.1's own request conversion](https://github.com/ollama/ollama/blob/v0.31.1/openai/openai.go#L591-L618) maps `none` to `think=false`. The prompt's `/no_think` soft instruction alone is insufficient evidence of that setting. No reasoning text is extracted or turned into an answer. The correct build154 dynamic-object type method is `%GetTypeOf`. The prompt asks for sequential tools, but no supported hard parallel-tool switch was found; actual audits establish which calls happened.
 
 ### Individual provider requests and responses
 
@@ -138,14 +140,15 @@ The actual metadata field map for [`CallRequest`](../src/SilentShift/Provider/Ca
 |---|---|
 | `call_id`, `case_id`, `production_session_id`, `invocation_span_id` | Server-bound pair/case/session/parent correlation, checked against actual native header session and reciprocal message IDs. |
 | `round` | Monotonic admitted HTTP-request number, capped at eight; not an SDK iteration or classified retry. |
-| `model`, `prompt_version` | Local model and instruction version, currently `silentshift-investigator/1.2.0`; not a prompt-content hash. |
+| `provider`, `model`, `prompt_version` | Provider identity, local model and instruction version, currently `silentshift-investigator/1.3.1`; not a prompt-content hash. |
 | Request `started_at`, `request_bytes`, `tool_names` | Admission time, original body bytes, and advertised tool names; offered tools do not establish execution. |
 | Response `started_at`, `finished_at`, `duration_ms` | Forwarding-operation timing including validation, HTTP I/O, metadata parsing and cleanup; not pure network latency. |
 | `http_status`, `upstream_http_status`, `error_code`, `response_bytes` | Relay outcome, upstream status if received, fixed safe failure code and response bytes. Transport/gateway failures can lack upstream status. |
 | `tool_calls`, `finish_reason` | Bounded returned tool IDs/allowlisted names with `arguments_omitted=true`, and a recognized finish reason. Actual tool audits are separate. |
 | `response_usage`, `usage_scope` | Numeric usage from this actual response or null, scoped `actual_http_response_only`; separate from final SDK response usage and session totals. |
 | `application_retry_count`, `provider_retry_count`, `fallback_used` | Zero application retries, null SDK/provider retry classification, and false fallback. Admitted repeated requests get new pairs. |
-| `billing_cost` | Null; no inferred billing or token-derived price. |
+| `billing_cost`, physical `CostStatus` | Null cost / unavailable status; no inferred billing or token-derived price. |
+| `execution_mode`, `replay_record_id` | `live` or explicit `recorded-replay`; fixture ID only for playback. Playback has null upstream status and current usage. |
 | `content_retained`, `payload_storage` | Persistent provider bodies omit raw content. Temporary IPC storage is `IRISTEMP_nonjournaled_until_relay_completion`; case evidence/final proposals are stored separately. |
 
 The case's `agent.provider_transport` identifies this HTTP layer, and `provider_request_count` records admitted calls before lease closure. Invocation/tool events retain their own `agent.trace` scope. Historical invocation-only traces do not retroactively establish provider-call coverage. See [AI tracing](AI_TRACING.md) for exact case IDs, header pairs, and local reproduction commands, including the isolated real HTTP 400 probe.
@@ -183,3 +186,13 @@ Bootstrap has run against the officially downloaded and locally loaded image wit
 The current native catalog adds the exact no-argument `find_similar_precedents` name. Build154's inherited `%AI.Tool` invocation generator emits a bare ObjectScript method call; an underscore name needs quoting and failed compilation. `EvidenceTools` supplies an application-only `%Invoke` dispatcher for the exact four-method allowlist, preserving native discovery and result encoding. It rejects nonempty/nonobject arguments and unknown names. Vendor code is unchanged. A native no-model dispatch probe verified all four methods against an isolated diagnostic case; actual model callbacks are separately proven by the five-case run.
 
 Current prompt `silentshift-investigator/1.3.1` uses192 output tokens and six iterations, with short final explanations. The gateway's admission ceiling remains700 tokens/eight actual HTTP requests. Run `fc12cbcf-c9fc-4813-8614-8ac944d6e8fd` passed5/5; all four tools ran and every actual provider call was paired. The SDK batched tool requests in this run, producing two provider calls per case despite the sequential prompt guidance. [Precedent evidence](PRECEDENTS.md) documents the vectors, source bindings, critical veto, earlier timeout trials and warmed/serial-run boundary. No provider cancellation or general performance guarantee is claimed.
+
+## No-key recorded-provider example (0.2.0)
+
+Follow the exact [README recipe](../README.md#see-it-in-visual-trace). The packaged `SilentShift.Provider.Replay` supplies the recorded final assistant content from original live session 1471. Its SHA-256 and original usage are provenance in `fixtures/provider-replay.json`; tool-call envelopes are reconstructed and usage is deliberately absent from playback responses. All four tools still execute through native AI Hub. Replay is restricted to the frozen synthetic quantity-mismatch case while PROCESSING, with its expected critical assessment and contract ID. It cannot be selected by partner payloads or used to authorize a real order.
+
+`SILENTSHIFT_PROVIDER_MODE` defaults to `live`. `recorded-replay` is operator configuration at container creation; the lease binds and the operation rechecks it. Both modes traverse the same provider ingress, queued forwarder and typed native messages. Live continues to call the configured local Ollama model with a short-lived application bearer capability. External provider API keys are neither required nor supported by this local-only transport.
+
+The native `%UnitTest` suite includes physical model/prompt/provider/session/timing/usage assertions, zero-token preservation, null cost, replay labeling, recorded-response progression, frozen-case restrictions and the critical-policy veto. `scripts/trace_example.py` additionally reads persisted paired headers/bodies from the packaged inspector and exercises the authenticated REST entry point. Playback `HTTPStatus=200` is a local relay result; `UpstreamHTTPStatus` remains empty/null. `DurationMS` measures this playback operation, not the original inference.
+
+For every requested comparison dimension, see [SilentShift vs Langfuse](../README.md#silentshift-iris-interoperability-vs-langfuse). Native Workflow task creation shares the intake session; subsequent human requests have independent sessions linked by case/task/decision records. No claim is made that an entire multi-day review has one session ID.

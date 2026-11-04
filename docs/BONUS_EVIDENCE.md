@@ -2,7 +2,7 @@
 
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, build 154 ARM64. The user authorized publishing the verified source to GitHub `main` on November 4. The user subsequently authorized submission preparation to be executed: video publication, the OEX approval request and both article submissions are recorded below. Hosting remains outside scope. Moderation, contest registration and public registry installation are separate gates.
+Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minilm:22m` embeddings, **2026.3.0AI.154.0 (Build 154U), ARM64**. The user authorized publishing the verified source to GitHub `main` on November 4. The user subsequently authorized submission preparation to be executed: video publication, the OEX approval request and both article submissions are recorded below. Hosting remains outside scope. Moderation and registry installation remain separate gates. SilentShift is now visibly listed in contest 49.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
 |---|---:|---|
@@ -10,7 +10,42 @@ Current boundary: local Ollama `qwen3-silentshift:4b-instruct`, local `all-minil
 | Native Workflow Engine |2 | VERIFIED: pending native tasks appear in the reviewer-only API and Review view. 54 native queue/concurrency checks and actual workbench approve/reject passed; full native5/5 retained. Award unconfirmed. |
 | IRIS Vector Search precedents |2 | VERIFIED: actual resolved cases and an approved amendment embedded locally into 384-dimensional IRIS VECTOR rows. Top 3 case-scoped cosine results, fourth native tool, UI and misleading-precedent veto executed. 5/5 native retained; award unconfirmed. |
 | Custom inbound adapter |2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
-| IPM package |2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public-registry publication/install remain unverified and user-managed; this bonus is not claimed earned. |
+| IPM package |2 | Clean local IPM `install` passed on fresh build 154 with no source mount; installed production repeated native 5/5. Public 0.1.0 metadata/manifest returned 200 on November 4. The 0.2.0 release and registry-install status are recorded below; no points are claimed awarded. |
+
+## November 4 release verification: 0.2.0
+
+The existing live transport already recorded model, prompt version, response tokens and operation duration. Version 0.2.0 adds physical provider/mode/replay/retry/fallback/cost-status properties and an explicitly labeled no-key replay through the same queued forwarder. It keeps deterministic release policy unchanged. The build remains **2026.3.0AI.154.0**, with exact observed `$ZVERSION` **IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT**. No build-109 result is claimed.
+
+### Requested LLM-call metadata audit
+
+| Requested field | Actual persisted message property / boundary |
+|---|---|
+| Prompt / version | `PromptVersion=silentshift-investigator/1.3.1`; raw prompt and content hash are not recorded |
+| Model and provider | `Model`, new `Provider`; local `qwen3-silentshift:4b-instruct` / `ollama/openai-compatible`, separately labeled recorded provider in replay |
+| Input/output tokens | Response `PromptTokens`, `CompletionTokens`, `TotalTokens` only when supplied; zero preserved, missing counts null in JSON; replay usage null |
+| Latency | Response `StartedAt`, `FinishedAt`, `DurationMS`; validation + I/O + parsing/cleanup, not pure inference latency |
+| Tool calls | Request `ToolNamesJSON`; response `ToolCallsJSON` with IDs/names and omitted arguments; separate `AITrace` events prove actual execution |
+| Cost | `BillingCost` unset/null; `CostStatus=unavailable`; no inferred price or zero-cost claim |
+| Errors | `HTTPStatus`, nullable `UpstreamHTTPStatus`, safe `ErrorCode`; no exception/provider-body dump |
+| Session | `ProductionSessionId`, `CaseId`, `InvocationSpanId`, `CallId`, `Round`; actual `Ens.MessageHeader` pair IDs checked |
+| Retries / fallback | Physical `ApplicationRetryCount=0`, `ProviderRetryCount` unset/null, `FallbackUsed=false`; no automatic model retry or fallback |
+| Replay provenance | `ExecutionMode=recorded-replay`, `ReplayRecordId`; historical original usage stays in fixture provenance only |
+
+The [README](../README.md#community-idea-dpi-i-689-llm-tracing-with-interoperability) contains the idea link, exact no-key recipe and fair Langfuse comparison. The dedicated Open Exchange idea field was read back with the same URL, alongside checked contest and IPM fields. Organizer qualification remains unconfirmed.
+
+**Live regression:** `uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/bonus-020-live-five.json` passed **5/5 final outcomes**, with four actual native tools per case. Sessions **1667, 1695, 1723, 1750, 1778** each contain two real local provider exchanges. Read-only `verify_native_provider.py` checked all ten pairs / 20 metadata bodies and transient cleanup. [Live receipt with field values and header IDs](evidence/bonus-020-live.json).
+
+**Current failure diagnostic:** the documented `ProviderProbe.Run("failure",...)` made one actual local SDK/provider request with invalid format. Case `36DC88F3-D824-11F1-A71B-4A5ECD1428BB`, session **1807**, recorded upstream HTTP **400**, safe `UPSTREAM_HTTP_ERROR`, remained QUARANTINED and produced zero deliveries. [Failure metadata and actual headers](evidence/bonus-020-live-failure.json). No model-quality or inference-success claim is made.
+
+**First fresh-source proof:** `verify_bonus_release.py --source load --container silentshift-bonus-load-20261104 --api-port 52793 --execute` installed 0.2.0 with no mounts. Its first native test attempt failed two new test expressions; ObjectScript underscore-property access in assertion macros was corrected to `%Get`. The full suite then passed all **five classes / 12 methods**. The runner's success return was initially mistaken for assertion success; the driver now rejects explicit failed assertions and requires each test-class pass line. This failure remains disclosed and is not counted as a passing attempt.
+
+The actual API replay returned session **24**, five request/response pairs, all four native tool reads, QUARANTINED and zero deliveries; **12/12 checks** passed. [Replay receipt](evidence/idea-replay-load.json). The CLI uses the separately compiled native verification helper, loaded by the documented driver. A second container load succeeded, but activation paused at the disk floor and a post-restart readiness check failed; that attempt was stopped after two failures. Its proposed inspector refinement was removed, and source hashes were compared with the first successfully verified load.
+
+**Portal screenshot limitation:** existing authenticated screenshots below show real native graph/pair timing, including a successful live call and HTTP-400 failure. They do not show the message-body metadata panel. The fresh standard reviewer can read the graph but body access was denied twice; no administrator password was changed and the attempted extra role resource was reverted. A fresh screenshot with body properties remains an explicit gate unless an existing authorized administrator session is available.
+
+### Publication state
+
+Anonymous public 0.1.0 metadata and manifest returned HTTP 200 on November 4; its public archive is distinct from the historical local archive. Open Exchange's developer portal shows **Published** and the public contest page lists **SilentShift**. Version 0.2.0 publication and its public clean-install result are updated in the submission checklist after execution. A successful local `load` is never counted as a public `install`.
 
 ## 1. Each LLM call belongs to its business case
 
@@ -106,7 +141,7 @@ Full native run `a96c814e-0606-41a1-b469-10f1f94885a9` passed **5/5**. Python 17
 
 ## 5. Install the backend without a source checkout
 
-The module declares `<SystemRequirements Version=">=2026.3" Interoperability="enabled" IPMVersion=">=0.9.0"/>`. The actual IPM 0.10.10 archive contains 43 classes, nine runtime assets and its manifest: 53 files, 75,003 bytes. The [clean-install receipt](evidence/ipm-clean-install.json) records its SHA-256 and the actual command:
+The historical 0.1.0 module declared `<SystemRequirements Version=">=2026.3" Interoperability="enabled" IPMVersion=">=0.9.0"/>`. Its actual IPM 0.10.10 archive contains 43 classes, nine runtime assets and its manifest: 53 files, 75,003 bytes. The [clean-install receipt](evidence/ipm-clean-install.json) records its SHA-256 and the actual command:
 
 ```objectscript
 zpm "repo -name LocalArchive -fs -depth 2 -path /home/irisowner/silentshift-ipm-release/repository/"
@@ -130,8 +165,8 @@ Embedded Python (3 potential points) and Docker (2) are already part of the veri
 | YouTube demonstration (3) | [Public video](https://youtu.be/a4dOcqu89EA), 2:30, 1080p H.264/AAC with English captions. Anonymous oEmbed HTTP 200; actual player 1080p HD and English captions observed. Organizer acceptance unconfirmed. |
 | Developer Community articles (2+1) | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable Workflow review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) submitted, then rewritten and updated in place. Both show **On moderation**; public acceptance unconfirmed. |
 | Questionnaire (1) | Submitted earlier with the user's answers; [actual confirmation](assets/questionnaire-submitted.png). No new response is needed unless the user chooses to amend it. Award unconfirmed. |
-| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. Anonymous public 0.1.0 listing/manifest returned 404; public registry installation unverified. |
-| Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. Contest Apply still requires publication; no contest-entry confirmation. |
+| IPM publication (2) | Clean local install/native execution verified. OEX Package Manager publication requested. Earlier public reads returned 404; November 4 refresh returned 200 for 0.1.0 metadata/manifest. See the current release gate above. |
+| Open Exchange / contest | [Version 0.1.0](https://openexchange.intersystems.com/package/SilentShift) sent for approval; portal confirms **Sent for approval**, app shows **Awaiting Review**. A later November 4 read confirmed SilentShift on the registered-app list for contest 49. |
 | Online demo (2) | Not hosted; explicitly outside the current authorization. |
 | PEX / vendor bug bonuses | No required Java/.NET boundary or verified vendor defect; no claim. |
 

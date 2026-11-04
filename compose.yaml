@@ -1,7 +1,7 @@
 # EAP IRIS image MUST already be loaded locally; never push this runtime.
 services:
   iris:
-    image: ${IRIS_IMAGE:?Set IRIS_IMAGE to the exact locally loaded build154 image}
+    image: ${IRIS_IMAGE:?Set IRIS_IMAGE to the locally loaded 2026.3.0AI.154.0 Community image}
     pull_policy: never
     init: true
     restart: unless-stopped
@@ -11,6 +11,7 @@ services:
       SILENTSHIFT_VIEWER_USERNAME: ${SILENTSHIFT_VIEWER_USERNAME:?Viewer account required}
       SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?Viewer password required}
       SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?Gateway password required}
+      SILENTSHIFT_PROVIDER_MODE: ${SILENTSHIFT_PROVIDER_MODE:-live}
       SILENTSHIFT_MODEL: ${SILENTSHIFT_MODEL:-qwen3-silentshift:4b-instruct}
       SILENTSHIFT_AGENT_WAIT_SECONDS: ${SILENTSHIFT_AGENT_WAIT_SECONDS:-60}
       SILENTSHIFT_LLM_BASE_URL: ${SILENTSHIFT_LLM_BASE_URL:-}

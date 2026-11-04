@@ -19,7 +19,7 @@ RUNTIME_FILES = (
     'python/silentshift/__init__.py', 'python/silentshift/engine.py',
     'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
     'fixtures/v1/scenarios.json', 'fixtures/v1/manifest.json',
-    'fixtures/v1/README.md', 'fixtures/runbooks.json', 'LICENSE',
+    'fixtures/v1/README.md', 'fixtures/provider-replay.json', 'fixtures/runbooks.json', 'LICENSE',
 )
 TARGET_PREFIX = '${mgrdir}silentshift/${namespace}/'
 
@@ -49,11 +49,11 @@ def package_files(root: Path) -> list[str]:
         raise ValueError('DTD and XML entity declarations are not package metadata')
     module = ET.fromstring(raw).find('./Document/Module')
     if (module is None or module.findtext('Name') != 'silentshift'
-            or module.findtext('Version') != '0.1.0'):
+            or module.findtext('Version') != '0.2.0'):
         raise ValueError('Expected the silentshift IPM module')
     requirements = module.find('SystemRequirements')
     if requirements is None or requirements.attrib != {
-        'Version': '>=2026.3', 'Interoperability': 'enabled', 'IPMVersion': '>=0.9.0'
+        'Version': '>=2026.3', 'Interoperability': 'enabled', 'IPMVersion': '>=0.10.10'
     }:
         raise ValueError('IRIS/interoperability/IPM requirements must remain explicit')
     classes = sorted(root.glob('src/SilentShift/**/*.cls'))
@@ -138,7 +138,7 @@ def stage(root: Path, destination: Path) -> dict:
             shutil.copyfile(source, target)
             inventory.append({'path': relative, 'bytes': target.stat().st_size,
                 'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
-        result = {'package': 'silentshift', 'version': '0.1.0',
+        result = {'package': 'silentshift', 'version': '0.2.0',
             'kind': 'allowlisted-source-stage', 'native_install_verified': False,
             'registry_published': False, 'files': inventory}
         (staging / 'package-inventory.json').write_text(

@@ -1,0 +1,25 @@
+{
+  "schema": "silentshift-provider-replay/1",
+  "id": "quantity-mismatch-recorded-1471-v1",
+  "scope": "Only the frozen synthetic quantity-mismatch scenario; no fresh inference or external HTTP call.",
+  "recording": {
+    "case_id": "0A60D298-D7B0-11F1-9980-CA5720F48492",
+    "session_id": "1471",
+    "model": "qwen3-silentshift:4b-instruct",
+    "prompt_version": "silentshift-investigator/1.3.1",
+    "raw_assistant_sha256": "1bc16bbb0b305130db093021e56f5b617cf25c905ef196edc8eccab83ce5605d",
+    "original_final_response_usage": {
+      "prompt_tokens": 2493,
+      "completion_tokens": 46,
+      "total_tokens": 2539
+    },
+    "provenance": "Observed native run a96c814e-0606-41a1-b469-10f1f94885a9, retained evidence/native/step4-five.json. Assistant content is unchanged; compatible envelopes and tool-call requests are reconstructed, not original HTTP bytes."
+  },
+  "tool_sequence": [
+    "GetCurrentMessage",
+    "GetApprovedContracts",
+    "GetRelatedRecords",
+    "find_similar_precedents"
+  ],
+  "assistant_content": "{\"decision\":\"QUARANTINE\",\"evidence_ids\":[\"contract:PO-2048:v1\"],\"explanation\":\"Quantity and unit mismatch with approved contract; critical contradiction exists.\",\"uncertainty\":0.0}"
+}

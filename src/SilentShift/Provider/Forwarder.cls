@@ -12,6 +12,8 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
     Set response.CallId = request.CallId, response.CaseId = request.CaseId
     Set response.ProductionSessionId = request.ProductionSessionId, response.InvocationSpanId = request.InvocationSpanId
     Set response.Round = request.Round, response.Model = request.Model, response.PromptVersion = request.PromptVersion
+    Set response.Provider = request.Provider, response.ExecutionMode = request.ExecutionMode
+    Set response.ReplayRecordId = request.ReplayRecordId
     Set response.StartedAt = ##class(SilentShift.TraceEvent).UTC(), started = $ZTIMESTAMP
     Set response.HTTPStatus = 503, response.ErrorCode = "PROVIDER_CALL_UNAVAILABLE", response.ResponseBytes = 0
     Set call = request.CallId, claimed = 0, locked = 0
@@ -22,6 +24,7 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         Set locked = 1, encoded = $GET(^CacheTemp.SilentShift.Provider("call",call,"binding"))
         If encoded = "" Throw ##class(%Exception.General).%New("PROVIDER_CALL_MISSING")
         Set binding = ##class(%DynamicObject).%FromJSON(encoded)
+        If (request.ExecutionMode '= binding.%Get("ExecutionMode", "live")) || (request.ExecutionMode '= ##class(SilentShift.Provider.Lease).ExecutionMode()) Throw ##class(%Exception.General).%New("PROVIDER_MODE_BINDING_INVALID")
         Set leaseKey = $GET(^CacheTemp.SilentShift.Provider("call",call,"lease"))
         If (binding.CaseId '= request.CaseId) || (binding.SessionId '= request.ProductionSessionId) || (binding.Model '= request.Model) || (binding.InvocationSpanId '= request.InvocationSpanId) Throw ##class(%Exception.General).%New("PROVIDER_CALL_BINDING_INVALID")
         If (binding.Expires < ##class(SilentShift.Provider.Lease).Seconds()) || '..CaseActive(binding) Throw ##class(%Exception.General).%New("PROVIDER_CALL_EXPIRED")
@@ -38,6 +41,16 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         Lock -^CacheTemp.SilentShift.Provider("call",call)
         Set locked = 0
 
+        If request.ExecutionMode = "recorded-replay" {
+            Set sc = ##class(SilentShift.Provider.Replay).CheckCase(request.CaseId)
+            $$$ThrowOnError(sc)
+            Set rawResponse = ##class(SilentShift.Provider.Replay).Response($ZCONVERT(raw,"I","UTF8"),request.Round)
+            Set raw = "", response.HTTPStatus = 200, response.ErrorCode = ""
+            Set response.ResponseBytes = $LENGTH(rawResponse)
+            Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
+            Do ..ResponseMetadata(rawResponse,response)
+            Set rawResponse = ""
+        } Else {
         // EntityBody's legacy stream setter copies a supplied stream into a
         // GlobalBinaryStream. Set its explicit location before writing instead;
         // even an accidental save then targets only nonjournaled IRISTEMP.
@@ -74,21 +87,10 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
             If $LENGTH(rawResponse) > ##class(SilentShift.Provider.Lease).#MAXBYTES Throw ##class(%Exception.General).%New("PROVIDER_RESPONSE_BOUNDS")
             Set response.HTTPStatus = upstream, response.ResponseBytes = $LENGTH(rawResponse)
             Set response.ErrorCode = $SELECT(upstream >= 400:"UPSTREAM_HTTP_ERROR",1:"")
-            Lock +^CacheTemp.SilentShift.Provider("call",call):2
-            If '$TEST Throw ##class(%Exception.General).%New("PROVIDER_RESPONSE_PUBLISH_BUSY")
-            Set locked = 1
-            Set active = $DATA(^CacheTemp.SilentShift.Provider("call",call,"binding")) && $DATA(^CacheTemp.SilentShift.Provider("lease",leaseKey,"binding"))
-            If active Set active = (binding.Expires >= ##class(SilentShift.Provider.Lease).Seconds()) && ..CaseActive(binding)
-            If active {
-                Set ^CacheTemp.SilentShift.Provider("call",call,"response") = rawResponse
-                Set ^CacheTemp.SilentShift.Provider("call",call,"state") = "complete"
-            } Else {
-                Set response.HTTPStatus = 503, response.ErrorCode = "PROVIDER_RESPONSE_DISCARDED"
-            }
-            Lock -^CacheTemp.SilentShift.Provider("call",call)
-            Set locked = 0
+            Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
             Do ..ResponseMetadata(rawResponse,response)
             Set rawResponse = ""
+        }
         }
     } Catch error {
         // Never return provider exception text: it can contain response bodies.
@@ -107,6 +109,27 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
     Set response.FinishedAt = ##class(SilentShift.TraceEvent).UTC()
     Set response.DurationMS = ##class(SilentShift.TraceEvent).ElapsedMS(started)
     Return $$$OK
+}
+
+/// Both live and recorded responses cross the same lease/session boundary.
+Method PublishResponse(call As %String, leaseKey As %String, binding As %DynamicObject, raw As %String, response As SilentShift.Provider.CallResponse) [ Private ]
+{
+    Lock +^CacheTemp.SilentShift.Provider("call",call):2
+    If '$TEST Throw ##class(%Exception.General).%New("PROVIDER_RESPONSE_PUBLISH_BUSY")
+    Try {
+        Set active = $DATA(^CacheTemp.SilentShift.Provider("call",call,"binding")) && $DATA(^CacheTemp.SilentShift.Provider("lease",leaseKey,"binding"))
+        If active Set active = (binding.Expires >= ##class(SilentShift.Provider.Lease).Seconds()) && ..CaseActive(binding)
+        If active {
+            Set ^CacheTemp.SilentShift.Provider("call",call,"response") = raw
+            Set ^CacheTemp.SilentShift.Provider("call",call,"state") = "complete"
+        } Else {
+            Set response.HTTPStatus = 503, response.ErrorCode = "PROVIDER_RESPONSE_DISCARDED"
+        }
+    } Catch error {
+        Lock -^CacheTemp.SilentShift.Provider("call",call)
+        Throw error
+    }
+    Lock -^CacheTemp.SilentShift.Provider("call",call)
 }
 
 /// Identity encoding is part of the fixed local route contract. Native HTTP

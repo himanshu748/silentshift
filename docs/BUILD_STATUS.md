@@ -1,5 +1,15 @@
 # Build status
 
+## Current bonus release — November 4, 2026
+
+The verified target remains official ARM64 Community **2026.3.0AI.154.0 (Build 154U)**. Version **0.2.0** adds explicit provider metadata and a recorded-response path through the native AI Hub agent and the same queued interoperability operation. Replay performs no fresh inference and preserves the critical policy veto.
+
+Current live regression: **5/5 final outcomes** on sessions 1667, 1695, 1723, 1750 and 1778; all four native tools per case, ten actual local provider request/response pairs. Python **172 passed**, TypeScript passed, production web build passed (existing Lucide directive warnings). [Current receipt](evidence/bonus-020-live.json).
+
+Fresh source load 0.2.0, corrected full native suite **five classes / 12 methods**, and replay **12/12** passed, session 24. The first test attempt failed assertions and is disclosed in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). Final clean load/public registry release status is maintained in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
+
+Public 0.1.0 registry metadata/manifest now return 200, and SilentShift is on contest 49. Earlier 404/moderation-only observations below are historical. No organizer award is claimed. A new native message-body screenshot remains blocked by portal permissions unless an existing administrator signs in; no password change was made.
+
 ## Submission package — November 4
 
 Feature freeze retained: no application/runtime feature changes. The [2:30 MP4](../evidence/video/silentshift-demo.mp4) is verified at 1920×1080 / 30 fps, H.264 with AAC silence, burned-in captions, embedded English captions and [SRT](../evidence/video/silentshift-demo.srt). Size: 3,561,558 bytes; SHA and source crops are in its [manifest](../evidence/video/silentshift-demo.json). Full audio/video decoding, exact caption readback and decoded-frame inspection passed. Homebrew ffmpeg/ffprobe 9.0.2 repaired the earlier x265 loader mismatch. Python 172, TypeScript and the web build passed again; existing native gates below remain retained, with no new model calls for this documentation/media work.

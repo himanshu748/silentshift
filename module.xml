@@ -3,7 +3,7 @@
   <Document name="silentshift.ZPM">
     <Module>
       <Name>silentshift</Name>
-      <Version>0.1.0</Version>
+      <Version>0.2.0</Version>
       <Description>Native IRIS semantic integration checks with evidence-bound agent proposals and deterministic routing policy.</Description>
       <Keywords>interoperability,ai-agents,semantic-integrity</Keywords>
       <Author>
@@ -11,7 +11,7 @@
         <License>MIT</License>
       </Author>
       <Packaging>module</Packaging>
-      <SystemRequirements Version=">=2026.3" Interoperability="enabled" IPMVersion=">=0.9.0"/>
+      <SystemRequirements Version=">=2026.3" Interoperability="enabled" IPMVersion=">=0.10.10"/>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="SilentShift.AI.EvidenceTools.CLS"/>
       <Resource Name="SilentShift.AI.Investigator.CLS"/>
@@ -45,6 +45,7 @@
       <Resource Name="SilentShift.Provider.Forwarder.CLS"/>
       <Resource Name="SilentShift.Provider.Ingress.CLS"/>
       <Resource Name="SilentShift.Provider.Lease.CLS"/>
+      <Resource Name="SilentShift.Provider.Replay.CLS"/>
       <Resource Name="SilentShift.Reply.CLS"/>
       <Resource Name="SilentShift.Runbooks.CLS"/>
       <Resource Name="SilentShift.Service.Partner.CLS"/>
@@ -64,6 +65,7 @@
       <FileCopy Name="fixtures/v1/scenarios.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/scenarios.json"/>
       <FileCopy Name="fixtures/v1/manifest.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/manifest.json"/>
       <FileCopy Name="fixtures/v1/README.md" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/README.md"/>
+      <FileCopy Name="fixtures/provider-replay.json" Target="${mgrdir}silentshift/${namespace}/fixtures/provider-replay.json"/>
       <FileCopy Name="fixtures/runbooks.json" Target="${mgrdir}silentshift/${namespace}/fixtures/runbooks.json"/>
       <FileCopy Name="LICENSE" Target="${mgrdir}silentshift/${namespace}/LICENSE"/>
       <Invoke Class="SilentShift.IPM" Method="ConfigureAssets" Phase="Activate" When="After" CheckStatus="true">

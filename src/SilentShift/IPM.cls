@@ -110,7 +110,7 @@ ClassMethod ValidateAssets(root As %String) As %String [ Language = python, Priv
         required = ('python/silentshift/__init__.py', 'python/silentshift/engine.py',
             'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
             'fixtures/v1/scenarios.json', 'fixtures/v1/manifest.json',
-            'fixtures/v1/README.md', 'fixtures/runbooks.json', 'LICENSE')
+            'fixtures/v1/README.md', 'fixtures/provider-replay.json', 'fixtures/runbooks.json', 'LICENSE')
         for relative in required:
             asset = target / relative
             if not asset.is_file() or asset.stat().st_size > 1048576:

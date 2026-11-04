@@ -1,46 +1,47 @@
 # Submission status and remaining steps
 
-Stopped at the user's request on **November 4, 2026**. Deadline: **November 9 at 10:29:59 IST / November 8 at 23:59:59 EST**, per [contest 49](https://openexchange.intersystems.com/contest/49). Feature freeze is retained. No organizer score or bonus award is claimed.
+Updated November 4, 2026. Deadline: **November 9 at 10:29:59 IST / November 8 at 23:59:59 EST**, per [contest 49](https://openexchange.intersystems.com/contest/49). SilentShift is visibly on that contest's registered-app list. No organizer score or bonus award is claimed.
 
-## Completed and observed
+## Verified entry
 
-| Item | Current evidence |
+| Item | Evidence |
 |---|---|
-| Native product | Official ARM64 AI Hub 154U; native agent, deterministic policy, Workflow, vector precedents and custom file adapter verified. [Technical ledger](BONUS_EVIDENCE.md) |
-| Quality gate | Retained 172 Python checks, TypeScript/build, 32 disconnected/landing and 16 native browser checks. No application features changed in this submission work |
-| Video | [Public YouTube demo](https://youtu.be/a4dOcqu89EA), 2:30. Anonymous oEmbed HTTP 200; 1080p HD and English captions observed in the actual player. Local MP4 and SRT remain in `evidence/video/` |
-| Open Exchange | [SilentShift 0.1.0](https://openexchange.intersystems.com/package/SilentShift): **Sent for approval / Awaiting Review**. Contest option, Package Manager option, DPI-I-689 link and video saved |
-| First article | [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production): submitted, rewritten in place and saved; **On moderation** |
-| Second article | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery): submitted, rewritten in place and saved; **On moderation** |
-| Questionnaire | Submitted earlier with the user's answers; [receipt](assets/questionnaire-submitted.png). Do not submit again |
-| Local IPM install | Real clean local install: 43 classes, nine assets, 53 files / 75,003 bytes; native 5/5 final routes and 4/5 model proposals. [Receipt](evidence/ipm-clean-install.json). Public-registry installation is a separate gate |
+| Native runtime | Official ARM64 Community AI Hub **2026.3.0AI.154.0 (Build 154U)**; no build-109 claim |
+| Current live regression | **5/5 final routes**, four native tool reads per case, ten local provider pairs; sessions 1667, 1695, 1723, 1750, 1778. [Receipt](evidence/bonus-020-live.json) |
+| Source-load replay | Fresh 0.2.0 load without mounts; corrected native suite **5 classes / 12 methods**, API replay **12/12**, session **24**, five recorded exchanges and zero deliveries. [Receipt](evidence/idea-replay-load.json) |
+| Release-source identity | All **55 runtime/package source files** match the successful first clean-load stage byte for byte; unverified inspector refinement removed |
+| Local checks | `uv run pytest -q`: **172 passed in 6.74s**. TypeScript and production web build passed; existing Lucide directive warnings retained |
+| Open Exchange | Developer portal shows Published; existing 0.1.0 release, contest/IPM checked, dedicated DPI-I-689 field and video read back. 0.2.0 release is the current publication step |
+| Public IPM | Anonymous 0.1.0 metadata/manifest HTTP 200. 0.2.0 public publication/install is a separate gate below |
+| Video | [Public 2:30 demo](https://youtu.be/a4dOcqu89EA); prior 1080p/caption playback evidence retained |
+| Articles | [Semantic validation](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [recoverable review](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery), submitted for moderation; public approval not refreshed |
+| Questionnaire | Submitted previously with the user's answers; [receipt](assets/questionnaire-submitted.png). Do not submit again |
 
-## Remaining actions, in order
+A second source-container load succeeded, but activation stopped at the disk-space floor; a post-restart readiness check also failed. That attempt was stopped under the two-failure rule. Colima's local disk capacity was increased from 16 to 20 GiB, with no files/volumes deleted. It does not replace the successful first fresh-load evidence above.
 
-1. **Check application moderation.** Open [My Applications → SilentShift](https://openexchange.intersystems.com/portal/products/SilentShift/edit). Preserve the existing request; do not cancel it or create a duplicate. It currently offers **Cancel approval** and says **Sent for approval**.
-2. **Register the published app for contest 49.** Open [contest 49](https://openexchange.intersystems.com/contest/49) → **Apply → SilentShift → complete entry**, then retain the actual contest confirmation. The current Apply dialog says no application on this account is published and requires publication before entry. The saved contest checkbox is not a registration receipt. If moderation still blocks entry near the deadline, use the official organizer channel; no organizer message has been sent.
-3. **Check both article moderation results and canonical links.** The technical rewrites are saved under the new titles above. Renaming changed their slugs. OEX's saved article fields and the posts' cross-links still contain the original routes; confirm redirects or replace those fields with the canonical links above. The repository copies already use canonical links. Verify both posts without editor privileges after approval. Potential article bonuses: **2 points + 1 point**.
-4. **Verify public IPM availability, then install from that registry.** The saved OEX request asks for Package Manager publication. Anonymous `silentshift/0.1.0` listing and manifest reads returned **404**. Follow [IPM.md](IPM.md#publish-and-verify-the-public-package) after the listing appears; use a fresh official build-154 namespace with no source/app archive mounts and `install PublicCommunity/silentshift 0.1.0`. Keep the registry artifact and clean-install receipt. Potential bonus: **2 points**. An OEX IPM badge alone proves no registry install.
-5. **Finish public readback.** Open the video, app, repository and approved articles without editor privileges. Check caption playback, setup/source links, article associations, idea field and separate contest receipt. Optionally add the approved OEX link to the live YouTube description. Recheck personal eligibility/team/profile details; these have not been established by technical tests.
+## Remaining gates in order
 
-## Bonus coverage
+1. **Native metadata screenshot for DPI-I-689 (up to 4 points).** Use an existing authorized administrator account to open [the retained live trace](http://127.0.0.1:52773/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=374), select a CallResponse and its Body tab, and capture the visible model/prompt/timing/token properties. The agent-accessible portal still shows Login after the sign-in handoff. Standard reviewer graph access works, but native body access was denied twice; no password change or permanent permission expansion was made. Existing captures show graph/pair timing only. README/OEX idea links, reproducible provider replay, metadata exports and Langfuse comparison are present; the body-panel screenshot remains explicitly unverified.
+2. **Publish and verify 0.2.0 through Open Exchange (IPM: 2 potential points).** Main must contain the tested manifest/source. Use My Applications → SilentShift → ellipsis → Add new release → Add new release → version 0.2.0 → release notes → Publish. Preserve the contest, IPM and idea fields. Refresh the description from the README and read back moderation state. Do not Unpublish or Cancel approval.
+3. **Clean public-registry install.** After public 0.2.0 appears, run the exact `--source public-registry` command in [IPM.md](IPM.md#verify-a-public-install-in-a-second-clean-container). Require production startup, the full native suite and API replay to pass. A public badge or manifest alone is insufficient. Stop after two failures.
+4. **Article moderation (2 + 1 potential points).** Check both existing posts after moderation; verify their public canonical links, then update the README pending-publication entries and OEX article associations. Do not create duplicate articles.
+5. **Final public readback.** Confirm the release, README, video and registry version, and that SilentShift remains on [contest 49](https://openexchange.intersystems.com/contest/49). Do not untick Submit to Contest. Personal eligibility and organizer awards remain independent of technical verification.
 
-All points below are **potential and unconfirmed**. Sources: [official bonus announcement](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows), [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689). Organizers determine qualification.
+## Bonus evidence
 
-| Criterion | Points | Status |
+All points are **potential**, with organizer acceptance unconfirmed. [Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows).
+
+| Criterion | Points | State |
 |---|---:|---|
-| Embedded Python | 3 | Native policy and installed module origins verified |
-| Docker | 2 | Official 154U runtime and clean local instance verified |
-| Native Workflow | 2 | Real tasks, reviewer actions, concurrency and recovery verified |
-| Custom adapter | 2 | Real file intake, held/delivered cases and replay verified |
-| IRIS vector retrieval | 2 | Native vectors/cosine, fourth tool and critical-case veto verified |
-| Community Opportunity idea | Up to 4 | Provider-call traces executed; README and OEX dedicated idea links saved |
-| Feedback questionnaire | 1 | Submitted; receipt retained |
-| YouTube demonstration | 3 | Public video with captions and actual 1080p playback observed |
-| First Community article | 2 | Submitted and revised; moderation pending |
-| Second Community article | 1 | Submitted and revised; moderation pending |
-| Public IPM package | 2 | Publication requested; registry availability/install unverified |
+| Embedded Python | 3 | Native deterministic policy and installed Python origins verified |
+| Docker | 2 | Official build 154U and isolated installations verified |
+| Native Workflow | 2 | Real tasks, review, concurrency and recorded-decision recovery verified |
+| Custom adapter | 2 | Actual ready-file intake, held/delivered cases and duplicate protection verified |
+| IRIS vector retrieval | 2 | Native vectors/cosine, fourth tool and critical veto verified |
+| DPI-I-689 | Up to 4 | README/OEX link, live/replay metadata and comparison present; body-panel capture remains a gate |
+| Questionnaire | 1 | Previously submitted |
+| YouTube demonstration | 3 | Published with retained caption/1080p evidence |
+| First / second article | 2 + 1 | Submitted for moderation |
+| Public IPM package | 2 | 0.1.0 publicly listed; 0.2.0 install gate pending |
 
-The rows total **24 potential points**, with no claimed awarded score or ranking. The online live-demo bonus (2) is not pursued because no hosted app exists. Java/.NET PEX (3) is not implemented. AI Hub and Embedded Python vendor-bug bonuses (up to 3 each) have no verified vendor defect/report. Recorded UI footage is not a hosted live demo.
-
-The [submission receipt](evidence/submission-status.json) records the external states separately from [native engineering evidence](BONUS_EVIDENCE.md). Resume from the remaining actions above; no further publication work is running.
+The rows total 24 potential points, with no awarded-score or ranking claim. There is no hosted demo, Java/.NET PEX integration or confirmed vendor-bug bonus. The [engineering evidence](BONUS_EVIDENCE.md) distinguishes live inference, recorded playback, source loading, public installation and publication.
