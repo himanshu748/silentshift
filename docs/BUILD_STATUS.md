@@ -1,5 +1,15 @@
 # Build status
 
+## Judge path and article clarification — November 4, 2026
+
+The judge guide now leads with the verified no-key public-registry replay and accurately reports public IPM **0.2.0** installation, the full **5-class / 12-method** native suite and separate **5/5** live route evidence. Its older invocation-only trace receipt is explicitly distinguished from the later provider-message exports and native Body captures.
+
+The tracing guide and published overview distinguish the current **192-token** agent request budget from the **700-token** provider-ingress ceiling. The existing article was updated in place with source links and the current companion URL; both a new signed-out Safari window and anonymous web retrieval show the correction. [Screenshot and receipt](evidence/article-clarification.json). No runtime class, model setting, historical measurement or package version changed.
+
+Repository issue search and Open Exchange Issues both showed **0** issues; OEX Reviews showed **No reviews yet**. The preceding three GitHub CI runs passed; the run for **81d1ed4** was queued at this check, so no pass is claimed for it. Native/provider tests were not rerun for documentation corrections. The replay command's flags were checked through `--help`; recorded clean-install receipts support its expected results.
+
+Validation passed for local/own-repository documentation links, source-to-documentation token limits, public-install receipt assertions, exact submitted article-source hash, screenshot hash and `git diff --check`. The known-pattern text scan found zero matches; the screenshot was visually reviewed.
+
 ## Signed-out listing check — November 4, 2026
 
 The refreshed Open Exchange README and native Body image are now publicly visible in anonymous retrieval and a fresh Safari Private Browsing window. IPM install command, version **0.2.1**, video and article links remain present; native IPM stays **0.2.0**. The dedicated **Ideas to the app** section is still absent when signed out, although the owner view shows its correct DPI-I-689 URL. Listing edits remain **Awaiting Review** and contest 49 still lists SilentShift among 15 entries. [Readback and screenshot](evidence/public-visibility.json). No duplicate submission, release or approval cancellation was performed.

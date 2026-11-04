@@ -4,6 +4,8 @@ SilentShift records native AI Hub investigations, evidence-tool spans, and indiv
 
 ## Observed on build 154U
 
+**Current evidence:** native package **0.2.0** uses four read-only tools. The November 4 [live provider export](evidence/bonus-020-live.json) verifies two provider exchanges per case across five passing final outcomes. The native **Body** panel is captured for [HTTP 200 in session 1667](assets/provider-success-body-safari.png) and [HTTP 400 in session 1807](assets/provider-failure-body-safari.png); both cases remain quarantined. [Field values and capture receipt](evidence/provider-body-captures.json). A separately labeled [public-install replay](evidence/final-public-replay.json) passed 12/12 without fresh inference. The three-tool trial below is historical.
+
 The November 3 local run `5bdbcc9c-2eb8-4d05-9a72-2f38299a4cc8` passed **5/5 end-to-end scenarios** with `qwen3-silentshift:4b-instruct`. Each investigation returned after four gateway requests and actual reads of all three evidence tools. Expected policy/routing, duplicate protection, and the critical reviewer-release veto passed. This is a synthetic fixed-clock evaluation on local Ollama, not production traffic or external-provider evidence.
 
 | Scenario | Case ID | Native session | Provider requests | Route / simulator deliveries |
@@ -56,7 +58,7 @@ The case's `agent.provider_transport` identifies this layer; `provider_request_c
 
 ## Bounds, retention, and failure limits
 
-Only the configured local Ollama host on port 11434 and exact model `qwen3-silentshift:4b-instruct` are accepted. The gateway rejects streaming, unknown top-level options, extra tools, multiple choices, and missing/excessive token budgets. Limits are six agent iterations, 700 output tokens per request, eight admitted HTTP calls, and 262,144 bytes per request/response. The investigation wait is 10–120 seconds; lease expiry adds five seconds to that wait, and each forwarder's HTTP timeout uses the remaining lease time. A contained case cannot publish a late result.
+Only the configured local Ollama host on port 11434 and exact model `qwen3-silentshift:4b-instruct` are accepted. The gateway rejects streaming, unknown top-level options, extra tools, multiple choices, and missing/excessive token budgets. The current [`Investigator`](../src/SilentShift/AI/Investigator.cls) configures six agent iterations and **192 output tokens per request**. The independent [`Provider.API`](../src/SilentShift/Provider/API.cls) admission ceiling is **700 tokens**; it is not the configured agent budget or a session-usage total. Other limits are eight admitted HTTP calls and 262,144 bytes per request/response. The investigation wait is 10–120 seconds; lease expiry adds five seconds to that wait, and each forwarder's HTTP timeout uses the remaining lease time. A contained case cannot publish a late result.
 
 Raw data crosses CSP/operation jobs through opaque call keys under `^CacheTemp.SilentShift.Provider`, verified to resolve to nonjournaled IRISTEMP. The outbound legacy stream has an explicit location there. The bounded response stream rejects excess bytes before allocation on the supported identity-encoding path. RAW modes preserve UTF-8 bytes, redirects and gzip requests are disabled, and native HTTP logging must remain below level 3. The forwarder requests identity encoding and checks both content encoding and response-stream identity before relay.
 

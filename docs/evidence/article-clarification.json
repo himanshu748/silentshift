@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-11-04T17:36:15.729202+00:00",
+  "article_url": "https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production",
+  "node_id": 590710,
+  "action": "Edit existing article, replace one budget paragraph and current companion URL, Save",
+  "save_confirmation": "Post Catching semantic failures in an IRIS interoperability production has been updated.",
+  "new_post_created": false,
+  "current_agent_max_tokens": 192,
+  "provider_ingress_maximum_allowed_tokens": 700,
+  "source_files": [
+    "src/SilentShift/AI/Investigator.cls",
+    "src/SilentShift/Provider/API.cls"
+  ],
+  "corrected_paragraph": "The local agent uses Ollama `qwen3-silentshift:4b-instruct` with a six-iteration session limit. The current [`Investigator`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/AI/Investigator.cls) requests at most **192 output tokens per exchange**; the [`provider ingress`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Provider/API.cls) independently rejects budgets above **700 tokens**. The admission ceiling is separate from the configured request budget, and neither is a measured session total. The enclosing production wait is separately bounded; expiry leaves the case held. That timeout does not establish that the provider has cancelled its work.",
+  "companion_url": "https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery",
+  "original_editor_source_sha256": "120c1d0c018a52cf7b63e12df11751ff579f84981cf98b69c6b16606c3bdcf06",
+  "submitted_editor_source_sha256": "f34b80a5a8f1d5670da9e9ec646547bb84820539fd68a0a3c8b259d0a107ef8d",
+  "historical_results_changed": false,
+  "signed_out_verification": {
+    "browser": "Safari Private Browsing",
+    "login_prompt_visible": true,
+    "corrected_budget_paragraph_visible": true,
+    "current_companion_link_visible": true,
+    "anonymous_web_retrieval_also_shows_correction": true
+  },
+  "confirmation_screenshot": "docs/assets/article-budget-clarification.png",
+  "confirmation_screenshot_sha256": "0a99d6fd75f02c0098940c9399c8e6a1d6c859be7b7ac2be4fcd50e4bc2f8a0f",
+  "feedback": {
+    "github_issues_found": 0,
+    "oex_opened_issues": 0,
+    "oex_reviews": "No reviews yet"
+  },
+  "ci_at_check": {
+    "81d1ed4": {
+      "status": "queued",
+      "url": "https://github.com/himanshu748/silentshift/actions/runs/41877763831"
+    },
+    "3dc3741": {
+      "conclusion": "success",
+      "url": "https://github.com/himanshu748/silentshift/actions/runs/41876007296"
+    },
+    "1c3941b": {
+      "conclusion": "success",
+      "url": "https://github.com/himanshu748/silentshift/actions/runs/41875192509"
+    },
+    "cd4b37c": {
+      "conclusion": "success",
+      "url": "https://github.com/himanshu748/silentshift/actions/runs/41809219488"
+    }
+  }
+}

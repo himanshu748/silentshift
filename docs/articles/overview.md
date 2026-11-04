@@ -46,7 +46,7 @@ The [tool implementation](https://github.com/himanshu748/silentshift/blob/main/s
 
 The native `%AI.Agent` reads those tools and returns a small proposal: `decision`, `evidence_ids`, `explanation` and `uncertainty`. The allowed decisions are `ALLOW`, `QUARANTINE` and `REQUEST_REVIEW`. The response is parsed and validated before it can influence routing. Unknown evidence IDs, an unexpected schema or malformed output cannot become a release decision.
 
-The recorded setup uses local Ollama `qwen3-silentshift:4b-instruct`. The session is bounded to six iterations and 700 output tokens per request. The enclosing production wait is separately bounded; expiry leaves the case held. That timeout does not establish that the provider has cancelled its work.
+The local agent uses Ollama `qwen3-silentshift:4b-instruct` with a six-iteration session limit. The current [`Investigator`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/AI/Investigator.cls) requests at most **192 output tokens per exchange**; the [`provider ingress`](https://github.com/himanshu748/silentshift/blob/main/src/SilentShift/Provider/API.cls) independently rejects budgets above **700 tokens**. The admission ceiling is separate from the configured request budget, and neither is a measured session total. The enclosing production wait is separately bounded; expiry leaves the case held. That timeout does not establish that the provider has cancelled its work.
 
 ## Keep relevance separate from authority
 

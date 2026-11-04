@@ -23,6 +23,17 @@ The payment example checks a declared interface contract: `12550` minor units ve
 
 ## Reproduce the complete journey
 
+For a no-key technical check, use the public native package in a fresh container. The [IPM prerequisites](IPM.md#reproduce-a-fresh-source-load) still apply: an authorized build-154 image, pinned IPM client, Web Gateway and private local configuration must already be available.
+
+```sh
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
+  --container silentshift-judge-replay --api-port 52803 --execute
+```
+
+The driver refuses an existing container name, performs `install silentshift` from the public registry, starts the production, runs the full native suite and exercises the recorded-provider API journey. Expected: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. It prints that run's session ID and Visual Trace URL. This executes the native agent and tools with a recorded provider answer; it performs no fresh inference. [Verified clean public replay](evidence/final-public-replay.json).
+
+For the live local-model comparison in the workbench:
+
 1. Follow the [README setup](../README.md#native-build-154-setup), including the separately licensed EAP image and local model. Bootstrap never invokes a model or seeds operational cases.
 2. Start the workbench, connect with the local configured account, and open **Scenario Lab**.
 3. Choose **Quantity mismatch**. Inspect `20 CASE` against the independent `240 EA` contract, then click **Inject into IRIS** once. Keep the displayed run ID. A critical contradiction must be held with zero simulator deliveries. The agent cannot infer a CASE→EA conversion.
@@ -62,7 +73,7 @@ A partner that cannot call REST can drop a ready file into the trusted inbox. Th
 
 ## Install the backend as a package
 
-The [IPM path](IPM.md) installs the backend into a fresh interoperability namespace without mounting the source checkout. A real local `zpm install` on build 154 passed manager-origin and empty-state checks; after explicit setup its API repeated all five final routes with four native tools. [Installation/native receipt](evidence/ipm-clean-install.json). Public-registry installation and publication remain unverified.
+The [IPM path](IPM.md) installs public native backend **0.2.0** into a prepared interoperability namespace with `zpm "install silentshift"`. Two fresh build-154 containers installed from the community registry without source mounts, explicitly started production and passed all **five native test classes / 12 methods**. One passed the no-key replay above; the other passed **5/5 live local-model routes**, with four tools per case. [Public replay receipt](evidence/final-public-replay.json) · [public live receipt](evidence/final-public-live.json). The separately built frontend is **0.2.1**. Installation itself does not configure accounts or start production; the driver performs those explicit setup steps.
 
 ## What to assess against the rubric
 
@@ -91,4 +102,4 @@ These are historical trials of five frozen synthetic cases each. The determinist
 
 The fresh installation began with zero cases and evaluations. Its trace IDs were 2, 10, 18, 26 and 34, with one delivery for the approved amendment and zero for the other four cases. Separate native checks exercised permission denials, malformed/blank reviews, optimistic versions, concurrent idempotent approval, human rejection, restart persistence and oversized evidence containment. See [build status](BUILD_STATUS.md) for their exact scopes.
 
-The [46-check trace receipt](evidence/traceability.json) covers whole native `Chat` invocations and actual evidence-tool spans, including a pre-model failure. It does not establish capture of every provider request/response or per-provider-round statistics. Public deployment, provider-side cancellation, broad repeated-trial performance and real external delivery remain outside the verified boundary.
+The historical [46-check trace receipt](evidence/traceability.json) covers whole native `Chat` invocations and tool spans, including a pre-model failure; it is not the evidence for per-call tracing. The later [provider-message export](evidence/bonus-020-live.json) and [native Body captures](evidence/provider-body-captures.json) separately verify actual provider request/response pairs and their metadata. See [session 1667](assets/provider-success-body-safari.png) for a successful provider call in a case that policy still quarantined, and [session 1807](assets/provider-failure-body-safari.png) for the HTTP-400 diagnostic. Public deployment, provider-side cancellation, broad repeated-trial performance and real external delivery remain outside the verified boundary.
