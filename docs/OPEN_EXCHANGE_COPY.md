@@ -2,7 +2,7 @@
 
 **Saved and sent for approval on November 5, 2026.** App/workbench release **0.2.1**, public native IPM **0.2.0**, verified runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. The custom Markdown description below replaced README import and was read back after reload. Contest/IPM selections, dedicated DPI-I-689 URL, video and both articles were preserved. No new release was created and no approval was cancelled. [Receipt](evidence/oex-submitted-nov5.json) · [confirmation screenshot](assets/oex-submitted-nov5.png).
 
-The owner listing remains **Awaiting Review**. Anonymous retrieval still returned older copy; public propagation and the dedicated idea association remain unconfirmed. The AI Hub bug is [filed as #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17), not vendor-confirmed or awarded. DC articles were unchanged.
+The November 5 signed-out browser check shows the submitted description, **Awaiting Review**, and the idea link in the description. The dedicated **Ideas to the app** section is absent. Public description visibility does not establish moderator approval. The AI Hub bug is [filed as #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17), with no replies at this check; it is not vendor-confirmed or awarded. DC articles were unchanged.
 
 ## Fields to retain or correct
 
@@ -59,7 +59,7 @@ All examples use synthetic data and an IRIS destination simulator. Recorded repl
 
 1. Open Exchange confirmed **saved successfully**, then **sent for approval successfully** through **Send for approval → Send edits**. The update changed the description only; app 0.2.1 and native package 0.2.0 were retained.
 2. After reload, the description matched this copy and **Submit to Contest**, **Publish in Package Manager**, DPI-I-689, video and both article fields retained their expected values. The online demo URL is empty.
-3. The owner listing displays the new description and **Awaiting Review**. Wait for moderation; never click **Cancel approval**. After approval, check the public description and dedicated **Ideas to the app** association while signed out. If the association is still missing, ask OEX support to inspect the saved field.
+3. The signed-out listing displays the new description and **Awaiting Review**, but no dedicated **Ideas to the app** section. Wait for moderation; never click **Cancel approval**. If the association is still missing after approval, ask OEX support to inspect the saved field. No OEX edit was made during this check.
 4. The November 4 published release notes remain a historical snapshot; their draft-bug statement predates the November 5 filing. The submitted current description links the filed issue. No new release was created just to rewrite that history.
 
 **Developer Community and questionnaire:** no duplicate submissions or edits are needed. **AI Hub bug:** [issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) is already filed; wait for vendor triage and organizer qualification. The historical callback-crash candidate remains unready and unclaimed.

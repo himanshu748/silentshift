@@ -1,5 +1,32 @@
 # Judge verification — feature freeze
 
+## Current-main repeat — November 5, 09:04–09:09 UTC
+
+A second fresh GitHub clone, at **e8e1e60fded08d688c263bc9485fc7419c10f15b**, passed both README blocks with no provider keys. Only the unused container name (`silentshift-bonus-registry-main-nov5`) and port (`52893`) changed. The tracked clone remained clean. All changes since the earlier tested `960b6b6` were documentation/evidence; no runtime, frontend or test code changed.
+
+**Public native IPM 0.2.0, production startup, all five native test classes / 12 methods, and both 12/12 replays passed on 2026.3.0AI.154.0 / 154U ARM64.** Fresh-clone `uv run pytest -q` returned **174 passed in 15.09s**. No fresh model/embedding call, five-case live rerun or newer build test is claimed.
+
+[Machine-readable receipt and both native traces](evidence/judge-main-clean-clone.json) · [full native test output](evidence/judge-main-native-tests.txt) · [registry installation output](evidence/judge-main-install.txt).
+
+The exact executed shell blocks are preserved as [block 1](evidence/judge-main-command-1.sh) and [block 2](evidence/judge-main-command-2.sh), with [first output](evidence/judge-main-command-1.txt) and [repeat output](evidence/judge-main-command-2.txt). Public logs replace the private checkout path with `<fresh-clone>` and strip trailing whitespace; original logs remain local. Both commands exited **0**. The repeated API journey printed:
+
+```text
+execution_mode=recorded-replay; fresh_inference=false
+case_id=A56C930B-D8F8-11F1-9B50-2D0E2BB6B2AA; session_id=58
+visual_trace_url=http://127.0.0.1:52893/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=58
+provider_pairs=5; four_tools=1_each; routing=QUARANTINED; delivery_count=0
+checks=12/12; passed=true
+```
+
+The initial case was `A2778A37-D8F8-11F1-9B50-2D0E2BB6B2AA`, session **24**. These session numbers belong to this new isolated instance, not the earlier instance with the same numbers. Host/VM preflight free space was 7,706,902,528 / 4,274,151,424 bytes; the existing safety floors were unchanged. The new test containers were stopped and retained after verification; the working app was preserved. To inspect these particular traces, restart only this pair:
+
+```sh
+docker --context colima-silentshift start silentshift-bonus-registry-main-nov5
+docker --context colima-silentshift start silentshift-bonus-registry-main-nov5-gateway
+```
+
+## Earlier clean-clone run — 960b6b6
+
 **Verified on November 5, 2026:** a fresh GitHub clone followed both README command blocks without provider keys. The public registry installed native **0.2.0** on **2026.3.0AI.154.0 Community, ARM64 (154U)**. Production startup, the entire native `%UnitTest` suite and two API replays passed. This closes the earlier disk-space and checkout-location gate.
 
 Application/workbench remains **0.2.1**. No runtime or feature code changed, and no newer IRIS build was tested. Recorded replay performs no fresh inference; the separate five-case live result below remains dated evidence.

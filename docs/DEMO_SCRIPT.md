@@ -24,7 +24,8 @@ The AAC track is silent; no generated narration or music is used.
 | 2:18–2:30 | Inspect the source and reproduce the native workflow. | Source URL, documented setup and recorded product page |
 
 The different case labels are deliberate. Provider session 374 is an earlier
-recorded run; the current four-tool run made two exchanges per case. The video
+recorded run; the later live four-tool run made two exchanges per case, while the
+keyless recorded replay makes five. The video
 does not splice the shots into a claim that one case visited every state.
 
 ## Artifact and upload copy
@@ -34,8 +35,9 @@ does not splice the shots into a claim that one case visited every state.
 - [Source/crop/hash manifest](../evidence/video/silentshift-demo.json)
 - [YouTube title, description, tags and clicks](YOUTUBE_UPLOAD.md)
 
-The video is below 50 MB and is included in Git. YouTube publication and bonus
-acceptance remain separate manual steps.
+The video is below 50 MB and is included in Git. It was published on November 4:
+[watch the captioned demo](https://youtu.be/a4dOcqu89EA). Organizer bonus
+acceptance remains unconfirmed.
 
 ## Reproduce the edit
 
@@ -87,4 +89,9 @@ ffmpeg -v error -i evidence/video/silentshift-demo.mp4 \
 Expect H.264 / `yuv420p`, 1920×1080, 30/1 fps, AAC, English captions and 150 seconds.
 The manifest records actual `ffprobe` results and SHA-256 hashes. Decoded samples
 cover the hold, amendment, precedents, provider trace, review and file adapter.
-This artifact is ready for the user's upload; it is not a published video.
+The published video remains an explicitly historical edit of these recorded
+cases. Later landing-page interactions, expanded provider metadata and keyless
+replay are documented in the README; the film does not claim to demonstrate
+those additions. Its hold, amendment, precedent, review and file-intake story
+remains accurate. No replacement recording or upload was made in the November 5
+consistency check.

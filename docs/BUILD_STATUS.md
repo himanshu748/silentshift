@@ -1,5 +1,13 @@
 # Build status
 
+## Current-main gate and signed-out listing — November 5, 2026
+
+Fresh remote clone **e8e1e60** passed the exact README recipe on official **154U ARM64**: public IPM **0.2.0**, production startup, all **five native test classes / 12 methods**, and two **12/12** API replays at port **52893**. Both cases stayed quarantined with zero deliveries; no provider keys or fresh inference were used. Fresh-clone Python: **174 passed in 15.09s**. The isolated test containers were stopped and retained. [Commands and evidence](JUDGE_VERIFICATION.md).
+
+The signed-out OEX browser shows the new description, IPM install command, correct video/articles and **Awaiting Review**. The description links DPI-I-689, but the dedicated **Ideas to the app** section is absent. Its older release note still calls the bug unfiled; a proposed correction is recorded in the [entry review](ENTRY_REVIEW.md). No listing or article was edited. Issue #17 has no replies; a six-hour follow-up watches for meaningful vendor/organizer feedback. The two public articles remain consistent with the demonstrated features and build-154 setup.
+
+The historical demo remains accurate for its labeled recorded cases; later UI and replay additions are outside its stated scope. No replacement or upload was made. Fixed stale local video-publication notes and marked the Embedded Python bonus **Not claimed** under the owner's latest instruction, without removing its verified implementation evidence. No award or untested build is claimed.
+
 ## Bug filed and OEX edits submitted — November 5, 2026
 
 On the user’s explicit instruction, filed the reproduced quoted-method generator defect as [AI Hub issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17), under `himanshu748`, after checking the 16 existing reports for a match. Readback confirmed the posted title/body and open state. Vendor confirmation and organizer qualification remain pending. [Filing receipt](evidence/ai-hub-bug-filed.json).
