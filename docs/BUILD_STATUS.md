@@ -1,16 +1,24 @@
 # Build status
 
-## Stopped and saved at the user’s request
+## Clean-clone judge path verified — November 5, 2026
+
+A fresh remote clone of **960b6b6** followed both README command blocks with new local credentials and no provider keys. The public registry installed native **0.2.0** on official ARM64 Community **2026.3.0AI.154.0 / 154U** in a new container without mounts. Explicit setup and authenticated production health passed. The full native `%UnitTest` suite passed **5 classes / 12 methods**. Initial and repeated API replays each passed **12/12**, sessions **24** and **58** at port **52883**, with five provider pairs, four native tool reads and zero deliveries. [Commands and output](JUDGE_VERIFICATION.md) · [receipt and metadata](evidence/judge-clean-clone.json).
+
+Fresh-clone Python: **174 passed in 8.66s**. Primary-checkout TypeScript and production build passed; Vite completed in **853 ms** with existing Lucide warnings. Application code, deterministic policy, app version **0.2.1** and native package **0.2.0** are unchanged. No fresh live inference, browser rerun or newer-build claim is made. The new test containers were stopped and retained; no cleanup was needed. This closes the earlier disk/check-out gate. Historical failures below remain dated evidence, not the current status.
+
+OEX and DC were not edited, and no bug was filed. The public listing remains **0.2.1**, both articles are readable and SilentShift remains in contest 49. The dedicated idea association is still unconfirmed in anonymous retrieval; the owner moderation state was not refreshed. [Readback](evidence/freeze-public-readback-nov5.json). Organizer awards remain unconfirmed.
+
+## Earlier stop — November 4, 2026
 
 The resumed fresh clones verified the public IPM client permission correction, native **0.2.0** registry installation and explicit setup on **154U**. A sibling-clone gateway bind failed because that directory was not shared with Colima; the README prerequisite is corrected in **ed27019**. A new clone under the existing shared directory reached successful package install/setup, then stopped at the host disk floor before gateway creation. Full native tests and API replay did not complete. The user requested stopping; no more retries or cleanup were performed, and the two new test containers were stopped and retained. [Exact results](JUDGE_VERIFICATION.md).
 
 Read-only checks confirmed CI **c92df33** passed and SilentShift remains on contest 49. OEX still serves the older recipe; no OEX/DC edit or bug submission was made. Source/workbench versions, deterministic policy and working app are unchanged.
 
-## Resumed verification: shared-directory prerequisite
+## Earlier resumed verification: shared-directory prerequisite
 
 The user resumed autonomous work. Clearing only inactive npx download caches recovered about 0.69 GiB and left the active cache entry intact. A new clean remote clone passed IPM-client loading with the documented installer permissions, public `install silentshift` at native version 0.2.0, and explicit production setup on 154U. Gateway creation then failed because this Colima profile shares only the existing project directory, not the sibling clone directory. No native test/replay pass is claimed for that attempt. The README now requires a shared clone location and checks VM visibility before creating configuration or containers. The next isolated clone will use that existing mount without changing/restarting the working VM.
 
-## Frozen-entry final result — November 4, 2026
+## Earlier frozen-entry result — November 4, 2026
 
 Four requested documentation/evidence gaps are closed locally: the minimal AI Hub bug reproduces on 154U with filing text; declared-build replay passes 12/12; public README idea/trace/Langfuse evidence is prominent; app 0.2.1/native IPM 0.2.0 and unconfirmed bonus states are consistent. OEX and DC were not edited.
 

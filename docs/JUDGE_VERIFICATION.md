@@ -1,39 +1,28 @@
 # Judge verification — feature freeze
 
-**Status: BLOCKED; work stopped at the user’s request.** The resumed clean clones installed public IPM successfully and completed explicit setup, but the full native suite and API replay did not complete. No end-to-end clean-clone pass is claimed. Application/workbench **0.2.1**; published native IPM **0.2.0**; declared runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. No newer build was tested.
+**Verified on November 5, 2026:** a fresh GitHub clone followed both README command blocks without provider keys. The public registry installed native **0.2.0** on **2026.3.0AI.154.0 Community, ARM64 (154U)**. Production startup, the entire native `%UnitTest` suite and two API replays passed. This closes the earlier disk-space and checkout-location gate.
 
+Application/workbench remains **0.2.1**. No runtime or feature code changed, and no newer IRIS build was tested. Recorded replay performs no fresh inference; the separate five-case live result below remains dated evidence.
 
-## Resumed work and stopping point
+[Machine-readable receipt and native message metadata](evidence/judge-clean-clone.json) · [installation output](evidence/judge-clean-clone-install.txt) · [complete native test output](evidence/judge-clean-clone-native-tests.txt).
 
-After the user resumed work, inactive npx download-cache cleanup recovered about **0.69 GiB**, preserving the active cache entry. Two further fresh GitHub clones installed public **silentshift 0.2.0** on build **154U** with no source mounts. Both reported `SS_CLIENT_OK`, `SS_MODULE_VERSION=0.2.0`, `SS_VERSION_OK` and `SS_RUNTIME_SETUP_OK`. This validates the documented public-installer permission correction. It does not establish a passing API health check or completed replay.
+## Isolation and prerequisites
 
-- The first resumed clone failed at gateway creation because its sibling directory was not shared with the VM. The README now requires a Colima-visible checkout and checks that directory before setup. No VM mounts were changed.
-- The next clone was created under the existing shared directory. A local runner initially let SSH consume its script input, skipping setup; the remaining commands were then executed from a script file in the same untouched clone. Package installation and setup passed. The driver stopped at its host-space safety check before gateway startup.
-- The user then asked to stop and push. No further provisioning, tests or cleanup was attempted. The two test IRIS containers were stopped and retained; the user's working app was preserved. Full native unit and API replay checks remain unverified for these clones.
+- Remote clone: `https://github.com/himanshu748/silentshift.git`, commit `960b6b6445f8b1f0ef7aaaa8c409e7d036b07170`. Its tracked tree remained clean before and after the run. The receipt records the README SHA-256.
+- The clone was created beneath the existing Colima-shared directory, under the primary checkout's ignored `.local/judge-verified-20261105/`. No `.env`, source patch, `.local`, virtual environment or database was copied from another checkout.
+- The process inherited only `HOME`, `PATH`, `TMPDIR` and locale variables. New local viewer/reviewer/gateway credentials were generated at mode `0600`; no LLM/provider API key was supplied. The checksum-verified public IPM installer was mode `0644`.
+- Shared prerequisites: an already licensed, locally loaded official build-154 image, the local Web Gateway image and the existing `colima-silentshift` Docker context. This verifies a fresh source checkout and application container, not a new Mac or fresh EAP download.
+- Native application container `silentshift-bonus-registry-judge-nov5` was new, had **no mounts**, and had no `SILENTSHIFT` namespace before installation. Only the separate gateway mounts generated configuration files. The preflight measured **6,822,494,208 host bytes** and **5,206,700,032 VM bytes** free; the 1.8 GiB / 3 GiB guards were unchanged.
+- Both README shell blocks ran from script files with stdin closed, preventing the SSH directory check from consuming later shell instructions. Only the unused container name and port changed, as the README permits. Block 1 exited **0** at `2026-11-05T07:56:33Z`; block 2 exited **0** at `07:56:35Z`.
 
-[Exact markers, commit hashes and failures](evidence/judge-resumed.json) · [first resumed output](evidence/judge-resumed-output.txt) · [shared-directory output](evidence/judge-shared-output.txt). The prior commit's [GitHub CI passed](https://github.com/himanshu748/silentshift/actions/runs/41887425804). A read-only check still found SilentShift in contest 49, with OEX release 0.2.1 and the install command visible. The OEX description has not imported the newer recipe; its prepared edit remains for the user. [Readback](evidence/freeze-public-readback.json).
+## Exact README commands executed
 
-## Earlier attempts — preserved history
-
-The first remote clone found a real setup-instruction gap: Docker copied the newly downloaded public IPM installer with mode `0600` and UID 501, preventing IRIS from opening it. The README now includes `chmod 644` for that checksum-verified public file only. The second remote clone confirmed installer mode `0644` and local credentials mode `0600`, then stopped at the host-storage preflight. The corrected installer has **not** yet been loaded by a successful fresh run. We stopped rather than making a third attempt.
-
-## What was isolated
-
-- Two new clones from `https://github.com/himanshu748/silentshift.git`, with no copied `.env`, `.local`, virtual environment, source patch or database. Both tracked trees remained clean.
-- Attempt 1 checked out `d116d735f577707a7b89b7c1cdc9fa1a819960b4`. Attempt 2 checked out `37480de32f4de8890c486a6974ea1e1ea7d4c56c`, including the installer-permission instruction. Both README hashes are recorded in the [machine-readable receipt](evidence/judge-verification.json).
-- Commands ran with only host `HOME`, `PATH`, `TMPDIR` and locale environment variables. Local viewer/reviewer/gateway credentials were generated separately in each clone and never printed or committed. No LLM/provider API key was supplied. No model or embedding call was made.
-- Shared prerequisites were explicitly declared: the preloaded licensed build-154 image, public Web Gateway image and existing Colima VM/context. This was a fresh source checkout and fresh application-container attempt, not a new Mac or a new EAP download.
-- Attempt 1 created a container without mounts and observed `$ZVERSION` build 154U. It was stopped and retained after failure. Attempt 2 created no container because preflight failed.
-
-## Exact README commands
-
-Attempt 1 ran both setup commands through the install driver exactly as the README at its commit specified, with default name `silentshift-bonus-registry-judge` and port `52843`. It did not contain the newly required `chmod` line. The repeat-replay command was never reached.
-
-For attempt 2, the README explicitly instructs using a new name and free port for another run. Only those two identifiers changed: `silentshift-bonus-registry-judge-retry`, port `52853`. The following block was extracted from the updated README and executed in a new empty parent directory:
+From an empty parent directory already shared with Colima:
 
 ```sh
 git clone https://github.com/himanshu748/silentshift.git silentshift-judge
 cd silentshift-judge
+colima ssh --profile silentshift -- test -d "$PWD"
 python3 - <<'PYCONFIG'
 import os
 from pathlib import Path
@@ -63,88 +52,111 @@ PYCONFIG
 uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
 chmod 644 .local/ipm/vendor/zpm-0.10.10.xml
 uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
-  --execution-mode recorded-replay --container silentshift-bonus-registry-judge-retry \
-  --api-port 52853 --execute
+  --execution-mode recorded-replay --container silentshift-bonus-registry-judge-nov5 \
+  --api-port 52883 --execute
 ```
 
-The README's next command is retained here for the eventual successful run. **It was not reached in either attempt:**
+The driver issued literal `zpm "install silentshift"` against the public community registry, then explicitly ran `SilentShift.Setup.Install()`. The installed version was read back as **0.2.0**. It compiled the repository's test helpers and ran:
+
+```objectscript
+set ^UnitTestRoot="/home/irisowner/silentshift-bonus/tests/"
+set manager=##class(%UnitTest.Manager).%New()
+set passed=manager.RunTest("","/nodelete")
+write "SS_UNIT_RESULT=",passed,!
+```
+
+From that same fresh clone, the second README block was:
 
 ```sh
 uv run python scripts/trace_example.py \
-  --api http://127.0.0.1:52853/silentshift/api \
-  --context colima-silentshift --container silentshift-bonus-registry-judge-retry
+  --api http://127.0.0.1:52883/silentshift/api \
+  --context colima-silentshift --container silentshift-bonus-registry-judge-nov5
 ```
 
-## Actual output
+## Actual results
 
-Attempt 1: [complete command output](evidence/judge-first-output.txt) and [exact IPM loader error](evidence/judge-first-client-error.txt).
+Published console logs omit trailing whitespace only; private original logs are retained unchanged.
+
+[Complete setup command output](evidence/judge-clean-clone-command-1.txt):
 
 ```text
 Creating fresh public-registry verification container...
-Verification stopped: Missing SS_CLIENT_OK; inspect private 10-client.log
+IPM install silentshift
+Starting the installed native production (recorded-replay)...
+Running the full native %UnitTest suite...
+Running the no-key synthetic playback example...
 ```
 
-The loader reported:
+The final JSON result reported `unit_suite_passed: true`, `replay_passed: true`, native version `0.2.0` and first replay session `24`. Its `native_five_passed` field is null because this was a recorded-replay run.
+
+The installer and health checks reported:
 
 ```text
-Unable to open file. Skipping file: /home/irisowner/silentshift-bonus/zpm.xml
-Detected 1 errors during load.
-ERROR #5005: Cannot open file '/home/irisowner/silentshift-bonus/zpm.xml'
+SS_MODULE_VERSION=0.2.0
+SS_VERSION_OK
+http_status: 200
+production_running: true
 ```
 
-The first container's actual version was:
+The full native suite passed **five classes / 12 test methods**, not merely the test runner's return status:
 
 ```text
-SS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
-SS_PRISTINE_OK
+SilentShift.Test.AdapterChecks passed
+SilentShift.Test.ProviderChecks passed
+SilentShift.Test.ReplayChecks passed
+SilentShift.Test.RuntimeChecks passed
+SilentShift.Test.TraceChecks passed
+All PASSED
+SS_UNIT_RESULT=1
+SS_UNIT_OK
 ```
 
-Attempt 2: [complete command output](evidence/judge-retry-output.txt).
-
-```text
-Created private local replay configuration; no provider keys.
-Using CPython 3.12.11
-Creating virtual environment at: .venv
-Installed 7 packages in 18ms
-Verification stopped: Insufficient free space; retain existing files/volumes and arrange space before retrying
-```
-
-The complete output also records the official IPM 0.10.10 download: **1,593,780 bytes**, SHA-256 `daa2adabd66b488f57187d29712e54b0c25bbe000794fbf2a35a882c458b788a`. A post-attempt read showed **1,745,149,952 host bytes free**, below the **1,932,735,283-byte** floor. Docker had **6,904,804 KiB** available. The remaining blocker is host storage, not the VM's available blocks. These are post-attempt readings, not invented measurements from inside the failed preflight.
-
-## What did pass in this freeze pass
-
-The separately retained public-registry instance was restarted and read back as native IPM **0.2.0** on **154U**. It passed a new judge replay; this is **not** a clean-clone result:
-
-```sh
-uv run python scripts/trace_example.py --api http://127.0.0.1:52823/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-final-replay-20261104 --output .local/freeze-build154-replay.json
-```
+The initial replay used case `69262B24-D8EE-11F1-897E-970E6F17AA2B`, session **24**. [Repeat command output](evidence/judge-clean-clone-command-2.txt):
 
 ```text
 execution_mode=recorded-replay; fresh_inference=false
-case_id=EE70D85C-D87A-11F1-AFA0-EE4D8B64EE4D; session_id=59
-visual_trace_url=http://127.0.0.1:52823/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=59
+case_id=6BADC663-D8EE-11F1-897E-970E6F17AA2B; session_id=58
+visual_trace_url=http://127.0.0.1:52883/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=58
 provider_pairs=5; four_tools=1_each; routing=QUARANTINED; delivery_count=0
 checks=12/12; passed=true
 ```
 
-[Full replay metadata](evidence/freeze-build154-replay.json). That retained instance was stopped afterward. Its local URL requires starting that specific instance; session IDs are scoped to an IRIS instance, not globally unique.
+Both replays passed **12/12**: five paired provider exchanges in the original case session, each of the four native tools executed once, recorded-replay provenance, null current token usage/cost, critical policy veto, `QUARANTINED` and zero delivery receipts. Full per-call metadata is retained in the receipt. Neither replay made a model or embedding request.
 
-Repository checks ran from the primary checkout; no application source changed:
+The actual runtime reported:
 
-| Command | Result |
-| --- | --- |
-| `uv run pytest -q` | `174 passed in 4.87s` |
-| `npm --prefix web run check` | Exit 0; TypeScript passed |
-| `npm --prefix web run build` | Exit 0; production assets built; existing Lucide `use client` bundling warnings |
-| `npm --prefix web run test:e2e` | `38 passed (1.0m)`; desktop/mobile landing and disconnected states, keyboard and reduced motion |
-| Documentation consistency / `git diff --check` | Version, video, article URLs, local links and whitespace passed |
+```text
+IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+```
 
-The five-class / 12-method native suite and five-case live run have [earlier public-package evidence](evidence/final-public-live.json). They were **not rerun successfully from these fresh clones**, and their older results are not substituted for this blocked gate.
+## Other checks and boundaries
 
-## Resume after freeing host space
+| Command | Checkout | Observed result |
+| --- | --- | --- |
+| `uv run pytest -q` | Fresh clone | `174 passed in 8.66s` |
+| `npm --prefix web run check` | Primary checkout, unchanged source | Exit 0; TypeScript passed |
+| `npm --prefix web run build` | Primary checkout, unchanged source | Exit 0; Vite built in 853 ms; existing Lucide `use client` warnings |
 
-Make at least another **1 GiB** available to leave room beyond the minimum floor. Preserve existing evidence, models and containers. On an explicit resumed attempt, repeat the README from another fresh clone with an unused container name/port; require the public install, production startup, full native suite and replay to pass. Save their actual output and session URL here before changing this status to Verified. No third test attempt was made in this pass.
+The browser suite was not repeated for this documentation-only update; the prior run recorded **38 passed (1.0m)**. The [earlier public-package live receipt](evidence/final-public-live.json) retains **5/5 expected final routes** on build 154U. It is not presented as a new live run or proof of model accuracy. No build 109, new package publication, public deployment or organizer award is claimed.
 
-The user approved removing three named stopped test containers without volumes. Rebuildable caches were also cleared under the separate cache-cleanup instruction. An active Chromium cache was retained; a protected dotslash cache could not be fully removed and was left after two permission failures. No credentials, models, project source or active app were deleted.
+The new test gateway and IRIS container were stopped after verification and retained, with their logs and private credentials. The existing application was preserved. Session URLs are local to this retained instance and require restarting that pair; session IDs are not globally unique:
 
-OEX and Developer Community were not edited. [Prepared OEX copy and user-only steps](OPEN_EXCHANGE_COPY.md); [bug filing text and URL](bug-reports/ai-hub-quoted-tool-name.md).
+```sh
+docker --context colima-silentshift start silentshift-bonus-registry-judge-nov5
+docker --context colima-silentshift start silentshift-bonus-registry-judge-nov5-gateway
+```
+
+Use a permitted local IRIS account to view message bodies. The successful API replay does not bypass portal permissions. Existing [native Body screenshots](../README.md#native-provider-metadata) remain the screenshot evidence.
+
+## Earlier failed attempts — retained history
+
+The previous attempts remain documented in their original receipts; none is relabeled successful:
+
+1. An installer copied with mode `0600` could not be read by IRIS. The README added `chmod 644` for that public installer only. [First attempt and disk-gated retry](evidence/judge-verification.json), [loader error](evidence/judge-first-client-error.txt).
+2. A sibling checkout installed the package but was outside the Colima shared directory, preventing gateway bind mounts. The README added the shared-directory prerequisite and early visibility check.
+3. A later shared checkout installed the package and completed setup, then stopped at the host-space guard. The user requested stopping. [Resumed-attempt receipt](evidence/judge-resumed.json).
+4. The November 5 run above used the corrected unchanged recipe after more host space became available. No further cleanup or lower safety floor was needed.
+
+The separate November 4 retained-instance replay passed **12/12**, session **59**; [its evidence](evidence/freeze-build154-replay.json) remains independent of this clean-clone proof.
+
+OEX and Developer Community were not edited. [Prepared OEX copy and user-only steps](OPEN_EXCHANGE_COPY.md); [exact AI Hub bug filing text and URL](bug-reports/ai-hub-quoted-tool-name.md). Organizer awards and the dedicated OEX idea association remain unconfirmed.
