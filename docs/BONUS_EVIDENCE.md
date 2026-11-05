@@ -14,7 +14,9 @@ SilentShift holds a technically valid order or payment when its business meaning
 
 ## Current freeze-pass check
 
-The build-154 retained-instance replay passed **12/12**, session **59**. The resumed fresh clones installed public native 0.2.0 and completed setup on 154U, confirming the installer permission correction. Gateway startup, the full native suite and API replay remain incomplete after shared-directory and host-storage stops. The user requested stopping. The current README path remains **blocked** as an end-to-end check. [Exact commands, output and boundaries](JUDGE_VERIFICATION.md). Earlier public-install evidence below still records what ran; it is not presented as this new run.
+The November 5 **fresh-clone README path passed** on declared build **154U**: public native **0.2.0** installation, explicit production startup, authenticated health, **5 native test classes / 12 methods**, and two **12/12** API replays. Sessions **24** and **58** each contain five provider pairs, four native tool reads and zero deliveries. No provider key, inference or embedding request was used. [Exact commands and output](JUDGE_VERIFICATION.md) · [receipt and message metadata](evidence/judge-clean-clone.json). Earlier disk and mount failures remain in the history; this new result closes that gate without changing runtime code.
+
+The November 5 read-only check found public OEX **0.2.1**, the install command, video and both published articles; SilentShift remains in contest 49. The dedicated idea association is still unconfirmed in anonymous extraction, and the owner moderation state was not refreshed. [Readback](evidence/freeze-public-readback-nov5.json). OEX/DC edits and bug filing remain user-only actions; all awards remain unconfirmed.
 
 ## Earlier public-install verification — November 4
 
