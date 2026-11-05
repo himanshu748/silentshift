@@ -1,10 +1,10 @@
 # %AI.Tool generates an unquoted call for a valid quoted underscore method (154U)
 
-**Filing URL:** https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/new
+**Filed issue:** https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17
 
-The [official contest criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) link this dedicated AI Hub bug tracker. Use this document's heading as the issue title and copy from **Environment** through **Workaround** as the body.
+The [official contest criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) link this dedicated AI Hub bug tracker. The report was submitted under `himanshu748` on November 5, 2026 and its body was verified by readback. [Filing receipt](../evidence/ai-hub-bug-filed.json). No duplicate report is needed.
 
-**Status:** reproduced again on November 4, 2026 at 18:07:42 UTC in the development `USER` namespace; no production classes changed. [Exact compiler transcript](evidence/quoted-tool-build154.txt). Draft only: not filed, vendor-confirmed or organizer-confirmed. No bonus is claimed awarded.
+**Status:** filed; vendor and organizer confirmation pending. Reproduced on November 4, 2026 at 18:07:42 UTC in the development `USER` namespace; no production classes changed. [Exact compiler transcript](evidence/quoted-tool-build154.txt). No bonus is claimed awarded.
 
 ## Environment
 
@@ -81,6 +81,6 @@ The generated call is unquoted. This is distinct from the first diagnostic attem
 
 ## Workaround
 
-`SilentShift.AI.EvidenceTools` overrides only its application `%Invoke` dispatch, keeping native discovery and `%Encode`. It checks the exact four-name allowlist and empty argument object, then invokes `.."find_similar_precedents"()`. No vendor class is modified. The current native five-case run executes all four tools with this workaround.
+`SilentShift.AI.EvidenceTools` overrides only its application `%Invoke` dispatch, keeping native discovery and `%Encode`. It checks the exact four-name allowlist and empty argument object, then invokes `.."find_similar_precedents"()`. No vendor class is modified. The November 4 native five-case run executed all four tools with this workaround.
 
-A vendor fix could quote generated ObjectScript identifiers or use a safe dynamic method dispatch. This draft does not establish behavior on build 109 or newer builds.
+A vendor fix could quote generated ObjectScript identifiers or use a safe dynamic method dispatch. This report does not establish behavior on build 109 or newer builds.

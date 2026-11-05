@@ -10,7 +10,7 @@ The same incoming value can be legitimate: an effective approved amendment autho
 
 **Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-The public video plays at 1080p with English captions. SilentShift remains listed in [contest 49](https://openexchange.intersystems.com/contest/49), and Open Exchange release **0.2.1** was public at the November 5 check. The last owner-portal observation, on November 4, marked listing edits **Awaiting Review**; its current moderation state was not rechecked. The separately installed public IPM backend remains **0.2.0**. Both technical articles are published. **Organizer bonus awards remain unconfirmed; online demo: Not claimed.** [Submission status and remaining steps](docs/SUBMISSION_CHECKLIST.md).
+The public video plays at 1080p with English captions. SilentShift remains listed in [contest 49](https://openexchange.intersystems.com/contest/49), and Open Exchange release **0.2.1** is public. The updated product description was saved and sent for approval on November 5; the owner listing remains **Awaiting Review**. Contest/IPM selections and DPI-I-689 were verified after reload. The separately installed public IPM backend remains **0.2.0**. Both technical articles are published, and the reproduced AI Hub defect is [filed as issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17). **Organizer bonus awards remain unconfirmed; online demo: Not claimed.** [Submission receipt and remaining gates](docs/SUBMISSION_CHECKLIST.md).
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 

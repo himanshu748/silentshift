@@ -159,4 +159,4 @@ The previous attempts remain documented in their original receipts; none is rela
 
 The separate November 4 retained-instance replay passed **12/12**, session **59**; [its evidence](evidence/freeze-build154-replay.json) remains independent of this clean-clone proof.
 
-OEX and Developer Community were not edited. [Prepared OEX copy and user-only steps](OPEN_EXCHANGE_COPY.md); [exact AI Hub bug filing text and URL](bug-reports/ai-hub-quoted-tool-name.md). Organizer awards and the dedicated OEX idea association remain unconfirmed.
+No external edit was part of the test run itself. The user subsequently authorized filing the [AI Hub bug as #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) and submitting the [OEX description](OPEN_EXCHANGE_COPY.md); both actions were verified on November 5. [OEX submission receipt](evidence/oex-submitted-nov5.json). Developer Community was unchanged. Organizer awards and public visibility of the dedicated OEX idea association remain unconfirmed.

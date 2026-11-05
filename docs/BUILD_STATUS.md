@@ -1,5 +1,13 @@
 # Build status
 
+## Bug filed and OEX edits submitted — November 5, 2026
+
+On the user’s explicit instruction, filed the reproduced quoted-method generator defect as [AI Hub issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17), under `himanshu748`, after checking the 16 existing reports for a match. Readback confirmed the posted title/body and open state. Vendor confirmation and organizer qualification remain pending. [Filing receipt](evidence/ai-hub-bug-filed.json).
+
+Saved the prepared product description in Open Exchange and used **Send for approval → Send edits**. The success confirmation was captured; after reload the full description matched and the checked contest/IPM options, dedicated DPI-I-689 URL, video and two article URLs persisted. Release **0.2.1** and native IPM **0.2.0** are unchanged. The owner view is **Awaiting Review**; anonymous retrieval still returned older copy. No new release, approval cancellation, article edit or questionnaire resubmission occurred. [Receipt and screenshot](evidence/oex-submitted-nov5.json).
+
+Only documentation and publication receipts changed; the clean-clone/native/Python/web checks below remain the applicable runtime evidence. Staged text secret scan, receipt hashes, local links and whitespace checks passed; the confirmation screenshot was reviewed.
+
 ## Clean-clone judge path verified — November 5, 2026
 
 A fresh remote clone of **960b6b6** followed both README command blocks with new local credentials and no provider keys. The public registry installed native **0.2.0** on official ARM64 Community **2026.3.0AI.154.0 / 154U** in a new container without mounts. Explicit setup and authenticated production health passed. The full native `%UnitTest` suite passed **5 classes / 12 methods**. Initial and repeated API replays each passed **12/12**, sessions **24** and **58** at port **52883**, with five provider pairs, four native tool reads and zero deliveries. [Commands and output](JUDGE_VERIFICATION.md) · [receipt and metadata](evidence/judge-clean-clone.json).

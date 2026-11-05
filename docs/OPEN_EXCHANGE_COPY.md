@@ -1,6 +1,8 @@
-# Open Exchange — prepared edit for the user
+# Open Exchange — submitted description
 
-**Prepared only; not applied.** App/workbench release **0.2.1**, public native IPM **0.2.0**, verified runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. No newer build is claimed. The November 5 public check found release 0.2.1, the install command, video and both articles. The last owner observation, on November 4, showed **Awaiting Review** and the saved idea association; current moderation was not rechecked. Anonymous dedicated-idea visibility remains unconfirmed. [Recorded readback](evidence/freeze-public-readback-nov5.json). No portal or Developer Community edit was made in this freeze pass.
+**Saved and sent for approval on November 5, 2026.** App/workbench release **0.2.1**, public native IPM **0.2.0**, verified runtime **2026.3.0AI.154.0 Community, ARM64 (154U)**. The custom Markdown description below replaced README import and was read back after reload. Contest/IPM selections, dedicated DPI-I-689 URL, video and both articles were preserved. No new release was created and no approval was cancelled. [Receipt](evidence/oex-submitted-nov5.json) · [confirmation screenshot](assets/oex-submitted-nov5.png).
+
+The owner listing remains **Awaiting Review**. Anonymous retrieval still returned older copy; public propagation and the dedicated idea association remain unconfirmed. The AI Hub bug is [filed as #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17), not vendor-confirmed or awarded. DC articles were unchanged.
 
 ## Fields to retain or correct
 
@@ -19,7 +21,7 @@
 | Article one | https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production |
 | Article two | https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery |
 
-## Full description — paste-ready
+## Full description — submitted text
 
 ### Catch wrong business meaning before delivery
 
@@ -49,16 +51,15 @@ Read the technical articles: [Catching semantic failures in an IRIS interoperabi
 
 ### Evidence and contest status
 
-Native Workflow, the custom adapter, Embedded Python, IRIS Vector Search, Docker, public IPM installation, both articles, the video and the questionnaire have recorded execution or publication evidence. **All organizer bonus awards remain unconfirmed.** DPI-I-689 implementation evidence is public; the dedicated OEX association remains pending public visibility at the last check. One AI Hub generator defect reproduces on build 154U; its report is prepared but unfiled and unconfirmed. **Online demo, Java/.NET PEX and an Embedded Python bug bonus are Not claimed.** The [bonus checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) links each claim to its evidence.
+Native Workflow, the custom adapter, Embedded Python, IRIS Vector Search, Docker, public IPM installation, both articles, the video and the questionnaire have recorded execution or publication evidence. **All organizer bonus awards remain unconfirmed.** DPI-I-689 implementation evidence is public; the dedicated OEX association remains pending public visibility at the last check. One AI Hub generator defect reproduces on build 154U and is [filed as issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17); vendor confirmation and organizer qualification remain pending. **Online demo, Java/.NET PEX and an Embedded Python bug bonus are Not claimed.** The [bonus checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) links each claim to its evidence.
 
 All examples use synthetic data and an IRIS destination simulator. Recorded replay proves native orchestration and policy behavior, not fresh inference or model accuracy. Separate live local-Ollama evidence retains five expected final routes. No real ERP/bank delivery, production readiness or awarded score is asserted.
 
-## Manual editing order
+## Submission receipt and next check
 
-1. Open your Open Exchange dashboard → **SilentShift → Edit**. If Awaiting Review prevents editing, wait for moderation; **never click Cancel approval**.
-2. Keep release **0.2.1**. Paste the full description above, or refresh the final pushed README if using OEX's README import. Preserve the existing public video and both article fields. No new release or native package version is required for this copy edit.
-3. Retain `https://ideas.intersystems.com/ideas/DPI-I-689` in the dedicated idea-links field. Keep **Submit to Contest** and **Publish in Package Manager** checked; verify `zpm "install silentshift"` remains visible. Leave the online demo URL empty.
-4. **Save**. If the editor offers **Send for approval → Send edits**, use that flow once. Do not cancel an existing approval to force an edit, untick the contest or submit another package.
-5. After moderation, open the public listing while signed out. Confirm release 0.2.1, the install command, video, articles and the dedicated **Ideas to the app** association. Check [contest 49](https://openexchange.intersystems.com/contest/49) still lists SilentShift. If the idea field remains missing, ask OEX support to inspect its saved association; do not mark the four-point bonus confirmed yourself.
+1. Open Exchange confirmed **saved successfully**, then **sent for approval successfully** through **Send for approval → Send edits**. The update changed the description only; app 0.2.1 and native package 0.2.0 were retained.
+2. After reload, the description matched this copy and **Submit to Contest**, **Publish in Package Manager**, DPI-I-689, video and both article fields retained their expected values. The online demo URL is empty.
+3. The owner listing displays the new description and **Awaiting Review**. Wait for moderation; never click **Cancel approval**. After approval, check the public description and dedicated **Ideas to the app** association while signed out. If the association is still missing, ask OEX support to inspect the saved field.
+4. The November 4 published release notes remain a historical snapshot; their draft-bug statement predates the November 5 filing. The submitted current description links the filed issue. No new release was created just to rewrite that history.
 
-**Developer Community edits: none needed.** Both published articles already link OEX and the repository. **Questionnaire: do not submit again**; its confirmation is retained. File only the [prepared AI Hub report](bug-reports/ai-hub-quoted-tool-name.md) yourself; the historical callback-crash candidate remains unready.
+**Developer Community and questionnaire:** no duplicate submissions or edits are needed. **AI Hub bug:** [issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) is already filed; wait for vendor triage and organizer qualification. The historical callback-crash candidate remains unready and unclaimed.
