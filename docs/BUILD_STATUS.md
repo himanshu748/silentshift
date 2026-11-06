@@ -1,5 +1,11 @@
 # Build status
 
+## Installation guide simplified after QA feedback — November 6, 2026
+
+Consolidated the user installation path into root `INSTALL.md`: prerequisites, seven numbered steps, explicit local configuration, backend/workbench startup, first order and troubleshooting. The optional no-model package verification is labeled separately in the same file. README was reduced from **332 to 52 lines**; feature explanations, tracing details, API examples and developer checks moved to [FEATURES.md](FEATURES.md). Duplicate setup commands were removed from the judge and package-maintenance guides. Existing public README anchors were preserved. No runtime, package version, OEX selection or QA message was changed.
+
+Validation: **115 local references** resolve and **20 shell examples** pass `bash -n`. README and INSTALL were rendered and checked in a browser, including the primary installation link. Docker/Compose readiness passed. A new private configuration containing only the documented settings passed the public-package driver's read-only preflight (`executed=false`). A fresh cold install was not repeated: the Docker VM had **3.19 GiB** free against the **3 GiB** preflight floor. Earlier clean-install execution remains linked in [JUDGE_VERIFICATION.md](JUDGE_VERIFICATION.md); this documentation review is not a new native-install result.
+
 ## Documentation shipped and local checks repeated — November 6, 2026
 
 Judge-facing documentation was pushed to main as **acea23a**. Its hosted workflow could not start any steps because of an account-level execution blocker; no hosted pass is claimed. The equivalent existing local checks passed: `uv run --locked pytest -q` **174 passed in 4.53s**; TypeScript and production build passed; `npm --prefix web run test:e2e` **38 passed in 49.1s**, covering desktop/mobile landing, disconnected states, keyboard and reduced motion. Existing Lucide bundler warnings remain. [Verification receipt](evidence/judge-docs-checks-nov6.json).

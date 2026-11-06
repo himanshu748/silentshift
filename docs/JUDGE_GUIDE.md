@@ -9,8 +9,8 @@ Start with **Quantity mismatch**, which holds the unsupported change. Then inspe
 | What you want to assess | Start here | What it establishes |
 | --- | --- | --- |
 | Understand the operator's task without installing anything | [Captioned demo](https://youtu.be/a4dOcqu89EA), then the screenshots below | Recorded synthetic cases in the working local application; no hosted access |
-| Reproduce native execution without a model or API key | [Exact fresh-clone recipe](../README.md#see-it-in-visual-trace) | Public IPM install, production startup, native tests and a held order with real trace messages and tool reads |
-| Exercise fresh local inference and human review | [Live setup](../README.md#native-build-154-setup), then [the complete journey](#reproduce-the-complete-journey) | New local-model investigations, evidence inspection and eligible review decisions |
+| Reproduce native execution without a model or API key | [Exact fresh-clone recipe](../INSTALL.md#optional-check-without-a-model) | Public IPM install, production startup, native tests and a held order with real trace messages and tool reads |
+| Exercise fresh local inference and human review | [Live setup](../INSTALL.md), then [the complete journey](#reproduce-the-complete-journey) | New local-model investigations, evidence inspection and eligible review decisions |
 
 The runnable paths require a separately obtained, licensed **2026.3.0AI.154.0 / 154U ARM64** image. The keyless reference recipe also requires the documented Colima/Docker environment; it does not download a model. If that runtime is unavailable, the [retained commands and outputs](JUDGE_VERIFICATION.md) let you inspect what was executed, but do not replace a new run.
 
@@ -49,19 +49,13 @@ For the separate [payment capture](assets/native-currency-quarantine.png), the d
 
 ## Reproduce the complete journey
 
-For a no-key technical check, use the public native package in a fresh container. First complete the [README fresh-clone prerequisites and local credential steps](../README.md#see-it-in-visual-trace). The command below is the same install step; do not run it a second time with an already-created container name.
+For a no-key technical check, follow [the optional replay steps in INSTALL.md](../INSTALL.md#optional-check-without-a-model). Installation commands are kept there so you do not have to combine this walkthrough with another setup recipe.
 
-```sh
-uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
-  --execution-mode recorded-replay --container silentshift-bonus-registry-judge \
-  --api-port 52843 --execute
-```
-
-The driver refuses an existing container name, performs `install silentshift` from the public registry, starts the production, runs the full native suite and exercises the recorded-provider API journey. Expected: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. It prints that run's session ID and Visual Trace URL. This executes the native agent and tools with a recorded provider answer; it performs no fresh inference. [November 5 fresh-clone receipt](evidence/judge-main-clean-clone.json). The replay covers the held order; it does not reproduce the live amendment-release comparison below.
+Expected result: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. The command prints the session ID and Visual Trace URL. This runs the native agent and tools with a recorded provider answer, without fresh inference. [Verified receipt](evidence/judge-main-clean-clone.json). Replay covers the held order; the live amendment comparison below requires the normal local-model installation.
 
 For the live local-model comparison in the workbench:
 
-1. Follow the [README setup](../README.md#native-build-154-setup), including the separately licensed EAP image and local model. Bootstrap never invokes a model or seeds operational cases.
+1. Follow the [README setup](../INSTALL.md), including the separately licensed EAP image and local model. Bootstrap never invokes a model or seeds operational cases.
 2. Start the workbench, connect with the local configured account, and open **Scenario Lab**.
 3. Choose **Quantity mismatch**. Inspect `20 CASE` against the independent `240 EA` contract, then click **Inject into IRIS** once. Keep the displayed run ID. A critical contradiction must be held with zero simulator deliveries. The agent cannot infer a CASE→EA conversion.
 4. Choose **Approved amendment** and inject once. Inspect both the earlier contract and effective amendment, the native agent's actual reads, the release checks and the delivered case. Retrying the same injection must reuse its case and receipt.
@@ -107,12 +101,12 @@ The [IPM path](IPM.md) installs public native backend **0.2.0** into a prepared 
 | Official criterion | Inspect | What to verify |
 | --- | --- | --- |
 | Complexity | [Native architecture](../ARCHITECTURE.md), [provider message bodies](evidence/provider-body-captures.json), [Workflow receipt](evidence/review-queue.json) | Real production messages connect the investigation to routing; later review has persisted task/session links |
-| Clarity of Instructions | [Fresh-clone recipe](../README.md#see-it-in-visual-trace), [actual commands and output](JUDGE_VERIFICATION.md) | Exact build, prerequisites, expected hold and replay limitations are explicit |
+| Clarity of Instructions | [Fresh-clone recipe](../INSTALL.md#optional-check-without-a-model), [actual commands and output](JUDGE_VERIFICATION.md) | Exact build, prerequisites, expected hold and replay limitations are explicit |
 | Developer Experience | [Public installation transcript](evidence/judge-main-install.txt), [clean-clone receipt](evidence/judge-main-clean-clone.json) | Native IPM 0.2.0 installs, production starts and all native tests pass without a provider key |
 | Applicability | [Unsupported order](assets/demo-unit-quarantine.jpg), [authorized amendment](assets/native-approved-delivery.png) | Approved authority changes the outcome; the same incoming quantity is not inherently wrong |
 | Usability | [Actual review actions](evidence/review-ui.json), [interface verification](UI_REVIEW.md) | The operator can inspect evidence, see the route and resolve an eligible hold; desktop/mobile, keyboard and reduced-motion checks have distinct scopes |
 
-This maps observable evidence to the [official criteria](https://openexchange.intersystems.com/contest/49); it does not predict a judge's score. Optional adapter intake, procedural vector guidance and IPM setup are documented in the [README](../README.md#optional-local-intake-and-procedural-guidance). Their evidence gates remain separate from the core journey and any organizer award.
+This maps observable evidence to the [official criteria](https://openexchange.intersystems.com/contest/49); it does not predict a judge's score. Optional adapter intake, procedural vector guidance and IPM setup are documented in the [README](FEATURES.md#optional-local-intake-and-procedural-guidance). Their evidence gates remain separate from the core journey and any organizer award.
 
 ## Check failure and recovery behavior
 
