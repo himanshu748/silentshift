@@ -1,5 +1,11 @@
 # Build status
 
+## Documentation shipped and local checks repeated — November 6, 2026
+
+Judge-facing documentation was pushed to main as **acea23a**. Its hosted workflow could not start any steps because of an account-level execution blocker; no hosted pass is claimed. The equivalent existing local checks passed: `uv run --locked pytest -q` **174 passed in 4.53s**; TypeScript and production build passed; `npm --prefix web run test:e2e` **38 passed in 49.1s**, covering desktop/mobile landing, disconnected states, keyboard and reduced motion. Existing Lucide bundler warnings remain. [Verification receipt](evidence/judge-docs-checks-nov6.json).
+
+The browser checks do not establish native connectivity. Runtime source and executable setup instructions remain unchanged; the earlier **154U** fresh-clone/native results below remain the applicable evidence. Open Exchange, articles, versions and contest selections were not changed by this push.
+
 ## Judge-facing documentation polish — November 6, 2026
 
 The README now leads with the operator's decision and a two-row comparison of the unsupported order and effective amendment. Demo, judge walkthrough and keyless replay are the primary actions; submission chronology stays in the linked checklist. DPI-I-689 remains the first technical section, with direct links to the replay, native Body captures and Langfuse comparison. The judge guide separates watching recorded cases, reproducing native replay and running fresh local inference. It explicitly states that replay covers the held order, not the live amendment-release comparison, and retains the deterministic baseline and synthetic-data limits.

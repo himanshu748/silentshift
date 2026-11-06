@@ -1,0 +1,44 @@
+{
+  "checked_on": "2026-11-06",
+  "source_commit": "acea23a03627dc16f2c5d2b31c5fb8e6acacf6c0",
+  "scope": "Documentation-only judge walkthrough update; local workflow checks",
+  "documentation": {
+    "local_references_checked": 105,
+    "existing_executable_and_diagram_blocks_unchanged": true,
+    "manifest_class_resources": 44,
+    "added_text_credential_pattern_scan_passed": true,
+    "diff_whitespace_check_passed": true
+  },
+  "checks": [
+    {
+      "command": "uv run --locked pytest -q",
+      "exit_code": 0,
+      "output_summary": "174 passed in 4.53s"
+    },
+    {
+      "command": "npm --prefix web run check && npm --prefix web run build",
+      "exit_code": 0,
+      "output_summary": "TypeScript passed; Vite 8.3.5 production build completed in 981ms",
+      "warnings": "Existing Lucide module-level use-client directives reported by the bundler"
+    },
+    {
+      "command": "npm --prefix web run test:e2e",
+      "exit_code": 0,
+      "output_summary": "38 passed (49.1s)",
+      "scope": "Desktop/mobile landing and genuinely unavailable-upstream states; keyboard and reduced motion",
+      "native_integration_verified_by_this_check": false
+    }
+  ],
+  "hosted_ci": {
+    "url": "https://github.com/himanshu748/silentshift/actions/runs/42240386138",
+    "conclusion": "failure",
+    "steps_started": 0,
+    "status": "Account-level execution blocker; no hosted test result established"
+  },
+  "native_clean_clone_rerun": false,
+  "native_rerun_reason": "Runtime, package, model configuration and executable setup commands unchanged",
+  "previous_native_evidence": "docs/evidence/judge-main-clean-clone.json",
+  "verified_runtime": "2026.3.0AI.154.0 / 154U ARM64",
+  "app_version": "0.2.1",
+  "native_ipm_version": "0.2.0"
+}
