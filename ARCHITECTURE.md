@@ -47,7 +47,7 @@ Iteration/token caps bound model work. The enclosing synchronous Operation timeo
 
 IRIS password authentication protects the REST web application; a viewer resource controls reads/ingestion and an additional reviewer resource controls review mutations. Credentials are kept in browser memory only and sent over the local same-origin API; remote use requires TLS. The default Docker ports bind to loopback. Source may be public; EAP archives/runtime images may not be redistributed. Docker loads the officially downloaded build154 image locally, then mounts/copies source for compilation. No public runtime image pull or registry push is part of setup.
 
-Build 154 uses a separate Web Gateway (NoPWS packaging). The gateway and authenticated API run against the official ARM64 kit; the current package declares 43 native classes. A fresh manager volume repeated the core five scenarios. Each sponsor extension has its own gate in [BONUS_EVIDENCE.md](docs/BONUS_EVIDENCE.md); source compilation alone does not establish execution.
+Build 154 uses a separate Web Gateway (NoPWS packaging). The gateway and authenticated API run against the official ARM64 kit; native package 0.2.0 declares 44 classes in [module.xml](module.xml). A fresh manager volume repeated the core five scenarios. Each sponsor extension has its own gate in [BONUS_EVIDENCE.md](docs/BONUS_EVIDENCE.md); source compilation alone does not establish execution.
 
 ## Evidence and failure behavior
 

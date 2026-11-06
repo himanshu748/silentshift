@@ -1,4 +1,26 @@
-# Competitive review — November 3, 2026
+# Competitive review — November 6, 2026
+
+## Current field and implications
+
+The [contest page](https://openexchange.intersystems.com/contest/49) lists **22 entries**, including SilentShift. All listing summaries were read; seven closely related or structurally distinct entries received a deeper public-listing review below. This is not an execution comparison of all 22 projects, a comprehensive code review or a predicted ranking. Other teams' results remain their published claims; their demos and evaluations were not independently run.
+
+| Entry | Current public emphasis | Implication for SilentShift |
+| --- | --- | --- |
+| [PaymentGuard AI](https://openexchange.intersystems.com/package/PaymentGuard-AI) | Rule fast paths, AI decisions for ambiguous payments, native Workflow and model/session usage | Explain the agent's exact decision authority; generic claims about human review or tracing are insufficient |
+| [Proof Before Pay](https://openexchange.intersystems.com/package/Proof-Before-Pay) | Sealed evidence, single-use permits, a hosted review path and a reported paired twelve-case evaluation | Make effect boundaries inspectable. Do not imply our five-case demonstration is a comparable quality study |
+| [Signal Noir](https://openexchange.intersystems.com/package/Signal-Noir) | Failed lab-order investigation, deterministic proposal validation and agent/rules/hybrid modes | Lead with successful transport and unsupported business meaning before delivery, not generic failure triage |
+| [Readback](https://openexchange.intersystems.com/package/Readback) | Lab-result safety floors, a hosted replay path and reported 240-case evaluations with ablations | State what AI adds and what it does not. Our deterministic baseline ties the frozen five-case result |
+| [Interop Ops Agent](https://openexchange.intersystems.com/package/Interop-Ops-Agent) | Silent HL7 sender changes, bounded fixes, a replay gate and human approval | Do not claim silent-change detection is unique. Emphasize approved-reference authority and the order/amendment contrast |
+| [RouteGuard IRIS](https://openexchange.intersystems.com/package/RouteGuard-IRIS) | Shipment-exception routing, a local Ollama path and durable per-event decisions | Show independent evidence selection and effective amendments, with equally explicit runtime limits |
+| [InteropMCP](https://openexchange.intersystems.com/package/InteropMCP) | Reusable production-to-MCP integration, approvals and native traces | Keep SilentShift focused on the operator's business decision rather than adding another integration surface |
+
+**Competitive limits:** several listings offer hosted access and larger reported evaluations. SilentShift has no claimed hosted demo, five frozen core scenarios, and no demonstrated AI accuracy uplift. Documentation cannot erase those limits. Test counts from different projects are not comparable scores, and the contest publishes no numerical weights for its five judging dimensions.
+
+**Changes within the feature freeze:** the README and judge guide now make the same-order/different-authority contrast explicit, explain the agent's role in release versus review, and link the rubric to specific execution receipts. The guide adds direct checks for misleading precedents, concurrent approval, interrupted Workflow completion, file retry and provider error. Existing install/replay commands are preserved. The architecture's outdated 43-class count is corrected against the 44 resources in native package 0.2.0. No new runtime capability, benchmark or award is asserted.
+
+**Remaining external issue:** the DPI-I-689 field is correct in the owner view but absent as a dedicated association while signed out. Open Exchange support was contacted with explicit approval on November 6, also asking about the outdated release-note sentence. The [AI Hub report #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) is filed; vendor and organizer qualification remain pending. Do not send a duplicate request or change the listing without approval.
+
+## Archived November 3 review
 
 **Historical research snapshot.** The eight-entry comparison below records November 3 observations and has not been rerun against every current competitor. On November 4, contest 49 lists 15 entries including SilentShift. The public repository, demo, two articles, native tracing, Workflow, vectors, adapter and IPM are now delivered; the current [submission checklist](SUBMISSION_CHECKLIST.md) supersedes this document's original handoff priorities. No new competitor ranking is implied.
 

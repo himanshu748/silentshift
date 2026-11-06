@@ -1,25 +1,51 @@
-# Try SilentShift
+# Judge walkthrough: the same order, two different decisions
 
-For the DPI-I-689 example without an external API key or fresh inference, follow [See it in Visual Trace](../README.md#see-it-in-visual-trace). It runs the frozen unsupported-unit order through native AI Hub and all four tools using explicitly recorded provider responses, then prints its actual session URL. Recorded playback is labeled separately from the [current five live investigations](evidence/bonus-020-live.json).
+An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift helps the integration operator answer the next question: **is there approved evidence that makes this change legitimate?**
 
+Start with **Quantity mismatch**, which holds the unsupported change. Then inspect **Approved amendment**, which allows the same incoming value because an approved amendment is effective at event time. The difference is the authority behind the order. Follow that evidence to the policy decision and the simulator receipt.
 
-An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift gives the integration operator the evidence to hold that order before the included destination simulator accepts it.
+## Choose your path
 
-Start with two investigations: **Quantity mismatch** holds that unsupported change; **Approved amendment** allows the same incoming value because an approved amendment is effective at event time. Compare the authority behind the decisions, then inspect the actual simulator receipt.
+| What you want to assess | Start here | What it establishes |
+| --- | --- | --- |
+| Understand the operator's task without installing anything | [Captioned demo](https://youtu.be/a4dOcqu89EA), then the screenshots below | Recorded synthetic cases in the working local application; no hosted access |
+| Reproduce native execution without a model or API key | [Exact fresh-clone recipe](../README.md#see-it-in-visual-trace) | Public IPM install, production startup, native tests and a held order with real trace messages and tool reads |
+| Exercise fresh local inference and human review | [Live setup](../README.md#native-build-154-setup), then [the complete journey](#reproduce-the-complete-journey) | New local-model investigations, evidence inspection and eligible review decisions |
 
-The decision stays inside InterSystems IRIS: Business Service → Business Process → native AI Hub agent and scoped tools → Embedded Python policy → routing Operations. The agent proposes; deterministic server policy owns the route. All supplied messages and references are synthetic.
+The runnable paths require a separately obtained, licensed **2026.3.0AI.154.0 / 154U ARM64** image. The keyless reference recipe also requires the documented Colima/Docker environment; it does not download a model. If that runtime is unavailable, the [retained commands and outputs](JUDGE_VERIFICATION.md) let you inspect what was executed, but do not replace a new run.
+
+## What to look for
+
+1. **Authority changes the outcome.** The unsupported `20 CASE` order stays held with zero deliveries. An effective approved amendment permits the legitimate change. No CASE-to-EA conversion is guessed.
+2. **The explanation has a trace.** Each admitted provider exchange has its own native request/response pair. Inspect the actual [message properties](../README.md#native-provider-metadata), then connect them to the case's evidence and route.
+3. **Human review preserves the safety boundary.** Eligible holds can be resolved with a reason and current version. Critical contradictions cannot be approved; concurrent identical approvals produce one simulator receipt in the verified test.
+
+The decision stays inside InterSystems IRIS: Business Service → Business Process → native AI Hub agent and scoped tools → Embedded Python policy → routing Operations. The agent proposes; deterministic server policy owns the route. All supplied messages and references are synthetic. The [five-case baseline](#evidence-appendix) also solves the frozen cases; no AI accuracy improvement is claimed. The agent's demonstrated contribution is an inspectable investigation, with its tool reads and recommendation retained alongside the business decision.
+
+## Where the agent makes a decision
+
+The native agent returns a recommendation: `ALLOW`, `QUARANTINE` or `REQUEST_REVIEW`, with evidence IDs, an explanation and uncertainty. Its tools expose only the current case's evidence. The production validates that answer before routing; the model cannot change a contract, manufacture an amendment or invoke delivery.
+
+| Situation | Effect of the recommendation |
+| --- | --- |
+| An authoritative critical contradiction exists | Even a well-formed `ALLOW` cannot release the order; policy quarantines it |
+| Approved evidence resolves the comparison | Automatic delivery additionally needs a valid `ALLOW`, complete evidence citations and uncertainty no greater than `0.35` |
+| The comparison is otherwise eligible, but the agent raises a concern | The production requests human review; model concern alone does not establish a critical contradiction |
+| The answer is missing, malformed or cites unknown evidence | Automatic delivery is refused; critical cases remain quarantined and other cases require review |
+
+This is the implemented [release contract](../python/silentshift/engine.py), exercised through the [native live run](evidence/bonus-020-live.json) and separate boundary checks below. The agent participates in the decision, but never supplies its own authority to act. The recorded five-case result does not establish that adding AI improves accuracy, speed or operator productivity; those would require a larger, independently assessed evaluation.
 
 ## See the operator's decision
 
 These screenshots show persisted records from local Community AI Hub 154U and Qwen3 4B inference. They are captures of the working application, not live hosted access.
 
-![Currency fields disagree with an approved contract; server policy holds the message](assets/native-currency-quarantine.png)
+[Inspect the held-order capture](assets/demo-unit-quarantine.jpg): the original quantity and unit disagree with the approved contract, policy quarantines the order, and the reviewer cannot approve release.
 
 ![A browser-injected approved amendment was allowed and delivered to the simulator](assets/native-approved-delivery.png)
 
-The second screenshot is case `D39226FC-D6B8-11F1-956F-F285F08CEB87`, native trace 42. It was injected through Scenario Lab after the fresh-volume benchmark. Delivery is to the IRIS simulator, not an external ERP or bank.
+The amendment screenshot is case `D39226FC-D6B8-11F1-956F-F285F08CEB87`, native trace 42. It was injected through Scenario Lab after the fresh-volume benchmark. Delivery is to the IRIS simulator, not an external ERP or bank.
 
-The payment example checks a declared interface contract: `12550` minor units versus `125.50` major units. Numeric equivalence does not authorize a transformation. The hold does not establish a 100× monetary loss.
+For the separate [payment capture](assets/native-currency-quarantine.png), the declared interface contract requires `125.50` major units while the message supplies `12550` minor units. Numeric equivalence does not authorize a transformation. The hold does not establish a 100× monetary loss.
 
 ## Reproduce the complete journey
 
@@ -31,7 +57,7 @@ uv run python scripts/verify_bonus_release.py --source public-registry --install
   --api-port 52843 --execute
 ```
 
-The driver refuses an existing container name, performs `install silentshift` from the public registry, starts the production, runs the full native suite and exercises the recorded-provider API journey. Expected: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. It prints that run's session ID and Visual Trace URL. This executes the native agent and tools with a recorded provider answer; it performs no fresh inference. [Verified clean public replay](evidence/final-public-replay.json).
+The driver refuses an existing container name, performs `install silentshift` from the public registry, starts the production, runs the full native suite and exercises the recorded-provider API journey. Expected: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. It prints that run's session ID and Visual Trace URL. This executes the native agent and tools with a recorded provider answer; it performs no fresh inference. [November 5 fresh-clone receipt](evidence/judge-main-clean-clone.json). The replay covers the held order; it does not reproduce the live amendment-release comparison below.
 
 For the live local-model comparison in the workbench:
 
@@ -78,15 +104,27 @@ The [IPM path](IPM.md) installs public native backend **0.2.0** into a prepared 
 
 ## What to assess against the rubric
 
-| Official criterion | Inspect |
-| --- | --- |
-| Complexity | A complete native production, scoped tool retrieval, versioned independent references, native human-task completion and transaction-protected simulator effects. |
-| Clarity of Instructions | Exact runtime/provider, load/start/check commands, five-case verifier and this walkthrough. |
-| Developer Experience | Local inference, source-only distribution, empty-volume installation evidence, typed API and separate host/native/browser checks. |
-| Applicability | Pre-delivery contradictions in orders/payments, effective amendments and conflicting authority; all supplied data is synthetic. |
-| Usability | Evidence comparison, distinct quarantine/review/delivered states, explicit reviewer gates, desktop/mobile and keyboard behavior. |
+| Official criterion | Inspect | What to verify |
+| --- | --- | --- |
+| Complexity | [Native architecture](../ARCHITECTURE.md), [provider message bodies](evidence/provider-body-captures.json), [Workflow receipt](evidence/review-queue.json) | Real production messages connect the investigation to routing; later review has persisted task/session links |
+| Clarity of Instructions | [Fresh-clone recipe](../README.md#see-it-in-visual-trace), [actual commands and output](JUDGE_VERIFICATION.md) | Exact build, prerequisites, expected hold and replay limitations are explicit |
+| Developer Experience | [Public installation transcript](evidence/judge-main-install.txt), [clean-clone receipt](evidence/judge-main-clean-clone.json) | Native IPM 0.2.0 installs, production starts and all native tests pass without a provider key |
+| Applicability | [Unsupported order](assets/demo-unit-quarantine.jpg), [authorized amendment](assets/native-approved-delivery.png) | Approved authority changes the outcome; the same incoming quantity is not inherently wrong |
+| Usability | [Actual review actions](evidence/review-ui.json), [interface verification](UI_REVIEW.md) | The operator can inspect evidence, see the route and resolve an eligible hold; desktop/mobile, keyboard and reduced-motion checks have distinct scopes |
 
 This maps observable evidence to the [official criteria](https://openexchange.intersystems.com/contest/49); it does not predict a judge's score. Optional adapter intake, procedural vector guidance and IPM setup are documented in the [README](../README.md#optional-local-intake-and-procedural-guidance). Their evidence gates remain separate from the core journey and any organizer award.
+
+## Check failure and recovery behavior
+
+These are separately retained native checks on synthetic data. Open each receipt to inspect its inputs, assertions and outcome; no combined success rate is implied.
+
+| Challenge | Observed result | Evidence and limit |
+| --- | --- | --- |
+| A similar historical case was delivered, so a proposal recommends `ALLOW` | The critical current case remains held with zero deliveries | [Precedent veto](evidence/precedent-veto.json); a deliberately constructed valid proposal, with no fresh model call |
+| Two identical approvals arrive concurrently | One review receipt, one native completion response and one simulator delivery | [Review queue checks](evidence/review-queue.json); isolated eligible boundary cases, not an LLM accuracy test |
+| Task completion fails after the review decision is recorded | The original decision can be resumed without replacing its reason, version or key | [Controlled recovery](evidence/workflow.json) and [workbench walkthrough](articles/engineering.md); does not establish recovery from every outage |
+| A partner file is retried or its acknowledgement needs recovery | The retained outcome and receipt are reused without a second simulator delivery | [Adapter checks](evidence/adapter.json); two live local-model cases plus intake/recovery assertions |
+| The provider returns an HTTP error | The failure is visible in a native response message and the case stays quarantined | [Failure capture](assets/provider-failure-body-safari.png), [metadata receipt](evidence/provider-body-captures.json); an intentional invalid-format diagnostic |
 
 ## Evidence appendix
 

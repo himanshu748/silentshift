@@ -4,25 +4,30 @@
 
 An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order before the included destination simulator accepts it, then gives the integration operator the message, contract and reason in one investigation.
 
-The same incoming value can be legitimate: an effective approved amendment authorizing `20 CASE` lets the order proceed. SilentShift makes that distinction using independent reference records, a native IRIS AI Hub investigation and deterministic Embedded Python policy.
+The same incoming value can be legitimate: an effective approved amendment authorizing `20 CASE` lets the order proceed. SilentShift gives the operator a way to distinguish an unsupported change from an authorized one, with the evidence and delivery outcome in the same investigation.
 
-**[Try the operator walkthrough](docs/JUDGE_GUIDE.md)** · [Public source](https://github.com/himanshu748/silentshift) · [Native setup](#native-build-154-setup) · [Verification ledger](docs/BUILD_STATUS.md)
+| Incoming order | Approved evidence at event time | Observed outcome |
+| --- | --- | --- |
+| `20 CASE` | Contract requires `240 EA`; no authorized conversion | Held; zero simulator deliveries |
+| `20 CASE` | An effective approved amendment authorizes the change | Delivered to the simulator |
 
-**Demo video:** [Watch the walkthrough](https://youtu.be/a4dOcqu89EA) · **Open Exchange application:** [SilentShift on Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
+An IRIS AI Hub agent gathers evidence through four read-only tools and recommends release, quarantine or review. A release recommendation must satisfy deterministic policy; an unresolved agent concern keeps an otherwise eligible order in review. Operators can follow each model exchange in Visual Trace, compare similar precedents and resolve eligible holds through native Workflow tasks. A critical contradiction cannot be approved away. [Where the agent makes a decision](docs/JUDGE_GUIDE.md#where-the-agent-makes-a-decision).
 
-The public video plays at 1080p with English captions. SilentShift remains listed in [contest 49](https://openexchange.intersystems.com/contest/49), and Open Exchange release **0.2.1** is public. The updated product description was saved and sent for approval on November 5; the owner listing remains **Awaiting Review**. Contest/IPM selections and DPI-I-689 were verified after reload. The separately installed public IPM backend remains **0.2.0**. Both technical articles are published, and the reproduced AI Hub defect is [filed as issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17). **Organizer bonus awards remain unconfirmed; online demo: Not claimed.** [Submission receipt and remaining gates](docs/SUBMISSION_CHECKLIST.md).
+**[Watch the captioned demo](https://youtu.be/a4dOcqu89EA)** · **[Follow the judge walkthrough](docs/JUDGE_GUIDE.md)** · **[Run the keyless native replay](#see-it-in-visual-trace)** · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
+
+**Verified scope:** synthetic orders and payments on **IRIS Community AI Hub 2026.3.0AI.154.0 / 154U, ARM64**, with delivery to an IRIS simulator. App/workbench **0.2.1**; public native IPM **0.2.0**. No hosted demo or external ERP/bank delivery is claimed. [Test results and limits](docs/JUDGE_VERIFICATION.md) · [Contest status and bonus evidence](docs/SUBMISSION_CHECKLIST.md).
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
 SilentShift implements [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) by turning each admitted AI Hub provider exchange into an actual `CallRequest` / `CallResponse` pair in the original business-case session. A queued Business Operation records the model, provider, prompt version, elapsed operation time, returned tool names, HTTP outcome and available response-token counts. Deterministic policy still authorizes delivery; a trace is evidence of execution, not permission to release an order.
 
-**Judge shortcuts:** [keyless replay](#see-it-in-visual-trace) · [native metadata screenshot](#native-provider-metadata) · [Langfuse comparison](#silentshift-iris-interoperability-vs-langfuse). **Bonus status: Pending, organizer-unconfirmed.** The November 5 signed-out check shows the new description and its idea link, but no dedicated **Ideas to the app** section; the listing still says **Awaiting Review**. These public implementation details do not depend on that association appearing.
+**Inspect the implementation:** [keyless replay](#see-it-in-visual-trace) · [native metadata screenshot](#native-provider-metadata) · [Langfuse comparison](#silentshift-iris-interoperability-vs-langfuse). **Bonus status: Pending, organizer-unconfirmed.** The November 6 signed-out check shows the description link but no dedicated **Ideas to the app** association. Open Exchange support has been contacted; no award is asserted.
 
 ### See it in Visual Trace
 
 The no-key example replays one recorded assistant answer through the **same native AI Hub agent, evidence tools, provider ingress and queued operation** used in live mode. Tool envelopes are reconstructed; the four tools execute afresh. It creates only the frozen synthetic `20 CASE` versus `240 EA` case, which must stay held with no delivery. It performs no new inference and never reports the original recording's tokens as current usage.
 
-**Verified from fresh clones of `960b6b6` and current main `e8e1e60` on November 5:** public native **0.2.0** installed on **154U**, production startup passed, and all **5 native test classes / 12 methods** passed. Each isolated instance passed both API replays **12/12**, using its own sessions **24** and **58**, with zero deliveries. [Exact README commands, output and verification limits](docs/JUDGE_VERIFICATION.md). No provider key, new inference or embedding request was used.
+**Verified from fresh clones of `960b6b6` and `e8e1e60` on November 5:** public native **0.2.0** installed on **154U**, production startup passed, and all **5 native test classes / 12 methods** passed. Each isolated instance passed both API replays **12/12**, using its own sessions **24** and **58**, with zero deliveries. [Exact README commands, output and verification limits](docs/JUDGE_VERIFICATION.md). No provider key, new inference or embedding request was used.
 
 This reference recipe uses **macOS/ARM64, Git, Python 3.11+, uv and an already running Colima profile `silentshift` / Docker context `colima-silentshift`**. The official image must already be loaded as `silentshift-iris:2026.3.0AI.154.0`, with `containers.intersystems.com/intersystems/webgateway:2026.1` available locally. It requires at least **1.8 GiB free on the host and 3 GiB in the Docker VM**. The verifier's storage check uses Colima; other Docker platforms need an adapted harness. Obtain licensed runtime prerequisites through the [native setup](#native-build-154-setup). This recipe does **not** require Ollama, model downloads, a provider API key or frontend installation. Internet access is used for Git, Python dependencies, the pinned IPM installer and the public package registry. **Create the clone under a directory already shared with Colima.** The gateway binds two generated configuration files from the checkout; an unshared checkout can install the backend but cannot start the gateway. The directory check below stops before configuration or container creation if the VM cannot see the clone.
 
@@ -119,6 +124,8 @@ The agent proposes through four read-only, case-scoped evidence tools: current m
 The native chain is Business Service → Business Process → reference/AI Operations → Embedded Python policy → destination or quarantine Operation. IRIS persists the payload, references, audit, review state and unique simulator receipt. The workbench provides eight API-backed views, including the native Review queue, raw payload inspection and a Scenario Lab with five labeled synthetic experiments.
 
 **Verified boundary:** the core ran on official ARM64 Community AI Hub `2026.3.0AI.154.0` (`154U`), including a fresh-volume repeat. The destination is an IRIS simulator. The [evidence appendix](docs/JUDGE_GUIDE.md#evidence-appendix) retains passing and failed trials, baseline results and measurement limits. No public deployment or external ERP/bank delivery is claimed.
+
+The five-case demonstration is only the starting point. Separate native checks exercise [misleading precedents, concurrent approvals, interrupted review completion and file retries](docs/JUDGE_GUIDE.md#check-failure-and-recovery-behavior). Each has its own recorded outcome and scope; these checks are not combined into an AI accuracy score.
 
 ## Interface walkthrough
 
