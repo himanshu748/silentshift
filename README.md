@@ -40,6 +40,8 @@ The idea implementation is verified locally; organizer qualification and the ded
 
 [Features and technical reference](docs/FEATURES.md) covers evidence inspection, Workflow review, vector precedents, partner-file intake, API examples and developer checks. [Judge walkthrough](docs/JUDGE_GUIDE.md) connects those features to recorded execution evidence.
 
+[Import a CSV order feed from the workbench](docs/CSV_IMPORT.md): preview incoming lines against a separate approved export, then investigate them in the native production. This source feature requires explicit importer permission and is not included in public IPM 0.2.0.
+
 All supplied examples are synthetic and deliver only to an IRIS simulator. There is no hosted demo or verified external ERP/bank delivery. [Verification results](docs/JUDGE_VERIFICATION.md) · [Bonus status](docs/SUBMISSION_CHECKLIST.md).
 
 ## Developer Community articles

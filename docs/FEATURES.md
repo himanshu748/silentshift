@@ -152,7 +152,7 @@ The earlier controlled postcommit HTTP 503 recovery remains documented in [the W
 
 ### Evaluate a bounded CSV order feed
 
-The separate [CSV pilot](../pilot/README.md) accepts incoming order lines and an independently supplied approved-reference export. A trusted local operator imports immutable reference revisions; each line then uses the existing native investigation and deterministic delivery policy. The verifier checks holds, a simulator delivery, repeat submissions and transactional rollback. Samples are synthetic; there is no X12 parser, whole-order delivery guarantee or customer-data qualification. The pilot is source-only and is not included in public IPM 0.2.0. [Current verification](BUILD_STATUS.md).
+The [CSV Import workbench view](CSV_IMPORT.md) accepts incoming order lines and an independently supplied approved-reference export. Preview is read-only; adding immutable reference revisions requires explicit SSImporter permission, confirmation and a source note. Each line then uses the existing native investigation and deterministic delivery policy. Results retain source hashes, an authenticated import receipt, case links and trace IDs. The [CLI pilot](../pilot/README.md) remains available. Samples are synthetic; there is no X12 parser, whole-order delivery guarantee or customer-data qualification. The source additions are not included in public IPM 0.2.0. [Current verification](BUILD_STATUS.md).
 
 ### Accept partner JSON from a ready-file inbox
 

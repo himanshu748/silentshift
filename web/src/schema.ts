@@ -162,7 +162,7 @@ export const HealthSchema = z
       })
       .passthrough(),
     components: z.array(z.object({ name: Text, status: Text }).passthrough()),
-    permissions: z.object({ review: z.boolean() }).passthrough().optional(),
+    permissions: z.object({ review: z.boolean(), csv_import: z.boolean().optional() }).passthrough().optional(),
   })
   .passthrough();
 export type Health = z.infer<typeof HealthSchema>;

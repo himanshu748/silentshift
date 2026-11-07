@@ -18,7 +18,7 @@ The intended audience is the team responsible for partner-order exceptions, rega
 
 The existing local IRIS demonstrator provides native AI Hub investigation, deterministic policy, recoverable human review and traceable simulator outcomes on synthetic cases. It has a [captioned walkthrough](https://youtu.be/a4dOcqu89EA), [public source](https://github.com/himanshu748/silentshift) and a [verified native replay recipe](../README.md#see-it-in-visual-trace).
 
-A separate [local CSV pilot](../pilot/README.md) accepts a bounded order feed and an independently approved reference export, then sends individual lines through the existing native production. Its samples are synthetic and its destination is the IRIS simulator. X12 support, whole-order release, a hosted demo and customer-data validation remain proposed. The [pilot specification](PRODUCT_PILOT.md) defines those acceptance gates. No measured reduction in exceptions, resolution time or business loss is claimed.
+A [CSV Import workbench view](CSV_IMPORT.md) accepts a bounded order feed and an independently approved reference export. Operators preview the values; an explicitly authorized importer records the approved source before individual lines enter the native production. Results link back to their investigations and traces. Verified samples are synthetic and the destination is the IRIS simulator. X12 support, whole-order release, a hosted demo and customer-data validation remain proposed. The [pilot specification](PRODUCT_PILOT.md) defines those acceptance gates. No measured reduction in exceptions, resolution time or business loss is claimed.
 
 ## Discovery prompt
 

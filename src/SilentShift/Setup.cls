@@ -71,11 +71,27 @@ ClassMethod SeedReference(scope As %String, referenceJSON As %String) As %Status
     Return record.%Save()
 }
 
+/// Explicit local administrator opt-in. Review permission alone never grants
+/// authority to add approved contract references. Preserve all existing roles.
+ClassMethod EnableCSVImport(username As %String) As %Status
+{
+    New $NAMESPACE
+    Set $NAMESPACE = "%SYS"
+    If '$SYSTEM.Security.Check("%Admin_Secure","USE") Return $$$ERROR($$$GeneralError,"APP_FORBIDDEN")
+    If '##class(Security.Roles).Exists("SSImporter") Return $$$ERROR($$$GeneralError,"Run SilentShift.Setup.Install before enabling an importer")
+    Set sc = ##class(Security.Users).Get(username,.current)
+    $$$ThrowOnError(sc)
+    Set roles = $GET(current("Roles"))
+    If (","_roles_",") [ ",SSImporter," Return $$$OK
+    Set properties("Roles") = roles_$SELECT(roles="":"",1:",")_"SSImporter"
+    Return ##class(Security.Users).Modify(username,.properties)
+}
+
 ClassMethod SecurityConfig() As %Status [ Private ]
 {
     New $NAMESPACE
     Set $NAMESPACE = "%SYS"
-    For name = "SSView", "SSReview" {
+    For name = "SSView", "SSReview", "SSImport" {
         If '##class(Security.Resources).Exists(name) {
             Set sc = ##class(Security.Resources).Create(name, "SilentShift application permission", 0)
         } Else {
@@ -87,9 +103,9 @@ ClassMethod SecurityConfig() As %Status [ Private ]
     }
     // Database authority is application-scoped, never permanently granted to
     // viewer/reviewer users. Reinstall also repairs earlier owned role grants.
-    For role = "SSViewer", "SSReviewer", "SSApplication" {
-        Set resources = $SELECT(role = "SSViewer": "SSView:U", role = "SSReviewer": "SSReview:U", 1: "%DB_SILENTSHIFT:RW,%Service_EmbeddedPython:U")
-        Set inherited = $SELECT(role = "SSReviewer": "SSViewer", 1: "")
+    For role = "SSViewer", "SSReviewer", "SSImporter", "SSApplication" {
+        Set resources = $SELECT(role = "SSViewer": "SSView:U", role = "SSReviewer": "SSReview:U", role = "SSImporter": "SSImport:U", 1: "%DB_SILENTSHIFT:RW,%Service_EmbeddedPython:U")
+        Set inherited = $SELECT((role = "SSReviewer") || (role = "SSImporter"): "SSViewer", 1: "")
         If ##class(Security.Roles).Exists(role) {
             Kill roleProperties
             Set roleProperties("Resources") = resources, roleProperties("GrantedRoles") = inherited

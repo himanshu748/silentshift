@@ -109,6 +109,7 @@ ClassMethod ValidateAssets(root As %String) As %String [ Language = python, Priv
             current = current.parent
         required = ('python/silentshift/__init__.py', 'python/silentshift/engine.py',
             'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
+            'python/silentshift/csv_orders.py',
             'fixtures/v1/scenarios.json', 'fixtures/v1/manifest.json',
             'fixtures/v1/README.md', 'fixtures/provider-replay.json', 'fixtures/runbooks.json', 'LICENSE')
         for relative in required:

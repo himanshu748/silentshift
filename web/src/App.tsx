@@ -6,6 +6,7 @@ import {
   ChevronDown,
   Command,
   FileJson2,
+  FileSpreadsheet,
   FlaskConical,
   GitCompareArrows,
   KeyRound,
@@ -33,6 +34,7 @@ import {
 import { AppContext, Badge, Button, InlineError, Modal } from "./ui";
 import Landing from "./Landing";
 import Reviews from "./Reviews";
+import CSVImport, { useCSVImport } from "./CSVImport";
 
 const views = [
   "investigations",
@@ -40,6 +42,7 @@ const views = [
   "scenarios",
   "overview",
   "messages",
+  "imports",
   "evaluations",
   "policies",
   "health",
@@ -75,6 +78,7 @@ const navigation: {
     icon: FileJson2,
     group: "Workspace",
   },
+  { id: "imports", label: "CSV Import", icon: FileSpreadsheet, group: "Workspace" },
   { id: "scenarios", label: "Scenario Lab", icon: Beaker, group: "Validation" },
   {
     id: "evaluations",
@@ -351,6 +355,7 @@ function WorkbenchApp({
   const [quickSwitch, setQuickSwitch] = useState(false);
   const closeQuickSwitch = useCallback(() => setQuickSwitch(false), []);
   const health = useApi("/api/health", HealthSchema, epoch);
+  const csvImport = useCSVImport();
   const refresh = useCallback(() => setEpoch((value) => value + 1), []);
   const openConnect = useCallback(() => setConnect(true), []);
   const closeConnect = useCallback(() => setConnect(false), []);
@@ -533,6 +538,7 @@ function WorkbenchApp({
               tabIndex={-1}
               key={route.view}
             >
+              {csvImport.busy && route.view !== "imports" && <div className="csv-background" role="status">CSV import is in progress. <a href="#imports">Return to import</a></div>}
               {route.view === "investigations" && (
                 <Investigations refresh={epoch} caseId={route.caseId} />
               )}
@@ -548,6 +554,7 @@ function WorkbenchApp({
                 <Overview refresh={epoch} health={health} />
               )}
               {route.view === "messages" && <Messages refresh={epoch} />}
+              {route.view === "imports" && <CSVImport state={csvImport} health={health} />}
               {route.view === "evaluations" && <Evaluations refresh={epoch} />}
               {route.view === "policies" && <Policies refresh={epoch} />}
               {route.view === "health" && <SystemHealth health={health} />}

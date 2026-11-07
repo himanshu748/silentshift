@@ -4,6 +4,8 @@
 
 **Implementation started locally:** the [CSV prototype](../pilot/README.md) prepares bounded feeds and imports independent approved references into the native production. It submits individual order lines through the existing agent and policy, preserving event identity and source provenance. It remains separate from the public IPM package. Whole-order enforcement, X12 and hosting remain unimplemented; current verification is recorded in [BUILD_STATUS.md](BUILD_STATUS.md).
 
+The source workbench now includes [CSV Import](CSV_IMPORT.md): read-only preview, explicitly authorized reference import and native line results with case/trace links. Its two synthetic browser-submitted cases and the original native five-case regression passed. This adds a usable input path; it does not establish customer-data qualification or a whole-order delivery contract.
+
 ## Customer and job
 
 An integration operations team receives partner orders through an existing EDI translator, file exchange or API. Before those orders enter fulfillment, the team needs to identify unsupported changes to quantity, unit, product, business unit or effective order terms, and explain why an order is held.

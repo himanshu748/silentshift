@@ -2,6 +2,8 @@
 
 **Local CSV pilot for the existing IRIS production.** Prepare incoming order lines and import a separate approved-order export, then investigate each line through the native agent and deterministic policy. All supplied samples are synthetic. This pilot is outside the packaged `src/` classes and is not installed by IPM; app 0.2.1 and public native IPM 0.2.0 are unchanged.
 
+Prefer the browser? Use [CSV Import in the workbench](../docs/CSV_IMPORT.md). That source feature shares this CLI's parser and adds explicit reference-import permissions and an authenticated import receipt. Public IPM 0.2.0 does not include the CSV additions; its registry release has not changed.
+
 ## Prepare a feed without running a model
 
 From the repository root:

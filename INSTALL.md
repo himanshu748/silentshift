@@ -97,6 +97,8 @@ Leave this terminal running. Open **http://127.0.0.1:5173**, select **Open workb
 
 You now have the application running. [Features and examples](docs/FEATURES.md) explain review tasks, trace metadata, precedents and file intake. They are optional reading after installation.
 
+To bring your own CSV order feed, follow the [workbench CSV guide](docs/CSV_IMPORT.md). Its reference-import permission is a separate administrator opt-in.
+
 ## Troubleshooting
 
 | What you see | What to do |

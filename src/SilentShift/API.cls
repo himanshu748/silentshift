@@ -18,6 +18,8 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
   <Route Url="/api/cases/:id" Method="GET" Call="Case"/>
   <Route Url="/api/cases/:id/review" Method="POST" Call="Review"/>
   <Route Url="/api/messages" Method="POST" Call="Ingest"/>
+  <Route Url="/api/imports/csv/preview" Method="POST" Call="CSVPreview"/>
+  <Route Url="/api/imports/csv/commit" Method="POST" Call="CSVCommit"/>
   <Route Url="/api/scenarios" Method="GET" Call="Scenarios"/>
   <Route Url="/api/scenarios/:id/run" Method="POST" Call="RunScenario"/>
   <Route Url="/api/policies" Method="GET" Call="Policies"/>
@@ -81,7 +83,7 @@ ClassMethod ErrorResponse(error As %Exception.AbstractException) As %Status
     Return ..Fail(503,"IRIS_OPERATION_FAILED","IRIS could not complete this operation. Inspect the native event log; no release is assumed.")
 }
 
-ClassMethod StrictJSON(value As %String) As %String [ Language = python ]
+ClassMethod StrictJSON(value As %String, maxBytes As %Integer = 131072) As %String [ Language = python ]
 {
     import iris, json, sys
     asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
@@ -89,7 +91,7 @@ ClassMethod StrictJSON(value As %String) As %String [ Language = python ]
         sys.path.insert(0, asset_python)
     from silentshift.engine import strict_loads
     try:
-        parsed = strict_loads(value)
+        parsed = strict_loads(value, max_bytes=maxBytes)
     except (ValueError, TypeError, RecursionError):
         return ""
     if not isinstance(parsed, dict):
@@ -97,13 +99,13 @@ ClassMethod StrictJSON(value As %String) As %String [ Language = python ]
     return json.dumps(parsed, allow_nan=False, separators=(",", ":"), sort_keys=True)
 }
 
-ClassMethod Body(Output raw As %String) As %DynamicObject
+ClassMethod Body(Output raw As %String, maxBytes As %Integer = 131072) As %DynamicObject
 {
     If '$ISOBJECT(%request.Content) Throw ##class(%Exception.General).%New("INVALID_REQUEST")
-    If %request.Content.Size > 131072 Throw ##class(%Exception.General).%New("INVALID_REQUEST")
+    If %request.Content.Size > maxBytes Throw ##class(%Exception.General).%New("INVALID_REQUEST")
     Do %request.Content.Rewind()
-    Set raw = %request.Content.Read(131073)
-    Set normalized = ..StrictJSON(raw)
+    Set raw = %request.Content.Read(maxBytes+1)
+    Set normalized = ..StrictJSON(raw,maxBytes)
     If normalized="" Throw ##class(%Exception.General).%New("INVALID_REQUEST")
     Return ##class(%DynamicObject).%FromJSON(normalized)
 }
@@ -131,6 +133,29 @@ ClassMethod Ingest() As %Status
         // clock, scenario and fault metadata cannot be supplied in an envelope.
         Set envelope = {"message": (message), "raw_payload": (raw)}
         Return ..Dispatch(envelope)
+    } Catch error {
+        Return ..ErrorResponse(error)
+    }
+}
+
+ClassMethod CSVPreview() As %Status
+{
+    Try {
+        Set request = ..Body(.raw,524288)
+        Set result = ##class(SilentShift.CSV).Preview(raw)
+        Return ..JSON(result.%ToJSON())
+    } Catch error {
+        Return ..ErrorResponse(error)
+    }
+}
+
+ClassMethod CSVCommit() As %Status
+{
+    If '$SYSTEM.Security.Check("SSImport","USE") Return ..Fail(403,"FORBIDDEN","An authorized CSV importer account is required to add approved references.")
+    Try {
+        Set request = ..Body(.raw,524288)
+        Set result = ##class(SilentShift.CSV).Preview(raw,1)
+        Return ..JSON(result.%ToJSON())
     } Catch error {
         Return ..ErrorResponse(error)
     }
@@ -285,6 +310,7 @@ ClassMethod Health() As %Status
         For host="Partner","Semantic","References","Investigator","Destination","Quarantine" Do components.%Push({"name":(host),"status":"not_probed"})
         Set permissions={}
         Do permissions.%Set("review",$SYSTEM.Security.Check("SSReview","USE"),"boolean")
+        Do permissions.%Set("csv_import",$SYSTEM.Security.Check("SSImport","USE"),"boolean")
         Set result={"build":($ZVERSION),"production":(production),"agent":(agent),"components":(components),"permissions":(permissions),"scope":"synthetic single-tenant contest demonstrator"}
         Return ..JSON(result.%ToJSON())
     } Catch error {

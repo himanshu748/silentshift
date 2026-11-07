@@ -1,0 +1,451 @@
+{
+  "schema": "silentshift-csv-ui-verification/1",
+  "created_at": "2026-11-07T11:43:16.893647+00:00",
+  "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "app_version": "0.2.1",
+  "public_ipm_version": "0.2.0",
+  "publication": "Source changes only; CSV endpoints and parser have not been published to the public IPM registry or OEX.",
+  "environment": "Existing local 154U ARM64 production; no fresh-container claim. Python parser copied into its installed manager assets; changed native classes compiled and Setup.Install executed.",
+  "authorization": "SSImport resource and SSImporter role created without default user assignment. Before explicit enablement, the configured reviewer was denied import. A local administrator then called Setup.EnableCSVImport for that configured reviewer, preserving its existing roles. Viewer remains unable to import.",
+  "native_api": {
+    "passed": true,
+    "checks": {
+      "viewer_preview_readonly_available": true,
+      "preview_created_no_references": true,
+      "anonymous_preview_denied": true,
+      "viewer_commit_denied": true,
+      "review_permission_does_not_imply_import": true,
+      "explicit_admin_grant_succeeded": true,
+      "import_permission_reported": true,
+      "tampered_preview": true,
+      "confirmation_required": true,
+      "source_note_required": true,
+      "client_authority_rejected": true,
+      "invalid_decimal_rejected": true,
+      "malformed_csv_rejected": true,
+      "native_import_created_two": true,
+      "receipt_records_authenticated_importer": true,
+      "receipt_records_source_note": true,
+      "repeat_reuses_both_revisions": true,
+      "repeat_preserves_receipt": true,
+      "conflict_fixture_previewed_without_write": true,
+      "immutable_revision_conflict": true,
+      "whole_reference_batch_rolled_back": true,
+      "import_did_not_submit_cases": true,
+      "source_note_160_accepted": true,
+      "source_note_161_rejected": true,
+      "bom_crlf_csv_preview_accepted": true,
+      "retained_order_bytes_match_bom_crlf_hash": true,
+      "retained_approved_bytes_match_bom_crlf_hash": true,
+      "retained_original_receipt_unchanged": true,
+      "conflict_rolls_back_raw_sources": true,
+      "conflict_rolls_back_receipt": true,
+      "conflict_rolls_back_earlier_reference": true
+    },
+    "import_receipt": {
+      "id": "95b44ca168712301c935258ee415226b2fe5de93f834354157468ec451a0523e",
+      "imported_by": "ss-reviewer",
+      "imported_at": "2026-11-07T11:16:57.531005Z",
+      "reference_count": 2,
+      "feed_sha256": "16dd6134ac96a6557259ea89b4627de2e02cdfe9147811ce802a2019058509a2",
+      "approved_sha256": "9063a980716760e7582404dcfc33cfcab14b82e39509e1d023557971c5493eb4"
+    },
+    "scope": "Actual native HTTP requests and operator grant; synthetic references only, no inference.",
+    "retained_source_proof": {
+      "import_id": "bc51d34179d71fe6b831c3b49b38648df102e91da5285fb297639aaca50bc776",
+      "order_sha256": "15294a87d6b9e1a997eb4662f1811345937fa2969a025022bf72cf84d7f702c9",
+      "approved_sha256": "21d9e55169c12f6eb40a2eb701063746315f3f34be6841742d788faf8ca6bcc4",
+      "source_bytes": "UTF-8 BOM and CRLF retained in native globals; checked with Bridge.Hash without exporting source text."
+    }
+  },
+  "live_ui": {
+    "passed": true,
+    "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "scope": "Actual browser uploads and native production with synthetic CSVs; simulator only. Offline failure deliberately injected at the browser transport.",
+    "checks": {
+      "native_154_running": true,
+      "explicit_importer_permission": true,
+      "oversized_file_rejected_before_api": true,
+      "viewer_can_preview": true,
+      "viewer_cannot_import": true,
+      "preview_did_not_dispatch_or_commit": true,
+      "invalid_csv_rejected_by_native_server": true,
+      "invalid_preview_has_no_commit_action": true,
+      "consent_required": true,
+      "uncertain_import_stops_before_rows": true,
+      "uncertain_import_requires_repreview": true,
+      "ui_reference_import_http_200": true,
+      "navigation_preserves_selected_files": true,
+      "critical_line_held": true,
+      "matching_line_delivered_once": true,
+      "references_created_in_ui": true,
+      "order_limits_visible": true,
+      "native_four_tools_4CC8680B-DA9D-11F1-AC78-0694AF4F9420": true,
+      "native_four_tools_7AEF315C-DA9D-11F1-AC78-0694AF4F9420": true,
+      "case_link_opens_native_investigation": true,
+      "repeat_reuses_cases_and_receipts": true,
+      "repeat_reuses_reference_revisions": true,
+      "repeat_reads_cases_without_new_dispatch": true,
+      "mobile_has_no_page_overflow": true,
+      "reduced_motion_no_panel_animation": true,
+      "file_picker_keyboard_focus": true,
+      "compact_has_no_page_overflow": true,
+      "credentials_not_in_browser_storage": true,
+      "no_browser_exceptions": true
+    },
+    "cases": [
+      {
+        "case_id": "4CC8680B-DA9D-11F1-AC78-0694AF4F9420",
+        "trace_id": "2498",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "7AEF315C-DA9D-11F1-AC78-0694AF4F9420",
+        "trace_id": "2526",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      }
+    ],
+    "ui_import_receipt": {
+      "id": "fcc3ede17650d6e873e4517ca3759bb698c1b694ca8833a0a5fde1ac1766f8ab",
+      "imported_by": "ss-reviewer",
+      "imported_at": "2026-11-07T11:20:55.768722Z"
+    },
+    "writes": [
+      "/api/imports/csv/preview",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit",
+      "/api/messages",
+      "/api/messages",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit"
+    ]
+  },
+  "final_ui_readback": {
+    "passed": true,
+    "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "reused_existing_cases": true,
+    "scope": "Actual browser uploads and native production with synthetic CSVs; simulator only. Offline failure deliberately injected at the browser transport. Existing-case reuse, when selected, makes no fresh inference claim.",
+    "checks": {
+      "native_154_running": true,
+      "explicit_importer_permission": true,
+      "reuse_only_existing_terminal_cases": true,
+      "oversized_file_rejected_before_api": true,
+      "viewer_can_preview": true,
+      "viewer_cannot_import": true,
+      "preview_did_not_dispatch_or_commit": true,
+      "invalid_csv_rejected_by_native_server": true,
+      "invalid_preview_has_no_commit_action": true,
+      "consent_required": true,
+      "uncertain_import_stops_before_rows": true,
+      "uncertain_import_requires_repreview": true,
+      "ui_reference_import_http_200": true,
+      "navigation_preserves_selected_files": true,
+      "critical_line_held": true,
+      "matching_line_delivered_once": true,
+      "references_reused_in_ui": true,
+      "original_sources_retained": true,
+      "order_limits_visible": true,
+      "native_four_tools_4CC8680B-DA9D-11F1-AC78-0694AF4F9420": true,
+      "native_four_tools_7AEF315C-DA9D-11F1-AC78-0694AF4F9420": true,
+      "case_link_opens_native_investigation": true,
+      "repeat_reuses_cases_and_receipts": true,
+      "repeat_reuses_reference_revisions": true,
+      "repeat_reads_cases_without_new_dispatch": true,
+      "mobile_has_no_page_overflow": true,
+      "reduced_motion_no_panel_animation": true,
+      "file_picker_keyboard_focus": true,
+      "compact_has_no_page_overflow": true,
+      "credentials_not_in_browser_storage": true,
+      "no_browser_exceptions": true,
+      "reuse_made_zero_message_posts": true
+    },
+    "cases": [
+      {
+        "case_id": "4CC8680B-DA9D-11F1-AC78-0694AF4F9420",
+        "trace_id": "2498",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "7AEF315C-DA9D-11F1-AC78-0694AF4F9420",
+        "trace_id": "2526",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      }
+    ],
+    "ui_import_receipt": {
+      "id": "fcc3ede17650d6e873e4517ca3759bb698c1b694ca8833a0a5fde1ac1766f8ab",
+      "imported_by": "ss-reviewer",
+      "imported_at": "2026-11-07T11:20:55.768722Z"
+    },
+    "writes": [
+      "/api/imports/csv/preview",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit",
+      "/api/imports/csv/preview",
+      "/api/imports/csv/commit"
+    ]
+  },
+  "native_five": {
+    "passed": true,
+    "run_id": "99c4df65-60db-491d-9199-31406e80a6cf",
+    "native_verified": true,
+    "evaluation_persisted": true,
+    "checks": [
+      {
+        "scenario_id": "quantity-mismatch",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "currency-scaling",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "approved-amendment",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "conflicting-references",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "unsafe-agent-output",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      }
+    ],
+    "proposal_accuracy": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "final_accuracy": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "unsafe_release": {
+      "count": 0,
+      "denominator": 4
+    },
+    "cases": [
+      {
+        "case_id": "DC2191D0-DA9F-11F1-AC78-0694AF4F9420",
+        "scenario_id": "quantity-mismatch",
+        "trace_id": "2714",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "FC1BF9CC-DA9F-11F1-AC78-0694AF4F9420",
+        "scenario_id": "currency-scaling",
+        "trace_id": "2742",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "0E7B7164-DAA0-11F1-AC78-0694AF4F9420",
+        "scenario_id": "approved-amendment",
+        "trace_id": "2770",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "29DB8705-DAA0-11F1-AC78-0694AF4F9420",
+        "scenario_id": "conflicting-references",
+        "trace_id": "2797",
+        "routing": "REVIEW",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "4B12F7BE-DAA0-11F1-AC78-0694AF4F9420",
+        "scenario_id": "unsafe-agent-output",
+        "trace_id": "2825",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      }
+    ]
+  },
+  "local_checks": {
+    "pytest": "207 passed in 15.77s",
+    "typescript": "passed",
+    "web_build": "passed; existing Lucide warnings",
+    "web_browser": "  38 passed (1.6m)",
+    "web_browser_scope": "Existing landing and disconnected desktop/mobile suite",
+    "native_unit": "All PASSED; five classes / 12 methods; CSV_UI_UNIT_RESULT=1"
+  },
+  "commands": [
+    "uv run pytest -q",
+    "npm --prefix web run check",
+    "npm --prefix web run build",
+    "npm --prefix web run test:e2e",
+    "node scripts/verify_csv_ui.mjs --execute --output-directory .local/csv-ui/browser-run",
+    "node scripts/verify_csv_ui.mjs --execute --reuse-input-directory .local/csv-ui/browser-run --output-directory .local/csv-ui/browser-ship",
+    "uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output .local/csv-ui/native-five-ship.json"
+  ],
+  "native_unit_commands": [
+    "Copy tests/iris to a fresh /tmp/ss-csv-ui-unit-<uuid> directory in the running IRIS container",
+    "iris session IRIS -U SILENTSHIFT",
+    "set ^UnitTestRoot=\"/tmp/ss-csv-ui-unit-<uuid>/\"",
+    "set manager=##class(%UnitTest.Manager).%New()",
+    "set passed=manager.RunTest(\"\",\"/nodelete\")",
+    "write \"CSV_UI_UNIT_RESULT=\",passed,!"
+  ],
+  "api_reproduction": {
+    "preview": "Authenticated POST /silentshift/api/imports/csv/preview with exactly orders_csv and approved_csv strings; no writes.",
+    "commit": "SSImport-authorized POST /silentshift/api/imports/csv/commit with the same strings, preview_hash returned by preview, confirmation true and a 12-160-character reason.",
+    "security_checks": "Before enablement, reviewer and viewer commit returned 403. After explicit enablement, invalid previews/confirmation/CSV/source notes returned 422. Changed immutable references returned 409 and their batch rolled back. Exact repeats reused revisions and the original import receipt."
+  },
+  "source_sha256": {
+    "python/silentshift/csv_orders.py": "f3855fec6e508f7bf31b6648f3b014c84c756ab228699912aca828d03c4cde3c",
+    "pilot/orders.py": "4caba1b1e9023cf17c004f79e557c7e7ba6fff97842fcbf99393810083bae59b",
+    "src/SilentShift/CSV.cls": "0a7bc533dd72570f6ab7bf3c0e514ff8472f10e8955a1c2220ee5faac5566bb8",
+    "src/SilentShift/API.cls": "3cdec92d867c027acc81007480fe9c08fec5b26e452b954d6cf917ab9e0d8dd9",
+    "src/SilentShift/Setup.cls": "d94971cb035f43f4fb4a2b270a7661a64b969ba04ee38e12f4af4834446c7388",
+    "src/SilentShift/IPM.cls": "75b531b5b7fab8851a7ba64e46206f99f36a538179335b7b48990336952d35e1",
+    "module.xml": "6afd3313e58f32ce49e6eaf248c559b958d214f1c5b0741b61c6e6bb8c5bcbd9",
+    "scripts/package_ipm.py": "383e5a64b25bf8db68f82e45daaae765a8f0f49a8166bd8c1b101fa90064c188",
+    "web/src/CSVImport.tsx": "a8fa823605430b82a5bf71811e325ebe3e00576af7626700410afb1859bdb83a",
+    "web/src/csv-import.css": "78893178890bddcfe7ee1af6d6aac091d1631d0f6aa32b45a26c8c3e6747af84",
+    "web/src/App.tsx": "fd60ac7005f4c7046c945b4baaf62436fbb593b0224293b5e2ef88db1c00b5b1",
+    "web/src/schema.ts": "7d71c30f695f60f7242193c8436ad2fb5cbe08c98a9aacc5f22ff8253496ce91",
+    "scripts/verify_csv_ui.mjs": "e588cc4a390f2e1e1cf3e588787a1285cf36961469bf7bd3c87e511f2c5e918e",
+    "tests/test_csv_requests.py": "1e517179775f4fc3243ad879008677fe7bdbd6e61cd44f30f40f9b10c26614ff"
+  },
+  "screenshot_sha256": {
+    "docs/assets/csv-ui-results-desktop.png": "96a4561b3ef096b6c27ca0e9204380c19fceb47b03d3e3b9dbf0f16bcb7367d4",
+    "docs/assets/csv-ui-results-mobile.png": "91a0c988c72eaa91cf5a968ec1aaecaeca9e4eadf6fa74902bb77eaa6dc560ce"
+  },
+  "private_artifact_sha256": {
+    ".local/csv-ui/api-verification.json": "e390d014dca0cbb37e53557e4b775a56e050d23fdd2fd46225284d04f4c39105",
+    ".local/csv-ui/browser-run/verification.json": "cf96fd3c044d09053827bfa7ae5293ed5ae856669a506377dff57af25ebd97fb",
+    ".local/csv-ui/browser-final2/verification.json": "3407dae9396ffffd5f461dca7438d1b9a621add50fd02de60be566d45b314359",
+    ".local/csv-ui/native-five.json": "0eb9861f473015ace3484b34dc02456fa0104752042903efeb925d655a01006d",
+    ".local/csv-ui/native-unit.log": "82ab954090314d150e98bdc25e7ed67ed6694d09755d7c01ab283ecc466dbe34",
+    ".local/csv-ui/pytest-final.log": "15e7a4cfe4c1d3b63d00e7f32c22ca931c3a460a022542f441f877362bf56344",
+    ".local/csv-ui/types-final.log": "2fdb2cc9a65884adc3185ce77007b25699a2ebe846292444c06e4b0e89250a21",
+    ".local/csv-ui/build-final.log": "a3ef71f77fbb4fe145d40ddde4fe4eab778419372a2ec51964a6f38af4de981c",
+    ".local/csv-ui/web-browser-final.log": "20fcc191026c6fa64e845997c3dba078e93d393e182e1025f06c1d1e611cab9c",
+    ".local/csv-ui/browser-ship/verification.json": "5f8eed32713de4cf69c99f614653727dbc0e0fbe4647d3b877c1dad78e5e35f7",
+    ".local/csv-ui/native-five-ship.json": "b21de2ffeaef4f130c0dfd881a1d868bb30dd5e01479c0f5fb18aa420e09712e"
+  },
+  "limitations": [
+    "All verification inputs are synthetic. No customer-data or production-readiness claim.",
+    "CSV approver names are operator-supplied provenance, not external approval authentication.",
+    "Reference import is transactional; line investigations and simulator effects are not an atomic whole-order transaction.",
+    "No feed-completeness, X12, external ERP delivery or hosting claim.",
+    "The browser reuse runs read earlier persisted live cases; they did not invoke the model again.",
+    "No new clean-clone or registry-install result for this source feature."
+  ],
+  "native_five_before_source_retention": {
+    "passed": true,
+    "run_id": "ebef25b0-ee57-4250-8d34-b19fe4c598fc"
+  },
+  "source_retention": "Exact uploaded text is retained in the local application database in the same transaction as references and the receipt. BOM/CRLF source hashes were checked through native Bridge.Hash; conflicting batches leave no source, receipt or earlier reference row.",
+  "source_retention_reproduction": [
+    "Use the import.receipt.id returned by commit as importId",
+    "write ##class(SilentShift.Bridge).Hash(^SilentShift.CSVSources(importId,\"orders\")),!",
+    "write ##class(SilentShift.Bridge).Hash(^SilentShift.CSVSources(importId,\"approved\")),!",
+    "Compare those native hashes with feed_sha256 and approved_sha256; do not export raw source text."
+  ]
+}
