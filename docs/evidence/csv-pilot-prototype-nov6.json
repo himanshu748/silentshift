@@ -1,0 +1,89 @@
+{
+  "schema": "silentshift-csv-pilot-progress/1",
+  "date": "2026-11-06",
+  "published": false,
+  "native_csv_end_to_end_verified": false,
+  "csv_sample_records": 2,
+  "csv_sample_provenance": "synthetic",
+  "reference_import": {
+    "compile_passed": true,
+    "successful_imports": 0,
+    "refused_responses": 3,
+    "import_sessions": 2,
+    "catalog_rows_after_failure": 0,
+    "helpers_removed_from_runtime": true,
+    "retry_stopped": true
+  },
+  "local_tests": {
+    "python": "189 passed in 7.61s",
+    "csv_specific_tests": 15,
+    "typescript_passed": true,
+    "build_passed": true,
+    "browser": "38 passed (1.1m)",
+    "browser_scope": "landing and disconnected desktop/mobile"
+  },
+  "native_baseline": {
+    "passed": true,
+    "run_id": "9027bf55-7e2b-40e7-92b1-f25245907387",
+    "case_ids": [
+      "FC522CF5-D9F6-11F1-9784-EEA006F40C7E",
+      "29EB8549-D9F7-11F1-9784-EEA006F40C7E",
+      "4072D621-D9F7-11F1-9784-EEA006F40C7E",
+      "5829EBB0-D9F7-11F1-9784-EEA006F40C7E",
+      "732ABBCD-D9F7-11F1-9784-EEA006F40C7E"
+    ],
+    "trace_ids": [
+      "1816",
+      "1844",
+      "1872",
+      "1899",
+      "1927"
+    ]
+  },
+  "native_postcheck": {
+    "passed": false,
+    "run_id": "6c1ea1f3-efc0-46fb-83fb-ec7f928ece71",
+    "case_ids": [
+      "D7466992-D9F7-11F1-9784-EEA006F40C7E",
+      "F6DE5DC2-D9F7-11F1-9784-EEA006F40C7E",
+      "166E6D59-D9F8-11F1-9784-EEA006F40C7E",
+      "357C0BFA-D9F8-11F1-9784-EEA006F40C7E",
+      "546F0A1A-D9F8-11F1-9784-EEA006F40C7E"
+    ],
+    "failure": "native-agent-chat; provider transport failures",
+    "unsafe_deliveries": null
+  },
+  "local_environment_repair": "host.lima.internal failed DNS resolution in the container. VM resolved it to 192.168.5.2; container-only hosts entry restored Ollama GET /api/tags HTTP 200.",
+  "native_recovery_check": {
+    "passed": true,
+    "run_id": "5f39bc5a-816b-47ee-beec-c44c0b462036",
+    "final_routes": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "unsafe_deliveries": {
+      "count": 0,
+      "denominator": 4
+    },
+    "case_ids": [
+      "DC8425B6-D9F8-11F1-9784-EEA006F40C7E",
+      "FE96B099-D9F8-11F1-9784-EEA006F40C7E",
+      "106BA2C9-D9F9-11F1-9784-EEA006F40C7E",
+      "24AD21A1-D9F9-11F1-9784-EEA006F40C7E",
+      "415F5504-D9F9-11F1-9784-EEA006F40C7E"
+    ],
+    "trace_ids": [
+      "2085",
+      "2113",
+      "2141",
+      "2168",
+      "2196"
+    ]
+  },
+  "source_sha256": {
+    "pilot/orders.py": "b1a30a698f3c4f72cd72fcf36e652ddd192bf7be18f1f4350ae7da65d8deebc8",
+    "pilot/ReferenceImport.cls": "acd0d2b5f8cf5ce3cc5065e06c3f6c60ab706ea4ee328823566c9ddc231cbfb9",
+    "tests/test_csv_pilot.py": "92d5ab0df605cb0deb2d9792c519d87c331bd3073822ed29348adcd5479294f1"
+  }
+}

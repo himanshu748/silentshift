@@ -1,0 +1,313 @@
+{
+  "schema": "silentshift-csv-native-verification/1",
+  "created_at": "2026-11-07T10:53:51.161175+00:00",
+  "scope": "Source-only pilot in the existing local production; synthetic CSV inputs and IRIS simulator only. Not an IPM release or clean-container test.",
+  "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "app_version": "0.2.1",
+  "public_ipm_version": "0.2.0",
+  "csv": {
+    "passed": true,
+    "synthetic": true,
+    "scope": "CSV reference import and two native per-line simulator cases; no external delivery",
+    "checks": {
+      "importer_compiled": true,
+      "created_two_references": true,
+      "repeat_import_reuses_revisions": true,
+      "changed_revision_refused": true,
+      "whole_import_rolled_back": true,
+      "peer_cannot_authorize_import": true,
+      "approval_provenance_required": true,
+      "empty_import_refused": true,
+      "unsupported_order_held": true,
+      "matching_order_simulated_once": true,
+      "native_four_tools_1_SYNTHETIC-held-20261107T105028752262": true,
+      "native_four_tools_1_SYNTHETIC-clear-20261107T105028752262": true,
+      "repeat_reuses_cases_traces_and_receipts": true,
+      "changed_event_identity_conflicts": true,
+      "no_atomic_order_claim": true
+    },
+    "imports": {
+      "initial": {
+        "passed": true,
+        "created": 2,
+        "reused": 0
+      },
+      "repeat": {
+        "passed": true,
+        "created": 0,
+        "reused": 2
+      },
+      "conflict": {
+        "passed": false,
+        "error": "PILOT_REFERENCE_IMPORT_REFUSED",
+        "stage": "persist"
+      },
+      "peer": {
+        "passed": false,
+        "error": "PILOT_REFERENCE_IMPORT_REFUSED",
+        "stage": "validate-reference"
+      },
+      "unsigned": {
+        "passed": false,
+        "error": "PILOT_REFERENCE_IMPORT_REFUSED",
+        "stage": "validate-reference"
+      },
+      "empty": {
+        "passed": false,
+        "error": "PILOT_REFERENCE_IMPORT_REFUSED",
+        "stage": "parse"
+      }
+    },
+    "cases": [
+      {
+        "case_id": "0DC16287-DA99-11F1-AC78-0694AF4F9420",
+        "trace_id": "2282",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        },
+        "agent_status": "returned",
+        "agent_failure_code": null
+      },
+      {
+        "case_id": "2554A769-DA99-11F1-AC78-0694AF4F9420",
+        "trace_id": "2310",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        },
+        "agent_status": "returned",
+        "agent_failure_code": null
+      }
+    ],
+    "feed_sha256": "043fd4f3d5b5df2b47197e5b66689c3162b4625ad8a52418e173b7765aa278d0",
+    "approved_sha256": "fff792f6abdd3d04d51e31ad33f3c55e9a8220a0cc0dd4993a8f98618c931293"
+  },
+  "earlier_csv_attempt": {
+    "passed": false,
+    "passing_checks": 14,
+    "total_checks": 15,
+    "failed_checks": [
+      "native_four_tools_1_SYNTHETIC-held-20261106T185227746329"
+    ],
+    "cases": [
+      {
+        "case_id": "37E7D48F-DA13-11F1-9784-EEA006F40C7E",
+        "trace_id": "2224",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "tool_reads": {}
+      },
+      {
+        "case_id": "8115A40C-DA13-11F1-9784-EEA006F40C7E",
+        "trace_id": "2243",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      }
+    ],
+    "limitation": "Held case timed out in the native agent; no release occurred. Retained, not counted as a passing live investigation."
+  },
+  "native_five": {
+    "passed": true,
+    "run_id": "2021bd56-a83b-4be8-8972-232f0ed06641",
+    "native_verified": true,
+    "evaluation_persisted": true,
+    "checks": [
+      {
+        "scenario_id": "quantity-mismatch",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "currency-scaling",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "approved-amendment",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "conflicting-references",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      },
+      {
+        "scenario_id": "unsafe-agent-output",
+        "native_agent_and_tools": true,
+        "trace_present": true,
+        "policy_matches_ground_truth": true,
+        "routing_matches_ground_truth": true,
+        "duplicate_reuses_case_and_receipt": true,
+        "critical_release_denied": true,
+        "critical_policy_test_used_reviewer": true
+      }
+    ],
+    "final_accuracy": {
+      "value": 1.0,
+      "numerator": 5,
+      "denominator": 5
+    },
+    "proposal_accuracy": {
+      "value": 0.8,
+      "numerator": 4,
+      "denominator": 5
+    },
+    "unsafe_release": {
+      "count": 0,
+      "denominator": 4
+    },
+    "cases": [
+      {
+        "case_id": "397512CA-DA99-11F1-AC78-0694AF4F9420",
+        "scenario_id": "quantity-mismatch",
+        "trace_id": "2337",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "47CA3C1B-DA99-11F1-AC78-0694AF4F9420",
+        "scenario_id": "currency-scaling",
+        "trace_id": "2365",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "5324B9BE-DA99-11F1-AC78-0694AF4F9420",
+        "scenario_id": "approved-amendment",
+        "trace_id": "2393",
+        "routing": "DELIVERED",
+        "delivery_count": 1,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "63D691BA-DA99-11F1-AC78-0694AF4F9420",
+        "scenario_id": "conflicting-references",
+        "trace_id": "2420",
+        "routing": "REVIEW",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      {
+        "case_id": "745B1A3C-DA99-11F1-AC78-0694AF4F9420",
+        "scenario_id": "unsafe-agent-output",
+        "trace_id": "2448",
+        "routing": "QUARANTINED",
+        "delivery_count": 0,
+        "agent_status": "returned",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      }
+    ]
+  },
+  "local_checks": {
+    "pytest": "191 passed in 4.52s",
+    "typescript": "passed",
+    "web_build": "passed; existing Lucide warnings",
+    "browser": "38 passed (1.1m); landing and disconnected desktop/mobile",
+    "native_unit": "All PASSED; 5 test classes / 12 methods; CSV_UNIT_RESULT=1"
+  },
+  "commands": [
+    "uv run python pilot/verify_native_csv.py --output-directory .local/csv-import-fix/retry-nov7 --execute",
+    "uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output .local/csv-import-fix/native-five-after.json",
+    "uv run pytest -q",
+    "npm --prefix web run check",
+    "npm --prefix web run build",
+    "npm --prefix web run test:e2e"
+  ],
+  "native_unit_commands": [
+    "Copy tests/iris into a fresh /tmp/ss-csv-unit-<uuid> directory in silentshift-clean-iris-1",
+    "iris session IRIS -U SILENTSHIFT",
+    "set ^UnitTestRoot=\"/tmp/ss-csv-unit-<uuid>/\"",
+    "set manager=##class(%UnitTest.Manager).%New()",
+    "set passed=manager.RunTest(\"\",\"/nodelete\")",
+    "write \"CSV_UNIT_RESULT=\",passed,!"
+  ],
+  "source_sha256": {
+    "pilot/orders.py": "fd5763c6b121f4dcf5e9be7b6efb0401cb3c737fe35571c3c242c3a89f737ea6",
+    "pilot/ReferenceImport.cls": "952d64e784a6b05ced577e1530fb82aa98e5135e1038dc58f519f420cd602709",
+    "pilot/make_sample.py": "5d2ad9437e219c5218bd41bbaf251f4e99bdc5279e75df658501968b6293195e",
+    "pilot/verify_native_csv.py": "7b1246af1a5e25403e1f2015231f2f69b4a5e377a047acdb4d6d1e5b9d0de919",
+    "tests/test_csv_pilot.py": "d0d0a5b2b9d2198f6fe1cd723e178f9c23e3d358e217fbc3f409d197eaf211be"
+  },
+  "private_artifact_sha256": {
+    ".local/csv-import-fix/native-five-after.json": "2d51366013c78e2e19d7d1346d6ac5221c3e572c2831130f40d436102bc75048",
+    ".local/csv-import-fix/retry-nov7/verification.json": "4bed4006c8cda2d7137cd7ed3b0df8787ebac85d3acea4663734f59feaeb4cd2",
+    ".local/csv-import-fix/verified-nov7/verification.json": "cd2ba7d4bd3fce3da6875bed520934bfdc4679d97f5e061a6dc4bab203c360e6",
+    ".local/csv-import-fix/native-unit-nov7.log": "ff2afced60dd01b98779cc6028435a5ef53ecc8b3c1d0876024f797333db882a",
+    ".local/csv-import-fix/pytest-nov7.log": "17f5b1c324f1949813325ef4bffb9dd28a429d4e25c87f08b7dc961d1e17cc03",
+    ".local/csv-import-fix/web-check-nov7.log": "2fdb2cc9a65884adc3185ce77007b25699a2ebe846292444c06e4b0e89250a21",
+    ".local/csv-import-fix/web-build-nov7.log": "a71870b28e856e6ce6249a6f4f0a59c2345c831a81ff5f251e8d88ee573df3e0",
+    ".local/csv-import-fix/browser-nov7.log": "430d0112f650c7a420ecf8c54ca1dffdba93b3d6d7ec80904b402b10fec65b05"
+  },
+  "limits": [
+    "No real partner data or approval authentication has been established.",
+    "No whole-order atomicity, order completeness, X12 parser or external ERP delivery.",
+    "No hosted demo, new build qualification, package publication or bonus award."
+  ]
+}

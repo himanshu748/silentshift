@@ -150,6 +150,10 @@ The earlier controlled postcommit HTTP 503 recovery remains documented in [the W
 
 ## Optional local intake and procedural guidance
 
+### Evaluate a bounded CSV order feed
+
+The separate [CSV pilot](../pilot/README.md) accepts incoming order lines and an independently supplied approved-reference export. A trusted local operator imports immutable reference revisions; each line then uses the existing native investigation and deterministic delivery policy. The verifier checks holds, a simulator delivery, repeat submissions and transactional rollback. Samples are synthetic; there is no X12 parser, whole-order delivery guarantee or customer-data qualification. The pilot is source-only and is not included in public IPM 0.2.0. [Current verification](BUILD_STATUS.md).
+
 ### Accept partner JSON from a ready-file inbox
 
 The custom native inbound adapter is dormant by default. Set `SILENTSHIFT_PARTNER_FILES_ENABLED=1` before bootstrap to opt in. Bootstrap creates `.local/partner-inbox` with mode `0700`; Compose mounts it at the adapter's fixed `/var/opt/silentshift/partner-inbox` path. Keep it owned for the trusted operator and container `irisowner`; partner payloads cannot choose a directory.

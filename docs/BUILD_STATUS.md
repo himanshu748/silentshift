@@ -1,10 +1,34 @@
 # Build status
 
+## CSV reference import repaired and native regression passed — November 7, 2026
+
+The source-only CSV pilot now completes its two-line journey in the existing **ARM64 2026.3.0AI.154.0 / 154U** production. The importer failed when dynamic JSON property access treated `id` as an undefined local variable; explicit `%Get()` access and parenthesized conditions fixed that path. Private copied bundles remain mode 0600, with ownership assigned only to the container's `irisowner`. No core policy or packaged runtime class changed. [Pilot commands](../pilot/README.md) · [Sanitized execution receipt](evidence/csv-import-fix-nov7.json).
+
+**CSV native gate: 15/15 passed.** Two references were created and exact repeats reused both. A changed immutable revision was refused and its entire batch rolled back; peer authority, missing approval provenance and empty imports were refused. The synthetic `20 CASE` line against `240 EA` was quarantined with zero deliveries (**session 2282**); the matching `240 EA` line produced one simulator receipt (**session 2310**). Both agents returned with actual reads of message, contracts, related records and precedents. Repeated submissions preserved case IDs, traces and receipts; changed content under the same event identity returned HTTP 409.
+
+An earlier CSV gate passed 14/15 checks: its held case's agent timed out, while the clear case returned. That failure remains retained; a correct hold was not counted as successful model execution. The CLI now exposes agent status/failure code with its line results and refuses native submission below 2 GiB of free host space. After the user freed disk space, the warmed local-model rerun above passed. No timeout cap or safety policy was relaxed.
+
+**Original native gate: 5/5 passed**, run `2021bd56-a83b-4be8-8972-232f0ed06641`, using `scripts/verify_native.py --allow-model-calls`. All five agents returned with four evidence reads, expected policy decisions/routes, persisted evaluation and duplicate-receipt checks. Critical approval was denied; there were **0/4 unsafe releases**. Model proposals matched 4/5 labels; deterministic policy produced all five expected outcomes. This is a synthetic scenario result, not general accuracy or customer validation.
+
+**Other checks:** `uv run pytest -q` — **191 passed in 4.52s**; TypeScript and web build passed with existing Lucide warnings; browser suite — **38 passed in 1.1m**. The full native `%UnitTest` suite passed **5 test classes / 12 methods**, with `All PASSED` and `CSV_UNIT_RESULT=1`. These checks used the existing local production, not a new clean installation. Earlier clean-install evidence remains separate.
+
+The pilot preserves per-line simulator effects and marks order completeness unverified; it supplies no whole-order release, X12 parser, hosted service or real-data qualification. App **0.2.1**, public native IPM **0.2.0**, OEX and contest selections are unchanged. Remote main additionally contains an image-optimization commit, with no runtime source changes. Its hosted CI job could not start because GitHub reports an account billing lock; local passes do not establish a hosted CI pass.
+
 ## Installation guide simplified after QA feedback — November 6, 2026
 
 Consolidated the user installation path into root `INSTALL.md`: prerequisites, seven numbered steps, explicit local configuration, backend/workbench startup, first order and troubleshooting. The optional no-model package verification is labeled separately in the same file. README was reduced from **332 to 52 lines**; feature explanations, tracing details, API examples and developer checks moved to [FEATURES.md](FEATURES.md). Duplicate setup commands were removed from the judge and package-maintenance guides. Existing public README anchors were preserved. No runtime, package version, OEX selection or QA message was changed.
 
 Validation: **115 local references** resolve and **20 shell examples** pass `bash -n`. README and INSTALL were rendered and checked in a browser, including the primary installation link. Docker/Compose readiness passed. A new private configuration containing only the documented settings passed the public-package driver's read-only preflight (`executed=false`). A fresh cold install was not repeated: the Docker VM had **3.19 GiB** free against the **3 GiB** preflight floor. Earlier clean-install execution remains linked in [JUDGE_VERIFICATION.md](JUDGE_VERIFICATION.md); this documentation review is not a new native-install result.
+
+## CSV pilot prototype — November 6, 2026; not released
+
+Started a separate `pilot/` prototype for bounded CSV order preparation, independent approved-reference bundles, stable partner/event/line identity, source hashes and physical row numbers. The default command makes no API/model calls and writes a new private bundle. Two fresh, explicitly synthetic CSV records and their separate reference export were generated and prepared locally. This establishes format handling, not customer-data validation. [Prototype instructions and limitations](../pilot/README.md) · [Product pilot specification](PRODUCT_PILOT.md).
+
+The operator-only native reference importer compiled on **154U**, but initial/retry imports were refused; no `csv-ref:` rows were committed. Import attempts stopped under the owner's failure rule. Both candidate/diagnostic classes were removed from the running instance. The candidate source and opt-in local submission path remain **unverified**, with no end-to-end CSV, whole-order delivery or X12 support claimed. Nothing from this pilot was committed, pushed, packaged, deployed or submitted at this checkpoint.
+
+**Regression results:** the initial live local-model gate passed **5/5**. A subsequent run failed native-agent execution after the container lost DNS resolution for `host.lima.internal`; provider traces recorded HTTP 502 transport failures. Critical cases stayed held and there were zero unsafe deliveries. The VM's observed host address was mapped only in that container's `/etc/hosts`; Ollama reachability returned HTTP 200. A final live `scripts/verify_native.py --allow-model-calls` run again passed **5/5**, with real native tool reads and all expected routes. The mapping is an instance-local recovery, not a portable deployment configuration. [Summary including failed-run limits](evidence/csv-pilot-prototype-nov6.json).
+
+Local tests: **189 passed in 7.61s**, including **15 CSV tests**. TypeScript and production build passed with existing Lucide warnings. Browser checks passed **38/38 in 1.1m** for landing/disconnected desktop/mobile states. These local checks do not establish native CSV ingestion. Hosting, a new runtime build and real partner-data access remain separate gates; app **0.2.1** and public native IPM **0.2.0** are unchanged.
 
 ## Documentation shipped and local checks repeated — November 6, 2026
 
