@@ -20,7 +20,7 @@ Checked November 8, 2026 (UTC) for the local verification below. External public
 | Find a bug in Embedded Python | 2 for first, +1 for second | Not claimed | [Historical callback crash candidate](bug-reports/callback-signal11-candidate.md) lacks a standalone repro and attribution; not a confirmed Python defect |
 | First Developer Community article | 2 | Verified | [Public semantic-validation article](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production); body links SilentShift on OEX. [Publication/backlink receipt](evidence/entry-readback-nov5.json) |
 | Second Developer Community article | 1 | Verified | [Public recoverable-review article](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery); body links SilentShift on OEX. [Publication/backlink receipt](evidence/entry-readback-nov5.json) |
-| YouTube video | 3 | Verified | [Public demo](https://youtu.be/a4dOcqu89EA), [prior caption/1080p verification](evidence/submission-status.json); video URL present in the listing |
+| YouTube video | 3 | Verified | [Public demo](https://youtu.be/a4dOcqu89EA), [anonymous MP4 download and media receipt](evidence/video-download-nov8.json); [download the captioned file](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4). Organizer receipt/award is unconfirmed |
 
 [Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score or ranking is claimed. The native implementation remains **2026.3.0AI.154.0 (Build 154U), ARM64**. No newer runtime is declared tested or compatible.
 
@@ -88,3 +88,11 @@ git log --reverse --format='%H %s' d3637bbe85812035e6258320c81af93305e95560..mai
 ```
 
 No release was tagged, package published, registry changed or Open Exchange listing edited in this run. The owner decides whether to publish a later package; a new OEX edit may go through moderation.
+
+## Downloadable video for organizers
+
+The [official staff reminder](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) asks for a downloadable file even when YouTube is linked. The existing MP4 returned HTTP **200** anonymously, matches the local file, and contains **150 seconds** of **1920×1080 H.264** video, AAC audio and embedded captions. [Measured receipt](evidence/video-download-nov8.json). No replacement video or new upload was made.
+
+The owner can share this exact note with the organizers; it has **not been posted**:
+
+> SilentShift's demo is downloadable without signing in: https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4 . It is the same captioned synthetic-workflow recording linked on YouTube, not footage of the later CSV addition. Bonus qualification remains subject to organizer review.

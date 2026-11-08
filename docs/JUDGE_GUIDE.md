@@ -8,7 +8,7 @@ Start with **Quantity mismatch**, which holds the unsupported change. Then inspe
 
 | What you want to assess | Start here | What it establishes |
 | --- | --- | --- |
-| Understand the operator's task without installing anything | [Captioned demo](https://youtu.be/a4dOcqu89EA), then the screenshots below | Recorded synthetic cases in the working local application; no hosted access |
+| Understand the operator's task without installing anything | [Captioned demo](https://youtu.be/a4dOcqu89EA) or [download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4), then the screenshots below | Recorded synthetic cases in the working local application; no hosted access |
 | Reproduce native execution without a model or API key | [Exact fresh-clone recipe](../INSTALL.md#optional-check-without-a-model) | Public IPM install, production startup, native tests and a held order with real trace messages and tool reads |
 | Exercise fresh local inference and human review | [Live setup](../INSTALL.md), then [the complete journey](#reproduce-the-complete-journey) | New local-model investigations, evidence inspection and eligible review decisions |
 

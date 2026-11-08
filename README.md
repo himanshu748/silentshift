@@ -6,7 +6,7 @@ An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is 
 
 If an effective approved amendment authorizes `20 CASE`, the demonstrated workflow allows it. A native IRIS AI Hub agent investigates the evidence; deterministic policy controls delivery and preserves the critical-release veto.
 
-**[Install SilentShift](INSTALL.md)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
+**[Install SilentShift](INSTALL.md)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
 <a id="native-build-154-setup"></a>
 ## Installation
