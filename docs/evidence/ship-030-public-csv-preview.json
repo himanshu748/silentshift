@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-11-08T10:12:14.898124+00:00",
+  "scope": "public IPM 0.3.0 native preview API; read-only, no imports or inference; not a browser run",
+  "http_status": 200,
+  "preview": {
+    "preview_hash": "45a597b2367ae2b1b8fe0286399abca4aa63d0d482263e783ecb251148a9da5c",
+    "feed_sha256": "abda2a0eba61f0d6a676ca360b595c66a4ef663d3e75965f045a67a127fb5529",
+    "approved_sha256": "288305bf4f4d57a052713ca757c2799fd4e6eba22d6bcfb0284137e63c49382e",
+    "records": [
+      {
+        "message": {
+          "occurred_at": "2026-11-08T10:11:36.523086+00:00",
+          "product_id": "SYNTHETIC-SKU",
+          "quantity": "20",
+          "unit": "CASE",
+          "business_unit": "TEST",
+          "kind": "order",
+          "source": "synthetic-csv-partner",
+          "event_id": "csv:bce69b9cbe15e052816b2aba997d649a9069f3f289bbee9c6a294f3f965894ad",
+          "correlation_id": "csv-order:237e4a4df93aff30ad227aa87a57c9679a072ded1c894b86ec727c4415bc4fbb",
+          "contract_id": "csv-line:bce69b9cbe15e052816b2aba997d649a9069f3f289bbee9c6a294f3f965894ad"
+        },
+        "order_id": "SYNTHETIC-held-20261108T101136523086",
+        "line_id": "1",
+        "partner": "synthetic-csv-partner",
+        "source_row": 2,
+        "existing_case": null
+      },
+      {
+        "message": {
+          "occurred_at": "2026-11-08T10:11:36.523086+00:00",
+          "product_id": "SYNTHETIC-SKU",
+          "quantity": "240",
+          "unit": "EA",
+          "business_unit": "TEST",
+          "kind": "order",
+          "source": "synthetic-csv-partner",
+          "event_id": "csv:c1fb3f90cb8ef86551135715d0c948797f8cb9045af56574a9564a06bc4a1525",
+          "correlation_id": "csv-order:7c62d24df71f10055777d74369eaf07d1228ccd5b77b09363f5fcd40e51526f2",
+          "contract_id": "csv-line:c1fb3f90cb8ef86551135715d0c948797f8cb9045af56574a9564a06bc4a1525"
+        },
+        "order_id": "SYNTHETIC-clear-20261108T101136523086",
+        "line_id": "1",
+        "partner": "synthetic-csv-partner",
+        "source_row": 3,
+        "existing_case": null
+      }
+    ],
+    "references": [
+      {
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "240",
+        "unit": "EA",
+        "business_unit": "TEST",
+        "effective_from": "2026-11-07T10:11:36.523086+00:00",
+        "id": "csv-ref:a0095176b8242217c27a4906490243d80158731f5a62487cdefe91f99c2e0dcd",
+        "contract_id": "csv-line:bce69b9cbe15e052816b2aba997d649a9069f3f289bbee9c6a294f3f965894ad",
+        "authority": "approved",
+        "effective_to": null,
+        "timestamp_semantics": "event_time",
+        "approval_provenance": {
+          "approved_by": "synthetic-buyer",
+          "approved_at": "2026-11-06T10:11:36.523086+00:00",
+          "revision": "v1",
+          "source_sha256": "288305bf4f4d57a052713ca757c2799fd4e6eba22d6bcfb0284137e63c49382e",
+          "source_row": 2
+        }
+      },
+      {
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "240",
+        "unit": "EA",
+        "business_unit": "TEST",
+        "effective_from": "2026-11-07T10:11:36.523086+00:00",
+        "id": "csv-ref:40cc2cbae794d595209af85599f8f0d4ddf09df5cd3f6c38a173ca3e982efad9",
+        "contract_id": "csv-line:c1fb3f90cb8ef86551135715d0c948797f8cb9045af56574a9564a06bc4a1525",
+        "authority": "approved",
+        "effective_to": null,
+        "timestamp_semantics": "event_time",
+        "approval_provenance": {
+          "approved_by": "synthetic-buyer",
+          "approved_at": "2026-11-06T10:11:36.523086+00:00",
+          "revision": "v1",
+          "source_sha256": "288305bf4f4d57a052713ca757c2799fd4e6eba22d6bcfb0284137e63c49382e",
+          "source_row": 3
+        }
+      }
+    ],
+    "mode": "per-line-simulator",
+    "atomic_order_delivery": false,
+    "order_completeness": "not_verified"
+  },
+  "bounded_rejection": {
+    "rows_submitted": 21,
+    "http_status": 422
+  },
+  "elapsed_seconds": 0.266,
+  "passed": true,
+  "harness_note": "Initial harness expected HTTP 400 incorrectly; documented APP_INVALID maps to 422 in SilentShift.API. Only the private probe assertion changed; original result preserved. No runtime code or stored input changed."
+}

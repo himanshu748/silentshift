@@ -1,0 +1,1 @@
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest --version 0.3.0 --execution-mode recorded-replay --container silentshift-bonus-registry-public-030-nov8 --api-port 52943 --execute

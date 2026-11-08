@@ -1,0 +1,1 @@
+uv run python scripts/trace_example.py --api http://127.0.0.1:52943/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-public-030-nov8 --output <retained-checkout>/.local/ship-030/registry-repeat.json
