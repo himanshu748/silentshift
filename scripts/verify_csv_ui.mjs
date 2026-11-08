@@ -32,9 +32,18 @@ if (reuseArgument !== -1 && !args[reuseArgument + 1])
   throw new Error("Supply the previous synthetic run directory.");
 process.loadEnvFile(path.join(root, ".env"));
 const web = new URL(process.env.SILENTSHIFT_WEB_URL ?? "http://127.0.0.1:5173");
-const api = new URL("http://127.0.0.1:52773/silentshift/api");
-if (!["127.0.0.1", "localhost"].includes(web.hostname))
-  throw new Error("Only the local workbench is supported.");
+const api = new URL(
+  process.env.SILENTSHIFT_API_URL ?? "http://127.0.0.1:52773/silentshift/api",
+);
+for (const endpoint of [web, api]) {
+  if (
+    endpoint.protocol !== "http:" ||
+    !["127.0.0.1", "localhost"].includes(endpoint.hostname) ||
+    endpoint.username ||
+    endpoint.password
+  )
+    throw new Error("Only local HTTP workbench and API endpoints are supported.");
+}
 const pair = (kind) => {
   const username = process.env[`SILENTSHIFT_${kind}_USERNAME`];
   const password = process.env[`SILENTSHIFT_${kind}_PASSWORD`];
