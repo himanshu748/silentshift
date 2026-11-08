@@ -1,12 +1,19 @@
 # Build status
 
+## 0.3.0 candidate check, November 8, 2026 UTC
+
+The native manifest now declares **0.3.0 (prepared, not published)**. The last verified public native registry version is **0.2.0**; the independent OEX/frontend release remains **0.2.1**. Source staging reports **58 files: 45 native classes and 11 assets**, while the historical public 0.2.0 package contained **44/10**. In an isolated Linux source checkout, **207 Python tests passed**, packaging/staging passed, and TypeScript and web production build passed. [Dated candidate receipt](evidence/ipm-030-candidate-linux-nov8.json) · [commands](evidence/ipm-030-candidate-linux-nov8-commands.sh) · [captured output](evidence/ipm-030-candidate-linux-nov8-output.txt).
+
+This is **not** a new native build-154 gate, live five-case run, second API replay, or browser import pass. Docker/IRIS and the proprietary 154U image were unavailable in the temporary Linux sandbox; Chromium download failed on the external Playwright CDN with `EAI_AGAIN`. Earlier IRIS and browser successes below retain their dated original code-snapshot scope. Owner-only fresh-native and publication instructions are in [IPM.md](IPM.md#owner-only-030-publication-runbook). No runtime policy code, hosted CI settings, OEX listing, release registry, or bonus row changed.
+
+
 ## Final installation and workflow pass completed — November 8, 2026
 
 Fixed source bootstrap to compile only the checked-in source directory. The normal documented command now succeeds in the previously failing instance while retaining its diagnostic class. No application class, policy or AI behavior changed. [Regression receipt](evidence/bootstrap-scope-fix-nov8.json).
 
 After that repair: **5 native classes / 12 methods passed**, **5/5 final routes passed** with **4/5 raw model recommendations**, **54 review assertions passed**, live file intake/recovery passed, and **32 CSV UI checks passed**. Provider-message and native-vector inspectors passed. Python: **207 passed in 3.89s**; TypeScript/build passed; browser suites passed **38 disconnected** and **16 connected** checks. [Complete final receipt and scope](evidence/final-pass-nov8.json) · [commands and outputs](JUDGE_VERIFICATION.md).
 
-This is a retained-instance upgrade/regression pass, separate from the earlier fresh source and public-package installs. Public artifacts and article backlinks were checked anonymously. IPM remains **0.2.0**, OEX/workbench **0.2.1**; no release or external message was submitted. Hosted CI is blocked before execution by GitHub's billing lock. Idea/bug qualification and all bonus awards remain unconfirmed. Synthetic examples, simulator delivery and the absence of real partner-data/ERP qualification are unchanged limits.
+This **historical pass** is a retained-instance upgrade/regression pass, separate from the earlier fresh source and public-package installs. Public artifacts and article backlinks were checked anonymously. At that pass, public IPM was **0.2.0** and OEX/workbench was **0.2.1**; no release or external message was submitted. The subsequently prepared native 0.3.0 candidate has not changed this observed public version. Hosted CI is blocked before execution by GitHub's billing lock. Idea/bug qualification and all bonus awards remain unconfirmed. Synthetic examples, simulator delivery and the absence of real partner-data/ERP qualification are unchanged limits.
 
 ## Product story and rules reviewed — November 8, 2026
 
