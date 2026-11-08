@@ -1,5 +1,7 @@
 # Judge walkthrough: the same order, two different decisions
 
+**Package version at this documentation freeze:** public native IPM last verified **0.2.0**; current `module.xml` prepares **0.3.0**, not yet published or clean-IRIS-verified. The separate frontend release stays **0.2.1**. For judges after an owner publication, confirm the actual installed package version rather than assuming the prepared version is live. [Published-versus-main ledger](SUBMISSION_CHECKLIST.md#published-vs-main).
+
 An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift helps the integration operator answer the next question: **is there approved evidence that makes this change legitimate?**
 
 Start with **Quantity mismatch**, which holds the unsupported change. Then inspect **Approved amendment**, which allows the same incoming value because an approved amendment is effective at event time. The difference is the authority behind the order. Follow that evidence to the policy decision and the simulator receipt.
@@ -100,7 +102,7 @@ The [IPM path](IPM.md) installs public native backend **0.2.0** into a prepared 
 
 From the current source installation, open **CSV Import** with an incoming order feed and a separate, independently approved reference export. Preview the comparison first. An explicitly authorized importer can then record the approved source and investigate each line through the same native production. [CSV guide](CSV_IMPORT.md).
 
-The fresh source instance held the unsupported `20 CASE` line with no delivery and delivered the matching `240 EA` line once. Repeating the import recovered the original cases and receipts. The [new native/UI receipt](evidence/csv-isolated-nov8.json) covers that journey, invalid inputs, source authority, interrupted-request recovery and compact layouts. This is source-only functionality; public native IPM remains the earlier package. The examples are synthetic and delivery is per line to the simulator, without a whole-order completeness guarantee.
+The fresh source instance held the unsupported `20 CASE` line with no delivery and delivered the matching `240 EA` line once. Repeating the import recovered the original cases and receipts. The [new native/UI receipt](evidence/csv-isolated-nov8.json) covers that journey, invalid inputs, source authority, interrupted-request recovery and compact layouts. The CSV source/backend is included in the **unpublished native 0.3.0 candidate**. The last verified **public 0.2.0** installation does not include it; even after the native package is published, the CSV web UI requires the separately built frontend. The examples are synthetic and delivery is per line to the simulator, without a whole-order completeness guarantee.
 
 ![Two imported CSV lines show the incoming value, approved value, actual route and native trace](assets/csv-isolated-nov8-desktop.png)
 
