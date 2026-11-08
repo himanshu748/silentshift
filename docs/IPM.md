@@ -12,7 +12,7 @@ The Compile-after hook calls `IPM.CheckTarget()`: the namespace/build must match
 
 Web applications and roles are deliberately created by the **explicit** `SilentShift.Setup.Install()` operation, using private environment configuration. Defining them again as automatic package web-app resources would create a second security owner and hide a consequential setup step. Setup configures the authenticated `/silentshift` API, internal `/silentshift-provider` gateway and native trace portal. It seeds independent references, enables production auto-start and starts `SilentShift.Production`; it invokes no model.
 
-## Owner publication commands — not executed
+## Owner-only 0.3.0 publication runbook
 
 The [candidate changelog](../CHANGELOG.md) is release-ready copy; the [judge gate](JUDGE_VERIFICATION.md) determines whether it is safe to publish. **Do not publish while that gate is incomplete or failing.** No package, registry release, Git tag or OEX edit is part of candidate preparation.
 
@@ -37,7 +37,7 @@ The expected identity is `0.3.0`. Staging and packaging are local operations, no
 
 ### Public community registry: use OEX
 
-[Official OEX instructions](https://docs.openexchange.intersystems.com/apps/ipm/) state that Open Exchange is the publication route for `pm.community.intersystems.com`. Do not configure a direct public publishing credential or run `zpm "publish silentshift"` against that registry. The command exists for an explicitly configured writable private/testing registry; it is not an extra required public-publication step. [Official CLI reference](https://github.com/intersystems/ipm/wiki/02.-CLI-commands#publish).
+[Official OEX instructions](https://docs.openexchange.intersystems.com/apps/ipm/) state that Open Exchange is the publication route for `pm.community.intersystems.com`. Do not configure a direct public publishing credential or run `zpm "publish silentshift"` against that registry. The command exists for an explicitly configured writable private/testing registry; it is not an extra required public-publication step. **Only** after configuring and selecting a private writable test registry, the optional local test command is `zpm "publish silentshift"`. Never use it to try to publish to the public community registry. [Official CLI reference](https://github.com/intersystems/ipm/wiki/02.-CLI-commands#publish).
 
 After the candidate gate passes, the owner can:
 
