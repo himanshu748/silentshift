@@ -1,0 +1,19 @@
+# Changelog
+
+## 0.3.0 candidate — not published
+
+Compared with the public 0.2.0 source snapshot `d3637bbe85812035e6258320c81af93305e95560`:
+
+- **Bounded CSV intake** (`09f71b7`): accept order lines and an independently approved reference export through the native production, with explicit importer permission, bounded input validation and retained source evidence.
+- **CSV workbench** (`ab00ecc`, `df59142`): preview the comparison, approve the source explicitly, investigate each line, recover interrupted imports and reopen persisted results without redispatch.
+- **Interactive landing/workbench** (`770baab`): demonstrate the unsupported-unit hold and approved-amendment release, with case navigation, keyboard access and reduced-motion behavior.
+- **Image optimization** (`fbd3947`): reduce repository image payloads.
+- **Source bootstrap repair** (`e61a961`): compile the checked-in source directory instead of unrelated diagnostic classes retained in an existing namespace.
+- **Release harness**: read the candidate manifest version when staging, packaging and checking receipts instead of reporting the old published identity.
+- **Documentation**: consolidate installation in `INSTALL.md`, retain historical failures and verification boundaries, and distinguish recorded replay from fresh local inference.
+
+The native IPM archive owns the backend classes and runtime assets. The React UI, optimized documentation images and source-bootstrap script are repository deliverables; they are not web assets installed by IPM. Pair the native candidate with the matching repository workbench. The [exact post-package commit inventory](docs/SUBMISSION_CHECKLIST.md#published-vs-main) includes documentation and evidence changes as well as runtime changes.
+
+No routing policy, agent behavior or native execution semantics changed during candidate preparation. All examples remain synthetic; delivery remains per line to an IRIS simulator. There is no hosted demo or verified external ERP/X12 integration. Organizer qualification and awards remain unconfirmed.
+
+**Release gate:** see the current head of [judge verification](docs/JUDGE_VERIFICATION.md). A version bump, source stage or earlier pass does not establish a passing 0.3.0 candidate or a public registry installation. Publish only after the candidate gate passes.

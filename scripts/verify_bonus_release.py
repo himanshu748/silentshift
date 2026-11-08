@@ -16,7 +16,7 @@ import subprocess
 import time
 
 from fetch_ipm import SHA256, SIZE
-from package_ipm import ROOT, stage
+from package_ipm import ROOT, stage, module_version
 from verify_ipm_clean import (
     RELEASE, activate, command, prepare_native, private_write, runtime_environment, space,
 )
@@ -182,7 +182,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source',choices=['load','public-registry'],required=True)
     p.add_argument('--container',required=True)
-    p.add_argument('--version',default='0.2.0')
+    p.add_argument('--version',help='Expected version; defaults to source manifest for load, published 0.2.0 for registry')
     p.add_argument('--install-latest',action='store_true',help='Use literal public zpm install silentshift; still require the expected installed version')
     p.add_argument('--execution-mode',choices=['recorded-replay','live'],default='recorded-replay')
     p.add_argument('--allow-model-calls',action='store_true',help='Permit only the configured local Ollama live verification')
@@ -196,6 +196,7 @@ def main():
     p.add_argument('--min-vm-free-gib',type=float,default=3)
     p.add_argument('--execute',action='store_true')
     a=p.parse_args();a.activate_runtime=True
+    a.version = a.version or (module_version(ROOT) if a.source == 'load' else '0.2.0')
     try:result=execute(a)
     except (OSError,ValueError,RuntimeError,subprocess.TimeoutExpired) as e:p.exit(1,'Verification stopped: '+str(e)+'\n')
     if not a.execute:print(json.dumps(result,indent=2))

@@ -30,7 +30,6 @@ from package_ipm import ROOT
 from verify_ipm_native import TABLES, literal
 
 GIB = 1024 ** 3
-INSTALL_COMMAND = 'install LocalArchive/silentshift 0.2.0 -synchronous'
 RELEASE = '/home/irisowner/silentshift-ipm-release'
 RUNTIME_KEYS = ('SILENTSHIFT_IRIS_USERNAME', 'SILENTSHIFT_IRIS_PASSWORD',
     'SILENTSHIFT_VIEWER_USERNAME', 'SILENTSHIFT_VIEWER_PASSWORD', 'SILENTSHIFT_GATEWAY_PASSWORD',
@@ -144,7 +143,8 @@ def preflight(args) -> dict:
     return {'kind': 'clean-local-filesystem-ipm-install-plan',
         'archive': boundary, 'image_id': image['Id'], 'architecture': image['Architecture'],
         'image_version': labels['com.intersystems.platform-version'], 'namespace': 'SILENTSHIFT',
-        'container': args.container, 'space': space(args), 'install_command': INSTALL_COMMAND,
+        'container': args.container, 'space': space(args),
+        'install_command': 'install LocalArchive/silentshift ' + boundary['version'] + ' -synchronous',
         'new_persistent_volumes': 0, 'source_mounts': 0, 'network_during_install': 'none',
         'estimated_extra_disk_gib': '0.8-1.3; estimate, not a measured bound',
         'activate_runtime': args.activate_runtime, 'native_five_requested': args.allow_model_calls,
@@ -262,7 +262,7 @@ def execute(args, plan: dict) -> dict:
             'write "SS_CLIENT_OK",!', '12-client', marker='SS_CLIENT_OK')
         for label, cli in (('13-disable-analytics', 'config set analytics 0'),
                 ('14-filesystem-repo', 'repo -name LocalArchive -fs -depth 2 -path ' + RELEASE + '/repository/'),
-                ('15-install', INSTALL_COMMAND)):
+                ('15-install', plan['install_command'])):
             session('set sc=##class(%IPM.Main).Shell(' + literal(cli) + ')\n'
                 'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\n'
                 'write "SS_COMMAND_OK",!', label, marker='SS_COMMAND_OK')

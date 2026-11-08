@@ -25,6 +25,19 @@ RUNTIME_FILES = (
 TARGET_PREFIX = '${mgrdir}silentshift/${namespace}/'
 
 
+def module_version(root: Path) -> str:
+    """Read the candidate identity; never substitute a published version."""
+    raw = regular_file(root, 'module.xml').read_bytes()
+    if b'<!' in raw:
+        raise ValueError('DTD and XML entity declarations are not package metadata')
+    module = ET.fromstring(raw).find('./Document/Module')
+    version = module.findtext('Version', '') if module is not None else ''
+    if (module is None or module.findtext('Name') != 'silentshift'
+            or not re.fullmatch(r'(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', version)):
+        raise ValueError('Expected the silentshift IPM module with a release version')
+    return version
+
+
 def regular_file(root: Path, relative: str) -> Path:
     """Reject traversal, external files and symlinked ancestors before copying."""
     parts = PurePosixPath(relative).parts
@@ -50,7 +63,7 @@ def package_files(root: Path) -> list[str]:
         raise ValueError('DTD and XML entity declarations are not package metadata')
     module = ET.fromstring(raw).find('./Document/Module')
     if (module is None or module.findtext('Name') != 'silentshift'
-            or module.findtext('Version') != '0.2.0'):
+            or module.findtext('Version') != module_version(root)):
         raise ValueError('Expected the silentshift IPM module')
     requirements = module.find('SystemRequirements')
     if requirements is None or requirements.attrib != {
@@ -139,7 +152,7 @@ def stage(root: Path, destination: Path) -> dict:
             shutil.copyfile(source, target)
             inventory.append({'path': relative, 'bytes': target.stat().st_size,
                 'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
-        result = {'package': 'silentshift', 'version': '0.2.0',
+        result = {'package': 'silentshift', 'version': module_version(root),
             'kind': 'allowlisted-source-stage', 'native_install_verified': False,
             'registry_published': False, 'files': inventory}
         (staging / 'package-inventory.json').write_text(
