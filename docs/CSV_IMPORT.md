@@ -85,4 +85,6 @@ For the CLI workflow, see [the pilot guide](../pilot/README.md).
 
 ## Latest verification boundary
 
-The [UI finish receipt](evidence/csv-ui-design-nov8.json) and its [successful import](evidence/csv-ui-nov8-success.json) / [bounded rejection](evidence/csv-ui-nov8-rejection.json) observations were captured before the latest fresh-clone gate. The subsequent source reload in the retained instance failed while compiling an untracked diagnostic class, so the post-gate CSV repeat was stopped. [Failure and next verification gap](JUDGE_VERIFICATION.md#csv-and-ui-evidence-stopped-repeat). This is not a newly verified clean-source CSV installation.
+The remaining CSV repeat passed in a new source-loaded build-154 instance: **32 browser checks**, with one held line, one delivered line, native invalid-input rejection and repeat imports that reused the original cases. The core native five-case run also passed. [Complete source verification](JUDGE_VERIFICATION.md#current-main-repeat--isolated-source-november-8-2026-utc) · [CSV receipt](evidence/csv-isolated-nov8.json) · [desktop](assets/csv-isolated-nov8-desktop.png) · [mobile](assets/csv-isolated-nov8-mobile.png).
+
+The earlier retained-instance reload failure remains recorded in [its receipt](evidence/csv-current-nov8.json). Testing in an isolated instance closed that verification gap without deleting its diagnostic class or changing native behavior. Public IPM remains the earlier package; the new source was loaded locally, not published.

@@ -1,5 +1,13 @@
 # Build status
 
+## Current source and CSV verified in a clean instance — November 8, 2026
+
+A fresh GitHub clone at `35d29e0913ea27f4c56dfed214a402418984e5f0` passed source installation through native IPM `load`, production startup and the full native suite on **ARM64 2026.3.0AI.154.0 / 154U**. **5 native test classes / 12 methods passed; final routes passed 5/5.** All agents returned with four native tools. Raw recommendations matched **4/5** labels; policy selected review for the conflicting-reference case. This is a synthetic integration result, not a general accuracy claim. [Native receipt](evidence/source-isolated-nov8.json).
+
+The fresh CSV workbench passed **32 checks**: held and delivered lines, invalid input, authority confirmation, retained originals, recovery, duplicate handling, keyboard, mobile and reduced motion. Connected read-only browser checks passed **16**; landing/disconnected checks passed **38**. Python returned **207 passed in 11.30s**; TypeScript and production build passed. [CSV receipt](evidence/csv-isolated-nov8.json) · [connected checks](evidence/source-isolated-nov8-connected.json) · [commands and limits](JUDGE_VERIFICATION.md).
+
+The preceding failed source reload is retained as history. A fresh instance avoided its untracked diagnostic class; no native runtime, policy or AI investigation code was changed. The browser harness now supports a separate local API port. Public native IPM **0.2.0** and OEX/workbench **0.2.1** are unchanged; nothing was published. **Hosted CI did not run because GitHub reports an account billing lock.** [Annotation](evidence/hosted-ci-nov8.json). No billing change, hosted demo, real partner-data validation, external delivery or organizer award is claimed.
+
 ## CSV workbench presentation refined — November 8, 2026
 
 Compacted the paired file controls, strengthened quantity/unit comparisons, and made the next action depend on the current step. Held and delivered values receive their route colors only after a native result. Progress counts resolved lines; source provenance remains available in a disclosure. Keyboard controls, mobile paired values and reduced motion remain part of the workflow. Native source, policy and AI Hub behavior are unchanged.

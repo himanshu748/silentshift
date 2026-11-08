@@ -1,6 +1,42 @@
 # Judge verification
 
-## Current-main repeat — November 8, 2026 (UTC)
+## Current-main repeat — isolated source, November 8, 2026 (UTC)
+
+**The remaining local verification gap is closed.** A fresh GitHub clone at **`35d29e0913ea27f4c56dfed214a402418984e5f0`** was loaded into a new **2026.3.0AI.154.0 Community / 154U ARM64** container, using the already loaded official image. The namespace was pristine and the application container had no source mounts. The tracked clone remained clean. Only documentation/evidence commits followed this tested snapshot.
+
+This run used **IPM `load` of current source**, including the CSV class and parser. It is separate from the earlier successful public `zpm "install silentshift"` gate below. The source manifest still declares the published version, but **no new native package was published**. Public IPM remains **0.2.0**; app/workbench remains **0.2.1**. No provider key, paid service or new IRIS download was used.
+
+| Check | Observed result | Evidence |
+| --- | --- | --- |
+| Fresh source load and production startup | Passed; **45 declared classes** | [Exact command](evidence/source-isolated-nov8-command.sh), [output](evidence/source-isolated-nov8-output.txt), [load transcript](evidence/source-isolated-nov8-load.txt) |
+| Full native `%UnitTest` | **5 classes / 12 methods passed** | [Complete output](evidence/source-isolated-nov8-native-tests.txt) |
+| Fresh live native scenarios | **5/5 final routes passed**; all agents returned with all four evidence tools | [Source, provenance and complete native receipt](evidence/source-isolated-nov8.json) |
+| Fresh CSV workbench import | **32 browser checks passed**, with new held and delivered cases | [CSV receipt](evidence/csv-isolated-nov8.json), [exact command](evidence/csv-isolated-nov8-command.sh), [output](evidence/csv-isolated-nov8-output.txt) |
+| Fresh-clone Python | **207 passed in 11.30s** | [Output](evidence/source-isolated-nov8-pytest.txt) |
+| TypeScript and production build | Both passed | [Types](evidence/source-isolated-nov8-types.txt), [build](evidence/source-isolated-nov8-build.txt) |
+| Landing/disconnected browser checks | **38 passed** | [Output](evidence/source-isolated-nov8-browser.txt) |
+| Connected browser checks | **16 passed**, desktop and mobile; read-only native data | [Receipt](evidence/source-isolated-nov8-connected.json), [output](evidence/source-isolated-nov8-connected.txt) |
+
+The complete source/native command took **359.323 seconds**, including installation, one separate local amendment embedding, an SDK diagnostic and the five-case run. CSV verification took **119.966 seconds**; connected checks took **55.396 seconds**. The [local-check receipt](evidence/source-isolated-nov8-local-checks.json) retains each command's measured wall time and exit code. All these commands exited successfully.
+
+Final routing matched the frozen labels **5/5**; raw model recommendations matched **4/5**. The model proposed quarantine for conflicting references; policy correctly selected review. These synthetic cases establish integration behavior, not general model accuracy or an AI advantage over the deterministic baseline. The SDK diagnostic and amendment indexing are excluded from the five-case score.
+
+Native scenario sessions were **30, 58, 86, 113, 141**. The CSV mismatch was **QUARANTINED**, session **169**, with **0 deliveries**; its matching line was **DELIVERED**, session **197**, with **1 simulator receipt**. Both CSV agents returned and read every tool. The UI checks also exercised bounded file rejection, native invalid-quantity rejection, explicit source approval, viewer restrictions, interrupted-request recovery, repeat import without new dispatch, case navigation, keyboard input, compact layouts and reduced motion. [First import](evidence/csv-isolated-nov8-first.json) · [repeat receipt](evidence/csv-isolated-nov8-repeat.json) · [desktop capture](assets/csv-isolated-nov8-desktop.png) · [mobile capture](assets/csv-isolated-nov8-mobile.png).
+
+The earlier reload failure below is retained unchanged. It was bypassed by testing in a new instance without the untracked diagnostic class; that class was not deleted, and native code/policy/AI behavior were not changed. The only harness change allows an explicitly local API port, with [remote endpoints rejected before credential use](evidence/csv-isolated-nov8-guard.json).
+
+**Hosted CI is blocked separately:** GitHub reports that the job did not start because the account is locked for billing. [Exact annotation](evidence/hosted-ci-nov8.json). The passing checks above are local; no hosted CI pass or billing repair is claimed.
+
+The isolated test containers are retained for inspection. Restart only this pair to inspect these sessions:
+
+```sh
+docker --context colima-silentshift start silentshift-bonus-load-main-nov8
+docker --context colima-silentshift start silentshift-bonus-load-main-nov8-gateway
+```
+
+Its API and trace portal use port **52913**. Opening message bodies requires a permitted account in that instance. CSV remains additive to the README's keyless replay and the JSON-ready-file adapter walkthrough. All inputs remain synthetic; delivery remains the IRIS simulator. No newer build, hosted demo, external ERP integration, package publication or bonus award is claimed.
+
+## Earlier current-main repeat — November 8, 2026 (UTC)
 
 **Public-package gate: passed. Current-main CSV repeat: stopped at failed source-reload preparation.** These are separate results; the released native package does not contain the source-only CSV feature.
 

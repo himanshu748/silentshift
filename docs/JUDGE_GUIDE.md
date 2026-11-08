@@ -51,7 +51,7 @@ For the separate [payment capture](assets/native-currency-quarantine.png), the d
 
 For a no-key technical check, follow [the optional replay steps in INSTALL.md](../INSTALL.md#optional-check-without-a-model). Installation commands are kept there so you do not have to combine this walkthrough with another setup recipe.
 
-Expected result: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. The command prints the session ID and Visual Trace URL. This runs the native agent and tools with a recorded provider answer, without fresh inference. [Verified receipt](evidence/judge-main-clean-clone.json). Replay covers the held order; the live amendment comparison below requires the normal local-model installation.
+Expected result: **12/12 replay checks**, five provider request/response pairs, four native evidence tools, **QUARANTINED** and zero deliveries. The command prints the session ID and Visual Trace URL. This runs the native agent and tools with a recorded provider answer, without fresh inference. [Latest public-package receipt](evidence/judge-current-nov8.json). Replay covers the held order; the live amendment comparison below requires the normal local-model installation.
 
 For the live local-model comparison in the workbench:
 
@@ -96,13 +96,21 @@ A partner that cannot call REST can drop a ready file into the trusted inbox. Th
 
 The [IPM path](IPM.md) installs public native backend **0.2.0** into a prepared interoperability namespace with `zpm "install silentshift"`. Two fresh build-154 containers installed from the community registry without source mounts, explicitly started production and passed all **five native test classes / 12 methods**. One passed the no-key replay above; the other passed **5/5 live local-model routes**, with four tools per case. [Public replay receipt](evidence/final-public-replay.json) · [public live receipt](evidence/final-public-live.json). The separately built frontend is **0.2.1**. Installation itself does not configure accounts or start production; the driver performs those explicit setup steps.
 
+## Bring an order feed through the workbench
+
+From the current source installation, open **CSV Import** with an incoming order feed and a separate, independently approved reference export. Preview the comparison first. An explicitly authorized importer can then record the approved source and investigate each line through the same native production. [CSV guide](CSV_IMPORT.md).
+
+The fresh source instance held the unsupported `20 CASE` line with no delivery and delivered the matching `240 EA` line once. Repeating the import recovered the original cases and receipts. The [new native/UI receipt](evidence/csv-isolated-nov8.json) covers that journey, invalid inputs, source authority, interrupted-request recovery and compact layouts. This is source-only functionality; public native IPM remains the earlier package. The examples are synthetic and delivery is per line to the simulator, without a whole-order completeness guarantee.
+
+![Two imported CSV lines show the incoming value, approved value, actual route and native trace](assets/csv-isolated-nov8-desktop.png)
+
 ## What to assess against the rubric
 
 | Official criterion | Inspect | What to verify |
 | --- | --- | --- |
 | Complexity | [Native architecture](../ARCHITECTURE.md), [provider message bodies](evidence/provider-body-captures.json), [Workflow receipt](evidence/review-queue.json) | Real production messages connect the investigation to routing; later review has persisted task/session links |
 | Clarity of Instructions | [Fresh-clone recipe](../INSTALL.md#optional-check-without-a-model), [actual commands and output](JUDGE_VERIFICATION.md) | Exact build, prerequisites, expected hold and replay limitations are explicit |
-| Developer Experience | [Public installation transcript](evidence/judge-main-install.txt), [clean-clone receipt](evidence/judge-main-clean-clone.json) | Native IPM 0.2.0 installs, production starts and all native tests pass without a provider key |
+| Developer Experience | [Public installation transcript](evidence/judge-main-install.txt), [clean-clone receipt](evidence/judge-current-nov8.json) | Native IPM 0.2.0 installs, production starts and all native tests pass without a provider key |
 | Applicability | [Unsupported order](assets/demo-unit-quarantine.jpg), [authorized amendment](assets/native-approved-delivery.png) | Approved authority changes the outcome; the same incoming quantity is not inherently wrong |
 | Usability | [Actual review actions](evidence/review-ui.json), [interface verification](UI_REVIEW.md) | The operator can inspect evidence, see the route and resolve an eligible hold; desktop/mobile, keyboard and reduced-motion checks have distinct scopes |
 
