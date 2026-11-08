@@ -1,5 +1,12 @@
 # Sponsor technology evidence
 
+## Final local repeat — November 8, 2026
+
+The [final pass](JUDGE_VERIFICATION.md#final-source-pass--november-8-2026-utc) repeated normal source bootstrap, native unit tests and the five scenarios after repairing installation scope. It also repeated [human-review approval/rejection and concurrency](evidence/final-pass-nov8-review.json), [live file intake and recovery](evidence/final-pass-nov8-adapter.json), [CSV browser intake](evidence/final-pass-nov8.json), [provider-message inspection](evidence/final-pass-nov8-provider.json) and [native-vector evidence inspection](evidence/final-pass-nov8-precedents.json). These are local behavior/artifact confirmations, not organizer awards. The historical adapter receipt has no defined aggregate counting rule, so its former numeric label has been replaced with a behavior label; its recorded data is unchanged.
+
+Public native IPM remains the verified earlier package; the [new download](evidence/final-pass-nov8-ipm-artifact.json) matched its archive. The anonymous [listing/contest/article check](evidence/final-pass-nov8-public.json) passed; dedicated idea visibility and vendor/organizer qualification remain unconfirmed. The existing video file remains downloadable. No OEX edit, registry publication, forum/support message, article edit or questionnaire resubmission occurred. Existing Not claimed statuses remain in force.
+
+
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
 **Application/workbench release: 0.2.1. Published native IPM package: 0.2.0. Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** Live evidence uses local `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings; recorded replay performs no new inference. No newer IRIS build is claimed. **Every organizer award remains unconfirmed**, including rows whose implementation or publication is Verified. The Embedded Python bonus is Not claimed under the owner’s latest instruction; its native execution evidence remains valid. The [submission checklist](SUBMISSION_CHECKLIST.md) is the current status index; dated experiments below retain their original version and results. The November 5 OEX description edit was submitted after the user authorized it; DC articles were unchanged.
@@ -149,7 +156,7 @@ uv run python scripts/verify_native_adapter.py --inspect-file adapter-a0a5ad658f
 uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output evidence/native/step4-five.json
 ```
 
-The [82-check receipt](evidence/adapter.json) proves case `D23769A0-D7B0-11F1-9980-CA5720F48492`, session 1610, delivered once; `E10A0F45-D7B0-11F1-9980-CA5720F48492`, session 1636, stayed quarantined with zero receipts. Both made all four native reads. Ack-write recovery, different-name event replay, same-name redrop, exact retained bytes/hashes, malformed/oversized/internal-envelope rejection and symlink refusal passed.
+The [Native file-intake/recovery receipt](evidence/adapter.json) proves case `D23769A0-D7B0-11F1-9980-CA5720F48492`, session 1610, delivered once; `E10A0F45-D7B0-11F1-9980-CA5720F48492`, session 1636, stayed quarantined with zero receipts. Both made all four native reads. Ack-write recovery, different-name event replay, same-name redrop, exact retained bytes/hashes, malformed/oversized/internal-envelope rejection and symlink refusal passed.
 
 ![File intake in authenticated native Visual Trace](assets/adapter-visual-trace.png)
 

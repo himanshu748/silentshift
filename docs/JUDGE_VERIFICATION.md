@@ -1,8 +1,37 @@
 # Judge verification
 
+## Final source pass — November 8, 2026 (UTC)
+
+**All executed local checks passed after the source-installer repair at `e61a961228cdf3d0f4ebc3a274b46ad1894a43b1`.** Normal bootstrap now uses `LoadDir` with compilation enabled for the checked-in source directory. It no longer compiles unrelated diagnostic classes already present in the namespace. In the same instance where the earlier reload failed, the documented bootstrap completed and `SilentShift.Repro.UnderscoreTool` remained present. [Before/after receipt](evidence/bootstrap-scope-fix-nov8.json) · [bootstrap output](evidence/bootstrap-scope-fix-nov8.txt).
+
+This was a **same-instance source upgrade/regression test on 154U ARM64**, not another clean-container or registry install. Application classes, policy, Python, UI and scenario fixtures are unchanged from the earlier fresh source snapshot. The installation harness is the only code change. The earlier clean source/package gates below retain their original scope; the public package was separately downloaded and found byte-identical to its verified archive. [Artifact receipt](evidence/final-pass-nov8-ipm-artifact.json). No image was downloaded, release tagged, package published, OEX edit saved or message posted.
+
+| Executed check | Actual result | Receipt / output |
+| --- | --- | --- |
+| Normal source bootstrap with the retained diagnostic class | Passed in **6.396s**, without deleting it | [Bootstrap regression](evidence/bootstrap-scope-fix-nov8.json) |
+| Full native unit suite | **5 classes / 12 methods passed** | [Native unit output](evidence/final-pass-nov8-unit-output.txt), [executed ObjectScript](evidence/final-pass-nov8-unit-command.cos) |
+| Fresh five-case local inference | **5/5 final routes passed** | [Complete receipt](evidence/final-pass-nov8.json), [command](evidence/final-pass-nov8-native-command.sh), [output](evidence/final-pass-nov8-native-output.txt) |
+| Approve, reject and concurrent identical approval | **54 assertions passed** | [Review receipt](evidence/final-pass-nov8-review.json), [output](evidence/final-pass-nov8-review-output.txt) |
+| Live custom file adapter | Passed with **2 new model cases**, acknowledgement recovery, duplicates and invalid/symlink input checks | [Adapter receipt](evidence/final-pass-nov8-adapter.json) |
+| CSV import through the workbench | **32 checks passed** | [CSV observations](evidence/final-pass-nov8.json), [first import](evidence/final-pass-nov8-csv-first.json), [repeat](evidence/final-pass-nov8-csv-repeat.json) |
+| Current provider trace metadata and vector evidence | Both read-only inspectors passed for held and delivered cases | [Provider pairs](evidence/final-pass-nov8-provider.json), [native precedents](evidence/final-pass-nov8-precedents.json) |
+| Python | **207 passed in 3.89s** | [Output](evidence/final-pass-nov8-pytest-output.txt) |
+| TypeScript / production build | Both passed | [Types](evidence/final-pass-nov8-types-output.txt), [build](evidence/final-pass-nov8-build-output.txt) |
+| Landing/disconnected browser / connected browser | **38 / 16 passed** | [Disconnected output](evidence/final-pass-nov8-browser-output.txt), [connected output](evidence/final-pass-nov8-connected-output.txt) |
+
+The live native run took **314.465s**; CSV verification took **113.274s**. These are command durations from this Mac, not throughput promises. Raw model recommendations matched **4/5** frozen labels while final routing matched **5/5**. The deterministic baseline also solves the fixed examples; no AI accuracy improvement or generalization result is claimed.
+
+Core native sessions: **2957, 2985, 3013, 3040, 3068**. CSV sessions: **3198, 3226**; the critical line stayed held with **0 deliveries**, and the matching line had **1 simulator receipt**. CSV checks include bounded rejection, required source approval, retained originals, interrupted-request recovery, repeat import without redispatch, mobile, keyboard and reduced motion. No aggregate adapter assertion count is inferred from nested metadata.
+
+A new anonymous browser context returned **200** for OEX, the contest page and both articles. SilentShift remained listed; both articles linked OEX; the listing showed its moderator Works result, video and idea description link. The dedicated idea section was still absent. [Live public readback](evidence/final-pass-nov8-public.json). The downloadable MP4 matched its local file. [Download receipt](evidence/final-pass-nov8-video.json).
+
+**External gates remain:** GitHub's job did not start because the account is locked for billing; [exact annotation](evidence/final-pass-nov8-hosted-ci.json). AI Hub issue #17 remains open with no replies or labels; [readback](evidence/final-pass-nov8-issue.json). Vendor/organizer qualification and the dedicated idea association remain unconfirmed. No hosted CI pass or awarded bonus is claimed. The prepared OEX copy and organizer video note remain unsent.
+
+Public native IPM stays **0.2.0**; app/OEX stays **0.2.1**. CSV and this installer fix are current-source changes, not a new published package. Synthetic inputs, per-line simulator effects, the absence of a hosted demo and unverified real-partner/ERP integration remain explicit limits. Historical failed attempts below were preserved; the retained-instance reload failure is now resolved by the installer repair above.
+
 ## Current-main repeat — isolated source, November 8, 2026 (UTC)
 
-**The remaining local verification gap is closed.** A fresh GitHub clone at **`35d29e0913ea27f4c56dfed214a402418984e5f0`** was loaded into a new **2026.3.0AI.154.0 Community / 154U ARM64** container, using the already loaded official image. The namespace was pristine and the application container had no source mounts. The tracked clone remained clean. Only documentation/evidence commits followed this tested snapshot.
+**The remaining local verification gap is closed.** A fresh GitHub clone at **`35d29e0913ea27f4c56dfed214a402418984e5f0`** was loaded into a new **2026.3.0AI.154.0 Community / 154U ARM64** container, using the already loaded official image. The namespace was pristine and the application container had no source mounts. The tracked clone remained clean. The follow-up interval through `7d2cb7e` changed documentation/evidence only. The later source-installer repair is verified separately above.
 
 This run used **IPM `load` of current source**, including the CSV class and parser. It is separate from the earlier successful public `zpm "install silentshift"` gate below. The source manifest still declares the published version, but **no new native package was published**. Public IPM remains **0.2.0**; app/workbench remains **0.2.1**. No provider key, paid service or new IRIS download was used.
 
@@ -40,7 +69,7 @@ Its API and trace portal use port **52913**. Opening message bodies requires a p
 
 **Public-package gate: passed. Current-main CSV repeat: stopped at failed source-reload preparation.** These are separate results; the released native package does not contain the source-only CSV feature.
 
-The fresh GitHub clone's HEAD was **`df591420c06ed081623f6178804359ceb1686964`**. It includes the CSV runtime changes and the UI finish. The tracked clone stayed clean. Subsequent commits in this verification pass add documentation and evidence; this hash identifies the executed source snapshot, not those later receipts.
+The fresh GitHub clone's HEAD was **`df591420c06ed081623f6178804359ceb1686964`**. It includes the CSV runtime changes and the UI finish. The tracked clone stayed clean. Receipt-only follow-up commits through `e4a5573` added documentation and evidence. This hash identifies that executed snapshot; later harness changes are verified separately above.
 
 Installation now lives in [INSTALL.md](../INSTALL.md#optional-check-without-a-model), linked from the README. The two historical README blocks were repeated with only a new container name and port. The already loaded official **2026.3.0AI.154.0 Community / 154U ARM64** image was used; no IRIS image was downloaded and no provider key was supplied.
 

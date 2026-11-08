@@ -1,5 +1,13 @@
 # Build status
 
+## Final installation and workflow pass completed — November 8, 2026
+
+Fixed source bootstrap to compile only the checked-in source directory. The normal documented command now succeeds in the previously failing instance while retaining its diagnostic class. No application class, policy or AI behavior changed. [Regression receipt](evidence/bootstrap-scope-fix-nov8.json).
+
+After that repair: **5 native classes / 12 methods passed**, **5/5 final routes passed** with **4/5 raw model recommendations**, **54 review assertions passed**, live file intake/recovery passed, and **32 CSV UI checks passed**. Provider-message and native-vector inspectors passed. Python: **207 passed in 3.89s**; TypeScript/build passed; browser suites passed **38 disconnected** and **16 connected** checks. [Complete final receipt and scope](evidence/final-pass-nov8.json) · [commands and outputs](JUDGE_VERIFICATION.md).
+
+This is a retained-instance upgrade/regression pass, separate from the earlier fresh source and public-package installs. Public artifacts and article backlinks were checked anonymously. IPM remains **0.2.0**, OEX/workbench **0.2.1**; no release or external message was submitted. Hosted CI is blocked before execution by GitHub's billing lock. Idea/bug qualification and all bonus awards remain unconfirmed. Synthetic examples, simulator delivery and the absence of real partner-data/ERP qualification are unchanged limits.
+
 ## Product story and rules reviewed — November 8, 2026
 
 Reviewed the official task, judging dimensions, organizer clarifications, expert advice and anonymous listing. The README now names integration operations as the intended user, explains the agent's role in release decisions, and distinguishes local live inference from model-free replay. Refreshed the compliance ledger and prepared product-focused OEX replacement copy **without saving an external edit**. [Review scope, sources and limits](evidence/rules-product-review-nov8.json). This was documentation-only work; the preceding native/UI receipts retain their scope and no new execution is claimed.
