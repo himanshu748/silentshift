@@ -1,5 +1,9 @@
 # Build status
 
+## Product story and rules reviewed — November 8, 2026
+
+Reviewed the official task, judging dimensions, organizer clarifications, expert advice and anonymous listing. The README now names integration operations as the intended user, explains the agent's role in release decisions, and distinguishes local live inference from model-free replay. Refreshed the compliance ledger and prepared product-focused OEX replacement copy **without saving an external edit**. [Review scope, sources and limits](evidence/rules-product-review-nov8.json). This was documentation-only work; the preceding native/UI receipts retain their scope and no new execution is claimed.
+
 ## Current source and CSV verified in a clean instance — November 8, 2026
 
 A fresh GitHub clone at `35d29e0913ea27f4c56dfed214a402418984e5f0` passed source installation through native IPM `load`, production startup and the full native suite on **ARM64 2026.3.0AI.154.0 / 154U**. **5 native test classes / 12 methods passed; final routes passed 5/5.** All agents returned with four native tools. Raw recommendations matched **4/5** labels; policy selected review for the conflicting-reference case. This is a synthetic integration result, not a general accuracy claim. [Native receipt](evidence/source-isolated-nov8.json).

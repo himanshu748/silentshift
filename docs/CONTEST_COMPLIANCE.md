@@ -1,6 +1,14 @@
 # Contest compliance
 
-Rules reviewed against the linked primary sources on **2026-11-03**; publication and registration status rechecked **2026-11-04**. SilentShift is registered in contest 49, Open Exchange release **0.2.1** is public, and native IPM **0.2.0** has passed clean public installs. Listing edits remain **Awaiting Review**. The refreshed README and native Body screenshot are visible without signing in; the dedicated idea association is saved and visible only in the owner view. [Signed-out readback](evidence/public-visibility.json). Runtime evidence belongs in [BUILD_STATUS.md](BUILD_STATUS.md); bonus qualification in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Historical observations below are dated explicitly.
+Contest task, entry requirements, organizer clarifications and the public description were reviewed against primary sources on **November 8, 2026**. SilentShift is listed in contest 49, OEX release **0.2.1** is public, and public native IPM remains **0.2.0**. The [anonymous readback](evidence/entry-readback-nov8.json) shows the moderator's **Works** result and the idea link in the description; the dedicated idea section is absent from retrieved text. The saved owner field was not re-edited or rechecked. No bonus award is confirmed.
+
+The [current-source verification](JUDGE_VERIFICATION.md) covers a new source-loaded **154U ARM64** instance, the native decision workflow and actual CSV UI imports. The public-registry replay is a separate verified path. Installation has one source of instructions, [INSTALL.md](../INSTALL.md), linked prominently from the English README. Runtime detail belongs in [BUILD_STATUS.md](BUILD_STATUS.md); bonus qualification belongs in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Historical observations below retain their original dates.
+
+## Product fit
+
+SilentShift addresses the required decision task inside an IRIS interoperability production: the native AI Hub agent reads case-bound evidence and recommends a disposition. Its valid ALLOW recommendation is required for automatic release, while deterministic policy constrains the result. A warning can send an otherwise eligible order to review; a critical contradiction cannot be overridden. [Implemented decision contract](../python/silentshift/engine.py) · [native architecture](../ARCHITECTURE.md).
+
+The operator's complete journey is intake → compare approved evidence → investigate → inspect the route → resolve an eligible Workflow hold. The intended user is an integration operations team handling B2B orders. CSV is a current-source addition; public IPM does not include it. The [judge walkthrough](JUDGE_GUIDE.md#what-to-assess-against-the-rubric) maps the official criteria to working behavior and receipts. Synthetic inputs, simulator delivery and platform limits remain explicit; no customer adoption or production readiness is asserted.
 
 ## Entry requirements and schedule
 
@@ -11,15 +19,15 @@ Rules reviewed against the linked primary sources on **2026-11-03**; publication
 | Registration closes | 2026-11-08 23:59:59 EST | **2026-11-09 10:29:59 IST** |
 | Voting | November 9–15, 2026 | See announcement for exact boundaries |
 
-The conversion uses EST (UTC−05:00), as explicitly written by the organizer. Submit substantially earlier than the cutoff.
+The conversion uses EST (UTC−05:00), as explicitly written by the organizer. The announcement permits improvements through submission and voting. The task and required deliverables govern eligibility; the [expert preparation article](https://community.intersystems.com/post/what-experts-look-contest-entries) is advice, and technology bonuses are separate from the published judging dimensions. A hosted demo is not a mandatory entry requirement and remains Not claimed.
 
 ## Build, distribution, providers
 
-The [announcement](https://community.intersystems.com/node/590306) originally prescribed **2026.3.0AI.154.0 Community**, replacing 162; IRIS/Health and x64/ARM64 were accepted. **New organizer exception visible November 3:** Tatiana Tikhonova's reply to Mikhail Oskola permits **2027.1.0AI.109.0 Community**, with judges using the corresponding declared build. The question reports that older kits disappeared from the portal. Do not describe 154 as the only currently permitted build.
+The [announcement](https://community.intersystems.com/node/590306) originally prescribed **2026.3.0AI.154.0 Community**, replacing 162; IRIS/Health and x64/ARM64 were accepted. Tatiana Tikhonova's November 2 reply to Mikhail Oskola permits **2027.1.0AI.109.0 Community**, with judges using the corresponding declared build. The question reports that older kits disappeared from the portal. Do not describe 154 as the only currently permitted build.
 
 SilentShift remains on its actually verified **154 ARM64 Community** target. No migration or 109 compatibility is claimed. Recheck kit availability for a new judge installation; do not redistribute an old kit as a workaround. Download through the [EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub), load/retag locally and document the exact build, provider, key variable, start command and health check. EAP and derived images must not be published.
 
-Organizer clarifications permit contest development, recorded/public demos, synthetic data, and AI coding assistance; disclosure is optional. No provider credits are supplied. Entrants and judges supply their own keys. Replay without a key is accepted if live mode is available; a static recorded-response website does not earn the live-demo bonus. An Ideas Portal link is optional. Team READMEs must link every member's Developer Community profile.
+The announcement expressly permits EAP application development and related submission materials for this contest. Organizer comments allow synthetic data and AI coding assistance; disclosure is optional. No provider credits are supplied. Entrants and judges supply their own keys. Replay without a key is accepted if live mode is available; a static recorded-response website does not earn the live-demo bonus. An Ideas Portal link is optional. Team READMEs must link every member's Developer Community profile.
 
 The [EAP documentation](https://github.com/intersystems-community/ai-hub-eap) warns that APIs can change and the prerelease is unsuitable for production. Older examples are not a version guarantee. The [community template](https://github.com/intersystems-community/ai-hub-dev-template) is a reference, not application execution evidence. SilentShift's actual 154 compilation, native sessions and clean-install results govern its claims.
 
@@ -27,7 +35,7 @@ The [EAP documentation](https://github.com/intersystems-community/ai-hub-eap) wa
 
 [Open Exchange application instructions](https://docs.openexchange.intersystems.com/apps/submit/) require authentication, New Application, metadata and repository details, then **Send for Approval**. Saving produces a draft; sending initiates review, and acceptance publishes it. Prepare the license URL, categories, technologies, descriptions, logo, and applicable demo/documentation/video links. The [contest guide](https://docs.openexchange.intersystems.com/contest/apply/) describes Apply from the contest, app page, or developer portal and generally says the app must be published first.
 
-The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **Earlier November 4 observation:** Apply initially reported no published application and required publication first. **Later verified state:** SilentShift appears among the contest's 15 registered applications, independently of pending listing edits. The earlier dialog is no longer a registration blocker. Preserve submission and registration receipts separately; a repository, draft or approval request alone proves neither.
+The contest-specific October 21 [organizer clarification](https://community.intersystems.com/node/590306) says approval need not occur before the deadline: timely submission is sufficient, but the package must work during evaluation. **Earlier November 4 observation:** Apply initially reported no published application and required publication first. **Current readback:** SilentShift remains listed on the contest page, independently of the dedicated idea-association visibility gap. The earlier dialog is no longer a registration blocker. Preserve submission and registration receipts separately; a repository, draft or approval request alone proves neither.
 
 ### Authenticated workflow recheck, 2026-11-02
 
@@ -43,9 +51,11 @@ The [competition terms](https://openexchange.intersystems.com/markdown?url=/asse
 
 ## Bonus clarifications visible November 3
 
-Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift includes that comparison, actual native Body screenshots and reproducible replay/live commands in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The README link is public; the dedicated field is saved and visible to the owner but absent from the signed-out listing. Registration is confirmed; listing moderation and idea-field public visibility remain pending.
+Semion Makarov's replies to Aziz Cotrim and MxSalata on the [bonus page](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) resolve the earlier idea questions: DPI-I-689 can qualify without Vector Search; multiple entries may implement the same idea; all ideas together are capped at **4 points per entry**. Required evidence includes the idea link in README **and** OEX's dedicated idea-link field, plus a reproducible LLM-metadata Visual Trace example. A Langfuse comparison is helpful, not a separately stated mandatory requirement. SilentShift includes that comparison, actual native Body screenshots and reproducible replay/live commands in [BONUS_EVIDENCE.md](BONUS_EVIDENCE.md). The README link is public; the dedicated field is saved and visible to the owner but absent from the signed-out listing. Registration is confirmed. The current public readback shows the moderator Works result; idea-field public visibility and organizer qualification remain unconfirmed.
 
 Tatiana's newer [announcement reply to Doc](https://community.intersystems.com/node/590306) resolves the earlier IPM question: publish the package; installation is checked on AI Hub 154; include `<SystemRequirements Version=">=2026.3" Interoperability="enabled"/>`. Her subsequent 109 reply permits a declared matching build. If IPM is pursued, retain the actual registry-install result for the declared runtime. A manifest alone is not a published, working package.
+
+The November 6 staff reminder on the bonus page asks for a downloadable video file even when YouTube is provided. SilentShift's existing [MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) was anonymously downloaded and matched the local file; [the receipt](evidence/video-download-nov8.json) records codecs and captions. A note for the owner is prepared in the checklist, not posted. Organizer qualification remains unconfirmed.
 
 The [bonus announcement](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows) describes extra voting points. It does not publish a conversion into Expert Jury criterion scores. The contest still lists five judging dimensions without numerical weights.
 
@@ -53,18 +63,18 @@ The [bonus announcement](https://community.intersystems.com/post/technology-bonu
 
 | Gate | Observed position at this update |
 | --- | --- |
-| Native execution | LOCALLY_VERIFIED: actual 154 production, native agent tools, five scenario outcomes; synthetic simulator scope |
-| Reproducibility | LOCALLY_VERIFIED: fresh-volume zero-record start and successful five-case clean-install run; retained evidence below |
-| Browser journey | LOCALLY_VERIFIED: connected desktop/mobile reads and a real approved-amendment Scenario Lab delivery; not a public deployment |
-| Public repository | CONFIRMED: native metadata captures and documentation published on `main` in [1c3941b](https://github.com/himanshu748/silentshift/commit/1c3941b); [3dc3741](https://github.com/himanshu748/silentshift/commit/3dc3741) records the description submission |
-| OEX application | Release **0.2.1** public; refreshed README, native Body screenshot, video and install command visible anonymously. Listing edits Awaiting Review; dedicated idea field visible only to owner |
-| Public IPM | **0.2.0** installed from the community registry in two fresh containers; native suite, replay and live five-case results retained in [FINAL_PASS_REPORT.md](FINAL_PASS_REPORT.md) |
-| Contest registration | CONFIRMED: SilentShift appears among 15 registered applications on contest 49 in the latest anonymous readback |
+| Native execution | [Fresh current-source native run](evidence/source-isolated-nov8.json): actual 154U production, agent/tool invocation and deterministic routing; synthetic simulator scope |
+| Reproducibility | [Public-registry replay](evidence/judge-current-nov8.json) and [current-source load](evidence/source-isolated-nov8.json) verified separately; source CSV is not in the registry package |
+| Browser journey | [Fresh CSV imports](evidence/csv-isolated-nov8.json) and [connected desktop/mobile reads](evidence/source-isolated-nov8-connected.json); not a public deployment |
+| Public repository | Source, installation, video and current verification receipts are public on [main](https://github.com/himanshu748/silentshift); latest execution is tied to its recorded clone hash |
+| OEX application | Release **0.2.1** public with moderator Works result. Idea description link, video and articles visible; dedicated idea section absent from retrieved text. No edit in this review |
+| Public IPM | **0.2.0** public install verified in the [registry receipt](evidence/judge-current-nov8.json). New source features were loaded locally and not published |
+| Contest registration | SilentShift remains listed in the [current anonymous readback](evidence/entry-readback-nov8.json) |
 | Bonuses | Local execution receipts for provider tracing, Workflow, case/amendment vectors and custom inbound adapter; see current bonus ledger for exact gates. Organizer awards remain unconfirmed |
 | Questionnaire | Submitted earlier; actual confirmation retained in the bonus ledger |
 
 Local evidence: `evidence/native/clean-install-initial.json` (empty initial state), `evidence/native/clean-install.json` (run `0503b649-ee6f-495e-be37-166db508377c`, passed), and `evidence/browser/browser-scenario-delivered.png` (actual C delivery, trace 42). These artifacts are ignored/private; publish only reviewed, redacted extracts. See `BUILD_STATUS.md` for current measurements and limits.
 
-The latest November 3 read-only check of the [contest page](https://openexchange.intersystems.com/contest/49) displayed nine entries. The earlier eight-entry comparison is a historical snapshot. Displayed bonus counts do not establish implementation eligibility or final scoring. The competitive review separates public claims, static inspection and actual execution.
+The historical November 3 read-only check of the [contest page](https://openexchange.intersystems.com/contest/49) displayed nine entries. The earlier eight-entry comparison is a historical snapshot. Displayed bonus counts do not establish implementation eligibility or final scoring. The competitive review separates public claims, static inspection and actual execution.
 
 Registration and publication observations above are supported by their linked receipts. No awarded bonus, production-readiness or prize claim follows from them.
