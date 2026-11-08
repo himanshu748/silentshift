@@ -49,9 +49,9 @@ At the time of this **historical** native run, public native IPM was **0.2.0** a
 
 ## Current-main repeat — isolated source, November 8, 2026 (UTC)
 
-**The remaining local verification gap is closed.** A fresh GitHub clone at **`35d29e0913ea27f4c56dfed214a402418984e5f0`** was loaded into a new **2026.3.0AI.154.0 Community / 154U ARM64** container, using the already loaded official image. The namespace was pristine and the application container had no source mounts. The tracked clone remained clean. The follow-up interval through `7d2cb7e` changed documentation/evidence only. The later source-installer repair is verified separately above.
+**The then-open fresh-source verification gap was closed for this earlier source snapshot, not for the later 0.3.0 package candidate.** A fresh GitHub clone at **`35d29e0913ea27f4c56dfed214a402418984e5f0`** was loaded into a new **2026.3.0AI.154.0 Community / 154U ARM64** container, using the already loaded official image. The namespace was pristine and the application container had no source mounts. The tracked clone remained clean. The follow-up interval through `7d2cb7e` changed documentation/evidence only. The later source-installer repair is verified separately above.
 
-This run used **IPM `load` of current source**, including the CSV class and parser. It is separate from the earlier successful public `zpm "install silentshift"` gate below. The source manifest still declares the published version, but **no new native package was published**. Public IPM remains **0.2.0**; app/workbench remains **0.2.1**. No provider key, paid service or new IRIS download was used.
+This run used **IPM `load` of current source**, including the CSV class and parser. It is separate from the earlier successful public `zpm "install silentshift"` gate below. **At this earlier verified snapshot**, the source manifest still declared 0.2.0 and no new native package was published. At the **later release-preparation freeze**, the manifest declares **0.3.0 prepared/unpublished**, while public IPM was last verified as **0.2.0** and app/workbench as **0.2.1**. No provider key, paid service or new IRIS download was used.
 
 | Check | Observed result | Evidence |
 | --- | --- | --- |
