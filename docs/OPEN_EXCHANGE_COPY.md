@@ -1,42 +1,46 @@
-# Open Exchange description and proposed product copy
+# Open Exchange description and product copy
 
-## Current readback and proposed edit
+## Description update — November 8, 2026 (UTC)
 
-The latest [anonymous readback](evidence/entry-readback-nov8.json) shows the public description, moderator **Works** result, idea link in the description, video and both articles. The dedicated **Ideas to the app** section is absent from retrieved text. That does not establish the saved owner-field state or bonus qualification. The older observations below remain historical; do not send another support request from them.
+Saved through **Save → Send for approval → Send edits**, without creating a release. Open Exchange confirmed submission, then emailed approval at **08:26 UTC**. The new description is visible anonymously. Release **0.2.1**, native IPM **0.2.0**, contest/IPM selections, dedicated idea URL, video and both article fields were retained; Demo URL stays empty. [Submission and mail receipt](evidence/oex-update-nov8.json) · [owner screenshot](evidence/oex-update-nov8-owner.jpg).
 
-**The following replacement copy is prepared only. It has not been saved or submitted to OEX.** Keep release **0.2.1**, public native IPM **0.2.0**, the existing article/video fields, the dedicated idea URL and both contest/IPM selections. Keep Demo URL empty. A later listing edit may require moderation; the owner decides whether to apply it.
+The owner page shows **Ideas to the app** with DPI-I-689. Anonymous retrieved text still lacks that dedicated section, although the description links the idea, Visual Trace recipe and Langfuse comparison. The Open Exchange team has been sent the downloadable demo and asked to confirm the 4-point idea qualification. No awarded points or organizer acknowledgement is asserted.
 
-Proposed short description:
+An automatic IPM notification followed the description-only submission: `ERROR #5001: Version 0.2.0 of Package silentshift is already published`. No new package version was requested. A subsequent [streamed public archive check](evidence/oex-update-nov8-ipm.json) returned the identical existing package. The email asks whether corrective action is needed without requesting another publication.
 
-> Investigate B2B orders whose business meaning changed: compare approved commitments, inspect native AI evidence and resolve eligible holds in IRIS Workflow.
+Short description (within the editor's limit):
 
-### Proposed full description — not submitted
+> Catch wrong business meaning in B2B orders before delivery.
 
-#### An order can arrive successfully and still be wrong
+## Full description — saved November 8
+
+### An order can arrive successfully and still be wrong
 
 SilentShift is a validation workbench for integration operations teams running B2B order pipelines. It compares incoming business values with independently approved commitments, investigates discrepancies and gives the operator a reason, supporting records and a route for each case.
 
 An order arrives as **20 CASE**. The approved contract says **240 EA**. The message is valid JSON, but there is no approved conversion. SilentShift holds it before the included destination simulator accepts it. An effective approved amendment authorizing **20 CASE** changes the outcome. The decisive difference is the governing evidence.
 
-#### Follow a case from intake to resolution
+### Follow a case from intake to resolution
 
 Open the investigation to compare the original message and selected reference, inspect the agent's actual evidence reads, and follow the final route. Eligible holds create native Workflow tasks. A reviewer supplies a reason and current version; recorded decisions can be resumed after a completion failure. A critical contradiction cannot be approved through the review screen.
 
 The production accepts REST intake and ready JSON files through a custom inbound adapter. **Current GitHub source also includes a bounded CSV workbench:** preview an order feed against a separate approved-reference export, record the source under an explicitly authorized importer, then investigate each line. Repeating the same import recovers persisted cases and receipts. CSV is source-only and is **not included in public native IPM 0.2.0**. [CSV workflow and current captures](https://github.com/himanshu748/silentshift/blob/main/docs/CSV_IMPORT.md).
 
-#### The agent makes a recommendation inside the production
+### The agent makes a recommendation inside the production
 
 A native IRIS AI Hub agent reads four case-scoped evidence tools and recommends **ALLOW**, **QUARANTINE** or **REQUEST_REVIEW**, with citations and uncertainty. Automatic delivery needs a valid ALLOW recommendation, a resolved comparison and complete evidence. Deterministic policy owns the final route. Similar precedents inform the investigation; they do not replace current authority.
 
 Each admitted provider exchange becomes a native request/response pair in the business case's Visual Trace. The messages expose model, provider, prompt version, timing, tool calls, outcome and available response usage. Unknown cost and provider retries remain null. [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689), the [reproducible example](https://github.com/himanshu748/silentshift#see-it-in-visual-trace) and [Langfuse comparison](https://github.com/himanshu748/silentshift#silentshift-iris-interoperability-vs-langfuse) explain the tracing design.
 
-#### Run it locally or inspect the recorded journey
+### Run it locally or inspect the recorded journey
 
 [Install from one guide](https://github.com/himanshu748/silentshift/blob/main/INSTALL.md). Fresh investigations use local Ollama and local embeddings, without a paid provider key. The optional keyless replay runs the native production with recorded provider responses and performs no fresh inference. Both paths require a separately obtained licensed IRIS image.
 
 [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download the MP4 without signing in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Current verification and commands](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_VERIFICATION.md). The video demonstrates the earlier synthetic core workflow and predates CSV.
 
-**App/workbench 0.2.1; public native IPM 0.2.0; tested runtime 2026.3.0AI.154.0 Community / 154U ARM64.** No newer build is claimed tested. All supplied examples are synthetic and delivery is per line to an IRIS simulator. There is no hosted demo, verified external ERP delivery, X12 support, whole-order completeness guarantee or production-readiness claim. Organizer bonus awards remain unconfirmed; [the checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) separates verified artifacts from pending qualification and Not claimed bonuses.
+Read the technical articles: [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery).
+
+**App/workbench 0.2.1; public native IPM 0.2.0; tested runtime 2026.3.0AI.154.0 Community / 154U ARM64.** In a prepared namespace with IPM, the public native package installs with `zpm "install silentshift"`; account configuration and production startup are explicit setup steps. No newer build is claimed tested. All supplied examples are synthetic and delivery is per line to an IRIS simulator. There is no hosted demo, verified external ERP delivery, X12 support, whole-order completeness guarantee or production-readiness claim. Organizer bonus awards remain unconfirmed; [the checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) separates verified artifacts from pending qualification and Not claimed bonuses.
 
 ## Historical submission — November 5
 
