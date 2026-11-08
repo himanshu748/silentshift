@@ -14,11 +14,13 @@ Web applications and roles are deliberately created by the **explicit** `SilentS
 
 ## Owner-only 0.3.0 publication runbook
 
-The [candidate changelog](../CHANGELOG.md) is release-ready copy; the [judge gate](JUDGE_VERIFICATION.md) determines whether it is safe to publish. **Do not publish while that gate is incomplete or failing.** No package, registry release, Git tag or OEX edit is part of candidate preparation.
+The [fresh-source candidate gate](evidence/candidate-030.json) passed. The [candidate changelog](../CHANGELOG.md) is release-ready copy; the [judge gate](JUDGE_VERIFICATION.md) determines whether it is safe to publish. **Do not publish while that gate is incomplete or failing.** No package, registry release, Git tag or OEX edit is part of candidate preparation.
 
 For a prepared namespace in a disposable build-154U container, load the allowlisted candidate and generate a local archive. Substitute the actual verified container and staging path printed by the candidate receipt; do not use the active production instance:
 
 ```sh
+SS_CANDIDATE_CONTAINER=silentshift-bonus-load-030-nov8
+docker --context colima-silentshift start "$SS_CANDIDATE_CONTAINER"
 uv run python scripts/package_ipm.py --output .local/ipm/owner-030-stage
 docker --context colima-silentshift cp .local/ipm/owner-030-stage "$SS_CANDIDATE_CONTAINER":/home/irisowner/silentshift-030-stage
 docker --context colima-silentshift exec -it "$SS_CANDIDATE_CONTAINER" iris session IRIS -U SILENTSHIFT
@@ -27,6 +29,8 @@ docker --context colima-silentshift exec -it "$SS_CANDIDATE_CONTAINER" iris sess
 In that namespace, with production stopped:
 
 ```objectscript
+set sc=##class(Ens.Director).StopProduction()
+if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt
 zpm "load /home/irisowner/silentshift-030-stage"
 zpm "package silentshift -path /home/irisowner/silentshift-030-export/"
 set module=##class(%IPM.Storage.Module).NameOpen("silentshift")

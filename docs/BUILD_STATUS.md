@@ -1,6 +1,13 @@
 # Build status
 
-## 0.3.0 candidate check, November 8, 2026 UTC
+## Native 0.3.0 candidate gate completed — November 8, 2026 UTC
+
+The fresh-source **154U ARM64** candidate passed **5 native classes / 12 methods**, **5/5 live routes**, **54 review assertions**, **32 CSV browser checks**, two **12/12 recorded replays**, **207 pytest**, TypeScript/build and **38 + 16** browser checks. Real native archives were generated and inspected. [Complete receipt](evidence/candidate-030.json) · [exact verified source/main identity](evidence/candidate-030-final-snapshot.json) · [commands, failures and scope](JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc).
+
+The replay installation paused at disk preflight, then completed in the same newly created container. Test setup repairs and their failed outputs are preserved; no runtime policy or agent changes were made. Public IPM remains **0.2.0**, source candidate **0.3.0**, and OEX/frontend **0.2.1**. No publication, tag, OEX/CI setting change or awarded bonus is claimed. Both test container pairs are retained stopped. The normal local app was not replaced. Browser test results remain valid, but the idle Playwright headless download cache was removed afterward for space recovery; reinstall it before future browser tests.
+
+
+## Earlier Linux-only 0.3.0 candidate check, November 8, 2026 UTC
 
 The native manifest now declares **0.3.0 (prepared, not published)**. The last verified public native registry version is **0.2.0**; the independent OEX/frontend release remains **0.2.1**. Source staging reports **58 files: 45 native classes and 11 assets**, while the historical public 0.2.0 package contained **44/10**. In the **final integrated mainline** isolated Linux source checkout at [`b6bfdd0`](https://github.com/himanshu748/silentshift/commit/b6bfdd099d9273fa4134ce34bfbc7269c52f8f6b), **207 Python tests passed (2.90s)** with the mainline version-aware packaging changes and regressions preserved. Native staging of 58 files including the exact `docs/IPM.md` bytes, TypeScript, production web build and **408 Markdown local link targets** passed. [Final integrated receipt](evidence/ipm-030-integrated-freeze-nov8.json) · [commands](evidence/ipm-030-integrated-freeze-nov8-commands.sh) · [output](evidence/ipm-030-integrated-freeze-nov8-output.txt). Earlier [pre-integration stage](evidence/ipm-030-freeze-nov8.json) used different release-harness code and is historical only.
 

@@ -1,6 +1,6 @@
 # Judge walkthrough: the same order, two different decisions
 
-**Package version at this documentation freeze:** public native IPM last verified **0.2.0**; current `module.xml` prepares **0.3.0**, not yet published or clean-IRIS-verified. The separate frontend release stays **0.2.1**. For judges after an owner publication, confirm the actual installed package version rather than assuming the prepared version is live. [Published-versus-main ledger](SUBMISSION_CHECKLIST.md#published-vs-main).
+**Package version at this documentation freeze:** public native IPM last verified **0.2.0**; current `module.xml` prepares **0.3.0**, verified through fresh source-loaded IRIS containers, but not yet published or public-registry-installed. [Current candidate gate](JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc). The separate frontend release stays **0.2.1**. For judges after an owner publication, confirm the actual installed package version rather than assuming the prepared version is live. [Published-versus-main ledger](SUBMISSION_CHECKLIST.md#published-vs-main).
 
 An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift helps the integration operator answer the next question: **is there approved evidence that makes this change legitimate?**
 

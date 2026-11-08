@@ -2,7 +2,7 @@
 
 This guide starts the IRIS backend and the browser workbench. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
-The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. The separate app/workbench is **0.2.1**. Public native IPM was last verified at **0.2.0**; `module.xml` currently prepares native **0.3.0**, which is **not yet published or freshly verified under IRIS**. [Owner-only publication instructions](docs/IPM.md#owner-only-030-publication-runbook).
+The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. The separate app/workbench is **0.2.1**. Public native IPM was last verified at **0.2.0**; `module.xml` currently prepares native **0.3.0**, which is **verified as a fresh source-loaded candidate under IRIS, but not yet published or public-registry-installed**. [Candidate receipt](docs/evidence/candidate-030.json). [Owner-only publication instructions](docs/IPM.md#owner-only-030-publication-runbook).
 
 ## Before you start
 

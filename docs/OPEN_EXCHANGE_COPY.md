@@ -1,6 +1,10 @@
 # Open Exchange description and product copy
 
-**Maintainer note, November 8, 2026:** this document preserves the actual **approved 0.2.1 OEX listing copy** and its dated moderation evidence. The native `module.xml` is separately **prepared at 0.3.0**, **not** publicly published; last observed public native IPM was **0.2.0**. The new candidate does not alter the approved OEX text, video, idea field or any owner-side setting. Only the owner decides when to submit a new package release. [Release scope](../CHANGELOG.md) · [Owner-only steps](IPM.md#owner-only-030-publication-runbook) · [New local test scope](evidence/ipm-030-candidate-linux-nov8.json). After a 0.3.0 public release is independently confirmed, this section remains a historical copy of what was approved, not evidence that a newer OEX description was accepted.
+**Maintainer note, November 8, 2026:** this document preserves the actual **approved 0.2.1 OEX listing copy** and its dated moderation evidence. The native `module.xml` is separately **prepared at 0.3.0**, **not** publicly published; last observed public native IPM was **0.2.0**. The new candidate does not alter the approved OEX text, video, idea field or any owner-side setting. Only the owner decides when to submit a new package release. [Release scope](../CHANGELOG.md) · [Owner-only steps](IPM.md#owner-only-030-publication-runbook) · [Completed native/browser candidate gate](evidence/candidate-030.json). After a 0.3.0 public release is independently confirmed, this section remains a historical copy of what was approved, not evidence that a newer OEX description was accepted.
+
+## Future owner release — prepared only
+
+The native **0.3.0 source candidate is verified**, but publication is still the owner's decision. Use the [changelog](../CHANGELOG.md) and [OEX release steps](IPM.md#owner-only-030-publication-runbook). After an independently verified registry 0.3.0 install, change the current package paragraph to say that the native CSV backend is included in public 0.3.0, while the React workbench is built separately. Preserve the demo, both articles, DPI-I-689, Submit to Contest, IPM and every honest limit. No OEX edit was made in this preparation pass. The saved text below remains the historical public 0.2.0 state.
 
 ## Description update — November 8, 2026 (UTC)
 

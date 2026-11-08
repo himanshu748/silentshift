@@ -2,7 +2,7 @@
 
 Use **CSV Import** when you have an incoming order feed and a separate, independently approved reference export. SilentShift previews the two files, imports approved reference revisions under an authorized account, and investigates each order line through the native IRIS production.
 
-This source feature previously ran in a verified ARM64 **2026.3.0AI.154.0 / 154U** instance. Public IPM **0.2.0**, the last verified registry version, lacks the CSV backend. **Prepared native IPM 0.3.0** includes the backend and parser but has **not** been published or reverified through a clean IRIS install; the web CSV workbench must still be built from source. If 0.3.0 later appears in the public registry, verify it independently rather than treating this historic 0.2.0 observation as current. The destination is the IRIS simulator; a per-line result is not an atomic whole-order release. Supplied samples are synthetic.
+The unpublished **native 0.3.0 candidate** passed fresh-source installation on **154U ARM64** and **32 CSV browser checks**. [New receipt](evidence/candidate-030-csv-verification.json) · [desktop](evidence/candidate-030-csv-results-desktop.png) · [mobile](evidence/candidate-030-csv-results-mobile.png). Public IPM **0.2.0** still lacks the CSV backend; a future public 0.3.0 install needs a new registry receipt. The React workbench is built separately from matching source. The destination is the IRIS simulator; a per-line result is not an atomic whole-order release. Supplied samples are synthetic.
 
 ![CSV workbench comparing incoming quantities with approved references and their observed outcomes](assets/csv-import-refined-desktop.png)
 

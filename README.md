@@ -22,7 +22,7 @@ Follow **[INSTALL.md](INSTALL.md)** for the complete installation in one file: o
 | Run new investigations and CSV imports | [Full local installation](INSTALL.md) | Local Ollama, Qwen and local embeddings; no paid provider key |
 | Check native orchestration without a model | [Keyless replay](INSTALL.md#optional-check-without-a-model) | No Ollama needed; recorded provider responses, no fresh inference |
 
-The verified native environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. App/workbench: **0.2.1**. Last verified **public** native IPM: **0.2.0**. The current source manifest prepares native IPM **0.3.0, not yet published or registry-installed**. [0.3.0 release notes](CHANGELOG.md) · [Owner publication instructions](docs/IPM.md#owner-only-030-publication-runbook). The proprietary runtime must be obtained separately; no newer build is claimed tested.
+The verified native environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. App/workbench: **0.2.1**. Last verified **public** native IPM: **0.2.0**. The source manifest declares native IPM **0.3.0: candidate source verified in fresh 154U containers, not yet published or public-registry-installed**. [Current native/browser gate and exact source identity](docs/JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc). [0.3.0 release notes](CHANGELOG.md) · [Owner publication instructions](docs/IPM.md#owner-only-030-publication-runbook). The proprietary runtime must be obtained separately; no newer build is claimed tested.
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
