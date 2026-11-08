@@ -2,10 +2,10 @@ zn "SILENTSHIFT"
 set sc=##class(Ens.Director).GetProductionStatus(.production,.state)
 if $system.Status.IsError(sc) { write "SILENTSHIFT_STATUS_FAILED",! halt }
 if state=1 { if production'="SilentShift.Production" { write "SILENTSHIFT_OTHER_PRODUCTION_RUNNING",! halt } set sc=##class(Ens.Director).StopProduction(10,0) if $system.Status.IsError(sc) { write "SILENTSHIFT_STOP_FAILED",! halt } }
-set sc=$system.OBJ.LoadDir("/opt/silentshift/src","k",,1)
+; Compile the source being installed, not unrelated diagnostics already in
+; the namespace. LoadDir queues the imported classes for compilation with c.
+set sc=$system.OBJ.LoadDir("/opt/silentshift/src","ck",,1)
 if $system.Status.IsError(sc) { write "SILENTSHIFT_LOAD_FAILED",! halt }
-set sc=$system.OBJ.CompilePackage("SilentShift","ck")
-if $system.Status.IsError(sc) { write "SILENTSHIFT_COMPILE_FAILED",! halt }
 ; Source installation explicitly selects its matching mounted Python/assets.
 ; An earlier IPM activation can otherwise leave a stale manager asset root.
 set ^SilentShift.Config("AssetRoot")="/opt/silentshift"

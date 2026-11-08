@@ -1,0 +1,51 @@
+{
+  "started_at": "2026-11-08T07:40:33.886291+00:00",
+  "finished_at": "2026-11-08T07:40:40.281941+00:00",
+  "elapsed_seconds": 6.396,
+  "command": [
+    "uv",
+    "run",
+    "--env-file",
+    ".env",
+    "python",
+    "scripts/bootstrap.py"
+  ],
+  "exit_code": 0,
+  "container": "silentshift-clean-iris-1",
+  "retained_diagnostic_before": "\nNode: 49a41fbee8ef, Instance: IRIS\n\nSILENTSHIFT>\nDIAGNOSTIC_RETAINED=1\n\nSILENTSHIFT>\n",
+  "retained_diagnostic_after": "\nNode: 49a41fbee8ef, Instance: IRIS\n\nSILENTSHIFT>\nDIAGNOSTIC_RETAINED=1\n\nSILENTSHIFT>\n",
+  "old_failure_receipt": "docs/evidence/csv-current-nov8.json",
+  "bootstrap_script_sha256": "71077aa31ce8746b5953e6918ea72df5cb40ed74765c717155a827195d6a226d",
+  "scope": "Normal documented source bootstrap in the same retained instance that previously failed on the unrelated diagnostic class. No class deletion, policy change or model call.",
+  "source_parent_commit": "7d2cb7ea180e9180d32dd6095fcd558c1da56886",
+  "documentation": "https://docs.intersystems.com/irislatest/csp/documatic/%25CSP.Documatic.cls?CLASSNAME=%25SYSTEM.OBJ&LIBRARY=%25SYS",
+  "native_unit": {
+    "started_at": "2026-11-08T07:41:29.937035+00:00",
+    "elapsed_seconds": 3.459,
+    "exit_code": 0,
+    "passed": true,
+    "classes": [
+      "SilentShift.Test.AdapterChecks",
+      "SilentShift.Test.ProviderChecks",
+      "SilentShift.Test.ReplayChecks",
+      "SilentShift.Test.RuntimeChecks",
+      "SilentShift.Test.TraceChecks"
+    ],
+    "methods": [
+      "TestContracts",
+      "TestIterator",
+      "TestAuthorizationRejectsUnknownCapability",
+      "TestExpiredCapability",
+      "TestMetadataOnlyMessages",
+      "TestPerCallModelTokensAndLatency",
+      "TestPlaybackCannotLookLikeLiveInference",
+      "TestPlaybackScopeAndCriticalPolicy",
+      "TestRecordedResponseProgression",
+      "TestApprovedReferenceLimit",
+      "TestPeerReferenceLimit",
+      "TestTypedMetadata"
+    ]
+  },
+  "native_five_passed": true,
+  "published_this_run": false
+}
