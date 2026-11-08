@@ -152,7 +152,7 @@ The earlier controlled postcommit HTTP 503 recovery remains documented in [the W
 
 ### Evaluate a bounded CSV order feed
 
-The [CSV Import workbench view](CSV_IMPORT.md) accepts incoming order lines and an independently supplied approved-reference export. Preview is read-only; adding immutable reference revisions requires explicit SSImporter permission, confirmation and a source note. Each line then uses the existing native investigation and deterministic delivery policy. Results retain source hashes, an authenticated import receipt, case links and trace IDs. The [CLI pilot](../pilot/README.md) remains available. Samples are synthetic; there is no X12 parser, whole-order delivery guarantee or customer-data qualification. The source additions are not included in public IPM 0.2.0. [Current verification](BUILD_STATUS.md).
+The [CSV Import workbench view](CSV_IMPORT.md) accepts incoming order lines and an independently supplied approved-reference export. Preview is read-only; adding immutable reference revisions requires explicit SSImporter permission, confirmation and a source note. Each line then uses the existing native investigation and deterministic delivery policy. Results retain source hashes, an authenticated import receipt, case links and trace IDs. The [CLI pilot](../pilot/README.md) remains available. Samples are synthetic; there is no X12 parser, whole-order delivery guarantee or customer-data qualification. Public native IPM **0.3.0** includes the backend/parser; the web workbench is built separately. [Public install](evidence/ship-030-registry.json) · [Current verification](BUILD_STATUS.md).
 
 ### Accept partner JSON from a ready-file inbox
 
@@ -188,7 +188,7 @@ The first seed indexed 15 actual resolved demo cases and one approved amendment.
 
 ### Package the native backend with IPM
 
-The public native package is **0.2.0**. Use [INSTALL.md](../INSTALL.md) for installation and its optional public-package verification. [Package maintenance](IPM.md) documents manifest hooks, publishing and retained package evidence.
+The public native package is **0.3.0**. Use [INSTALL.md](../INSTALL.md) for installation and its optional public-package verification. [Package maintenance](IPM.md) documents manifest hooks, publishing and retained package evidence.
 
 ## API and data boundaries
 

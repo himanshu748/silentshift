@@ -1,5 +1,7 @@
 # Judge-facing entry review — November 5, 2026
 
+**Historical report.** Current public IPM/OEX is **0.3.0**, with React frontend **0.2.1**. See the [new publication receipt](evidence/ship-030-publication.json) and [fresh public installation](JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc). The dated observations below are preserved with their original versions and limits.
+
 **App 0.2.1 · native IPM 0.2.0 · tested IRIS 2026.3.0AI.154.0 / 154U ARM64.** [Readback receipt](evidence/entry-readback-nov5.json) · [current-main clean-clone proof](JUDGE_VERIFICATION.md).
 
 ## Public listing and remaining moderation gates

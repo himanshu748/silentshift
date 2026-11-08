@@ -2,7 +2,7 @@
 
 This guide starts the IRIS backend and the browser workbench. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
-The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. The separate app/workbench is **0.2.1**. Public native IPM was last verified at **0.2.0**; `module.xml` currently prepares native **0.3.0**, which is **verified as a fresh source-loaded candidate under IRIS, but not yet published or public-registry-installed**. [Candidate receipt](docs/evidence/candidate-030.json). [Owner-only publication instructions](docs/IPM.md#owner-only-030-publication-runbook).
+The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
 ## Before you start
 
@@ -115,15 +115,14 @@ Stopping containers preserves their database. Do not delete volumes to troublesh
 
 ## Optional: check without a model
 
-This is an alternative **backend verification**, not the full live workbench installation above. It installs the **currently published** native IPM version, starts a separate production, runs native tests and replays one frozen synthetic order. The last independently checked public version was **0.2.0**; owner-prepared native **0.3.0** is not public until approval and a verified registry readback. It does not download or call Ollama. Only the recorded quantity-mismatch case is supported in this mode.
+This is an alternative **backend verification**, not the full live workbench installation above. It installs the **currently published** native IPM version, starts a separate production, runs native tests and replays one frozen synthetic order. The independently checked public version is **0.3.0**, installed from the community registry in a new isolated container. [Commands and results](docs/JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc). It does not download or call Ollama. Only the recorded quantity-mismatch case is supported in this mode.
 
 Complete steps 1–3 first. You can skip steps 4–7. The Web Gateway image must already be loaded. The driver requires at least **1.8 GiB free on the Mac and 3 GiB in the Docker VM**. It refuses an existing container name; choose another suffix and port if you have run this example before.
 
 ```sh
 uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
 chmod 644 .local/ipm/vendor/zpm-0.10.10.xml
-# Before 0.3.0 is publicly confirmed: 0.2.0. After confirmed publication: 0.3.0.
-PUBLIC_IPM_VERSION=0.2.0
+PUBLIC_IPM_VERSION=0.3.0
 uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
   --version "$PUBLIC_IPM_VERSION" \
   --execution-mode recorded-replay --container silentshift-bonus-registry-judge \

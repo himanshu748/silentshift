@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 candidate — not published
+## 0.3.0 — published November 8, 2026
 
 Compared with the public 0.2.0 source snapshot `d3637bbe85812035e6258320c81af93305e95560`:
 
@@ -12,8 +12,8 @@ Compared with the public 0.2.0 source snapshot `d3637bbe85812035e6258320c81af933
 - **Release harness**: read the candidate manifest version when staging, packaging and checking receipts instead of reporting the old published identity.
 - **Documentation**: consolidate installation in `INSTALL.md`, retain historical failures and verification boundaries, and distinguish recorded replay from fresh local inference.
 
-The native IPM archive owns the backend classes and runtime assets. The React UI, optimized documentation images and source-bootstrap script are repository deliverables; they are not web assets installed by IPM. Pair the native candidate with the matching repository workbench. The [exact post-package commit inventory](docs/SUBMISSION_CHECKLIST.md#published-vs-main) includes documentation and evidence changes as well as runtime changes.
+The native IPM archive owns the backend classes and runtime assets. The React UI, optimized documentation images and source-bootstrap script are repository deliverables; they are not web assets installed by IPM. Pair the native package with the matching repository workbench. The [exact post-package commit inventory](docs/SUBMISSION_CHECKLIST.md#published-vs-main) includes documentation and evidence changes as well as runtime changes.
 
 No routing policy, agent behavior or native execution semantics changed during candidate preparation. All examples remain synthetic; delivery remains per line to an IRIS simulator. There is no hosted demo or verified external ERP/X12 integration. Organizer qualification and awards remain unconfirmed.
 
-**Release gate:** see the current head of [judge verification](docs/JUDGE_VERIFICATION.md). A version bump, source stage or earlier pass does not establish a passing 0.3.0 candidate or a public registry installation. Publish only after the candidate gate passes.
+**Publication verified:** the [fresh public 0.3.0 install](docs/evidence/ship-030-registry.json) passed startup, all native tests and two recorded replays. The [source archive](docs/evidence/ship-030-source-archive.json) matches published source snapshot `a7aa217f1fc8d96f56bac6fd3110618eec21c353`. Full live/browser candidate results retain their separate scope in [judge verification](docs/JUDGE_VERIFICATION.md). Description moderation and organizer qualification remain separate external gates; no Git tag was created.

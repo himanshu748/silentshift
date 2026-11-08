@@ -1,10 +1,36 @@
 # Judge verification
 
+## Public 0.3.0 install — November 8, 2026 (UTC)
+
+**PASSED: fresh public-registry install, not a source upgrade.** A new GitHub clone at **`a7aa217f1fc8d96f56bac6fd3110618eec21c353`** installed the public native package with literal **`zpm "install silentshift"`** in a new **2026.3.0AI.154.0 Community / 154U ARM64** container. Actual installed version: **0.3.0**; application source mounts: **0**. No provider key, new image download or fresh inference was used. [Registry receipt](evidence/ship-030-registry.json) · [pristine state](evidence/ship-030-pristine.txt) · [mounts](evidence/ship-030-mounts.txt).
+
+| Executed check | Result | Receipt |
+| --- | --- | --- |
+| Public IPM install and explicit production startup | Passed, native **0.3.0**; command **75.801s** including tests and first replay | [Install](evidence/ship-030-install.txt), [version](evidence/ship-030-version.txt), [driver output](evidence/ship-030-registry-install-output.txt) |
+| Full native suite | **5 classes / 12 methods; All PASSED** | [Full output](evidence/ship-030-native-tests.txt) |
+| First recorded replay | **12/12**, session **24**, QUARANTINED, **0 deliveries** | [Output](evidence/ship-030-first-replay.txt), [metadata](evidence/ship-030-registry.json) |
+| Repeated recorded replay | **12/12**, session **58**, QUARANTINED, **0 deliveries**; command **1.051s** | [Output](evidence/ship-030-registry-repeat-output.txt), [metadata](evidence/ship-030-repeat.json) |
+| Installed CSV preview API | HTTP **200**, **2** synthetic lines; **21** rows rejected with HTTP **422** | [Receipt](evidence/ship-030-public-csv-preview.json) |
+| Public source archive | **474** tracked files match clone `a7aa217`; all **45 classes / 11 assets** and manifest match | [Full source comparison](evidence/ship-030-source-archive.json), [native boundary](evidence/ship-030-public-artifact.json) |
+
+Exact executed blocks, from the privately configured fresh clone:
+
+```sh
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest --version 0.3.0 --execution-mode recorded-replay --container silentshift-bonus-registry-public-030-nov8 --api-port 52943 --execute
+uv run python scripts/trace_example.py --api http://127.0.0.1:52943/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-public-030-nov8 --output <retained-checkout>/.local/ship-030/registry-repeat.json
+```
+
+The output placeholder above replaces a private local path; it is not shell syntax to paste literally. [Original sanitized install command](evidence/ship-030-registry-install-command.sh) · [repeat command](evidence/ship-030-registry-repeat-command.sh). Each replay records five provider request/response pairs and four executed native evidence tools. No upstream token usage or cost is invented for replay. Visual Trace: `http://127.0.0.1:52943/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=58` (local permitted portal account required; test instance is retained stopped after capture).
+
+The CSV preview probe initially expected HTTP 400 incorrectly; the API correctly returned its documented **422**. Only that private harness assertion changed. [Original failed assertion](evidence/ship-030-public-csv-preview-initial.json) · [corrected probe](evidence/ship-030-csv-probe.py). This preview check performed **no source import, case investigation or browser automation**. Full live **5/5**, review **54**, CSV browser **32**, Python **207**, TypeScript/build and browser **38 + 16** remain the separate candidate results below; they were not rerun or relabeled as public-install checks. [Executable-tree identity from candidate to public-gate clone](evidence/ship-030-source-identity.json).
+
+The live signed-out OEX page shows release **0.3.0** and its archive link. The new description was submitted successfully but has not yet replaced its older public text. The dedicated idea section is still absent anonymously. [Publication and external gates](evidence/ship-030-publication.json). No Git tag, runtime/policy/agent change, questionnaire resubmission or duplicate bug filing occurred. Later evidence/index documentation commits preserve the tested executable snapshot; the hash names the verified clone, not the commit containing this paragraph. [Documentation-only closeout checks](evidence/ship-030-closeout.json) confirm the unchanged executable tree, retained stopped test instances, working app health and unchanged Not claimed rows.
+
 ## Final release-candidate source freeze, November 8, 2026 (UTC)
 
-**PASSED: native IPM 0.3.0 candidate, prepared but not published.** The fresh GitHub checkout is **`c71acdf94f2214316ff510696a2909724c31c416`**. Its runtime, manifest, fixtures, release harness and tests are byte-identical in Git to **`63ec7d901e85d415ed831c866983ca0e4046a937`**, against which the commands below executed. [Final source-identity receipt](evidence/candidate-030-final-snapshot.json) · [complete candidate receipt](evidence/candidate-030.json). Later evidence/index documentation commits preserve that exact executable tree; they do not assert another native run. The checkout hash is a reproducible verification checkpoint, not a self-referential claim about the commit containing this paragraph.
+**Historical pre-publication gate: PASSED for native IPM 0.3.0 candidate.** At that checkpoint it was prepared but not published; the later public-install gate above records publication independently. The fresh GitHub checkout is **`c71acdf94f2214316ff510696a2909724c31c416`**. Its runtime, manifest, fixtures, release harness and tests are byte-identical in Git to **`63ec7d901e85d415ed831c866983ca0e4046a937`**, against which the commands below executed. [Final source-identity receipt](evidence/candidate-030-final-snapshot.json) · [complete candidate receipt](evidence/candidate-030.json). Later evidence/index documentation commits preserve that exact executable tree; they do not assert another native run. The checkout hash is a reproducible verification checkpoint, not a self-referential claim about the commit containing this paragraph.
 
-The already loaded official **2026.3.0AI.154.0 Community / 154U ARM64** image was used in two new isolated containers with **no application source mounts**. Both used real IPM **`load` of candidate 0.3.0**, explicit production setup and generated native archives. This is source/package-candidate verification, **not a public registry 0.3.0 installation**. Public native IPM was last independently observed at **0.2.0**; OEX/workbench remains **0.2.1**.
+The already loaded official **2026.3.0AI.154.0 Community / 154U ARM64** image was used in two new isolated containers with **no application source mounts**. Both used real IPM **`load` of candidate 0.3.0**, explicit production setup and generated native archives. This is source/package-candidate verification, **not a public registry 0.3.0 installation**. At this historical candidate checkpoint, public native IPM was last independently observed at **0.2.0** and OEX/workbench was **0.2.1**.
 
 | Executed check | Observed result | Commands / receipts |
 | --- | --- | --- |

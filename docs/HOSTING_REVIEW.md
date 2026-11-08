@@ -1,5 +1,7 @@
 # Online demo decision
 
+**November 8 follow-up:** the existing Open Exchange team thread received a request for written public-replay hosting eligibility or a separately licensed free/card-free option. No permission or eligible runtime has been confirmed. Hosting remains stopped and the bonus remains **Not claimed**. [External-state receipt](evidence/ship-030-publication.json). The earlier displayed-terms review follows.
+
 Checked November 4, 2026 against the licence page used for the downloaded EAP kit. **No public deployment was made and the two-point online-demo bonus is Not claimed.** The landing page and interactive illustration are local product UI, not a hosted runtime or a substitute for one.
 
 The [IRIS Early Access Program Evaluation/Testing License Agreement](https://evaluation.intersystems.com/Eval/early-access/tos), section 2, limits the licence to internal testing/evaluation and says it does not permit production, development or demonstration use. Section 6 restricts disclosure of the licensed software and related information. A public replay app would still run that licensed IRIS/AI Hub software; removing fresh inference does not remove the runtime licensing question.

@@ -1,5 +1,7 @@
 # Final contest pass — November 4, 2026
 
+**Historical report.** Current public IPM/OEX is **0.3.0**, with React frontend **0.2.1**. See the [new publication receipt](evidence/ship-030-publication.json) and [fresh public installation](JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc). The dated observations below are preserved with their original versions and limits.
+
 The native backend remains public IPM **0.2.0** on official ARM64 **2026.3.0AI.154.0 (154U)**. The interactive frontend is **0.2.1**. No native runtime class, model or deterministic policy changed. The accepted 2027.1.0AI.109.0 Community build was not tested.
 
 ## Fresh public installs

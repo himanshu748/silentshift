@@ -2,7 +2,7 @@
 
 **Installing the application? Use [INSTALL.md](../INSTALL.md).** This file is for package maintainers. It is not part of the installation path.
 
-Public native package **0.2.0** remains the last published version. The source manifest now declares **0.3.0 candidate**, with **45 classes and 11 assets**. These counts come from the candidate manifest, not the historical public archive. App/workbench **0.2.1** and OEX **0.2.1** have separate versions. The target remains **154U ARM64**, IPM 0.10.10 or newer and an interoperability-enabled `SILENTSHIFT` namespace. Package installation alone does not configure accounts or start the production.
+Public native package and OEX release **0.3.0** are published. The manifest and public archive contain **45 classes and 11 assets**; every native source file/asset and the manifest matched the verified source. [Archive comparison](evidence/ship-030-public-artifact.json). A [fresh registry installation](evidence/ship-030-registry.json) passed native tests and both recorded replays. React workbench **0.2.1** has a separate version. The target remains **154U ARM64**, IPM 0.10.10 or newer and an interoperability-enabled `SILENTSHIFT` namespace. Package installation alone does not configure accounts or start the production.
 
 ## What the manifest owns
 
@@ -14,7 +14,7 @@ Web applications and roles are deliberately created by the **explicit** `SilentS
 
 ## Owner-only 0.3.0 publication runbook
 
-The [fresh-source candidate gate](evidence/candidate-030.json) passed. The [candidate changelog](../CHANGELOG.md) is release-ready copy; the [judge gate](JUDGE_VERIFICATION.md) determines whether it is safe to publish. **Do not publish while that gate is incomplete or failing.** No package, registry release, Git tag or OEX edit is part of candidate preparation.
+**Completed under the owner's subsequent authorization. Do not republish 0.3.0.** The [fresh-source candidate gate](evidence/candidate-030.json), OEX publication and [fresh public-registry gate](evidence/ship-030-registry.json) all passed. The commands below retain the preparation/publication procedure for maintainers; they are not installation steps or a request to create another release. No Git tag was created. The updated description is separately awaiting moderation. [External-state receipt](evidence/ship-030-publication.json).
 
 For a prepared namespace in a disposable build-154U container, load the allowlisted candidate and generate a local archive. Substitute the actual verified container and staging path printed by the candidate receipt; do not use the active production instance:
 
@@ -43,10 +43,10 @@ The expected identity is `0.3.0`. Staging and packaging are local operations, no
 
 [Official OEX instructions](https://docs.openexchange.intersystems.com/apps/ipm/) state that Open Exchange is the publication route for `pm.community.intersystems.com`. Do not configure a direct public publishing credential or run `zpm "publish silentshift"` against that registry. The command exists for an explicitly configured writable private/testing registry; it is not an extra required public-publication step. **Only** after configuring and selecting a private writable test registry, the optional local test command is `zpm "publish silentshift"`. Never use it to try to publish to the public community registry. [Official CLI reference](https://github.com/intersystems/ipm/wiki/02.-CLI-commands#publish).
 
-After the candidate gate passes, the owner can:
+The publication used the following owner-authorized sequence; it is retained as reference:
 
 1. Confirm the verified candidate is pushed to `himanshu748/silentshift` and root `module.xml` declares `0.3.0`.
-2. Sign in to OEX → **My Applications → SilentShift → Add new release**. Enter release **0.3.0** and the changelog above, including the separate-workbench boundary. This is a new owner decision; the current OEX release stays 0.2.1 until then.
+2. Sign in to OEX → **My Applications → SilentShift → Add new release**. Enter release **0.3.0** and the changelog above, including the separate-workbench boundary. The portal first saved a Draft; publishing that draft completed the release. The live signed-out listing then showed 0.3.0.
 3. Keep **Publish in Package Manager** and **Submit to Contest** checked. Retain DPI-I-689, both articles and YouTube. Leave Demo URL empty. Never choose **Unpublish** or **Cancel approval**.
 4. Submit the release as the portal permits and record the confirmation and moderation state. Do not count public visibility as technology-bonus qualification.
 5. Wait for registry version 0.3.0, then run the fresh public-registry replay gate below. Verify the installed version from actual output before calling it public. A duplicate-0.2.0 email is not proof of a 0.3.0 publication.
@@ -64,9 +64,9 @@ uv run python scripts/trace_example.py --api http://127.0.0.1:52943/silentshift/
   --output .local/ipm/owner-030-second-replay.json
 ```
 
-The first command executes the literal `zpm "install silentshift"`, checks that **0.3.0** was installed, starts the production, runs the native suite and runs the first replay. The second repeats the API example. These commands are prepared, not results. The explicit version-qualified alternative inside a prepared namespace is `zpm "install silentshift 0.3.0"`.
+The first command executes the literal `zpm "install silentshift"`, checks that **0.3.0** was installed, starts the production, runs the native suite and runs the first replay. The second repeats the API example. The executed equivalents used container `silentshift-bonus-registry-public-030-nov8`; [exact commands and output](JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc) record the results. The explicit version-qualified alternative inside a prepared namespace is `zpm "install silentshift 0.3.0"`.
 
-Until those checks succeed, public IPM remains **0.2.0 verified**, while **0.3.0 is a source candidate**. After they succeed, retain the old dated receipts and add the new registry receipt/date; update the published-version sentence and OEX state from readback. Source-only verification never substitutes for this post-publication check. Confirm SilentShift still appears on [contest 49](https://openexchange.intersystems.com/contest/49).
+These checks succeeded on November 8: native **0.3.0**, production started, **5 classes / 12 methods passed**, two **12/12** replays. [Registry receipt](evidence/ship-030-registry.json) · [second replay](evidence/ship-030-repeat.json). The installed CSV preview returned HTTP **200** for two synthetic lines and HTTP **422** for a 21-row bounded rejection; no import/inference occurred in that preview check. [Receipt](evidence/ship-030-public-csv-preview.json). SilentShift remains listed on [contest 49](https://openexchange.intersystems.com/contest/49). Old 0.2.0 receipts remain historical; source-only verification never substitutes for public installation.
 
 ## Historical 0.1.0 evidence
 

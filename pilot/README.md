@@ -1,6 +1,6 @@
 # CSV order-feed pilot — local prototype
 
-**Local CSV pilot for the existing IRIS production.** Prepare incoming order lines and import a separate approved-order export, then investigate each line through the native agent and deterministic policy. All supplied samples are synthetic. This pilot is outside the packaged `src/` classes and is not installed by IPM; app 0.2.1 and public native IPM 0.2.0 are unchanged.
+**Local CSV pilot for the existing IRIS production.** Prepare incoming order lines and import a separate approved-order export, then investigate each line through the native agent and deterministic policy. All supplied samples are synthetic. This pilot is outside the packaged `src/` classes and is not installed by IPM; React workbench remains 0.2.1, while public native IPM 0.3.0 now includes the shared CSV backend/parser. The [workbench path](../docs/CSV_IMPORT.md) is separate from these CLI pilot files.
 
 Prefer the browser? Use [CSV Import in the workbench](../docs/CSV_IMPORT.md). That source feature shares this CLI's parser and adds explicit reference-import permissions and an authenticated import receipt. Public IPM 0.2.0 does not include the CSV additions; its registry release has not changed.
 

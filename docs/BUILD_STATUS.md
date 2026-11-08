@@ -1,10 +1,20 @@
 # Build status
 
-## Native 0.3.0 candidate gate completed — November 8, 2026 UTC
+## Public native 0.3.0 shipped and verified — November 8, 2026 UTC
+
+**Public native IPM 0.3.0 is published and clean-install verified on November 8, 2026 UTC.** Open Exchange release **0.3.0** is visible in a live signed-out browser; the React workbench remains **0.2.1** and runs separately from source. [Publication/readback](evidence/ship-030-publication.json) · [fresh registry install](evidence/ship-030-registry.json). The new description was sent for approval; its older 0.2.0 wording remains public until moderation completes. Dedicated public DPI-I-689 visibility, idea qualification, bug confirmation and all organizer awards remain unconfirmed.
+
+The fresh clone `a7aa217f1fc8d96f56bac6fd3110618eec21c353` installed literal `zpm "install silentshift"` in a new official **154U ARM64** container without source mounts. Production started; **5 native classes / 12 methods** and two **12/12** recorded replays passed, sessions **24 / 58**, no deliveries. The installed CSV preview accepted **2** synthetic lines and rejected **21** rows with HTTP **422**. Its initial incorrect HTTP-400 harness assertion is preserved beside the corrected result. [Judge commands and exact scope](JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc).
+
+All **474** tracked source-archive files match the published `a7aa217` snapshot; the **45 native classes / 11 assets** match the full-gate candidate source. Source/browser/live results below retain their scope. No runtime behavior, policy or agent code changed. The working app was preserved; the new verification container is retained stopped. No Git tag was created.
+
+The existing organizer email thread received one update with the public-install results and requests for idea qualification and written hosting eligibility. GitHub Support accepted a free-tier billing-lock review; hosted CI remains blocked, with no payment or billing-settings change. The existing monitoring automation was refreshed, not duplicated. Issue #17 remains open without comments or labels. No duplicate filing, questionnaire submission, paid service, hosting or bonus-award claim occurred.
+
+## Historical pre-publication native 0.3.0 candidate gate completed — November 8, 2026 UTC
 
 The fresh-source **154U ARM64** candidate passed **5 native classes / 12 methods**, **5/5 live routes**, **54 review assertions**, **32 CSV browser checks**, two **12/12 recorded replays**, **207 pytest**, TypeScript/build and **38 + 16** browser checks. Real native archives were generated and inspected. [Complete receipt](evidence/candidate-030.json) · [exact verified source/main identity](evidence/candidate-030-final-snapshot.json) · [commands, failures and scope](JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc).
 
-The replay installation paused at disk preflight, then completed in the same newly created container. Test setup repairs and their failed outputs are preserved; no runtime policy or agent changes were made. Public IPM remains **0.2.0**, source candidate **0.3.0**, and OEX/frontend **0.2.1**. No publication, tag, OEX/CI setting change or awarded bonus is claimed. Both test container pairs are retained stopped. The normal local app was not replaced. Browser test results remain valid, but the idle Playwright headless download cache was removed afterward for space recovery; reinstall it before future browser tests.
+The replay installation paused at disk preflight, then completed in the same newly created container. Test setup repairs and their failed outputs are preserved; no runtime policy or agent changes were made. At that pre-publication checkpoint, public IPM was **0.2.0**, source candidate **0.3.0**, and OEX/frontend **0.2.1**. No publication, tag, OEX/CI setting change or awarded bonus is claimed. Both test container pairs are retained stopped. The normal local app was not replaced. Browser test results remain valid, but the idle Playwright headless download cache was removed afterward for space recovery; reinstall it before future browser tests.
 
 
 ## Earlier Linux-only 0.3.0 candidate check, November 8, 2026 UTC
