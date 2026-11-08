@@ -2,16 +2,25 @@
 
 **Catch wrong business meaning before delivery.**
 
+SilentShift is a validation workbench for integration operations teams running B2B order pipelines. It compares incoming orders with independently approved commitments and gives each held line an inspectable reason and a review path.
+
 An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order and shows the operator the incoming value, the approved reference and the reason.
 
-If an effective approved amendment authorizes `20 CASE`, the demonstrated workflow allows it. A native IRIS AI Hub agent investigates the evidence; deterministic policy controls delivery and preserves the critical-release veto.
+If an effective approved amendment authorizes `20 CASE`, the demonstrated workflow allows it. In the workbench, the operator follows the original message, governing reference, evidence reads and final route in one case. Eligible holds go to a reviewer; critical contradictions require corrected input or approved authority and a new investigation.
+
+A native IRIS AI Hub agent recommends a disposition with evidence citations and uncertainty. Automatic delivery requires a valid `ALLOW` recommendation as well as a resolved comparison and complete evidence. Deterministic policy retains the final authority and critical-release veto.
 
 **[Install SilentShift](INSTALL.md)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
 <a id="native-build-154-setup"></a>
 ## Installation
 
-Follow **[INSTALL.md](INSTALL.md)** from start to finish. It contains the prerequisites, configuration, startup, first order and troubleshooting in one place. You do not need the other documentation to install the application.
+Follow **[INSTALL.md](INSTALL.md)** for the complete installation in one file: obtain and load the licensed image, create private local credentials, prepare the local model, bootstrap IRIS, then start the workbench and investigate an order.
+
+| What you want to do | Installation path | Model requirement |
+| --- | --- | --- |
+| Run new investigations and CSV imports | [Full local installation](INSTALL.md) | Local Ollama, Qwen and local embeddings; no paid provider key |
+| Check native orchestration without a model | [Keyless replay](INSTALL.md#optional-check-without-a-model) | No Ollama needed; recorded provider responses, no fresh inference |
 
 The verified environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. App/workbench: **0.2.1**. Public native IPM package: **0.2.0**. The proprietary runtime must be obtained separately. No newer build is claimed tested.
 
