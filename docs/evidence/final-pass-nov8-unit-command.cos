@@ -1,0 +1,5 @@
+set ^UnitTestRoot="/opt/silentshift/tests/iris/"
+set manager=##class(%UnitTest.Manager).%New()
+set passed=manager.RunTest("","/nodelete")
+write "FINAL_UNIT_RESULT=",passed,!
+halt

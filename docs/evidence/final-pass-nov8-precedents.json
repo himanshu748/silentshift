@@ -1,0 +1,259 @@
+{
+  "created_at": "2026-11-08T07:53:02.407770+00:00",
+  "mode": "read-only-inspection",
+  "llm_calls": 0,
+  "cases": [
+    {
+      "case_id": "D2878EC5-DB47-11F1-B793-5288372C06CC",
+      "scenario_id": "quantity-mismatch",
+      "trace_id": "2957",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "critical": true,
+      "downstream_permitted": false,
+      "context": {
+        "status": "retrieved",
+        "implementation": "IRIS VECTOR_COSINE",
+        "case_id": "D2878EC5-DB47-11F1-B793-5288372C06CC",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "decision_authority": false,
+        "matches": [
+          {
+            "precedent_id": "prec:15304c35630632324c79aafe2ad38bb3ee02ae05fc084a9cfdeab9694b15d5b0",
+            "source_id": "9F295C94-D76A-11F1-82EF-EED820A70F55",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          },
+          {
+            "precedent_id": "prec:b00d37251d2cde51f7850efc0350d3ee12ed835ef5a9ff16b4fc8a8bcc42a944",
+            "source_id": "D23769A0-D7B0-11F1-9980-CA5720F48492",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          },
+          {
+            "precedent_id": "prec:ed560142ed9b5043a8e43d8b4a081c4165dc23c646d3fdbcb8bce32305d15f05",
+            "source_id": "1055DC7F-D7AF-11F1-9980-CA5720F48492",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          }
+        ]
+      },
+      "agent": {
+        "mode": "native-ai-hub",
+        "status": "returned",
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.3.1",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      "native_headers": [
+        {
+          "id": "2962",
+          "type": 1,
+          "session_id": 2957,
+          "corresponding_message_id": 2963,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message",
+          "body_id": "2466",
+          "created_at": "2026-11-08 07:41:36.146",
+          "request_case_id": "D2878EC5-DB47-11F1-B793-5288372C06CC",
+          "request_action": "process"
+        },
+        {
+          "id": "2963",
+          "type": 2,
+          "session_id": 2957,
+          "corresponding_message_id": 2962,
+          "source": "Precedents",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply",
+          "body_id": "2469",
+          "created_at": "2026-11-08 07:41:36.674"
+        }
+      ],
+      "misleading_past_delivery_precedent_ids": [
+        "prec:15304c35630632324c79aafe2ad38bb3ee02ae05fc084a9cfdeab9694b15d5b0",
+        "prec:b00d37251d2cde51f7850efc0350d3ee12ed835ef5a9ff16b4fc8a8bcc42a944",
+        "prec:ed560142ed9b5043a8e43d8b4a081c4165dc23c646d3fdbcb8bce32305d15f05"
+      ],
+      "misleading_past_delivery_containment_observed": true,
+      "checks": {
+        "native_local_vector_context": true,
+        "context_bound_to_current_case": true,
+        "one_to_three_actual_matches": true,
+        "bounded_unique_ids_and_summaries": true,
+        "finite_descending_cosine_scores": true,
+        "case_scoped_source_types": true,
+        "precedents_never_release_authority": true,
+        "honest_synthetic_labels": true,
+        "returned_native_local_agent": true,
+        "four_actual_tool_reads": true,
+        "actual_precedent_tool_audit": true,
+        "retrieval_before_native_investigation": true,
+        "known_four_tool_prompt": true,
+        "actual_native_retrieval_request_and_response": true,
+        "critical_contradictions_stay_held": true
+      }
+    },
+    {
+      "case_id": "2ECA96AE-DB48-11F1-B793-5288372C06CC",
+      "scenario_id": "approved-amendment",
+      "trace_id": "3013",
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "critical": false,
+      "downstream_permitted": true,
+      "context": {
+        "status": "retrieved",
+        "implementation": "IRIS VECTOR_COSINE",
+        "case_id": "2ECA96AE-DB48-11F1-B793-5288372C06CC",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "decision_authority": false,
+        "matches": [
+          {
+            "precedent_id": "prec:15304c35630632324c79aafe2ad38bb3ee02ae05fc084a9cfdeab9694b15d5b0",
+            "source_id": "9F295C94-D76A-11F1-82EF-EED820A70F55",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          },
+          {
+            "precedent_id": "prec:b00d37251d2cde51f7850efc0350d3ee12ed835ef5a9ff16b4fc8a8bcc42a944",
+            "source_id": "D23769A0-D7B0-11F1-9980-CA5720F48492",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          },
+          {
+            "precedent_id": "prec:ed560142ed9b5043a8e43d8b4a081c4165dc23c646d3fdbcb8bce32305d15f05",
+            "source_id": "1055DC7F-D7AF-11F1-9980-CA5720F48492",
+            "source_type": "resolved_case",
+            "contract_id": "PO-2048",
+            "kind": "order",
+            "summary": "DELIVERED. kind: order; contract_id: PO-2048; quantity: 240; unit: EA; product_id: P-ALLOY-8; business_unit: EU-WEST. Assessment: CLEAR",
+            "outcome": "DELIVERED",
+            "similarity": 0.7954503217641106,
+            "synthetic": false,
+            "decision_authority": false
+          }
+        ]
+      },
+      "agent": {
+        "mode": "native-ai-hub",
+        "status": "returned",
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.3.1",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      "native_headers": [
+        {
+          "id": "3018",
+          "type": 1,
+          "session_id": 3013,
+          "corresponding_message_id": 3019,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message",
+          "body_id": "2514",
+          "created_at": "2026-11-08 07:44:10.036",
+          "request_case_id": "2ECA96AE-DB48-11F1-B793-5288372C06CC",
+          "request_action": "process"
+        },
+        {
+          "id": "3019",
+          "type": 2,
+          "session_id": 3013,
+          "corresponding_message_id": 3018,
+          "source": "Precedents",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply",
+          "body_id": "2517",
+          "created_at": "2026-11-08 07:44:10.437"
+        },
+        {
+          "id": "3038",
+          "type": 1,
+          "session_id": 3013,
+          "corresponding_message_id": "",
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message",
+          "body_id": "2534",
+          "created_at": "2026-11-08 07:45:14.593",
+          "request_case_id": "2ECA96AE-DB48-11F1-B793-5288372C06CC",
+          "request_action": "index_precedent"
+        }
+      ],
+      "misleading_past_delivery_precedent_ids": [
+        "prec:15304c35630632324c79aafe2ad38bb3ee02ae05fc084a9cfdeab9694b15d5b0",
+        "prec:b00d37251d2cde51f7850efc0350d3ee12ed835ef5a9ff16b4fc8a8bcc42a944",
+        "prec:ed560142ed9b5043a8e43d8b4a081c4165dc23c646d3fdbcb8bce32305d15f05"
+      ],
+      "misleading_past_delivery_containment_observed": false,
+      "checks": {
+        "native_local_vector_context": true,
+        "context_bound_to_current_case": true,
+        "one_to_three_actual_matches": true,
+        "bounded_unique_ids_and_summaries": true,
+        "finite_descending_cosine_scores": true,
+        "case_scoped_source_types": true,
+        "precedents_never_release_authority": true,
+        "honest_synthetic_labels": true,
+        "returned_native_local_agent": true,
+        "four_actual_tool_reads": true,
+        "actual_precedent_tool_audit": true,
+        "retrieval_before_native_investigation": true,
+        "known_four_tool_prompt": true,
+        "actual_native_retrieval_request_and_response": true,
+        "critical_contradictions_stay_held": true
+      }
+    }
+  ],
+  "passed": true,
+  "limits": [
+    "Local synthetic source evidence, not a relevance benchmark or an award claim.",
+    "Seeding alone does not prove production retrieval or a fourth agent tool read.",
+    "Missing past delivered matches do not establish the misleading-precedent containment demonstration."
+  ],
+  "iris_version": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT"
+}

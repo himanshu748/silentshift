@@ -1,0 +1,177 @@
+{
+  "preview_hash": "1a9a4181b4cf54a3d7f190a203a2ba014afe0e0c627a50d79a6336683076285d",
+  "feed_sha256": "9404a50fb2907b492380517701a5e848d9ad091388b5d86075ba7bac7eeab03c",
+  "approved_sha256": "d4c912dc32351695dc92fdfd05b191432b218fb861a7325f478513df37c0f9e2",
+  "mode": "per-line-simulator",
+  "atomic_order_delivery": false,
+  "order_completeness": "not_verified",
+  "records": [
+    {
+      "order_id": "SYNTHETIC-held-20261108T075109043157",
+      "line_id": "1",
+      "partner": "synthetic-csv-partner",
+      "source_row": 2,
+      "message": {
+        "event_id": "csv:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc",
+        "contract_id": "csv-line:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc",
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "20",
+        "unit": "CASE",
+        "occurred_at": "2026-11-08T07:51:09.043157+00:00",
+        "business_unit": "TEST",
+        "kind": "order",
+        "source": "synthetic-csv-partner",
+        "correlation_id": "csv-order:882eda6e92c23401c874c977623abcb4e1fc8961f1bf2383245a1773d039f99e"
+      },
+      "existing_case": {
+        "id": "2BBC1A3E-DB49-11F1-B793-5288372C06CC",
+        "routing": "QUARANTINED",
+        "trace_id": "3198",
+        "delivery_count": 0,
+        "agent": {
+          "status": "returned",
+          "failure_code": ""
+        }
+      }
+    },
+    {
+      "order_id": "SYNTHETIC-clear-20261108T075109043157",
+      "line_id": "1",
+      "partner": "synthetic-csv-partner",
+      "source_row": 3,
+      "message": {
+        "event_id": "csv:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655",
+        "contract_id": "csv-line:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655",
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "240",
+        "unit": "EA",
+        "occurred_at": "2026-11-08T07:51:09.043157+00:00",
+        "business_unit": "TEST",
+        "kind": "order",
+        "source": "synthetic-csv-partner",
+        "correlation_id": "csv-order:16a756ae42307044da6e881fbdb04a5e317569b0a8841e6ce91d499b54e11ba3"
+      },
+      "existing_case": {
+        "id": "494E93E0-DB49-11F1-B793-5288372C06CC",
+        "routing": "DELIVERED",
+        "trace_id": "3226",
+        "delivery_count": 1,
+        "agent": {
+          "status": "returned",
+          "failure_code": ""
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "id": "csv-ref:b60c05e8b2231cb1c8e1aedf8a301244caff2778d50d6cb805becfcbaef2f0bb",
+      "contract_id": "csv-line:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc",
+      "quantity": "240",
+      "unit": "EA",
+      "approval_provenance": {
+        "revision": "v1",
+        "approved_by": "synthetic-buyer",
+        "approved_at": "2026-11-06T07:51:09.043157+00:00"
+      },
+      "product_id": "SYNTHETIC-SKU",
+      "business_unit": "TEST",
+      "effective_from": "2026-11-07T07:51:09.043157+00:00",
+      "authority": "approved",
+      "effective_to": null,
+      "timestamp_semantics": "event_time"
+    },
+    {
+      "id": "csv-ref:4f4e7ee8a367761ff000971c83c51149c12f93e150d8869938b65edc4a778417",
+      "contract_id": "csv-line:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655",
+      "quantity": "240",
+      "unit": "EA",
+      "approval_provenance": {
+        "revision": "v1",
+        "approved_by": "synthetic-buyer",
+        "approved_at": "2026-11-06T07:51:09.043157+00:00"
+      },
+      "product_id": "SYNTHETIC-SKU",
+      "business_unit": "TEST",
+      "effective_from": "2026-11-07T07:51:09.043157+00:00",
+      "authority": "approved",
+      "effective_to": null,
+      "timestamp_semantics": "event_time"
+    }
+  ],
+  "import": {
+    "created": 0,
+    "reused": 2,
+    "source_retained": true,
+    "receipt": {
+      "id": "1a9a4181b4cf54a3d7f190a203a2ba014afe0e0c627a50d79a6336683076285d",
+      "imported_by": "ss-reviewer",
+      "imported_at": "2026-11-08T07:51:13.778923Z",
+      "reason": "Synthetic independently approved buyer export for UI verification.",
+      "reference_count": 2,
+      "feed_sha256": "9404a50fb2907b492380517701a5e848d9ad091388b5d86075ba7bac7eeab03c",
+      "approved_sha256": "d4c912dc32351695dc92fdfd05b191432b218fb861a7325f478513df37c0f9e2",
+      "records": [
+        {
+          "message": {
+            "occurred_at": "2026-11-08T07:51:09.043157+00:00",
+            "product_id": "SYNTHETIC-SKU",
+            "quantity": "20",
+            "unit": "CASE",
+            "business_unit": "TEST",
+            "kind": "order",
+            "source": "synthetic-csv-partner",
+            "event_id": "csv:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc",
+            "correlation_id": "csv-order:882eda6e92c23401c874c977623abcb4e1fc8961f1bf2383245a1773d039f99e",
+            "contract_id": "csv-line:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc"
+          },
+          "order_id": "SYNTHETIC-held-20261108T075109043157",
+          "line_id": "1",
+          "partner": "synthetic-csv-partner",
+          "source_row": 2
+        },
+        {
+          "message": {
+            "occurred_at": "2026-11-08T07:51:09.043157+00:00",
+            "product_id": "SYNTHETIC-SKU",
+            "quantity": "240",
+            "unit": "EA",
+            "business_unit": "TEST",
+            "kind": "order",
+            "source": "synthetic-csv-partner",
+            "event_id": "csv:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655",
+            "correlation_id": "csv-order:16a756ae42307044da6e881fbdb04a5e317569b0a8841e6ce91d499b54e11ba3",
+            "contract_id": "csv-line:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655"
+          },
+          "order_id": "SYNTHETIC-clear-20261108T075109043157",
+          "line_id": "1",
+          "partner": "synthetic-csv-partner",
+          "source_row": 3
+        }
+      ]
+    }
+  },
+  "results": {
+    "csv:4f00d0134d81bb640365fad6b8868ccdff3192917aab9f0493404ec48cf934dc": {
+      "id": "2BBC1A3E-DB49-11F1-B793-5288372C06CC",
+      "routing": "QUARANTINED",
+      "trace_id": "3198",
+      "delivery_count": 0,
+      "agent": {
+        "status": "returned",
+        "failure_code": ""
+      }
+    },
+    "csv:e780de99fe5d0cf901b08816bc5c04f2e5702fd7e9247038c3c47eb062260655": {
+      "id": "494E93E0-DB49-11F1-B793-5288372C06CC",
+      "routing": "DELIVERED",
+      "trace_id": "3226",
+      "delivery_count": 1,
+      "agent": {
+        "status": "returned",
+        "failure_code": ""
+      }
+    }
+  },
+  "completed": true
+}

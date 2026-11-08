@@ -1,0 +1,1132 @@
+{
+  "suite": "native-partner-adapter/1",
+  "mode": "live",
+  "created_at": "2026-11-08T07:48:57.675834+00:00",
+  "new_model_cases_requested": 2,
+  "synthetic": true,
+  "cases": [
+    {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-allow",
+      "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+      "trace_id": "3145",
+      "routing": "DELIVERED",
+      "ack": {
+        "protocol": "silentshift-partner-file/1",
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-allow.json",
+        "status": "COMPLETED",
+        "input_sha256": "b5695d2e1d541ca97630d35bd5bf6e1a82e9c10db702eab23ea9afb161abd74d",
+        "input_bytes": 442,
+        "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+        "routing": "DELIVERED",
+        "trace_id": "3145",
+        "policy_decision": "ALLOW",
+        "delivery_count": 1,
+        "delivery_receipt": {
+          "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+          "delivered_at": "2026-11-08T07:49:41.472647Z",
+          "policy_version": "silentshift-policy/1.1.0",
+          "case_version": 7,
+          "destination": "included-iris-simulator"
+        },
+        "recorded_at": "2026-11-08T07:49:41.889289Z",
+        "duplicate_event": false
+      },
+      "native_state": {
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-allow",
+        "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+        "held": false,
+        "failures": 0,
+        "completed": true,
+        "dispatch_status": "enqueued",
+        "input_sha256": "b5695d2e1d541ca97630d35bd5bf6e1a82e9c10db702eab23ea9afb161abd74d",
+        "input_bytes": 442,
+        "headers": [
+          {
+            "id": "3145",
+            "session_id": 3145,
+            "source": "PartnerFiles",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3146",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3147",
+            "session_id": 3145,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3148",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "Runbooks",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3149",
+            "session_id": 3145,
+            "source": "Runbooks",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3150",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "Precedents",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3151",
+            "session_id": 3145,
+            "source": "Precedents",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3152",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3153",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3154",
+            "session_id": 3145,
+            "source": "ProviderIngress",
+            "target": "ProviderForwarder",
+            "body_class": "SilentShift.Provider.CallRequest"
+          },
+          {
+            "id": "3155",
+            "session_id": 3145,
+            "source": "ProviderForwarder",
+            "target": "ProviderIngress",
+            "body_class": "SilentShift.Provider.CallResponse"
+          },
+          {
+            "id": "3156",
+            "session_id": 3145,
+            "source": "ProviderIngress",
+            "target": "ProviderForwarder",
+            "body_class": "SilentShift.Provider.CallRequest"
+          },
+          {
+            "id": "3157",
+            "session_id": 3145,
+            "source": "ProviderForwarder",
+            "target": "ProviderIngress",
+            "body_class": "SilentShift.Provider.CallResponse"
+          },
+          {
+            "id": "3158",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3159",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3160",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3161",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3162",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3163",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3164",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3165",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3166",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3167",
+            "session_id": 3145,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3168",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "Destination",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3169",
+            "session_id": 3145,
+            "source": "Destination",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3170",
+            "session_id": 3145,
+            "source": "Semantic",
+            "target": "Precedents",
+            "body_class": "SilentShift.Message"
+          }
+        ],
+        "trace_id": "3145",
+        "scenario_id": "",
+        "clock": "2026-11-08T07:48:59.336198Z",
+        "received_at": "2026-11-08T07:48:59.336198Z",
+        "reference_count": 1
+      },
+      "runbook_context": {
+        "status": "retrieved",
+        "implementation": "IRIS VECTOR_COSINE",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "match_count": 2,
+        "decision_authority": false
+      },
+      "precedent_context": {
+        "status": "retrieved",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "match_count": 3,
+        "decision_authority": false
+      },
+      "checks": {
+        "one_actual_adapter_dispatch": true,
+        "one_actual_native_investigation": true,
+        "model_returned_four_reads": true,
+        "native_precedent_retrieval": true,
+        "precedents_have_no_release_authority": true,
+        "expected_persisted_outcome": true,
+        "immutable_ack_matches_observed_outcome": true,
+        "actual_trace_association": true,
+        "raw_bytes_retained": true,
+        "byte_count_and_digest": true,
+        "general_catalog_server_clock": true,
+        "ack_matches_policy": true,
+        "receipt_truthful": true,
+        "ack_completion_not_still_held": true,
+        "ack_failure_recovered_same_case": true
+      }
+    },
+    {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-critical",
+      "case_id": "F759FA72-DB48-11F1-B793-5288372C06CC",
+      "trace_id": "3171",
+      "routing": "QUARANTINED",
+      "ack": {
+        "protocol": "silentshift-partner-file/1",
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-critical.json",
+        "status": "COMPLETED",
+        "input_sha256": "15f2240d052eedce93fec4febdb65801bbd2296022bed74a4aa716bdc3200834",
+        "input_bytes": 461,
+        "case_id": "F759FA72-DB48-11F1-B793-5288372C06CC",
+        "routing": "QUARANTINED",
+        "trace_id": "3171",
+        "policy_decision": "QUARANTINE",
+        "delivery_count": 0,
+        "delivery_receipt": null,
+        "recorded_at": "2026-11-08T07:50:31.446515Z",
+        "duplicate_event": false
+      },
+      "native_state": {
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-critical",
+        "case_id": "F759FA72-DB48-11F1-B793-5288372C06CC",
+        "held": false,
+        "failures": 0,
+        "completed": true,
+        "dispatch_status": "enqueued",
+        "input_sha256": "15f2240d052eedce93fec4febdb65801bbd2296022bed74a4aa716bdc3200834",
+        "input_bytes": 461,
+        "headers": [
+          {
+            "id": "3171",
+            "session_id": 3171,
+            "source": "PartnerFiles",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3172",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3173",
+            "session_id": 3171,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3174",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "Runbooks",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3175",
+            "session_id": 3171,
+            "source": "Runbooks",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3176",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "Precedents",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3177",
+            "session_id": 3171,
+            "source": "Precedents",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3178",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3179",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3180",
+            "session_id": 3171,
+            "source": "ProviderIngress",
+            "target": "ProviderForwarder",
+            "body_class": "SilentShift.Provider.CallRequest"
+          },
+          {
+            "id": "3181",
+            "session_id": 3171,
+            "source": "ProviderForwarder",
+            "target": "ProviderIngress",
+            "body_class": "SilentShift.Provider.CallResponse"
+          },
+          {
+            "id": "3182",
+            "session_id": 3171,
+            "source": "ProviderIngress",
+            "target": "ProviderForwarder",
+            "body_class": "SilentShift.Provider.CallRequest"
+          },
+          {
+            "id": "3183",
+            "session_id": 3171,
+            "source": "ProviderForwarder",
+            "target": "ProviderIngress",
+            "body_class": "SilentShift.Provider.CallResponse"
+          },
+          {
+            "id": "3184",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3185",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3186",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3187",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3188",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3189",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3190",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3191",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3192",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent"
+          },
+          {
+            "id": "3193",
+            "session_id": 3171,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3194",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "Quarantine",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3195",
+            "session_id": 3171,
+            "source": "Quarantine",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply"
+          },
+          {
+            "id": "3196",
+            "session_id": 3171,
+            "source": "Semantic",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Message"
+          },
+          {
+            "id": "3197",
+            "session_id": 3171,
+            "source": "ReviewCoordinator",
+            "target": "ReviewWorklist",
+            "body_class": "SilentShift.Workflow.ReviewRequest"
+          }
+        ],
+        "trace_id": "3171",
+        "scenario_id": "",
+        "clock": "2026-11-08T07:49:45.919412Z",
+        "received_at": "2026-11-08T07:49:45.919412Z",
+        "reference_count": 1
+      },
+      "runbook_context": {
+        "status": "retrieved",
+        "implementation": "IRIS VECTOR_COSINE",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "match_count": 2,
+        "decision_authority": false
+      },
+      "precedent_context": {
+        "status": "retrieved",
+        "model": "all-minilm:22m",
+        "dimensions": 384,
+        "match_count": 3,
+        "decision_authority": false
+      },
+      "checks": {
+        "one_actual_adapter_dispatch": true,
+        "one_actual_native_investigation": true,
+        "model_returned_four_reads": true,
+        "native_precedent_retrieval": true,
+        "precedents_have_no_release_authority": true,
+        "expected_persisted_outcome": true,
+        "immutable_ack_matches_observed_outcome": true,
+        "actual_trace_association": true,
+        "raw_bytes_retained": true,
+        "byte_count_and_digest": true,
+        "general_catalog_server_clock": true,
+        "ack_matches_policy": true,
+        "receipt_truthful": true,
+        "ack_completion_not_still_held": true
+      }
+    }
+  ],
+  "checks": {
+    "duplicate_event_same_case_receipt": true,
+    "same_file_same_ack": true,
+    "invalid_inputs_never_create_cases": true,
+    "symlink_not_followed": true
+  },
+  "passed": true,
+  "contract_checks": {
+    "ordinary_name": true,
+    "unsafe_name_1": true,
+    "unsafe_name_2": true,
+    "unsafe_name_3": true,
+    "unsafe_name_4": true,
+    "unsafe_name_5": true,
+    "unsafe_name_6": true,
+    "unsafe_name_7": true,
+    "unsafe_name_8": true,
+    "unsafe_name_9": true,
+    "unsafe_name_10": true,
+    "envelope_only_two_fields": true,
+    "original_preserved": true,
+    "no_partner_clock": true,
+    "reserved_message": true,
+    "reserved_raw_payload": true,
+    "reserved_scenario_id": true,
+    "reserved_dataset_version": true,
+    "reserved_clock": true,
+    "reserved_fault": true,
+    "reserved_references": true,
+    "reserved_action": true,
+    "reserved_review": true,
+    "reserved_reviewer": true,
+    "reserved_case_id": true,
+    "invalid_json_1": true,
+    "invalid_json_2": true,
+    "invalid_json_3": true,
+    "invalid_json_4": true
+  },
+  "iterator_checks": {
+    "suite": "native-file-iterator/1",
+    "probe_prefix": "iterator-DB1239DA-DB48-11F1-B793-5288372C06CC",
+    "retained_probe_files": 3,
+    "model_calls_requested": false,
+    "checks": {
+      "installed_api_last_row_has_at_end": true,
+      "production_iterator_keeps_single_last_row": true,
+      "production_iterator_keeps_all_three": true,
+      "production_iterator_obeys_two_row_cap": true,
+      "zero_limit_clamped_to_one": true,
+      "safe_probe_is_regular": true
+    }
+  },
+  "run_id": "a1b3c3f8d70a4bb5957f3d3ea9639d2a",
+  "ack_failure": {
+    "native_state": {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-allow",
+      "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+      "held": true,
+      "failures": 3,
+      "completed": false,
+      "dispatch_status": "enqueued",
+      "input_sha256": "b5695d2e1d541ca97630d35bd5bf6e1a82e9c10db702eab23ea9afb161abd74d",
+      "input_bytes": 442,
+      "headers": [
+        {
+          "id": "3145",
+          "session_id": 3145,
+          "source": "PartnerFiles",
+          "target": "Semantic",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3146",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "References",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3147",
+          "session_id": 3145,
+          "source": "References",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3148",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Runbooks",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3149",
+          "session_id": 3145,
+          "source": "Runbooks",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3150",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3151",
+          "session_id": 3145,
+          "source": "Precedents",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3152",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Investigator",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3153",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3154",
+          "session_id": 3145,
+          "source": "ProviderIngress",
+          "target": "ProviderForwarder",
+          "body_class": "SilentShift.Provider.CallRequest"
+        },
+        {
+          "id": "3155",
+          "session_id": 3145,
+          "source": "ProviderForwarder",
+          "target": "ProviderIngress",
+          "body_class": "SilentShift.Provider.CallResponse"
+        },
+        {
+          "id": "3156",
+          "session_id": 3145,
+          "source": "ProviderIngress",
+          "target": "ProviderForwarder",
+          "body_class": "SilentShift.Provider.CallRequest"
+        },
+        {
+          "id": "3157",
+          "session_id": 3145,
+          "source": "ProviderForwarder",
+          "target": "ProviderIngress",
+          "body_class": "SilentShift.Provider.CallResponse"
+        },
+        {
+          "id": "3158",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3159",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3160",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3161",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3162",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3163",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3164",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3165",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3166",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3167",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3168",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Destination",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3169",
+          "session_id": 3145,
+          "source": "Destination",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3170",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message"
+        }
+      ],
+      "trace_id": "3145",
+      "scenario_id": "",
+      "clock": "2026-11-08T07:48:59.336198Z",
+      "received_at": "2026-11-08T07:48:59.336198Z",
+      "reference_count": 1
+    },
+    "routing": "DELIVERED",
+    "delivery_count": 1
+  },
+  "duplicate": {
+    "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-duplicate",
+    "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+    "trace_id": "3145",
+    "routing": "DELIVERED",
+    "ack": {
+      "protocol": "silentshift-partner-file/1",
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-duplicate.json",
+      "status": "COMPLETED",
+      "input_sha256": "b5695d2e1d541ca97630d35bd5bf6e1a82e9c10db702eab23ea9afb161abd74d",
+      "input_bytes": 442,
+      "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+      "routing": "DELIVERED",
+      "trace_id": "3145",
+      "policy_decision": "ALLOW",
+      "delivery_count": 1,
+      "delivery_receipt": {
+        "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+        "delivered_at": "2026-11-08T07:49:41.472647Z",
+        "policy_version": "silentshift-policy/1.1.0",
+        "case_version": 7,
+        "destination": "included-iris-simulator"
+      },
+      "recorded_at": "2026-11-08T07:50:32.467412Z",
+      "duplicate_event": true
+    },
+    "native_state": {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-duplicate",
+      "case_id": "DB95F3E4-DB48-11F1-B793-5288372C06CC",
+      "held": false,
+      "failures": 0,
+      "completed": true,
+      "dispatch_status": "enqueued",
+      "input_sha256": "b5695d2e1d541ca97630d35bd5bf6e1a82e9c10db702eab23ea9afb161abd74d",
+      "input_bytes": 442,
+      "headers": [
+        {
+          "id": "3145",
+          "session_id": 3145,
+          "source": "PartnerFiles",
+          "target": "Semantic",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3146",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "References",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3147",
+          "session_id": 3145,
+          "source": "References",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3148",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Runbooks",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3149",
+          "session_id": 3145,
+          "source": "Runbooks",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3150",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3151",
+          "session_id": 3145,
+          "source": "Precedents",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3152",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Investigator",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3153",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3154",
+          "session_id": 3145,
+          "source": "ProviderIngress",
+          "target": "ProviderForwarder",
+          "body_class": "SilentShift.Provider.CallRequest"
+        },
+        {
+          "id": "3155",
+          "session_id": 3145,
+          "source": "ProviderForwarder",
+          "target": "ProviderIngress",
+          "body_class": "SilentShift.Provider.CallResponse"
+        },
+        {
+          "id": "3156",
+          "session_id": 3145,
+          "source": "ProviderIngress",
+          "target": "ProviderForwarder",
+          "body_class": "SilentShift.Provider.CallRequest"
+        },
+        {
+          "id": "3157",
+          "session_id": 3145,
+          "source": "ProviderForwarder",
+          "target": "ProviderIngress",
+          "body_class": "SilentShift.Provider.CallResponse"
+        },
+        {
+          "id": "3158",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3159",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3160",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3161",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3162",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3163",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3164",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3165",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3166",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "AITrace",
+          "body_class": "SilentShift.TraceEvent"
+        },
+        {
+          "id": "3167",
+          "session_id": 3145,
+          "source": "Investigator",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3168",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Destination",
+          "body_class": "SilentShift.Message"
+        },
+        {
+          "id": "3169",
+          "session_id": 3145,
+          "source": "Destination",
+          "target": "Semantic",
+          "body_class": "SilentShift.Reply"
+        },
+        {
+          "id": "3170",
+          "session_id": 3145,
+          "source": "Semantic",
+          "target": "Precedents",
+          "body_class": "SilentShift.Message"
+        }
+      ],
+      "trace_id": "3145",
+      "scenario_id": "",
+      "clock": "2026-11-08T07:48:59.336198Z",
+      "received_at": "2026-11-08T07:48:59.336198Z",
+      "reference_count": 1
+    },
+    "runbook_context": {
+      "status": "retrieved",
+      "implementation": "IRIS VECTOR_COSINE",
+      "model": "all-minilm:22m",
+      "dimensions": 384,
+      "match_count": 2,
+      "decision_authority": false
+    },
+    "precedent_context": {
+      "status": "retrieved",
+      "model": "all-minilm:22m",
+      "dimensions": 384,
+      "match_count": 3,
+      "decision_authority": false
+    },
+    "checks": {
+      "one_actual_adapter_dispatch": true,
+      "one_actual_native_investigation": true,
+      "model_returned_four_reads": true,
+      "native_precedent_retrieval": true,
+      "precedents_have_no_release_authority": true,
+      "expected_persisted_outcome": true,
+      "immutable_ack_matches_observed_outcome": true,
+      "actual_trace_association": true,
+      "raw_bytes_retained": true,
+      "byte_count_and_digest": true,
+      "general_catalog_server_clock": true,
+      "ack_matches_policy": true,
+      "receipt_truthful": true,
+      "ack_completion_not_still_held": true
+    }
+  },
+  "rejected_inputs": [
+    {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-malformed",
+      "input_bytes": 1,
+      "ack": {
+        "protocol": "silentshift-partner-file/1",
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-malformed.json",
+        "status": "REJECTED_INPUT",
+        "error": "FILE_INVALID_MESSAGE",
+        "case_id": "",
+        "input_bytes": 1,
+        "input_sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+        "delivery_receipt": null,
+        "recorded_at": "2026-11-08T07:50:34.495214Z"
+      },
+      "native_state": {
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-malformed",
+        "case_id": "",
+        "held": false,
+        "failures": 0,
+        "completed": true,
+        "dispatch_status": "",
+        "input_sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+        "input_bytes": 1,
+        "headers": []
+      },
+      "passed": true
+    },
+    {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-oversize",
+      "input_bytes": 131073,
+      "ack": {
+        "protocol": "silentshift-partner-file/1",
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-oversize.json",
+        "status": "REJECTED_INPUT",
+        "error": "FILE_INPUT_TOO_LARGE",
+        "case_id": "",
+        "input_bytes": 131073,
+        "input_sha256": null,
+        "delivery_receipt": null,
+        "recorded_at": "2026-11-08T07:50:35.505276Z"
+      },
+      "native_state": {
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-oversize",
+        "case_id": "",
+        "held": false,
+        "failures": 0,
+        "completed": true,
+        "dispatch_status": "",
+        "input_sha256": "",
+        "input_bytes": "",
+        "headers": []
+      },
+      "passed": true
+    },
+    {
+      "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-envelope",
+      "input_bytes": 550,
+      "ack": {
+        "protocol": "silentshift-partner-file/1",
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-envelope.json",
+        "status": "REJECTED_INPUT",
+        "error": "FILE_INVALID_MESSAGE",
+        "case_id": "",
+        "input_bytes": 550,
+        "input_sha256": "dc26567f508b35487d96af38f9031d9f7c9a70675ea744f024b3b1729cfa59f1",
+        "delivery_receipt": null,
+        "recorded_at": "2026-11-08T07:50:36.523285Z"
+      },
+      "native_state": {
+        "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-envelope",
+        "case_id": "",
+        "held": false,
+        "failures": 0,
+        "completed": true,
+        "dispatch_status": "",
+        "input_sha256": "dc26567f508b35487d96af38f9031d9f7c9a70675ea744f024b3b1729cfa59f1",
+        "input_bytes": 550,
+        "headers": []
+      },
+      "passed": true
+    }
+  ],
+  "symlink": {
+    "file": "adapter-a1b3c3f8d70a4bb5957f3d3ea9639d2a-symlink",
+    "case_id": "",
+    "held": true,
+    "failures": 3,
+    "completed": false,
+    "dispatch_status": "",
+    "input_sha256": "",
+    "input_bytes": "",
+    "headers": []
+  }
+}
