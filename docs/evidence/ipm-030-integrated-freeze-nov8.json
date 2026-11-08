@@ -1,0 +1,95 @@
+{
+  "schema": "silentshift.mainline-merged-release-candidate-freeze.v1",
+  "checked_at_utc": "2026-11-08T09:16:44Z",
+  "verified_source_commit": "b6bfdd099d9273fa4134ce34bfbc7269c52f8f6b",
+  "parent_mainline_candidate": "63ec7d901e85d415ed831c866983ca0e4046a937",
+  "preparation_lineage": "Preserved mainline dynamic version-aware package scripts, verify_bonus_release and verify_ipm_clean changes plus new assertions in tests/test_ipm_package.py; merged only documentation and evidence from parallel prep.",
+  "environment": {
+    "source": "clean Vercel isolated Linux git checkout",
+    "session_id": "sbx_E49iahfItqrdEc4fiMgdneFPJZWf",
+    "architecture": "amd64",
+    "python": "CPython 3.14.4",
+    "node": "22",
+    "docker_available": false,
+    "iris_available": false,
+    "licensed_iris_154u_available": false,
+    "exposed_ports": 0
+  },
+  "scope": "post-documentation 0.3.0 source staging and language/build checks. Does NOT constitute new clean IRIS 154U gate, live five-case run, browser tests, public registry install or published module.",
+  "test_results": [
+    {
+      "name": "manifest and resources",
+      "status": "passed",
+      "value": "0.3.0, 45 classes, 11 FileCopy assets",
+      "module_sha256": "d5dcd474348ff726e55873301879a800492236d8f052ede01d1d15376abcf6bf"
+    },
+    {
+      "name": "Python contract tests",
+      "status": "passed",
+      "command": "uv run pytest -q",
+      "value": "207 passed in 2.90s"
+    },
+    {
+      "name": "allowlisted IPM source staging",
+      "status": "passed",
+      "command": "uv run python scripts/package_ipm.py --output /tmp/silentshift-merged-final-stage",
+      "version": "0.3.0",
+      "files": 58,
+      "manifest_declared_classes": 45,
+      "assets": 11,
+      "inventory_sha256": "c08203994071291c926a53f5d6b7eda1834ecd99fde670495c78dca9fdaa64fd",
+      "packaged_ipm_document_sha256": "c3a3aa0431a2542a7e1f06a5ceda1b1ecd12af9cc8f3c096056859d7d37a288d",
+      "packaged_document_matches_source": true,
+      "registry_published": false,
+      "native_install_verified": false
+    },
+    {
+      "name": "TypeScript",
+      "status": "passed",
+      "command": "npm --prefix web run check"
+    },
+    {
+      "name": "Frontend build",
+      "status": "passed",
+      "command": "npm --prefix web run build",
+      "value": "built in 493ms; prior dependency install completed"
+    },
+    {
+      "name": "Relative Markdown link targets",
+      "status": "passed",
+      "value": "408 checked, none missing across 12 release/judge docs"
+    },
+    {
+      "name": "Playwright Chromium browser prerequisite",
+      "status": "blocked",
+      "reason": "Earlier isolated candidate attempt encountered EAI_AGAIN cdn.playwright.dev; browser suite not rerun"
+    },
+    {
+      "name": "Native 154U clean image, five classes/12 methods, five live scenarios, both API replays and 54 review checks",
+      "status": "not-run",
+      "reason": "No Docker or proprietary licensed IRIS image in this sandbox"
+    },
+    {
+      "name": "CSV 32 browser tests and 38+16 Playwright suites",
+      "status": "not-run",
+      "reason": "No native IRIS and browser binary in this sandbox"
+    }
+  ],
+  "existing_historical_evidence": [
+    "docs/evidence/source-isolated-nov8.json",
+    "docs/evidence/final-pass-nov8.json",
+    "docs/evidence/judge-current-nov8.json"
+  ],
+  "no_change_claims": {
+    "no_changes_to_src_python_web_fixtures_since_original_main": true,
+    "only_native_manifest_version_and_packaging_test_harness_changed": true,
+    "ipm_publication": false,
+    "oex_edit": false,
+    "release_tag": false,
+    "hosted_demo": false,
+    "gh_billing_change": false,
+    "bonus_row_change": false
+  },
+  "acceptance_complete": false,
+  "note": "Mainline 0.3.0 packaging scripts and tests supersede an earlier parallel branch's hard-coded version wiring. This is the final integrated source-only gate, not a native/runtime pass. The current main ref after documentation indexing may differ, while no packaged files are subsequently edited."
+}

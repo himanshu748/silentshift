@@ -1,0 +1,107 @@
+{
+  "schema": "silentshift.release-candidate-freeze.v1",
+  "recorded_at_utc": "2026-11-08T09:07:41Z",
+  "verified_source_commit": "915878fc36604fb942e778311697cc0bd7db7f8c",
+  "verification_scope": "Clean isolated Linux source clone, 0.3.0 release staging/packaged documentation, Python and web static build only. Not IRIS, not browser e2e, not public registry.",
+  "environment": {
+    "sandbox_name": "silentshift-030-freeze-nov8",
+    "session_id": "sbx_E49iahfItqrdEc4fiMgdneFPJZWf",
+    "platform": "Linux",
+    "architecture": "amd64",
+    "python": "3.14.4",
+    "node": "22",
+    "source_cloned_from": "https://github.com/himanshu748/silentshift.git",
+    "worktree_clean": true,
+    "docker_available": false,
+    "iris_available": false,
+    "licensed_154u_image": false,
+    "public_web_ports": 0
+  },
+  "checks": [
+    {
+      "name": "manifest version",
+      "command": "python3 -c 'import xml.etree.ElementTree as E;print(E.parse(\"module.xml\").findtext(\"./Document/Module/Version\"))'",
+      "status": "passed",
+      "observed": "0.3.0",
+      "sha256": "d5dcd474348ff726e55873301879a800492236d8f052ede01d1d15376abcf6bf"
+    },
+    {
+      "name": "Python suite",
+      "command": "uv run pytest -q",
+      "status": "passed",
+      "observed": "207 passed in 4.33s",
+      "exit_code": 0
+    },
+    {
+      "name": "IPM staging",
+      "command": "uv run python scripts/package_ipm.py --output /tmp/silentshift-030-freeze-stage",
+      "status": "passed",
+      "exit_code": 0,
+      "version": "0.3.0",
+      "file_count": 58,
+      "native_class_count": 45,
+      "asset_count": 11,
+      "inventory_sha256": "8c5290607032f4bd50522b0a8fd74f0af37c4caa19f5a31cf60c1da760374065",
+      "packaged_docs_ipm_sha256": "30b5151c5301ee8b687161335e295d58669c9cb56a69c4703b09d7df42c5b345",
+      "packaged_document_bytes_match_source": true,
+      "native_install_verified": false,
+      "registry_published": false
+    },
+    {
+      "name": "npm dependencies",
+      "command": "npm --prefix web ci --no-audit --no-fund",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "name": "TS",
+      "command": "npm --prefix web run check",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "name": "web build",
+      "command": "npm --prefix web run build",
+      "status": "passed",
+      "exit_code": 0,
+      "observed": "✓ built in 505ms; nonfatal existing lucide warnings"
+    },
+    {
+      "name": "Markdown relative targets",
+      "status": "passed",
+      "observed": "410 local markdown targets checked, zero missing across 12 requested/release files",
+      "exit_code": 0
+    },
+    {
+      "name": "Playwright disconnected, connected and CSV browser checks",
+      "status": "not-run",
+      "reason": "Chromium unavailable; earlier isolated browser-download attempt was blocked by EAI_AGAIN cdn.playwright.dev. Historical 38+16+32 successes not rerun."
+    },
+    {
+      "name": "clean 154U native, 5 classes/12 methods, 5 live, both replay, CSV, review",
+      "status": "not-run",
+      "reason": "No Docker/IRIS binary, licensed IRIS image, or local Ollama in sandbox. Cannot assert a clean 0.3.0 native gate."
+    }
+  ],
+  "historical_native_evidence": [
+    "docs/evidence/source-isolated-nov8.json",
+    "docs/evidence/final-pass-nov8.json",
+    "docs/evidence/judge-current-nov8.json"
+  ],
+  "candidate_pre_docs_run": "docs/evidence/ipm-030-candidate-linux-nov8.json",
+  "status": {
+    "native_candidate_published": false,
+    "oex_edited": false,
+    "tag_created": false,
+    "hosted_demo_created": false,
+    "source_runtime_changed": false,
+    "source_policy_changed": false,
+    "bonuses_changed": false,
+    "complete_acceptance_gate": false
+  },
+  "notes": [
+    "This post-documentation staging check includes the final docs/IPM.md bytes. Later docs/evidence-only commits do not alter the staged IPM package unless docs/IPM.md or other packaged source is modified.",
+    "GitHub public version last independently observed at 0.2.0 and OEX/frontend at 0.2.1. These were not re-queried as part of this Linux validation.",
+    "The source was validated at git commit 915878fc36604fb942e778311697cc0bd7db7f8c. Later documentation-only commits are linked using source hashes, not falsely treated as freshly native-tested."
+  ]
+}

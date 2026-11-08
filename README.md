@@ -22,7 +22,7 @@ Follow **[INSTALL.md](INSTALL.md)** for the complete installation in one file: o
 | Run new investigations and CSV imports | [Full local installation](INSTALL.md) | Local Ollama, Qwen and local embeddings; no paid provider key |
 | Check native orchestration without a model | [Keyless replay](INSTALL.md#optional-check-without-a-model) | No Ollama needed; recorded provider responses, no fresh inference |
 
-The verified environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. App/workbench: **0.2.1**. Public native IPM package: **0.2.0**. The proprietary runtime must be obtained separately. No newer build is claimed tested.
+The verified native environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. App/workbench: **0.2.1**. Last verified **public** native IPM: **0.2.0**. The current source manifest prepares native IPM **0.3.0, not yet published or registry-installed**. [0.3.0 release notes](CHANGELOG.md) · [Owner publication instructions](docs/IPM.md#owner-only-030-publication-runbook). The proprietary runtime must be obtained separately; no newer build is claimed tested.
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
@@ -49,7 +49,7 @@ The idea implementation is verified locally; organizer qualification and the ded
 
 [Features and technical reference](docs/FEATURES.md) covers evidence inspection, Workflow review, vector precedents, partner-file intake, API examples and developer checks. [Judge walkthrough](docs/JUDGE_GUIDE.md) connects those features to recorded execution evidence.
 
-[Import a CSV order feed from the workbench](docs/CSV_IMPORT.md): preview incoming lines against a separate approved export, then investigate them in the native production. This source feature requires explicit importer permission and is not included in public IPM 0.2.0.
+[Import a CSV order feed from the workbench](docs/CSV_IMPORT.md): preview incoming lines against a separate approved export, then investigate them in the native production. This feature requires explicit importer permission. It was not in the last verified public IPM **0.2.0**; the **prepared, unpublished 0.3.0 native package** includes its IRIS backend/parser. The TypeScript CSV workbench remains a **separate source-built frontend**, not something installed by `zpm "install silentshift"` alone. After owner publication, verify the registry version and a fresh install before changing the public-package claim.
 
 All supplied examples are synthetic and deliver only to an IRIS simulator. There is no hosted demo or verified external ERP/bank delivery. [Verification results](docs/JUDGE_VERIFICATION.md) · [Bonus status](docs/SUBMISSION_CHECKLIST.md).
 
