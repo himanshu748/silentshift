@@ -23,6 +23,7 @@ RUNTIME_FILES = (
     'fixtures/v1/README.md', 'fixtures/provider-replay.json', 'fixtures/runbooks.json', 'LICENSE',
 )
 TARGET_PREFIX = '${mgrdir}silentshift/${namespace}/'
+RELEASE_VERSION = '0.3.0'
 
 
 def regular_file(root: Path, relative: str) -> Path:
@@ -50,7 +51,7 @@ def package_files(root: Path) -> list[str]:
         raise ValueError('DTD and XML entity declarations are not package metadata')
     module = ET.fromstring(raw).find('./Document/Module')
     if (module is None or module.findtext('Name') != 'silentshift'
-            or module.findtext('Version') != '0.2.0'):
+            or module.findtext('Version') != RELEASE_VERSION):
         raise ValueError('Expected the silentshift IPM module')
     requirements = module.find('SystemRequirements')
     if requirements is None or requirements.attrib != {
@@ -139,7 +140,7 @@ def stage(root: Path, destination: Path) -> dict:
             shutil.copyfile(source, target)
             inventory.append({'path': relative, 'bytes': target.stat().st_size,
                 'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
-        result = {'package': 'silentshift', 'version': '0.2.0',
+        result = {'package': 'silentshift', 'version': RELEASE_VERSION,
             'kind': 'allowlisted-source-stage', 'native_install_verified': False,
             'registry_published': False, 'files': inventory}
         (staging / 'package-inventory.json').write_text(
