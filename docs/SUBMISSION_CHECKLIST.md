@@ -1,5 +1,8 @@
 # Submission checklist
 
+**Final release-preparation snapshot (November 8, 2026):** `module.xml` now prepares **native IPM 0.3.0**, **not yet published**. The last verified public native package is **0.2.0**, and the independent OEX/web frontend release remains **0.2.1**. [Dated isolated Linux candidate gate](evidence/ipm-030-candidate-linux-nov8.json): 207 pytest, 58-file native staging, TypeScript/build passed, **but fresh 154U IRIS / 5 live routes / both native replays / 32 CSV browser / 38+16 browser have not been rerun on 0.3.0**. Earlier full IRIS/browser checks remain dated to their original code snapshots. No public package, tag, OEX edit, bonus status or awarded score changed. [Full scope](JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc) · [Owner-only release instructions](IPM.md#owner-only-030-publication-runbook).
+
+
 Checked November 8, 2026 (UTC): current-source native/UI verification and an anonymous public-listing readback are linked below. Earlier publications retain their dated receipts. Submission deadline: **November 8 at 23:59:59 EST / November 9 at 10:29:59 IST**. The [current anonymous readback](evidence/entry-readback-nov8.json) still lists SilentShift on [Contest 49](https://openexchange.intersystems.com/contest/49). **App/OEX release: 0.2.1; public native IPM: 0.2.0; verified IRIS: 2026.3.0AI.154.0 Community (154U), ARM64.** Verified means the linked behavior or publication was observed. **Organizer award: unconfirmed for every bonus.** Pending identifies an additional filing, visibility or eligibility gate; Not claimed means no bonus is requested for that item.
 
 ## Every bonus
@@ -43,11 +46,26 @@ This was an existing-instance source-upgrade/regression pass on **154U ARM64**, 
 
 ## Published vs main
 
+### Before the owner publishes (current verified state, November 8)
+
+- **Public native registry:** `silentshift 0.2.0`, downloaded and compared byte for byte with [published source snapshot `d3637bb`](https://github.com/himanshu748/silentshift/commit/d3637bbe85812035e6258320c81af93305e95560) in [the Nov8 archive receipt](evidence/published-vs-main-nov8.json). The literal `zpm "install silentshift"` verified **0.2.0** in a separate [fresh registry install](evidence/judge-current-nov8.json); it **does not include CSV**.
+- **Prepared source manifest:** `module.xml` declares **0.3.0**, with **45** native classes and **11** assets, including the bounded CSV backend/parser. These are source/staging counts, **not a public install**. Separately built TypeScript web workbench remains **0.2.1** and is not delivered by `zpm`. [Change list](../CHANGELOG.md).
+- **Release-tooling snapshot:** [`5e5c8a6`](https://github.com/himanshu748/silentshift/commit/5e5c8a66d8a33651eb65f170569b089ded3cb06a) is the candidate used for the dated 207-Python-test/TS/build/stage checks. Later documentation/evidence-only commits do not re-run native code. The final `docs/IPM.md` package documentation bytes require re-staging once documentation is frozen. [Candidate receipt](evidence/ipm-030-candidate-linux-nov8.json).
+- **Native and browser evidence:** [fresh current-source IRIS `35d29e0`](evidence/source-isolated-nov8.json) is a clean container with no source mounts; [later `e61a961` final pass](evidence/final-pass-nov8.json) is **same-instance**, and only it verifies the bootstrap compile-scope regression in that retained instance. They are not an installed IPM 0.3.0 gate. Clean 0.3.0 native testing remains outstanding in the owner's licensed environment.
+- **Open Exchange app:** published listing/workbench **0.2.1**, anonymous approved Nov8 description, no newer package submission. The owner-visible Community Idea association **DPI-I-689** is not visible in anonymous retrieved text; organizer eligibility remains **Pending**.
+- **Action:** owner must perform the [exact local IPM load/package commands, optional test-registry `zpm publish`, and **public OEX new-release steps**](IPM.md#owner-only-030-publication-runbook). The public registry is published **through OEX**, not a direct anonymous `zpm publish`. Do not change bonus rows or public version claims without external receipts.
+
+### After owner publication (conditional, not yet observed)
+
+Only **after** OEX moderation approves the new package and anonymous `silentshift` registry metadata, the downloaded 0.3.0 archive, and a new **fresh no-source-mount** `zpm "install silentshift"` all confirm **0.3.0**, update the first bullet and installation documentation to **public native IPM 0.3.0**. Preserve the observed **0.2.0** receipts as historical. Verify CSV backend availability in that native package, then build/run the **separate** 0.2.1 web frontend to exercise CSV UI in a real IRIS instance. A successful backend install alone is **not** proof of the 32 browser checks. A new OEX release does **not** independently confirm DPI-I-689 qualification, bug #17 acceptance, hosted CI success, or any organizer bonus award. Preserve all currently **Not claimed** bonus rows absent specific owner authorization and new evidence.
+
+### Historical source-to-registry inventory
+
 Public native IPM **0.2.0** is unchanged. In this run, the downloaded public archive was compared byte for byte with Git commit [`d3637bb`](https://github.com/himanshu748/silentshift/commit/d3637bbe85812035e6258320c81af93305e95560): all archived files match that source snapshot. [Archive identity, file comparison and exact commit inventory](evidence/published-vs-main-nov8.json).
 
-The fresh-clone verification covers current-main snapshot `df591420c06ed081623f6178804359ceb1686964` within the boundaries above: Python and released-package replay passed; the later retained-instance CSV source reload failed. A subsequent fresh clone at `35d29e0913ea27f4c56dfed214a402418984e5f0` passed current-source load, the native five-case run and CSV UI verification in an isolated instance. It does not turn unreleased source into a verified registry package. The module manifest still declares the published version; that is not proof that the CSV changes were published.
+The fresh-clone verification covers current-main snapshot `df591420c06ed081623f6178804359ceb1686964` within the boundaries above: Python and released-package replay passed; the later retained-instance CSV source reload failed. A subsequent fresh clone at `35d29e0913ea27f4c56dfed214a402418984e5f0` passed current-source load, the native five-case run and CSV UI verification in an isolated instance. It does not turn unreleased source into a verified registry package. **That observation described the earlier historical snapshot only.** The candidate now declares **0.3.0**, which remains **unpublished** and has not undergone a new clean 154U native verification; a manifest bump is not publication evidence.
 
-Code or asset changes after the published snapshot include the interactive landing/workbench (`770baab`), image optimization (`fbd3947`), bounded CSV/native intake (`09f71b7`), native CSV workbench (`ab00ecc`) and CSV presentation finish (`df59142`). The complete post-package commit list through the verified source snapshot is:
+Code or asset changes after the **0.2.0 published** snapshot include the interactive landing/workbench (`770baab`), image optimization (`fbd3947`), bounded CSV/native intake (`09f71b7`), native CSV workbench (`ab00ecc`) and CSV presentation finish (`df59142`). The later bootstrap fix (`e61a961`) and 0.3.0 manifest/release-tooling preparation (`8d47076` through `5e5c8a6`) are additional **unpublished** changes; no runtime or policy semantics were changed by the 0.3.0 preparation. The following is the preserved post-package inventory through the **historical source snapshot**, not a full list of new doc-only freeze commits:
 
 - [`9872451`](https://github.com/himanshu748/silentshift/commit/9872451dfd96e10dc6d3140b79d46097163cada9) docs: record public IPM verification and Open Exchange 0.2.0 release
 - [`770baab`](https://github.com/himanshu748/silentshift/commit/770baabd2c5e317918003dde05986eed476a75ef) feat: add interactive product walkthrough and verify contest evidence
@@ -87,7 +105,7 @@ Later verification work is also unpublished: `e4a5573` (checklist/source invento
 git log --reverse --format='%H %s' d3637bbe85812035e6258320c81af93305e95560..main
 ```
 
-No release was tagged and no new package version was published. The later authorized OEX description edit is recorded above; it triggered an automatic duplicate-version IPM notification while the existing archive stayed unchanged. Publishing a later package remains a separate owner decision.
+**As of this 0.3.0 preparation**, no release tag was created and no new native package version was published. The previously authorized OEX description edit is recorded above; its automatic duplicate-version IPM notification did not alter the previously observed public 0.2.0 archive. A 0.3.0 publication, moderated through OEX, remains solely the owner's decision. For the exact final Git commit inventory, use the `git log` command above rather than treating this historical bullet list as exhaustive.
 
 ## Downloadable video for organizers
 
