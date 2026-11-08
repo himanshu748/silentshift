@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "reused_existing_cases": false,
+  "scope": "New source-loaded build-154 container; actual workbench file uploads, native reference import and two new local-model investigations. This closes the earlier retained-instance CSV repeat gap without deleting diagnostic classes or changing native code.",
+  "checks": {
+    "native_154_running": true,
+    "explicit_importer_permission": true,
+    "oversized_file_rejected_before_api": true,
+    "viewer_can_preview": true,
+    "viewer_cannot_import": true,
+    "preview_did_not_dispatch_or_commit": true,
+    "invalid_csv_rejected_by_native_server": true,
+    "invalid_preview_has_no_commit_action": true,
+    "consent_required": true,
+    "uncertain_import_stops_before_rows": true,
+    "uncertain_import_requires_repreview": true,
+    "ui_reference_import_http_200": true,
+    "navigation_preserves_selected_files": true,
+    "progress_reports_resolved_lines": true,
+    "display_preserves_quantities_and_units": true,
+    "critical_line_held": true,
+    "matching_line_delivered_once": true,
+    "references_created_in_ui": true,
+    "original_sources_retained": true,
+    "order_limits_visible": true,
+    "native_four_tools_7A6A4933-DB41-11F1-A727-570C39622301": true,
+    "native_four_tools_9EB2B6EC-DB41-11F1-A727-570C39622301": true,
+    "case_link_opens_native_investigation": true,
+    "repeat_reuses_cases_and_receipts": true,
+    "repeat_reuses_reference_revisions": true,
+    "repeat_reads_cases_without_new_dispatch": true,
+    "mobile_has_no_page_overflow": true,
+    "reduced_motion_no_panel_animation": true,
+    "file_picker_keyboard_focus": true,
+    "compact_has_no_page_overflow": true,
+    "credentials_not_in_browser_storage": true,
+    "no_browser_exceptions": true
+  },
+  "cases": [
+    {
+      "case_id": "7A6A4933-DB41-11F1-A727-570C39622301",
+      "trace_id": "169",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "agent_status": "returned",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "case_id": "9EB2B6EC-DB41-11F1-A727-570C39622301",
+      "trace_id": "197",
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "agent_status": "returned",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    }
+  ],
+  "ui_import_receipt": {
+    "id": "0ae21057b0b6a9f6e3d608f3333dc6a1e7ae548ff64776f26cc863a59ce7a030",
+    "imported_by": "ss-judge-reviewer",
+    "imported_at": "2026-11-08T06:56:09.519144Z"
+  },
+  "writes": [
+    "/api/imports/csv/preview",
+    "/api/imports/csv/preview",
+    "/api/imports/csv/preview",
+    "/api/imports/csv/commit",
+    "/api/imports/csv/preview",
+    "/api/imports/csv/commit",
+    "/api/messages",
+    "/api/messages",
+    "/api/imports/csv/preview",
+    "/api/imports/csv/commit"
+  ],
+  "schema": "silentshift-isolated-csv-ui/1",
+  "source_commit": "35d29e0913ea27f4c56dfed214a402418984e5f0",
+  "execution": {
+    "started_at": "2026-11-08T06:56:01.174980+00:00",
+    "finished_at": "2026-11-08T06:58:01.139600+00:00",
+    "elapsed_seconds": 119.966,
+    "exit_code": 0
+  },
+  "api_url": "http://127.0.0.1:52913/silentshift/api",
+  "web_url": "http://127.0.0.1:5178",
+  "source_files_sha256": {
+    "web/src/CSVImport.tsx": "68838c276bab723ce4c2fb771ea5a39875ce6e96ad8c3552f707b9f91d235217",
+    "web/src/csv-import.css": "d2d979059c8da917903a48f9f3102bce885b96d840977073f735ff4650053e1c",
+    "scripts/verify_csv_ui.mjs": "4855962e68800a38bba2e65b01d68e25c82e601ff71b9adec72110335c08763f"
+  },
+  "screenshots": {
+    "docs/assets/csv-isolated-nov8-desktop.png": {
+      "sha256": "1e45c65b8718acad43d41753b3ca6aed86aa34309342bac87a6bdd6b60112018",
+      "edited": false
+    },
+    "docs/assets/csv-isolated-nov8-mobile.png": {
+      "sha256": "4a1150895141d940909ff368138b8597d8377558aa042d1f7550c5aadc774d6c",
+      "edited": false
+    },
+    "docs/assets/csv-isolated-nov8-progress.png": {
+      "sha256": "93e9fbf5912caabc7108019cea73f0630009f79a8594fa2e928beb47b31c6b79",
+      "edited": false
+    }
+  },
+  "no_registry_or_oex_publication": true
+}

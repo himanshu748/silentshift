@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-11-08T06:58:17.321360+00:00",
+  "scope": "Browser test harness configuration guard, before credentials and network requests. No remote endpoint was contacted.",
+  "command": [
+    "node",
+    "scripts/verify_csv_ui.mjs",
+    "--execute",
+    "--output-directory",
+    ".local/guard-must-not-run"
+  ],
+  "environment_override": {
+    "SILENTSHIFT_API_URL": "https://example.invalid/silentshift/api"
+  },
+  "exit_code": 1,
+  "expected_rejection_observed": true,
+  "output_directory_created": false
+}
