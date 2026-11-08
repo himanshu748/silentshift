@@ -353,11 +353,20 @@ try {
     "navigation_preserves_selected_files",
     (await page.locator(".csv-filename").first().innerText()) === "orders.csv",
   );
+  if (!reuse) {
+    const progress = page.getByRole("progressbar", { name: "Order lines resolved" });
+    await progress.waitFor();
+    check("progress_reports_resolved_lines", await progress.evaluate(el => el.max === 2 && el.value >= 0 && el.value <= 2));
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await page.screenshot({ path: path.join(output, "progress-desktop.png"), fullPage: true });
+  }
   await page
     .getByText("Processing complete", { exact: true })
     .waitFor({ timeout: 300000 });
   const first = await resultDownload(page, "first-results.json");
   const cases = first.records.map((row) => first.results[row.message.event_id]);
+  const quantities = await page.locator(".csv-incoming .csv-quantity").evaluateAll(nodes => nodes.map(node => node.textContent.replace(/\s+/g, " ").trim()));
+  check("display_preserves_quantities_and_units", quantities.every((value, index) => value === `${first.records[index].message.quantity} ${first.records[index].message.unit}`));
   check(
     "critical_line_held",
     cases[0].routing === "QUARANTINED" && cases[0].delivery_count === 0,

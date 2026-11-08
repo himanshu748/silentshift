@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import {
   ArrowRight,
-  Check,
+  CheckCircle2,
+  LoaderCircle,
   Download,
   FileSpreadsheet,
   LockKeyhole,
@@ -376,6 +377,89 @@ export function useCSVImport() {
   };
 }
 
+function CSVQuantity({ quantity, unit }: { quantity: string; unit: string }) {
+  return (
+    <span className="csv-quantity">
+      <span className="csv-quantity-number">{quantity}</span>{" "}
+      <span className="csv-quantity-unit">{unit}</span>
+    </span>
+  );
+}
+
+function CSVFileControl({
+  label,
+  index,
+  file,
+  busy,
+  choose,
+}: {
+  label: string;
+  index: 0 | 1;
+  file: CSVFile | null;
+  busy: boolean;
+  choose: (index: 0 | 1, file?: File) => Promise<void>;
+}) {
+  const Icon = index === 0 ? FileSpreadsheet : ShieldCheck;
+  const bytes = file ? new TextEncoder().encode(file.content).length : 0;
+  return (
+    <div
+      className="csv-file"
+      data-selected={Boolean(file)}
+      data-source={index === 0 ? "incoming" : "approved"}
+    >
+      <div className="csv-file-heading">
+        <span className="csv-file-symbol">
+          <Icon size={19} aria-hidden="true" />
+        </span>
+        <label className="field-label" htmlFor={`csv-file-${index}`}>
+          {label}
+        </label>
+        {file && (
+          <span className="csv-file-selected">
+            <CheckCircle2 size={13} aria-hidden="true" /> Selected
+          </span>
+        )}
+      </div>
+      <p>
+        {index === 0
+          ? "Partner order lines before fulfillment."
+          : "A separate export of approved terms and effective dates."}
+      </p>
+      <input
+        id={`csv-file-${index}`}
+        type="file"
+        accept=".csv,text/csv"
+        hidden
+        disabled={busy}
+        onChange={(event) => {
+          void choose(index, event.target.files?.[0]);
+          event.target.value = "";
+        }}
+      />
+      <div className="csv-file-selection">
+        <div className="csv-file-description">
+          <span className="csv-filename" title={file?.name}>
+            {file?.name ?? "Choose a CSV export"}
+          </span>
+          <small>
+            {file
+              ? `${bytes.toLocaleString()} bytes · selected for preview`
+              : "UTF-8 CSV · independent source"}
+          </small>
+        </div>
+        <Button
+          icon={Upload}
+          aria-label={`Choose ${index === 0 ? "order feed" : "approved export"}`}
+          disabled={busy}
+          onClick={() => document.getElementById(`csv-file-${index}`)?.click()}
+        >
+          {file ? "Replace file" : "Choose CSV"}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export default function CSVImport({
   state,
   health,
@@ -388,39 +472,37 @@ export default function CSVImport({
   const canImport = health.data?.permissions?.csv_import === true;
   const supported = typeof health.data?.permissions?.csv_import === "boolean";
   const [samples] = useState(sampleFiles);
-  const sourceFields = ["Order feed", "Approved reference export"] as const;
-  const finalCount =
-    preview?.records.filter(
-      (row) =>
-        results[row.message.event_id] &&
-        results[row.message.event_id].routing !== "PROCESSING",
-    ).length ?? 0;
-  const held =
-    preview?.records.filter((row) => {
-      const result = results[row.message.event_id];
-      return (
-        result &&
-        result.routing !== "PROCESSING" &&
-        result.routing !== "DELIVERED"
-      );
-    }).length ?? 0;
+  const resolved =
+    preview?.records
+      .map((row) => results[row.message.event_id])
+      .filter((result) => result && result.routing !== "PROCESSING") ?? [];
+  const finalCount = resolved.length;
+  const delivered = resolved.filter(
+    (result) => result.routing === "DELIVERED",
+  ).length;
+  const held = finalCount - delivered;
+  const phase = complete ? "results" : preview ? "review" : "select";
+  const stage =
+    complete || busy === "import" || busy === "investigate"
+      ? 2
+      : preview
+        ? 1
+        : 0;
+  const friendlyError =
+    error instanceof ApiError && error.status === 422
+      ? new Error("These files need a correction before they can be imported.")
+      : error instanceof ApiError && error.status === 409
+        ? new Error("This import conflicts with a saved record.")
+        : error;
   return (
-    <>
+    <div className="csv-workflow" data-phase={phase}>
       <PageHeading
         eyebrow="Workspace / order feeds"
         title="CSV Import"
-        description="Bring an order feed and its independently approved reference into the same investigation."
+        description="Compare incoming orders with independently approved commitments."
       >
-        <Badge>Per-line simulator</Badge>
+        <Badge>IRIS simulator</Badge>
       </PageHeading>
-      <div className="csv-scope">
-        <ShieldCheck size={19} aria-hidden="true" />
-        <p>
-          Preview first. Only an authorized importer can add approved
-          references. Native AI investigates each line; deterministic policy
-          decides its route. No external ERP delivery.
-        </p>
-      </div>
       {health.error && <ErrorState error={health.error} />}
       {!health.error && health.data && !supported && (
         <div className="csv-permission">
@@ -428,9 +510,8 @@ export default function CSVImport({
           <div>
             <strong>CSV backend update required</strong>
             <p>
-              CSV Import needs the current source backend. Public IPM 0.2.0 does
-              not contain these endpoints. Update the source installation before
-              previewing files.
+              Update the source installation to use CSV Import. The public IPM
+              0.2.0 backend does not include this workflow.
             </p>
           </div>
         </div>
@@ -441,107 +522,95 @@ export default function CSVImport({
           <div>
             <strong>Reference-import permission required</strong>
             <p>
-              You can preview files. Ask your local administrator to grant
-              SSImporter to an authorized account; review permission alone
-              cannot add authority.
+              You can preview files with this account. An administrator must
+              authorize an importer account before approved references can be
+              added.
             </p>
             <Button onClick={openConnect}>Connect importer session</Button>
           </div>
         </div>
       )}
       <ol className="csv-steps" aria-label="CSV import stages">
-        {["Choose files", "Preview evidence", "Import and investigate"].map(
+        {["Choose files", "Review evidence", "Investigate"].map(
           (step, index) => (
             <li
               key={step}
-              aria-current={
-                busy === "import" || busy === "investigate" || complete
-                  ? index === 2
-                    ? "step"
-                    : undefined
-                  : preview
-                    ? index === 1
-                      ? "step"
-                      : undefined
-                    : index === 0
-                      ? "step"
-                      : undefined
-              }
+              aria-current={stage === index ? "step" : undefined}
+              data-done={stage > index}
             >
-              <span>{index + 1}</span>
+              <span>
+                {stage > index ? (
+                  <CheckCircle2 size={14} aria-hidden="true" />
+                ) : (
+                  index + 1
+                )}
+              </span>
               {step}
             </li>
           ),
         )}
       </ol>
-      <section className="csv-files" aria-label="CSV files">
-        {sourceFields.map((label, index) => (
-          <div className="csv-file" key={label}>
-            <FileSpreadsheet size={24} aria-hidden="true" />
-            <label className="field-label" htmlFor={`csv-file-${index}`}>
-              {label}
-            </label>
-            <p>
-              {index === 0
-                ? "Incoming partner order lines, with explicit quantities and units."
-                : "A separate approved order export, including revision, approver and effective dates."}
-            </p>
-            <input
-              id={`csv-file-${index}`}
-              type="file"
-              accept=".csv,text/csv"
-              hidden
-              disabled={Boolean(busy)}
-              onChange={(event) => {
-                void state.choose(index as 0 | 1, event.target.files?.[0]);
-                event.target.value = "";
-              }}
-            />
+      <section className="csv-sources" aria-label="CSV files">
+        <div className="csv-source-title">
+          <h2>Source files</h2>
+          <span>128 KiB per file · up to 20 rows</span>
+        </div>
+        <div className="csv-files">
+          <CSVFileControl
+            label="Order feed"
+            index={0}
+            file={files[0]}
+            busy={Boolean(busy)}
+            choose={state.choose}
+          />
+          <CSVFileControl
+            label="Approved reference export"
+            index={1}
+            file={files[1]}
+            busy={Boolean(busy)}
+            choose={state.choose}
+          />
+        </div>
+        <div className="csv-source-toolbar">
+          <div className="csv-file-actions">
             <Button
-              icon={Upload}
-              disabled={Boolean(busy)}
-              onClick={() =>
-                document.getElementById(`csv-file-${index}`)?.click()
+              icon={busy === "preview" ? LoaderCircle : undefined}
+              kind={preview ? "secondary" : "primary"}
+              disabled={
+                !files[0] ||
+                !files[1] ||
+                Boolean(busy) ||
+                !health.data ||
+                !supported
               }
+              onClick={() => void state.validate()}
             >
-              Choose {index === 0 ? "order feed" : "approved export"}
+              {busy === "preview"
+                ? "Validating CSV files…"
+                : error && preview
+                  ? "Preview persisted state again"
+                  : "Preview files"}
             </Button>
-            <span className="csv-filename">
-              {files[index]?.name ?? "No file chosen"}
-            </span>
-            <small>UTF-8 · up to 128 KiB · up to 20 rows</small>
+            <Button
+              kind="ghost"
+              disabled={Boolean(busy)}
+              onClick={() => state.reset(samples)}
+            >
+              Use synthetic sample
+            </Button>
           </div>
-        ))}
+          <span className="csv-readonly-note">
+            <ShieldCheck size={14} aria-hidden="true" /> Preview is read-only
+          </span>
+        </div>
       </section>
-      <div className="csv-file-actions">
-        <Button
-          icon={Upload}
-          kind="primary"
-          disabled={
-            !files[0] ||
-            !files[1] ||
-            Boolean(busy) ||
-            !health.data ||
-            !supported
-          }
-          onClick={() => void state.validate()}
-        >
-          {busy === "preview"
-            ? "Validating CSV files…"
-            : error && preview
-              ? "Preview persisted state again"
-              : "Preview files"}
-        </Button>
-        <Button disabled={Boolean(busy)} onClick={() => state.reset(samples)}>
-          Use synthetic sample
-        </Button>
-        <details className="csv-format">
-          <summary>CSV layout and sample downloads</summary>
+      <details className="csv-format">
+        <summary>CSV layout and sample downloads</summary>
+        <div className="csv-format-body">
           <p>
-            Header names must match exactly; column order may vary. Keep
-            quantities as positive decimal text and timestamps explicit about
-            timezone. Only effective_to may be blank. No pack conversion is
-            inferred.
+            Use the exact column names below, in any order. Quantities are
+            positive decimal text; timestamps include a timezone. Only
+            effective_to may be blank. No pack conversion is inferred.
           </p>
           <strong>Order feed</strong>
           <pre tabIndex={0}>{FEED}</pre>
@@ -565,54 +634,87 @@ export default function CSVImport({
             ))}
           </div>
           <p>
-            Both downloads are synthetic and use matching identities. An
-            approver name in a CSV is provenance supplied by you, not an
-            authenticated approval.
+            These matching samples are synthetic. An approver name in a CSV is
+            supplied provenance, not an authenticated approval.
           </p>
-        </details>
-      </div>
-      {error && (
+        </div>
+      </details>
+      {Boolean(error) && (
         <div className="csv-error">
-          <InlineError error={error} />
+          <InlineError error={friendlyError} />
           {error instanceof ApiError && error.status === 422 && (
             <p>
-              Check the documented headers, decimal quantities, timezone
-              offsets, duplicate identities and reference approval fields.
-              Preview the files again after a correction.
+              Check column names, decimal quantities, timezone offsets,
+              duplicate identities and approval fields. Correct the file, then
+              preview again.
             </p>
           )}
           {error instanceof ApiError && error.status === 409 && (
             <p>
-              An event identity or reference revision already exists with different
-              content. Inspect the original import and approval record. Use a new
-              revision only for a genuinely approved change.
+              An event identity or approved revision has different content in
+              the saved import. Inspect that record; use a new revision only for
+              a genuinely approved change.
             </p>
           )}
           {pending && (
             <p>
-              Stopped at event <code>{pending}</code>. No later lines were
-              submitted. Preview these same files to recover persisted cases; do
-              not generate new event IDs to retry.
+              Stopped at event <code>{pending}</code>. Later lines were not
+              submitted. Preview the same files to recover saved cases; keep the
+              original event IDs.
             </p>
           )}
         </div>
       )}
       {preview && (
-        <section className="csv-preview" aria-label="Validated CSV preview">
+        <section
+          className="csv-preview"
+          aria-label="Validated CSV preview"
+          aria-busy={busy === "import" || busy === "investigate"}
+        >
           <div className="csv-section-title">
             <div>
-              <h2>{complete ? "Native results" : "Validated feed"}</h2>
+              <h2>
+                {complete
+                  ? "Import results"
+                  : busy === "investigate"
+                    ? "Investigating orders"
+                    : "Review order lines"}
+              </h2>
               <p>
                 {preview.records.length} order lines ·{" "}
                 {preview.references.length} approved reference revisions
               </p>
             </div>
-            <Badge tone={complete ? "mint" : "muted"}>
+            <Badge tone="muted">
               {complete ? "Processing complete" : "Server validated"}
             </Badge>
           </div>
+          {finalCount > 0 && (
+            <div
+              className="csv-outcome-summary"
+              aria-label="Observed line outcomes"
+            >
+              <span className={held ? "csv-held-count" : ""}>
+                <strong>{held}</strong> held or rejected
+              </span>
+              <span className={delivered ? "csv-delivered-count" : ""}>
+                <strong>{delivered}</strong> delivered
+              </span>
+              <span>
+                {finalCount} of {preview.records.length} lines resolved
+                {!preview.import ? " · saved results" : ""}
+              </span>
+            </div>
+          )}
           <div className="table-scroll">
             <table className="data-table csv-table">
+              <colgroup>
+                <col className="csv-order-col" />
+                <col className="csv-incoming-col" />
+                <col className="csv-approved-col" />
+                <col className="csv-outcome-col" />
+                <col className="csv-evidence-col" />
+              </colgroup>
               <thead>
                 <tr>
                   <th>Order / source row</th>
@@ -628,30 +730,45 @@ export default function CSVImport({
                   const refs = preview.references.filter(
                     (ref) => ref.contract_id === row.message.contract_id,
                   );
+                  const working =
+                    pending === row.message.event_id && Boolean(busy);
                   return (
-                    <tr key={row.message.event_id}>
+                    <tr
+                      key={row.message.event_id}
+                      data-route={result?.routing ?? "UNSUBMITTED"}
+                      data-working={working}
+                    >
                       <td>
                         <span className="csv-cell-label">
                           Order / source row
                         </span>
-                        <strong>{row.order_id}</strong>
+                        <strong
+                          className="csv-order-title"
+                          title={row.order_id}
+                        >
+                          {row.order_id}
+                        </strong>
                         <small>
                           Line {row.line_id} · CSV row {row.source_row}
                         </small>
                         <small>{row.message.product_id}</small>
                       </td>
-                      <td className="mono">
+                      <td className="csv-incoming">
                         <span className="csv-cell-label">Incoming</span>
-                        {row.message.quantity} {row.message.unit}
+                        <CSVQuantity
+                          quantity={row.message.quantity}
+                          unit={row.message.unit}
+                        />
                       </td>
                       <td>
                         <span className="csv-cell-label">Approved export</span>
                         {refs.length ? (
                           refs.map((ref) => (
-                            <div key={ref.id}>
-                              <strong className="mono">
-                                {ref.quantity} {ref.unit}
-                              </strong>
+                            <div className="csv-approved-value" key={ref.id}>
+                              <CSVQuantity
+                                quantity={ref.quantity}
+                                unit={ref.unit}
+                              />
                               <small>
                                 {ref.approval_provenance.revision} ·{" "}
                                 {ref.approval_provenance.approved_by}
@@ -676,15 +793,20 @@ export default function CSVImport({
                             {result.agent?.status === "failed" && (
                               <small className="csv-agent-failure">
                                 Agent failed:{" "}
-                                {result.agent.failure_code ?? "inspect case"}
+                                {result.agent.failure_code || "inspect case"}
                               </small>
                             )}
                           </>
                         ) : (
                           <Badge>
-                            {pending === row.message.event_id
-                              ? "Investigating…"
-                              : "Not submitted"}
+                            {working && (
+                              <LoaderCircle
+                                size={12}
+                                className="csv-spinner"
+                                aria-hidden="true"
+                              />
+                            )}
+                            {working ? "Investigating…" : "Not submitted"}
                           </Badge>
                         )}
                       </td>
@@ -693,17 +815,20 @@ export default function CSVImport({
                         {result ? (
                           <>
                             <a
-                              className="text-link"
+                              className="text-link csv-case-link"
                               href={`#investigations/${encodeURIComponent(result.id)}`}
                             >
-                              Open case <ArrowRight size={14} />
+                              Open case{" "}
+                              <ArrowRight size={14} aria-hidden="true" />
                             </a>
                             <small className="mono">
                               Trace {result.trace_id || "pending"}
                             </small>
                           </>
                         ) : (
-                          <span>Available after submission</span>
+                          <span className="csv-evidence-pending">
+                            After investigation
+                          </span>
                         )}
                       </td>
                     </tr>
@@ -711,6 +836,115 @@ export default function CSVImport({
                 })}
               </tbody>
             </table>
+          </div>
+          {busy === "investigate" && (
+            <div className="csv-run-progress">
+              <progress
+                max={preview.records.length}
+                value={finalCount}
+                aria-label="Order lines resolved"
+              />
+              <span>
+                {finalCount} of {preview.records.length} lines resolved
+              </span>
+            </div>
+          )}
+          {!preview.import && (
+            <div className="csv-authority">
+              <div>
+                <h3>Confirm the approved source</h3>
+                <p>
+                  Only import references you are authorized to use. Your account
+                  and source note stay with the import.
+                </p>
+              </div>
+              <div className="csv-authority-fields">
+                <label className="field-label" htmlFor="csv-source-note">
+                  Approved source note
+                </label>
+                <textarea
+                  id="csv-source-note"
+                  rows={2}
+                  maxLength={160}
+                  minLength={12}
+                  value={state.reason}
+                  onChange={(event) => state.setReason(event.target.value)}
+                  disabled={Boolean(busy) || !canImport}
+                  placeholder="Approval record and reference owner"
+                />
+                <label className="csv-confirm">
+                  <input
+                    type="checkbox"
+                    checked={state.confirmed}
+                    onChange={(event) =>
+                      state.setConfirmed(event.target.checked)
+                    }
+                    disabled={Boolean(busy) || !canImport}
+                  />
+                  <span>
+                    I am authorized to import this independently approved
+                    reference export.
+                  </span>
+                </label>
+              </div>
+            </div>
+          )}
+          <div className="csv-run-footer">
+            <div className="csv-run-actions">
+              {!complete && (
+                <Button
+                  icon={busy ? LoaderCircle : ShieldCheck}
+                  kind="primary"
+                  disabled={
+                    !canImport ||
+                    Boolean(busy) ||
+                    Boolean(error) ||
+                    !state.confirmed ||
+                    state.reason.trim().length < 12 ||
+                    Boolean(preview.import)
+                  }
+                  onClick={() => void state.start()}
+                >
+                  {busy === "import"
+                    ? "Importing approved references…"
+                    : busy === "investigate"
+                      ? `Investigating lines · ${finalCount}/${preview.records.length}`
+                      : "Import references and investigate"}
+                </Button>
+              )}
+              {complete && (
+                <span className="csv-run-finished">
+                  <CheckCircle2 size={17} aria-hidden="true" /> Import complete
+                </span>
+              )}
+              {Object.keys(results).length > 0 && (
+                <Button
+                  icon={Download}
+                  kind={complete ? "primary" : "secondary"}
+                  disabled={Boolean(busy)}
+                  onClick={() =>
+                    download(
+                      "silentshift-csv-results.json",
+                      JSON.stringify(
+                        { ...preview, results, completed: complete },
+                        null,
+                        2,
+                      ),
+                      "application/json",
+                    )
+                  }
+                >
+                  Download results
+                </Button>
+              )}
+            </div>
+            <p className="csv-progress" role="status" aria-live="polite">
+              {busy === "investigate"
+                ? "Local inference is running. Keep this tab open; switching workspace views preserves progress."
+                : complete
+                  ? "IRIS simulator only. Results cover submitted lines; whole-order completeness and delivery are not verified."
+                  : "Import retains both CSV originals and approved references in local IRIS. Investigation can create per-line simulator receipts."}
+            </p>
           </div>
           <div className="csv-hashes">
             <details>
@@ -738,93 +972,17 @@ export default function CSVImport({
                       {preview.import.created} created · {preview.import.reused}{" "}
                       reused
                     </dd>
-                  <dt>Original uploads</dt>
-                  <dd>Retained in local IRIS with the source hashes above.</dd>
+                    <dt>Original uploads</dt>
+                    <dd>
+                      Retained in local IRIS with the source hashes above.
+                    </dd>
                   </>
                 )}
               </dl>
             </details>
           </div>
-          {!preview.import && (
-            <div className="csv-authority">
-              <label className="field-label" htmlFor="csv-source-note">
-                Approved source note
-              </label>
-              <textarea
-                id="csv-source-note"
-                rows={2}
-              maxLength={160}
-                minLength={12}
-                value={state.reason}
-                onChange={(event) => state.setReason(event.target.value)}
-                disabled={Boolean(busy) || !canImport}
-                placeholder="Where was this export approved, and who owns that reference?"
-              />
-              <label className="csv-confirm">
-                <input
-                  type="checkbox"
-                  checked={state.confirmed}
-                  onChange={(event) => state.setConfirmed(event.target.checked)}
-                  disabled={Boolean(busy) || !canImport}
-                />
-                <span>
-                  I am authorized to import this independently approved
-                  reference export.
-                </span>
-              </label>
-            </div>
-          )}
-          <div className="csv-run-actions">
-            <Button
-              icon={complete ? Check : ShieldCheck}
-              kind="primary"
-              disabled={
-                !canImport ||
-                Boolean(busy) ||
-                Boolean(error) ||
-                !state.confirmed ||
-                state.reason.trim().length < 12 ||
-                Boolean(preview.import)
-              }
-              onClick={() => void state.start()}
-            >
-              {busy === "import"
-                ? "Importing approved references…"
-                : busy === "investigate"
-                  ? `Investigating lines · ${finalCount}/${preview.records.length}`
-                  : complete
-                    ? "Run complete"
-                    : "Import references and investigate"}
-            </Button>
-            {Object.keys(results).length > 0 && (
-              <Button
-                icon={Download}
-                disabled={Boolean(busy)}
-                onClick={() =>
-                  download(
-                    "silentshift-csv-results.json",
-                    JSON.stringify(
-                      { ...preview, results, completed: complete },
-                      null,
-                      2,
-                    ),
-                    "application/json",
-                  )
-                }
-              >
-                Download results
-              </Button>
-            )}
-          </div>
-          <p className="csv-progress" role="status" aria-live="polite">
-            {busy === "investigate"
-              ? `Local inference is running. ${finalCount} of ${preview.records.length} lines resolved. Keep this tab open; switching workspace views preserves progress.`
-              : complete
-                ? `${finalCount} lines resolved; ${held} held or rejected. Results cover submitted lines only. Order completeness and atomic whole-order delivery are not verified.`
-            : "Preview makes no writes. Import stores both CSV originals and approved references in local IRIS; investigation can create per-line simulator receipts."}
-          </p>
         </section>
       )}
-    </>
+    </div>
   );
 }

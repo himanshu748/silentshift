@@ -1,5 +1,13 @@
 # Build status
 
+## CSV workbench presentation refined — November 8, 2026
+
+Compacted the paired file controls, strengthened quantity/unit comparisons, and made the next action depend on the current step. Held and delivered values receive their route colors only after a native result. Progress counts resolved lines; source provenance remains available in a disclosure. Keyboard controls, mobile paired values and reduced motion remain part of the workflow. Native source, policy and AI Hub behavior are unchanged.
+
+The fresh browser run passed **32 checks**, including two new synthetic CSV investigations, original-source retention, interrupted-connection recovery, repeated imports and an observed progress capture. The [receipt](evidence/csv-ui-design-nov8.json) records the actual cases and native traces. Local Python: **207 passed in 6.46s**; landing/disconnected browser suite: **  38 passed (1.6m)**; TypeScript and build completed. This is an existing-instance UI result, separate from the current-main fresh-clone judge verification being repeated. No new IPM/OEX publication or bonus award is claimed.
+
+[Desktop](assets/csv-import-refined-desktop.png) · [Mobile](assets/csv-import-refined-mobile.png) · [Observed processing](assets/csv-import-refined-progress.png).
+
 ## CSV Import works from the native workbench — November 7, 2026
 
 The **CSV Import** view now takes an order feed and an independent approved-reference export through preview, authorized import and native per-line investigation. Preview is read-only. Reference writes require the separate **SSImport** resource, explicit authority confirmation and an approved-source note. SSImporter is created without automatic user assignment; review permission alone was verified insufficient. The configured local reviewer was then explicitly enabled through the administrator method. Imports retain authenticated identity, time, exact CSV originals, source hashes and the original receipt; conflicting revisions roll back references, sources and receipt together. Native hash readback confirmed BOM/CRLF originals without exporting their contents.

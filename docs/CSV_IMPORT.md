@@ -4,6 +4,10 @@ Use **CSV Import** when you have an incoming order feed and a separate, independ
 
 This source feature runs on the verified ARM64 **2026.3.0AI.154.0 / 154U** instance. Public IPM **0.2.0** does not include it. The destination is the IRIS simulator; a per-line result is not an atomic whole-order release. Supplied samples are synthetic.
 
+![CSV workbench comparing incoming quantities with approved references and their observed outcomes](assets/csv-import-refined-desktop.png)
+
+[Mobile layout](assets/csv-import-refined-mobile.png) · [Processing display](assets/csv-import-refined-progress.png).
+
 ## Before the first import
 
 Complete [INSTALL.md](../INSTALL.md) from the current source checkout, including the local Ollama model. After updating an existing source installation, run its normal bootstrap again so the compiled classes and Python assets match:
