@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-11-08T09:11:08.721542+00:00",
+  "source_commit": "63ec7d901e85d415ed831c866983ca0e4046a937",
+  "setup_repair": "Restore original relative symlinks in reused node_modules/.bin; no tracked source change",
+  "checks": [
+    {
+      "name": "types-repaired",
+      "command": "npm --prefix web run check",
+      "exit_code": 0,
+      "elapsed_seconds": 17.507
+    },
+    {
+      "name": "build",
+      "command": "npm --prefix web run build",
+      "exit_code": 0,
+      "elapsed_seconds": 11.661
+    },
+    {
+      "name": "browser",
+      "command": "npm --prefix web run test:e2e",
+      "exit_code": 0,
+      "elapsed_seconds": 125.829
+    }
+  ],
+  "passed": true
+}

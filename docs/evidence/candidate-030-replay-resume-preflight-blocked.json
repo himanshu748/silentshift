@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-11-08T09:38:11.495054+00:00",
+  "container": "silentshift-bonus-load-030-replay-nov8",
+  "scope": "Complete the SAME freshly created isolated candidate container after storage-preflight stop; no new source load or reset",
+  "passed": false,
+  "steps": [
+    {
+      "label": "identity",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "inspect",
+        "silentshift-bonus-load-030-replay-nov8"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.363
+    },
+    {
+      "label": "network",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "network",
+        "inspect",
+        "silentshift-bonus-load-030-replay-nov8"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.176
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+uv run python scripts/verify_native_review_queue.py --context colima-silentshift --container silentshift-bonus-load-030-nov8 --allow-new-synthetic-cases --output <retained-checkout>/.local/release-030/review-ready.json

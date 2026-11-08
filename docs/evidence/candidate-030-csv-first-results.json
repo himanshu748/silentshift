@@ -1,0 +1,157 @@
+{
+  "preview_hash": "072856f8e1541096e16b376c6b9e6d8fee2e2dfe9f7e3c3817b9f9c992669db0",
+  "feed_sha256": "b0ee4edc02f3ff70d177b4e786f4fb5e8c852f442a7b8a27f90597d97b07d46f",
+  "approved_sha256": "83b48edb2b4f277a8ca2c3a18b2fb9b60bb321ee18667cb1b9826454b1a14ade",
+  "mode": "per-line-simulator",
+  "atomic_order_delivery": false,
+  "order_completeness": "not_verified",
+  "records": [
+    {
+      "order_id": "SYNTHETIC-held-20261108T091725009039",
+      "line_id": "1",
+      "partner": "synthetic-csv-partner",
+      "source_row": 2,
+      "message": {
+        "event_id": "csv:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd",
+        "contract_id": "csv-line:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd",
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "20",
+        "unit": "CASE",
+        "occurred_at": "2026-11-08T09:17:25.009039+00:00",
+        "business_unit": "TEST",
+        "kind": "order",
+        "source": "synthetic-csv-partner",
+        "correlation_id": "csv-order:74f9c8ffa9c72225a826406ca308875adb56284b12b724971ef5435ca371024f"
+      },
+      "existing_case": null
+    },
+    {
+      "order_id": "SYNTHETIC-clear-20261108T091725009039",
+      "line_id": "1",
+      "partner": "synthetic-csv-partner",
+      "source_row": 3,
+      "message": {
+        "event_id": "csv:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a",
+        "contract_id": "csv-line:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a",
+        "product_id": "SYNTHETIC-SKU",
+        "quantity": "240",
+        "unit": "EA",
+        "occurred_at": "2026-11-08T09:17:25.009039+00:00",
+        "business_unit": "TEST",
+        "kind": "order",
+        "source": "synthetic-csv-partner",
+        "correlation_id": "csv-order:53307cfa45de650d1c2dbcb73db1ee1c4e2724378f03351e8457167d6682b21e"
+      },
+      "existing_case": null
+    }
+  ],
+  "references": [
+    {
+      "id": "csv-ref:007e33663687bb9a6664ac5de82fbc765f73228a3ab8b5720bea1d8dfc91f734",
+      "contract_id": "csv-line:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd",
+      "quantity": "240",
+      "unit": "EA",
+      "approval_provenance": {
+        "revision": "v1",
+        "approved_by": "synthetic-buyer",
+        "approved_at": "2026-11-06T09:17:25.009039+00:00"
+      },
+      "product_id": "SYNTHETIC-SKU",
+      "business_unit": "TEST",
+      "effective_from": "2026-11-07T09:17:25.009039+00:00",
+      "authority": "approved",
+      "effective_to": null,
+      "timestamp_semantics": "event_time"
+    },
+    {
+      "id": "csv-ref:7dcf8d9cb2d579b1374817cd39bf9d1c910580d80ec256f106e3f167e4516456",
+      "contract_id": "csv-line:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a",
+      "quantity": "240",
+      "unit": "EA",
+      "approval_provenance": {
+        "revision": "v1",
+        "approved_by": "synthetic-buyer",
+        "approved_at": "2026-11-06T09:17:25.009039+00:00"
+      },
+      "product_id": "SYNTHETIC-SKU",
+      "business_unit": "TEST",
+      "effective_from": "2026-11-07T09:17:25.009039+00:00",
+      "authority": "approved",
+      "effective_to": null,
+      "timestamp_semantics": "event_time"
+    }
+  ],
+  "import": {
+    "created": 2,
+    "reused": 0,
+    "source_retained": true,
+    "receipt": {
+      "id": "072856f8e1541096e16b376c6b9e6d8fee2e2dfe9f7e3c3817b9f9c992669db0",
+      "imported_by": "ss-judge-reviewer",
+      "imported_at": "2026-11-08T09:17:29.693840Z",
+      "reason": "Synthetic independently approved buyer export for UI verification.",
+      "reference_count": 2,
+      "feed_sha256": "b0ee4edc02f3ff70d177b4e786f4fb5e8c852f442a7b8a27f90597d97b07d46f",
+      "approved_sha256": "83b48edb2b4f277a8ca2c3a18b2fb9b60bb321ee18667cb1b9826454b1a14ade",
+      "records": [
+        {
+          "message": {
+            "occurred_at": "2026-11-08T09:17:25.009039+00:00",
+            "product_id": "SYNTHETIC-SKU",
+            "quantity": "20",
+            "unit": "CASE",
+            "business_unit": "TEST",
+            "kind": "order",
+            "source": "synthetic-csv-partner",
+            "event_id": "csv:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd",
+            "correlation_id": "csv-order:74f9c8ffa9c72225a826406ca308875adb56284b12b724971ef5435ca371024f",
+            "contract_id": "csv-line:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd"
+          },
+          "order_id": "SYNTHETIC-held-20261108T091725009039",
+          "line_id": "1",
+          "partner": "synthetic-csv-partner",
+          "source_row": 2
+        },
+        {
+          "message": {
+            "occurred_at": "2026-11-08T09:17:25.009039+00:00",
+            "product_id": "SYNTHETIC-SKU",
+            "quantity": "240",
+            "unit": "EA",
+            "business_unit": "TEST",
+            "kind": "order",
+            "source": "synthetic-csv-partner",
+            "event_id": "csv:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a",
+            "correlation_id": "csv-order:53307cfa45de650d1c2dbcb73db1ee1c4e2724378f03351e8457167d6682b21e",
+            "contract_id": "csv-line:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a"
+          },
+          "order_id": "SYNTHETIC-clear-20261108T091725009039",
+          "line_id": "1",
+          "partner": "synthetic-csv-partner",
+          "source_row": 3
+        }
+      ]
+    }
+  },
+  "results": {
+    "csv:6846939be7ecf4399f459e0e98e4f85a51413d697a9d0be5ab6622de2c187bbd": {
+      "id": "38D2B66A-DB55-11F1-80DE-450B8FCD2806",
+      "routing": "QUARANTINED",
+      "trace_id": "218",
+      "delivery_count": 0,
+      "agent": {
+        "status": "returned"
+      }
+    },
+    "csv:ccc419794ded07f1ec7b8689414bf3c2f9aaee4dd23be0cf429b1e4c879b229a": {
+      "id": "6577F1EF-DB55-11F1-80DE-450B8FCD2806",
+      "routing": "DELIVERED",
+      "trace_id": "246",
+      "delivery_count": 1,
+      "agent": {
+        "status": "returned"
+      }
+    }
+  },
+  "completed": true
+}

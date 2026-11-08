@@ -1,0 +1,3 @@
+set sc=##class(SilentShift.Setup).EnableCSVImport($SYSTEM.Util.GetEnviron("SILENTSHIFT_IRIS_USERNAME"))
+write "CSV_IMPORTER=",$system.Status.IsOK(sc),!
+halt

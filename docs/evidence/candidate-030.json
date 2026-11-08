@@ -1,0 +1,140 @@
+{
+  "created_at": "2026-11-08T09:35:42.492929+00:00",
+  "candidate_version": "0.3.0",
+  "published_version_last_observed": "0.2.0",
+  "verified_source_commit": "63ec7d901e85d415ed831c866983ca0e4046a937",
+  "fresh_clone_origin": "https://github.com/himanshu748/silentshift.git",
+  "passed": true,
+  "publish_ready": true,
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "application_source_mounts": 0,
+  "current_source_load_passed": true,
+  "native_unit_classes": 5,
+  "native_unit_methods": 12,
+  "live_native_cases": 5,
+  "live_native_passed": true,
+  "csv_checks": 32,
+  "csv_passed": true,
+  "review_assertions": 54,
+  "review_passed": true,
+  "python_summary": "207 passed in 55.73s",
+  "web_checks": [
+    {
+      "name": "types-repaired",
+      "command": "npm --prefix web run check",
+      "exit_code": 0,
+      "elapsed_seconds": 17.507
+    },
+    {
+      "name": "build",
+      "command": "npm --prefix web run build",
+      "exit_code": 0,
+      "elapsed_seconds": 11.661
+    },
+    {
+      "name": "browser",
+      "command": "npm --prefix web run test:e2e",
+      "exit_code": 0,
+      "elapsed_seconds": 125.829
+    }
+  ],
+  "connected_checks": [
+    {
+      "name": "csv-ready",
+      "command": "node scripts/verify_csv_ui.mjs --execute --output-directory /Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift/.local/release-030/csv-ready",
+      "exit_code": 0,
+      "elapsed_seconds": 128.534
+    },
+    {
+      "name": "connected",
+      "command": "npm --prefix web run test:e2e:native",
+      "exit_code": 0,
+      "elapsed_seconds": 61.296
+    }
+  ],
+  "disconnected_browser_summary": "  38 passed (2.0m)",
+  "connected_browser_summary": "  16 passed (58.3s)",
+  "source_load_elapsed_seconds": 446.645,
+  "recorded_replay_candidate": {
+    "container": "silentshift-bonus-load-030-replay-nov8",
+    "fresh_source_install_completed": true,
+    "version_read_back": "0.3.0",
+    "explicit_production_setup_completed": true,
+    "gateway_created": true,
+    "native_suite_repeated": true,
+    "api_replays_executed": 2,
+    "original_attempt": "candidate-030-replay-load-output.txt",
+    "native_unit_classes": 5,
+    "native_unit_methods": 12,
+    "replays": [
+      {
+        "session_id": "46",
+        "checks_passed": 12,
+        "check_count": 12,
+        "fresh_inference": false,
+        "routing": "QUARANTINED",
+        "delivery_count": 0
+      },
+      {
+        "session_id": "80",
+        "checks_passed": 12,
+        "check_count": 12,
+        "fresh_inference": false,
+        "routing": "QUARANTINED",
+        "delivery_count": 0
+      }
+    ],
+    "storage_blocker_resolved": true,
+    "scope": "Original newly created isolated source-load container, paused at storage preflight then completed without another installation or state reset",
+    "resume_receipt": "candidate-030-replay-resume.json",
+    "resume_space": {
+      "host_free_bytes": 2787663872,
+      "vm_docker_free_bytes": 3716792320,
+      "host_floor_gib": 1.8,
+      "vm_floor_gib": 3
+    }
+  },
+  "failures_preserved": [
+    {
+      "kind": "dependency-copy setup",
+      "receipt": "candidate-030-gate-receipt.json",
+      "resolved": "Restore npm launcher symlinks; TypeScript/build/browser rerun passed."
+    },
+    {
+      "kind": "review test-file path setup",
+      "receipts": [
+        "candidate-030-review.json",
+        "candidate-030-review-repaired.json"
+      ],
+      "resolved": "Copy only checked-in test classes into expected container path; 54 assertions then passed."
+    },
+    {
+      "kind": "web proxy setup",
+      "receipt": "candidate-030-csv-initial-failure.json",
+      "resolved": "Configure IRIS_API_ORIGIN with /silentshift; 32 CSV checks then passed."
+    },
+    {
+      "kind": "disk preflight",
+      "resolved": "Inactive regenerable caches reclaimed; unchanged safety floors passed before gateway creation.",
+      "receipt": "candidate-030-replay-load-output.txt"
+    },
+    {
+      "kind": "resumed verifier omitted adapter test inbox prerequisite",
+      "receipt": "candidate-030-resume-unit-initial-failure-output.txt",
+      "resolved": "Created the same isolated 0700 test inbox as the normal driver; all five classes / 12 methods then passed. No application source changed."
+    }
+  ],
+  "no_runtime_behavior_changes": true,
+  "new_git_tags": [],
+  "package_published": false,
+  "oex_edited": false,
+  "bonus_statuses_changed": false,
+  "hosted_ci_settings_changed": false,
+  "limits": [
+    "Synthetic fixed-clock examples; simulator-only delivery.",
+    "Native source load/package is not public registry installation.",
+    "Node dependencies reused after exact lockfile comparison; initial symlink-copy error retained.",
+    "Future browser runs require reinstalling the locked Playwright headless download, removed only after these browser checks completed to reclaim disk."
+  ],
+  "completed_at": "2026-11-08T09:43:23.748775+00:00"
+}

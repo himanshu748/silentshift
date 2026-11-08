@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-11-08T09:17:23.750195+00:00",
+  "checks": [
+    {
+      "name": "csv-ready",
+      "command": "node scripts/verify_csv_ui.mjs --execute --output-directory <retained-checkout>/.local/release-030/csv-ready",
+      "exit_code": 0,
+      "elapsed_seconds": 128.534
+    },
+    {
+      "name": "connected",
+      "command": "npm --prefix web run test:e2e:native",
+      "exit_code": 0,
+      "elapsed_seconds": 61.296
+    }
+  ],
+  "passed": true
+}

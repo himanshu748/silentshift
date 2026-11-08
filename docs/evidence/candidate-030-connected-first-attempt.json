@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-11-08T09:15:59.897339+00:00",
+  "checks": [
+    {
+      "name": "review-ready",
+      "command": "uv run python scripts/verify_native_review_queue.py --context colima-silentshift --container silentshift-bonus-load-030-nov8 --allow-new-synthetic-cases --output <retained-checkout>/.local/release-030/review-ready.json",
+      "exit_code": 0,
+      "elapsed_seconds": 4.469
+    },
+    {
+      "name": "enable-csv",
+      "command": "docker --context colima-silentshift exec -i silentshift-bonus-load-030-nov8 iris session IRIS -U SILENTSHIFT",
+      "exit_code": 0,
+      "elapsed_seconds": 0.125
+    },
+    {
+      "name": "csv",
+      "command": "node scripts/verify_csv_ui.mjs --execute --output-directory <retained-checkout>/.local/release-030/csv",
+      "exit_code": 1,
+      "elapsed_seconds": 18.935
+    }
+  ],
+  "passed": false
+}

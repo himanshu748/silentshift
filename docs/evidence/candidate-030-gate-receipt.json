@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-11-08T08:56:33.135334+00:00",
+  "source_commit": "63ec7d901e85d415ed831c866983ca0e4046a937",
+  "clone_origin": "https://github.com/himanshu748/silentshift.git",
+  "dependency_setup": "node_modules hardlinks from retained checkout after byte-identical package-lock.json comparison; uv uses local dependency cache",
+  "checks": [
+    {
+      "name": "source-live",
+      "command": "uv run python scripts/verify_bonus_release.py --source load --version 0.3.0 --execution-mode live --allow-model-calls --container silentshift-bonus-load-030-nov8 --api-port 52923 --execute",
+      "exit_code": 0,
+      "elapsed_seconds": 446.645
+    },
+    {
+      "name": "pytest",
+      "command": "uv run pytest -q",
+      "exit_code": 0,
+      "elapsed_seconds": 67.41
+    },
+    {
+      "name": "types",
+      "command": "npm --prefix web run check",
+      "exit_code": 1,
+      "elapsed_seconds": 4.254
+    }
+  ],
+  "passed": false
+}

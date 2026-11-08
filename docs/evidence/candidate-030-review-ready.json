@@ -1,0 +1,1028 @@
+{
+  "created_at": "2026-11-08T09:16:00.529080+00:00",
+  "llm_calls": 0,
+  "cases": [
+    {
+      "case_id": "042F1530-DB55-11F1-80DE-450B8FCD2806",
+      "action": "reject",
+      "before": {
+        "case_id": "042F1530-DB55-11F1-80DE-450B8FCD2806",
+        "routing": "REVIEW",
+        "version": 8,
+        "delivery_count": 0,
+        "policy": {
+          "checks": [
+            {
+              "code": "ASSESSMENT_VALID",
+              "passed": true,
+              "reason": "Deterministic assessment must be complete and valid."
+            },
+            {
+              "code": "NOT_DUPLICATE",
+              "passed": true,
+              "reason": "Duplicate event cannot create a second downstream effect."
+            },
+            {
+              "code": "NO_CRITICAL_CONTRADICTION",
+              "passed": true,
+              "reason": "Invalid messages and critical contradictions cannot be released."
+            },
+            {
+              "code": "RECOMMENDATION_VALID",
+              "passed": false,
+              "reason": "Agent output must satisfy the strict recommendation schema."
+            }
+          ],
+          "decision": "REQUEST_REVIEW",
+          "downstream_permitted": false,
+          "policy_version": "silentshift-policy/1.1.0",
+          "reasons": [
+            "Agent output must satisfy the strict recommendation schema.",
+            "Agent output must be a JSON object."
+          ],
+          "release_eligible": false
+        },
+        "review": "",
+        "workflow": {
+          "engine": "native-iris-workflow",
+          "status": "pending",
+          "role": "ReviewWorklist",
+          "requested_at": "2026-11-08T09:16:01.436454Z",
+          "completion_received": false,
+          "task_id": "149",
+          "request_id": "147",
+          "worklist_id": "149||ss-judge-reviewer",
+          "created_case_version": 7,
+          "created_at": "2026-11-08T09:16:01.445937Z",
+          "source_session_id": 169
+        },
+        "trace_id": "169",
+        "native_headers": [
+          {
+            "id": "169",
+            "session_id": 169,
+            "source": "Partner",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "170",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "171",
+            "session_id": 169,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "143"
+          },
+          {
+            "id": "172",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "173",
+            "session_id": 169,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent",
+            "body_id": "144"
+          },
+          {
+            "id": "174",
+            "session_id": 169,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "145"
+          },
+          {
+            "id": "175",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Quarantine",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "176",
+            "session_id": 169,
+            "source": "Quarantine",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "146"
+          },
+          {
+            "id": "177",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "178",
+            "session_id": 169,
+            "source": "ReviewCoordinator",
+            "target": "ReviewWorklist",
+            "body_class": "SilentShift.Workflow.ReviewRequest",
+            "body_id": "147"
+          },
+          {
+            "id": "179",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Partner",
+            "body_class": "SilentShift.Reply",
+            "body_id": "150"
+          }
+        ],
+        "workflow_events": [
+          {
+            "id": "185",
+            "kind": "workflow_task_requested",
+            "at": "2026-11-08T09:16:01.436722Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "queued",
+              "role": "ReviewWorklist",
+              "requested_at": "2026-11-08T09:16:01.436454Z",
+              "completion_received": false
+            }
+          },
+          {
+            "id": "186",
+            "kind": "workflow_task_created",
+            "at": "2026-11-08T09:16:01.446641Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "pending",
+              "role": "ReviewWorklist",
+              "task_id": "149",
+              "request_id": "147",
+              "worklist_id": "149||ss-judge-reviewer",
+              "created_case_version": 7,
+              "created_at": "2026-11-08T09:16:01.445937Z",
+              "source_session_id": 169,
+              "completion_received": false
+            }
+          }
+        ],
+        "review_receipt_count": 0,
+        "delivery_receipt_count": 0,
+        "agent_summary": {
+          "caller_status": "failed",
+          "caller_failure_code": "EVIDENCE_REFERENCE_LIMIT",
+          "model_invoked": false
+        },
+        "native_task": {
+          "task_id": "149",
+          "case_id": "042F1530-DB55-11F1-80DE-450B8FCD2806",
+          "created_case_version": 7,
+          "reviewed_case_version": "",
+          "role": "ReviewWorklist",
+          "assigned_to": "",
+          "user": "",
+          "action": "",
+          "status": "Unassigned",
+          "is_complete": false,
+          "time_created": "2026-11-08 09:16:01.442",
+          "time_completed": "",
+          "session_id": 169,
+          "source": "ReviewCoordinator",
+          "request_id": "147",
+          "review_reason": "",
+          "review_idempotency_key": "",
+          "worklist_count": 1,
+          "role_membership_count": 1
+        },
+        "native_completion_response_count": 0
+      },
+      "request": {
+        "action": "REJECT",
+        "reason": "Synthetic native worklist verification: reject",
+        "expected_version": 8,
+        "idempotency_key": "1f628c0b-31c2-49ff-b3c8-9c086dbcc6c9"
+      },
+      "checks": {
+        "actual_native_task": true,
+        "native_role_case_version": true,
+        "native_role_has_one_member": true,
+        "native_coordinator_request": true,
+        "native_worklist_request": true,
+        "pending_native_worklist": true,
+        "no_model_invocation": true,
+        "actual_native_task_in_review_api": true,
+        "blank_reason_denied": true,
+        "stale_version_denied": true,
+        "viewer_action_denied": true,
+        "rejection_http200": true,
+        "actual_native_completion": true,
+        "native_owner_bound_to_reviewer": true,
+        "native_worklist_consumed": true,
+        "actual_deferred_response": true,
+        "completion_receipt_received": true,
+        "reason_version_idempotency_preserved": true,
+        "claim_audited": true,
+        "expected_terminal_route": true,
+        "exactly_one_review_receipt": true,
+        "exactly_one_native_completion_response": true,
+        "exact_delivery_receipts": true,
+        "same_request_replay_stable": true,
+        "completed_task_leaves_pending_queue": true,
+        "changed_key_content_denied": true
+      },
+      "after": {
+        "case_id": "042F1530-DB55-11F1-80DE-450B8FCD2806",
+        "routing": "REJECTED",
+        "version": 12,
+        "delivery_count": 0,
+        "policy": {
+          "checks": [
+            {
+              "code": "HUMAN_REJECTION",
+              "passed": true,
+              "reason": "Reviewer identity, reason, version and idempotency were validated."
+            }
+          ],
+          "decision": "QUARANTINE",
+          "downstream_permitted": false,
+          "policy_version": "silentshift-policy/1.1.0",
+          "reasons": [
+            "An authorized reviewer rejected this transaction."
+          ],
+          "release_eligible": false,
+          "decision_source": "authorized-human-rejection"
+        },
+        "review": {
+          "action": "reject",
+          "reason": "Synthetic native worklist verification: reject",
+          "reviewer": "ss-judge-reviewer",
+          "at": "2026-11-08T09:16:02.462179Z",
+          "idempotency_key": "1f628c0b-31c2-49ff-b3c8-9c086dbcc6c9",
+          "expected_version": 8
+        },
+        "workflow": {
+          "engine": "native-iris-workflow",
+          "status": "completed",
+          "role": "ReviewWorklist",
+          "requested_at": "2026-11-08T09:16:01.436454Z",
+          "completion_received": true,
+          "task_id": "149",
+          "request_id": "147",
+          "worklist_id": "149||ss-judge-reviewer",
+          "created_case_version": 7,
+          "created_at": "2026-11-08T09:16:01.445937Z",
+          "source_session_id": 169,
+          "claimed_by": "ss-judge-reviewer",
+          "claimed_at": "2026-11-08T09:16:02.461440Z",
+          "completed_by": "ss-judge-reviewer",
+          "completion_action": "REJECT",
+          "completion_confirmed_at": "2026-11-08T09:16:02.503509Z",
+          "native_time_completed": "2026-11-08 09:16:02.468",
+          "completion_header_id": "180",
+          "completion_received_at": "2026-11-08T09:16:02.682164Z",
+          "completion_response_id": "149"
+        },
+        "trace_id": "169",
+        "native_headers": [
+          {
+            "id": "169",
+            "session_id": 169,
+            "source": "Partner",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "170",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "171",
+            "session_id": 169,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "143"
+          },
+          {
+            "id": "172",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "173",
+            "session_id": 169,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent",
+            "body_id": "144"
+          },
+          {
+            "id": "174",
+            "session_id": 169,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "145"
+          },
+          {
+            "id": "175",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Quarantine",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "176",
+            "session_id": 169,
+            "source": "Quarantine",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "146"
+          },
+          {
+            "id": "177",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Message",
+            "body_id": "142"
+          },
+          {
+            "id": "178",
+            "session_id": 169,
+            "source": "ReviewCoordinator",
+            "target": "ReviewWorklist",
+            "body_class": "SilentShift.Workflow.ReviewRequest",
+            "body_id": "147"
+          },
+          {
+            "id": "179",
+            "session_id": 169,
+            "source": "Semantic",
+            "target": "Partner",
+            "body_class": "SilentShift.Reply",
+            "body_id": "150"
+          },
+          {
+            "id": "180",
+            "session_id": 169,
+            "source": "ReviewWorklist",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Workflow.ReviewTask",
+            "body_id": "149"
+          }
+        ],
+        "workflow_events": [
+          {
+            "id": "185",
+            "kind": "workflow_task_requested",
+            "at": "2026-11-08T09:16:01.436722Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "queued",
+              "role": "ReviewWorklist",
+              "requested_at": "2026-11-08T09:16:01.436454Z",
+              "completion_received": false
+            }
+          },
+          {
+            "id": "186",
+            "kind": "workflow_task_created",
+            "at": "2026-11-08T09:16:01.446641Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "pending",
+              "role": "ReviewWorklist",
+              "task_id": "149",
+              "request_id": "147",
+              "worklist_id": "149||ss-judge-reviewer",
+              "created_case_version": 7,
+              "created_at": "2026-11-08T09:16:01.445937Z",
+              "source_session_id": 169,
+              "completion_received": false
+            }
+          },
+          {
+            "id": "187",
+            "kind": "workflow_task_claimed",
+            "at": "2026-11-08T09:16:02.461485Z",
+            "detail": {
+              "task_id": "149",
+              "reviewer": "ss-judge-reviewer",
+              "expected_case_version": 8,
+              "claimed_at": "2026-11-08T09:16:02.461440Z",
+              "native_assigned_to": "ss-judge-reviewer"
+            }
+          },
+          {
+            "id": "189",
+            "kind": "workflow_task_completed",
+            "at": "2026-11-08T09:16:02.503992Z",
+            "detail": {
+              "status": "completed",
+              "completed_by": "ss-judge-reviewer",
+              "completion_action": "REJECT",
+              "completion_confirmed_at": "2026-11-08T09:16:02.503509Z",
+              "native_time_completed": "2026-11-08 09:16:02.468"
+            }
+          },
+          {
+            "id": "191",
+            "kind": "workflow_completion_received",
+            "at": "2026-11-08T09:16:02.682808Z",
+            "detail": {
+              "status": "completed",
+              "completion_received": true,
+              "completion_header_id": "180",
+              "completion_action": "REJECT",
+              "completed_by": "ss-judge-reviewer",
+              "completion_received_at": "2026-11-08T09:16:02.682164Z",
+              "completion_response_id": "149"
+            }
+          }
+        ],
+        "review_receipt_count": 1,
+        "delivery_receipt_count": 0,
+        "agent_summary": {
+          "caller_status": "failed",
+          "caller_failure_code": "EVIDENCE_REFERENCE_LIMIT",
+          "model_invoked": false
+        },
+        "native_task": {
+          "task_id": "149",
+          "case_id": "042F1530-DB55-11F1-80DE-450B8FCD2806",
+          "created_case_version": 7,
+          "reviewed_case_version": 8,
+          "role": "ReviewWorklist",
+          "assigned_to": "ss-judge-reviewer",
+          "user": "ss-judge-reviewer",
+          "action": "REJECT",
+          "status": "Completed",
+          "is_complete": true,
+          "time_created": "2026-11-08 09:16:01.442",
+          "time_completed": "2026-11-08 09:16:02.468",
+          "session_id": 169,
+          "source": "ReviewCoordinator",
+          "request_id": "147",
+          "review_reason": "Synthetic native worklist verification: reject",
+          "review_idempotency_key": "1f628c0b-31c2-49ff-b3c8-9c086dbcc6c9",
+          "worklist_count": 0,
+          "role_membership_count": 1
+        },
+        "native_completion_response_count": 1
+      },
+      "passed": true
+    },
+    {
+      "case_id": "05973137-DB55-11F1-80DE-450B8FCD2806",
+      "action": "approve",
+      "before": {
+        "case_id": "05973137-DB55-11F1-80DE-450B8FCD2806",
+        "routing": "REVIEW",
+        "version": 8,
+        "delivery_count": 0,
+        "policy": {
+          "checks": [
+            {
+              "code": "ASSESSMENT_VALID",
+              "passed": true,
+              "reason": "Deterministic assessment must be complete and valid."
+            },
+            {
+              "code": "NOT_DUPLICATE",
+              "passed": true,
+              "reason": "Duplicate event cannot create a second downstream effect."
+            },
+            {
+              "code": "NO_CRITICAL_CONTRADICTION",
+              "passed": true,
+              "reason": "Invalid messages and critical contradictions cannot be released."
+            },
+            {
+              "code": "RECOMMENDATION_VALID",
+              "passed": false,
+              "reason": "Agent output must satisfy the strict recommendation schema."
+            }
+          ],
+          "decision": "REQUEST_REVIEW",
+          "downstream_permitted": false,
+          "policy_version": "silentshift-policy/1.1.0",
+          "reasons": [
+            "Agent output must satisfy the strict recommendation schema.",
+            "Agent output must be a JSON object."
+          ],
+          "release_eligible": false
+        },
+        "review": "",
+        "workflow": {
+          "engine": "native-iris-workflow",
+          "status": "pending",
+          "role": "ReviewWorklist",
+          "requested_at": "2026-11-08T09:16:03.794440Z",
+          "completion_received": false,
+          "task_id": "166",
+          "request_id": "164",
+          "worklist_id": "166||ss-judge-reviewer",
+          "created_case_version": 7,
+          "created_at": "2026-11-08T09:16:03.800720Z",
+          "source_session_id": 191
+        },
+        "trace_id": "191",
+        "native_headers": [
+          {
+            "id": "191",
+            "session_id": 191,
+            "source": "Partner",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "192",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "193",
+            "session_id": 191,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "160"
+          },
+          {
+            "id": "194",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "195",
+            "session_id": 191,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent",
+            "body_id": "161"
+          },
+          {
+            "id": "196",
+            "session_id": 191,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "162"
+          },
+          {
+            "id": "197",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Quarantine",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "198",
+            "session_id": 191,
+            "source": "Quarantine",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "163"
+          },
+          {
+            "id": "199",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "200",
+            "session_id": 191,
+            "source": "ReviewCoordinator",
+            "target": "ReviewWorklist",
+            "body_class": "SilentShift.Workflow.ReviewRequest",
+            "body_id": "164"
+          },
+          {
+            "id": "201",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Partner",
+            "body_class": "SilentShift.Reply",
+            "body_id": "167"
+          }
+        ],
+        "workflow_events": [
+          {
+            "id": "203",
+            "kind": "workflow_task_requested",
+            "at": "2026-11-08T09:16:03.794722Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "queued",
+              "role": "ReviewWorklist",
+              "requested_at": "2026-11-08T09:16:03.794440Z",
+              "completion_received": false
+            }
+          },
+          {
+            "id": "204",
+            "kind": "workflow_task_created",
+            "at": "2026-11-08T09:16:03.801085Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "pending",
+              "role": "ReviewWorklist",
+              "task_id": "166",
+              "request_id": "164",
+              "worklist_id": "166||ss-judge-reviewer",
+              "created_case_version": 7,
+              "created_at": "2026-11-08T09:16:03.800720Z",
+              "source_session_id": 191,
+              "completion_received": false
+            }
+          }
+        ],
+        "review_receipt_count": 0,
+        "delivery_receipt_count": 0,
+        "agent_summary": {
+          "caller_status": "failed",
+          "caller_failure_code": "EVIDENCE_REFERENCE_LIMIT",
+          "model_invoked": false
+        },
+        "native_task": {
+          "task_id": "166",
+          "case_id": "05973137-DB55-11F1-80DE-450B8FCD2806",
+          "created_case_version": 7,
+          "reviewed_case_version": "",
+          "role": "ReviewWorklist",
+          "assigned_to": "",
+          "user": "",
+          "action": "",
+          "status": "Unassigned",
+          "is_complete": false,
+          "time_created": "2026-11-08 09:16:03.798",
+          "time_completed": "",
+          "session_id": 191,
+          "source": "ReviewCoordinator",
+          "request_id": "164",
+          "review_reason": "",
+          "review_idempotency_key": "",
+          "worklist_count": 1,
+          "role_membership_count": 1
+        },
+        "native_completion_response_count": 0
+      },
+      "request": {
+        "action": "APPROVE",
+        "reason": "Synthetic native worklist verification: approve",
+        "expected_version": 8,
+        "idempotency_key": "0e0c787c-9fca-450b-b565-b947fa275044"
+      },
+      "checks": {
+        "actual_native_task": true,
+        "native_role_case_version": true,
+        "native_role_has_one_member": true,
+        "native_coordinator_request": true,
+        "native_worklist_request": true,
+        "pending_native_worklist": true,
+        "no_model_invocation": true,
+        "actual_native_task_in_review_api": true,
+        "blank_reason_denied": true,
+        "stale_version_denied": true,
+        "viewer_action_denied": true,
+        "both_concurrent_requests_completed": true,
+        "actual_native_completion": true,
+        "native_owner_bound_to_reviewer": true,
+        "native_worklist_consumed": true,
+        "actual_deferred_response": true,
+        "completion_receipt_received": true,
+        "reason_version_idempotency_preserved": true,
+        "claim_audited": true,
+        "expected_terminal_route": true,
+        "exactly_one_review_receipt": true,
+        "exactly_one_native_completion_response": true,
+        "exact_delivery_receipts": true,
+        "same_request_replay_stable": true,
+        "completed_task_leaves_pending_queue": true,
+        "changed_key_content_denied": true
+      },
+      "concurrent_http_statuses": [
+        200,
+        200
+      ],
+      "after": {
+        "case_id": "05973137-DB55-11F1-80DE-450B8FCD2806",
+        "routing": "DELIVERED",
+        "version": 12,
+        "delivery_count": 1,
+        "policy": {
+          "checks": [
+            {
+              "code": "ASSESSMENT_VALID",
+              "passed": true,
+              "reason": "Deterministic assessment must be complete and valid."
+            },
+            {
+              "code": "NOT_DUPLICATE",
+              "passed": true,
+              "reason": "Duplicate event cannot create a second downstream effect."
+            },
+            {
+              "code": "NO_CRITICAL_CONTRADICTION",
+              "passed": true,
+              "reason": "Invalid messages and critical contradictions cannot be released."
+            },
+            {
+              "code": "RECOMMENDATION_VALID",
+              "passed": true,
+              "reason": "Agent output must satisfy the strict recommendation schema."
+            },
+            {
+              "code": "EVIDENCE_COMPLETE",
+              "passed": true,
+              "reason": "Every independently retrieved evidence record must be cited for release."
+            },
+            {
+              "code": "SEMANTICS_RESOLVED",
+              "passed": true,
+              "reason": "Only a resolved comparison to an approved contract can permit release."
+            },
+            {
+              "code": "UNCERTAINTY_BOUNDED",
+              "passed": true,
+              "reason": "Uncertainty above 0.35 requires human review."
+            }
+          ],
+          "decision": "ALLOW",
+          "downstream_permitted": true,
+          "policy_version": "silentshift-policy/1.1.0",
+          "reasons": [
+            "Recommendation satisfies all deterministic release gates."
+          ],
+          "release_eligible": true
+        },
+        "review": {
+          "action": "approve",
+          "reason": "Synthetic native worklist verification: approve",
+          "reviewer": "ss-judge-reviewer",
+          "at": "2026-11-08T09:16:04.152430Z",
+          "idempotency_key": "0e0c787c-9fca-450b-b565-b947fa275044",
+          "expected_version": 8
+        },
+        "workflow": {
+          "engine": "native-iris-workflow",
+          "status": "completed",
+          "role": "ReviewWorklist",
+          "requested_at": "2026-11-08T09:16:03.794440Z",
+          "completion_received": true,
+          "task_id": "166",
+          "request_id": "164",
+          "worklist_id": "166||ss-judge-reviewer",
+          "created_case_version": 7,
+          "created_at": "2026-11-08T09:16:03.800720Z",
+          "source_session_id": 191,
+          "claimed_by": "ss-judge-reviewer",
+          "claimed_at": "2026-11-08T09:16:04.152197Z",
+          "completed_by": "ss-judge-reviewer",
+          "completion_action": "APPROVE",
+          "completion_confirmed_at": "2026-11-08T09:16:04.161214Z",
+          "native_time_completed": "2026-11-08 09:16:04.16",
+          "completion_header_id": "202",
+          "completion_received_at": "2026-11-08T09:16:04.167914Z",
+          "completion_response_id": "166"
+        },
+        "trace_id": "191",
+        "native_headers": [
+          {
+            "id": "191",
+            "session_id": 191,
+            "source": "Partner",
+            "target": "Semantic",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "192",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "References",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "193",
+            "session_id": 191,
+            "source": "References",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "160"
+          },
+          {
+            "id": "194",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Investigator",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "195",
+            "session_id": 191,
+            "source": "Investigator",
+            "target": "AITrace",
+            "body_class": "SilentShift.TraceEvent",
+            "body_id": "161"
+          },
+          {
+            "id": "196",
+            "session_id": 191,
+            "source": "Investigator",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "162"
+          },
+          {
+            "id": "197",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Quarantine",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "198",
+            "session_id": 191,
+            "source": "Quarantine",
+            "target": "Semantic",
+            "body_class": "SilentShift.Reply",
+            "body_id": "163"
+          },
+          {
+            "id": "199",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Message",
+            "body_id": "159"
+          },
+          {
+            "id": "200",
+            "session_id": 191,
+            "source": "ReviewCoordinator",
+            "target": "ReviewWorklist",
+            "body_class": "SilentShift.Workflow.ReviewRequest",
+            "body_id": "164"
+          },
+          {
+            "id": "201",
+            "session_id": 191,
+            "source": "Semantic",
+            "target": "Partner",
+            "body_class": "SilentShift.Reply",
+            "body_id": "167"
+          },
+          {
+            "id": "202",
+            "session_id": 191,
+            "source": "ReviewWorklist",
+            "target": "ReviewCoordinator",
+            "body_class": "SilentShift.Workflow.ReviewTask",
+            "body_id": "166"
+          }
+        ],
+        "workflow_events": [
+          {
+            "id": "203",
+            "kind": "workflow_task_requested",
+            "at": "2026-11-08T09:16:03.794722Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "queued",
+              "role": "ReviewWorklist",
+              "requested_at": "2026-11-08T09:16:03.794440Z",
+              "completion_received": false
+            }
+          },
+          {
+            "id": "204",
+            "kind": "workflow_task_created",
+            "at": "2026-11-08T09:16:03.801085Z",
+            "detail": {
+              "engine": "native-iris-workflow",
+              "status": "pending",
+              "role": "ReviewWorklist",
+              "task_id": "166",
+              "request_id": "164",
+              "worklist_id": "166||ss-judge-reviewer",
+              "created_case_version": 7,
+              "created_at": "2026-11-08T09:16:03.800720Z",
+              "source_session_id": 191,
+              "completion_received": false
+            }
+          },
+          {
+            "id": "205",
+            "kind": "workflow_task_claimed",
+            "at": "2026-11-08T09:16:04.152236Z",
+            "detail": {
+              "task_id": "166",
+              "reviewer": "ss-judge-reviewer",
+              "expected_case_version": 8,
+              "claimed_at": "2026-11-08T09:16:04.152197Z",
+              "native_assigned_to": "ss-judge-reviewer"
+            }
+          },
+          {
+            "id": "207",
+            "kind": "workflow_task_completed",
+            "at": "2026-11-08T09:16:04.161674Z",
+            "detail": {
+              "status": "completed",
+              "completed_by": "ss-judge-reviewer",
+              "completion_action": "APPROVE",
+              "completion_confirmed_at": "2026-11-08T09:16:04.161214Z",
+              "native_time_completed": "2026-11-08 09:16:04.16"
+            }
+          },
+          {
+            "id": "209",
+            "kind": "workflow_completion_received",
+            "at": "2026-11-08T09:16:04.173151Z",
+            "detail": {
+              "status": "completed",
+              "completion_received": true,
+              "completion_header_id": "202",
+              "completion_action": "APPROVE",
+              "completed_by": "ss-judge-reviewer",
+              "completion_received_at": "2026-11-08T09:16:04.167914Z",
+              "completion_response_id": "166"
+            }
+          }
+        ],
+        "review_receipt_count": 1,
+        "delivery_receipt_count": 1,
+        "agent_summary": {
+          "caller_status": "failed",
+          "caller_failure_code": "EVIDENCE_REFERENCE_LIMIT",
+          "model_invoked": false
+        },
+        "native_task": {
+          "task_id": "166",
+          "case_id": "05973137-DB55-11F1-80DE-450B8FCD2806",
+          "created_case_version": 7,
+          "reviewed_case_version": 8,
+          "role": "ReviewWorklist",
+          "assigned_to": "ss-judge-reviewer",
+          "user": "ss-judge-reviewer",
+          "action": "APPROVE",
+          "status": "Completed",
+          "is_complete": true,
+          "time_created": "2026-11-08 09:16:03.798",
+          "time_completed": "2026-11-08 09:16:04.16",
+          "session_id": 191,
+          "source": "ReviewCoordinator",
+          "request_id": "164",
+          "review_reason": "Synthetic native worklist verification: approve",
+          "review_idempotency_key": "0e0c787c-9fca-450b-b565-b947fa275044",
+          "worklist_count": 0,
+          "role_membership_count": 1
+        },
+        "native_completion_response_count": 1
+      },
+      "passed": true
+    }
+  ],
+  "checks": {
+    "viewer_queue_denied": true,
+    "invalid_pagination_denied": true
+  },
+  "passed": true
+}

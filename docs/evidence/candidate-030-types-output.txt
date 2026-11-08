@@ -1,0 +1,24 @@
+
+> silentshift-web@0.2.1 check
+> tsc --noEmit
+
+node:internal/modules/esm/resolve:241
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '<fresh-clone>/web/node_modules/lib/tsc.js' imported from <fresh-clone>/web/node_modules/.bin/tsc
+    at finalizeResolution (node:internal/modules/esm/resolve:241:11)
+    at moduleResolve (node:internal/modules/esm/resolve:846:10)
+    at defaultResolve (node:internal/modules/esm/resolve:973:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:752:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:772:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:810:56)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:651:27)
+    at ModuleJobSync.syncLink (node:internal/modules/esm/module_job:328:33)
+    at ModuleJobSync.link (node:internal/modules/esm/module_job:626:17)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:616:26) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file://<fresh-clone>/web/node_modules/lib/tsc.js'
+}
+
+Node.js v26.12.0

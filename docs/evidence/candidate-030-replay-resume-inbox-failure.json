@@ -1,0 +1,94 @@
+{
+  "created_at": "2026-11-08T09:40:37.403641+00:00",
+  "container": "silentshift-bonus-load-030-replay-nov8",
+  "scope": "Complete the SAME freshly created isolated candidate container after storage-preflight stop; no new source load or reset",
+  "passed": false,
+  "steps": [
+    {
+      "label": "identity",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "inspect",
+        "silentshift-bonus-load-030-replay-nov8"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.264
+    },
+    {
+      "label": "network",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "network",
+        "inspect",
+        "silentshift-bonus-load-030-replay-nov8"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.09
+    },
+    {
+      "label": "gateway",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "run",
+        "-d",
+        "--pull",
+        "never",
+        "--init",
+        "--name",
+        "silentshift-bonus-load-030-replay-nov8-gateway",
+        "--network",
+        "silentshift-bonus-load-030-replay-nov8",
+        "--network-alias",
+        "gateway",
+        "--publish",
+        "127.0.0.1:52933:80",
+        "--env",
+        "ISC_CSP_CONF_FILE=/silentshift-gateway/CSP.conf",
+        "--env",
+        "ISC_CSP_INI_FILE=/silentshift-gateway/CSP.ini",
+        "--mount",
+        "type=bind,src=<fresh-clone>/.local/ipm/bonus-runs/silentshift-bonus-load-030-replay-nov8/CSP.conf,dst=/silentshift-gateway/CSP.conf,readonly",
+        "--mount",
+        "type=bind,src=<fresh-clone>/.local/ipm/bonus-runs/silentshift-bonus-load-030-replay-nov8/CSP.ini,dst=/silentshift-gateway/CSP.ini",
+        "--log-opt",
+        "max-size=10m",
+        "--log-opt",
+        "max-file=2",
+        "containers.intersystems.com/intersystems/webgateway:2026.1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.624
+    },
+    {
+      "label": "unit",
+      "command": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "silentshift-bonus-load-030-replay-nov8",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "SILENTSHIFT"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.322
+    }
+  ],
+  "resume_space": {
+    "host_free_bytes": 2575532032,
+    "vm_docker_free_bytes": 3717918720,
+    "host_floor_gib": 1.8,
+    "vm_floor_gib": 3
+  },
+  "production_health_verified": true
+}

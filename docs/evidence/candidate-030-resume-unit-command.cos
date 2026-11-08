@@ -1,0 +1,7 @@
+set ^UnitTestRoot="/home/irisowner/silentshift-bonus/tests/"
+set manager=##class(%UnitTest.Manager).%New()
+set passed=manager.RunTest("","/nodelete")
+write "SS_UNIT_RESULT=",passed,!
+if 'passed halt
+write "SS_UNIT_OK",!
+halt
