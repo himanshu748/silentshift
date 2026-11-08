@@ -1,5 +1,7 @@
 # Open Exchange description and product copy
 
+**Maintainer note, November 8, 2026:** this document preserves the actual **approved 0.2.1 OEX listing copy** and its dated moderation evidence. The native `module.xml` is separately **prepared at 0.3.0**, **not** publicly published; last observed public native IPM was **0.2.0**. The new candidate does not alter the approved OEX text, video, idea field or any owner-side setting. Only the owner decides when to submit a new package release. [Release scope](../CHANGELOG.md) · [Owner-only steps](IPM.md#owner-only-030-publication-runbook) · [New local test scope](evidence/ipm-030-candidate-linux-nov8.json). After a 0.3.0 public release is independently confirmed, this section remains a historical copy of what was approved, not evidence that a newer OEX description was accepted.
+
 ## Description update — November 8, 2026 (UTC)
 
 Saved through **Save → Send for approval → Send edits**, without creating a release. Open Exchange confirmed submission, then emailed approval at **08:26 UTC**. The new description is visible anonymously. Release **0.2.1**, native IPM **0.2.0**, contest/IPM selections, dedicated idea URL, video and both article fields were retained; Demo URL stays empty. [Submission and mail receipt](evidence/oex-update-nov8.json) · [owner screenshot](evidence/oex-update-nov8-owner.jpg).
