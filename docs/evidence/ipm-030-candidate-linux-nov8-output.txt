@@ -1,0 +1,42 @@
+SilentShift 0.3.0 candidate. Isolated source checkout (Linux x86_64), 2026-11-08 UTC.
+Source commit: 5e5c8a66d8a33651eb65f170569b089ded3cb06a
+Git worktree: clean
+module.xml SHA-256: d5dcd474348ff726e55873301879a800492236d8f052ede01d1d15376abcf6bf
+
+$ uv run pytest -q
+207 passed in 2.85s
+exit=0
+
+$ uv run python scripts/package_ipm.py --output /tmp/silentshift-030-stage
+{"package": "silentshift", "version": "0.3.0", "file_count": 58, "native_install_verified": false, "registry_published": false}
+STAGED_NATIVE_CLASSES=45
+STAGED_ASSETS=11
+STAGED_VERSION=0.3.0
+exit=0
+
+$ npm --prefix web ci --no-audit --no-fund
+added 32 packages in 2s
+exit=0
+
+$ npm --prefix web run check
+> silentshift-web@0.2.1 check
+> tsc --noEmit
+exit=0
+
+$ npm --prefix web run build
+> silentshift-web@0.2.1 build
+> tsc --noEmit && vite build
+built in 518ms
+exit=0
+Nonfatal existing lucide-react "use client" bundler warnings.
+
+$ (cd web && npx playwright install chromium)
+Failed to download Chrome for Testing (Playwright Chromium v1248)
+getaddrinfo EAI_AGAIN cdn.playwright.dev
+exit=1
+Disconnected/connected browsers and CSV UI checks NOT rerun in this sandbox.
+
+Docker and IRIS executables: unavailable. Licensed official 154U image: not available.
+Therefore clean IRIS source load, native 5 classes / 12 methods, 5 live scenarios, 2 replays,
+and connected CSV 32+16 checks were NOT executed here. Earlier dated receipts remain valid
+for their original source snapshots only. No registry publication, OEX edit or release tag.
