@@ -1,6 +1,6 @@
 # Sponsor technology evidence
 
-**Release-preparation status, November 8, 2026:** the native manifest now declares **0.3.0**, which has **not been published or freshly verified inside IRIS**. The last independently verified public registry installation remains **0.2.0**; the separate OEX/frontend release remains **0.2.1**. [New candidate checks](evidence/ipm-030-candidate-linux-nov8.json) cover 207 Python tests, staging, TypeScript and build, **not** new native or browser runs. Until independent approval and install, this page's 0.2.0 statements are historical published evidence. **No bonus statuses have changed and no organizer award has been confirmed.** [Owner steps](IPM.md#owner-only-030-publication-runbook).
+**Release-preparation status, November 8, 2026:** the native manifest now declares **0.3.0**, which has **not been published or freshly verified inside IRIS**. The last independently verified public registry installation remains **0.2.0**; the separate OEX/frontend release remains **0.2.1**. [Final integrated candidate checks](evidence/ipm-030-integrated-freeze-nov8.json) cover 207 Python tests, staging, TypeScript and build, **not** new native or browser runs. Until independent approval and install, this page's 0.2.0 statements are historical published evidence. **No bonus statuses have changed and no organizer award has been confirmed.** [Owner steps](IPM.md#owner-only-030-publication-runbook).
 
 ## Final local repeat — November 8, 2026
 
