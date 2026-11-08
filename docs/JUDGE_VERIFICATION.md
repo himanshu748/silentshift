@@ -1,8 +1,36 @@
-# Judge verification — feature freeze
+# Judge verification
+
+## Current-main repeat — November 8, 2026 (UTC)
+
+**Public-package gate: passed. Current-main CSV repeat: stopped at failed source-reload preparation.** These are separate results; the released native package does not contain the source-only CSV feature.
+
+The fresh GitHub clone's HEAD was **`df591420c06ed081623f6178804359ceb1686964`**. It includes the CSV runtime changes and the UI finish. The tracked clone stayed clean. Subsequent commits in this verification pass add documentation and evidence; this hash identifies the executed source snapshot, not those later receipts.
+
+Installation now lives in [INSTALL.md](../INSTALL.md#optional-check-without-a-model), linked from the README. The two historical README blocks were repeated with only a new container name and port. The already loaded official **2026.3.0AI.154.0 Community / 154U ARM64** image was used; no IRIS image was downloaded and no provider key was supplied.
+
+| Executed check | Observed result | Elapsed |
+| --- | --- | ---: |
+| Fresh clone, literal `zpm "install silentshift"`, production startup and full native suite | Public native **0.2.0**; **5 classes / 12 methods passed**; initial replay **12/12** | 119.348 s for the complete first block |
+| Second API replay | **12/12 passed** | 1.640 s |
+| Fresh-clone `uv run pytest -q` | **207 passed in 14.21s** | 16.664 s wall time |
+
+All blocks exited successfully. Replay sessions **24** and **58** each ended **QUARANTINED**, with **0 deliveries** and no fresh inference. [Machine-readable receipt](evidence/judge-current-nov8.json), [installation output](evidence/judge-current-nov8-install.txt), [complete native tests](evidence/judge-current-nov8-native-tests.txt) and [authenticated health](evidence/judge-current-nov8-health.json) preserve the observations.
+
+Exact commands and outputs: [installation block](evidence/judge-current-nov8-command-1.sh) / [output](evidence/judge-current-nov8-command-1.txt), [repeat block](evidence/judge-current-nov8-command-2.sh) / [output](evidence/judge-current-nov8-command-2.txt), [Python block](evidence/judge-current-nov8-command-3.sh) / [output](evidence/judge-current-nov8-command-3.txt). Public logs replace the checkout path with `<fresh-clone>` and strip trailing whitespace. Private originals are retained. The fresh public-package containers were stopped and retained after testing.
+
+### CSV and UI evidence; stopped repeat
+
+Earlier in this same turn, before the fresh-clone gate, the refined CSV workbench completed **32 browser checks** against the retained local production. The synthetic mismatch was held and the matching line delivered once; invalid quantity input was rejected by the native server. [UI receipt](evidence/csv-ui-design-nov8.json), [successful import observations](evidence/csv-ui-nov8-success.json), [bounded-rejection observations](evidence/csv-ui-nov8-rejection.json). These observations are explicitly dated and ordered; they are not a post-gate CSV rerun.
+
+After the fresh-clone gate, source/Python/fixture bytes were compared with that clone, then the documented source bootstrap was attempted in the retained local instance. It exited **1**: `CompilePackage("SilentShift")` also compiled the retained, untracked diagnostic class `SilentShift.Repro.UnderscoreTool`. Its generated `find_similar_precedents` invocation produced **3 compiler errors**, including `MPP5376`. This demonstrates a failed reload in that instance; it does not establish a defect in CSV import or a clean-source-install failure.
+
+**Stopped without retry or native-code changes.** The post-gate CSV success/rejection checks and a fresh full live five-case run were not executed. The previously running production was restarted successfully after the failed reload. [Failure receipt and source hashes](evidence/csv-current-nov8.json), [executed command](evidence/csv-current-nov8-command.sh), [output](evidence/csv-current-nov8-bootstrap.txt), [compiler excerpt](evidence/csv-current-nov8-compiler.txt).
+
+CSV is additive: it does not change the documented keyless replay walkthrough or the JSON-ready-file adapter path in [PARTNER_INBOX.md](PARTNER_INBOX.md). It requires the current source installation and explicit importer permission; public native IPM remains unchanged. No newer build, hosted demo, package publication or organizer award is claimed.
 
 ## Current-main repeat — November 5, 09:04–09:09 UTC
 
-A second fresh GitHub clone, at **e8e1e60fded08d688c263bc9485fc7419c10f15b**, passed both README blocks with no provider keys. Only the unused container name (`silentshift-bonus-registry-main-nov5`) and port (`52893`) changed. The tracked clone remained clean. All changes since the earlier tested `960b6b6` were documentation/evidence; no runtime, frontend or test code changed.
+A second fresh GitHub clone, at **e8e1e60fded08d688c263bc9485fc7419c10f15b**, passed both README blocks with no provider keys. Only the unused container name (`silentshift-bonus-registry-main-nov5`) and port (`52893`) changed. The tracked clone remained clean. Within the historical `960b6b6` → `e8e1e60` interval, changes were documentation/evidence only. This statement does not cover the later CSV runtime and workbench changes.
 
 **Public native IPM 0.2.0, production startup, all five native test classes / 12 methods, and both 12/12 replays passed on 2026.3.0AI.154.0 / 154U ARM64.** Fresh-clone `uv run pytest -q` returned **174 passed in 15.09s**. No fresh model/embedding call, five-case live rerun or newer build test is claimed.
 
@@ -29,7 +57,7 @@ docker --context colima-silentshift start silentshift-bonus-registry-main-nov5-g
 
 **Verified on November 5, 2026:** a fresh GitHub clone followed both README command blocks without provider keys. The public registry installed native **0.2.0** on **2026.3.0AI.154.0 Community, ARM64 (154U)**. Production startup, the entire native `%UnitTest` suite and two API replays passed. This closes the earlier disk-space and checkout-location gate.
 
-Application/workbench remains **0.2.1**. No runtime or feature code changed, and no newer IRIS build was tested. Recorded replay performs no fresh inference; the separate five-case live result below remains dated evidence.
+At this earlier snapshot, application/workbench was **0.2.1**. No runtime or feature code changed within that historical documentation interval, and no newer IRIS build was tested. Recorded replay performs no fresh inference; the separate five-case live result below remains dated evidence.
 
 [Machine-readable receipt and native message metadata](evidence/judge-clean-clone.json) · [installation output](evidence/judge-clean-clone-install.txt) · [complete native test output](evidence/judge-clean-clone-native-tests.txt).
 

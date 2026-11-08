@@ -1,0 +1,17 @@
+{
+  "schema": "silentshift-csv-observation/1",
+  "source_commit": "df591420c06ed081623f6178804359ceb1686964",
+  "timing": "Earlier in this same turn, before the fresh-clone gate. Does not replace the stopped post-gate CSV repeat.",
+  "source_receipt": "csv-ui-design-nov8.json",
+  "synthetic_inputs": true,
+  "simulator_only": true,
+  "checks": {
+    "oversized_file_rejected_before_api": true,
+    "viewer_cannot_import": true,
+    "preview_did_not_dispatch_or_commit": true,
+    "invalid_csv_rejected_by_native_server": true,
+    "invalid_preview_has_no_commit_action": true
+  },
+  "invalid_quantity_http_status": 422,
+  "observations": "The browser harness observed an oversized file rejected before API preview and a malformed quantity rejected by the native preview endpoint. No post-gate rejection repeat was executed."
+}

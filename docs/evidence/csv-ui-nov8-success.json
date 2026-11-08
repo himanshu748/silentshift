@@ -1,0 +1,49 @@
+{
+  "schema": "silentshift-csv-observation/1",
+  "source_commit": "df591420c06ed081623f6178804359ceb1686964",
+  "timing": "Earlier in this same turn, before the fresh-clone gate. Does not replace the stopped post-gate CSV repeat.",
+  "source_receipt": "csv-ui-design-nov8.json",
+  "synthetic_inputs": true,
+  "simulator_only": true,
+  "cases": [
+    {
+      "case_id": "85445D54-DB3C-11F1-B811-1A9694F73075",
+      "trace_id": "2876",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "agent_status": "returned",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    },
+    {
+      "case_id": "B8FF9DB2-DB3C-11F1-B811-1A9694F73075",
+      "trace_id": "2904",
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "agent_status": "returned",
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      }
+    }
+  ],
+  "ui_import_receipt": {
+    "id": "0514c11d15226b400a690d785fee0061df6ed2e4adfb3283d50549858c5be0e8",
+    "imported_by": "ss-reviewer",
+    "imported_at": "2026-11-08T06:20:40.110544Z"
+  },
+  "checks": {
+    "critical_line_held": true,
+    "matching_line_delivered_once": true,
+    "references_created_in_ui": true,
+    "original_sources_retained": true,
+    "repeat_reuses_cases_and_receipts": true,
+    "repeat_reads_cases_without_new_dispatch": true
+  }
+}

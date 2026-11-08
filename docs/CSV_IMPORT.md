@@ -82,3 +82,7 @@ node scripts/verify_csv_ui.mjs --execute \
 Use a new directory. This generates synthetic files and runs two actual local-model investigations through the browser. It also tests viewer restrictions, invalid files, deliberately injected browser offline failure, recovery, duplicate prevention, case navigation, result download, mobile layout and reduced motion. Credentials come from private `.env`; automatic traces, videos and login screenshots are disabled. Detailed [execution results](evidence/csv-ui-nov7.json) distinguish the initial live run from the later existing-case readback.
 
 For the CLI workflow, see [the pilot guide](../pilot/README.md).
+
+## Latest verification boundary
+
+The [UI finish receipt](evidence/csv-ui-design-nov8.json) and its [successful import](evidence/csv-ui-nov8-success.json) / [bounded rejection](evidence/csv-ui-nov8-rejection.json) observations were captured before the latest fresh-clone gate. The subsequent source reload in the retained instance failed while compiling an untracked diagnostic class, so the post-gate CSV repeat was stopped. [Failure and next verification gap](JUDGE_VERIFICATION.md#csv-and-ui-evidence-stopped-repeat). This is not a newly verified clean-source CSV installation.
