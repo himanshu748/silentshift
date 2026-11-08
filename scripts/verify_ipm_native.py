@@ -16,7 +16,7 @@ import subprocess
 
 from fetch_ipm import SHA256, SIZE, VERSION, fetch
 from inspect_ipm import inspect
-from package_ipm import ROOT, stage
+from package_ipm import ROOT, RELEASE_VERSION, stage
 
 TABLES = tuple('SilentShift_Data.' + name for name in (
     'CaseRecord', 'Reference', 'AuditEvent', 'Delivery', 'ReviewAction', 'Evaluation', 'Runbook', 'Precedent'
@@ -121,7 +121,7 @@ def verify(args) -> dict:
         'write "SS_LOCAL_PACKAGE_OK",!', output / '08-module-package.log')
     if 'SS_LOCAL_PACKAGE_OK' not in text:
         raise RuntimeError('IPM package generation failed; production remains stopped')
-    archive = output / 'silentshift-0.2.0.tgz'
+    archive = output / f'silentshift-{RELEASE_VERSION}.tgz'
     run([*docker, 'cp', args.container + ':' + runtime_root + '/out.tgz', str(archive)],
         output / '09-copy-archive.log')
     boundary = inspect(archive, source_stage)
@@ -139,7 +139,7 @@ def verify(args) -> dict:
     after = snapshot(docker, args.container, output, '12-after')
     if before['counts'] != after['counts']:
         raise RuntimeError('Data-row counts changed during packaging; investigate before resuming')
-    receipt = {'package': 'silentshift', 'version': '0.2.0',
+    receipt = {'package': 'silentshift', 'version': RELEASE_VERSION,
         'verification_scope': 'existing-namespace-local-ipm-load-and-package',
         'runtime': after['runtime'], 'namespace': 'SILENTSHIFT',
         'ipm_client': {'version': VERSION, 'sha256': SHA256, 'bytes': SIZE},
