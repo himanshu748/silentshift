@@ -10,7 +10,7 @@ import re
 import tarfile
 import xml.etree.ElementTree as ET
 
-from package_ipm import ROOT, RUNTIME_FILES, package_files
+from package_ipm import ROOT, RUNTIME_FILES, RELEASE_VERSION, package_files
 
 
 def inspect(archive: Path, source: Path = ROOT) -> dict:
@@ -110,7 +110,7 @@ def inspect(archive: Path, source: Path = ROOT) -> dict:
         observed_classes.add(classname)
     if observed_classes != expected_classes or not set(RUNTIME_FILES).issubset(relative_files):
         raise ValueError('Exported archive is missing application classes/assets')
-    return {'package': 'silentshift', 'version': '0.2.0',
+    return {'package': 'silentshift', 'version': RELEASE_VERSION,
         'artifact_sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
         'compressed_bytes': archive.stat().st_size, 'expanded_bytes': total_bytes,
         'file_count': len(files), 'class_count': len(observed_classes),
