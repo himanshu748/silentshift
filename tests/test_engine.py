@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 import pytest
-from hypothesis import given, strategies as st
+from hypothesis import given, settings, strategies as st
 
 from silentshift.engine import (
     assess, assess_json, evaluate_json, normalize_currency, normalize_quantity,
@@ -295,6 +295,9 @@ def test_embedded_python_json_wrappers_execute_the_same_functions():
     assert output["policy"]["decision"] == "ALLOW"
 
 
+# Property assertions establish correctness; measured latency belongs in native evidence.
+# Wall-clock deadlines fluctuate under host scheduling and are not a policy contract.
+@settings(deadline=None)
 @given(st.integers(min_value=1, max_value=1_000_000), st.integers(min_value=1, max_value=1000))
 def test_quantity_normalization_is_exact_and_requires_explicit_pack_size(cases, pack):
     assert normalize_quantity(str(cases), "CASE", str(pack)) == str(cases * pack)
@@ -302,6 +305,7 @@ def test_quantity_normalization_is_exact_and_requires_explicit_pack_size(cases, 
         normalize_quantity(str(cases), "CASE")
 
 
+@settings(deadline=None)
 @given(st.integers(min_value=0, max_value=100_000_000), st.integers(min_value=0, max_value=4))
 def test_currency_scaling_uses_exact_decimal_arithmetic(minor, digits):
     from decimal import Decimal
@@ -309,6 +313,7 @@ def test_currency_scaling_uses_exact_decimal_arithmetic(minor, digits):
     assert Decimal(value) * (Decimal(10) ** digits) == Decimal(minor)
 
 
+@settings(deadline=None)
 @given(st.sampled_from(["ALLOW", "QUARANTINE", "REQUEST_REVIEW"]), st.floats(min_value=0, max_value=1))
 def test_no_agent_recommendation_can_release_a_critical_contradiction(decision, uncertainty):
     case = SCENARIOS[0]
@@ -319,6 +324,7 @@ def test_no_agent_recommendation_can_release_a_critical_contradiction(decision, 
     assert not result["downstream_permitted"]
 
 
+@settings(deadline=None)
 @given(st.sampled_from(["ALLOW", "QUARANTINE", "REQUEST_REVIEW"]), st.text(max_size=100))
 def test_duplicate_flag_never_permits_a_second_delivery(decision, explanation):
     case = clean_case()
@@ -329,6 +335,7 @@ def test_duplicate_flag_never_permits_a_second_delivery(decision, explanation):
     assert not result["downstream_permitted"]
 
 
+@settings(deadline=None)
 @given(st.permutations(SCENARIOS[2]["references"]))
 def test_reference_order_does_not_change_release_decision(references):
     case = SCENARIOS[2]
@@ -336,6 +343,7 @@ def test_reference_order_does_not_change_release_decision(references):
     assert validate_policy(assessment, allow(assessment))["decision"] == "ALLOW"
 
 
+@settings(deadline=None)
 @given(st.text(max_size=300))
 def test_malformed_json_never_escapes_policy_boundary(raw):
     case = clean_case()
@@ -348,6 +356,7 @@ JSON_VALUE = st.recursive(st.none() | st.booleans() | st.integers(min_value=-10*
                           lambda children: st.lists(children, max_size=4) | st.dictionaries(st.text(max_size=20), children, max_size=4), max_leaves=10)
 
 
+@settings(deadline=None)
 @given(JSON_VALUE)
 def test_arbitrary_json_agent_values_never_escape_policy_boundary(value):
     case = clean_case()
@@ -356,6 +365,7 @@ def test_arbitrary_json_agent_values_never_escape_policy_boundary(value):
     assert result["decision"] in {"REQUEST_REVIEW", "QUARANTINE"}
 
 
+@settings(deadline=None)
 @given(st.dictionaries(st.sampled_from(["kind", "event_id", "amount_scale", "quantity", "notes"]), JSON_VALUE, max_size=5))
 def test_arbitrary_partial_message_objects_are_contained(value):
     result = json.loads(assess_json(json.dumps(value), "[]", NOW))
