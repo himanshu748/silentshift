@@ -1,21 +1,21 @@
 {
-  "checked_at": "2026-11-09T07:21:12.631101+00:00",
-  "status": "incomplete",
+  "checked_at": "2026-11-09T10:55:53.017471+00:00",
+  "status": "complete",
   "rules": 48,
   "trials": {
     "1": 48,
     "2": 48,
-    "3": 18
+    "3": 48
   },
-  "completed_native_investigations": 114,
+  "completed_native_investigations": 144,
   "planned_native_investigations": 144,
   "labels_sha256": "e02747e587495dd2587a3813277a15451c7715638d9ff9962186a09e8986ef55",
   "report_guard": {
-    "command": "uv run python scripts/report_heldout.py",
-    "exit_code": 1,
-    "reason": "Report refused: all 144 preregistered native investigations must be retained",
-    "final_summary_created": false
+    "command": "uv run python scripts/report_heldout.py > .local/top3/heldout-final-report.txt 2>&1",
+    "exit_code": 0,
+    "final_summary_created": true
   },
   "all_outputs_retained": true,
-  "final_metric_claims_made": false
+  "final_metric_claims_made": true,
+  "previous_checkpoint": "coverage-paused-114.json"
 }

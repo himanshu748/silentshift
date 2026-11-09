@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-11-09T10:55:53.022507+00:00",
+  "report_harness_commit": "e99e1a135517765bd8ee17b64b5a30121ca480fb",
+  "execution_harness_commit": "c41d835495cb40289552550d61ed6ecadf4b8560",
+  "dataset_sha256": "e02747e587495dd2587a3813277a15451c7715638d9ff9962186a09e8986ef55",
+  "frozen_labels_identical_to_label_first_commit": true,
+  "prior_checkpoint_commit": "c41d835495cb40289552550d61ed6ecadf4b8560",
+  "earlier_trial_records_unchanged": 114,
+  "native_trial_records": 144,
+  "trials": {
+    "1": 48,
+    "2": 48,
+    "3": 48
+  },
+  "native_agent_statuses": {
+    "returned": 139,
+    "failed": 5
+  },
+  "semantic_payload_checks_passed": 144,
+  "credential_pattern_scan_passed": true,
+  "configured_secret_literal_scan_passed": true,
+  "largest_trial_record_bytes": 44619,
+  "commands": [
+    {
+      "command": "uv run python scripts/run_heldout.py --execute > .local/top3/heldout-resume-after-ui.txt 2>&1",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run python scripts/report_heldout.py > .local/top3/heldout-final-report.txt 2>&1",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run pytest -q tests/test_heldout_metrics.py",
+      "exit_code": 0,
+      "passed": 4,
+      "elapsed_seconds": 1.29
+    }
+  ],
+  "scope": "Retained frozen release 0.3.0 evaluation instance; not the new configurable-provider implementation or a new clean-install gate."
+}

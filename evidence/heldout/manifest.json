@@ -19,8 +19,8 @@
   "execution": "three paired native trials per case; raw agent recommendation and shipped policy route",
   "source_commit": "124d5b23e3d79ba6e14542d94ffaaa97a1901d60",
   "synthetic": true,
-  "status": "paused-infrastructure",
-  "completed": 114,
+  "status": "completed",
+  "completed": 144,
   "planned": 144,
   "actual_agent_only_delivery_executed": false,
   "policy_delivery_target": "IRIS simulator only",
@@ -36,7 +36,8 @@
   "harness_revisions": [
     "e3e05b4af009cac75a3e520b4c38205e6b822a0b",
     "6f795c02b91be87736047f39ac93f5c6f915a36b",
-    "92e63c10abf69132a43802963ae8bbf072e09b13"
+    "92e63c10abf69132a43802963ae8bbf072e09b13",
+    "c41d835495cb40289552550d61ed6ecadf4b8560"
   ],
   "infrastructure_interruptions": [
     {
@@ -70,5 +71,13 @@
   },
   "staged_native_source_note": "Read back from the retained source-load staging tree after infrastructure recovery. This evaluation instance was never loaded with the later push/top3 configurable-provider changes. Harness revision hashes identify operator checkouts, not native source replacement.",
   "paused_at": "2026-11-09T07:21:12.510755+00:00",
-  "pause_reason": "Repeated unchanged host-disk guard; macOS swap allocation left insufficient free host disk. No further retries until capacity changes."
+  "pause_reason": "Repeated unchanged host-disk guard; macOS swap allocation left insufficient free host disk. No further retries until capacity changes.",
+  "resume_events": [
+    {
+      "resumed_at": "2026-11-09T10:10:14.561983+00:00",
+      "completed_retained": 114,
+      "harness_commit": "c41d835495cb40289552550d61ed6ecadf4b8560"
+    }
+  ],
+  "finished_at": "2026-11-09T10:54:22.589903+00:00"
 }
