@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-POLICY_VERSION = "silentshift-policy/1.1.0"
+POLICY_VERSION = "silentshift-policy/1.2.0"
 SCHEMA_VERSION = "silentshift-message/1"
 MAX_AGE = timedelta(hours=24)
 MAX_FUTURE = timedelta(minutes=5)
@@ -287,7 +287,8 @@ def rule_only(assessment: dict[str, Any], duplicate: bool = False) -> str:
 def _recommendation_errors(recommendation: Any, known_ids: set[str]) -> list[str]:
     if not isinstance(recommendation, dict):
         return ["Agent output must be a JSON object."]
-    if set(recommendation) != {"decision", "evidence_ids", "explanation", "uncertainty"}:
+    if set(recommendation) not in ({"decision", "evidence_ids", "explanation", "uncertainty"},
+                                    {"decision", "evidence_ids", "explanation", "uncertainty", "cited_findings"}):
         return ["Agent output does not match the exact recommendation schema."]
     errors: list[str] = []
     if not isinstance(recommendation["decision"], str) or recommendation["decision"] not in DECISIONS:
@@ -303,10 +304,57 @@ def _recommendation_errors(recommendation: Any, known_ids: set[str]) -> list[str
     uncertainty = recommendation["uncertainty"]
     if isinstance(uncertainty, bool) or not isinstance(uncertainty, (int, float)) or not 0 <= uncertainty <= 1 or not math.isfinite(uncertainty):
         errors.append("Agent uncertainty must be a finite number from zero to one.")
+    findings = recommendation.get("cited_findings", [])
+    if (not isinstance(findings, list) or len(findings) > 2
+            or any(not isinstance(f, dict) or set(f) != {"reference_id", "path", "quote"}
+                   or not all(isinstance(f[k], str) for k in f)
+                   or not 12 <= len(f["quote"]) <= 800
+                   or not 1 <= len(f["path"]) <= 240 for f in findings)):
+        errors.append("Cited findings must be at most two bounded reference/path/exact-quote objects.")
     return errors
 
 
-def validate_policy(assessment: Any, recommendation: Any, duplicate: bool = False) -> dict[str, Any]:
+def _grounded_findings(assessment: dict, recommendation: dict, context: Any) -> bool:
+    """Check provenance only. This does NOT verify a model's semantic inference.
+
+    Only server-supplied snapshots and independently assessed active references
+    are eligible. A citation can contain a transaction, never authorize release.
+    """
+    findings = recommendation.get("cited_findings", [])
+    if not findings or not isinstance(context, dict):
+        return False
+    message, references = context.get("message"), context.get("references")
+    if not isinstance(message, dict) or not isinstance(references, list):
+        return False
+    active = set(assessment["active_reference_ids"])
+    refs = {r.get("id"): r for r in references if isinstance(r, dict)}
+    # Metadata and structured fields are not operative prose. Unknown text
+    # extensions remain usable; this is not a whitelist of fixture wording.
+    reserved = MESSAGE_FIELDS | {"id", "authority", "effective_from", "effective_to",
+                                "amendment_of", "approved_at", "verified_by", "sender"}
+    for finding in findings:
+        ref = refs.get(finding["reference_id"])
+        if (not ref or ref.get("id") not in active or ref.get("authority") != "approved"
+                or ref.get("contract_id") != message.get("contract_id")):
+            return False
+        pointer = finding["path"]
+        if not pointer.startswith("/") or re.search(r"~(?![01])", pointer):
+            return False
+        parts = [p.replace("~1", "/").replace("~0", "~") for p in pointer[1:].split("/")]
+        if len(parts) > 6 or any(not p or p in reserved for p in parts):
+            return False
+        value = ref
+        for part in parts:
+            if not isinstance(value, dict) or part not in value:
+                return False
+            value = value[part]
+        if not isinstance(value, str) or finding["quote"] not in value:
+            return False
+    return True
+
+
+def validate_policy(assessment: Any, recommendation: Any, duplicate: bool = False,
+                    evidence_context: Any = None) -> dict[str, Any]:
     """An agent cannot authorize mutation, repair, or bypass a hold.
 
     All evidence retrieved for an ALLOW must be cited, including an amendment's
@@ -355,8 +403,20 @@ def validate_policy(assessment: Any, recommendation: Any, duplicate: bool = Fals
             # A model's concern cannot turn inconclusive evidence into a
             # verified contradiction. Keep it held for a reviewer instead.
             decision = "ALLOW" if proposed == "ALLOW" and release_eligible else "REQUEST_REVIEW"
-            if proposed != "ALLOW":
-                reasons.append("Agent concerns without a verified critical contradiction require human review.")
+            if recommendation.get("cited_findings"):
+                grounded = _grounded_findings(assessment, recommendation, evidence_context)
+                check("CITED_PROSE_GROUNDED", grounded,
+                      "Prose findings must quote current approved case evidence exactly; this verifies provenance, not entailment.")
+                # A quoted model concern permits containment only. In particular
+                # neither this path nor an ALLOW with contradictory findings can
+                # authorize a release that the unchanged baseline would hold.
+                if proposed == "QUARANTINE" and grounded and confident and covered:
+                    decision = "QUARANTINE"
+                    reasons.append("Preventive hold from cited prose; semantic interpretation is model-generated, not a verified deterministic contradiction.")
+                elif proposed == "ALLOW":
+                    decision = "REQUEST_REVIEW"
+            if proposed != "ALLOW" and decision != "QUARANTINE":
+                reasons.append("Agent concerns without a grounded current-evidence citation require human review.")
     return {"decision": decision, "reasons": list(dict.fromkeys(reasons)) or ["Recommendation satisfies all deterministic release gates."],
             "checks": checks, "policy_version": POLICY_VERSION,
             "release_eligible": release_eligible, "downstream_permitted": decision == "ALLOW"}
@@ -402,7 +462,8 @@ def assess_json(message_json: str, refs_json: str, now_iso: str) -> str:
     return _dump(assess(message, refs, now_iso))
 
 
-def policy_json(assessment_json: str, recommendation_json: str, duplicate: bool = False) -> str:
+def policy_json(assessment_json: str, recommendation_json: str, duplicate: bool = False,
+                evidence_context_json: str = "") -> str:
     try:
         assessment = strict_loads(assessment_json)
     except (ValueError, TypeError, RecursionError):
@@ -411,7 +472,11 @@ def policy_json(assessment_json: str, recommendation_json: str, duplicate: bool 
         recommendation = strict_loads(recommendation_json)
     except (ValueError, TypeError, RecursionError):
         recommendation = None
-    return _dump(validate_policy(assessment, recommendation, duplicate))
+    try:
+        context = strict_loads(evidence_context_json) if evidence_context_json else None
+    except (ValueError, TypeError, RecursionError):
+        context = None
+    return _dump(validate_policy(assessment, recommendation, duplicate, context))
 
 
 def evaluate_json(message_json: str, refs_json: str, recommendation_json: str,

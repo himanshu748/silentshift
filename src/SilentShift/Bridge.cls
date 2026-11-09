@@ -10,14 +10,14 @@ ClassMethod Assess(messageJSON As %String, referencesJSON As %String, clock As %
     from silentshift.engine import assess_json
     return assess_json(messageJSON, referencesJSON, clock)
 }
-ClassMethod Policy(assessmentJSON As %String, recommendationJSON As %String) As %String [ Language = python ]
+ClassMethod Policy(assessmentJSON As %String, recommendationJSON As %String, evidenceContextJSON As %String = "") As %String [ Language = python ]
 {
     import iris, sys
     asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
     if asset_python not in sys.path:
         sys.path.insert(0, asset_python)
     from silentshift.engine import policy_json
-    return policy_json(assessmentJSON, recommendationJSON)
+    return policy_json(assessmentJSON, recommendationJSON, evidence_context_json=evidenceContextJSON)
 }
 ClassMethod Canonical(value As %String) As %String [ Language = python ]
 {

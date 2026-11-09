@@ -116,7 +116,8 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             }
             If policyInput '= "" Do body.%Set("policy_recommendation", ##class(%DynamicObject).%FromJSON(policyInput))
             Set stage = "policy-evaluation"
-            Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessmentJSON, policyInput))
+            Set evidenceContext = {"message": (body.%Get("message")), "references": (body.%Get("references"))}
+            Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessmentJSON, policyInput, evidenceContext.%ToJSON()))
             Do body.%Set("policy", policy)
             Set sc = ##class(SilentShift.Store).SaveCase(id, body.%ToJSON())
             $$$ThrowOnError(sc)
