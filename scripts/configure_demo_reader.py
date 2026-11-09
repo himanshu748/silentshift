@@ -18,7 +18,7 @@ def read_env(path):
 
 
 def literal(value):
-    return '"' + value.replace('"', '""') + '"' 
+    return '"' + value.replace('"', '""') + '"'
 
 
 def main():

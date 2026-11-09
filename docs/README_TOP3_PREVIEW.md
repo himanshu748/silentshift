@@ -1,6 +1,6 @@
-# Proposed README opening — owner review
+# Approved README opening — retained proposal
 
-This is a proposed opening, not a change to the root README. It uses the frozen results without claiming an overall accuracy advantage. Publication and package versions remain unchanged. Links below resolve from this preview; adjust their relative paths if this copy is moved to the repository root.
+The owner approved this wording on November 9 and the root README now uses it. This file retains the reviewed proposal. It uses the frozen results without claiming an overall accuracy advantage. Publication and package versions remain unchanged. Links below resolve from this preview; adjust their relative paths if this copy is moved to the repository root.
 
 ---
 

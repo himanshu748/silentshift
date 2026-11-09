@@ -99,3 +99,10 @@ The new loopback demo gateway passed 30 fake-upstream boundary tests in 12.32 se
 Two local guided samples reached the real native production: quantity mismatch was quarantined with zero simulator deliveries (trace 170); approved amendment delivered once (trace 198). The gateway was restarted during the second attempt, correctly retaining it as uncertain and refusing redispatch. The operator reconciled the one persisted native case by exact correlation ID using reads only; its gateway wall time is unavailable, not a measured latency. No investigation was repeated. Reset retained native history.
 
 Printable Visual Trace rendered its actual provider request/response hops through the read-only principal. The interactive Production Configuration page did not render: after its initial missing READ privilege was corrected, the restricted gateway still refused encoded SVG and HyperEvent broker requests. After two failed render attempts, further portal expansion stopped. The demo links production status in the workbench and native printable Visual Trace; it does not claim a working interactive Production Configuration page or reviewer task access.
+
+
+### Timed AWS trial launched
+
+The explicitly approved `t4g.large` trial launched at 13:13:47 UTC on November 9. The absolute timer was read back active for 17:13:47 UTC, AWS instance-initiated shutdown is `terminate`, the encrypted root disk deletes with the instance, and standard CPU credits are confirmed. Public application ingress stays closed during installation. The monitoring budget is an alert, not a cap. [Launch/control receipt](evidence/top3-aws-trial-launch.json).
+
+The sequential direct image transfer was too slow; its partial archive was retained. A first chunk-upload invocation started before its local manifest finished and exited before copying any chunk; that operator sequencing failure is retained privately. Once the manifest existed, four bounded transfer workers started. The original image/model archives are unchanged and will be hash-checked on the host. This transfer change does not extend the termination timer or authorize a larger instance.
