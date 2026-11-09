@@ -1,5 +1,11 @@
 # Build status
 
+## Serialized source quality gate — November 9, 2026 UTC
+
+The executable source snapshot **`718ec9f65317655379c0194d326f755dccc44a64`** now passes the default-provider fresh-source gate. With the benchmark finished, storage recovered and only one IRIS instance running at a time, **248 Python tests passed in 21.49 seconds**. A new source-loaded **154U ARM64** container with no application mounts passed production startup, **5 native classes / 12 methods** and two **12/12** keyless API replays, sessions **24 / 58**. A separate fresh live source instance passed the same native suite and **5/5** local Ollama scenarios, sessions **30 / 58 / 86 / 113 / 141**. The frontend passed **16** read-only checks against that fresh backend in **16.6 seconds**. [Receipt, source hashes and commands](evidence/top3-quality.json) · [Python output](evidence/top3-quality-pytest.txt) · [replay unit output](evidence/top3-quality-replay-unit.txt) · [live unit output](evidence/top3-quality-live-unit.txt).
+
+The earlier timing and VM-memory failures are retained below; their pending default-provider gates are superseded by this new, serialized pass. Source was not changed to force a pass. These are source loads, not a new public registry install. External provider execution remains unverified. Public IPM/OEX remain **0.3.0**, React **0.2.1**, and no other IRIS build is claimed. Both verification pairs are retained stopped; the normal local production is restored. Subsequent README/design/evidence edits do not alter the verified executable source.
+
 ## Unpublished multi-page site — November 9, 2026 UTC
 
 Source `252bdd62ac60a1088320586cfc71e766766c0fb5` adds separate public documents for Home, How it works, Workbench tour, Safeguards, Evidence record and Run locally. Neither repository nor global `AGENTS.md` requires a single-page site. CoCo selected the page hierarchy and visual direction. Existing workbench hash links and the native API proxy remain compatible; public pages make no authenticated API calls. [Receipt, source hashes and scope](evidence/top3-multipage.json).

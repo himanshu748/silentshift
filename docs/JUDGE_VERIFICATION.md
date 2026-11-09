@@ -1,5 +1,22 @@
 # Judge verification
 
+## Voting-week source branch repeat — November 9, 2026 UTC
+
+This pass verifies executable source **`718ec9f65317655379c0194d326f755dccc44a64` on `push/top3`**, not a new main/public-package release. Two newly created official **2026.3.0AI.154.0 Community / 154U ARM64** containers used source loading with **zero application source mounts**. They ran sequentially after the benchmark finished and the normal app was temporarily stopped. This is a fresh-container source gate, not a fresh GitHub-clone installation or a public registry install. No new image was downloaded.
+
+| Check | Observed result | Receipt/output |
+| --- | --- | --- |
+| Full Python suite after the earlier timing-harness repair | **248 passed in 21.49 seconds** | [Exact output](evidence/top3-quality-pytest.txt) |
+| Keyless source install and production startup | Passed | [Source identity and commands](evidence/top3-quality.json) |
+| Full native suite, replay instance | **5 classes / 12 methods passed** | [Native assertions](evidence/top3-quality-replay-unit.txt) |
+| Two keyless API replays | **12/12 each**, sessions **24 / 58**, quarantined with zero deliveries | [First](evidence/top3-quality-replay-first.json), [second](evidence/top3-quality-replay-second.json) |
+| Separate fresh live source instance | Native suite **5 classes / 12 methods**, live scenarios **5/5** | [Native unit output](evidence/top3-quality-live-unit.txt), [actual scenarios](evidence/top3-quality-live-five.json) |
+| Frontend connected to that fresh live backend | **16 passed in 16.6 seconds**, no request mocks | [Browser output](evidence/top3-quality-fresh-native-browser.txt) |
+
+Live sessions: **30, 58, 86, 113, 141** in the separate live container. Session numbers belong to their own containers and are not interchangeable. New source gates close the previous default-provider replay/live and full-Python follow-ups; earlier failed attempts remain preserved. External provider services are still unverified. Both test instances were retained stopped, and the normal local app was restored. Subsequent README/design/evidence edits do not change the verified executable snapshot. [Detailed scope and source hashes](evidence/top3-quality.json).
+
+The published-package and main-branch histories below retain their original dates, commits and test scope.
+
 ## Public 0.3.0 install — November 8, 2026 (UTC)
 
 **PASSED: fresh public-registry install, not a source upgrade.** A new GitHub clone at **`a7aa217f1fc8d96f56bac6fd3110618eec21c353`** installed the public native package with literal **`zpm "install silentshift"`** in a new **2026.3.0AI.154.0 Community / 154U ARM64** container. Actual installed version: **0.3.0**; application source mounts: **0**. No provider key, new image download or fresh inference was used. [Registry receipt](evidence/ship-030-registry.json) · [pristine state](evidence/ship-030-pristine.txt) · [mounts](evidence/ship-030-mounts.txt).

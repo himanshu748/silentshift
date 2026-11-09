@@ -1,0 +1,240 @@
+
+Node: silentshift-bonus-load-top3-quality-nov9, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+===============================================================================
+Directory: /home/irisowner/silentshift-bonus/tests/
+===============================================================================
+  (root) begins ...
+Load of directory started on 11/09/2026 11:41:16 '*.xml;*.XML;*.cls;*.mac;*.int;*.inc;*.CLS;*.MAC;*.INT;*.INC'
+
+Loading file /home/irisowner/silentshift-bonus/tests/HeldoutEval.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/AdapterChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/IPMChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/PrecedentChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/ProviderProbe.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/ProviderChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/ReplayChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/RuntimeChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/TraceChecks.cls as udl
+Loading file /home/irisowner/silentshift-bonus/tests/WorkflowChecks.cls as udl
+
+Compilation started on 11/09/2026 11:41:17 with qualifiers '/nodelete'
+Compiling 10 classes
+Compiling class SilentShift.Test.HeldoutEval
+Compiling class SilentShift.Test.IPMChecks
+Compiling class SilentShift.Test.AdapterChecks
+Compiling class SilentShift.Test.PrecedentChecks
+Compiling class SilentShift.Test.ProviderProbe
+Compiling class SilentShift.Test.ProviderChecks
+Compiling class SilentShift.Test.ReplayChecks
+Compiling class SilentShift.Test.RuntimeChecks
+Compiling class SilentShift.Test.WorkflowChecks
+Compiling class SilentShift.Test.TraceChecks
+Compiling routine SilentShift.Test.AdapterChecks.1
+Compiling routine SilentShift.Test.HeldoutEval.1
+Compiling routine SilentShift.Test.IPMChecks.1
+Compiling routine SilentShift.Test.PrecedentChecks.1
+Compiling routine SilentShift.Test.ProviderChecks.1
+Compiling routine SilentShift.Test.ReplayChecks.1
+Compiling routine SilentShift.Test.ProviderProbe.1
+Compiling routine SilentShift.Test.TraceChecks.1
+Compiling routine SilentShift.Test.RuntimeChecks.1
+Compiling routine SilentShift.Test.WorkflowChecks.1
+Compilation finished successfully in 0.106s.
+
+Load finished successfully.
+
+    SilentShift.Test.AdapterChecks begins ...
+      TestContracts() begins ...
+        AssertTrue:ordinary_name (passed)
+        AssertTrue:unsafe_name_1 (passed)
+        AssertTrue:unsafe_name_2 (passed)
+        AssertTrue:unsafe_name_3 (passed)
+        AssertTrue:unsafe_name_4 (passed)
+        AssertTrue:unsafe_name_5 (passed)
+        AssertTrue:unsafe_name_6 (passed)
+        AssertTrue:unsafe_name_7 (passed)
+        AssertTrue:unsafe_name_8 (passed)
+        AssertTrue:unsafe_name_9 (passed)
+        AssertTrue:unsafe_name_10 (passed)
+        AssertTrue:envelope_only_two_fields (passed)
+        AssertTrue:original_preserved (passed)
+        AssertTrue:no_partner_clock (passed)
+        AssertTrue:reserved_message (passed)
+        AssertTrue:reserved_raw_payload (passed)
+        AssertTrue:reserved_scenario_id (passed)
+        AssertTrue:reserved_dataset_version (passed)
+        AssertTrue:reserved_clock (passed)
+        AssertTrue:reserved_fault (passed)
+        AssertTrue:reserved_references (passed)
+        AssertTrue:reserved_action (passed)
+        AssertTrue:reserved_review (passed)
+        AssertTrue:reserved_reviewer (passed)
+        AssertTrue:reserved_case_id (passed)
+        AssertTrue:invalid_json_1 (passed)
+        AssertTrue:invalid_json_2 (passed)
+        AssertTrue:invalid_json_3 (passed)
+        AssertTrue:invalid_json_4 (passed)
+        LogMessage:Duration of execution: .131757 sec.
+      TestContracts passed
+      TestIterator() begins ...
+        AssertTrue:installed_api_last_row_has_at_end (passed)
+        AssertTrue:production_iterator_keeps_single_last_row (passed)
+        AssertTrue:production_iterator_keeps_all_three (passed)
+        AssertTrue:production_iterator_obeys_two_row_cap (passed)
+        AssertTrue:zero_limit_clamped_to_one (passed)
+        AssertTrue:safe_probe_is_regular (passed)
+        LogMessage:Duration of execution: .00295 sec.
+      TestIterator passed
+    SilentShift.Test.AdapterChecks passed
+    SilentShift.Test.ProviderChecks begins ...
+      TestAuthorizationRejectsUnknownCapability() begins ...
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("",.binding) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("Basic synthetic",.binding) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("Bearer synthetic-unknown-capability-0000000000000000",.binding) (passed)
+        AssertStatusNotOK:sc (passed)
+        AssertTrue:'$ISOBJECT(request) (passed)
+        LogMessage:Duration of execution: .003599 sec.
+      TestAuthorizationRejectsUnknownCapability passed
+      TestExpiredCapability() begins ...
+        AssertTrue:'accepted (passed)
+        AssertTrue:'$DATA(^CacheTemp.SilentShift.Provider("lease",key)) (passed)
+        LogMessage:Duration of execution: .001743 sec.
+      TestExpiredCapability passed
+      TestMetadataOnlyMessages() begins ...
+        AssertEquals:data.%Get("granularity")=="provider_http_call" (passed)
+        AssertEquals:data.%GetTypeOf("provider_retry_count")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        AssertTrue:'data.%Get("content_retained") (passed)
+        AssertTrue:'data.%IsDefined("prompt") && 'data.%IsDefined("messages") && 'data.%IsDefined("authorization") (passed)
+        AssertEquals:data.%GetTypeOf("upstream_http_status")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("response_usage")=="null" (passed)
+        AssertEquals:data.%Get("http_status")==502 (passed)
+        AssertTrue:'data.%Get("fallback_used") (passed)
+        AssertTrue:'data.%IsDefined("raw_response") && 'data.%IsDefined("arguments") (passed)
+        LogMessage:Duration of execution: .003333 sec.
+      TestMetadataOnlyMessages passed
+      TestPerCallModelTokensAndLatency() begins ...
+        AssertEquals:data.%Get("provider")=="ollama/openai-compatible" (passed)
+        AssertEquals:data.%Get("model")==request.Model (passed)
+        AssertEquals:data.%Get("prompt_version")=="test-prompt/1" (passed)
+        AssertEquals:data.%Get("production_session_id")==42 (passed)
+        AssertEquals:data.%Get("duration_ms")==123 (passed)
+        AssertEquals:usage.%Get("prompt_tokens")==257 (passed)
+        AssertEquals:usage.%Get("completion_tokens")==17 (passed)
+        AssertEquals:usage.%Get("total_tokens")==274 (passed)
+        AssertEquals:data.%Get("usage_scope")=="actual_http_response_only" (passed)
+        AssertEquals:data.%Get("tool_calls").%Size()==1 (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        AssertEquals:data.%Get("response_usage").%Get("prompt_tokens")==0 (passed)
+        LogMessage:Duration of execution: .002527 sec.
+      TestPerCallModelTokensAndLatency passed
+      TestPlaybackCannotLookLikeLiveInference() begins ...
+        AssertEquals:data.%Get("granularity")=="recorded_provider_response" (passed)
+        AssertEquals:data.%Get("usage_scope")=="unavailable_for_replay" (passed)
+        AssertEquals:data.%GetTypeOf("response_usage")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("upstream_http_status")=="null" (passed)
+        AssertEquals:data.%Get("replay_record_id")==##class(SilentShift.Provider.Replay).#RECORDID (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        LogMessage:Duration of execution: .001216 sec.
+      TestPlaybackCannotLookLikeLiveInference passed
+    SilentShift.Test.ProviderChecks passed
+    SilentShift.Test.ReplayChecks begins ...
+      TestPlaybackScopeAndCriticalPolicy() begins ...
+        AssertTrue:##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'policy.%Get("downstream_permitted") (passed)
+        AssertEquals:policy.decision=="QUARANTINE" (passed)
+        LogMessage:Duration of execution: .008168 sec.
+      TestPlaybackScopeAndCriticalPolicy passed
+      TestRecordedResponseProgression() begins ...
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:proposal.decision=="QUARANTINE" (passed)
+        AssertEquals:proposal.%Get("evidence_ids").%Get(0)=="contract:PO-2048:v1" (passed)
+        AssertEquals:choice.%Get("finish_reason")=="stop" (passed)
+        AssertTrue:A final response cannot skip the four native evidence reads (passed)
+        AssertTrue:Playback has only five bounded responses (passed)
+        LogMessage:Duration of execution: .013681 sec.
+      TestRecordedResponseProgression passed
+    SilentShift.Test.ReplayChecks passed
+    SilentShift.Test.RuntimeChecks begins ...
+      TestApprovedReferenceLimit() begins ...
+        AssertStatusOK:sc (passed)
+        AssertTrue:snapshot_contains_all_11_references (passed)
+        AssertTrue:isolated_synthetic_scope (passed)
+        AssertTrue:native_partner_to_semantic_trace (passed)
+        AssertTrue:native_semantic_to_investigator_trace (passed)
+        AssertTrue:semantic_assessment_completed (passed)
+        AssertTrue:routed_to_review (passed)
+        AssertTrue:policy_denies_delivery (passed)
+        AssertTrue:no_delivery_rows (passed)
+        AssertTrue:specific_evidence_limit_failure (passed)
+        AssertTrue:model_not_invoked_boolean (passed)
+        AssertTrue:no_tool_or_chat_audits (passed)
+        AssertTrue:no_model_proposal (passed)
+        AssertTrue:observed_reference_budget (passed)
+        LogMessage:Duration of execution: 1.659988 sec.
+      TestApprovedReferenceLimit passed
+      TestPeerReferenceLimit() begins ...
+        AssertStatusOK:sc (passed)
+        AssertTrue:snapshot_contains_all_11_references (passed)
+        AssertTrue:isolated_synthetic_scope (passed)
+        AssertTrue:native_partner_to_semantic_trace (passed)
+        AssertTrue:native_semantic_to_investigator_trace (passed)
+        AssertTrue:semantic_assessment_completed (passed)
+        AssertTrue:routed_to_review (passed)
+        AssertTrue:policy_denies_delivery (passed)
+        AssertTrue:no_delivery_rows (passed)
+        AssertTrue:specific_evidence_limit_failure (passed)
+        AssertTrue:model_not_invoked_boolean (passed)
+        AssertTrue:no_tool_or_chat_audits (passed)
+        AssertTrue:no_model_proposal (passed)
+        AssertTrue:observed_reference_budget (passed)
+        LogMessage:Duration of execution: .305149 sec.
+      TestPeerReferenceLimit passed
+    SilentShift.Test.RuntimeChecks passed
+    SilentShift.Test.TraceChecks begins ...
+      TestTypedMetadata() begins ...
+        AssertEquals:data.%Get("usage_scope")== "final_response_only" (passed)
+        AssertEquals:data.%GetTypeOf("session_totals")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("provider_round_usage")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("provider_retry_count")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")== "null" (passed)
+        AssertTrue:'data.%Get("content_retained") (passed)
+        LogMessage:Duration of execution: .002997 sec.
+      TestTypedMetadata passed
+    SilentShift.Test.TraceChecks passed
+  Skipping deleting classes
+  (root) passed
+
+Use the following URL to view the result:
+http://192.168.112.2:52773/csp/sys/%25UnitTest.Portal.Indices.cls?Index=2&$NAMESPACE=SILENTSHIFT
+All PASSED
+SILENTSHIFT>
+SS_UNIT_RESULT=1
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_UNIT_OK
+
+SILENTSHIFT>
