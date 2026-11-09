@@ -51,3 +51,15 @@ The first two-case dev probe used prompt 1.4.0: HO-016 supplied both correct quo
 The subsequent dev probe on prompt 1.4.1 held HO-016 for review and quarantined HO-017 with the exact buyer-note quote. [Raw second probe](../evidence/dev-prose-probe-final/). These two development examples demonstrate the mechanism, not a held-out accuracy result. No tuning decision used v3 case contents.
 
 The native projection test initially tried to replace a case's protected reference snapshot with SaveCase. IRIS correctly preserved the immutable snapshot. The test now seeds its own synthetic catalog scope and calls the actual SnapshotReferences method. No production immutability rule was relaxed.
+
+## Final-format experiment and stop condition
+
+The later live core run with prompt 1.4.1 held the approved amendment because the response ended with a malformed `cited_findings` key. That was a genuine regression, not a label dispute. The failed gate is [retained](evidence/prose-repair-live-gate-v141.json).
+
+An explicitly labeled outside-IRIS local protocol probe showed that JSON schema on every round suppressed tool selection. A second probe, with schema only on the final answer after a real toy tool response, returned valid structured JSON. [First protocol receipt](evidence/prose-repair-format-all-rounds-protocol.json), [final-only protocol receipt](evidence/prose-repair-format-final-only-protocol.json). These are protocol diagnostics, not native or benchmark evidence.
+
+Candidate `34c45a96c7493135aa0b9dfb7e91340ddfda2ee9` therefore adds pre-inference final-format configuration only after four invocation-scoped tool-read audit events. It labels the effective request `structured_final` and records its actual byte count and empty tool catalog. Replay and non-Ollama providers bypass this shaping. Responses are not repaired and no new model retry is added.
+
+The native unit and keyless replay checks passed, but the fresh live core failed: all five investigations failed at native agent chat, with zero provider request/response headers. [Failed live gate](evidence/prose-repair-live-gate-v142.json), [provider exports](evidence/prose-repair-failed-provider-exports.json). Source review identifies a likely integration defect: `Lease.ShapeFinal` now selects `SilentShift_Data.AuditEvent`, while `SSProviderTransport` is given database resources but no SELECT grant for that table. The successful unit test runs under the operator's broader role and does not establish service-role compatibility. The precise service-role failure remains to be isolated; this is not a vendor bug claim.
+
+Under the two-failure limit, no further runtime change, permission expansion, model retry or sealed execution followed. A narrowly scoped invocation marker in the existing private temporary lease store, or an explicitly reviewed service permission, is a possible next repair. It is not implemented or claimed here. The current repair must not be merged as verified.

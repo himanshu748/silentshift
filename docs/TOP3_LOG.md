@@ -142,3 +142,12 @@ Verification history is retained rather than overwritten: the first native test 
 On the subsequent fresh replay instance, the new citation projection test failed because SaveCase correctly refused to mutate immutable references. The test now uses real scoped catalog insertion and SnapshotReferences. The second attempt passed the suite and two separate keyless API replays. These were test-harness repairs, not relaxed runtime checks. All original failed logs remain private; no provider secrets are in repository evidence.
 
 No new AWS resource, upload or paid provider call has been authorized or executed in this pass. The eight-hour trial is closed. The proposed private S3 transfer, ARM-compatible compute choice, $60 budget alert and longer hosting remain behind a fresh cost approval after the sealed result is reported.
+
+
+### Two failed live core gates; sealed set remains unopened
+
+The prompt 1.4.1 core gate failed because approved-amendment ALLOW was malformed JSON and the fail-closed policy correctly kept it in review. A local protocol experiment found that global structured output prevented tool selection; a final-only structured request worked in a toy protocol test. The new native final-format integration then passed the operator-run native suite and two keyless replays, but its fresh live core gate failed before provider trace pairs were created. The service-role SQL read added in Lease.ShapeFinal has no matching AuditEvent SELECT grant in the transport role's setup; this is a likely integration defect, not a confirmed vendor issue.
+
+Two failed live gates are saved, not overwritten. Repair/model attempts stopped under the owner's rule. No further runtime code or permissions were changed. v3 remains unopened and unrun; the full v2 rerun is also unrun. No sealed score, improvement claim, live demo, spending or external publication followed. [Complete blocked status](EVAL_SEALED.md) and [machine-readable receipt](evidence/prose-repair-status.json).
+
+The repaired source remains local on push/top3. Main, the remote draft PR, IPM, OEX, articles and videos were not updated in this pass. Earlier uncommitted landing/session copy, browser tests and the README anchor cleanup remain outside these commits and are preserved.

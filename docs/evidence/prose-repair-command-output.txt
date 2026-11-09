@@ -1,0 +1,26 @@
+# Executed local verification commands (no credentials in command arguments)
+
+uv run pytest -q
+........................................................................ [ 22%]
+........................................................................ [ 45%]
+........................................................................ [ 68%]
+........................................................................ [ 90%]
+.............................                                            [100%]
+317 passed in 21.54s
+
+# Fresh current-source live gate; failed, no retry after the stop condition.
+uv run python scripts/verify_bonus_release.py --source load --container silentshift-bonus-load-prose-final-nov9 --execution-mode live --allow-model-calls --api-port 53003 --execute
+Creating fresh load verification container...
+IPM load /home/irisowner/silentshift-bonus/stage
+Starting the installed native production (live)...
+Running the full native %UnitTest suite...
+Running five real local Ollama investigations...
+Verification stopped: Command failed; inspect private 28-native-five.log
+
+# Actual five-case API child output from that fresh gate
+quantity-mismatch: policy=QUARANTINE route=QUARANTINED native=False
+currency-scaling: policy=QUARANTINE route=QUARANTINED native=False
+approved-amendment: policy=REQUEST_REVIEW route=REVIEW native=False
+conflicting-references: policy=REQUEST_REVIEW route=REVIEW native=False
+unsafe-agent-output: policy=QUARANTINE route=QUARANTINED native=False
+Evidence saved: <repo>/.local/ipm/bonus-runs/silentshift-bonus-load-prose-final-nov9/native-five.json

@@ -356,3 +356,10 @@ Scenario E injects a labeled hostile validator proposal after an actual native r
 The authenticated OEX Apply dialog showed no published application on this account. No separate pre-development registration was found; OEX publication/approval and contest application are separate. Rules/deadline and organizer clarification are in `CONTEST_COMPLIANCE.md`.
 
 </details>
+
+
+## Unpublished prose-repair candidate — November 9 UTC: blocked
+
+The new local push/top3 candidate changes native source and is **not covered by the earlier unchanged-source qualification**. Its Python suite passed 317 tests in 21.54 seconds; the operator-run native suite passed six classes / fifteen methods, and two keyless replays passed 12/12 each. The real live five-case core gate failed twice; the latest attempt had no successful agent/tool executions and held the approved amendment. The current repair is not verified or merge-ready. [Status and receipts](EVAL_SEALED.md).
+
+The v3 labels were sealed before diagnosis and remain untouched; no sealed evaluation or full tuned dev rerun was performed. Public packages, main and the remote draft PR remain unchanged. No hosted demo or measured accuracy improvement is claimed.
