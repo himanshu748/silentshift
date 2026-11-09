@@ -83,7 +83,7 @@ ClassMethod Run(runId As %String, sid As %String, trial As %Integer) As %String
     If prior.%Get("exists") Return prior.%ToJSON()
     Set envelope=..Envelope(runId,sid,trial),input=##class(%DynamicObject).%FromJSON(^SilentShiftHeldout(runId,"input",sid)),refs=input.%Get("references")
     For i=0:1:refs.%Size()-1 {
-        Set sc=##class(SilentShift.Setup).SeedReference(envelope.%Get("scenario_id"),refs.%Get(i).%ToJSON())
+        Set sc=..SeedReference(envelope.%Get("scenario_id"),refs.%Get(i))
         $$$ThrowOnError(sc)
     }
     Set stream=##class(%Stream.GlobalCharacter).%New()
@@ -96,5 +96,22 @@ ClassMethod Run(runId As %String, sid As %String, trial As %Integer) As %String
     Set result=##class(%DynamicObject).%FromJSON(..Read(runId,sid,trial))
     Do result.%Set("service_status_ok",$SYSTEM.Status.IsOK(sc),"boolean")
     Return result.%ToJSON()
+}
+
+/// Same scoped test-catalog insertion used by existing native boundary tests.
+/// Setup.SeedReference is private; no shipped method visibility is changed.
+ClassMethod SeedReference(scope As %String, reference As %DynamicObject) As %Status [ Private ]
+{
+    Set key=##class(SilentShift.Bridge).PairHash(scope,reference.%Get("id"))
+    Set canonical=##class(SilentShift.Bridge).Canonical(reference.%ToJSON())
+    Set row=##class(SilentShift.Data.Reference).%OpenId(key)
+    If $ISOBJECT(row) {
+        If row.Body'=canonical Return $$$ERROR($$$GeneralError,"Frozen held-out reference differs")
+        Return $$$OK
+    }
+    Set row=##class(SilentShift.Data.Reference).%New()
+    Set row.ReferenceKey=key,row.ReferenceId=reference.%Get("id"),row.ScenarioScope=scope
+    Set row.ContractId=reference.%Get("contract_id"),row.Body=canonical
+    Return row.%Save()
 }
 }

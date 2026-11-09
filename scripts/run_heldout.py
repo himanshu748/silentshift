@@ -63,11 +63,17 @@ class Native:
             private.write_text(p.stdout + p.stderr)
             private.chmod(0o600)
             raise RuntimeError("Native harness failed; private terminal output retained")
-        return json.loads(lines[0])
+        try:
+            return json.loads(lines[0])
+        except ValueError:
+            private = ROOT / ".local/heldout/last-terminal.txt"
+            private.write_text(p.stdout + p.stderr)
+            private.chmod(0o600)
+            raise RuntimeError("Native result was not JSON; private diagnostics retained") from None
 
     def call(self, method, *args):
         encoded = ",".join(str(a) if isinstance(a, int) else literal(str(a)) for a in args)
-        return self.shell('write "HELDOUT=",##class(SilentShift.Test.HeldoutEval).' + method + "(" + encoded + "),!")
+        return self.shell('set result=##class(SilentShift.Test.HeldoutEval).' + method + "(" + encoded + ')\nwrite "HELDOUT=",result,!')
 
     def copy(self, source, target):
         subprocess.run(self.docker + ["cp", str(source), self.args.container + ":" + target], check=True, capture_output=True)
@@ -131,6 +137,11 @@ def main():
         manifest["native_input_sha256"] = hashlib.sha256(payload.read_bytes()).hexdigest()
         write_json(manifest_file, manifest)
     run_id = manifest["run_id"]
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    manifest.setdefault("harness_revisions", [])
+    if revision not in manifest["harness_revisions"]:
+        manifest["harness_revisions"].append(revision)
+    write_json(manifest_file, manifest)
     rules_path = out / "rules-only.json"
     if not rules_path.exists():
         rows = [native.call("Rules", run_id, case["id"]) for case in dataset["scenarios"]]
@@ -169,13 +180,15 @@ def main():
                 raise RuntimeError("Persisted case incomplete or inputs differ; checkpoint retained")
             export = native.shell('write "HELDOUT=",##class(SilentShift.Test.ProviderChecks).InspectCase(' + literal(record["id"]) + "),!")
             result = {"scenario_id": case["id"], "trial": trial, "run_id": run_id,
+                "harness_commit": revision,
                 "dataset_sha256": DATA_SHA, "case_id": record["id"], "trace_id": record["trace_id"],
                 "service_elapsed_ms": observed.get("service_elapsed_ms"),
                 "harness_elapsed_ms": round((time.monotonic()-started)*1000, 3),
                 "record": record, "provider_export": export,
                 "semantic_inputs_match_frozen": True, "resumed_existing_case": prior["exists"]}
             write_json(dest, result)
-            manifest["completed"] = sum(len(list((out / f"trial-{n}").glob("HO-*.json"))) for n in range(1,4))
+            manifest["completed"] = sum((out / f"trial-{n}" / (c["id"] + ".json")).exists()
+                for n in range(1,4) for c in dataset["scenarios"])
             write_json(manifest_file, manifest)
             print(f"trial={trial} {case['id']} native_case={record['id']} session={record['trace_id']} "
                 f"route={record['routing']} agent={record.get('agent',{}).get('status')} completed={manifest['completed']}/144", flush=True)
