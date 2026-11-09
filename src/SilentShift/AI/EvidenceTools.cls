@@ -20,6 +20,27 @@ Property PrecedentContext As %DynamicObject;
 Property ReferenceTruncated As %Boolean [ InitialExpression = 0 ];
 Property TraceFailures As %Integer [ InitialExpression = 0 ];
 
+/// Citation locations only; full reference objects remain unchanged below.
+/// Never interprets prose, assigns authority or enters Embedded Python.
+ClassMethod %ProsePaths(value As %DynamicObject, referenceId As %String, paths As %DynamicArray, parent As %String = "", depth As %Integer = 0) [ Private ]
+{
+    If depth > 5 Quit
+    Set reserved = "|id|event_id|correlation_id|source|kind|occurred_at|contract_id|business_unit|product_id|quantity|unit|currency|amount|amount_scale|timestamp_semantics|authority|effective_from|effective_to|amendment_of|approved_at|verified_by|sender|"
+    Set iterator = value.%GetIterator()
+    While iterator.%GetNext(.name,.leaf) {
+        If reserved [ ("|"_name_"|") Continue
+        Set path = parent_"/"_$REPLACE($REPLACE(name,"~","~0"),"/","~1")
+        If $LENGTH(path)>240 Continue
+        Set type = value.%GetTypeOf(name)
+        If type = "object" {
+            If leaf.%IsA("%Library.DynamicObject") Do ..%ProsePaths(leaf,referenceId,paths,path,depth+1)
+        } ElseIf type = "string", $LENGTH(leaf)>=12 {
+            If paths.%Size()>=32 Throw ##class(%Exception.General).%New("PROSE_CITATION_PATH_LIMIT")
+            Do paths.%Push({"reference_id":(referenceId),"path":(path)})
+        }
+    }
+}
+
 /// Build 154's inherited generator emits unquoted method names. Keep native
 /// discovery/encoding, but dispatch this exact no-argument catalog explicitly
 /// so the required underscore tool name remains valid ObjectScript.
@@ -77,20 +98,21 @@ Method GetApprovedContracts() As %String
         If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
         Set item = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(..CaseId))
         If item.%Get("id") '= ..CaseId Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope mismatch"))
-        Set approved = [], references = item.%Get("references"), truncated = 0
+        Set approved = [], prosePaths = [], references = item.%Get("references"), truncated = 0
         If $ISOBJECT(references) {
             For index = 0:1:references.%Size()-1 {
                 Set reference = references.%Get(index)
                 If $ISOBJECT(reference), reference.%Get("authority") = "approved" {
                     If approved.%Size() < 10 {
                         Do approved.%Push(reference)
+                        Do ..%ProsePaths(reference,reference.%Get("id"),prosePaths)
                     } Else {
                         Set truncated = 1
                     }
                 }
             }
         }
-        Set result = {"case_id": (..CaseId), "references": (approved), "truncated": (truncated)}
+        Set result = {"case_id": (..CaseId), "references": (approved), "prose_citation_paths": (prosePaths), "truncated": (truncated)}
         Do result.%Set("truncated", truncated, "boolean")
         Set encoded = result.%ToJSON()
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Contracts exceed evidence size limit"))

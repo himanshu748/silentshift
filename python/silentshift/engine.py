@@ -422,8 +422,12 @@ def validate_policy(assessment: Any, recommendation: Any, duplicate: bool = Fals
                 # neither this path nor an ALLOW with contradictory findings can
                 # authorize a release that the unchanged baseline would hold.
                 if proposed == "QUARANTINE" and grounded and confident and covered:
-                    decision = "QUARANTINE"
-                    reasons.append("Preventive hold from cited prose; semantic interpretation is model-generated, not a verified deterministic contradiction.")
+                    if len({f["reference_id"] for f in recommendation["cited_findings"]}) > 1:
+                        decision = "REQUEST_REVIEW"
+                        reasons.append("A multi-record prose concern requires review; quote provenance does not establish precedence between approved records.")
+                    else:
+                        decision = "QUARANTINE"
+                        reasons.append("Preventive hold from cited prose; semantic interpretation is model-generated, not a verified deterministic contradiction.")
                 elif proposed == "ALLOW":
                     decision = "REQUEST_REVIEW"
             if proposed != "ALLOW" and decision != "QUARANTINE":

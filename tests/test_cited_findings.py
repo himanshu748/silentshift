@@ -92,3 +92,14 @@ def test_deterministic_baseline_source_has_not_changed():
         return {n.name:ast.get_source_segment(text,n) for n in ast.parse(text).body if isinstance(n,ast.FunctionDef)}
     for name in ('assess','assess_json','rule_only'):
         assert functions(frozen)[name]==functions(current)[name]
+
+
+def test_multi_record_prose_concern_cannot_adjudicate_approved_precedence():
+    c=sample();other=copy.deepcopy(c['references'][0]);other['id']='reference:additional-approved'
+    other['dispatch_terms']['body']='The signed dispatch authorization remains active until further notice.'
+    c['references'].append(other);a,r=proposal(c)
+    r['cited_findings'].append({'reference_id':other['id'],'path':'/dispatch_terms/body',
+                              'quote':'dispatch authorization remains active until further notice.'})
+    result=validate_policy(a,r,evidence_context=c)
+    assert result['decision']=='REQUEST_REVIEW'
+    assert not result['downstream_permitted']
