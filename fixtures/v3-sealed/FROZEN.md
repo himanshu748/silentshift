@@ -1,5 +1,7 @@
 # Sealed v3 evaluation
 
+Label-first commit: `9c8d9376f08024eb7f5ff05771a5b02a854d6b4f`. No case file has been opened after generation.
+
 Generated once from seed `8172406782145921268` by `scripts/generate_sealed.py`.
 Exact scenarios.json SHA-256: `415489ccebbe21b83ea870c862570eb6acc7bd1a59ea2394fa7f31cd27c962d6`.
 Generator SHA-256: `17eead910dcc3e61b28196b62a1c5c7c3e8da7ab809bfe34eff61a8e8da9379c`.
