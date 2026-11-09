@@ -109,6 +109,36 @@ ClassMethod AuthorizeBearer(header As %String, Output binding As %DynamicObject)
     }
 }
 
+/// Shape only the final local-model request after this invocation's four reads.
+/// This is pre-inference request configuration, never output repair or retry.
+ClassMethod ShapeFinal(raw As %String, binding As %DynamicObject, Output shaped As %Boolean) As %String
+{
+    Set shaped=0
+    If (binding.%Get("ExecutionMode")'="live") || (binding.%Get("Provider")'="ollama/openai-compatible") || (binding.%Get("PromptVersion")'="silentshift-investigator/1.4.2") Return raw
+    Set statement=##class(%SQL.Statement).%New()
+    Set sc=statement.%Prepare("SELECT Detail FROM SilentShift_Data.AuditEvent WHERE CaseId=? AND Kind='agent_tool_read'")
+    $$$ThrowOnError(sc)
+    Set rows=statement.%Execute(binding.CaseId),seen=0
+    If rows.%SQLCODE<0 Throw ##class(%Exception.General).%New("FINAL_FORMAT_READ_CHECK_FAILED")
+    While rows.%Next() {
+        Set detail=##class(%DynamicObject).%FromJSON(rows.%Get("Detail"))
+        If detail.%Get("invocation_span_id")'=binding.InvocationSpanId Continue
+        Set tool=detail.%Get("tool")
+        If tool="GetCurrentMessage" Set reads("message")=1
+        If tool="GetApprovedContracts" Set reads("contracts")=1
+        If tool="GetRelatedRecords" Set reads("related")=1
+        If tool="find_similar_precedents" Set reads("precedents")=1
+    }
+    If '$DATA(reads("message")) || '$DATA(reads("contracts")) || '$DATA(reads("related")) || '$DATA(reads("precedents")) Return raw
+    Set body=##class(%DynamicObject).%FromJSON($ZCONVERT(raw,"I","UTF8"))
+    Do body.%Remove("tools"),body.%Remove("tool_choice"),body.%Remove("parallel_tool_calls")
+    Do body.%Set("response_format",##class(SilentShift.AI.Investigator).FinalResponseFormat())
+    Set result=$ZCONVERT(body.%ToJSON(),"O","UTF8")
+    If $LENGTH(result)>..#MAXBYTES Throw ##class(%Exception.General).%New("FINAL_FORMAT_REQUEST_BOUNDS")
+    Set shaped=1
+    Return result
+}
+
 /// Claims one actual call after authentication and bounded payload validation.
 ClassMethod Claim(header As %String, raw As %String, Output request As SilentShift.Provider.CallRequest, tools As %String = "[]") As %Status
 {
@@ -133,6 +163,9 @@ ClassMethod Claim(header As %String, raw As %String, Output request As SilentShi
             Set request.Provider = "recorded-ollama/openai-compatible"
             Set request.ReplayRecordId = ##class(SilentShift.Provider.Replay).#RECORDID
         }
+        Set raw=..ShapeFinal(raw,binding,.shaped)
+        If shaped Set tools="[]"
+        Set request.StructuredFinal=shaped
         Set request.StartedAt = ##class(SilentShift.TraceEvent).UTC(), request.RequestBytes = $LENGTH(raw)
         Set request.ToolNamesJSON = tools
         Set call = request.CallId

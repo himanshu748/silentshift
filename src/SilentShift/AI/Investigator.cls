@@ -4,7 +4,15 @@ Include %occStatus
 /// routing components retain exclusive control over delivery and quarantine.
 Class SilentShift.AI.Investigator Extends %RegisteredObject
 {
-Parameter PROMPTVERSION = "silentshift-investigator/1.4.1";
+Parameter PROMPTVERSION = "silentshift-investigator/1.4.2";
+
+/// Local final-answer format. Never imposed on tool-selection rounds.
+ClassMethod FinalResponseFormat() As %DynamicObject
+{
+    Set finding={"type":"object","properties":{"reference_id":{"type":"string"},"path":{"type":"string","maxLength":240},"quote":{"type":"string","minLength":12,"maxLength":800}},"required":["reference_id","path","quote"],"additionalProperties":false}
+    Set schema={"type":"object","properties":{"decision":{"type":"string","enum":["ALLOW","QUARANTINE","REQUEST_REVIEW"]},"evidence_ids":{"type":"array","items":{"type":"string"},"maxItems":101},"explanation":{"type":"string","maxLength":4000},"uncertainty":{"type":"number","minimum":0,"maximum":1},"cited_findings":{"type":"array","items":(finding),"maxItems":2}},"required":["decision","evidence_ids","explanation","uncertainty","cited_findings"],"additionalProperties":false}
+    Return {"type":"json_schema","json_schema":{"name":"silentshift_recommendation","strict":true,"schema":(schema)}}
+}
 
 /// Explicit deployment budget. Invalid configuration fails before inference.
 ClassMethod WaitSeconds() As %Integer
@@ -118,6 +126,7 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         Set stage = "native-agent-chat"
         Set sessionConfig = {"max_iterations": 6, "max_tokens": 512}
         Do metadata.%Set("limits", sessionConfig)
+        Do metadata.%Set("structured_final_output", "local Ollama only, after four invocation-scoped tool reads; no response repair")
         // Build154's bundled CompletionOptions forwards provider-specific
         // options through extra_params. Ollama0.31.1 maps none to think=false.
         // Apply only to the explicitly local Qwen route, never other providers.

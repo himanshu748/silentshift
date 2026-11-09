@@ -77,6 +77,7 @@ Method GetCurrentMessage() As %String
         Set encoded = result.%ToJSON()
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Message exceeds evidence size limit"))
         Set detail = {"tool": "GetCurrentMessage", "scope": "current-case"}
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         Set ..MessageReads = ..MessageReads + 1
@@ -118,6 +119,7 @@ Method GetApprovedContracts() As %String
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Contracts exceed evidence size limit"))
         Set detail = {"tool": "GetApprovedContracts", "scope": "current-case", "record_count": (approved.%Size()), "truncated": (truncated)}
         Do detail.%Set("truncated", truncated, "boolean")
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         If truncated {
@@ -176,6 +178,7 @@ Method GetRelatedRecords() As %String
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "History exceeds evidence size limit"))
         Set detail = {"tool": "GetRelatedRecords", "scope": "same-contract", "peer_count": (peers.%Size()), "truncated": (truncated)}
         Do detail.%Set("truncated", truncated, "boolean")
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         If truncated {
@@ -227,6 +230,7 @@ Method "find_similar_precedents"() As %String
         Set encoded = result.%ToJSON()
         If $LENGTH($ZCONVERT(encoded,"O","UTF8")) > 8192 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Precedents exceed context size limit"))
         Set detail = {"tool":"find_similar_precedents","scope":"precomputed-current-case-context","record_count":(matches.%Size()),"status":(status),"decision_authority":false}
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId,"agent_tool_read",detail.%ToJSON())
         $$$ThrowOnError(sc)
         Set ..PrecedentReads = ..PrecedentReads + 1

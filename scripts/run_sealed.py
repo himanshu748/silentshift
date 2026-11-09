@@ -25,7 +25,7 @@ DATASETS = {
                '415489ccebbe21b83ea870c862570eb6acc7bd1a59ea2394fa7f31cd27c962d6', 36),
 }
 MODEL = 'qwen3-silentshift:4b-instruct'
-PROMPT = 'silentshift-investigator/1.4.1'
+PROMPT = 'silentshift-investigator/1.4.2'
 
 
 def frozen(name):

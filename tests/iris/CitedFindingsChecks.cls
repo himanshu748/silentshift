@@ -62,4 +62,41 @@ Method TestProseCitationPaths()
     Do $$$AssertTrue(escaped,"JSON pointer escaping survives native projection")
     Do $$$AssertEquals(result.%Get("references").%Get(0).%Get("dispatch_terms").%Get("body"),"The signed dispatch authorization is withdrawn until further notice.","Prose is returned intact")
 }
+
+Method TestFinalFormatAfterInvocationReads()
+{
+    Set fixture=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON())
+    Set message=fixture.%Get("scenarios").%Get(0).%Get("message"),run=$TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
+    Do message.%Set("event_id","format-contract-"_run)
+    Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":"synthetic-final-format-contract","clock":(fixture.%Get("clock"))}
+    Set sc=##class(SilentShift.Store).CreateCase(envelope.%ToJSON(),.id,.duplicate)
+    Do $$$AssertStatusOK(sc)
+    Set binding={"CaseId":(id),"InvocationSpanId":(run),"ExecutionMode":"live","Provider":"ollama/openai-compatible","PromptVersion":"silentshift-investigator/1.4.2"}
+    Set input={"model":"qwen3-silentshift:4b-instruct","messages":[{"role":"user","content":"A synthetic café request."}],"tools":[],"tool_choice":"auto","parallel_tool_calls":false}
+    Set raw=$ZCONVERT(input.%ToJSON(),"O","UTF8")
+    Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
+    Do $$$AssertTrue('shaped,"Format cannot suppress required evidence reads")
+    Do $$$AssertEquals(result,raw,"Pre-read request bytes remain unchanged")
+    For tool="GetCurrentMessage","GetApprovedContracts","GetRelatedRecords","find_similar_precedents" {
+        Set sc=##class(SilentShift.Store).AddEvent(id,"agent_tool_read",{"tool":(tool),"invocation_span_id":(run)}.%ToJSON())
+        Do $$$AssertStatusOK(sc)
+    }
+    Do binding.%Set("InvocationSpanId","another-invocation")
+    Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
+    Do $$$AssertTrue('shaped,"Another invocation's reads do not authorize final format")
+    Do binding.%Set("InvocationSpanId",run)
+    Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
+    Do $$$AssertTrue(shaped,"Four invocation-scoped reads enable final format")
+    Set decoded=##class(%DynamicObject).%FromJSON($ZCONVERT(result,"I","UTF8"))
+    Do $$$AssertTrue('decoded.%IsDefined("tools"),"Final request cannot call more tools")
+    Do $$$AssertEquals(decoded.%Get("response_format").%Get("type"),"json_schema","Constrained final output is requested")
+    Do $$$AssertEquals(decoded.%Get("messages").%ToJSON(),input.%Get("messages").%ToJSON(),"Evidence and UTF-8 messages remain intact")
+    Do binding.%Set("ExecutionMode","recorded-replay")
+    Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
+    Do $$$AssertTrue('shaped,"Keyless replay request is unchanged")
+    Do $$$AssertEquals(result,raw)
+    Do binding.%Set("ExecutionMode","live"),binding.%Set("Provider","openai")
+    Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
+    Do $$$AssertTrue('shaped,"Other providers are not silently reformatted")
+}
 }
