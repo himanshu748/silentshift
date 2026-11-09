@@ -41,7 +41,7 @@ Public native IPM and Open Exchange remain **0.3.0**; the separate React package
 
 | | |
 | --- | --- |
-| IRIS image | **IRIS Community AI Hub 2026.3.0AI.154.0 (build 154), ARM64**, from the [EAP portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). Tested on macOS/Apple Silicon only. |
+| IRIS image | **IRIS Community AI Hub 2026.3.0AI.154.0 (build 154), ARM64**, from InterSystems. The EAP portal no longer offers this retained build; [obtain access before installing](INSTALL.md). Tested locally on macOS/Apple Silicon only. |
 | LLM provider | **Local Ollama** (`qwen3-silentshift:4b-instruct`), set by `SILENTSHIFT_MODEL` and `SILENTSHIFT_LLM_BASE_URL` in `.env`. **No API key needed.** The keyless replay needs no model at all. |
 | Tools | Git, Python 3.11+, uv, Docker (Colima) with Compose 2. Node.js 22.12+ only for the browser workbench. |
 

@@ -6,6 +6,7 @@ is active. Never publishes images or packages; never creates AWS resources.
 """
 from __future__ import annotations
 import argparse
+import datetime
 import hashlib
 import json
 import os
@@ -24,14 +25,29 @@ def write(path, value, mode=0o600):
     path.write_text(value);path.chmod(mode)
 
 
+def validate_trial(config, now, actual_timer):
+    """Reject an unapproved duration or a timer that cannot enforce its bound."""
+    expiry=float(config['expires_at'])
+    hours=config.get('approved_hours',4)
+    created_at=datetime.datetime.fromisoformat(config['created_at'])
+    if created_at.utcoffset() is None:raise ValueError('Explicit UTC offset required')
+    created=created_at.timestamp()
+    if hours not in {4,8} or created>now or not now<expiry<=created+hours*3600:
+        raise ValueError('Expiry must match the explicitly approved four/eight-hour bound')
+    if abs(actual_timer-expiry)>5:raise ValueError('Active termination timer differs from approved expiry')
+    return expiry
+
+
 def execute(root):
     if os.geteuid()!=0: raise ValueError('Root operator required')
     if subprocess.run(['systemctl','is-active','--quiet','silentshift-expiry.timer']).returncode:
-        raise ValueError('Install and verify the four-hour termination timer first')
+        raise ValueError('Install and verify the approved termination timer first')
     os.chdir(root)
     config=json.loads(Path('deployment-private.json').read_text())
-    expiry=float(config['expires_at'])
-    if not time.time()<expiry<=time.time()+4*3600:raise ValueError('Trial expiry must be within four hours')
+    next_timer=subprocess.check_output(['systemctl','show','silentshift-expiry.timer','--property=NextElapseUSecRealtime','--value'],text=True).strip()
+    if not next_timer or next_timer=='n/a':raise ValueError('Absolute termination timer required')
+    actual_timer=int(subprocess.check_output(['date','-d',next_timer,'+%s'],text=True))
+    expiry=validate_trial(config,time.time(),actual_timer)
     def run(args, *, data=None, timeout=1200):
         r=subprocess.run(args,input=data,text=True,capture_output=True,timeout=timeout)
         log=Path('operator-install.log')
@@ -118,6 +134,14 @@ WantedBy=multi-user.target
     run(['python3','scripts/configure_demo_reader.py','--container','silentshift-demo-native','--env-file','edge.env','--execute'])
     run(['docker','pull','containers.intersystems.com/intersystems/webgateway:2026.1'])
     run(['docker','run','-d','--init','--name','silentshift-demo-gateway','--network','silentshift-demo','--network-alias','gateway','--publish','127.0.0.1:52773:80','--env','ISC_CSP_CONF_FILE=/private/CSP.conf','--env','ISC_CSP_INI_FILE=/private/CSP.ini','--mount','type=bind,src='+str(root/'CSP.conf')+',dst=/private/CSP.conf,readonly','--mount','type=bind,src='+str(root/'CSP.ini')+',dst=/private/CSP.ini','--log-opt','max-size=10m','--log-opt','max-file=2','containers.intersystems.com/intersystems/webgateway:2026.1'])
+    run(['docker','cp','tests/iris','silentshift-demo-native:'+base+'/tests'])
+    run(['docker','exec','--user','0','silentshift-demo-native','mkdir','-p','/var/opt/silentshift/partner-inbox'])
+    run(['docker','exec','--user','0','silentshift-demo-native','chown','51773:51773','/var/opt/silentshift/partner-inbox'])
+    run(['docker','exec','silentshift-demo-native','chmod','700','/var/opt/silentshift/partner-inbox'])
+    unit=session('set ^UnitTestRoot="'+base+'/tests/"\nset manager=##class(%UnitTest.Manager).%New()\nset passed=manager.RunTest("","/nodelete")\nwrite "SS_UNIT_RESULT=",passed,!\nif \'passed halt\nwrite "SS_STAGE_OK",!')
+    if '**FAILED**' in unit or 'Some tests FAILED' in unit or not all('SilentShift.Test.'+name+' passed' in unit for name in ['AdapterChecks','ProviderChecks','ReplayChecks','RuntimeChecks','TraceChecks']):
+        raise RuntimeError('Native unit suite did not pass; no public service started')
+    write('native-unit.txt',unit)
     # Deliberately measure amendment embedding separately from the live case.
     session('set sc=##class(SilentShift.Precedents).IndexAmendments(.report)\nif $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_INDEX=",report,!\nwrite "SS_STAGE_OK",!')
     run(['useradd','--system','--home-dir','/var/lib/silentshift-demo','--shell','/usr/sbin/nologin','silentshift-demo'])
@@ -160,4 +184,4 @@ if __name__=='__main__':
     if args.execute:
         execute(args.bundle.resolve())
     else:
-        print(json.dumps({'execute':False,'bundle':str(args.bundle.resolve()),'requires':'Root on approved ARM host with active four-hour expiry timer','publishes_images_or_packages':False}))
+        print(json.dumps({'execute':False,'bundle':str(args.bundle.resolve()),'requires':'Root on approved ARM host with active approved expiry timer','publishes_images_or_packages':False}))

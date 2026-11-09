@@ -1,5 +1,12 @@
 # Build status
 
+## Final source checkpoint, November 9
+
+The full Python suite passed **286 tests in 18.88 seconds**, including the new pure trial-duration/timer checks; [exact output](evidence/top3-final-pytest.txt). All **59** native package source files remain byte-identical to the fresh native replay/live snapshot; [source-footprint receipt](evidence/top3-final-source.json). The separate [multi-page/browser/CSV gate](evidence/top3-multipage.json) and [fresh native gate](evidence/top3-quality.json) keep their original execution scope.
+
+The approved AWS trial was stopped early after the direct/resumable transfer failed. Native installation never began, public application ingress never opened, and no cloud investigation or HTTPS demo is claimed. The instance, root volume, security group and key pair were removed; [target-side closure readback](evidence/top3-aws-trial-result.json). The local app, model/archive originals, benchmark and evidence are preserved. No registry or Open Exchange change occurred.
+
+
 ## November 9: bounded demo boundary (source branch only)
 
 The new gateway keeps investigation and policy execution inside IRIS. The full Python suite passed **278 tests in 18.40 seconds**. Two actual local guided samples reached the native production; the quantity case held with zero simulator deliveries, and the approved amendment delivered once. Printable native Visual Trace rendered. The second gateway result required operator reconciliation after a gateway restart; its gateway duration is unavailable. Interactive Production Configuration and reviewer task access remain blocked in this restricted demo. [Exact local scope and receipts](evidence/top3-demo-local.json).

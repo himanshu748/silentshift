@@ -111,3 +111,21 @@ The sequential direct image transfer was too slow; its partial archive was retai
 ### Main documentation integrated without rewriting frozen history
 
 Remote main advanced to `a10de3f61e1d809b374832a4db67761318bc16ea` with a README-only plain-English judge path. It was merged into `push/top3`, preserving that shorter setup and the owner's approved three-line held-out result, new source screenshot and explicit public-package/source boundaries. No native code changed, and label-first evaluation commits were not rebased or rewritten. Local main was not advanced or pushed.
+
+
+### Owner-approved eight-hour trial bound
+
+After the slow upload was measured, the owner explicitly approved eight hours total, estimated $0.62 base before tax/transfer. The absolute timer now ends no later than 21:13:47 UTC on November 9 / 02:43:47 IST on November 10, with a separate shutdown scheduled earlier. No larger machine or hosting through November 20 is authorized. [Approval/control receipt](evidence/top3-aws-trial-extension.json).
+
+Four complete chunks were verified against their original hashes. The resume harness initially treated an already-complete destination as an SFTP failure; the complete files were read and hash-checked, then excluded from the remaining queue. The bounded worker retains partial files, cancels its owned processes on failure and stops admissions before the approved deadline. No data label, image content or model manifest changed. The operator embedding base was corrected before deployment from an endpoint path to the base URL the existing validator requires. The native installer remains pending transfer completion; no live cloud result is claimed.
+
+[The final source-footprint receipt](evidence/top3-final-source.json) confirms all 59 native package source files still match the fresh quality-gate snapshot byte-for-byte. The new edge gateway and operator setup have only the explicitly named local/host checks; this does not turn them into previously qualified native source.
+
+
+### Cloud attempt closed; source work continues to draft PR
+
+The bounded resumable worker failed again with `Timeout, server … not responding`. Under the two-failure stop rule, no further transfer or cloud-deployment retry was attempted. The receiver still had only 4 of 60 chunks hash-verified, so native installation had not started. Its status/journal were saved, the waiting receiver was stopped, and the exact tagged trial was terminated early. AWS readback confirms the instance terminated and its root volume, security group and key pair are absent. The budget alert remains; actual billed cost and credit coverage are not yet established. [Closure receipt](evidence/top3-aws-trial-result.json).
+
+No public application port was opened, no cloud model investigation ran, and there is no verified live demo URL. Printable trace and two guided cases remain local evidence only. Hosting through November 20, a larger CPU/GPU or another trial requires a new cost approval. The local source, original image/model bundles, benchmark results and unique logs remain protected. No image was pushed to a registry.
+
+The final full Python run passed **286 tests in 18.88 seconds**, including eight approval/timer cases. [Output](evidence/top3-final-pytest.txt). The operator installer is prepared and plan/compile-tested, not end-to-end cloud-qualified. Its pure timer tests do not substitute for deployment evidence. The README retains no-hosted-demo wording and now makes the removed build-154 download prerequisite explicit. None of the 59 native package source files changed after the qualified native snapshot. The separate demo gateway retains its own local-only qualification.

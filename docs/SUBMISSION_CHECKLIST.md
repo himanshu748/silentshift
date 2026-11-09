@@ -1,5 +1,12 @@
 # Submission checklist
 
+## November 9: final `push/top3` source checkpoint
+
+The [final checkpoint](evidence/top3-final-checkpoint.json) records **286 Python tests passing in 18.88 seconds** and the normal local production healthy. All **59 native package source files** remain byte-identical to the fresh quality-gate snapshot; [footprint](evidence/top3-final-source.json). The [fresh native replay/live gate](evidence/top3-quality.json) and [multi-page/browser/CSV gate](evidence/top3-multipage.json) retain their recorded scope. The new demo gateway has [two local native cases and printable-trace evidence](evidence/top3-demo-local.json); this does not establish public hosting.
+
+The AWS trial stopped before native installation after transfer failure, and its resources were removed; [closure readback](evidence/top3-aws-trial-result.json). Online demo remains **Not claimed**. Main, native IPM 0.3.0, the listing and video were not changed by this branch. The prepared host installer is not end-to-end cloud-qualified. Historical verification sections below are preserved.
+
+
 **Checked November 9, 2026 (UTC): voting-week source branch.** The [new source quality receipt](evidence/top3-quality.json) closes the earlier default-provider replay/live and full-Python follow-ups. This is separate from the public 0.3.0 package checks below. The owner approved the honest README benchmark wording. [Product/criteria review](TOP3_REVIEW.md).
 
 The anonymous OEX listing now shows the dedicated DPI-I-689 association and release 0.3.0, but retains legacy 0.2.0/source-only CSV body text. [Readback](evidence/top3-public-review.json). Organizer qualification remains unconfirmed; no listing edit was saved. The owner approved only the four-hour ARM CPU trial described in [the quote](evidence/top3-aws-trial-quote.json), not longer hosting or a GPU. Until a real deployment is verified, online demo stays **Not claimed**.

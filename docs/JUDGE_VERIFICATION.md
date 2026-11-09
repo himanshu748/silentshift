@@ -1,5 +1,12 @@
 # Judge verification
 
+## November 9: final `push/top3` source checkpoint
+
+The [final checkpoint](evidence/top3-final-checkpoint.json) records **286 Python tests passing in 18.88 seconds** and the normal local production healthy. All **59 native package source files** remain byte-identical to the fresh quality-gate snapshot; [footprint](evidence/top3-final-source.json). The [fresh native replay/live gate](evidence/top3-quality.json) and [multi-page/browser/CSV gate](evidence/top3-multipage.json) retain their recorded scope. The new demo gateway has [two local native cases and printable-trace evidence](evidence/top3-demo-local.json); this does not establish public hosting.
+
+The AWS trial stopped before native installation after transfer failure, and its resources were removed; [closure readback](evidence/top3-aws-trial-result.json). Online demo remains **Not claimed**. Main, native IPM 0.3.0, the listing and video were not changed by this branch. The prepared host installer is not end-to-end cloud-qualified. Historical verification sections below are preserved.
+
+
 ## Voting-week source branch repeat — November 9, 2026 UTC
 
 This pass verifies executable source **`718ec9f65317655379c0194d326f755dccc44a64` on `push/top3`**, not a new main/public-package release. Two newly created official **2026.3.0AI.154.0 Community / 154U ARM64** containers used source loading with **zero application source mounts**. They ran sequentially after the benchmark finished and the normal app was temporarily stopped. This is a fresh-container source gate, not a fresh GitHub-clone installation or a public registry install. No new image was downloaded.

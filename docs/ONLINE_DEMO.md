@@ -1,54 +1,48 @@
-# Online demo deployment
+# Online demo status
 
-**Status: four-hour AWS trial installing; no live URL verified.** The online-demo bonus is not claimed. Recorded playback is not accepted as live inference evidence.
+**Not deployed. No live demo URL is verified, and the online-demo bonus is not claimed.** The November 9 AWS trial was stopped early after the direct/resumable archive transfer failed. Native installation never began and public application ingress never opened. AWS readback confirms the instance terminated and its root volume, security group and key pair were removed. The monitoring budget remains. [Closure receipt](evidence/top3-aws-trial-result.json).
 
-The owner authorized a bounded AWS trial, a $150 budget alert and an ARM-based CPU instance using the already-loaded **ARM64 2026.3.0AI.154.0 / 154U** image. The official EAP portal now offers Community 109 and explicitly says earlier 2026.3 builds were removed. This deployment will preserve build 154; no other build is claimed and no EAP image will be uploaded to a registry.
+Use [INSTALL.md](../INSTALL.md) for the qualified local path. Recorded playback is explicitly labeled and is not an online live-inference demo.
 
-InterSystems' November 8 reply permits a contest demo and says idea implementation will be reviewed separately. That reply is not four-point qualification. See [hosting review](HOSTING_REVIEW.md).
+## What the trial established
 
-## Controls before launch
+The owner approved a four-hour ARM CPU trial, then explicitly approved eight hours total after the slow upload was measured. The machine was `t4g.large`: two vCPUs, eight GiB RAM and fifty GiB encrypted gp3 disk. Standard CPU credits were confirmed, avoiding surplus-credit charges. The estimated maximum base cost was **$0.62** before tax/transfer; actual billed cost and credit coverage are not yet established. Early teardown means that approval is not a claim that the entire estimate was spent.
 
-- **The owner approved the smaller four-hour trial on November 9.** It uses `t4g.large`: two ARM vCPUs, eight GiB RAM and fifty GiB encrypted gp3 disk, with standard CPU credits. Estimated base cost is **$0.31** before tax/transfer; credit coverage is unconfirmed. The instance launched at **13:13:47 UTC** and its absolute termination timer was read back as active for **17:13:47 UTC / 22:43:47 IST on November 9**. AWS confirms instance-initiated shutdown terminates it and the root disk deletes on termination. No resize, GPU or longer hosting is authorized. [Price receipt](evidence/top3-aws-trial-quote.json).
-- Monitoring-only AWS budget `SilentShift-Nov2026-150USD`: $150 monthly, account-wide gross costs before credits, email alerts at 80% and 100% actual and 100% forecast. It is not a hard cap; AWS cost data and alerts are delayed.
-- Every new resource must carry `project=silentshift` and a deployment tag. No IAM role or registry publication is needed.
-- SSH is restricted to the operator's address. Public access is HTTPS to synthetic demo scenarios and a scoped read-only portal. No direct IRIS/Ollama port is opened.
-- Inference must be live local Ollama using the release model. Guided runs, rate limiting and reset must be exercised before publishing a URL. Viewer credentials stay out of Git.
-- The requested long-run target is through November 20, with termination November 21 at 05:00 UTC, after the full November 20 Eastern day. That duration is not authorized until its cost is confirmed. Record actual resource IDs privately and schedule teardown only after successful deployment.
+The instance launched at **13:13:47 UTC on November 9**. Its extended absolute timer was read back for **21:13:47 UTC**, with a second shutdown scheduled earlier. AWS confirmed shutdown terminates the instance and deletes its root disk. Every created instance, volume, network interface, security group and key pair carried project/deployment tags. SSH was restricted to the operator's address; application ports stayed closed. No GPU, resize, tunnel, image registry push or longer hosting was performed.
 
-## Smaller options reviewed before spending
+[Original launch controls](evidence/top3-aws-trial-launch.json) · [Explicit extension and timer readback](evidence/top3-aws-trial-extension.json) · [Dated price readback](evidence/top3-aws-trial-quote.json).
 
-The owner requested Lightsail and Vultr comparisons instead of approving the proposed launch. **The comparison itself did not authorize spending; the later explicit four-hour `t4g.large` approval is the only compute authorization.** Prices below were read on November 9; estimates exclude taxes and transfer overages.
+The retained official ARM64 build-154 image and the exact local Qwen/minilm manifests were exported privately and hashed. Only **4 of 60** archive chunks were verified on the receiver before the transfer stopped. A resume harness also encountered an already-complete destination; complete files were checksum-verified before being excluded from the queue. The subsequent server-response timeout ended the attempt under the two-failure rule. Logs, local originals and partial-transfer evidence remain; there was no cloud model investigation and no cloud latency measurement.
 
-| Option | Resources | Price readback | Fit for the retained image |
-| --- | --- | --- | --- |
-| EC2 `t4g.large` | 2 vCPUs, 8 GiB RAM; separate 50 GiB gp3 disk and IPv4 | $0.0672 compute/hour; estimated $0.31 total base for four hours, $22.23 through November 20 | ARM64 matches. Trial launched; public latency is still unverified. Use **standard** CPU credits to avoid surplus-credit charges; depleted credits throttle performance. |
-| Lightsail `large_3_0` | 2 vCPUs, 8 GiB RAM, 160 GiB disk, IPv4 and transfer allowance | $44/month, $0.05913/hour | The available Ubuntu 24.04 blueprint links to an x86 image. No supported ARM option was verified. The x64 154 kit is still missing. |
-| Vultr `vc2-4c-8gb` | 4 vCPUs, 8 GiB RAM, 160 GB disk | $40/month, $0.055/hour | This selected plan uses Intel. No ARM option or Vultr credit entitlement was verified. It does not resolve the missing x64 kit. |
+This result identifies a transfer blocker. It does not establish that the selected CPU is fast enough or that another provider/model/build works.
 
-Sources: [AWS Lightsail pricing](https://aws.amazon.com/lightsail/pricing/), [the Ubuntu product linked by the Lightsail API](https://aws.amazon.com/marketplace/pp/prodview-s4zvkzmlirbga), [Vultr's public plans API](https://api.vultr.com/v2/plans), [AWS standard CPU-credit behavior](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-standard-mode.html). The EC2 and hourly Lightsail prices also have dated AWS Price List API readbacks in the [preflight receipt](evidence/top3-demo-preflight-nov9.json). A matching CPU architecture is necessary; it does not prove the complete demo runs or meets the latency target.
+## What works locally
 
-## Teardown
+[The local integration receipt](evidence/top3-demo-local.json) records two fresh native guided cases: a held quantity contradiction with no simulator delivery, and an approved amendment with one simulator receipt. Printable Visual Trace rendered actual provider request/response hops. These are local results, not deployment evidence.
 
-The private deployment receipt at `.local/top3/aws/trial-nov9/deployment.json` records the exact instance, security group, key pair, account and region. Preview the targets first:
+The separate loopback demo gateway admits only fixed synthetic samples. It serializes investigations, applies per-address and whole-trial limits, and blocks arbitrary intake, review actions and CSV commits. Reset clears a journey pointer, preserving native history and quotas. A restarted gateway retains uncertain attempts and never redispatches them automatically. The second local result required explicit read-based reconciliation after a gateway restart; its gateway duration is unavailable.
 
-```bash
-python3 scripts/teardown_demo.py --receipt .local/top3/aws/trial-nov9/deployment.json
-```
+A dedicated reader has database READ and scoped SELECT; it has no application database WRITE, SSReview or SSImport. The private runner is a different account. The reader's API application adds read/serialization capability only while that API executes. Credentials stay outside Git. Reviewer tasks are unavailable to this reader. The interactive Production Configuration page failed two restricted render attempts and was removed from the demo allowlist. The guided page links actual workbench production status and printable native Visual Trace instead.
 
-At the scheduled end, execute the same bounded plan:
+The full Python suite passed **286 tests in 18.88 seconds**, including pure approval/timer checks. [Output](evidence/top3-final-pytest.txt). Fake-upstream and timer tests do not substitute for native execution or hosting proof.
+
+## Prepared operator tools
+
+`scripts/bootstrap_demo_host.py` is plan/compile-tested, not end-to-end cloud-qualified. It requires a privately prepared bundle, the separately licensed image, exact model hashes and an active absolute termination timer matching the approved bound. It loads current native source without application source mounts, includes the native unit gate and keeps Caddy stopped pending live-inference/HTTPS checks. Default execution is a plan; `--execute` is required to install. It does not create AWS resources or publish packages/images.
+
+`scripts/teardown_demo.py` validates the exact account, project/deployment tags and root-volume deletion settings before terminating the one recorded instance and removing its dedicated security group and key pair. The successful trial cleanup used:
 
 ```bash
-python3 scripts/teardown_demo.py --receipt .local/top3/aws/trial-nov9/deployment.json --execute
+python3 scripts/teardown_demo.py \
+  --receipt .local/top3/aws/trial-nov9/deployment.json --execute
 ```
 
-The script validates both project and deployment tags, the AWS account and volume deletion settings before changing anything. It terminates only that instance and removes only its dedicated security group and SSH key pair. Its attached volume must delete on termination. The monitoring budget remains. No source, local models, other project resources or EAP images are deleted.
+The receipt and credentials are private. Do not reuse the terminated host address or try to reconnect to a potentially reassigned IP.
 
-## Local boundary already exercised
+## What another attempt needs
 
-[The local integration receipt](evidence/top3-demo-local.json) records two actual native cases and printable Visual Trace. Arbitrary intake, review actions and CSV commits are blocked by the demo gateway. Reset clears only the journey pointer; it retains native history and run quotas. One native investigation runs at a time, with per-address and whole-trial caps. A restarted gateway keeps uncertain attempts and refuses automatic redispatch.
+A new paid trial or hosting through November 20 requires a **new cost approval**. The previous trial is closed. First establish a reliable direct transfer path for the retained ARM64 image and exact model bundle; the official portal no longer offers build 154. No other build is claimed tested.
 
-The dedicated synthetic reader has database READ plus scoped SELECT, never application database WRITE, SSReview or SSImport. Its API application adds the read/serialization capability only while that API executes. The private runner is a separate account and can dispatch only fixed scenarios through the gateway. The interactive Production Configuration page was blocked after two unsuccessful renders; it is excluded from the public allowlist. Reviewer task access is also unavailable. The guided demo links actual workbench production status and printable native Visual Trace instead. These limits are not hidden as completed requirements.
+Then verify native installation, the runtime/model/source identities, a timed fresh live investigation, public HTTPS, read-only access, denied writes, reset/rate limits and a bounded teardown. There is no prepared public login or URL to advertise until those checks pass. Any latency above the requested threshold must be reported before asking for a larger paid machine.
 
-## Verification still required
-
-Record the HTTPS URL, deployed source hash, build readback, model digest and prompt version, timed live investigation, native trace session, production/viewer reads, denied viewer writes, rate-limit/reset checks and teardown schedule. Until those results exist, a prepared instance or landing page does not establish an online demo.
+InterSystems' November 8 reply already permits a contest demo under the EAP clarification. Permission is not the present blocker and is not four-point qualification. [Hosting review](HOSTING_REVIEW.md). The dedicated DPI-I-689 association is now publicly visible; organizer qualification remains unconfirmed.
