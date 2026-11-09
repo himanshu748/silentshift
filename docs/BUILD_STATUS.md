@@ -1,5 +1,9 @@
 # Build status
 
+## Held-out comparison completed — November 9, 2026 UTC
+
+The frozen release **154U ARM64** evaluation completed **144** native investigations over **48** synthetic orders, retaining **5** failed attempts. Rules-only scored **33/48** correct routes; agent + policy scored **33/48**, **33/48** and **30/48**. It reduced wrong simulator deliveries relative to the baseline's counterfactual releases, but **did not improve correct routing in the unstructured split**: both scored **1/16** per trial. This is not an overall correct-routing improvement or a customer-data accuracy estimate. [Full results and every failure](EVAL_HELDOUT.md) · [coverage](../evidence/heldout/coverage.json) · [integrity receipt](../evidence/heldout/verification.json). README/listing wording remains unchanged pending owner review.
+
 ## Unpublished CoCo frontend — November 9, 2026 UTC
 
 `push/top3` source `7b8b17087f4d2c43b47a16e4a5aafbc55f494118` rebuilds the landing page and native workbench. CoCo chose the visual direction from the product description and existing integration contracts. Authentication, API schemas, dependencies and native policy remain unchanged. The running preview uses the real same-origin IRIS API; no mock case records were added. [Verification receipt](evidence/top3-coco-frontend.json) · [brief](TOP3_FRONTEND_BRIEF.md).
