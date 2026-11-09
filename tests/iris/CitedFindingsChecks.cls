@@ -17,7 +17,7 @@ Method TestCitationContainment()
     Set context={"message":(message),"references":(refs)}
     Set result=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessmentJSON,proposal.%ToJSON(),context.%ToJSON()))
     Do $$$AssertEquals(result.%Get("decision"),"QUARANTINE","Exact current-evidence quote may contain the transaction")
-    Do $$$AssertFalse(result.%Get("downstream_permitted"),"Quotation cannot grant delivery")
+    Do $$$AssertTrue('result.%Get("downstream_permitted"),"Quotation cannot grant delivery")
     Do finding.%Set("quote","This invented quote does not occur in the reference.")
     Set result=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessmentJSON,proposal.%ToJSON(),context.%ToJSON()))
     Do $$$AssertEquals(result.%Get("decision"),"REQUEST_REVIEW","Invented quote cannot justify grounded quarantine")
