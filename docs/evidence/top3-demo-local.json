@@ -1,0 +1,133 @@
+{
+  "checked_at_utc": "2026-11-09T13:14:25.863843+00:00",
+  "scope": "Local native integration of demo gateway, not AWS deployment or public availability",
+  "runtime": "2026.3.0AI.154.0 / 154U ARM64",
+  "cases": [
+    {
+      "scenario": "quantity-mismatch",
+      "state": "completed",
+      "native_case_id": "CE270BCC-DC3B-11F1-8BAC-AABE8E6FD4DC",
+      "native_trace_session": "170",
+      "routing": "QUARANTINED",
+      "simulator_deliveries": 0,
+      "model": "qwen3-silentshift:4b-instruct",
+      "model_invoked": true,
+      "agent_status": "returned",
+      "native_elapsed_ms": 23401,
+      "gateway_wall_seconds": 25.443,
+      "operator_reconciled_after_gateway_restart": false
+    },
+    {
+      "scenario": "approved-amendment",
+      "state": "completed",
+      "native_case_id": "43059044-DC3C-11F1-8BAC-AABE8E6FD4DC",
+      "native_trace_session": "198",
+      "routing": "DELIVERED",
+      "simulator_deliveries": 1,
+      "model": "qwen3-silentshift:4b-instruct",
+      "model_invoked": true,
+      "agent_status": "returned",
+      "native_elapsed_ms": 20973,
+      "gateway_wall_seconds": null,
+      "operator_reconciled_after_gateway_restart": true
+    }
+  ],
+  "model_response_replayed": false,
+  "reset_kept_native_history": true,
+  "reader_native_checks": [
+    {
+      "path": "/health",
+      "status": 200,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 747
+    },
+    {
+      "path": "/cases?limit=1",
+      "status": 503,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 138
+    },
+    {
+      "path": "/reviews",
+      "status": 403,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 100
+    },
+    {
+      "path": "/messages",
+      "status": 503,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 926
+    },
+    {
+      "path": "/imports/csv/commit",
+      "status": 403,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 108
+    },
+    {
+      "path": "/cases/00000000-0000-0000-0000-000000000000/review",
+      "status": 403,
+      "kind": "application/json; charset=utf-8",
+      "bytes": 78
+    }
+  ],
+  "reader_first_read_failed_before_scoped_select_grant": true,
+  "read_only_sql_grant": "SELECT SilentShift_Data schema and Ens.MessageHeader",
+  "printable_visual_trace_rendered": true,
+  "interactive_production_configuration_verified": false,
+  "interactive_portal_blocker": "Restricted encoded SVG/HyperEvent requests; stopped after two render failures, production config route removed",
+  "gateway_restart_did_not_redispatch": true,
+  "unit_tests": {
+    "passed": 30,
+    "seconds": 12.3,
+    "scope": "Fake upstream boundary tests only"
+  },
+  "screenshots": [
+    "../../evidence/browser/top3-demo-local/visual-trace.png",
+    "../../evidence/browser/top3-demo-local/amendment-result.png"
+  ],
+  "reader_native_checks_after_scoped_grant": [
+    {
+      "path": "/health",
+      "status": 200,
+      "bytes": 747
+    },
+    {
+      "path": "/cases?limit=1",
+      "status": 200,
+      "bytes": 24110
+    },
+    {
+      "path": "/overview",
+      "status": 200,
+      "bytes": 204465
+    },
+    {
+      "path": "/policies",
+      "status": 200,
+      "bytes": 911
+    },
+    {
+      "path": "/reviews",
+      "status": 403,
+      "bytes": 100
+    },
+    {
+      "path": "/imports/csv/commit",
+      "status": 403,
+      "bytes": 108
+    },
+    {
+      "path": "/cases/00000000-0000-0000-0000-000000000000/review",
+      "status": 403,
+      "bytes": 78
+    }
+  ],
+  "full_python_suite": {
+    "passed": 278,
+    "seconds": 18.4,
+    "command": "uv run pytest -q",
+    "output": "top3-demo-pytest.txt"
+  }
+}

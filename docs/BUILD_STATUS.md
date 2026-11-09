@@ -1,5 +1,12 @@
 # Build status
 
+## November 9: bounded demo boundary (source branch only)
+
+The new gateway keeps investigation and policy execution inside IRIS. The full Python suite passed **278 tests in 18.40 seconds**. Two actual local guided samples reached the native production; the quantity case held with zero simulator deliveries, and the approved amendment delivered once. Printable native Visual Trace rendered. The second gateway result required operator reconciliation after a gateway restart; its gateway duration is unavailable. Interactive Production Configuration and reviewer task access remain blocked in this restricted demo. [Exact local scope and receipts](evidence/top3-demo-local.json).
+
+AWS deployment is in progress under the owner-approved four-hour CPU trial; local evidence does not establish public availability or an online-demo bonus. No main, registry, listing or video change is authorized.
+
+
 ## Serialized source quality gate — November 9, 2026 UTC
 
 The executable source snapshot **`718ec9f65317655379c0194d326f755dccc44a64`** now passes the default-provider fresh-source gate. With the benchmark finished, storage recovered and only one IRIS instance running at a time, **248 Python tests passed in 21.49 seconds**. A new source-loaded **154U ARM64** container with no application mounts passed production startup, **5 native classes / 12 methods** and two **12/12** keyless API replays, sessions **24 / 58**. A separate fresh live source instance passed the same native suite and **5/5** local Ollama scenarios, sessions **30 / 58 / 86 / 113 / 141**. The frontend passed **16** read-only checks against that fresh backend in **16.6 seconds**. [Receipt, source hashes and commands](evidence/top3-quality.json) · [Python output](evidence/top3-quality-pytest.txt) · [replay unit output](evidence/top3-quality-replay-unit.txt) · [live unit output](evidence/top3-quality-live-unit.txt).
