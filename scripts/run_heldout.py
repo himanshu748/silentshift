@@ -141,6 +141,11 @@ def main():
     manifest.setdefault("harness_revisions", [])
     if revision not in manifest["harness_revisions"]:
         manifest["harness_revisions"].append(revision)
+    if manifest["status"] == "paused-infrastructure":
+        manifest.setdefault("resume_events", []).append({
+            "resumed_at": datetime.now(timezone.utc).isoformat(),
+            "completed_retained": manifest["completed"], "harness_commit": revision})
+        manifest["status"] = "running"
     write_json(manifest_file, manifest)
     rules_path = out / "rules-only.json"
     if not rules_path.exists():
@@ -153,7 +158,13 @@ def main():
         directory.mkdir(exist_ok=True)
         for case in dataset["scenarios"]:
             frozen_dataset()
-            if shutil.disk_usage(ROOT).free < 1.8 * 1024**3:
+            host_free = shutil.disk_usage(ROOT).free
+            if host_free < 1.8 * 1024**3:
+                manifest.update(status="paused-infrastructure",
+                    paused_at=datetime.now(timezone.utc).isoformat(),
+                    pause_reason="Host disk below unchanged storage floor",
+                    host_free_bytes_at_pause=host_free)
+                write_json(manifest_file, manifest)
                 raise RuntimeError("Host disk below unchanged storage floor; checkpoint retained")
             dest = directory / (case["id"] + ".json")
             if dest.exists():

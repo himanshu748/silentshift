@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-11-09T06:16:04.443603+00:00",
+  "run_id": "3e2b0b86-58aa-457f-a7e0-c3ddadd40572",
+  "dataset_sha256": "e02747e587495dd2587a3813277a15451c7715638d9ff9962186a09e8986ef55",
+  "labels_commit": "a50a551a92b5f52ba5212a91dca3de0d21f57da5",
+  "identity": {
+    "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "namespace": "SILENTSHIFT",
+    "model": "qwen3-silentshift:4b-instruct",
+    "prompt_version": "silentshift-investigator/1.3.1",
+    "execution_mode": "live",
+    "module_version": "0.3.0",
+    "assets": {
+      "engine_sha256": "63f4d212793e4c6b6ad65374c5302cc863561e4d01607f566f580e2984f151de",
+      "architecture": "aarch64",
+      "python": "3.12.3"
+    }
+  },
+  "execution": "three paired native trials per case; raw agent recommendation and shipped policy route",
+  "source_commit": "124d5b23e3d79ba6e14542d94ffaaa97a1901d60",
+  "synthetic": true,
+  "status": "paused-infrastructure",
+  "completed": 114,
+  "planned": 144,
+  "actual_agent_only_delivery_executed": false,
+  "policy_delivery_target": "IRIS simulator only",
+  "native_input_sha256": "0767a250c6d83285e952769c3f4fb09339e80f1dbff1fe4c4d91cacf22930b87",
+  "setup_failures": [
+    {
+      "stage": "first case, before any persisted case or held-out inference",
+      "error": "Evaluation harness called private Setup.SeedReference; not a model or routing failure",
+      "repair": "Test-only helper now inserts immutable scoped test references, following RuntimeChecks; no shipped class changed",
+      "preserved_log": ".local/heldout/initial-harness-failure.txt"
+    }
+  ],
+  "harness_revisions": [
+    "e3e05b4af009cac75a3e520b4c38205e6b822a0b",
+    "6f795c02b91be87736047f39ac93f5c6f915a36b",
+    "92e63c10abf69132a43802963ae8bbf072e09b13"
+  ],
+  "infrastructure_interruptions": [
+    {
+      "recorded_at": "2026-11-09T06:51:25.463763+00:00",
+      "completed_retained": 64,
+      "reason": "Host disk safety-floor pause; subsequent VM kernel OOM killed IRIS control daemons while an additional provider-verification instance was running.",
+      "recovery": "Stopped other IRIS instances, restarted this same evaluation container without source/environment changes. Completed cases not rerun.",
+      "model_outcome_retries": 0,
+      "vm_memory_gib": 2,
+      "subsequent_parallel_iris_instances": 0
+    },
+    {
+      "recorded_at": "2026-11-09T07:11:52.449964+00:00",
+      "completed_retained": 109,
+      "reason": "Second host disk safety-floor pause. One final case completed after the earlier progress observation; 109 persisted results are retained.",
+      "recovery": "Removed only the second stopped failed provider-test container after exact owner approval; trimmed unused VM disk blocks. Same evaluation container and inputs retained.",
+      "model_outcome_retries": 0
+    },
+    {
+      "recorded_at": "2026-11-09T07:21:12.510755+00:00",
+      "completed_retained": 114,
+      "reason": "Repeated unchanged host-disk guard; macOS swap allocation left insufficient free host disk. No further retries until capacity changes.",
+      "model_outcome_retries": 0,
+      "recovery": "Not attempted; requires more host space. Existing outputs and native instance retained."
+    }
+  ],
+  "staged_native_source_sha256": {
+    "src/SilentShift/AI/Investigator.cls": "322fba9f86b555243334951276f1be858ff687922fa1cf5db30d1073d80f0d73",
+    "src/SilentShift/Provider/Forwarder.cls": "b85067fa2a0183fc070d111fdb04a502904f955ac87c1f27dbfe6aecd713f1f8",
+    "src/SilentShift/Provider/Lease.cls": "089ad98cb01f06e4f3ca22afb023ae96200dd6e56a3e4bc7e79f5308de0b879a"
+  },
+  "staged_native_source_note": "Read back from the retained source-load staging tree after infrastructure recovery. This evaluation instance was never loaded with the later push/top3 configurable-provider changes. Harness revision hashes identify operator checkouts, not native source replacement.",
+  "paused_at": "2026-11-09T07:21:12.510755+00:00",
+  "pause_reason": "Repeated unchanged host-disk guard; macOS swap allocation left insufficient free host disk. No further retries until capacity changes."
+}
