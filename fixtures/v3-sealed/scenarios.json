@@ -1,0 +1,1390 @@
+{
+  "dataset_version": "silentshift-sealed/3.0.0",
+  "schema_version": "silentshift-message/1",
+  "clock": "2026-11-10T12:00:00Z",
+  "provenance": "Synthetic contractual authority is stipulated. Generator written before dev-failure diagnosis; not independently human-adjudicated. Labels are never provided to the evaluated system.",
+  "scenarios": [
+    {
+      "id": "V3-U-12",
+      "name": "silver-kite unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-12",
+        "correlation_id": "corr-v3-u-12",
+        "source": "silver-kite",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-893040",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-8750",
+        "quantity": "102",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-893040:r1",
+          "contract_id": "C-893040",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-8750",
+          "quantity": "102",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "The signed commercial rider for ITEM-8750 requires unit SERIAL, not EA. This representation requirement applies from November 10; legacy export columns still show EA. The order quantity remains 102."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "An effective approved prose instruction requires SERIAL representation, while the order still uses EA."
+      }
+    },
+    {
+      "id": "V3-U-04",
+      "name": "cedar-switch unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-04",
+        "correlation_id": "corr-v3-u-04",
+        "source": "cedar-switch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-937972",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-3787",
+        "quantity": "10",
+        "unit": "PACK",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-937972:r1",
+          "contract_id": "C-937972",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-3787",
+          "quantity": "60",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Text-only conversion clause in the approved buyer commitment: for ITEM-3787, each PACK is exactly six EA. The invoice presentation 10 PACK is expressly permitted for this 60 EA commitment from November 1 onward."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "LEGITIMATE_CHANGE",
+        "reason": "The approved operative conversion clause explicitly permits the incoming PACK presentation; the tabular EA fields alone are incomplete."
+      }
+    },
+    {
+      "id": "V3-S-08",
+      "name": "saffron-beacon structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-08",
+        "correlation_id": "corr-v3-s-08",
+        "source": "saffron-beacon",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-131888",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-7926",
+        "quantity": "120",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-131888:r1",
+          "contract_id": "C-131888",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-7926",
+          "quantity": "114",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved quantity is 114 EA, but the order sends 120 EA."
+      }
+    },
+    {
+      "id": "V3-U-11",
+      "name": "pebble-works unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-11",
+        "correlation_id": "corr-v3-u-11",
+        "source": "pebble-works",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-359898",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-5380",
+        "quantity": "120",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-359898:r1",
+          "contract_id": "C-359898",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-5380",
+          "quantity": "120",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Approved buyer commitment: the controlling quantity for ITEM-5380 is 120 EA."
+        },
+        {
+          "id": "contract:C-359898:peer",
+          "contract_id": "C-359898",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-5380",
+          "quantity": "120",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Equally approved and effective buyer commitment: the controlling quantity for ITEM-5380 is 126 EA. Neither document states that it supersedes the other."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "Equally authoritative effective prose references disagree and neither supersedes the other; a reviewer must resolve the conflict."
+      }
+    },
+    {
+      "id": "V3-S-12",
+      "name": "silver-kite structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-12",
+        "correlation_id": "corr-v3-s-12",
+        "source": "silver-kite",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-682518",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-5328",
+        "quantity": "78",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-682518:r1",
+          "contract_id": "C-682518",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T00:00:00Z",
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-5328",
+          "quantity": "78",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "The only approved reference expired before the business event; current authority is missing."
+      }
+    },
+    {
+      "id": "V3-U-05",
+      "name": "mosaic-ridge unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-05",
+        "correlation_id": "corr-v3-u-05",
+        "source": "mosaic-ridge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-367585",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-3061",
+        "quantity": "132",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-367585:r1",
+          "contract_id": "C-367585",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-3061",
+          "quantity": "132",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Approved purchase schedule: the controlling quantity for ITEM-3061 is 132 EA."
+        },
+        {
+          "id": "contract:C-367585:peer",
+          "contract_id": "C-367585",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-3061",
+          "quantity": "132",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Equally approved and effective purchase schedule: the controlling quantity for ITEM-3061 is 138 EA. Neither document states that it supersedes the other."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "Equally authoritative effective prose references disagree and neither supersedes the other; a reviewer must resolve the conflict."
+      }
+    },
+    {
+      "id": "V3-S-01",
+      "name": "copper-finch structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-01",
+        "correlation_id": "corr-v3-s-01",
+        "source": "copper-finch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-323187",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-2034",
+        "quantity": "42",
+        "unit": "TRAY",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-323187:r1",
+          "contract_id": "C-323187",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-2034",
+          "quantity": "42",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved commitment requires EA, while the order declares TRAY without approved authority for that representation."
+      }
+    },
+    {
+      "id": "V3-U-01",
+      "name": "copper-finch unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-01",
+        "correlation_id": "corr-v3-u-01",
+        "source": "copper-finch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-911090",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-1185",
+        "quantity": "20",
+        "unit": "BUNDLE",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-911090:r1",
+          "contract_id": "C-911090",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-1185",
+          "quantity": "120",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Effective November 10, the signed buyer commitment replaces the unit presentation: one BUNDLE contains six EA. For ITEM-1185, 20 BUNDLE is the agreed presentation of 120 EA. The old export columns have not been refreshed."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "LEGITIMATE_CHANGE",
+        "reason": "The effective signed prose authorizes 20 BUNDLE as 120 EA despite stale structured unit columns."
+      }
+    },
+    {
+      "id": "V3-C-08",
+      "name": "saffron-beacon clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-08",
+        "correlation_id": "corr-v3-c-08",
+        "source": "saffron-beacon",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-938025",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-3495",
+        "quantity": "30",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-938025:r1",
+          "contract_id": "C-938025",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-3495",
+          "quantity": "30",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "A future proposal for November 20 would use 48 EA. It is not approved and is not effective for this event. Current approved quantity is 30 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-S-06",
+      "name": "tamarind-dock structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-06",
+        "correlation_id": "corr-v3-s-06",
+        "source": "tamarind-dock",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-293821",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-6358",
+        "quantity": "84",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-293821:r1",
+          "contract_id": "C-293821",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T00:00:00Z",
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-6358",
+          "quantity": "84",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "The only approved reference expired before the business event; current authority is missing."
+      }
+    },
+    {
+      "id": "V3-S-10",
+      "name": "maple-current structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-10",
+        "correlation_id": "corr-v3-s-10",
+        "source": "maple-current",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-206467",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-8461",
+        "quantity": "108",
+        "unit": "TRAY",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-206467:r1",
+          "contract_id": "C-206467",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-8461",
+          "quantity": "108",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved commitment requires EA, while the order declares TRAY without approved authority for that representation."
+      }
+    },
+    {
+      "id": "V3-U-07",
+      "name": "birch-orbit unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-07",
+        "correlation_id": "corr-v3-u-07",
+        "source": "birch-orbit",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-373513",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-9856",
+        "quantity": "17",
+        "unit": "BUNDLE",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-373513:r1",
+          "contract_id": "C-373513",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-9856",
+          "quantity": "102",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Effective November 10, the signed commercial rider replaces the unit presentation: one BUNDLE contains six EA. For ITEM-9856, 17 BUNDLE is the agreed presentation of 102 EA. The old export columns have not been refreshed."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "LEGITIMATE_CHANGE",
+        "reason": "The effective signed prose authorizes 17 BUNDLE as 102 EA despite stale structured unit columns."
+      }
+    },
+    {
+      "id": "V3-S-09",
+      "name": "cobalt-reed structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-09",
+        "correlation_id": "corr-v3-s-09",
+        "source": "cobalt-reed",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-691782",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-1213",
+        "quantity": "42",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-691782:r1",
+          "contract_id": "C-691782",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T00:00:00Z",
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-1213",
+          "quantity": "42",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "The only approved reference expired before the business event; current authority is missing."
+      }
+    },
+    {
+      "id": "V3-S-03",
+      "name": "opal-forge structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-03",
+        "correlation_id": "corr-v3-s-03",
+        "source": "opal-forge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-882025",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-9598",
+        "quantity": "60",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-882025:r1",
+          "contract_id": "C-882025",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T00:00:00Z",
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-9598",
+          "quantity": "60",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "reason": "The only approved reference expired before the business event; current authority is missing."
+      }
+    },
+    {
+      "id": "V3-U-06",
+      "name": "tamarind-dock unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-06",
+        "correlation_id": "corr-v3-u-06",
+        "source": "tamarind-dock",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-778961",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-2853",
+        "quantity": "30",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-778961:r1",
+          "contract_id": "C-778961",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-2853",
+          "quantity": "30",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "The signed purchase schedule for ITEM-2853 requires unit SERIAL, not EA. This representation requirement applies from November 10; legacy export columns still show EA. The order quantity remains 30."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "An effective approved prose instruction requires SERIAL representation, while the order still uses EA."
+      }
+    },
+    {
+      "id": "V3-S-02",
+      "name": "juniper-quay structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-02",
+        "correlation_id": "corr-v3-s-02",
+        "source": "juniper-quay",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-473552",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-4736",
+        "quantity": "126",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-473552:r1",
+          "contract_id": "C-473552",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-4736",
+          "quantity": "120",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved quantity is 120 EA, but the order sends 126 EA."
+      }
+    },
+    {
+      "id": "V3-C-06",
+      "name": "tamarind-dock clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-06",
+        "correlation_id": "corr-v3-c-06",
+        "source": "tamarind-dock",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-985913",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-8625",
+        "quantity": "72",
+        "unit": "EA",
+        "notes": "Partner requests a possible future carton presentation. No change is made to this order; quantities and units stay as agreed."
+      },
+      "references": [
+        {
+          "id": "contract:C-985913:r1",
+          "contract_id": "C-985913",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-8625",
+          "quantity": "72",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "The label CARTON is only a warehouse nickname, not an order unit. Current approved supply remains 72 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-U-09",
+      "name": "cobalt-reed unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-09",
+        "correlation_id": "corr-v3-u-09",
+        "source": "cobalt-reed",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-518962",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-6766",
+        "quantity": "96",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-518962:r1",
+          "contract_id": "C-518962",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-6766",
+          "quantity": "96",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Superseding email approved by the contract owner on November 9: for C-518962, deliver 114 EA, replacing the earlier 96 EA entry. Effective for events from November 10. This is the governing instruction for ITEM-6766."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The effective approved superseding email requires 114 EA; the order retains the obsolete 96 EA."
+      }
+    },
+    {
+      "id": "V3-C-11",
+      "name": "pebble-works clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-11",
+        "correlation_id": "corr-v3-c-11",
+        "source": "pebble-works",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-879005",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-8960",
+        "quantity": "114",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-879005:r1",
+          "contract_id": "C-879005",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-8960",
+          "quantity": "114",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "For a different product OTHER-ITEM-8960, a separate order uses 120 EA. This document confirms that ITEM-8960 remains 114 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-03",
+      "name": "opal-forge clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-03",
+        "correlation_id": "corr-v3-c-03",
+        "source": "opal-forge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-823718",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-7485",
+        "quantity": "120",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-823718:r1",
+          "contract_id": "C-823718",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-7485",
+          "quantity": "120",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "For a different product OTHER-ITEM-7485, a separate order uses 126 EA. This document confirms that ITEM-7485 remains 120 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-02",
+      "name": "juniper-quay clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-02",
+        "correlation_id": "corr-v3-c-02",
+        "source": "juniper-quay",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-959381",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-2810",
+        "quantity": "36",
+        "unit": "EA",
+        "notes": "Partner requests a possible future carton presentation. No change is made to this order; quantities and units stay as agreed."
+      },
+      "references": [
+        {
+          "id": "contract:C-959381:r1",
+          "contract_id": "C-959381",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-2810",
+          "quantity": "36",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "The label CARTON is only a warehouse nickname, not an order unit. Current approved supply remains 36 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-U-03",
+      "name": "opal-forge unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-03",
+        "correlation_id": "corr-v3-u-03",
+        "source": "opal-forge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-723364",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-5220",
+        "quantity": "108",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-723364:r1",
+          "contract_id": "C-723364",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-5220",
+          "quantity": "108",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Superseding email approved by the contract owner on November 9: for C-723364, deliver 126 EA, replacing the earlier 108 EA entry. Effective for events from November 10. This is the governing instruction for ITEM-5220."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The effective approved superseding email requires 126 EA; the order retains the obsolete 108 EA."
+      }
+    },
+    {
+      "id": "V3-S-04",
+      "name": "cedar-switch structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-04",
+        "correlation_id": "corr-v3-s-04",
+        "source": "cedar-switch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-868219",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-8013",
+        "quantity": "84",
+        "unit": "TRAY",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-868219:r1",
+          "contract_id": "C-868219",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-8013",
+          "quantity": "84",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved commitment requires EA, while the order declares TRAY without approved authority for that representation."
+      }
+    },
+    {
+      "id": "V3-C-09",
+      "name": "cobalt-reed clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-09",
+        "correlation_id": "corr-v3-c-09",
+        "source": "cobalt-reed",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-468698",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-1574",
+        "quantity": "72",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-468698:r1",
+          "contract_id": "C-468698",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-1574",
+          "quantity": "72",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Historical draft, not operative: a proposal once mentioned 84 EA. That proposal was rejected. The approved and current commitment remains 72 EA of ITEM-1574."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-10",
+      "name": "maple-current clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-10",
+        "correlation_id": "corr-v3-c-10",
+        "source": "maple-current",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-742851",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-9439",
+        "quantity": "42",
+        "unit": "EA",
+        "notes": "Partner requests a possible future carton presentation. No change is made to this order; quantities and units stay as agreed."
+      },
+      "references": [
+        {
+          "id": "contract:C-742851:r1",
+          "contract_id": "C-742851",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-9439",
+          "quantity": "42",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "The label CARTON is only a warehouse nickname, not an order unit. Current approved supply remains 42 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-U-02",
+      "name": "juniper-quay unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-02",
+        "correlation_id": "corr-v3-u-02",
+        "source": "juniper-quay",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-579836",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-1851",
+        "quantity": "54",
+        "unit": "EA",
+        "notes": "PO attachment: the buyer asks for 54 EA."
+      },
+      "references": [
+        {
+          "id": "contract:C-579836:r1",
+          "contract_id": "C-579836",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-1851",
+          "quantity": "54",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Approved PO buyer note, effective November 10: this shipment must contain 66 EA of ITEM-1851; the number 54 belongs to the superseded schedule. This note governs over the old tabular export."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved buyer note requires 66 EA, while the incoming order and stale export say 54 EA."
+      }
+    },
+    {
+      "id": "V3-S-05",
+      "name": "mosaic-ridge structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-05",
+        "correlation_id": "corr-v3-s-05",
+        "source": "mosaic-ridge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-475394",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-4423",
+        "quantity": "60",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-475394:r1",
+          "contract_id": "C-475394",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-4423",
+          "quantity": "54",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved quantity is 54 EA, but the order sends 60 EA."
+      }
+    },
+    {
+      "id": "V3-S-11",
+      "name": "pebble-works structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-11",
+        "correlation_id": "corr-v3-s-11",
+        "source": "pebble-works",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-953595",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-1990",
+        "quantity": "42",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-953595:r1",
+          "contract_id": "C-953595",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-1990",
+          "quantity": "36",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved quantity is 36 EA, but the order sends 42 EA."
+      }
+    },
+    {
+      "id": "V3-C-05",
+      "name": "mosaic-ridge clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-05",
+        "correlation_id": "corr-v3-c-05",
+        "source": "mosaic-ridge",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-419275",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-2723",
+        "quantity": "48",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-419275:r1",
+          "contract_id": "C-419275",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-2723",
+          "quantity": "48",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Historical draft, not operative: a proposal once mentioned 60 EA. That proposal was rejected. The approved and current commitment remains 48 EA of ITEM-2723."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-01",
+      "name": "copper-finch clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-01",
+        "correlation_id": "corr-v3-c-01",
+        "source": "copper-finch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-108796",
+        "business_unit": "EU-SOUTH",
+        "product_id": "ITEM-5824",
+        "quantity": "96",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-108796:r1",
+          "contract_id": "C-108796",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "EU-SOUTH",
+          "product_id": "ITEM-5824",
+          "quantity": "96",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Historical draft, not operative: a proposal once mentioned 108 EA. That proposal was rejected. The approved and current commitment remains 96 EA of ITEM-5824."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-07",
+      "name": "birch-orbit clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-07",
+        "correlation_id": "corr-v3-c-07",
+        "source": "birch-orbit",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-506664",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-3244",
+        "quantity": "108",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-506664:r1",
+          "contract_id": "C-506664",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-3244",
+          "quantity": "108",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "For a different product OTHER-ITEM-3244, a separate order uses 114 EA. This document confirms that ITEM-3244 remains 108 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-U-08",
+      "name": "saffron-beacon unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-08",
+        "correlation_id": "corr-v3-u-08",
+        "source": "saffron-beacon",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-753112",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-7164",
+        "quantity": "90",
+        "unit": "EA",
+        "notes": "PO attachment: the buyer asks for 90 EA."
+      },
+      "references": [
+        {
+          "id": "contract:C-753112:r1",
+          "contract_id": "C-753112",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-7164",
+          "quantity": "90",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Approved PO buyer note, effective November 10: this shipment must contain 102 EA of ITEM-7164; the number 90 belongs to the superseded schedule. This note governs over the old tabular export."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved buyer note requires 102 EA, while the incoming order and stale export say 90 EA."
+      }
+    },
+    {
+      "id": "V3-S-07",
+      "name": "birch-orbit structured order",
+      "category": "structured",
+      "message": {
+        "event_id": "evt-v3-s-07",
+        "correlation_id": "corr-v3-s-07",
+        "source": "birch-orbit",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-201798",
+        "business_unit": "NA-CENTRAL",
+        "product_id": "ITEM-8729",
+        "quantity": "102",
+        "unit": "TRAY",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-201798:r1",
+          "contract_id": "C-201798",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "NA-CENTRAL",
+          "product_id": "ITEM-8729",
+          "quantity": "102",
+          "unit": "EA",
+          "timestamp_semantics": "event_time"
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "classification": "VERIFIED_CONTRADICTION",
+        "reason": "The approved commitment requires EA, while the order declares TRAY without approved authority for that representation."
+      }
+    },
+    {
+      "id": "V3-U-10",
+      "name": "maple-current unstructured order",
+      "category": "unstructured",
+      "message": {
+        "event_id": "evt-v3-u-10",
+        "correlation_id": "corr-v3-u-10",
+        "source": "maple-current",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-805429",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-2834",
+        "quantity": "9",
+        "unit": "PACK",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-805429:r1",
+          "contract_id": "C-805429",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-2834",
+          "quantity": "54",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "Text-only conversion clause in the approved commercial rider: for ITEM-2834, each PACK is exactly six EA. The invoice presentation 9 PACK is expressly permitted for this 54 EA commitment from November 1 onward."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "LEGITIMATE_CHANGE",
+        "reason": "The approved operative conversion clause explicitly permits the incoming PACK presentation; the tabular EA fields alone are incomplete."
+      }
+    },
+    {
+      "id": "V3-C-04",
+      "name": "cedar-switch clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-04",
+        "correlation_id": "corr-v3-c-04",
+        "source": "cedar-switch",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-772933",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-4828",
+        "quantity": "72",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-772933:r1",
+          "contract_id": "C-772933",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-4828",
+          "quantity": "72",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "A future proposal for November 20 would use 90 EA. It is not approved and is not effective for this event. Current approved quantity is 72 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    },
+    {
+      "id": "V3-C-12",
+      "name": "silver-kite clean order",
+      "category": "clean",
+      "message": {
+        "event_id": "evt-v3-c-12",
+        "correlation_id": "corr-v3-c-12",
+        "source": "silver-kite",
+        "kind": "order",
+        "occurred_at": "2026-11-10T11:30:00Z",
+        "contract_id": "C-518002",
+        "business_unit": "APAC-NORTH",
+        "product_id": "ITEM-6271",
+        "quantity": "48",
+        "unit": "EA",
+        "notes": "Synthetic partner order."
+      },
+      "references": [
+        {
+          "id": "contract:C-518002:r1",
+          "contract_id": "C-518002",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "business_unit": "APAC-NORTH",
+          "product_id": "ITEM-6271",
+          "quantity": "48",
+          "unit": "EA",
+          "timestamp_semantics": "event_time",
+          "text": "A future proposal for November 20 would use 66 EA. It is not approved and is not effective for this event. Current approved quantity is 48 EA."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "classification": "CLEAR",
+        "reason": "The active approved commitment and order agree; no conflicting operative instruction exists."
+      }
+    }
+  ]
+}
