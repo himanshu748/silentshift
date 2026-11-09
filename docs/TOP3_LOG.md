@@ -106,3 +106,8 @@ Printable Visual Trace rendered its actual provider request/response hops throug
 The explicitly approved `t4g.large` trial launched at 13:13:47 UTC on November 9. The absolute timer was read back active for 17:13:47 UTC, AWS instance-initiated shutdown is `terminate`, the encrypted root disk deletes with the instance, and standard CPU credits are confirmed. Public application ingress stays closed during installation. The monitoring budget is an alert, not a cap. [Launch/control receipt](evidence/top3-aws-trial-launch.json).
 
 The sequential direct image transfer was too slow; its partial archive was retained. A first chunk-upload invocation started before its local manifest finished and exited before copying any chunk; that operator sequencing failure is retained privately. Once the manifest existed, four bounded transfer workers started. The original image/model archives are unchanged and will be hash-checked on the host. This transfer change does not extend the termination timer or authorize a larger instance.
+
+
+### Main documentation integrated without rewriting frozen history
+
+Remote main advanced to `a10de3f61e1d809b374832a4db67761318bc16ea` with a README-only plain-English judge path. It was merged into `push/top3`, preserving that shorter setup and the owner's approved three-line held-out result, new source screenshot and explicit public-package/source boundaries. No native code changed, and label-first evaluation commits were not rebased or rewritten. Local main was not advanced or pushed.
