@@ -1,28 +1,54 @@
 # SilentShift
 
-**Catch wrong business meaning before delivery.**
+**Find the business contradiction behind a successful integration.**
 
-SilentShift is a validation workbench for integration operations teams running B2B order pipelines. It compares incoming orders with independently approved commitments and gives each held line an inspectable reason and a review path.
+SilentShift helps integration operations teams inspect B2B orders against independently approved commitments before delivery. An order says **20 CASE**; its contract says **240 EA**. The message passes technical validation, but no approved conversion authorizes the change. The operator sees the two values, their sources and a held order with no simulator delivery. An effective approved amendment authorizing **20 CASE** changes the outcome.
 
-An order arrives as `20 CASE`. Its approved contract says `240 EA`. The JSON is valid, but no approved conversion explains the change. SilentShift holds the order and shows the operator the incoming value, the approved reference and the reason.
+The investigation runs inside InterSystems IRIS Interoperability. Native AI Hub reads case-scoped evidence and recommends a route. Deterministic policy retains the final authority; eligible holds go to native Workflow review, while critical contradictions cannot be approved.
 
-If an effective approved amendment authorizes `20 CASE`, the demonstrated workflow allows it. In the workbench, the operator follows the original message, governing reference, evidence reads and final route in one case. Eligible holds go to a reviewer; critical contradictions require corrected input or approved authority and a new investigation.
+**[Install from one guide](INSTALL.md)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
 
-A native IRIS AI Hub agent recommends a disposition with evidence citations and uncertainty. Automatic delivery requires a valid `ALLOW` recommendation as well as a resolved comparison and complete evidence. Deterministic policy retains the final authority and critical-release veto.
+The app runs locally. There is no hosted demo. The video records the earlier core workflow and predates the new workbench and CSV importer.
 
-**[Install SilentShift](INSTALL.md)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
+![The source-built SilentShift home page with an interactive, explicitly synthetic order comparison](evidence/browser/top3-multipage/home-light-desktop.png)
+
+## What the held-out comparison showed
+
+- On **48 frozen synthetic orders**, rules-only produced **33/48** correct routes; agent + policy produced **33/48, 33/48 and 30/48** across three trials.
+- Rules recommended releasing **6/23** release-ineligible orders. The shipped arm made **2/23, 3/23 and 3/23 actual wrong simulator deliveries**, with more false holds: **9/25, 9/25 and 12/25**, versus the baseline's **9/25**.
+- **Agent + policy did not improve correct routing in the unstructured split: 1/16 for both in every trial.** Five failed agent attempts remain counted. This does not establish an overall AI accuracy improvement.
+
+[Every result, failure, timing and rules win](docs/EVAL_HELDOUT.md) · [Frozen labels and protocol](fixtures/v2-heldout/FROZEN.md) · [Raw native observations](evidence/heldout/summary.json). Baseline releases are counterfactual choices; only the shipped arm executed simulator deliveries. The same cases repeat across trials and are not independent production orders.
 
 <a id="native-build-154-setup"></a>
-## Installation
+<a id="installation"></a>
+## The short judge path
 
-Follow **[INSTALL.md](INSTALL.md)** for the complete installation in one file: obtain and load the licensed image, create private local credentials, prepare the local model, bootstrap IRIS, then start the workbench and investigate an order.
+Follow [INSTALL.md](INSTALL.md), then connect with your configured local IRIS account. Fresh inference needs the local Ollama model and embeddings. The alternative keyless path uses recorded responses and does not prove fresh inference or the amendment case.
 
-| What you want to do | Installation path | Model requirement |
-| --- | --- | --- |
-| Run new investigations and CSV imports | [Full local installation](INSTALL.md) | Local Ollama, Qwen and local embeddings; no paid provider key |
-| Check native orchestration without a model | [Keyless replay](INSTALL.md#optional-check-without-a-model) | No Ollama needed; recorded provider responses, no fresh inference |
+1. Open **Scenario Lab → Quantity mismatch** and inject once. Inspect `20 CASE`, the independently approved `240 EA` reference, the critical finding and **zero deliveries**. Local inference may take longer than a quick inspection.
+2. Run **Approved amendment**. Follow the effective reference to the allowed route and its single simulator receipt. The change is approved authority, not a guessed conversion.
+3. Open the case's native **Visual Trace**. Each admitted provider exchange is its own request/response pair in the business-case session. Inspect model, provider, prompt version, duration, tool calls and available response usage. Unknown cost and provider retries stay null.
+4. Inspect **Review** and **CSV Import**. Review requires permission, a reason and the current case version. CSV preview uses a separate approved-reference export; commit requires explicit importer permission. Precedents add evidence and cannot override current authority.
 
-The verified native environment is **macOS/ARM64 with IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. **Public native IPM and OEX release: 0.3.0. React workbench: 0.2.1**, built separately from matching source. A fresh public `zpm "install silentshift"` passed production startup, the native suite and two recorded replays. [Public-install evidence and source identity](docs/JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc) · [Live/native/browser source gate](docs/JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc) · [Release notes](CHANGELOG.md). The proprietary runtime must be obtained separately; no newer build is claimed tested.
+[Full walkthrough](docs/JUDGE_GUIDE.md) · [CSV guide](docs/CSV_IMPORT.md) · [Verified source, commands and limits](docs/BUILD_STATUS.md).
+
+<a id="local-checks-without-iris"></a>
+<a id="prove-the-native-journey"></a>
+<a id="optional-local-intake-and-procedural-guidance"></a>
+## What is technically interesting
+
+- **AI Hub is inside the production.** A Business Service and Business Process coordinate native investigation, read-only evidence tools, policy and routing Operations.
+- **LLM calls are business trace messages.** [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689) connects provider exchanges to the case's evidence, review and delivery/hold. [Reproduce it and compare with Langfuse](docs/NATIVE_AI_HUB.md). The dedicated OEX association is publicly visible; organizer qualification remains unconfirmed.
+- **Authority is explicit.** The model proposes; policy authorizes. Review versioning and idempotency preserve a recorded decision and a single simulator receipt in the verified workflow.
+
+## Versions and limits
+
+Only **2026.3.0AI.154.0 Community / 154U ARM64** is qualified locally. Obtain its separately licensed image from InterSystems; it is not bundled or publicly redistributed. Other builds and platforms are not claimed tested.
+
+Public native IPM and OEX release remain **0.3.0**; the separate React package remains **0.2.1**. Provider configuration and the new multi-page workbench are changes on `push/top3`, not a newly published native package. Use the matching source checkout for those changes. External OpenAI, Gemini and OpenRouter service execution remains unverified; no paid provider is needed for the tested local path.
+
+All supplied examples are synthetic. Delivery is per line to an IRIS simulator, not an external ERP or bank. There is no X12 parser, whole-order completeness guarantee, hosted demo or production-readiness claim. The held-out prose-authority failures are a real limitation of the shipped structured-authority policy.
 
 ## Community Idea DPI-I-689: LLM tracing with Interoperability
 
@@ -40,18 +66,7 @@ Use the **optional keyless replay** in [INSTALL.md](INSTALL.md#optional-check-wi
 
 SilentShift connects model exchanges to native business messages and human review. Langfuse offers dedicated LLM evaluation, dashboards and prompt-management workflows. [Read the full comparison](docs/FEATURES.md#silentshift-iris-interoperability-vs-langfuse).
 
-The idea implementation is verified locally; organizer qualification and the dedicated OEX association's public visibility remain pending. No awarded points are claimed.
-
-<a id="local-checks-without-iris"></a>
-<a id="prove-the-native-journey"></a>
-<a id="optional-local-intake-and-procedural-guidance"></a>
-## Explore the application
-
-[Features and technical reference](docs/FEATURES.md) covers evidence inspection, Workflow review, vector precedents, partner-file intake, API examples and developer checks. [Judge walkthrough](docs/JUDGE_GUIDE.md) connects those features to recorded execution evidence.
-
-[Import a CSV order feed from the workbench](docs/CSV_IMPORT.md): preview incoming lines against a separate approved export, then investigate them in the native production. This feature requires explicit importer permission. Public native IPM **0.3.0** includes its IRIS backend/parser, verified through the [installed preview API](docs/evidence/ship-030-public-csv-preview.json). The TypeScript CSV workbench remains a **separate source-built frontend**, not something installed by `zpm "install silentshift"` alone. The [32-check browser import run](docs/evidence/candidate-030-csv-verification.json) exercised the same backend source before publication.
-
-All supplied examples are synthetic and deliver only to an IRIS simulator. There is no hosted demo or verified external ERP/bank delivery. [Verification results](docs/JUDGE_VERIFICATION.md) · [Bonus status](docs/SUBMISSION_CHECKLIST.md).
+The idea implementation is verified locally, and the dedicated OEX association is publicly visible. Organizer qualification remains unconfirmed; no awarded points are claimed.
 
 ## Developer Community articles
 

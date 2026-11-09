@@ -1,6 +1,16 @@
 # Voting-week work log
 
-Work is confined to `push/top3`. Main, the registry, Open Exchange and the published video are unchanged. README/listing wording waits for the owner's review of the completed held-out results.
+Work is confined to `push/top3`. Main, the registry, Open Exchange and the published video are unchanged. The owner approved the measured benchmark wording after reviewing the completed results, and the README was updated on this branch. The newer quality pass below supersedes earlier verification blockers without rewriting their history.
+
+## New serialized quality pass — November 9, 2026 UTC
+
+Following the owner's request to strengthen the entry, the completed benchmark, recovered storage and repaired property-test deadlines allowed a new quality pass with one IRIS instance at a time. The full Python suite passed **248 tests in 21.49 seconds**. Separate newly created **154U ARM64** source-loaded instances, without application mounts, passed **5 native classes / 12 methods**, two **12/12** keyless replays (sessions **24 / 58**) and **5/5** fresh local Ollama scenarios (sessions **30 / 58 / 86 / 113 / 141**). The rebuilt frontend passed **16** actual native read-only checks against that fresh live backend in **16.6 seconds**. The normal local app was restored and authenticated health returned HTTP **200**, production running. [Receipt, commands and executable snapshot](evidence/top3-quality.json). Earlier timing/OOM failures remain below; none is relabeled as a pass.
+
+The anonymous contest/listing readback now shows **43** entries, release **0.3.0** and the dedicated DPI-I-689 association. The OEX body still contains legacy **0.2.0/source-only CSV** wording. A correction is prepared; no listing edit or message was sent. Organizer qualification remains unconfirmed. [Public readback](evidence/top3-public-review.json).
+
+The owner explicitly approved the README's honest comparison: fewer wrong simulator deliveries, no overall accuracy improvement and no unstructured-routing improvement. The opening now leads with the operator's task, measured result and short judge path. The design/architecture documents were aligned with the actual multi-page UI and source-versus-package boundary. The new Developer Community article remains a draft, not a post.
+
+The owner separately approved a **four-hour**, **2-vCPU / 8-GiB / 50-GiB** ARM AWS trial at an estimated **$0.31** base before tax/transfer. Credit coverage is unconfirmed. No GPU, larger instance or longer duration is approved. Preparation must finish before launch, and automatic termination remains required. [Fresh AWS price readback](evidence/top3-aws-trial-quote.json). Hosting is not yet verified and the online-demo bonus remains Not claimed.
 
 ## November 9, 2026 UTC
 

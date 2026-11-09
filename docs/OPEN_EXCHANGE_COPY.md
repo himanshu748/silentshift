@@ -1,10 +1,14 @@
 # Open Exchange description and product copy
 
-**Public native IPM 0.3.0 is published and clean-install verified on November 8, 2026 UTC.** Open Exchange release **0.3.0** is visible in a live signed-out browser; the React workbench remains **0.2.1** and runs separately from source. [Publication/readback](evidence/ship-030-publication.json) · [fresh registry install](evidence/ship-030-registry.json). The new description was sent for approval; its older 0.2.0 wording remains public until moderation completes. Dedicated public DPI-I-689 visibility, idea qualification, bug confirmation and all organizer awards remain unconfirmed.
+## November 9 public readback and prepared correction
 
-## Current 0.3.0 description — saved and sent for approval
+The anonymous listing shows release **0.3.0**, its CSV release notes and the dedicated **Ideas to the app → DPI-I-689** association. Its description body still contains the older **0.2.0 / source-only CSV** sentences. That is a visible inconsistency, not proof that the replacement description has been approved. Organizer idea qualification and awards remain unconfirmed. [Public listing](https://openexchange.intersystems.com/package/SilentShift).
 
-This is the exact replacement copy submitted after the public install passed. Submission succeeded; signed-out readback still shows the older description below, so approval is **not confirmed**. Contest/IPM stayed checked; the dedicated idea URL, video and both articles stayed intact. No approval was cancelled.
+The replacement below is ready for owner review. Do not save another edit from this task: preserve Submit to Contest and existing approval. No new package version is published. Public native IPM remains **0.3.0**; the React workbench remains **0.2.1**. New provider configuration and the multi-page interface are source-branch changes and must not be presented as contents of the public native archive.
+
+## Prepared 0.3.0 description — not resubmitted in this pass
+
+This replacement was prepared after the public install passed. The November 9 anonymous readback still has legacy body text; approval of this complete replacement is **not confirmed**. No owner fields, approval state or contest selection were changed in this pass.
 
 ### An order can arrive successfully and still be wrong
 SilentShift is a validation workbench for integration operations teams running B2B order pipelines. It compares incoming business values with independently approved commitments, investigates discrepancies and gives the operator a reason, supporting records and a route for each case.
@@ -15,6 +19,9 @@ The production accepts REST intake and ready JSON files through a custom inbound
 ### The agent makes a recommendation inside the production
 A native IRIS AI Hub agent reads four case-scoped evidence tools and recommends **ALLOW**, **QUARANTINE** or **REQUEST_REVIEW**, with citations and uncertainty. Automatic delivery needs a valid ALLOW recommendation, a resolved comparison and complete evidence. Deterministic policy owns the final route. Similar precedents inform the investigation; they do not replace current authority.
 Each admitted provider exchange becomes a native request/response pair in the business case's Visual Trace. The messages expose model, provider, prompt version, timing, tool calls, outcome and available response usage. Unknown cost and provider retries remain null. [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689), the [reproducible example](https://github.com/himanshu748/silentshift#see-it-in-visual-trace) and [Langfuse comparison](https://github.com/himanshu748/silentshift#silentshift-iris-interoperability-vs-langfuse) explain the tracing design.
+### What the held-out comparison shows
+On 48 frozen synthetic orders, rules-only produced **33/48** correct routes; agent + policy produced **33/48, 33/48 and 30/48** across three paired trials. Its wrong simulator deliveries were **2/23, 3/23 and 3/23**, versus six counterfactual baseline release choices. The reduction came with more false holds. **There was no overall correct-routing improvement and no unstructured-routing improvement: 1/16 for both per trial.** Five failed agent attempts remain counted. [Every failure and limitation](https://github.com/himanshu748/silentshift/blob/push/top3/docs/EVAL_HELDOUT.md). This source-branch comparison is not a new public package release or a population accuracy estimate.
+The source workbench has separate public product pages and keeps its native case, review and CSV journeys. New provider configuration and frontend work belong to the source branch; they are not claimed as contents of the public native 0.3.0 archive. External provider service execution remains unverified.
 ### Run it locally or inspect the recorded journey
 [Install from one guide](https://github.com/himanshu748/silentshift/blob/main/INSTALL.md). Fresh investigations use local Ollama and local embeddings, without a paid provider key. The optional keyless replay runs the native production with recorded provider responses and performs no fresh inference. Both paths require a separately obtained licensed IRIS image.
 [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download the MP4 without signing in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Current verification and commands](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_VERIFICATION.md). The video demonstrates the earlier synthetic core workflow and predates CSV.
