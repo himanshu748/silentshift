@@ -20,7 +20,7 @@ import {
   SystemHealth,
 } from "./Views";
 import { AppContext, Badge, Button, InlineError, Modal } from "./ui";
-import Landing from "./Landing";
+import { Home, legacySectionUrl } from "./Landing";
 import Reviews from "./Reviews";
 import CSVImport, { useCSVImport } from "./CSVImport";
 
@@ -194,17 +194,30 @@ function isLandingRoute() {
   return !hash || hash === "landing" || hash.startsWith("landing/");
 }
 
+/** Sections of the former one-page landing now live on their own documents. */
+function redirectLegacySection() {
+  const target = legacySectionUrl(window.location.hash.slice(1));
+  if (target) window.location.replace(target);
+  return Boolean(target);
+}
+
 export default function App() {
   const [landing, setLanding] = useState(isLandingRoute);
+  const [arrived, setArrived] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
   useEffect(() => {
-    const listener = () => setLanding(isLandingRoute());
+    redirectLegacySection();
+    const listener = () => {
+      if (redirectLegacySection()) return;
+      setLanding(isLandingRoute());
+      setArrived(true);
+    };
     window.addEventListener("hashchange", listener);
     return () => window.removeEventListener("hashchange", listener);
   }, []);
   // Public product information never mounts the authenticated API hooks.
   return landing ? (
-    <Landing />
+    <Home focusMain={arrived} />
   ) : (
     <WorkbenchApp username={username} setUsername={setUsername} />
   );
@@ -467,6 +480,7 @@ function WorkbenchApp({
           <a className="link" href="#landing">
             Product overview <ArrowUpRight size={13} aria-hidden="true" />
           </a>
+          <span>Product pages open as separate documents and end the in-memory IRIS session.</span>
           <Badge>Synthetic demonstration</Badge>
         </footer>
       </div>

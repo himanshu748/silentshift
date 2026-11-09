@@ -151,7 +151,7 @@ export default function FlowPreview() {
         </div>
       </div>
       <figcaption>
-        <a className="link" href="#scenarios">
+        <a className="link" href="/#scenarios">
           Run the real scenario in IRIS <ArrowRight size={13} aria-hidden="true" />
         </a>
       </figcaption>

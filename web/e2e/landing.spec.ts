@@ -10,10 +10,16 @@ test('public landing and section links never request the native API', async ({ p
   });
   page.on('pageerror', (error) => pageErrors.push(error.message));
 
-  for (const fragment of ['', '#landing', '#landing/proof', '#landing/route', '#landing/setup']) {
+  for (const [fragment, heading] of [
+    ['', 'Catch what status codes miss.'],
+    ['#landing', 'Catch what status codes miss.'],
+    ['#landing/proof', 'Five cases. Five controlled outcomes.'],
+    ['#landing/route', 'Valid message. Contradicted agreement.'],
+    ['#landing/setup', 'Start the IRIS production.'],
+  ]) {
     await page.goto(`/${fragment}`);
-    await expect(page.getByRole('heading', { name: 'Catch what status codes miss.', exact: true })).toBeVisible();
-    await expect(page).toHaveTitle('SilentShift · Catch what status codes miss');
+    await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
+    await expect(page).toHaveTitle(/SilentShift/);
     await page.waitForLoadState('networkidle');
     expect(apiRequests).toEqual([]);
     if (!fragment) {
@@ -21,8 +27,9 @@ test('public landing and section links never request the native API', async ({ p
       await page.screenshot({path:path.resolve('..',`evidence/browser/landing-refresh-${testInfo.project.name}.png`)});
     }
   }
-  await page.getByRole('link', { name: 'Inspect recorded evidence', exact: true }).click();
-  await expect(page).toHaveURL(/#landing\/proof$/);
+  await page.goto('/');
+  await page.getByRole('link', { name: /^Evidence record/ }).click();
+  await expect(page).toHaveURL(/\/evidence-record\/$/);
   await expect(page.getByRole('heading', { name: 'Five cases. Five controlled outcomes.', exact: true })).toBeInViewport();
   expect(apiRequests).toEqual([]);
   expect(pageErrors).toEqual([]);
@@ -31,8 +38,8 @@ test('public landing and section links never request the native API', async ({ p
 test('public proof is scoped and real JSON and product captures are available', async ({ page, request }) => {
   // Six real asset requests can contend with native compilation on the demo host.
   test.setTimeout(45_000);
-  await page.goto('/');
-  await expect(page.getByText('Five synthetic scenarios, run natively in IRIS.', { exact: true })).toBeVisible();
+  await page.goto('/evidence-record/');
+  await expect(page.getByText(/Five synthetic scenarios, run natively in IRIS on November 2, 2026/)).toBeVisible();
   await expect(page.getByText('Rule-only baseline: 5/5. No AI accuracy uplift demonstrated.', { exact: true })).toBeVisible();
   await expect(page.locator('figcaption').filter({ hasText: 'Native investigation of a synthetic payment event' })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Recorded scenario outcomes' }).locator('tbody tr')).toHaveCount(5);
@@ -58,7 +65,7 @@ test('public proof is scoped and real JSON and product captures are available', 
     expect(response.headers()['content-type'], filename).toContain('image/png');
     expect((await response.body()).length, filename).toBeGreaterThan(10_000);
   }
-  for (const image of await page.locator('.landing-page picture img').all()) {
+  for (const image of await page.locator('.site picture img').all()) {
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate((node: HTMLImageElement) => node.complete && node.naturalWidth > 0)).toBe(true);
   }
@@ -70,7 +77,7 @@ test('workbench action opens the actual unavailable-upstream experience', async 
     if (new URL(request.url()).pathname.startsWith('/api/')) apiRequests.push(request.url());
   });
   await page.goto('/');
-  await page.locator('.landing-actions').getByRole('link', { name: 'Open workbench', exact: true }).click();
+  await page.locator('.site-actions').getByRole('link', { name: 'Open workbench', exact: true }).click();
   await expect(page).toHaveURL(/#investigations$/);
   await expect(page.getByRole('heading', { name: 'Investigations', exact: true })).toBeVisible();
   await expect(page.getByText('Native API offline', { exact: true })).toBeVisible();
@@ -85,8 +92,8 @@ test('keyboard skip link and reduced-motion landing remain usable', async ({ pag
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to content', exact: true })).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.locator('[id="landing/main"]')).toBeFocused();
-  const action = page.locator('.landing-actions').getByRole('link', { name: 'Open workbench', exact: true });
+  await expect(page.locator('[id="site-main"]')).toBeFocused();
+  const action = page.locator('.site-actions').getByRole('link', { name: 'Open workbench', exact: true });
   await action.focus();
   const styles = await action.evaluate((node) => {
     const computed = getComputedStyle(node);
@@ -102,7 +109,7 @@ test('320px landing preserves readable actions without overflow and captures the
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/');
   await page.evaluate(() => document.fonts.ready);
-  const action = page.locator('.landing-actions').getByRole('link', { name: 'Open workbench', exact: true });
+  const action = page.locator('.site-actions').getByRole('link', { name: 'Open workbench', exact: true });
   await expect(action).toBeVisible();
   await expect(action).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
@@ -113,7 +120,7 @@ test('320px landing preserves readable actions without overflow and captures the
   });
   expect(geometry.x).toBeGreaterThanOrEqual(0);
   expect(geometry.right).toBeLessThanOrEqual(320);
-  // A generic link reset must not turn the mint action's label pale.
+  // The primary action remains legible in the generated visual system.
   const luminance = (color: string) => {
     const rgb = color.match(/[\d.]+/g)!.slice(0, 3).map(Number).map((channel) => {
       const value = channel / 255;
@@ -127,7 +134,7 @@ test('320px landing preserves readable actions without overflow and captures the
   expect(geometry.height).toBeGreaterThanOrEqual(44);
   expect(geometry.fontSize).toBeGreaterThanOrEqual(14);
   expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth);
-  for (const image of await page.locator('.landing-page picture img').all()) {
+  for (const image of await page.locator('.site picture img').all()) {
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate((node: HTMLImageElement) => node.complete && node.naturalWidth > 0)).toBe(true);
   }

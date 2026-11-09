@@ -5,9 +5,12 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./styles.css";
 import App from "./App";
+import PublicSite, { isPublicPage } from "./Landing";
+
+// Every HTML entry shares this bundle. Public documents render informational pages only;
+// the root document hosts the home page and the hash-routed native workbench.
+const page = document.body.dataset.page;
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <StrictMode>{isPublicPage(page) ? <PublicSite page={page} /> : <App />}</StrictMode>,
 );
