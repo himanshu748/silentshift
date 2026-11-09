@@ -1,0 +1,45 @@
+import { chromium } from '../../../web/node_modules/@playwright/test/index.mjs';
+import assert from 'node:assert/strict';
+import { mkdir, writeFile } from 'node:fs/promises';
+const targets = [
+ ['/', 'Catch what status codes miss.'],
+ ['/how-it-works/', 'Valid message. Contradicted agreement.'],
+ ['/product/', 'One workbench for every hold.'],
+ ['/safeguards/', 'The model recommends. It never releases.'],
+ ['/evidence-record/', 'Five cases. Five controlled outcomes.'],
+ ['/run-locally/', 'Start the IRIS production.'],
+];
+const browser = await chromium.launch();
+const receipt = { checked_at: new Date().toISOString(), target: 'production build served by Python http.server on loopback; no SPA fallback or API proxy', checks: [], passed: false };
+try {
+ for (const [name, viewport] of [['desktop',{width:1440,height:960}],['mobile',{width:390,height:844}]]) {
+  const page = await browser.newPage({viewport, reducedMotion:'reduce'});
+  const api = [], errors = [];
+  page.on('request', r => { if (new URL(r.url()).pathname.startsWith('/api/')) api.push(r.url()); });
+  page.on('pageerror', e => errors.push(e.message));
+  for (const [path, heading] of targets) {
+   const response = await page.goto('http://127.0.0.1:5191'+path);
+   assert.equal(response.status(),200);
+   await page.getByRole('heading',{name:heading,exact:true,level:1}).waitFor();
+   const title = await page.title();
+   assert.ok(title.includes('SilentShift'));
+   await page.reload();
+   await page.getByRole('heading',{name:heading,exact:true,level:1}).waitFor();
+   await page.evaluate(()=>document.fonts.ready);
+   const size = await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+   assert.ok(size.scrollWidth<=size.width+1);
+   assert.deepEqual(api,[]);assert.deepEqual(errors,[]);
+   receipt.checks.push({viewport:name,path,http_status:200,title,reload:true,no_native_api_requests:true,no_page_errors:true,...size});
+   if(path==='/' && name==='desktop') {
+    await mkdir('evidence/browser/top3-multipage',{recursive:true});
+    await page.screenshot({path:'evidence/browser/top3-multipage/home-light-desktop.png'});
+   }
+  }
+  await page.close();
+ }
+ receipt.passed=true;
+} finally {
+ await browser.close();
+ await writeFile('.local/top3/coco/multipage-static.json',JSON.stringify(receipt,null,2)+'\n');
+ console.log(JSON.stringify(receipt,null,2));
+}

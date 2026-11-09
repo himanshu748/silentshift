@@ -1,10 +1,18 @@
 # Build status
 
+## Unpublished multi-page site — November 9, 2026 UTC
+
+Source `252bdd62ac60a1088320586cfc71e766766c0fb5` adds separate public documents for Home, How it works, Workbench tour, Safeguards, Evidence record and Run locally. Neither repository nor global `AGENTS.md` requires a single-page site. CoCo selected the page hierarchy and visual direction. Existing workbench hash links and the native API proxy remain compatible; public pages make no authenticated API calls. [Receipt, source hashes and scope](evidence/top3-multipage.json).
+
+TypeScript/build passed, including **6** HTML documents. The final browser run passed **54** checks; native read-only checks passed **16** in **35.4 seconds**. Serving the production build with a plain loopback static server passed **12** desktop/mobile document journeys without a single-page fallback. The new CSV UI run passed **32** checks with fresh native traces **3451 / 3479**. All **5/5** fresh live scenarios passed, traces **3506 / 3534 / 3562 / 3589 / 3617**, including actual AI Hub execution, the four evidence-tool reads, idempotent receipts and critical-release denial. [CSV receipt](evidence/top3-multipage-csv-ui.json) · [native scenarios](evidence/top3-multipage-native-five.json) · [browser output](evidence/top3-multipage-browser.txt) · [native browser output](evidence/top3-multipage-native-browser.txt) · [static-document checks](evidence/top3-multipage-static.json).
+
+The first browser attempt retained a real **320px** footer overflow and a menu-test locator error. Both were repaired; no assertion was dropped. Native runtime/policy, API/schema contracts and dependencies were unchanged in this UI pass. This is retained-runtime verification, not a fresh native source load or `%UnitTest` rerun. The full Python rerun after the earlier timing-harness repair remains pending under the two-failure stop rule. Main, README, public IPM/OEX, hosted-demo status and provider-branch verification limits remain unchanged.
+
 ## Held-out comparison completed — November 9, 2026 UTC
 
 The frozen release **154U ARM64** evaluation completed **144** native investigations over **48** synthetic orders, retaining **5** failed attempts. Rules-only scored **33/48** correct routes; agent + policy scored **33/48**, **33/48** and **30/48**. It reduced wrong simulator deliveries relative to the baseline's counterfactual releases, but **did not improve correct routing in the unstructured split**: both scored **1/16** per trial. This is not an overall correct-routing improvement or a customer-data accuracy estimate. [Full results and every failure](EVAL_HELDOUT.md) · [coverage](../evidence/heldout/coverage.json) · [integrity receipt](../evidence/heldout/verification.json). README/listing wording remains unchanged pending owner review.
 
-## Unpublished CoCo frontend — November 9, 2026 UTC
+## Earlier CoCo frontend checkpoint — November 9, 2026 UTC
 
 `push/top3` source `7b8b17087f4d2c43b47a16e4a5aafbc55f494118` rebuilds the landing page and native workbench. CoCo chose the visual direction from the product description and existing integration contracts. Authentication, API schemas, dependencies and native policy remain unchanged. The running preview uses the real same-origin IRIS API; no mock case records were added. [Verification receipt](evidence/top3-coco-frontend.json) · [brief](TOP3_FRONTEND_BRIEF.md).
 
