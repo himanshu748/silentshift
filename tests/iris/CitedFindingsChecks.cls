@@ -45,9 +45,14 @@ Method TestProseCitationPaths()
     Do $$$AssertStatusOK(sc)
     Set tool=##class(SilentShift.AI.EvidenceTools).%New(),tool.CaseId=id
     Set result=##class(%DynamicObject).%FromJSON(tool.GetApprovedContracts())
-    Set encoded=result.%Get("prose_citation_paths").%ToJSON()
-    Do $$$AssertTrue(encoded [ "/dispatch_terms/body","Nested prose path is visible to the model")
-    Do $$$AssertTrue(encoded [ "/contract~1clause~0/body","JSON pointer escaping survives native projection")
+    Set paths=result.%Get("prose_citation_paths"),nested=0,escaped=0
+    For i=0:1:paths.%Size()-1 {
+        Set path=paths.%Get(i).%Get("path")
+        If path="/dispatch_terms/body" Set nested=1
+        If path="/contract~1clause~0/body" Set escaped=1
+    }
+    Do $$$AssertTrue(nested,"Nested prose path is visible to the model")
+    Do $$$AssertTrue(escaped,"JSON pointer escaping survives native projection")
     Do $$$AssertEquals(result.%Get("references").%Get(0).%Get("dispatch_terms").%Get("body"),"The signed dispatch authorization is withdrawn until further notice.","Prose is returned intact")
 }
 }
