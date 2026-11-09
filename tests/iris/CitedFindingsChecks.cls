@@ -33,15 +33,22 @@ Method TestProseCitationPaths()
     Set item=fixture.%Get("scenarios").%Get(0),message=item.%Get("message"),refs=item.%Get("references")
     Set run=$TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
     Do message.%Set("event_id","citation-projection-"_run),message.%Set("correlation_id",run)
-    Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":"native-citation-projection","dataset_version":"synthetic-citation-projection/1","clock":(fixture.%Get("clock"))}
+    Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":("native-citation-projection-"_run),"dataset_version":"synthetic-citation-projection/1","clock":(fixture.%Get("clock"))}
     Set sc=##class(SilentShift.Store).CreateCase(envelope.%ToJSON(),.id,.duplicate)
     Do $$$AssertStatusOK(sc)
     Set ref=refs.%Get(0)
     Do ref.%Set("dispatch_terms",{"body":"The signed dispatch authorization is withdrawn until further notice."})
     Do ref.%Set("contract/clause~",{"body":"A separate synthetic approved contractual text leaf."})
-    Set body=##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
-    Do body.%Set("references",refs)
-    Set sc=##class(SilentShift.Store).SaveCase(id,body.%ToJSON())
+    Set scope=envelope.%Get("scenario_id")
+    For i=0:1:refs.%Size()-1 {
+        Set reference=refs.%Get(i),row=##class(SilentShift.Data.Reference).%New()
+        Set row.ReferenceKey=##class(SilentShift.Bridge).PairHash(scope,reference.%Get("id"))
+        Set row.ReferenceId=reference.%Get("id"),row.ScenarioScope=scope
+        Set row.ContractId=reference.%Get("contract_id"),row.Body=##class(SilentShift.Bridge).Canonical(reference.%ToJSON())
+        Set sc=row.%Save()
+        Do $$$AssertStatusOK(sc)
+    }
+    Set sc=##class(SilentShift.Store).SnapshotReferences(id)
     Do $$$AssertStatusOK(sc)
     Set tool=##class(SilentShift.AI.EvidenceTools).%New(),tool.CaseId=id
     Set result=##class(%DynamicObject).%FromJSON(tool.GetApprovedContracts())
