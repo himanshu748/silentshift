@@ -1,0 +1,138 @@
+{
+  "checked_at": "2026-11-09T07:00:38.833587+00:00",
+  "budget": {
+    "name": "SilentShift-Nov2026-150USD",
+    "limit_usd": "150.0",
+    "scope": "monthly account-wide gross cost excluding credits/refunds",
+    "monitor_only": true,
+    "alerts": [
+      {
+        "notification": {
+          "NotificationType": "ACTUAL",
+          "ComparisonOperator": "GREATER_THAN",
+          "Threshold": 100.0
+        },
+        "email_subscriber_present": true
+      },
+      {
+        "notification": {
+          "NotificationType": "ACTUAL",
+          "ComparisonOperator": "GREATER_THAN",
+          "Threshold": 80.0
+        },
+        "email_subscriber_present": true
+      },
+      {
+        "notification": {
+          "NotificationType": "FORECASTED",
+          "ComparisonOperator": "GREATER_THAN",
+          "Threshold": 100.0
+        },
+        "email_subscriber_present": true
+      }
+    ],
+    "tags": [
+      {
+        "Key": "project",
+        "Value": "silentshift"
+      }
+    ]
+  },
+  "hosting_permission": {
+    "source": "existing owner-account InterSystems correspondence",
+    "sender": "Irene Mikhailova_CTR, InterSystems",
+    "received_at": "2026-11-08T17:20:00Z",
+    "contest_demo_permitted": true,
+    "idea_bonus_confirmed": false,
+    "private_correspondence_not_published": true
+  },
+  "official_portal_readback": {
+    "date": "2026-11-09",
+    "earlier_2026_3_builds_removed": true,
+    "community_build_offered": "2027.1.0AI.109.0",
+    "new_build_downloaded": false,
+    "local_x64_154_archive_found": false,
+    "owner_authorized_arm64_154_alternative": true
+  },
+  "cost_plan": {
+    "calculated_at": "2026-11-09T06:59:29.927815+00:00",
+    "end_at": "2026-11-21T05:00:00+00:00",
+    "instance_type": "c7g.xlarge",
+    "vcpus": 4,
+    "ram_gib": 8,
+    "architecture": "arm64",
+    "hours": "286.0083533847222222222222222",
+    "hourly_compute_usd": "0.1450000000",
+    "volume_gib": 50,
+    "compute_usd": "41.47",
+    "storage_usd": "1.59",
+    "public_ipv4_usd": "1.43",
+    "estimated_base_total_usd": "44.49",
+    "transfer_and_tax_excluded": true,
+    "not_actual_billed_spend": true,
+    "user_cost_confirmation_required": true,
+    "compute_created": false
+  },
+  "four_hour_trial_estimate_usd": "0.62",
+  "price_sources": [
+    "AWS Price List API, AmazonEC2, us-east-1, Linux shared On-Demand c7g.xlarge",
+    "AWS Price List API, gp3 us-east-1",
+    "https://aws.amazon.com/vpc/pricing/"
+  ],
+  "compute_created": false,
+  "money_confirmation_pending": true,
+  "no_paid_provider_calls": true,
+  "cheaper_arm_option": {
+    "checked_at": "2026-11-09T07:06:49.540064+00:00",
+    "instance_type": "t4g.large",
+    "architecture": "arm64",
+    "ram_gib": 8,
+    "vcpus": 2,
+    "cpu_credit_mode": "standard; no surplus-credit charges; throttles when credits are depleted",
+    "hourly_compute_usd": "0.0672000000",
+    "four_hour_estimated_base_usd": "0.31",
+    "through_nov20_estimated_base_usd": "22.23",
+    "excludes_tax_transfer": true,
+    "launch_approved": false
+  },
+  "lightsail_review": {
+    "bundle": {
+      "price": 44.0,
+      "cpuCount": 2,
+      "diskSizeInGb": 160,
+      "bundleId": "large_3_0",
+      "instanceType": "large",
+      "isActive": true,
+      "name": "Large",
+      "power": 3000,
+      "ramSizeInGb": 8.0,
+      "transferPerMonthInGb": 5120,
+      "supportedPlatforms": [
+        "LINUX_UNIX"
+      ],
+      "publicIpv4AddressCount": 1
+    },
+    "ubuntu_blueprint": "ubuntu_24_04",
+    "blueprint_product_url": "https://aws.amazon.com/marketplace/pp/prodview-s4zvkzmlirbga",
+    "blueprint_architecture_readback": "64-bit (x86)",
+    "arm_option_verified": false,
+    "existing_arm64_iris_image_compatible_verified": false,
+    "instance_created": false
+  },
+  "vultr_review": {
+    "source": "https://api.vultr.com/v2/plans",
+    "selected_plan": {
+      "id": "vc2-4c-8gb",
+      "vcpu_count": 4,
+      "ram": 8192,
+      "disk": 160,
+      "bandwidth": 4096,
+      "monthly_cost": 40,
+      "hourly_cost": 0.055,
+      "cpu_vendor": "Intel"
+    },
+    "arm64_option_verified": false,
+    "credit_entitlement_verified": false,
+    "instance_created": false
+  }
+}

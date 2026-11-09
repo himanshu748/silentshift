@@ -1,0 +1,20 @@
+# Voting-week work log
+
+Work is confined to `push/top3`. Main, the registry, Open Exchange and the published video are unchanged. README/listing wording waits for the owner's review of the completed held-out results.
+
+## November 9, 2026 UTC
+
+- Provider configuration and a bounded forwarding transport were added behind the existing native gateway. Configuration/protocol tests passed; the native suite passed in a clean source-loaded 154U instance. External OpenAI, Gemini and OpenRouter execution has not been verified. [Provider receipt](evidence/top3-provider-partial-nov9.json) and [configuration guide](PROVIDERS.md).
+- Two native provider verification attempts stopped when the VM killed IRIS processes under memory pressure. The VM has 2 GiB of RAM; running additional IRIS instances alongside the benchmark exceeded it. The first stopped during unit testing, the second after the native suite while attempting the replay. No third provider gate was attempted. These are failed/incomplete gates, not replay passes. Logs are preserved privately; the second attempt's completed unit output is retained with the receipt.
+- The frozen held-out run paused after 64 persisted investigations at its unchanged host-disk safety floor. Completed cases and rule results were retained. A resume encountered the frozen IRIS instance before any new model call. No completed case is rerun, no label is changed, and an incomplete dataset will not be reported as a complete benchmark. Other local IRIS instances were stopped to recover VM memory before restoring the same benchmark container. Infrastructure interruptions will remain in its receipt.
+- With exact owner approval, the failed `silentshift-bonus-load-top3-replay` container and inactive OpenCode updater cache were removed after retaining logs. The benchmark container, source, models and unique evidence remain.
+- The AWS connector rejected two read-only calls as unauthenticated. Work moved to the already-configured AWS CLI; no repeated connector attempts were made.
+- The signed-in official EAP page explicitly says earlier 2026.3 builds were removed and offers Community 2027.1.0AI.109.0. No x64 154 archive was found locally. No new build was downloaded or claimed. The owner authorized using the already-loaded ARM64 154 image on an ARM-based AWS instance, copied directly without a registry.
+- A monitoring-only $150 monthly AWS budget was created before compute. Its alerts are delayed estimates, not a spending stop. No compute resource or hosted demo has yet been verified. Deployment status and teardown instructions belong in [ONLINE_DEMO.md](ONLINE_DEMO.md).
+- The owner requested explicit money confirmation before any further cost-bearing action. The smaller CPU option is prepared only. A four-hour trial and any longer hosting period need separate approval; no launch or resize occurs while that answer is pending.
+- Lightsail and Vultr were checked read-only at the owner's request. Their selected plans are cheaper than the original compute proposal, but the inspected Ubuntu Lightsail blueprint and Vultr Intel plan do not establish an ARM-compatible runtime for our retained image. A smaller `t4g.large` ARM option was priced as well. No comparison request is treated as launch approval.
+- A later host-disk guard stopped the benchmark after 109 retained investigations (the earlier progress view showed 108). The owner approved removal of the second stopped failed provider-test container after its logs and unit results were saved. The benchmark resumed in the same instance; no storage floor was relaxed.
+
+The dataset labels were committed before any held-out execution. See [FROZEN.md](../fixtures/v2-heldout/FROZEN.md). The benchmark container retains the release's original provider code and prompt; provider changes in this branch are not loaded into that instance.
+
+The teardown utility passed six isolated ownership/account/volume tests without contacting AWS. The complete Python suite then passed **248 tests in 9.08 seconds**. These are local test results, not a live teardown or deployment.
