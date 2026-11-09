@@ -50,6 +50,16 @@ def source_identity(commit):
     return result
 
 
+def resume_checkpoint(manifest, timestamp):
+    """Bookkeeping only: never reset attempts, inputs or source identity."""
+    if manifest["status"] == "paused-infrastructure":
+        manifest.setdefault("infrastructure_resumes", []).append({
+            "resumed_at": timestamp, "completed_retained": manifest["completed"],
+            "pause_reason": manifest.pop("reason", None)})
+        manifest["status"] = "running"
+    return manifest
+
+
 def isolate_precedents(native):
     """Operator-only production configuration; retrieval and routing stay real."""
     native.copy(ROOT/'tests/iris/HeldoutPrecedents.cls','/home/irisowner/silentshift-bonus/HeldoutPrecedents.cls')
@@ -131,6 +141,8 @@ def main():
         if result['cases']!=n:raise ValueError('Input count mismatch')
         manifest['native_input_sha256']=hashlib.sha256(payload.read_bytes()).hexdigest()
         write_json(manifest_path,manifest)
+    resume_checkpoint(manifest,datetime.now(timezone.utc).isoformat())
+    write_json(manifest_path,manifest)
     run=manifest['run_id']
     for trial in range(1,4):
         rules_file=out/f'rules-trial-{trial}.json'
