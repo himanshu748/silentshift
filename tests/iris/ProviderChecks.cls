@@ -3,6 +3,16 @@ Include (%occStatus, %outUnitTest)
 /// Native provider contracts and metadata export. No method calls a model.
 Class SilentShift.Test.ProviderChecks Extends %UnitTest.TestCase
 {
+Method TestTransportAuditReadPrivilege()
+{
+    // Check the named service role, not this operator-run test's privileges.
+    Do $$$AssertEquals($SYSTEM.SQL.Security.CheckPrivilege("SSProviderTransport",1,"SilentShift_Data.AuditEvent","s"),1,"Provider application can verify scoped tool-read receipts")
+    For action="i","u","d" {
+        Do $$$AssertEquals($SYSTEM.SQL.Security.CheckPrivilege("SSProviderTransport",1,"SilentShift_Data.AuditEvent",action),0,"Provider role receives no audit-table write privilege")
+    }
+    Do $$$AssertEquals($SYSTEM.SQL.Security.CheckPrivilege("SSProviderTransport",1,"SilentShift_Data.Reference","s"),0,"Provider role receives no additional reference-table SQL access")
+}
+
 Method TestMetadataOnlyMessages()
 {
     Set request = ##class(SilentShift.Provider.CallRequest).%New()

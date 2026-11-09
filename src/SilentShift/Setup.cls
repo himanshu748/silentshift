@@ -14,11 +14,17 @@ ClassMethod Install() As %Status
         Set sc = ##class(SilentShift.Workflow.Support).Configure()
         $$$ThrowOnError(sc)
         // Dynamic SQL checks table privileges independently of database RW.
-        // Only the application-scoped role receives these fixed read grants.
+        // The application-scoped role receives its fixed case/evidence reads.
         For table = "CaseRecord", "Reference", "AuditEvent", "Delivery", "ReviewAction", "Evaluation" {
             Set sc = $SYSTEM.SQL.Security.GrantPrivilege("SELECT", "SilentShift_Data."_table, "TABLE", "SSApplication")
             $$$ThrowOnError(sc)
         }
+        // The internal provider application verifies this invocation's four
+        // tool-read receipts before selecting the local final-answer format.
+        // Database resources alone do not grant SQL SELECT. This application
+        // role gains one read grant, never INSERT/UPDATE/DELETE or user roles.
+        Set sc = $SYSTEM.SQL.Security.GrantPrivilege("SELECT", "SilentShift_Data.AuditEvent", "TABLE", "SSProviderTransport")
+        $$$ThrowOnError(sc)
         // The pending reviewer API reads its native worklist through SQL. Task
         // actions still require Identity/Claim and the policy-checked receipt;
         // this application-only grant adds no engine mutation privilege.
