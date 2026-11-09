@@ -84,7 +84,9 @@ def report(source: Path, destination: Path):
     def metric_row(label, s):
         latency = f"{s['median_elapsed_ms']:.3f}" if s['median_elapsed_ms'] is not None else "unavailable"
         return f"| {label} | {s['correct']}/{s['n']} | {s['wrong_deliveries']}/{s['bad_orders']} | {s['false_holds']}/{s['allow_eligible']} | {s['reviews']}/{s['n']} ({s['review_rate']:.1%}) | {s['invalid']} | {latency} |"
-    lines=["# Held-out synthetic comparison", "", "## Result", ""]
+    lines=["# Held-out synthetic comparison", "",
+        f"Generated **{result['generated_at']}** from the completed [run manifest](../evidence/heldout/manifest.json).",
+        "", "## Result", ""]
     base_wrong=totals['rules-only']['wrong_deliveries']
     policy_wrong=mean(by_trial['agent+policy'][str(t)]['wrong_deliveries'] for t in range(1,4))
     base_unstructured=splits['rules-only']['unstructured']['correct']
@@ -108,7 +110,9 @@ def report(source: Path, destination: Path):
         "| Arm | Correct routes | Wrong deliveries / bad orders | False holds / eligible | Review rate | Invalid | Median time (ms) |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     lines += [metric_row(name,totals[name]) for name in arms]
-    lines += ["", "Baseline timing covers only assessment + rule selection inside Embedded Python. Agent timing covers the native investigator operation and is shared by both paired arms; it excludes other service stages. These timing scopes differ and do not establish an end-to-end speedup.", "", "## Three-trial variance", "",
+    lines += ["", "Baseline timing covers only assessment + rule selection inside Embedded Python. Agent timing covers the native investigator operation and is shared by both paired arms; it excludes other service stages. These timing scopes differ and do not establish an end-to-end speedup.",
+        f"Agent investigation timing is available for **{totals['agent-only']['timing_observations']} / {totals['agent-only']['n']}** attempts. Missing durations remain null and are excluded from that median, never filled with zero. Failed attempts remain in routing-result denominators; the service timing below includes every available service duration.",
+        "", "## Three-trial variance", "",
         "| Arm / trial | Correct routes | Wrong deliveries / bad orders | False holds / eligible | Review rate | Invalid | Median investigation (ms) |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for name in by_trial:
@@ -144,6 +148,7 @@ def report(source: Path, destination: Path):
         f"- **{invalid_schema} / 144** raw responses fail the released output-schema checks (separate from the invalid-decision count). A recognizable raw decision in a schema-invalid object is still scored as that agent-only choice. Schema errors for every response are in summary.json.",
         "- One harness preparation error called a private reference-seeding method before any held-out case or inference existed. It was repaired in test-only code; the failed attempt is retained. Rules-only results were preserved. No selective model rerun or label edit was used.",
         "- After 64 completed investigations, a disk safety-floor pause and VM out-of-memory kills interrupted the test infrastructure. The same evaluation container was restarted after other IRIS instances were stopped; completed cases were not rerun. Runtime, inputs and model configuration were retained. The manifest records this recovery. Timing includes resource contention around the interruption and cannot establish dedicated-server performance.",
+        "- Later host-disk pauses also retained their completed cases. Following owner-authorized cleanup, the final resume used the same evaluation container and stopped the normal local app temporarily to avoid running two IRIS instances in the small VM. Dataset bytes and earlier raw trial records were checked against the committed checkpoint. All persisted failures, including provider timeouts, remain in this comparison; none received a selective retry.",
         "", "## Reproduce and inspect", "", "The first run uses an isolated source-loaded live 154U instance prepared with the existing local verification driver. Setup's original native suite, five live demo cases, warmup and embedding preparation are **outside** the held-out denominators. Local Docker storage was expanded without deleting existing projects or weakening the storage floor. [Environment/setup receipt](../evidence/heldout/setup.json).", "", "```sh", "uv run python scripts/run_heldout.py --execute", "uv run python scripts/report_heldout.py", "```", "", "The runner refuses changed frozen inputs and resumes persisted cases without redispatch. Existing output belongs to its retained native instance; a fresh replication needs a new instance and a separate --output directory. It runs only local inference. Native message/reference payloads are copied without categories or truth labels. Preserve private credentials outside Git.", "", "[Raw run manifest](../evidence/heldout/manifest.json) · [rule-only native output](../evidence/heldout/rules-only.json) · [trial 1](../evidence/heldout/trial-1/) · [trial 2](../evidence/heldout/trial-2/) · [trial 3](../evidence/heldout/trial-3/) · [machine-readable summary, all failures and timings](../evidence/heldout/summary.json). No evidence file exceeds 50 MB."]
     destination.write_text("\n".join(lines)+"\n")
     print(json.dumps({"totals":totals,"categories":splits,"variation":variation},indent=2))
