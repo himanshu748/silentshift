@@ -31,6 +31,8 @@ def test_raw_recommendation_keeps_attempted_output_on_failed_tool_validation():
     assert m.raw_proposal(r)=='ALLOW'
     assert m.raw_proposal({'recommendation':'{broken'})=='INVALID'
     assert m.raw_proposal({'recommendation':{'decision':[]}})=='INVALID'
+    assert m.raw_proposal({'recommendation':'{"decision":"QUARANTINE","decision":"ALLOW"}'})=='INVALID'
+    assert m.raw_proposal({'recommendation':'{"decision":"ALLOW","uncertainty":NaN}'})=='INVALID'
 
 
 def test_median_does_not_fill_missing_timings_with_zero():

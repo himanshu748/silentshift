@@ -7,11 +7,24 @@ DECISIONS = {"ALLOW", "QUARANTINE", "REQUEST_REVIEW"}
 ROUTES = {"DELIVERED": "ALLOW", "QUARANTINED": "QUARANTINE", "REVIEW": "REQUEST_REVIEW"}
 
 
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Duplicate response field")
+        result[key] = value
+    return result
+
+
+def _non_json_constant(value):
+    raise ValueError("Non-JSON numeric constant")
+
+
 def raw_proposal(record):
     agent = record.get("agent") or {}
     raw = agent.get("raw_response") or record.get("recommendation")
     try:
-        data = json.loads(raw) if isinstance(raw, str) else raw
+        data = json.loads(raw, object_pairs_hook=_unique_object, parse_constant=_non_json_constant) if isinstance(raw, str) else raw
     except (ValueError, TypeError):
         data = None
     decision = data.get("decision") if isinstance(data, dict) else None
