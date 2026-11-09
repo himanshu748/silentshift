@@ -36,7 +36,7 @@ def test_grounded_prose_concern_can_quarantine_a_structured_clear_order():
     assert any('not a verified deterministic' in reason for reason in result['reasons'])
 
 
-@pytest.mark.parametrize('change', ['altered_quote','unknown_id','wrong_contract','peer','metadata','bad_pointer','no_context','expired','nontext','missing_path'])
+@pytest.mark.parametrize('change', ['altered_quote','unknown_id','wrong_contract','peer','metadata','bad_pointer','no_context','expired','nontext','missing_path','future_approval','nested_peer'])
 def test_unverifiable_citations_cannot_be_grounded(change):
     c=sample(); a,r=proposal(c); f=r['cited_findings'][0]
     if change=='altered_quote': f['quote']='This fabricated phrase does not occur.'
@@ -48,6 +48,8 @@ def test_unverifiable_citations_cannot_be_grounded(change):
     if change=='expired': a['active_reference_ids']=[]
     if change=='nontext': c['references'][0]['dispatch_terms']['body']=123
     if change=='missing_path': f['path']='/not_present'
+    if change=='future_approval': c['references'][0]['dispatch_terms']['approved_at']='2099-01-01T00:00:00Z'
+    if change=='nested_peer': c['references'][0]['dispatch_terms']['authority']='peer'
     context=None if change=='no_context' else c
     result=validate_policy(a,r,evidence_context=context)
     assert result['decision']=='REQUEST_REVIEW' and not result['downstream_permitted']

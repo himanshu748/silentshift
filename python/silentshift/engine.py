@@ -347,6 +347,17 @@ def _grounded_findings(assessment: dict, recommendation: dict, context: Any) -> 
         for part in parts:
             if not isinstance(value, dict) or part not in value:
                 return False
+            # Nested approval metadata, if present, must already be effective.
+            try:
+                event_at = _time(message.get("occurred_at"))
+                if (value.get("authority", "approved") != "approved"
+                        or any(k in value and _time(value[k]) > event_at
+                               for k in ("approved_at", "effective_from"))
+                        or (value.get("effective_to") is not None
+                            and _time(value["effective_to"]) <= event_at)):
+                    return False
+            except (ValueError, TypeError):
+                return False
             value = value[part]
         if not isinstance(value, str) or finding["quote"] not in value:
             return False
