@@ -151,3 +151,14 @@ The prompt 1.4.1 core gate failed because approved-amendment ALLOW was malformed
 Two failed live gates are saved, not overwritten. Repair/model attempts stopped under the owner's rule. No further runtime code or permissions were changed. v3 remains unopened and unrun; the full v2 rerun is also unrun. No sealed score, improvement claim, live demo, spending or external publication followed. [Complete blocked status](EVAL_SEALED.md) and [machine-readable receipt](evidence/prose-repair-status.json).
 
 The repaired source remains local on push/top3. Main, the remote draft PR, IPM, OEX, articles and videos were not updated in this pass. Earlier uncommitted landing/session copy, browser tests and the README anchor cleanup remain outside these commits and are preserved.
+
+
+### Provider permission and grammar repair; sealed source frozen
+
+The transport role readback confirmed missing audit SELECT (0 before, 1 after Setup.Install). INSERT/UPDATE/DELETE remained 0, as did reference-table SELECT. A native test now checks the named service role rather than inheriting the operator's privileges. No user roles or broad SQL permissions were added.
+
+The first repaired live gate reached Ollama and completed all four reads, then failed on final HTTP 400. An exact-format local protocol diagnostic returned “Failed to initialize samplers: failed to parse grammar”. The request format now uses structural JSON schema; the unchanged server still enforces every output bound.
+
+Fresh current-source `56ff2d6976e61ccb36b68e0632224e1234afaa3e` passed the complete native suite (6 classes / 16 methods) and live 5/5 in a new isolated ARM64 154U instance. Python passed 317 tests in 28.20 seconds; TypeScript and build passed. [Recovery receipt](evidence/provider-grant-recovery.json). This supersedes the earlier blocked candidate state without erasing its failed receipts.
+
+The sealed source is registered before first access to v3. No tuning will follow sealed results. Main/public packages and external listings remain unchanged; no spending or deployment occurred.

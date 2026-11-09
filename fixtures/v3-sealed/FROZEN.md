@@ -1,6 +1,6 @@
 # Sealed v3 evaluation
 
-Label-first commit: `9c8d9376f08024eb7f5ff05771a5b02a854d6b4f`. No case file has been opened after generation.
+Label-first commit: `9c8d9376f08024eb7f5ff05771a5b02a854d6b4f`. At protocol registration, no case file had been opened after generation. Execution registration and its source pin are in [EXECUTION.md](EXECUTION.md); the run manifest records first access.
 
 Generated once from seed `8172406782145921268` by `scripts/generate_sealed.py`.
 Exact scenarios.json SHA-256: `415489ccebbe21b83ea870c862570eb6acc7bd1a59ea2394fa7f31cd27c962d6`.
