@@ -1,0 +1,53 @@
+{
+  "recorded_at_utc": "2026-11-09T08:10:55.958986+00:00",
+  "source_commit": "98fba6c67e577c2303fc9b961396a49d23e1f1c1",
+  "branch": "push/top3",
+  "frontend_implementation_changed": false,
+  "checks": [
+    {
+      "command": "npm --prefix web run check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm --prefix web run build",
+      "exit_code": 0,
+      "warnings": "Lucide use client directives are ignored by the Vite client bundle."
+    },
+    {
+      "command": "npm --prefix web run test:e2e",
+      "attempt": 1,
+      "exit_code": 1,
+      "result": "Browser could not launch: matching chromium_headless_shell-1248 executable missing. No UI assertions were executed."
+    },
+    {
+      "command": "npx playwright install chromium --only-shell",
+      "cwd": "web",
+      "exit_code": 0,
+      "result": "Official matching Playwright headless shell installed."
+    },
+    {
+      "command": "npm --prefix web run test:e2e",
+      "attempt": 2,
+      "exit_code": 0,
+      "passed": 38,
+      "elapsed_reported": "1.3m",
+      "scope": "Disconnected upstream and public landing, desktop and mobile. Not native or model execution."
+    }
+  ],
+  "coco": {
+    "version": "1.2.35",
+    "generation_executed": false,
+    "status": "blocked_on_account_specific_browser_signin",
+    "methods_observed": [
+      "externalbrowser: Snowflake 390190 SAML configuration error",
+      "browser synchronization: returned zero connections",
+      "native OAuth: browser sign-in exceeded 120000ms window"
+    ],
+    "new_paid_resource_created": false
+  },
+  "limits": [
+    "No frontend redesign has been generated or applied.",
+    "No benchmark or native scenario rerun in this preflight.",
+    "Main, public package, listing and README untouched."
+  ]
+}
