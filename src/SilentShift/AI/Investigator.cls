@@ -6,11 +6,13 @@ Class SilentShift.AI.Investigator Extends %RegisteredObject
 {
 Parameter PROMPTVERSION = "silentshift-investigator/1.4.2";
 
-/// Local final-answer format. Never imposed on tool-selection rounds.
+/// Local structural final-answer grammar, never tool-selection rounds.
+/// The server retains all count, length and numeric bounds. Ollama 0.31.1
+/// rejects the bounded grammar; response schema is not policy validation.
 ClassMethod FinalResponseFormat() As %DynamicObject
 {
-    Set finding={"type":"object","properties":{"reference_id":{"type":"string"},"path":{"type":"string","maxLength":240},"quote":{"type":"string","minLength":12,"maxLength":800}},"required":["reference_id","path","quote"],"additionalProperties":false}
-    Set schema={"type":"object","properties":{"decision":{"type":"string","enum":["ALLOW","QUARANTINE","REQUEST_REVIEW"]},"evidence_ids":{"type":"array","items":{"type":"string"},"maxItems":101},"explanation":{"type":"string","maxLength":4000},"uncertainty":{"type":"number","minimum":0,"maximum":1},"cited_findings":{"type":"array","items":(finding),"maxItems":2}},"required":["decision","evidence_ids","explanation","uncertainty","cited_findings"],"additionalProperties":false}
+    Set finding={"type":"object","properties":{"reference_id":{"type":"string"},"path":{"type":"string"},"quote":{"type":"string"}},"required":["reference_id","path","quote"],"additionalProperties":false}
+    Set schema={"type":"object","properties":{"decision":{"type":"string","enum":["ALLOW","QUARANTINE","REQUEST_REVIEW"]},"evidence_ids":{"type":"array","items":{"type":"string"}},"explanation":{"type":"string"},"uncertainty":{"type":"number"},"cited_findings":{"type":"array","items":(finding)}},"required":["decision","evidence_ids","explanation","uncertainty","cited_findings"],"additionalProperties":false}
     Return {"type":"json_schema","json_schema":{"name":"silentshift_recommendation","strict":true,"schema":(schema)}}
 }
 
