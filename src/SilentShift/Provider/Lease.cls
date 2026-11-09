@@ -65,9 +65,8 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
             Set sc = ##class(SilentShift.Provider.Replay).CheckCase(caseId)
             $$$ThrowOnError(sc)
         }
-        Set sc = ..LocalHost(.host)
-        $$$ThrowOnError(sc)
-        If model '= "qwen3-silentshift:4b-instruct" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
+        Set config=##class(SilentShift.Provider.Config).Read(),host=config.%Get("host")
+        If model '= config.%Get("model") Return $$$ERROR($$$GeneralError,"PROVIDER_MODEL_CONFIGURATION_MISMATCH")
         If '..CaseMatches(caseId,sessionId) Return $$$ERROR($$$GeneralError,"PROVIDER_CASE_BINDING_INVALID")
         If (promptVersion = "") || ($LENGTH(promptVersion) > 80) Return $$$ERROR($$$GeneralError,"PROVIDER_PROMPT_VERSION_INVALID")
         If invocationSpan = "" Set invocationSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
@@ -76,6 +75,8 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
         Set token = $TRANSLATE($SYSTEM.Encryption.Base64Encode($SYSTEM.Encryption.GenCryptRand(32,1),1),"+/","-_")
         Set key = ..TokenKey(token), expires = ..Seconds()+##class(SilentShift.AI.Investigator).WaitSeconds()+5
         Set binding = {"CaseId":(caseId),"SessionId":(sessionId),"Model":(model),"PromptVersion":(promptVersion),"InvocationSpanId":(invocationSpan),"Host":(host),"Expires":(expires)}
+        Do binding.%Set("RouteSignature",##class(SilentShift.Bridge).Hash(config.%ToJSON()))
+        Do binding.%Set("Provider",config.%Get("trace_provider"))
         Do binding.%Set("ExecutionMode", mode)
         Set ^CacheTemp.SilentShift.Provider("lease",key,"binding") = binding.%ToJSON()
         Set ^CacheTemp.SilentShift.Provider("lease",key,"count") = 0
@@ -126,6 +127,7 @@ ClassMethod Claim(header As %String, raw As %String, Output request As SilentShi
         Set request.CaseId = binding.CaseId, request.ProductionSessionId = binding.SessionId
         Set request.InvocationSpanId = binding.InvocationSpanId, request.Round = round
         Set request.Model = binding.Model, request.PromptVersion = binding.PromptVersion
+        Set request.Provider=binding.%Get("Provider","ollama/openai-compatible")
         Set request.ExecutionMode = binding.%Get("ExecutionMode", "live")
         If request.ExecutionMode = "recorded-replay" {
             Set request.Provider = "recorded-ollama/openai-compatible"

@@ -1,6 +1,6 @@
 Include (%occStatus, Ensemble)
 
-/// Fixed local Ollama operation in its own pool. Every actual provider POST
+/// Deployment-configured provider operation. Every actual provider POST
 /// passes through one native request/response pair in the original session.
 Class SilentShift.Provider.Forwarder Extends Ens.BusinessOperation
 {
@@ -32,10 +32,9 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         If $GET(^CacheTemp.SilentShift.Provider("call",call,"state")) '= "pending" Throw ##class(%Exception.General).%New("PROVIDER_CALL_ALREADY_SENT")
         Set raw = $GET(^CacheTemp.SilentShift.Provider("call",call,"request"))
         If (raw = "") || ($LENGTH(raw) > ##class(SilentShift.Provider.Lease).#MAXBYTES) Throw ##class(%Exception.General).%New("PROVIDER_REQUEST_BOUNDS")
-        Set sc = ##class(SilentShift.Provider.Lease).LocalHost(.host)
-        $$$ThrowOnError(sc)
+        Set config=##class(SilentShift.Provider.Config).Read(),host=config.%Get("host")
         If '##class(SilentShift.Provider.Lease).TemporaryStoreSafe() Throw ##class(%Exception.General).%New("PROVIDER_TEMP_OR_LOG_CONFIGURATION_UNSAFE")
-        If host '= binding.Host Throw ##class(%Exception.General).%New("PROVIDER_ROUTE_CHANGED")
+        If (host '= binding.Host) || (binding.%Get("RouteSignature") '= ##class(SilentShift.Bridge).Hash(config.%ToJSON())) Throw ##class(%Exception.General).%New("PROVIDER_ROUTE_CHANGED")
         Set ^CacheTemp.SilentShift.Provider("call",call,"state") = "sending", claimed = 1
         Kill ^CacheTemp.SilentShift.Provider("call",call,"request")
         Lock -^CacheTemp.SilentShift.Provider("call",call)
@@ -50,6 +49,19 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
             Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
             Do ..ResponseMetadata(rawResponse,response)
             Set rawResponse = ""
+        } ElseIf config.%Get("transport") = "stdlib-http" {
+            Set remaining=binding.Expires-##class(SilentShift.Provider.Lease).Seconds()
+            If remaining<1 Throw ##class(%Exception.General).%New("PROVIDER_CALL_EXPIRED")
+            Set relay=##class(%DynamicObject).%FromJSON(##class(SilentShift.Provider.Config).ForwardHTTP(raw,config.%ToJSON(),remaining))
+            Set raw="",response.HTTPStatus=relay.%Get("http_status"),response.ErrorCode=relay.%Get("error_code")
+            Set response.ResponseBytes=relay.%Get("response_bytes")
+            If relay.%IsDefined("upstream_http_status") Set response.UpstreamHTTPStatus=relay.%Get("upstream_http_status")
+            If relay.%Get("body_base64")'="" {
+                Set rawResponse=$SYSTEM.Encryption.Base64Decode(relay.%Get("body_base64"))
+                Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
+                Do ..ResponseMetadata(rawResponse,response)
+                Set rawResponse=""
+            }
         } Else {
         // EntityBody's legacy stream setter copies a supplied stream into a
         // GlobalBinaryStream. Set its explicit location before writing instead;
@@ -60,7 +72,7 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         Set sc = outbound.Write(raw)
         $$$ThrowOnError(sc)
         Set raw = ""
-        Set http.Server = host, http.Port = 11434, http.Https = 0
+        Set http.Server = host, http.Port = config.%Get("port"), http.Https = 0
         Set http.FollowRedirect = 0, http.AcceptGzip = 0, http.PostGzip = 0
         Set http.ReadRawMode = 1, http.WriteRawMode = 1, http.SocketTimeout = 0
         Set remaining = binding.Expires-##class(SilentShift.Provider.Lease).Seconds()
@@ -70,7 +82,7 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         Set sc = http.SetHeader("Accept-Encoding","identity")
         $$$ThrowOnError(sc)
         Set http.ResponseStream = inbound
-        Set sc = http.Post("/v1/chat/completions")
+        Set sc = http.Post(config.%Get("path"))
         If '$ISOBJECT(http.HttpResponse) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
         Set upstream = http.HttpResponse.StatusCode
         If (upstream < 100) || (upstream > 599) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")

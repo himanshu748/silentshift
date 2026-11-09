@@ -1,5 +1,10 @@
 # Build status
 
+## Unpublished provider branch — November 9, 2026
+
+`push/top3` adds deployment-configurable Ollama, OpenAI, Gemini, OpenRouter and OpenAI-compatible routes behind the native provider gateway. Python configuration/protocol tests passed; a clean ARM64 154U source load compiled and its native suite passed **5 classes / 12 methods**. The overall Python suite passed **242 tests**. Two local native attempts were interrupted by VM out-of-memory kills, so the end-to-end replay and actual external-service compatibility remain **unverified**. No third provider gate was attempted. This branch is not main or the public IPM 0.3.0 package. [Partial receipt](evidence/top3-provider-partial-nov9.json) · [Provider configuration and limits](PROVIDERS.md).
+
+
 ## Public native 0.3.0 shipped and verified — November 8, 2026 UTC
 
 **Public native IPM 0.3.0 is published and clean-install verified on November 8, 2026 UTC.** Open Exchange release **0.3.0** is visible in a live signed-out browser; the React workbench remains **0.2.1** and runs separately from source. [Publication/readback](evidence/ship-030-publication.json) · [fresh registry install](evidence/ship-030-registry.json). The new description was sent for approval; its older 0.2.0 wording remains public until moderation completes. Dedicated public DPI-I-689 visibility, idea qualification, bug confirmation and all organizer awards remain unconfirmed.

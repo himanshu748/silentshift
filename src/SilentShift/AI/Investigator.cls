@@ -55,19 +55,14 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
             Do metadata.%Set("replay_record_id", ##class(SilentShift.Provider.Replay).#RECORDID)
             Do metadata.%Set("inference_performed", 0, "boolean")
         }
-        Set url = $SYSTEM.Util.GetEnviron("SILENTSHIFT_LLM_BASE_URL")
-        Set model = $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL")
-        If model = "" Set model = "qwen3-silentshift:4b-instruct"
+        Set config=##class(SilentShift.Provider.Config).Read()
+        Set url=config.%Get("base_url"),model=config.%Get("model")
+        Do metadata.%Set("provider",config.%Get("trace_provider"))
         Do metadata.%Set("model", model)
         Set metadataJSON = metadata.%ToJSON()
         If $LENGTH(model) > 160 Return $$$ERROR($$$GeneralError, "Model identifier exceeds configuration limit")
-        If url '= "" {
-            If $EXTRACT(url, 1, 8) '= "https://" {
-                Set host = $PIECE($PIECE(url, "://", 2), "/", 1)
-                Set isLocal = (host = "localhost:11434") || (host = "127.0.0.1:11434") || (host = "host.docker.internal:11434") || (host = "host.lima.internal:11434") || (host = "ollama:11434")
-                If ($EXTRACT(url, 1, 7) '= "http://") || 'isLocal Return $$$ERROR($$$GeneralError, "LLM endpoint requires HTTPS or an explicitly configured local Ollama address")
-            }
-        }
+        // Config already rejects remote plaintext, credentials in URLs and
+        // missing keys. The native SDK still talks only to the internal relay.
 
         // Native Agent.Chat dispatches its provider token directly into the
         // bundled runtime. A genuine local HTTP hop preserves that agent while
@@ -125,7 +120,7 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         // Build154's bundled CompletionOptions forwards provider-specific
         // options through extra_params. Ollama0.31.1 maps none to think=false.
         // Apply only to the explicitly local Qwen route, never other providers.
-        Set localQwen = ($EXTRACT(url, 1, 7) = "http://") && ($ZCONVERT(model, "L") [ "qwen3")
+        Set localQwen = (config.%Get("provider") = "ollama") && ($ZCONVERT(model, "L") [ "qwen3")
         If localQwen Do sessionConfig.%Set("extra_params", {"reasoning_effort": "none"})
         Set session = agent.CreateSession(sessionConfig)
         // Candidate findings are context, not permission. The adapter still
