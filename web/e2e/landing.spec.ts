@@ -10,7 +10,7 @@ test('public landing and section links never request the native API', async ({ p
   });
   page.on('pageerror', (error) => pageErrors.push(error.message));
 
-  for (const fragment of ['', '#landing', '#landing/proof', '#landing/pipeline', '#landing/setup']) {
+  for (const fragment of ['', '#landing', '#landing/proof', '#landing/route', '#landing/setup']) {
     await page.goto(`/${fragment}`);
     await expect(page.getByRole('heading', { name: 'Catch what status codes miss.', exact: true })).toBeVisible();
     await expect(page).toHaveTitle('SilentShift · Catch what status codes miss');
@@ -21,7 +21,7 @@ test('public landing and section links never request the native API', async ({ p
       await page.screenshot({path:path.resolve('..',`evidence/browser/landing-refresh-${testInfo.project.name}.png`)});
     }
   }
-  await page.getByRole('link', { name: 'Inspect measured evidence', exact: true }).click();
+  await page.getByRole('link', { name: 'Inspect recorded evidence', exact: true }).click();
   await expect(page).toHaveURL(/#landing\/proof$/);
   await expect(page.getByRole('heading', { name: 'Five cases. Five controlled outcomes.', exact: true })).toBeInViewport();
   expect(apiRequests).toEqual([]);
@@ -34,8 +34,8 @@ test('public proof is scoped and real JSON and product captures are available', 
   await page.goto('/');
   await expect(page.getByText('Five synthetic scenarios, run natively in IRIS.', { exact: true })).toBeVisible();
   await expect(page.getByText('Rule-only baseline: 5/5. No AI accuracy uplift demonstrated.', { exact: true })).toBeVisible();
-  await expect(page.getByText('Recorded native investigation, synthetic payment event held from the destination simulator.', { exact: true })).toBeVisible();
-  await expect(page.locator('.landing-proof-table tbody tr')).toHaveCount(5);
+  await expect(page.locator('figcaption').filter({ hasText: 'Native investigation of a synthetic payment event' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Recorded scenario outcomes' }).locator('tbody tr')).toHaveCount(5);
 
   const summaryResponse = await request.get('/evidence/native-summary.json');
   const traceResponse = await request.get('/evidence/traceability.json');
@@ -76,7 +76,7 @@ test('workbench action opens the actual unavailable-upstream experience', async 
   await expect(page.getByText('Native API offline', { exact: true })).toBeVisible();
   await expect(page.getByText('The native IRIS API could not be reached.', { exact: false }).first()).toBeVisible();
   expect(apiRequests.some((url) => new URL(url).pathname === '/api/health')).toBe(true);
-  await expect(page.locator('.case-list-item')).toHaveCount(0);
+  await expect(page.locator('.queue-item')).toHaveCount(0);
 });
 
 test('keyboard skip link and reduced-motion landing remain usable', async ({ page }) => {
@@ -109,10 +109,21 @@ test('320px landing preserves readable actions without overflow and captures the
   const geometry = await action.evaluate((node) => {
     const bounds = node.getBoundingClientRect();
     const computed = getComputedStyle(node);
-    return { x: bounds.x, right: bounds.right, height: bounds.height, fontSize: parseFloat(computed.fontSize), clientWidth: node.clientWidth, scrollWidth: node.scrollWidth };
+    return { x: bounds.x, right: bounds.right, height: bounds.height, fontSize: parseFloat(computed.fontSize), color: computed.color, background: computed.backgroundColor, clientWidth: node.clientWidth, scrollWidth: node.scrollWidth };
   });
   expect(geometry.x).toBeGreaterThanOrEqual(0);
   expect(geometry.right).toBeLessThanOrEqual(320);
+  // A generic link reset must not turn the mint action's label pale.
+  const luminance = (color: string) => {
+    const rgb = color.match(/[\d.]+/g)!.slice(0, 3).map(Number).map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    });
+    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+  };
+  const foreground = luminance(geometry.color);
+  const background = luminance(geometry.background);
+  expect((Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05)).toBeGreaterThanOrEqual(4.5);
   expect(geometry.height).toBeGreaterThanOrEqual(44);
   expect(geometry.fontSize).toBeGreaterThanOrEqual(14);
   expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth);
@@ -134,12 +145,12 @@ test('illustrated decision changes with authority and walkthrough completes with
   await expect(page.getByText('Held before delivery',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Approved amendment',exact:true}).click();
   await expect(page.getByText('Eligible for delivery',{exact:true})).toBeVisible();
-  await expect(page.locator('.flow-reference strong')).toHaveText('20 CASE');
-  await page.getByRole('button',{name:'Receive',exact:true}).click();
-  await expect(page.locator('.flow-step-detail')).toContainText('valid JSON');
+  await expect(page.locator('.flow-compare > div').nth(1).locator('strong')).toHaveText('20 CASE');
+  await page.getByRole('button',{name:'01 Receive',exact:true}).click();
+  await expect(page.locator('.flow-detail')).toContainText('valid JSON');
   await page.getByRole('button',{name:'Play the walkthrough',exact:true}).click();
-  await expect(page.getByRole('button',{name:'Route',exact:true})).toHaveAttribute('aria-pressed','true');
-  await expect(page.getByRole('button',{name:'Play the walkthrough',exact:true})).toBeVisible();
+  await expect(page.getByRole('button',{name:'04 Route',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:'Replay walkthrough',exact:true})).toBeVisible();
   expect(requests).toEqual([]);
 });
 
@@ -147,7 +158,7 @@ test('reduced motion keeps the decision interactive without animation', async ({
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
   await page.getByRole('button',{name:'Play the walkthrough',exact:true}).click();
-  await expect(page.getByRole('button',{name:'Route',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:'04 Route',exact:true})).toHaveAttribute('aria-pressed','true');
   await expect(page.locator('.flow-outcome')).toHaveCSS('animation-name','none');
   await page.getByRole('button',{name:'Approved amendment',exact:true}).focus();
   await page.keyboard.press('Enter');

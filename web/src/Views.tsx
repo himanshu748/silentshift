@@ -1,27 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  Activity,
   ArrowRight,
   ArrowUpRight,
   Check,
-  ChevronRight,
   CircleHelp,
-  Clock3,
-  Database,
   FileJson2,
   FlaskConical,
-  GitCompareArrows,
-  History,
   Inbox,
   KeyRound,
-  Layers3,
   Play,
   Plus,
-  Server,
-  ShieldCheck,
   ShieldX,
   Terminal,
-  Unplug,
 } from "lucide-react";
 import {
   CaseSchema,
@@ -48,6 +38,7 @@ import {
   humanize,
   InlineError,
   JsonBlock,
+  Loading,
   Metadata,
   MetaRow,
   Modal,
@@ -55,10 +46,13 @@ import {
   Notice,
   PageHeading,
   ResourceState,
+  RouteMark,
   toneFor,
   useActions,
 } from "./ui";
-import { CaseDetail, Timeline } from "./Investigations";
+import { CaseDetail, listKeys, Timeline } from "./Investigations";
+
+const scenarioName = (name: string) => name.replace(/^[A-E] [·•] /, "");
 
 export function ScenarioLab({ refresh }: { refresh: number }) {
   const catalog = useApi("/api/scenarios", ScenariosSchema, refresh);
@@ -68,11 +62,10 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
   const [error, setError] = useState<unknown>(null);
   const [runId, setRunId] = useState<string | null>(null);
   const [polled, setPolled] = useState(0);
+  const [resultScenario, setResultScenario] = useState<string | null>(null);
   const { inspectCase, notify } = useActions();
   const scenario =
-    catalog.data?.scenarios.find((item) => item.id === selectedId) ??
-    catalog.data?.scenarios[0];
-  const [resultScenario, setResultScenario] = useState<string | null>(null);
+    catalog.data?.scenarios.find((item) => item.id === selectedId) ?? catalog.data?.scenarios[0];
   useEffect(() => {
     if (result?.routing !== "PROCESSING" || polled >= 30) return;
     const controller = new AbortController();
@@ -93,12 +86,11 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
       controller.abort();
     };
   }, [result, polled]);
+  const retrying = Boolean(error && runId && resultScenario === scenario?.id);
   const run = async () => {
     if (!scenario || running) return;
-    const id =
-      error && runId && resultScenario === scenario.id
-        ? runId
-        : crypto.randomUUID();
+    // A retry after an uncertain outcome reuses the run ID so IRIS can deduplicate.
+    const id = retrying && runId ? runId : crypto.randomUUID();
     setRunId(id);
     setResultScenario(scenario.id);
     setRunning(true);
@@ -119,202 +111,131 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
       setRunning(false);
     }
   };
+  const matches = result?.policy?.decision === scenario?.ground_truth.decision;
   return (
     <>
       <PageHeading
-        eyebrow="Validation / reproducible experiments"
         title="Scenario Lab"
-        description="Make a silent failure visible. Inject a real event into the native production."
+        description="Inject a synthetic partner event into the native production and compare the observed route with frozen ground truth."
       >
-        <Badge tone="purple">
-          <FlaskConical size={13} /> Synthetic fixtures
+        <Badge tone="agent">
+          <FlaskConical size={13} aria-hidden="true" /> Synthetic fixtures
         </Badge>
       </PageHeading>
-      <div className="lab-intro">
-        <div>
-          <h2>Technically successful ≠ semantically correct</h2>
-          <p>
-            Five controlled experiments. Independent reference records. One
-            inspectable route.
-          </p>
-        </div>
-      </div>
       {!catalog.data ? (
-        <div className="panel">
+        <section className="panel">
           <ResourceState resource={catalog} />
-        </div>
+        </section>
       ) : (
-        <div className="lab-layout">
-          <aside className="scenario-list" aria-label="Synthetic scenarios">
-            <div className="scenario-list-header">
-              <span className="section-kicker">Choose an experiment</span>
-              <code>{catalog.data.version}</code>
+        <div className="split">
+          <aside className="queue" aria-label="Synthetic scenarios">
+            <div className="queue-head">
+              <h2>Experiments</h2>
+              <code className="small">{catalog.data.version}</code>
             </div>
-            {catalog.data.scenarios.map((item, index) => (
-              <button
-                className={`scenario-choice ${scenario?.id === item.id ? "selected" : ""}`}
-                key={item.id}
-                aria-pressed={scenario?.id === item.id}
-                onClick={() => {
-                  setSelectedId(item.id);
-                  setError(null);
-                }}
-                disabled={running}
-              >
-                <span className="scenario-number mono">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <strong>{item.name.replace(/^[A-E] [·•] /, "")}</strong>
-                  <small>{item.summary}</small>
-                </span>
-                <ChevronRight size={16} />
-              </button>
-            ))}
-            <div className="scenario-list-note">
-              <CircleHelp size={15} />
-              <p>
-                Expected outcomes are frozen ground truth, separate from
-                observed production results.
+            <div className="queue-body">
+              <ol className="queue-list" onKeyDown={listKeys}>
+                {catalog.data.scenarios.map((item, index) => (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      data-list-item
+                      className={`queue-item tone-${toneFor(item.ground_truth.decision)} ${scenario?.id === item.id ? "selected" : ""}`}
+                      aria-pressed={scenario?.id === item.id}
+                      onClick={() => {
+                        setSelectedId(item.id);
+                        setError(null);
+                      }}
+                      disabled={running}
+                    >
+                      <span className="queue-item-top">
+                        <strong>{scenarioName(item.name)}</strong>
+                        <span className="mono">{String(index + 1).padStart(2, "0")}</span>
+                      </span>
+                      <span className="queue-item-source">{item.summary}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+              <p className="queue-foot">
+                Expected outcomes are frozen ground truth, separate from observed production
+                results.
               </p>
             </div>
           </aside>
-          <section className="scenario-detail">
+          <section className="split-main stack-lg" aria-label="Scenario detail">
             {scenario ? (
               <>
-                <div className="scenario-heading">
-                  <h2>{scenario.name.replace(/^[A-E] [·•] /, "")}</h2>
-                  <p>{scenario.summary}</p>
-                  <code className="scenario-id">{scenario.id}</code>
-                </div>
+                <header className="case-head">
+                  <div className="case-title">
+                    <h2>{scenarioName(scenario.name)}</h2>
+                    <Badge>Synthetic</Badge>
+                  </div>
+                  <p className="case-source">
+                    <span>{scenario.summary}</span>
+                  </p>
+                  <code className="small quiet">{scenario.id}</code>
+                </header>
                 {scenario.id === "unsafe-agent-output" && (
-                  <Notice tone="amber" icon={ShieldX}>
-                    Validator fault injection: an unsafe recommendation is
-                    inserted after the native investigation. This tests
-                    deterministic policy, not a claim that the model produced
-                    that recommendation.
+                  <Notice tone="review" icon={ShieldX}>
+                    Validator fault injection: an unsafe recommendation is inserted after the native
+                    investigation. This tests deterministic policy, not a claim that the model
+                    produced that recommendation.
                   </Notice>
                 )}
-                <div className="scenario-run">
+
+                <div className="run-bar">
                   <div>
-                    <strong>Ready for a native run</strong>
+                    <strong>{running ? "Request sent to IRIS" : "Ready for a native run"}</strong>
                     <p>
-                      Creates a persisted case through the IRIS Business
-                      Service. A live agent call may be made.
+                      {running
+                        ? "IRIS is investigating this event. Keep the run ID for a safe retry if the connection is interrupted."
+                        : "Creates a persisted case through the IRIS Business Service. A live agent call may be made."}
                     </p>
                   </div>
-                  <Button
-                    icon={Play}
-                    kind="primary"
-                    disabled={running}
-                    onClick={run}
-                  >
+                  <Button icon={Play} kind="primary" disabled={running} onClick={run}>
                     {running
                       ? "Waiting for IRIS…"
-                      : error && runId && resultScenario === scenario.id
+                      : retrying
                         ? "Retry same injection"
                         : "Inject into IRIS"}
                   </Button>
                 </div>
-                {running && (
-                  <div className="run-pending" role="status">
-                    <Database size={18} />
-                    <div>
-                      <strong>Request sent to IRIS</strong>
-                      <p>
-                        IRIS is investigating this event. Keep the run ID for a
-                        safe retry if the connection is interrupted.
-                      </p>
-                    </div>
-                  </div>
-                )}
+                {running && <Loading>Waiting for the native investigation…</Loading>}
                 {error !== null && <InlineError error={error} />}
                 {runId && resultScenario === scenario.id && (
-                  <div className="run-id">
-                    <span>Run ID</span>
+                  <div className="copy-row run-id">
+                    <span className="kicker">Run ID</span>
                     <code>{runId}</code>
                     <CopyButton value={runId} label="Copy run ID" />
                   </div>
                 )}
-                <div className="expected-result">
+
+                <div className="expected">
                   <div>
-                    <span className="section-kicker">
-                      Frozen expected decision
-                    </span>
+                    <span className="kicker">Frozen expected decision</span>
                     <DecisionBadge value={scenario.ground_truth.decision} />
                   </div>
                   <p>{scenario.ground_truth.reason}</p>
                 </div>
-                <div className="scenario-payload-grid">
-                  <JsonBlock
-                    value={scenario.message}
-                    title="Partner event to inject"
-                  />
-                  <div>
-                    <div className="section-header">
-                      <h3>Independent references</h3>
-                      <Badge>{scenario.references.length}</Badge>
-                    </div>
-                    {scenario.references.map((reference, index) => (
-                      <details className="reference-record" key={index}>
-                        <summary>
-                          <ChevronRight size={14} />
-                          <span className="mono">
-                            {display(reference.id ?? `Reference ${index + 1}`)}
-                          </span>
-                        </summary>
-                        <JsonBlock
-                          value={reference}
-                          title={`Frozen reference ${index + 1}`}
-                          compact
-                        />
-                      </details>
-                    ))}
-                    <div className="fixture-clock">
-                      <Clock3 size={15} />
-                      <div>
-                        <span>Frozen evaluation clock</span>
-                        <time className="mono" dateTime={catalog.data.clock}>
-                          {dateTime(catalog.data.clock)}
-                        </time>
-                      </div>
-                    </div>
-                    <p className="small subtle">
-                      The server owns reference selection and execution. The
-                      browser cannot substitute release evidence.
-                    </p>
-                  </div>
-                </div>
+
                 {result && resultScenario === scenario.id && (
-                  <section className="observed-result">
-                    <div className="section-header">
+                  <section className="panel observed" aria-label="Observed native result">
+                    <div className="section-head">
                       <div>
                         <h3>
                           Observed native result:{" "}
-                          {result.policy
-                            ? humanize(result.policy.decision)
-                            : "Processing"}
+                          {result.policy ? humanize(result.policy.decision) : "Processing"}
                         </h3>
                       </div>
                       {result.policy && result.routing !== "PROCESSING" && (
-                        <Badge
-                          tone={
-                            result.policy.decision ===
-                            scenario.ground_truth.decision
-                              ? "mint"
-                              : "coral"
-                          }
-                        >
-                          {result.policy.decision ===
-                          scenario.ground_truth.decision ? (
-                            <Check size={13} />
+                        <Badge tone={matches ? "allow" : "hold"}>
+                          {matches ? (
+                            <Check size={13} aria-hidden="true" />
                           ) : (
-                            <CircleHelp size={13} />
+                            <CircleHelp size={13} aria-hidden="true" />
                           )}
-                          {result.policy.decision ===
-                          scenario.ground_truth.decision
-                            ? "Matches expectation"
-                            : "Differs from expectation"}
+                          {matches ? "Matches expectation" : "Differs from expectation"}
                         </Badge>
                       )}
                     </div>
@@ -323,29 +244,59 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
                         {result.id}
                       </MetaRow>
                       <MetaRow label="Route">
-                        <DecisionBadge value={result.routing} />
+                        <RouteMark routing={result.routing} />
                       </MetaRow>
                       <MetaRow label="Native trace" mono>
-                        {result.trace_id === null
-                          ? "Not recorded"
-                          : result.trace_id}
+                        {result.trace_id === null ? "Not recorded" : result.trace_id}
                       </MetaRow>
                     </Metadata>
                     <Timeline item={result} />
                     {result.routing === "PROCESSING" && polled >= 30 && (
-                      <Notice tone="amber">
-                        Automatic refresh paused. Open the investigation and
-                        refresh for the current state.
+                      <Notice tone="review">
+                        Automatic refresh paused. Open the investigation and refresh for the current
+                        state.
                       </Notice>
                     )}
-                    <Button
-                      icon={ArrowUpRight}
-                      onClick={() => inspectCase(result.id)}
-                    >
-                      Inspect full investigation
-                    </Button>
+                    <div className="row-actions">
+                      <Button icon={ArrowUpRight} onClick={() => inspectCase(result.id)}>
+                        Inspect full investigation
+                      </Button>
+                    </div>
                   </section>
                 )}
+
+                <div className="two-col">
+                  <JsonBlock value={scenario.message} title="Partner event to inject" />
+                  <div className="stack">
+                    <div className="section-head">
+                      <div>
+                        <h3>Independent references</h3>
+                      </div>
+                      <Badge>{scenario.references.length}</Badge>
+                    </div>
+                    <div className="disclosures">
+                      {scenario.references.map((reference, index) => (
+                        <details className="disclosure" key={index}>
+                          <summary>
+                            <span className="mono">
+                              {display(reference.id ?? `Reference ${index + 1}`)}
+                            </span>
+                          </summary>
+                          <JsonBlock value={reference} title={`Frozen reference ${index + 1}`} />
+                        </details>
+                      ))}
+                    </div>
+                    <Metadata>
+                      <MetaRow label="Frozen evaluation clock" mono>
+                        <time dateTime={catalog.data.clock}>{dateTime(catalog.data.clock)}</time>
+                      </MetaRow>
+                    </Metadata>
+                    <p className="small quiet">
+                      The server owns reference selection and execution. The browser cannot
+                      substitute release evidence.
+                    </p>
+                  </div>
+                </div>
               </>
             ) : (
               <EmptyState title="No scenarios in this version">
@@ -359,65 +310,31 @@ export function ScenarioLab({ refresh }: { refresh: number }) {
   );
 }
 
-export function Overview({
-  refresh,
-  health,
-}: {
-  refresh: number;
-  health: Resource<Health>;
-}) {
+const METRICS = [
+  { key: "processed", label: "Messages processed", caption: "Persisted native records", tone: "muted" },
+  { key: "contradictions", label: "Verified contradictions", caption: "Independent evidence disagrees", tone: "hold" },
+  { key: "pending_reviews", label: "Pending reviews", caption: "Awaiting an authorized decision", tone: "review" },
+  { key: "quarantined", label: "Quarantined transactions", caption: "Held from the destination", tone: "hold" },
+] as const;
+
+export function Overview({ refresh, health }: { refresh: number; health: Resource<Health> }) {
   const data = useApi("/api/overview", OverviewSchema, refresh);
-  const metrics = [
-    {
-      key: "processed",
-      label: "Messages processed",
-      icon: Layers3,
-      tone: "blue",
-      caption: "Persisted native records",
-    },
-    {
-      key: "contradictions",
-      label: "Verified contradictions",
-      icon: GitCompareArrows,
-      tone: "coral",
-      caption: "Independent evidence disagrees",
-    },
-    {
-      key: "pending_reviews",
-      label: "Pending reviews",
-      icon: History,
-      tone: "amber",
-      caption: "Awaiting an authorized decision",
-    },
-    {
-      key: "quarantined",
-      label: "Quarantined transactions",
-      icon: ShieldX,
-      tone: "purple",
-      caption: "Held from the destination",
-    },
-  ] as const;
   return (
     <>
       <PageHeading
-        eyebrow="Workspace / operations"
         title="Overview"
-        description="A clear view of what arrived, what changed, and what was contained."
+        description="What arrived, what contradicted its agreement, and what was contained."
       >
-        <a href="#scenarios" className="button primary">
-          <Play size={15} />
-          Run a scenario
+        <a href="#scenarios" className="btn btn-primary">
+          <Play size={15} aria-hidden="true" /> Run a scenario
         </a>
       </PageHeading>
-      <div className="metric-grid">
-        {metrics.map(({ key, label, icon: Icon, tone, caption }) => (
-          <article className="metric" key={key}>
-            <div className="metric-heading">
-              <span>{label}</span>
-              <Icon size={17} className={tone} />
-            </div>
-            <strong className="metric-number mono">
-              {data.data ? data.data[key].toLocaleString() : "—"}
+      <div className="metrics">
+        {METRICS.map(({ key, label, caption, tone }) => (
+          <article className={`metric metric-${tone}`} key={key}>
+            <span className="kicker">{label}</span>
+            <strong className="mono">
+              {data.data ? data.data[key].toLocaleString() : "Not observed"}
             </strong>
             <p>
               {data.data
@@ -430,95 +347,68 @@ export function Overview({
         ))}
       </div>
       {data.error && <ErrorState error={data.error} />}
-      <div className="overview-layout">
+      <div className="overview-grid">
         <section className="panel">
-          <div className="panel-header">
+          <div className="section-head">
             <div>
               <h2>Recent investigations</h2>
               <p>The latest cases returned by the native API.</p>
             </div>
-            <a href="#investigations" className="text-link">
-              View queue <ArrowRight size={14} />
+            <a href="#investigations" className="link">
+              View queue <ArrowRight size={13} aria-hidden="true" />
             </a>
           </div>
           {data.data ? (
             data.data.recent.length ? (
               <CaseTable cases={data.data.recent} />
             ) : (
-              <EmptyState compact icon={Inbox} title="No investigations yet">
+              <EmptyState icon={Inbox} title="No investigations yet">
                 Run a synthetic scenario or inject a partner event to begin.
               </EmptyState>
             )
           ) : data.loading ? (
-            <div className="loading-state" role="status">
-              Reading investigations…
-            </div>
+            <Loading>Reading investigations…</Loading>
           ) : (
-            <div className="quiet-panel">
-              <Database size={20} />
-              <p>
-                Case history is unavailable while the native API is
-                disconnected.
-              </p>
-            </div>
+            <p className="quiet">Case history is unavailable while the native API is disconnected.</p>
           )}
         </section>
-        <aside className="panel production-summary">
-          <div className="panel-header">
-            <h2>Production signal</h2>
-            <Activity size={17} />
-          </div>
-          <div className="production-summary-body">
-            <div className="signal-identity">
-              <span className="production-icon">
-                <Server size={23} strokeWidth={1.4} />
-              </span>
-              <div>
-                <strong>
-                  {health.data?.production.name ?? "InterSystems IRIS"}
-                </strong>
-                <small>Native interoperability</small>
-              </div>
+        <aside className="panel" aria-label="Production signal">
+          <div className="section-head">
+            <div>
+              <h2>Production signal</h2>
+              <p className="mono">{health.data?.production.name ?? "InterSystems IRIS"}</p>
             </div>
-            <Metadata>
-              <MetaRow label="Production">
-                {health.data ? (
-                  <Badge
-                    tone={health.data.production.running ? "mint" : "amber"}
-                    dot
-                  >
-                    {health.data.production.running ? "Running" : "Not running"}
-                  </Badge>
-                ) : (
-                  "Not observed"
-                )}
-              </MetaRow>
-              <MetaRow label="Agent configured">
-                {health.data
-                  ? health.data.agent.configured
-                    ? "Yes"
-                    : "No"
-                  : "Not observed"}
-              </MetaRow>
-              <MetaRow label="Last native success">
-                {health.data
-                  ? dateTime(health.data.agent.last_success_at)
-                  : "Not observed"}
-              </MetaRow>
-            </Metadata>
-            <a href="#health" className="button secondary">
-              Inspect health <ArrowRight size={14} />
-            </a>
           </div>
+          <Metadata>
+            <MetaRow label="Production">
+              {health.data ? (
+                <Badge tone={health.data.production.running ? "allow" : "review"}>
+                  {health.data.production.running ? "Running" : "Not running"}
+                </Badge>
+              ) : (
+                "Not observed"
+              )}
+            </MetaRow>
+            <MetaRow label="Agent configured">
+              {health.data ? (health.data.agent.configured ? "Yes" : "No") : "Not observed"}
+            </MetaRow>
+            <MetaRow label="Last native success">
+              {health.data ? dateTime(health.data.agent.last_success_at) : "Not observed"}
+            </MetaRow>
+          </Metadata>
+          <a href="#health" className="btn btn-secondary">
+            Inspect health <ArrowRight size={14} aria-hidden="true" />
+          </a>
         </aside>
       </div>
-      <section className="principle-strip">
-        <span className="section-kicker">How SilentShift works</span>
+      <section className="panel principle">
+        <div className="section-head">
+          <div>
+            <h2>How SilentShift works</h2>
+            <p>A recommendation is evidence to evaluate. It is never permission to deliver.</p>
+          </div>
+        </div>
         <NativePath observed={Boolean(health.data)} />
-        <p>
-          A recommendation is evidence to evaluate. It is never permission to
-          deliver.
-        </p>
       </section>
     </>
   );
@@ -536,21 +426,28 @@ function MessageDialog({
   const [busy, setBusy] = useState(false);
   return (
     <Modal
+      wide
       title="Inject a partner event"
       description="Submit original JSON through the authenticated IRIS Business Service. The native server retrieves reference evidence and controls routing."
       onClose={onClose}
     >
       <form
+        className="form"
         onSubmit={async (event) => {
           event.preventDefault();
           if (busy) return;
           setBusy(true);
           setError(null);
           try {
-            JsonObject.parse(JSON.parse(payload));
-            onComplete(
-              await request("/api/messages", CaseSchema, { rawBody: payload }),
-            );
+            let parsed: unknown;
+            try {
+              parsed = JSON.parse(payload);
+            } catch {
+              throw new Error("Enter valid JSON. The payload could not be parsed.");
+            }
+            if (!JsonObject.safeParse(parsed).success)
+              throw new Error("The message must be a JSON object.");
+            onComplete(await request("/api/messages", CaseSchema, { rawBody: payload }));
           } catch (failure) {
             setError(failure);
           } finally {
@@ -558,11 +455,11 @@ function MessageDialog({
           }
         }}
       >
-        <label htmlFor="message-json" className="field-label">
+        <label htmlFor="message-json" className="label">
           Original message JSON
         </label>
         <textarea
-          className="json-input"
+          className="code-input"
           id="message-json"
           data-autofocus
           value={payload}
@@ -574,21 +471,14 @@ function MessageDialog({
           disabled={busy}
           placeholder="Paste a JSON object with event_id, source and contract fields…"
         />
-        <p className="form-hint">
-          Keep the event ID unchanged when retrying. A reused ID with changed
-          content must be rejected by the server.
+        <p className="hint">
+          Keep the event ID unchanged when retrying. A reused ID with changed content must be
+          rejected by the server.
         </p>
         {error !== null && <InlineError error={error} />}
-        <div className="modal-actions">
-          <Button type="button" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            kind="primary"
-            icon={Plus}
-            disabled={busy || !payload.trim()}
-          >
+        <div className="dialog-actions">
+          <Button onClick={onClose}>Cancel</Button>
+          <Button type="submit" kind="primary" icon={Plus} disabled={busy || !payload.trim()}>
             {busy ? "Waiting for IRIS…" : "Inject into IRIS"}
           </Button>
         </div>
@@ -608,95 +498,84 @@ export function Messages({ refresh }: { refresh: number }) {
     cases.data?.items.filter((item) =>
       `${item.event_id} ${item.source} ${item.id}`
         .toLowerCase()
-        .includes(query.toLowerCase()),
+        .includes(query.toLowerCase().trim()),
     ) ?? [];
-  const item =
-    cases.data?.items.find((record) => record.id === selected) ?? items[0];
+  const item = items.find((record) => record.id === selected) ?? items[0];
   return (
     <>
       <PageHeading
-        eyebrow="Operations / original records"
         title="Message Explorer"
-        description="Inspect the original payload, reference snapshot, and semantic differences."
+        description="Inspect the original payload, reference snapshot and semantic differences."
       >
         <Button kind="primary" icon={Plus} onClick={() => setShowSubmit(true)}>
           Inject message
         </Button>
       </PageHeading>
       {!cases.data ? (
-        <div className="panel">
+        <section className="panel">
           <ResourceState resource={cases} />
-        </div>
+        </section>
       ) : !cases.data.items.length ? (
-        <div className="panel">
+        <section className="panel">
           <EmptyState icon={FileJson2} title="No messages received">
-            The native production has not returned any message records. Inject
-            an event or choose a synthetic scenario.
+            The native production has not returned any message records. Inject an event or choose
+            a synthetic scenario.
           </EmptyState>
-        </div>
+        </section>
       ) : (
-        <>
-          <div className="message-toolbar">
-            <label className="search-input">
+        <div className="stack-lg">
+          <div className="toolbar">
+            <label className="search">
+              <FileJson2 size={14} aria-hidden="true" />
               <span className="sr-only">Search messages</span>
-              <FileJson2 size={16} />
               <input
                 type="search"
-                placeholder="Search event, source, or case ID"
+                placeholder="Search event, source or case ID"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
             </label>
-            <label className="message-select">
-              <span>Message</span>
-              <select
-                value={item?.id ?? ""}
-                onChange={(event) => setSelected(event.target.value)}
-                aria-label="Select message"
-              >
-                {items.map((record) => (
-                  <option value={record.id} key={record.id}>
-                    {record.event_id} · {record.source}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <span className="small subtle">
-              {items.length} of {cases.data.total} records, limit{" "}
-              {cases.data.limit}
+            <select
+              value={item?.id ?? ""}
+              onChange={(event) => setSelected(event.target.value)}
+              aria-label="Select message"
+              disabled={!items.length}
+            >
+              {items.map((record) => (
+                <option value={record.id} key={record.id}>
+                  {record.event_id} · {record.source}
+                </option>
+              ))}
+            </select>
+            <span className="small quiet">
+              {items.length} of {cases.data.total} records, limit {cases.data.limit}
             </span>
           </div>
           {item ? (
             <>
-              <section className="panel message-preview">
-                <div className="panel-header">
+              <section className="panel">
+                <div className="section-head">
                   <div>
-                    <span className="section-kicker">Original payload</span>
+                    <span className="kicker">Original payload</span>
                     <h2 className="mono">{item.event_id}</h2>
                   </div>
-                  <Button
-                    icon={ArrowUpRight}
-                    onClick={() => inspectCase(item.id)}
-                  >
+                  <Button icon={ArrowUpRight} onClick={() => inspectCase(item.id)}>
                     Open investigation
                   </Button>
                 </div>
-                <div className="message-json-grid">
+                <div className="two-col">
                   <JsonBlock value={item.message} title="Partner message" />
-                  <JsonBlock
-                    value={item.references}
-                    title="Independent reference snapshot"
-                  />
+                  <JsonBlock value={item.references} title="Independent reference snapshot" />
                 </div>
               </section>
-              <CaseDetail item={item} key={item.id} compact />
+              <CaseDetail item={item} key={item.id} />
             </>
           ) : (
             <EmptyState title="No messages match this search">
               Try another event ID or source.
             </EmptyState>
           )}
-        </>
+        </div>
       )}
       {showSubmit && (
         <MessageDialog
@@ -715,61 +594,66 @@ export function Messages({ refresh }: { refresh: number }) {
 function usageSummary(value: unknown): string {
   if (!value || typeof value !== "object" || Array.isArray(value)) return "Not collected";
   const counters = Object.values(value).filter(
-    (entry): entry is Record<string, unknown> => Boolean(entry) && typeof entry === "object" && !Array.isArray(entry),
+    (entry): entry is Record<string, unknown> =>
+      Boolean(entry) && typeof entry === "object" && !Array.isArray(entry),
   );
-  const recorded = counters.filter((counter) => typeof counter.value === "number" && Number.isFinite(counter.value));
+  const recorded = counters.filter(
+    (counter) => typeof counter.value === "number" && Number.isFinite(counter.value),
+  );
   if (!recorded.length) return "Not collected";
-  const observations = recorded.filter((counter) => typeof counter.observed_records === "number" && typeof counter.total_records === "number");
+  const observations = recorded.filter(
+    (counter) =>
+      typeof counter.observed_records === "number" && typeof counter.total_records === "number",
+  );
   const coverage = observations.length
     ? `, ${Math.min(...observations.map((counter) => counter.observed_records as number))}/${Math.max(...observations.map((counter) => counter.total_records as number))} records observed`
     : "";
   return `${recorded.length} counter${recorded.length === 1 ? "" : "s"} recorded${coverage}`;
 }
 
+const percent = (value: number | null) =>
+  value === null ? "Not measured" : `${(value * 100).toFixed(1)}%`;
+
 export function Evaluations({ refresh }: { refresh: number }) {
   const data = useApi("/api/evaluations", EvaluationsSchema, refresh);
   return (
     <>
       <PageHeading
-        eyebrow="Validation / measured outcomes"
         title="Evaluations"
         description="Compare deterministic rules, native recommendations and policy-constrained outcomes."
       >
         <Badge>
-          <FlaskConical size={13} /> Actual runs only
+          <FlaskConical size={13} aria-hidden="true" /> Actual runs only
         </Badge>
       </PageHeading>
-      <div className="evaluation-explainer">
-        <div>
-          <span className="evaluation-stage mono">01</span>
-          <h3>Rule-only baseline</h3>
-          <p>Independent deterministic assessment before the agent.</p>
-        </div>
-        <ArrowRight size={18} />
-        <div>
-          <span className="evaluation-stage mono">02</span>
-          <h3>AI-assisted investigation</h3>
-          <p>The structured native recommendation and its evidence.</p>
-        </div>
-        <ArrowRight size={18} />
-        <div>
-          <span className="evaluation-stage mono">03</span>
-          <h3>Policy-constrained result</h3>
-          <p>The final permitted route, checked against frozen ground truth.</p>
-        </div>
-      </div>
+      <ol className="native-path compact" aria-label="Evaluation stages">
+        <li>
+          <span className="mono">01</span>
+          <strong>Rule-only baseline</strong>
+          <small>Independent deterministic assessment before the agent.</small>
+        </li>
+        <li>
+          <span className="mono">02</span>
+          <strong>AI-assisted investigation</strong>
+          <small>The structured native recommendation and its evidence.</small>
+        </li>
+        <li>
+          <span className="mono">03</span>
+          <strong>Policy-constrained result</strong>
+          <small>The final permitted route, checked against frozen ground truth.</small>
+        </li>
+      </ol>
       {!data.data ? (
-        <div className="panel">
+        <section className="panel">
           <ResourceState resource={data} />
-        </div>
+        </section>
       ) : !data.data.items.length ? (
-        <div className="panel evaluation-empty">
+        <section className="panel">
           <EmptyState icon={FlaskConical} title="No measured runs recorded">
-            Execute the versioned evaluation against the native production, then
-            refresh. Accuracy, safety, latency and usage stay unavailable until
-            actual run records exist.
+            Execute the versioned evaluation against the native production, then refresh. Accuracy,
+            safety, latency and usage stay unavailable until actual run records exist.
           </EmptyState>
-          <div className="unmeasured-metrics">
+          <dl className="meta meta-grid">
             {[
               "Correct / total",
               "False quarantine rate",
@@ -779,127 +663,98 @@ export function Evaluations({ refresh }: { refresh: number }) {
               "Model usage / cost",
             ].map((label) => (
               <div key={label}>
-                <span>{label}</span>
-                <code>Not measured</code>
+                <dt>{label}</dt>
+                <dd className="mono quiet">Not measured</dd>
               </div>
             ))}
-          </div>
-        </div>
+          </dl>
+        </section>
       ) : (
-        <div className="evaluation-runs">
+        <div className="stack-lg">
           {data.data.items.map((run) => (
-            <section className="panel" key={run.id}>
-              <div className="panel-header">
+            <section className="panel" key={run.id} aria-label={`Evaluation ${run.id}`}>
+              <div className="section-head">
                 <div>
-                  <span className="section-kicker">
-                    Recorded evaluation on {dateTime(run.created_at)}
-                  </span>
-                  <h2 className="mono">{run.id}</h2>
+                  <span className="kicker">Recorded evaluation on {dateTime(run.created_at)}</span>
+                  <h2 className="mono break">{run.id}</h2>
+                  <p>
+                    <Badge>{run.dataset_version}</Badge> {run.native.accepted_records} /{" "}
+                    {run.native.expected_cases} native records accepted
+                  </p>
                 </div>
-                <Badge tone={run.native.passed ? "mint" : "amber"}>
+                <Badge tone={run.native.passed ? "allow" : "review"}>
                   {humanize(run.native.status)}
                 </Badge>
               </div>
-              <div className="evaluation-record">
-                <div className="evaluation-run-meta">
-                  <Badge>{run.dataset_version}</Badge>
-                  <span>
-                    {run.native.accepted_records} / {run.native.expected_cases}{" "}
-                    native records accepted
-                  </span>
-                </div>
-                <div className="measured-metrics">
-                  {(
-                    [
-                      [
-                        "Native proposal accuracy",
-                        run.native.proposal_accuracy,
-                      ],
-                      ["Final decision accuracy", run.native.final_accuracy],
-                      [
-                        "False quarantine rate",
-                        run.native.false_quarantine_rate,
-                      ],
-                      ["Review rate", run.native.review_rate],
-                    ] as const
-                  ).map(([label, metric]) => (
-                    <article key={label}>
-                      <span>{label}</span>
-                      <strong className="mono">
-                        {metric.value === null
-                          ? "Not measured"
-                          : `${(metric.value * 100).toFixed(1)}%`}
-                      </strong>
-                      <small className="mono">
-                        {metric.numerator} / {metric.denominator}
-                      </small>
-                    </article>
-                  ))}
-                  <article>
-                    <span>Unsafe releases</span>
-                    <strong
-                      className={`mono ${run.native.unsafe_release.count === null ? "muted" : run.native.unsafe_release.count > 0 ? "coral" : "mint"}`}
-                    >
-                      {run.native.unsafe_release.count ?? "Not measured"}
-                    </strong>
-                    <small className="mono">
-                      of {run.native.unsafe_release.denominator} cases
-                    </small>
+              <div className="metrics">
+                {(
+                  [
+                    ["Native proposal accuracy", run.native.proposal_accuracy],
+                    ["Final decision accuracy", run.native.final_accuracy],
+                    ["False quarantine rate", run.native.false_quarantine_rate],
+                    ["Review rate", run.native.review_rate],
+                  ] as const
+                ).map(([label, metric]) => (
+                  <article className="metric" key={label}>
+                    <span className="kicker">{label}</span>
+                    <strong className="mono">{percent(metric.value)}</strong>
+                    <p className="mono">
+                      {metric.numerator} / {metric.denominator}
+                    </p>
                   </article>
-                  <article>
-                    <span>Native latency</span>
-                    <strong className="mono">
-                      {run.native.latency.mean_ms === null
-                        ? "Not measured"
-                        : `${run.native.latency.mean_ms.toFixed(0)} ms`}
-                    </strong>
-                    <small className="mono">
-                      p95{" "}
-                      {run.native.latency.p95_ms === null
-                        ? "unavailable"
-                        : `${run.native.latency.p95_ms.toFixed(0)} ms`}{" "}
-                      · {run.native.latency.observed_records}/
-                      {run.native.latency.total_records} observed
-                    </small>
-                  </article>
-                </div>
-                {run.native.issues.length > 0 && (
-                  <JsonBlock
-                    value={run.native.issues}
-                    title="Evaluation issues"
-                  />
-                )}
-                <div className="evaluation-usage">
-                  <span>
-                    Model usage:{" "}
-                    {usageSummary(run.native.model_usage)}
-                  </span>
-                  <span>
-                    Model cost:{" "}
-                    {run.native.model_cost === null ||
-                    run.native.model_cost === undefined
-                      ? "Not recorded"
-                      : display(run.native.model_cost)}
-                  </span>
-                </div>
-                <details className="evaluation-raw">
-                  <summary>
-                    Inspect all comparisons, case IDs and measurement evidence
-                  </summary>
-                  <JsonBlock value={run} title="Measured evaluation record" />
-                </details>
-                <p className="small subtle">
-                  Only server-recorded values are shown. Missing denominators,
-                  usage and cost are not inferred.
-                </p>
+                ))}
+                <article
+                  className={`metric ${run.native.unsafe_release.count === null ? "" : run.native.unsafe_release.count > 0 ? "metric-hold" : "metric-allow"}`}
+                >
+                  <span className="kicker">Unsafe releases</span>
+                  <strong className="mono">
+                    {run.native.unsafe_release.count ?? "Not measured"}
+                  </strong>
+                  <p className="mono">of {run.native.unsafe_release.denominator} cases</p>
+                </article>
+                <article className="metric">
+                  <span className="kicker">Native latency</span>
+                  <strong className="mono">
+                    {run.native.latency.mean_ms === null
+                      ? "Not measured"
+                      : `${run.native.latency.mean_ms.toFixed(0)} ms`}
+                  </strong>
+                  <p className="mono">
+                    p95{" "}
+                    {run.native.latency.p95_ms === null
+                      ? "unavailable"
+                      : `${run.native.latency.p95_ms.toFixed(0)} ms`}{" "}
+                    · {run.native.latency.observed_records}/{run.native.latency.total_records}{" "}
+                    observed
+                  </p>
+                </article>
               </div>
+              {run.native.issues.length > 0 && (
+                <JsonBlock value={run.native.issues} title="Evaluation issues" />
+              )}
+              <Metadata>
+                <MetaRow label="Model usage">{usageSummary(run.native.model_usage)}</MetaRow>
+                <MetaRow label="Model cost">
+                  {run.native.model_cost === null || run.native.model_cost === undefined
+                    ? "Not recorded"
+                    : display(run.native.model_cost)}
+                </MetaRow>
+              </Metadata>
+              <details className="disclosure plain">
+                <summary>Inspect all comparisons, case IDs and measurement evidence</summary>
+                <JsonBlock value={run} title="Measured evaluation record" />
+              </details>
+              <p className="small quiet">
+                Only server-recorded values are shown. Missing denominators, usage and cost are not
+                inferred.
+              </p>
             </section>
           ))}
         </div>
       )}
-      <Notice tone="blue" icon={CircleHelp}>
-        Five synthetic scenarios demonstrate specific behavior. Their results do
-        not establish general accuracy on real business traffic.
+      <Notice icon={CircleHelp}>
+        Five synthetic scenarios demonstrate specific behavior. Their results do not establish
+        general accuracy on real business traffic.
       </Notice>
     </>
   );
@@ -910,37 +765,44 @@ export function Policies({ refresh }: { refresh: number }) {
   return (
     <>
       <PageHeading
-        eyebrow="Governance / deterministic authority"
         title="Policies"
-        description="The agent recommends. Policy decides which actions are permitted."
+        description="The agent recommends. Deterministic policy decides which actions are permitted."
       >
-        {data.data && (
-          <Badge tone="mint">
-            <ShieldCheck size={13} />
-            {data.data.version}
-          </Badge>
-        )}
+        {data.data && <Badge tone="allow">{data.data.version}</Badge>}
       </PageHeading>
-      <div className="policy-principle">
-        <div className="policy-principle-icon">
-          <ShieldCheck size={31} strokeWidth={1.3} />
-        </div>
-        <div>
-          <h2>Explicit trust boundary</h2>
-          <p>
-            Agent reasoning remains a recommendation. Inspect the policy version and checks returned by IRIS. Every case
-            records the checks that permitted or denied its route.
-          </p>
-        </div>
-        <span className="policy-flow">AI → policy → route</span>
-      </div>
+      <section className="boundary" aria-label="Explicit trust boundary">
+        <ol>
+          <li>
+            <span className="kicker">Recommends</span>
+            <strong>AI Hub agent</strong>
+          </li>
+          <li aria-hidden="true">
+            <ArrowRight size={16} />
+          </li>
+          <li>
+            <span className="kicker">Decides</span>
+            <strong>Deterministic policy</strong>
+          </li>
+          <li aria-hidden="true">
+            <ArrowRight size={16} />
+          </li>
+          <li>
+            <span className="kicker">Records</span>
+            <strong>Route and checks</strong>
+          </li>
+        </ol>
+        <p>
+          Agent reasoning remains a recommendation. Inspect the policy version and checks returned
+          by IRIS. Every case records the checks that permitted or denied its route.
+        </p>
+      </section>
       {!data.data ? (
-        <div className="panel">
+        <section className="panel">
           <ResourceState resource={data} />
-        </div>
+        </section>
       ) : (
         <section className="panel">
-          <div className="panel-header">
+          <div className="section-head">
             <div>
               <h2>Configured safety rules</h2>
               <p>Server-reported policy · {data.data.version}</p>
@@ -948,44 +810,34 @@ export function Policies({ refresh }: { refresh: number }) {
             <Badge>{data.data.rules.length} rules</Badge>
           </div>
           {data.data.rules.length ? (
-            <ol className="rules-list">
+            <ol className="rules">
               {data.data.rules.map((rule, index) => (
                 <li key={rule.id}>
-                  <span className="rule-number mono">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <span className="mono">{String(index + 1).padStart(2, "0")}</span>
                   <div>
                     <code>{rule.id}</code>
                     <p>{rule.description}</p>
-                    {Object.keys(rule).some(
-                      (key) => !["id", "description"].includes(key),
-                    ) && (
-                      <details>
+                    {Object.keys(rule).some((key) => !["id", "description"].includes(key)) && (
+                      <details className="disclosure plain">
                         <summary>Rule configuration</summary>
-                        <JsonBlock
-                          value={rule}
-                          title={`${rule.id} configuration`}
-                          compact
-                        />
+                        <JsonBlock value={rule} title={`${rule.id} configuration`} />
                       </details>
                     )}
                   </div>
-                  <ShieldCheck size={18} />
                 </li>
               ))}
             </ol>
           ) : (
-            <EmptyState compact title="No policy rules returned">
-              This API response does not establish an enforced policy
-              configuration.
+            <EmptyState title="No policy rules returned">
+              This API response does not establish an enforced policy configuration.
             </EmptyState>
           )}
         </section>
       )}
-      <Notice tone="amber" icon={KeyRound}>
-        Reviewer actions require server authorization, a recorded reason, a
-        current case version and an idempotency key. Critical contradictions
-        require corrected evidence and a new investigation.
+      <Notice tone="review" icon={KeyRound}>
+        Reviewer actions require server authorization, a recorded reason, a current case version
+        and an idempotency key. Critical contradictions require corrected evidence and a new
+        investigation.
       </Notice>
     </>
   );
@@ -996,18 +848,19 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
   return (
     <>
       <PageHeading
-        eyebrow="Workspace / native dependencies"
         title="System Health"
-        description="Observe the runtime. Separate configured access from proven execution."
+        description="Observe the runtime. Configured access is not proof of execution."
       >
         <Button icon={KeyRound} onClick={openConnect}>
           IRIS session
         </Button>
       </PageHeading>
-      <div className="health-metrics">
-        <article className="panel health-status">
-          <span className="section-kicker">Native production</span>
-          <h2>
+      <div className="metrics three">
+        <article
+          className={`metric ${health.data ? (health.data.production.running ? "metric-allow" : "metric-review") : ""}`}
+        >
+          <span className="kicker">Native production</span>
+          <strong>
             {health.data
               ? health.data.production.running
                 ? "Running"
@@ -1015,47 +868,38 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
               : health.loading
                 ? "Checking…"
                 : "Not observed"}
-          </h2>
-          <p className="mono">
-            {health.data?.production.name ?? "Awaiting a native API response"}
-          </p>
-          {health.data && (
-            <Badge tone={health.data.production.running ? "mint" : "amber"} dot>
-              Server-reported status
-            </Badge>
-          )}
+          </strong>
+          <p className="mono">{health.data?.production.name ?? "Awaiting a native API response"}</p>
+          {health.data && <p className="small">Server-reported status</p>}
         </article>
-        <article className="panel health-status">
-          <span className="section-kicker">Agent configuration</span>
-          <h2>
+        <article className="metric">
+          <span className="kicker">Agent configuration</span>
+          <strong>
             {health.data
               ? health.data.agent.configured
                 ? "Configured"
                 : "Not configured"
               : "Not observed"}
-          </h2>
+          </strong>
           <p>Configuration does not prove a model invocation.</p>
           {health.data && (
-            <span className="small subtle">
+            <p className="small">
               Last native success: {dateTime(health.data.agent.last_success_at)}
-            </span>
+            </p>
           )}
         </article>
-        <article className="panel health-status">
-          <span className="section-kicker">Reported runtime build</span>
-          <h2 className="build-number mono">
-            {health.data?.build ?? "Unavailable"}
-          </h2>
+        <article className="metric">
+          <span className="kicker">Reported runtime build</span>
+          <strong className="mono">{health.data?.build ?? "Unavailable"}</strong>
           <p>
-            Required: <code>2026.3.0AI.154.0</code> Community
+            Required: <code>2026.3.0AI.154.0</code> Community · AI Hub Early Access
           </p>
-          <Badge tone="blue">AI Hub Early Access</Badge>
         </article>
       </div>
       {health.error && <ErrorState error={health.error} />}
       {health.data ? (
         <section className="panel">
-          <div className="panel-header">
+          <div className="section-head">
             <div>
               <h2>Production components</h2>
               <p>Statuses returned by the actual native API.</p>
@@ -1063,12 +907,12 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
             <Badge>{health.data.components.length} components</Badge>
           </div>
           {health.data.components.length ? (
-            <div className="table-scroll">
-              <table className="data-table">
+            <div className="table-wrap" role="region" aria-label="Production components" tabIndex={0}>
+              <table className="table">
                 <thead>
                   <tr>
-                    <th>Component</th>
-                    <th>Reported status</th>
+                    <th scope="col">Component</th>
+                    <th scope="col">Reported status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1076,9 +920,7 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
                     <tr key={component.name}>
                       <td className="mono">{component.name}</td>
                       <td>
-                        <Badge tone={toneFor(component.status)}>
-                          {component.status}
-                        </Badge>
+                        <Badge tone={toneFor(component.status)}>{component.status}</Badge>
                       </td>
                     </tr>
                   ))}
@@ -1086,57 +928,55 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
               </table>
             </div>
           ) : (
-            <EmptyState compact title="No component statuses returned">
-              The health response does not include individual component
-              observations.
+            <EmptyState title="No component statuses returned">
+              The health response does not include individual component observations.
             </EmptyState>
           )}
-          <details className="raw-health">
+          <details className="disclosure plain">
             <summary>Inspect full health response</summary>
             <JsonBlock value={health.data} title="Native health response" />
           </details>
         </section>
       ) : (
-        <section className="panel setup-panel">
-          <div className="panel-header">
+        <section className="panel">
+          <div className="section-head">
             <div>
               <h2>Native production connection</h2>
               <p>
-                The workbench needs a running build 154 production. It contains
-                no mock operational backend.
+                The workbench needs a running build 154 production. It contains no mock operational
+                backend.
               </p>
             </div>
-            <Unplug size={25} strokeWidth={1.3} />
           </div>
-          <ol className="setup-steps">
+          <ol className="rules">
             <li>
               <span className="mono">01</span>
               <div>
-                <h3>Load the official Community image</h3>
+                <strong>Load the official Community image</strong>
                 <p>
-                  Download the ARM64 or x64 build 154 from the AI Hub Early
-                  Access portal, then load and retag it locally.
+                  Download the ARM64 or x64 build 154 from the AI Hub Early Access portal, then load
+                  and retag it locally.
                 </p>
                 <a
-                  className="text-link"
+                  className="link"
                   href="https://evaluation.intersystems.com/Eval/early-access/AIHub"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Open EAP portal <ArrowUpRight size={14} />
+                  Open EAP portal <ArrowUpRight size={13} aria-hidden="true" />
                 </a>
               </div>
             </li>
             <li>
               <span className="mono">02</span>
               <div>
-                <h3>Start the native stack</h3>
+                <strong>Start the native stack</strong>
                 <p>
-                  Follow the repository setup to compile the production and
-                  start its Web Gateway. No EAP binary is bundled here.
+                  Follow the repository setup to compile the production and start its Web Gateway.
+                  No EAP binary is bundled here.
                 </p>
-                <div className="command-line">
-                  <Terminal size={15} />
+                <div className="command">
+                  <Terminal size={14} aria-hidden="true" />
                   <code>uv run python scripts/bootstrap.py</code>
                   <CopyButton
                     value="uv run python scripts/bootstrap.py"
@@ -1148,10 +988,10 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
             <li>
               <span className="mono">03</span>
               <div>
-                <h3>Connect an IRIS account</h3>
+                <strong>Connect an IRIS account</strong>
                 <p>
-                  Use a viewer account for records and scenario ingestion.
-                  Reviewer actions need an additional server permission.
+                  Use a viewer account for records and scenario ingestion. Reviewer actions need an
+                  additional server permission.
                 </p>
                 <Button icon={KeyRound} onClick={openConnect}>
                   Connect to IRIS
@@ -1159,25 +999,18 @@ export function SystemHealth({ health }: { health: Resource<Health> }) {
               </div>
             </li>
           </ol>
-          <div className="setup-footnote">
-            <code>IRIS_API_ORIGIN</code>
-            <p>
-              The Vite development proxy forwards same-origin API requests to
-              the configured IRIS Web Gateway. Credentials stay in this tab’s
-              memory.
-            </p>
-          </div>
+          <p className="small quiet">
+            <code>IRIS_API_ORIGIN</code>: the Vite development proxy forwards same-origin API
+            requests to the configured IRIS Web Gateway. Credentials stay in this tab's memory.
+          </p>
         </section>
       )}
-      <div className="health-footer">
-        <span>
-          <Activity size={14} />
-          {health.checkedAt
-            ? `Last API check: ${dateTime(health.checkedAt.toISOString())}`
-            : "No API check completed"}
-        </span>
-        <span>Health checks do not invoke the agent.</span>
-      </div>
+      <p className="small quiet foot-note">
+        {health.checkedAt
+          ? `Last API check: ${dateTime(health.checkedAt.toISOString())}`
+          : "No API check completed"}
+        {" · "}Health checks do not invoke the agent.
+      </p>
     </>
   );
 }

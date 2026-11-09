@@ -17,7 +17,7 @@ for (const [route, heading] of routes) {
     await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
     await expect(page.getByText('Native API offline', { exact: true })).toBeVisible();
     await expect(page.getByText('The native IRIS API could not be reached.', { exact: false }).first()).toBeVisible();
-    await expect(page.locator('.case-list-item')).toHaveCount(0);
+    await expect(page.locator('.queue-item')).toHaveCount(0);
     await expect(page.locator('vite-error-overlay')).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
     expect(errors).toEqual([]);
@@ -53,7 +53,7 @@ test('navigation remains usable with reduced motion and captures actual UI', asy
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/#investigations');
   await expect(page.getByText('Native API offline', { exact: true })).toBeVisible();
-  const animation = await page.locator('.nav-item').first().evaluate((node) => ({
+  const animation = await page.locator('.nav-link').first().evaluate((node) => ({
     animation: getComputedStyle(node).animationName,
     transition: getComputedStyle(node).transitionDuration,
   }));
@@ -62,7 +62,7 @@ test('navigation remains usable with reduced motion and captures actual UI', asy
   const directory = path.resolve('..', 'evidence', 'browser');
   await mkdir(directory, { recursive: true });
   await page.screenshot({ path: path.join(directory, `${testInfo.project.name}.png`), fullPage: true });
-  const navigation = page.getByRole('button', { name: 'Navigation', exact: true });
+  const navigation = page.getByRole('button', { name: /^(Open|Close) navigation$/ });
   if (await navigation.isVisible()) {
     await navigation.focus();
     await page.keyboard.press('Enter');

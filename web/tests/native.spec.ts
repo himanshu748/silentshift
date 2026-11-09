@@ -93,7 +93,7 @@ function label(value: string) {
 }
 
 async function openNavigation(page: Page) {
-  const toggle = page.getByRole("button", { name: "Navigation", exact: true });
+  const toggle = page.getByRole("button", { name: /^(Open|Close) navigation$/ });
   if (await toggle.isVisible()) {
     if ((await toggle.getAttribute("aria-expanded")) !== "true") {
       await toggle.focus();
@@ -262,26 +262,26 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
   await login(page);
   await expect(page).toHaveTitle("Investigations · SilentShift");
-  await expect(page.locator(".case-detail-heading")).toContainText(actual.id);
-  await expect(page.locator(".detail-source")).toContainText(actual.source);
-  await expect(page.locator(".detail-source")).toContainText(actual.event_id);
-  await expect(page.locator(".decision-strip strong")).toHaveText(
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);
+  await expect(page.locator('.case-source')).toContainText(actual.source);
+  await expect(page.locator('.case-source')).toContainText(actual.event_id);
+  await expect(page.locator(".verdict strong")).toHaveText(
     label(actual.policy!.decision),
   );
   for (const reason of actual.policy!.reasons)
-    await expect(page.locator(".policy-reasons")).toContainText(reason);
-  await expect(page.locator(".decision-strip")).toContainText(
+    await expect(page.locator('.reasons')).toContainText(reason);
+  await expect(page.locator('.verdict')).toContainText(
     "Held from the downstream destination.",
   );
-  await expect(page.locator(".evidence-table tbody tr")).toHaveCount(
+  await expect(page.locator('.ledger-row')).toHaveCount(
     actual.assessment!.findings.length,
   );
   for (const finding of actual.assessment!.findings) {
     const row = page
-      .locator(".evidence-table tbody tr")
+      .locator('.ledger-row')
       .filter({ has: page.getByText(finding.field, { exact: true }) });
     await expect(row).toContainText(finding.explanation);
-    await expect(row.locator("td").nth(1)).toContainText(
+    await expect(row.locator(".ledger-value").nth(0)).toContainText(
       typeof finding.observed === "string"
         ? finding.observed
         : JSON.stringify(finding.observed),
@@ -291,33 +291,35 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
     name: "Semantic comparison",
     exact: true,
   });
-  await comparison.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(comparison).toBeFocused();
-  const outline = await comparison.evaluate((node) => ({
+  await expect(comparison).toBeVisible();
+  // Comparisons are responsive value pairs now, rather than a horizontally
+  // scrollable table. Both original and required values must remain readable.
+  if (testInfo.project.name === "mobile-native") {
+    expect(await comparison.evaluate((node) => node.scrollWidth <= node.clientWidth + 1)).toBe(true);
+    for (const row of await page.locator('.ledger-row').all()) {
+      await row.scrollIntoViewIfNeeded();
+      await expect(row.locator(".ledger-value").nth(0)).toBeInViewport();
+      await expect(row.locator(".ledger-value").nth(1)).toBeInViewport();
+    }
+  }
+  const firstReference = actual.references[0]!;
+  const reference = page
+    .locator('.disclosure')
+    .filter({ hasText: String(firstReference.id) })
+    .first();
+  await reference.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(reference.locator("summary")).toBeFocused();
+  const outline = await reference.locator("summary").evaluate((node) => ({
     style: getComputedStyle(node).outlineStyle,
     width: parseFloat(getComputedStyle(node).outlineWidth),
   }));
   expect(outline.style).toBe("solid");
   expect(outline.width).toBeGreaterThanOrEqual(2);
-  if (testInfo.project.name === "mobile-native") {
-    expect(await comparison.evaluate((node) => node.scrollWidth <= node.clientWidth + 1)).toBe(true);
-    for (const row of await page.locator(".evidence-table tbody tr").all()) {
-      await row.scrollIntoViewIfNeeded();
-      await expect(row.locator("td").nth(1)).toBeInViewport();
-      await expect(row.locator("td").nth(2)).toBeInViewport();
-    }
-  }
-  const firstReference = actual.references[0]!;
-  const reference = page
-    .locator(".reference-record")
-    .filter({ hasText: String(firstReference.id) })
-    .first();
-  await reference.locator("summary").click();
   await expect(reference.locator("pre")).toContainText(
     String(firstReference.id),
   );
-  await expect(page.locator(".trace-box .copy-row code")).toHaveText(
+  await expect(page.locator('.trace .copy-row code')).toHaveText(
     String(actual.trace_id),
   );
   if (actual.trace_url)
@@ -361,7 +363,7 @@ test("existing evidence, policy, audit and native trace agree with actual IRIS r
       page.getByText("No agent execution recorded", { exact: true }),
     ).toBeVisible();
   await page.getByRole("tab", { name: "Evidence", exact: true }).click();
-  await page.locator(".case-detail-heading").scrollIntoViewIfNeeded();
+  await page.locator('[data-case-heading]').scrollIntoViewIfNeeded();
   await assertHealthyRenderedPage(page);
   await evidence(page, testInfo, "evidence-viewer");
 });
@@ -375,12 +377,12 @@ test("a delivered amendment shows its actual evidence and simulator outcome", as
   expect(actual.delivery_receipt).toBeTruthy();
   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
   await login(page);
-  await expect(page.locator(".case-detail-heading")).toContainText(actual.id);
-  await expect(page.locator(".decision-strip strong")).toHaveText("Allow");
-  await expect(page.locator(".decision-strip")).toContainText("destination simulator");
-  await expect(page.locator(".trace-box .copy-row code")).toHaveText(String(actual.trace_id));
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);
+  await expect(page.locator(".verdict strong")).toHaveText("Allow");
+  await expect(page.locator('.verdict')).toContainText("destination simulator");
+  await expect(page.locator('.trace .copy-row code')).toHaveText(String(actual.trace_id));
   await expect(page.getByRole("button", { name: "Approve release", exact: true })).toHaveCount(0);
-  await expect(page.getByRole("group", { name: "Reference snapshot", exact: true }).locator(".reference-record")).toHaveCount(actual.references.length);
+  await expect(page.getByRole("region", { name: "Reference snapshot", exact: true }).locator('.disclosure')).toHaveCount(actual.references.length);
   await assertHealthyRenderedPage(page);
   await evidence(page, testInfo, "approved-delivery");
 });
@@ -399,21 +401,21 @@ test("precedent evidence matches real case-scoped vector results and recorded to
   expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.3.1");
   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
   await login(page);
-  await expect(page.locator(".case-detail-heading")).toContainText(actual.id);
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);
   const precedents = page.getByRole("region", { name: "Similar precedents", exact: true });
   await expect(precedents).toBeVisible();
   await expect(precedents).toContainText("No release authority");
-  await expect(precedents.locator(".precedent-match")).toHaveCount(context.matches.length);
+  await expect(precedents.locator('[data-precedent-id]')).toHaveCount(context.matches.length);
   for (const precedent of context.matches) {
     expect(precedent.decision_authority).toBe(false);
     expect(Number.isFinite(precedent.similarity)).toBe(true);
     expect(precedent.similarity).toBeGreaterThanOrEqual(-1);
     expect(precedent.similarity).toBeLessThanOrEqual(1);
-    const row = precedents.locator(".precedent-match").filter({ hasText: precedent.precedent_id });
+    const row = precedents.locator('[data-precedent-id]').filter({ hasText: precedent.precedent_id });
     await expect(row).toContainText(precedent.source_id);
     await expect(row).toContainText(precedent.summary);
     await expect(row).toContainText(label(precedent.outcome));
-    await expect(row.locator(".precedent-similarity")).toHaveText(`Cosine similarity ${precedent.similarity.toFixed(3)}`);
+    await expect(row.getByText(`Cosine similarity ${precedent.similarity.toFixed(3)}`, { exact: true })).toHaveText(`Cosine similarity ${precedent.similarity.toFixed(3)}`);
     await expect(row.getByText("Synthetic source", { exact: true })).toHaveCount(precedent.synthetic === true ? 1 : 0);
     await expect(row.getByText("Source label not recorded", { exact: true })).toHaveCount(precedent.synthetic === null ? 1 : 0);
     if (precedent.source_type === "resolved_case") {
@@ -466,15 +468,15 @@ test("all eight routes expose real read-only state or reviewer permission", asyn
     ).toBeVisible();
     if (route === "investigations") {
       const actual = parse(await response!.json(), CasesSchema);
-      await expect(page.locator(".case-list-item")).toHaveCount(
+      await expect(page.locator('.queue-item')).toHaveCount(
         actual.items.length,
       );
     } else if (route === "scenarios") {
       const actual = parse(await response!.json(), ScenariosSchema);
-      await expect(page.locator(".scenario-choice")).toHaveCount(
+      await expect(page.locator('[aria-label="Synthetic scenarios"] .queue-item')).toHaveCount(
         actual.scenarios.length,
       );
-      await expect(page.locator(".scenario-list-header")).toContainText(
+      await expect(page.locator('[aria-label="Synthetic scenarios"] .queue-head')).toContainText(
         actual.version,
       );
       await expect(
@@ -482,7 +484,7 @@ test("all eight routes expose real read-only state or reviewer permission", asyn
       ).toBeVisible();
     } else if (route === "overview") {
       const actual = parse(await response!.json(), OverviewSchema);
-      await expect(page.locator(".metric-number")).toHaveText(
+      await expect(page.locator('.metrics > .metric > strong')).toHaveText(
         [
           actual.processed,
           actual.contradictions,
@@ -498,7 +500,7 @@ test("all eight routes expose real read-only state or reviewer permission", asyn
           .locator("option"),
       ).toHaveCount(actual.items.length);
       await expect(
-        page.locator(".message-preview .panel-header"),
+        page.getByRole("heading", { name: actual.items[0]!.event_id, exact: true }),
       ).toContainText(actual.items[0]!.event_id);
     } else if (route === "evaluations") {
       const actual = parse(await response!.json(), EvaluationsSchema);
@@ -511,25 +513,25 @@ test("all eight routes expose real read-only state or reviewer permission", asyn
         ).toBeVisible();
       else
         for (const run of actual.items)
-          await expect(page.locator(".evaluation-runs")).toContainText(run.id);
+          await expect(page.locator("#main-content")).toContainText(run.id);
     } else if (route === "policies") {
       const actual = parse(await response!.json(), PoliciesSchema);
-      await expect(page.locator(".rules-list > li")).toHaveCount(
+      await expect(page.locator(".rules > li")).toHaveCount(
         actual.rules.length,
       );
       if (actual.rules[0])
-        await expect(page.locator(".rules-list")).toContainText(
+        await expect(page.locator('.rules')).toContainText(
           actual.rules[0].description,
         );
     } else if (route === "reviews") {
       await expect(page.getByRole("heading", { name: "Reviewer permission required", exact: true })).toBeVisible();
-      await expect(page.locator(".review-task")).toHaveCount(0);
+      await expect(page.locator('.queue-item')).toHaveCount(0);
     } else {
-      await expect(page.locator(".build-number")).toHaveText(health.build);
-      await expect(page.locator(".health-status").first()).toContainText(
+      await expect(page.getByText(health.build, { exact: true })).toHaveText(health.build);
+      await expect(page.locator(".metrics > .metric").first()).toContainText(
         "Running",
       );
-      await expect(page.locator(".health-status").nth(1)).toContainText(
+      await expect(page.locator(".metrics > .metric").nth(1)).toContainText(
         "Configuration does not prove a model invocation.",
       );
     }
@@ -544,18 +546,18 @@ test("selecting another queued case returns to its visible disposition", async (
   if (!target) throw new Error("A second persisted native case is needed for case-navigation verification.");
   await page.goto(`/#investigations/${encodeURIComponent(selected.id)}`);
   await login(page);
-  await expect(page.locator(".case-detail-heading")).toContainText(selected.id);
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(selected.id);
   const toggle = page.getByRole("button", { name: "Expand investigation queue", exact: true });
   if (await toggle.isVisible()) {
     await toggle.focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("button", { name: "Collapse investigation queue", exact: true })).toHaveAttribute("aria-expanded", "true");
   }
-  await page.locator(".case-list-item").filter({ hasText: target.id }).click();
-  await expect(page.locator(".case-detail-heading")).toContainText(target.id);
-  await expect(page.locator(".case-detail-heading")).toBeInViewport();
-  await expect(page.locator(".decision-strip strong")).toHaveText(label(target.policy!.decision));
-  await expect(page.locator(".decision-strip")).toBeInViewport();
+  await page.locator(`a.queue-item[href="#investigations/${encodeURIComponent(target.id)}"]`).click();
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(target.id);
+  await expect(page.locator('[data-case-heading]')).toBeInViewport();
+  await expect(page.locator(".verdict strong")).toHaveText(label(target.policy!.decision));
+  await expect(page.locator('.verdict')).toBeInViewport();
   if (await toggle.isVisible()) await expect(toggle).toHaveAttribute("aria-expanded", "false");
   await assertHealthyRenderedPage(page);
 });
@@ -573,13 +575,13 @@ test("native Review worklist matches actual tasks and preserves dialog keyboard 
   await page.goto(`/#reviews/${encodeURIComponent(target.case_id)}`);
   await login(page, reviewer);
   await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
-  await expect(page.locator(".review-task")).toHaveCount(tasks.items.length);
-  expect(await page.locator(".review-task").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-task-id")))).toEqual(tasks.items.map((task) => task.task_id));
-  await expect(page.locator(".review-worklist-heading")).toContainText(String(tasks.total));
-  await expect(page.locator(".case-detail-heading")).toContainText(target.case_id);
-  await expect(page.locator(".review-task.selected")).toContainText(target.task_id);
-  await expect(page.locator(".review-task.selected")).toContainText(`v${target.case_version}`);
-  await expect(page.locator(".case-provenance")).toContainText("Native review task");
+  await expect(page.locator('.queue-item')).toHaveCount(tasks.items.length);
+  expect(await page.locator('.queue-item').evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-task-id")))).toEqual(tasks.items.map((task) => task.task_id));
+  await expect(page.locator('[aria-label="Native review worklist"] .queue-head')).toContainText(String(tasks.total));
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(target.case_id);
+  await expect(page.locator('.queue-item.selected')).toContainText(target.task_id);
+  await expect(page.locator('.queue-item.selected')).toContainText(`v${target.case_version}`);
+  await expect(page.locator('[aria-label="Native review task"]')).toContainText("Native review task");
   const reject = page.getByRole("button", { name: "Reject transaction", exact: true });
   await expect(reject).toBeEnabled();
   if (actual.assessment?.critical) await expect(page.getByRole("button", { name: "Approve release", exact: true })).toBeDisabled();
@@ -607,7 +609,7 @@ test("native Review worklist matches actual tasks and preserves dialog keyboard 
 test("critical quarantines retain the reviewer release veto", async ({ page }) => {
   await page.goto(`/#investigations/${encodeURIComponent(selected.id)}`);
   await login(page, reviewer);
-  await expect(page.locator(".case-detail-heading")).toContainText(selected.id);
+  await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(selected.id);
   if (selected.workflow?.task_id) {
     await expect(page.getByRole("button", { name: "Approve release", exact: true })).toBeDisabled();
     await expect(page.getByRole("button", { name: "Reject transaction", exact: true })).toBeEnabled();
@@ -637,9 +639,9 @@ test("keyboard navigation, reduced motion and memory-only session lifecycle rema
   await expect(
     page.getByRole("heading", { name: "Scenario Lab", exact: true }),
   ).toBeVisible();
-  await expect(page.locator(".scenario-choice").first()).toBeVisible();
+  await expect(page.locator('[aria-label="Synthetic scenarios"] .queue-item').first()).toBeVisible();
   const motion = await page
-    .locator(".nav-item")
+    .locator('.nav-link')
     .first()
     .evaluate((node) => ({
       animation: getComputedStyle(node).animationName,

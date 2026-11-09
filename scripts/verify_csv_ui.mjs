@@ -95,6 +95,12 @@ async function login(page, credentials) {
   });
   if (await dismiss.isVisible()) await dismiss.click();
 }
+async function navigate(page, name) {
+  const open = page.getByRole("button", { name: "Open navigation", exact: true });
+  if (await open.isVisible()) await open.click();
+  await page.getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name, exact: true }).click();
+}
 async function preview(page) {
   await page
     .getByRole("button", {
@@ -341,15 +347,9 @@ try {
   );
   if (reuse)
     await page.getByText("Processing complete", { exact: true }).waitFor();
-  await page
-    .locator('nav[aria-label="Main navigation"]')
-    .getByRole("link", { name: "Overview", exact: true })
-    .click();
+  await navigate(page, "Overview");
   if (reuse) {
-    await page
-      .locator('nav[aria-label="Main navigation"]')
-      .getByRole("link", { name: "CSV Import", exact: true })
-      .click();
+    await navigate(page, "CSV Import");
   } else {
     await page
       .getByText("CSV import is in progress.", { exact: false })
@@ -360,7 +360,7 @@ try {
   }
   check(
     "navigation_preserves_selected_files",
-    (await page.locator(".csv-filename").first().innerText()) === "orders.csv",
+    (await page.locator(".csv-file-name").first().innerText()) === "orders.csv",
   );
   if (!reuse) {
     const progress = page.getByRole("progressbar", { name: "Order lines resolved" });
@@ -374,8 +374,8 @@ try {
     .waitFor({ timeout: 300000 });
   const first = await resultDownload(page, "first-results.json");
   const cases = first.records.map((row) => first.results[row.message.event_id]);
-  const quantities = await page.locator(".csv-incoming .csv-quantity").evaluateAll(nodes => nodes.map(node => node.textContent.replace(/\s+/g, " ").trim()));
-  check("display_preserves_quantities_and_units", quantities.every((value, index) => value === `${first.records[index].message.quantity} ${first.records[index].message.unit}`));
+  const quantities = await page.locator('td[data-label="Incoming"] .qty').evaluateAll(nodes => nodes.map(node => node.textContent.replace(/\s+/g, " ").trim()));
+  check("display_preserves_quantities_and_units", quantities.length === first.records.length && quantities.every((value, index) => value === `${first.records[index].message.quantity} ${first.records[index].message.unit}`));
   check(
     "critical_line_held",
     cases[0].routing === "QUARANTINED" && cases[0].delivery_count === 0,
@@ -430,10 +430,7 @@ try {
     "case_link_opens_native_investigation",
     page.url().endsWith("#investigations/" + cases[0].id),
   );
-  await page
-    .locator('nav[aria-label="Main navigation"]')
-    .getByRole("link", { name: "CSV Import", exact: true })
-    .click();
+  await navigate(page, "CSV Import");
   await page.getByText("Processing complete", { exact: true }).waitFor();
 
   stage = "duplicate recovery";
@@ -484,7 +481,7 @@ try {
   check(
     "reduced_motion_no_panel_animation",
     await page
-      .locator(".csv-preview")
+      .getByRole("region", { name: "Validated CSV preview" })
       .evaluate((el) => getComputedStyle(el).animationName === "none"),
   );
   await page.screenshot({
