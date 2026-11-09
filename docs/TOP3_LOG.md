@@ -129,3 +129,16 @@ The bounded resumable worker failed again with `Timeout, server … not respondi
 No public application port was opened, no cloud model investigation ran, and there is no verified live demo URL. Printable trace and two guided cases remain local evidence only. Hosting through November 20, a larger CPU/GPU or another trial requires a new cost approval. The local source, original image/model bundles, benchmark results and unique logs remain protected. No image was pushed to a registry.
 
 The final full Python run passed **286 tests in 18.88 seconds**, including eight approval/timer cases. [Output](evidence/top3-final-pytest.txt). The operator installer is prepared and plan/compile-tested, not end-to-end cloud-qualified. Its pure timer tests do not substitute for deployment evidence. The README retains no-hosted-demo wording and now makes the removed build-154 download prerequisite explicit. None of the 59 native package source files changed after the qualified native snapshot. The separate demo gateway retains its own local-only qualification.
+
+
+### Prose repair and sealed-evaluation preparation — November 9 UTC
+
+This branch now intentionally changes native source; the earlier unchanged-source statements describe the d1d752c checkpoint only. v3 labels and their digest were committed at 9c8d937 before inspecting v2 failures; the sealed case file remains unopened during diagnosis. v2 is the development set and its original labels and raw historical runs remain unchanged.
+
+The diagnosis separates missing authority to release a baseline hold, model interpretation errors, and the old policy's unconditional downgrade of model-only quarantine concerns. New quotation validation grants containment only, never release. Quotation provenance is not semantic entailment. Multi-record prose concerns require review. The probe receipts retain both the unsuccessful early response format and the later observed mechanism.
+
+Verification history is retained rather than overwritten: the first native test attempt failed on an unsupported AssertFalse macro in the new test, then passed after using AssertTrue with negation. A private continuation helper first failed import before any native action; after that was corrected, the native suite passed but an optional SDK probe copy failed because its destination directory had not been created. That continuation path was stopped; the already completed amendment-index evidence was retained and the separate five-case API command passed. No failed attempt was counted as a pass.
+
+On the subsequent fresh replay instance, the new citation projection test failed because SaveCase correctly refused to mutate immutable references. The test now uses real scoped catalog insertion and SnapshotReferences. The second attempt passed the suite and two separate keyless API replays. These were test-harness repairs, not relaxed runtime checks. All original failed logs remain private; no provider secrets are in repository evidence.
+
+No new AWS resource, upload or paid provider call has been authorized or executed in this pass. The eight-hour trial is closed. The proposed private S3 transfer, ARM-compatible compute choice, $60 budget alert and longer hosting remain behind a fresh cost approval after the sealed result is reported.

@@ -83,12 +83,13 @@ def report(name,source,destination):
     bad=[o for o in observations if o['agent_status']!='returned' or o['schema_errors']]
     for o in bad:lines.append(f"| {o['scenario_id']} | {o['trial']} | {o['agent_status']} | {o['failure_code'] or '; '.join(o['schema_errors'])} |")
     if not bad:lines.append('No failed or schema-invalid agent attempts were observed.')
-    lines+=['','## Time per order','','Milliseconds; three agent investigation times are retained separately. — means unavailable, not zero.','', '| ID | Rules median | Agent trials 1 / 2 / 3 | Agent median |','| --- | --- | --- | --- |']
+    lines+=['','## Time per order','','Milliseconds; three agent investigation times are retained separately. — means unavailable, not zero.','', '| ID | Rules median | Agent trials 1 / 2 / 3 | Agent median | Service wall time, trials 1 / 2 / 3 |','| --- | --- | --- | --- | --- |']
     for c in cases:
         rs=[r['elapsed_ms'] for r in arms['rules-only'] if r['scenario_id']==c['id']];ag=[r['elapsed_ms'] for r in arms['agent+policy'] if r['scenario_id']==c['id']]
         fmt=lambda n:'—' if n is None else f'{n:.3f}'
         present=[n for n in ag if n is not None]
-        lines.append(f"| {c['id']} | {fmt(median(rs))} | {' / '.join(fmt(n) for n in ag)} | {fmt(median(present) if present else None)} |")
+        service=[o['service_elapsed_ms'] for o in observations if o['scenario_id']==c['id']]
+        lines.append(f"| {c['id']} | {fmt(median(rs))} | {' / '.join(fmt(n) for n in ag)} | {fmt(median(present) if present else None)} | {' / '.join(fmt(n) for n in service)} |")
     relative='../'+str(source.relative_to(ROOT))
     lines+=['','## Reproduction and limits','',f'Raw records, traces, per-case service timings, citation checks, complete metrics and native identity: [manifest]({relative}/manifest.json), [summary]({relative}/summary.json).',
         '', 'The operator-only evaluation host suppresses automatic indexing of evaluated outcomes. Contract/reference retrieval, the four tools, local inference, deterministic policy and simulator routing remain native. The precise production substitution is recorded in the manifest. Historical core fixtures may exist in the isolated instance; evaluated outcomes are not added to the precedent corpus.',

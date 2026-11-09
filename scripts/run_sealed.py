@@ -89,6 +89,7 @@ def main():
     if not a.execute or (a.dataset=='sealed' and not a.open_sealed):
         print('No case file opened. Explicit execution/open-sealed required.'); return 0
     inventory=source_identity(a.source_commit)
+    opened_at=datetime.now(timezone.utc).isoformat()
     dataset=frozen(a.dataset)
     path,label_commit,data_sha,n=DATASETS[a.dataset]
     out=a.output;out.mkdir(parents=True,exist_ok=True)
@@ -117,7 +118,7 @@ def main():
     else:
         isolation=isolate_precedents(native)
         manifest={'created_at':datetime.now(timezone.utc).isoformat(),'run_id':str(uuid.uuid4()),
-            'dataset':a.dataset,'dataset_sha256':data_sha,'labels_commit':label_commit,
+            'dataset':a.dataset,'case_file_opened_at':opened_at,'dataset_sha256':data_sha,'labels_commit':label_commit,
             'source_commit':a.source_commit,'source_inventory':inventory,'identity':identity,
             'planned':n*3,'completed':0,'status':'running','synthetic':True,
             'protocol':'3 baseline executions and 3 fresh native agent+policy investigations per case; no selective retries',
