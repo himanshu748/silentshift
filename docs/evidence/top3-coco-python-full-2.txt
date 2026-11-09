@@ -1,0 +1,29 @@
+$ uv run pytest -q
+........................................................................ [ 29%]
+..............................................................F......... [ 58%]
+........................................................................ [ 87%]
+................................                                         [100%]
+=================================== FAILURES ===================================
+______ test_no_agent_recommendation_can_release_a_critical_contradiction _______
+  + Exception Group Traceback (most recent call last):
+  |   File "<repo>/tests/test_engine.py", line 316, in test_no_agent_recommendation_can_release_a_critical_contradiction
+  |     def test_no_agent_recommendation_can_release_a_critical_contradiction(decision, uncertainty):
+  |                    ^^^
+  | hypothesis.errors.FlakyFailure: Hypothesis test_no_agent_recommendation_can_release_a_critical_contradiction(decision='ALLOW', uncertainty=1e-05) produces unreliable results: Failed on the first call but did not on a subsequent one (1 sub-exception)
+  | Failing test case: test_no_agent_recommendation_can_release_a_critical_contradiction(
+  |     decision='ALLOW',
+  |     uncertainty=1e-05,
+  | )
+  | Unreliable test timings! On an initial run, this test took 262.06ms, which exceeded the deadline of 200.00ms, but on a subsequent run it took 0.29 ms, which did not. If you expect this sort of variability in your test timings, consider turning deadlines off for this test by setting deadline=None.
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "<repo>/tests/test_engine.py", line 316, in test_no_agent_recommendation_can_release_a_critical_contradiction
+    |     def test_no_agent_recommendation_can_release_a_critical_contradiction(decision, uncertainty):
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "<repo>/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 1040, in test
+    |     raise DeadlineExceeded(
+    | hypothesis.errors.DeadlineExceeded: Test took 262.06ms, which exceeds the deadline of 200.00ms. If you expect test cases to take this long, you can use @settings(deadline=...) to either set a higher deadline, or to disable it with deadline=None.
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED tests/test_engine.py::test_no_agent_recommendation_can_release_a_critical_contradiction
+1 failed, 247 passed in 34.78s

@@ -1,5 +1,15 @@
 # Build status
 
+## Unpublished CoCo frontend — November 9, 2026 UTC
+
+`push/top3` source `7b8b17087f4d2c43b47a16e4a5aafbc55f494118` rebuilds the landing page and native workbench. CoCo chose the visual direction from the product description and existing integration contracts. Authentication, API schemas, dependencies and native policy remain unchanged. The running preview uses the real same-origin IRIS API; no mock case records were added. [Verification receipt](evidence/top3-coco-frontend.json) · [brief](TOP3_FRONTEND_BRIEF.md).
+
+TypeScript and production build passed. The serialized browser suites passed **42** landing/offline/session checks and **16** read-only checks against the retained **154U ARM64** runtime. The rebuilt CSV importer passed **32** checks with two fresh local-model investigations: one quarantined without delivery and one delivered once. The fresh five-scenario native run passed **5/5**, including native execution, all four evidence-tool reads, trace IDs and idempotent receipts. [CSV receipt](evidence/top3-coco-csv-ui.json) · [native scenarios](evidence/top3-coco-native-five.json) · [browser output](evidence/top3-coco-browser.txt) · [connected output](evidence/top3-coco-native-browser.txt).
+
+**Python full-suite follow-up remains pending.** Two full runs ended with Hypothesis wall-clock timing flakes: **246 passed / 2 failed**, then **247 passed / 1 failed**. Their correctness assertions passed on replay. The property-test harness now removes incidental wall-clock deadlines while preserving the generation strategies, example limits and assertions; the focused engine module passed **71 tests in 4.66 seconds** afterward. No third full-suite attempt was made under the two-run limit, so this pass makes no post-repair **248/248** claim. [First output](evidence/top3-coco-python-full-1.txt) · [second output](evidence/top3-coco-python-full-2.txt) · [focused repair check](evidence/top3-coco-engine-harness.txt).
+
+This is retained-runtime frontend and live-scenario verification, **not** a clean source install or a new native `%UnitTest` run. The earlier configurable-provider branch limits below still apply. Main, README, the public package, Open Exchange and the video remain unchanged; this frontend has not been published or deployed. Synthetic inputs and simulator-only delivery remain explicit limits.
+
 ## Unpublished provider branch — November 9, 2026
 
 `push/top3` adds deployment-configurable Ollama, OpenAI, Gemini, OpenRouter and OpenAI-compatible routes behind the native provider gateway. Python configuration/protocol tests passed; a clean ARM64 154U source load compiled and its native suite passed **5 classes / 12 methods**. The overall Python suite passed **242 tests**. Two local native attempts were interrupted by VM out-of-memory kills, so the end-to-end replay and actual external-service compatibility remain **unverified**. No third provider gate was attempted. This branch is not main or the public IPM 0.3.0 package. [Partial receipt](evidence/top3-provider-partial-nov9.json) · [Provider configuration and limits](PROVIDERS.md).
