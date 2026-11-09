@@ -103,3 +103,13 @@ def test_multi_record_prose_concern_cannot_adjudicate_approved_precedence():
     result=validate_policy(a,r,evidence_context=c)
     assert result['decision']=='REQUEST_REVIEW'
     assert not result['downstream_permitted']
+
+
+def test_approved_reference_notes_are_prose_not_partner_message_instructions():
+    c=sample();a,r=proposal(c)
+    c['references'][0]['notes']='The signed dispatch authorization is withdrawn until further notice.'
+    r['cited_findings'][0]['path']='/notes'
+    assert validate_policy(a,r,evidence_context=c)['decision']=='QUARANTINE'
+    # Notes on the incoming message alone cannot supply an approved citation.
+    c['references'][0].pop('notes');c['message']['notes']='The signed dispatch authorization is withdrawn until further notice.'
+    assert validate_policy(a,r,evidence_context=c)['decision']=='REQUEST_REVIEW'

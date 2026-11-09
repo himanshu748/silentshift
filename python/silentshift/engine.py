@@ -330,7 +330,7 @@ def _grounded_findings(assessment: dict, recommendation: dict, context: Any) -> 
     refs = {r.get("id"): r for r in references if isinstance(r, dict)}
     # Metadata and structured fields are not operative prose. Unknown text
     # extensions remain usable; this is not a whitelist of fixture wording.
-    reserved = MESSAGE_FIELDS | {"id", "authority", "effective_from", "effective_to",
+    reserved = (MESSAGE_FIELDS - {"notes"}) | {"id", "authority", "effective_from", "effective_to",
                                 "amendment_of", "approved_at", "verified_by", "sender"}
     for finding in findings:
         ref = refs.get(finding["reference_id"])
