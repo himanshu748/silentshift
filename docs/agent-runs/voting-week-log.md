@@ -226,3 +226,14 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - Scoped local-link check passed for README, INSTALL, verification/checklist/build status, current OEX copy, static-site guide and final report; new evidence JSON parses. Diff whitespace check passed. No tracked file over 50 MiB and no tag exists. Pattern and configured-secret-value scans found no signals in the relevant changed text; this is a scoped check, not a comprehensive security audit.
 - Stopped only the newly completed public-shell verification pair to reduce memory pressure; retained its containers, data and exported proof. Source UI/native instance remains running. No data/image/volume was deleted. Local main was not changed or pushed. Protected pre-existing UI edits and sealed-evaluation files remain untouched/uncommitted.
+
+### 2026-11-10 17:26:07 IST — Approved branch push completed
+
+- The owner’s exact `submit` consumed only the previously queued branch-push approval. Pushed `backend-polish-nov10` to `himanshu748/silentshift`, without force, at `08dad0bc2b1c3e9528388e87251a8aa6e5e51714`. Remote readback matches. Remote main remains `a10de3f61e1d809b374832a4db67761318bc16ea`; no main push.
+- All five commit-addressed screenshot URLs in the prepared OEX bundle now return anonymous HTTP 200 with image/jpeg. This closes their public-asset prerequisite, not the OEX approval gate.
+- No PR, merge, OEX save/submission, Pages deployment, tag/release, IPM publication, message or container deletion was performed. Protected uncommitted UI and sealed-evaluation work remains outside the push. This post-push log entry is local and uncommitted.
+
+### 2026-11-10 17:33:16 IST — Voting-week finish, CI restored
+
+- Owner authorized branch-only work/pushes and CI reruns; PR actions, main merge, OEX saves/approval, tags/releases, registry/Pages publication and communications remain individually gated. Re-ran latest main run 42569241885 and backend run 42811379567, attempt 2. Both executed steps: the old billing lock no longer blocks these attempts. Main completed successfully.
+- Backend ran 373 Python checks: 372 passed, one failed because the default shallow checkout could not resolve frozen historical commit d1d752c. Preserved [failure log](../evidence/voting-finish-nov10/ci-backend-initial-failure.txt). Added fetch-depth: 0 to checkout; the baseline assertion and all checks remain unchanged. Local pytest: 373 passed in 20.89s ([output](../evidence/voting-finish-nov10/ci-checkout-fix-pytest.txt)).
