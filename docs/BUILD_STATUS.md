@@ -1,3 +1,7 @@
+# Local backend polish — November 10, 2026 (UTC)
+
+Branch `backend-polish-nov10` is not published. The isolated same-instance source upgrade compiled on 154U ARM64, passed seven native classes / 22 methods and a 12/12 recorded replay; native approve/reject checks passed 26/26 per case. [Evidence log](agent-runs/voting-week-log.md). The additional production metadata exporter failed twice and was stopped; no complete body/Event Log screenshot readback or 0.3.1 promotion is claimed. Fresh-clone verification remains pending. Public native IPM stays 0.3.0.
+
 # Build status
 
 ## November 10 voting-week judge-path polish (local, not published)

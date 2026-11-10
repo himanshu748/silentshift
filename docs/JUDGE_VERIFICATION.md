@@ -1,3 +1,7 @@
+# Backend-polish branch status — November 10, 2026 (UTC)
+
+The historical main/public-install gates below do not cover the new `backend-polish-nov10` runtime changes. The local source upgrade passed the native suite (7 classes / 22 methods), recorded replay (12/12) and guarded review (26/26 per case). [Native tests](evidence/backend-polish-nov10/07-native-unit-retry.txt), [replay](evidence/backend-polish-nov10/upgrade-replay.json), [review](evidence/backend-polish-nov10/upgrade-review.json). These are same-instance upgrade results. Fresh-clone verification and complete production body/Event Log screenshots remain pending. The [failed metadata exporter](evidence/backend-polish-nov10/08-production-routes.json) is not passing evidence. Public native IPM remains 0.3.0; 0.3.1 is not prepared or published.
+
 # Judge verification
 
 ## One-command public-package launcher — November 10, 2026 (IST)

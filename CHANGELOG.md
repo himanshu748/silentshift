@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased backend polish — local branch only
+
+Privacy-safe host Event Log codes and stage traces; redacted setup diagnostics; byte-identical XData prompt storage; shared evidence/model/import/catalog definitions; compact internal acknowledgments; readable orchestration stages and bounded administrator settings; a single CSV parse with pristine authority data; compiler-exported build-154 storage; and test-harness fixes for copied native checks. Routing-engine functions and frozen records are unchanged in this pass.
+
+This branch inherits earlier unpublished provider/cited-prose work from `push/top3`; it is not the public 0.3.0 archive. It remains at manifest/project version 0.3.0 and must not be republished under that identity. A 0.3.1 candidate is on hold pending complete production readback. No release tag or registry publication has been made.
+
 ## 0.3.0 — published November 8, 2026
 
 Compared with the public 0.2.0 source snapshot `d3637bbe85812035e6258320c81af93305e95560`:

@@ -196,3 +196,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Review queue verifier initially assumed an /opt source mount. Added a backwards-compatible --test-root for copied native checks, then it passed reject 26/26 and approve 26/26, including concurrency and one delivery receipt. [Receipt](../evidence/backend-polish-nov10/upgrade-review.json).
 - A separate metadata-inspection helper failed twice (interactive loop, then temporary helper indentation). Stopped that helper, rejected its partial result and recorded passed=false; do not claim it verifies compact production reply bodies. [Blocked receipt](../evidence/backend-polish-nov10/08-production-routes.json). Native compact-summary unit test remains separately passed. No runtime workaround was introduced.
 - `uv run pytest -q` after the verifier path fix: 339 passed in 21.19s ([output](../evidence/backend-polish-nov10/08b-pytest.txt)). 0.3.1 promotion remains on hold pending complete production readback.
+
+### 2026-11-10 16:04:26 IST — Backend item 9
+
+- Added a short operator section to IPM.md: SILENTSHIFT/build-154 requirement, single configured Workflow reviewer, 20-row CSV cap, verified local model/embeddings, and a manual ownership-aware cleanup list. No uninstall implementation or cleanup was performed. Existing system services/accounts must be restored from prior backups, not deleted.
+- Kept manifest/project at 0.3.0 and explicitly prohibited republishing this changed branch under the existing public identity. 0.3.1 is not prepared while production readback remains incomplete. Added exact inherited-branch commit inventory and scope notes to the changelog, verification, build status and checklist. Bonus statuses unchanged.
+- `uv run pytest -q`: 339 passed in 23.68s ([output](../evidence/backend-polish-nov10/09-pytest.txt)). Fresh-clone source gate is next.

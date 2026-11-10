@@ -1,3 +1,5 @@
+> **Unreleased branch note — November 10, 2026:** `backend-polish-nov10` inherits unpublished source work from `push/top3`; public native IPM/OEX remain 0.3.0. The manifest/project still say 0.3.0; do not publish this branch under the existing version. The [exact branch inventory](evidence/backend-polish-nov10/source-inventory.json) distinguishes it from the public archive. 0.3.1 preparation is on hold pending production readback. Existing bonus statuses below are unchanged. No new registry/OEX/tag/push action occurred.
+
 # Submission checklist
 
 ## November 9: final `push/top3` source checkpoint
