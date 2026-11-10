@@ -87,3 +87,11 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - The official voting post still has no published leaderboard comments in the inspected anonymous text; voting is blind. Third and later articles bring no additional article bonus. No new award, point total, win probability or health outcome is claimed.
 - Gmail check: both existing OEX conversations contain no new organiser reply; the latest remains our authorised 14:21 IST queue-check email. No duplicate follow-up was sent. The new mission's prepare-only OEX approval gate remains active; `go on` is not exact `submit`.
 - No public edit, post, vote, email, registry action, release, hosting or spending occurred.
+
+
+## 2026-11-10 14:52:48 IST — Fresh-main public judge path passed
+
+- Started the existing local Colima profile without a new image download. It had no running containers; official ARM64 154U and Web Gateway were loaded. A new GitHub main clone at `a10de3f61e1d809b374832a4db67761318bc16ea` followed the documented setup/keyless path with private, freshly generated local test passwords and no provider keys.
+- Public native IPM **0.3.0** installed using literal `zpm "install silentshift"`; production started, **5 native classes / 12 methods** passed, and two recorded replays passed **12/12** each, sessions **24 / 58**, quarantined with zero deliveries. Fresh-clone `uv run pytest -q`: **207 passed in 11.40s**. [Receipt](../evidence/voting-week-nov10/judge-main-nov10.json) · [executed commands/output](../evidence/voting-week-nov10/judge-main-commands.txt).
+- The new test IRIS/gateway were retained stopped after capture to limit memory before the separate wrapper check. No prior container, source, model or benchmark result was deleted or changed. No fresh inference or new native live5/5 claim.
+- Found a harness-boundary issue during preparation: current source adds native cited-finding/permission tests that public0.3.0 cannot satisfy. The new launcher now uses a pinned release-matched verification checkout; it does not call an older public package a test of unpublished runtime code. Wrapper native verification is separate and not yet claimed here.

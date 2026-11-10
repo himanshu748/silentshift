@@ -1,5 +1,22 @@
 # Judge verification
 
+## Voting-week public main repeat — November 10, 2026 (IST)
+
+A fresh GitHub clone of **main `a10de3f61e1d809b374832a4db67761318bc16ea`** repeated the documented public-package path in a new isolated **2026.3.0AI.154.0 Community / 154U ARM64** container, with no application source mounts. The official runtime and gateway images were already loaded; no new IRIS image or model was downloaded. Private local test credentials were configured without provider keys. This is a **public 0.3.0 install**, not a source upgrade or verification of unpublished `push/top3` runtime changes.
+
+| Executed check | Observed result | Evidence |
+| --- | --- | --- |
+| Literal public `zpm "install silentshift"`, version check and explicit production start | Native 0.3.0, passed | [Receipt](evidence/voting-week-nov10/judge-main-nov10.json) |
+| Full release-matched native suite | **5 classes / 12 methods; All PASSED** | [Complete assertion output](evidence/voting-week-nov10/judge-main-native-tests.txt) |
+| First no-key API replay | **12/12**, session **24**, QUARANTINED, **0 deliveries** | [First replay](evidence/voting-week-nov10/judge-main-first-replay.json) |
+| Repeat no-key API replay | **12/12**, session **58**, QUARANTINED, **0 deliveries** | [Repeat replay](evidence/voting-week-nov10/judge-main-second-replay.json) |
+| Fresh main Python suite | **207 passed in 11.40s** | [Commands and output](evidence/voting-week-nov10/judge-main-commands.txt) |
+
+No fresh inference, embeddings, live five-case scenario run or browser regression suite ran in this repeat. Those earlier receipts retain their original scope. The new test containers are retained stopped; starting them again is needed to inspect their printed local trace URLs. No existing app container or benchmark data was changed. Whole-install wall time was not captured, so no total elapsed claim is made.
+
+Historical sections below remain unchanged. A source-branch harness must not copy newer native tests into this older published package; the separate one-command wrapper pins release-matched verification source.
+
+
 ## November 9: final `push/top3` source checkpoint
 
 The [final checkpoint](evidence/top3-final-checkpoint.json) records **286 Python tests passing in 18.88 seconds** and the normal local production healthy. All **59 native package source files** remain byte-identical to the fresh quality-gate snapshot; [footprint](evidence/top3-final-source.json). The [fresh native replay/live gate](evidence/top3-quality.json) and [multi-page/browser/CSV gate](evidence/top3-multipage.json) retain their recorded scope. The new demo gateway has [two local native cases and printable-trace evidence](evidence/top3-demo-local.json); this does not establish public hosting.
