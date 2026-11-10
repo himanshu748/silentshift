@@ -64,18 +64,24 @@ Method TestCompactAcknowledgment()
 
 Method TestDefaultHostSettings()
 {
-    Set semantic = ##class(SilentShift.Process.Semantic).%New()
-    Do $$$AssertEquals(semantic.StepTimeoutSeconds, 10)
-    Do $$$AssertEquals(semantic.MaxReferencesPerAuthority, 10)
-    Set investigation = ##class(SilentShift.Operation.Investigation).%New()
-    Do $$$AssertEquals(investigation.AgentWaitSeconds, "")
-    Do $$$AssertEquals(investigation.Model, "")
+    Set value = ##class(Ens.Director).GetHostSettingValue("Semantic", "StepTimeoutSeconds", .sc)
+    Do $$$AssertStatusOK(sc)
+    Do $$$AssertEquals(value, 10)
+    Set value = ##class(Ens.Director).GetHostSettingValue("Semantic", "MaxReferencesPerAuthority", .sc)
+    Do $$$AssertStatusOK(sc)
+    Do $$$AssertEquals(value, 10)
+    For setting = "AgentWaitSeconds", "Model" {
+        Set value = ##class(Ens.Director).GetHostSettingValue("Investigator", setting, .sc)
+        Do $$$AssertStatusOK(sc)
+        Do $$$AssertEquals(value, "")
+    }
     Do $$$AssertEquals(##class(SilentShift.Provider.Config).ModelSetting(), "")
     Set expected = $SYSTEM.Util.GetEnviron("SILENTSHIFT_AGENT_WAIT_SECONDS")
     If expected = "" Set expected = 60
     Do $$$AssertEquals(##class(SilentShift.AI.Investigator).WaitSeconds(), +expected)
-    Set adapter = ##class(SilentShift.Adapter.PartnerJSON).%New()
-    Do $$$AssertEquals(adapter.InboxPath, ##class(SilentShift.Adapter.PartnerJSON).#ROOT)
+    Set value = ##class(Ens.Director).GetAdapterSettingValue("PartnerFiles", "InboxPath", .sc)
+    Do $$$AssertStatusOK(sc)
+    Do $$$AssertEquals(value, ##class(SilentShift.Adapter.PartnerJSON).#ROOT)
     Do $$$AssertTrue('##class(SilentShift.Adapter.PartnerJSON).RootSafe("relative/inbox"))
     Do $$$AssertTrue('##class(SilentShift.Adapter.PartnerJSON).RootSafe("/tmp/../tmp"))
 }

@@ -182,3 +182,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Ruff safe fixes applied outside fixtures/raw evidence. Initial whole-tree count: 154; scoped pre-fix: 144; final whole-tree: 79. Remaining findings retained, no failing Ruff CI step added, no unsafe fixes. Historical evidence scripts were not rewritten.
 - Auto-removal of pilot re-exports caused 17 tests to fail; restored explicit exports. Preserved the original engine Decimal literals and proved all engine functions/classes have identical ASTs ([invariants](../evidence/backend-polish-nov10/07-policy-invariants.json)). Fixed loop binding in review and adapter verification helpers.
 - Final `uv run pytest -q`: 339 passed in 22.24s ([output](../evidence/backend-polish-nov10/07c-pytest.txt)). Original failure and both subsequent passing runs retained.
+
+### 2026-11-10 15:49:05 IST — Native defaults test repair
+
+- All source compiled and production started on 154U. First native suite exposed an invalid test assumption: an Ensemble host cannot be instantiated with plain %New without production configuration. Replaced that with status-checked Ens.Director reads of the actual running hosts and adapter.
+- Native suite retry: All PASSED. This was an isolated same-instance source upgrade, not a fresh-install claim. Original failure retained. Keyless replay: 12/12, session 46, five provider pairs, QUARANTINED, zero receipts; no fresh inference.
+- `uv run pytest -q`: 339 passed in 21.06s ([output](../evidence/backend-polish-nov10/07d-pytest.txt)).

@@ -162,3 +162,7 @@ The first repaired live gate reached Ollama and completed all four reads, then f
 Fresh current-source `56ff2d6976e61ccb36b68e0632224e1234afaa3e` passed the complete native suite (6 classes / 16 methods) and live 5/5 in a new isolated ARM64 154U instance. Python passed 317 tests in 28.20 seconds; TypeScript and build passed. [Recovery receipt](evidence/provider-grant-recovery.json). This supersedes the earlier blocked candidate state without erasing its failed receipts.
 
 The sealed source is registered before first access to v3. No tuning will follow sealed results. Main/public packages and external listings remain unchanged; no spending or deployment occurred.
+
+## Backend polish — November 10, 2026
+
+Ruff remained non-clean after its initial read and safe-fix pass (154 initial full-tree findings; 79 final). Stopped lint cleanup rather than using unsafe fixes or rewriting historical evidence. No Ruff CI gate added. Pytest initially caught removed pilot re-exports; restored explicit exports, then 339 passed. Native defaults test initially used an invalid bare host constructor; switched to actual Ens.Director settings reads; native retry All PASSED and recorded replay 12/12. These are local source checks, not a new public release. See [voting-week log](agent-runs/voting-week-log.md).
