@@ -1,0 +1,268 @@
+Browser tab: 4, Title: "Recoverable human review in IRIS: from approval to one delivery | InterSystems DC", URL: "https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery".
+0 AXWebArea Recoverable human review in IRIS: from approval to one delivery | InterSystems DC, URL: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery
+	1 container
+		2 link Description: Skip to main content, Value: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery#main-content
+		3 container
+			4 link Description: Learning, Value: learning.intersystems.com/
+			5 link Description: Documentation, Value: docs.intersystems.com/
+			6 text Community
+			7 link Description: Open Exchange, Value: openexchange.intersystems.com/
+			8 link Description: Ideas Portal, Value: ideas.intersystems.com/
+			9 link Description: Global Masters, Value: globalmasters.intersystems.com/
+			10 link Description: Certification, Value: intersystems.com/support-learning/learning-services/certification-program/
+			11 link Description: Partner Directory, Value: partner.intersystems.com/
+			12 link Description: Startup Hub, Value: startup.intersystems.com/
+		13 container
+			14 container block-intersystems-branding
+				15 link community.intersystems.com/
+			16 container navbarSupportedContent
+				17 text Search by posts, members, tags
+				18 container block-intersystems-intersystemsnewbuttonpost
+					19 link community.intersystems.com/node/add/post
+					20 link Description: Ask DC AI, Value: community.intersystems.com/ask-dc-ai
+				21 text EN
+				22 text 2
+				23 link community.intersystems.com/direct
+				24 content list
+					25 button (collapsed) Secondary Actions: Expand
+		26 container Tabs
+			27 content list
+				28 link Description: View, Value: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery
+				29 link Description: Edit, Value: community.intersystems.com/node/590711/edit
+		30 container block-intersystems-content
+			31 container
+				32 text 0
+				33 link Description: 0, Value: community.intersystems.com/intsys_bookmark/node/590711
+				34 text 47
+			35 container
+				36 container user-profile-block
+					37 text Written by
+					38 link Description: Himanshu Kumar, Value: community.intersystems.com/user/himanshu-kumar
+					39 link javascript:
+				40 container
+					41 text Article
+					42 link Description: Himanshu Kumar, Value: community.intersystems.com/user/himanshu-kumar
+					43 text · Nov 4  (Edited)  8m read
+					44 container
+						45 link Description: Open Exchange, Value: openexchange.intersystems.com/package/SilentShift
+						46 link community.intersystems.com/node/590710
+					47 heading Recoverable human review in IRIS: from approval to one delivery, Value: 1
+						48 text Recoverable human review in IRIS: from approval to one delivery
+				49 container
+					50 link Description: #InterSystems IRIS, Value: community.intersystems.com/tags/intersystems-iris
+					51 link Description: #AI Hub, Value: community.intersystems.com/tags/ai-hub
+					52 link Description: #AI Programming Contest, Value: community.intersystems.com/tags/ai-programming-contest
+					53 link Description: #Interoperability, Value: community.intersystems.com/tags/interoperability
+				54 text An operator approves a held transaction. The server saves the decision, then native Workflow completion fails. The browser receives HTTP 503.
+				55 text At that point, an ordinary “Try again” button asks the operator to guess what happened. Did the approval persist? Is another reason required? Would a second click create another delivery?
+				56 container
+					57 text SilentShift treats this interruption as a recoverable state. The saved decision remains visible, the case stays held, and  Resume recorded review  continues the original request. In the controlled recovery test, that continuation completed the native task and produced one destination-simulator receipt.
+				58 text This article explains the boundary between the decision, native task completion and delivery. All transactions are synthetic; the destination is an IRIS simulator.
+				59 heading Put the human wait in native Workflow, Value: 2
+					60 text Put the human wait in native Workflow
+				61 container
+					62 text SilentShift investigates changes in business meaning inside an IRIS interoperability production. Its AI Hub agent gathers evidence and proposes a route; Embedded Python policy determines whether the evidence permits release. The
+					63 link Description: first article, Value: community.intersystems.com/post/check-business-meaning-delivering-iris-transaction
+					64 text  explains the contract comparison and the agent's read-only tools.
+				65 container
+					66 text A held investigation still needs an owner. SilentShift uses a separate durable
+					67 link Description: Coordinator, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow/Coordinator.cls
+					68 text  Business Process to send a  ReviewRequest  asynchronously to an  EnsLib.Workflow.Operation . The task handler extends  EnsLib.Workflow.TaskResponse .
+				69 text The coordinator can wait for the native deferred response without keeping the original HTTP request or an operation job occupied while a human considers the case. The original investigation finishes in its held state; the native task owns the longer human wait.
+				70 container
+					71 text The demo configures one reviewer in the native  ReviewWorklist  role. That membership is separate from the IRIS  SSReview  permission checked by the application. A new decision requires both the authorized application identity and the corresponding native reviewer/task association. Multi-user allocation and escalation are outside this implementation.
+				72 text The workbench reads pending tasks from the native worklist through the API and opens their investigation evidence. A browser label cannot establish that a task is actionable: the server verifies its case, role, assignment and worklist association.
+				73 image Pending native Workflow tasks in the SilentShift Review view
+				74 heading Persist the decision before attempting completion, Value: 2
+					75 text Persist the decision before attempting completion
+				76 text The review request carries four application fields. This illustrative body shows their shape; its version and key are examples:
+				77 container
+					78 button JSON
+					79 container code-0
+						80 text { "action" : "approve" , "reason" : "The approved amendment covers this event." , "expected_version" : 12 , "idempotency_key" : "review-example-001" }
+				81 text The server derives reviewer identity from the authenticated request. It checks a new decision against the current case version, requires a bounded reason, evaluates deterministic policy and claims the native task. Approval cannot override a critical contradiction, and the native task callback repeats the authorization check.
+				82 container
+					83 link Description: Store.Review, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/Store.cls
+					84 text  then commits the case update, a  ReviewAction  receipt and the review event in one IRIS transaction. The receipt retains the action, reason, reviewer, original case version and idempotency key. The workflow status becomes  completion_pending .
+				85 text Only after that commit does the application synchronize native completion. The native ownership claim has its own persistence; no application transaction spans the Workflow engine's deferred-response enqueue path. Treating those operations as one indivisible transaction would conceal the interruption the product must recover from.
+				86 text The resulting states are deliberately distinct:
+				87 table
+					88 row
+						89 cell
+							90 text Observed state
+						91 cell
+							92 text Persisted review decision
+						93 cell
+							94 text Native completion confirmed
+						95 cell
+							96 text Simulator delivery
+					97 row
+						98 cell
+							99 text Awaiting a reviewer
+						100 cell
+							101 text No
+						102 cell
+							103 text No
+						104 cell
+							105 text None
+					106 row
+						107 cell
+							108 text completion_pending
+						109 cell
+							110 text Yes
+						111 cell
+							112 text Not yet
+						113 cell
+							114 text Held during synchronization failure
+					115 row
+						116 cell
+							117 text Completed approval and delivery
+						118 cell
+							119 text Yes
+						120 cell
+							121 text Yes
+						122 cell
+							123 text One receipt in the verified journey
+					124 row
+						125 cell
+							126 text Completed rejection
+						127 cell
+							128 text Yes
+						129 cell
+							130 text Yes
+						131 cell
+							132 text None
+				133 text A committed decision therefore does not make the UI claim that delivery succeeded. The native task and destination receipt provide the remaining evidence.
+				134 heading Check the receipt before checking a retry's version, Value: 2
+					135 text Check the receipt before checking a retry's version
+				136 container
+					137 text Versioning and idempotency solve different problems.  expected_version  prevents a new decision based on stale evidence. The idempotency key identifies a decision that may already have committed.
+				138 text The distinction becomes visible after a failure. Saving the first decision advances the case version. Native workflow events can advance it again. A retry of the same decision still carries its original version; replacing that version would change the request the operator authorized.
+				139 text The implementation checks for the receipt before applying the new-decision version check. Its control flow can be summarized as follows; this is explanatory pseudocode:
+				140 container
+					141 button ObjectScript
+					142 container code-1
+						143 text lock  case
+receipt = lookup(case_id, idempotency_key)
+
+ if  receipt exists:
+    require identical authenticated reviewer  and  request fingerprint
+    unlock case
+    resume native completion
+ else :
+    require current case version  and  an undecided native task
+    require reviewer authority, reason  and  policy permission
+    claim native task
+    commit case + review receipt + review event
+    unlock case
+    synchronize native completion
+
+				144 text The fingerprint includes the authenticated reviewer and canonical request body. Reusing the same key with a different reason, action or version is a conflict. Choosing a new key also cannot replace an already committed task decision. These checks give a retry a narrow meaning: continue the recorded decision.
+				145 container
+					146 text The workbench reflects that rule.  Resume recorded review  reconstructs the original request from the server-side receipt and displays its locked reason. It does not silently turn a recovery attempt into a fresh approval.
+				147 heading Serialize completion separately from decision persistence, Value: 2
+					148 text Serialize completion separately from decision persistence
+				149 container
+					150 text The case lock protects the decision commit.
+					151 link Description: SyncCompletion, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/Workflow/Support.cls
+					152 text  uses a separate completion lock so concurrent exact-key retries cannot independently enqueue the same native response.
+				153 container
+					154 text Before completing a task, the server verifies the task/case binding, reviewer assignment and matching committed receipt. For approval, it re-evaluates policy. The task's  OnAction  callback uses that same authorization boundary, so invoking a native Workflow action directly cannot bypass the application decision.
+				155 text There is another failure window inside native completion: the worklist item can be removed before its deferred response is successfully enqueued. Recovery cannot rely exclusively on finding that item again. The completion code checks the persisted task and receipt, then resumes through the guarded task callback when needed. The pending-task API also includes receipt-backed held cases so this intermediate state remains discoverable.
+				156 text At the final boundary, the simulator destination independently checks policy and persists a unique receipt. The concurrency test sent two simultaneous identical approvals. Both requests returned HTTP 200; the observed result was one review receipt, one native completion response and one delivery.
+				157 text That is the demonstrated guarantee for this persisted simulator. A real shipment or payment endpoint would need its own effect and retry contract; these tests do not establish exactly-once behavior for arbitrary external systems.
+				158 heading Inject the failure after the commit, Value: 2
+					159 text Inject the failure after the commit
+				160 text The useful recovery test interrupts the gap between saving a decision and completing its effect. A validation error before persistence would exercise a different path.
+				161 text For the controlled experiment, a synthetic case had an eleven-reference snapshot, exceeding the agent's evidence budget. Inference was skipped and the case entered review with its approved evidence preserved. The test temporarily made the native task's deferred-response destination invalid, then submitted an otherwise eligible approval.
+				162 container
+					163 text The API returned HTTP 503 after the approval committed. Inspection showed  completion_pending , routing  REVIEW  and zero deliveries. The original native token was restored immediately.
+				164 container
+					165 text After reconnecting, the operator could see the saved reason and original version.  Resume recorded review  completed the native task and delivered once. Repeating the original request preserved the same decision and the same one delivery.
+				166 container
+					167 text The
+					168 link Description: recovery receipt, Value: github.com/himanshu748/silentshift/blob/main/docs/evidence/workflow.json
+					169 text  records that experiment. The separate
+					170 link Description: worklist receipt, Value: github.com/himanshu748/silentshift/blob/main/docs/evidence/review-queue.json
+					171 text  covers concurrent identical approvals, rejection and pending-task reads. Viewer denial, stale-version rejection and direct native-action denial were also exercised. These are controlled tests of specific boundaries; they do not cover every crash, outage or external destination failure.
+				172 heading Reproduce the boundary through the product, Value: 2
+					173 text Reproduce the boundary through the product
+				174 container
+					175 text Start with the
+					176 link Description: native build-154 setup, Value: github.com/himanshu748/silentshift#native-build-154-setup
+					177 text , using the official licensed AI Hub image and private local configuration. Bootstrap installs the coordinator and worklist without making a model call.
+				178 text To create isolated synthetic review cases and exercise the queue, approval, rejection and concurrency paths without LLM inference, run:
+				179 container
+					180 button ObjectScript
+					181 container code-2
+						182 text uv run python scripts/verify_native_review_queue.py --allow- new -synthetic-cases
+
+				183 text The separate controlled recovery verifier creates a no-model boundary case and makes one local-model conflict investigation:
+				184 container
+					185 button ObjectScript
+					186 text uv run python scripts/verify_native_workflow.py --allow-one-local-model-call
+
+				187 container
+					188 text Use the local inference configuration documented in the repository. Open  Review  as the configured reviewer and inspect the task's investigation. Compare the saved review receipt, native task state and simulator receipt before and after recovery. The
+					189 link Description: captioned demo, Value: youtu.be/a4dOcqu89EA
+					190 text  shows the workbench and native components; the
+					191 link Description: reproduction guide, Value: github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md
+					192 text  supplies the shorter operator walkthrough.
+				193 container
+					194 link Description: Open Exchange application, Value: openexchange.intersystems.com/package/SilentShift
+					195 text  ·
+					196 link Description: Source and installation, Value: github.com/himanshu748/silentshift
+					197 text  ·
+					198 link Description: Native Workflow implementation, Value: github.com/himanshu748/silentshift/tree/main/src/SilentShift/Workflow
+				199 link Description: Check the related application on InterSystems Open Exchange, Value: openexchange.intersystems.com/package/SilentShift
+				200 container related-posts
+					201 text Related posts
+					202 content list
+						203 link Description: Catching semantic failures in an IRIS interoperability production, Value: community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production
+						204 text Recoverable human review in IRIS: from approval to one delivery
+				205 container
+					206 text Discussion ( 0 ) 1
+					207 container edit-comment-body-wrapper
+						208 container Rich Text Editor
+							209 toolbar Editor toolbar
+								210 pop up button (collapsed) Description: Paragraph, Heading, Secondary Actions: Expand
+								211 checkbox Bold, Value: 0
+								212 checkbox Italic, Value: 0
+								213 checkbox Bulleted List, Value: 0
+								214 container
+									215 checkbox Numbered List, Value: 0
+									216 pop up button (collapsed) Numbered List, Secondary Actions: Expand
+								217 button Upload image from computer
+								218 checkbox Source, Value: 0
+									219 text Source
+								220 checkbox Code, Value: 0
+								221 container
+									222 checkbox Insert code block, Value: 0
+									223 pop up button (collapsed) Insert code block, Secondary Actions: Expand
+								224 pop up button (collapsed) Emoji, Secondary Actions: Expand
+								225 button Page Break
+							226 text entry area (settable) Description: Rich Text Editor. Editing area: main. Press ⌥0 for help., Value:
+
+						227 text Words: 0
+						228 text Characters: 0
+						229 container edit-comment-body-0-format
+							230 pop up button (collapsed, settable) Value: Markdown, ID: edit-comment-body-0-format--2, Secondary Actions: Expand
+								231 menu
+									232 Full HTML
+									233 (selected) Markdown
+					234 container edit-actions
+						235 button Preview, ID: preview-ajax-comments-reply-form-node-590711-field-comments-0-0
+						236 button Add reply, ID: edit-ajax-comments-reply-form-node-590711-field-comments-0-0
+		237 container
+			238 content list
+				239 link Description: Privacy & Terms, Value: intersystems.com/privacy-policy/
+				240 link Description: Guarantee, Value: intersystems.com/guarantee/
+				241 link Description: Section 508, Value: intersystems.com/section-508/
+				242 link Description: Contest Terms, Value: community.intersystems.com/intersystems-online-programming-contest-terms
+				243 link Description: Code of Conduct, Value: community.intersystems.com/node/464261
+				244 link Description: Moderation Policy, Value: community.intersystems.com/node/590421
+				245 text Cookies Settings
+			246 text © 2026 InterSystems Corporation.  All rights reserved.
+		247 link Description: Ask DC AI, Value: community.intersystems.com/ask-dc-ai, ID: floating-ask-ai
+
+The focused UI element is 0 AXWebArea Recoverable human review in IRIS: from approval to one delivery | InterSystems DC, URL: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery

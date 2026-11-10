@@ -1,5 +1,16 @@
 # Open Exchange description and product copy
 
+## November 10: existing owner draft ready for approval
+
+[Phase 0 log](agent-runs/voting-week-log.md) · [anonymous receipt](evidence/voting-week-nov10/public-readback.json) · [owner receipt](evidence/voting-week-nov10/owner-readback.json).
+
+The public listing still has legacy 0.2.0/source-only CSV body text. The owner form already contains the corrected **native IPM 0.3.0 / separately built React 0.2.1** description, with **unpublished changes**. The dedicated DPI-I-689 association is visible anonymously; qualification remains unconfirmed. Nothing was changed, saved or sent in this pass.
+
+Use [this exact existing owner description](agent-runs/oex-description-approval.md) as the single approval target. It preserves the idea, video, MP4, articles and honest limits, and excludes unpublished provider/frontend/benchmark work. Wait for the owner's exact **`submit`** before sending only these description edits for approval. No release, IPM publication or contest-setting change is authorised by that action.
+
+The November 9 source-branch proposal below remains preparation history; it is **not** the current approval target.
+
+
 ## November 9 public readback and prepared correction
 
 The anonymous listing shows release **0.3.0**, its CSV release notes and the dedicated **Ideas to the app → DPI-I-689** association. Its description body still contains the older **0.2.0 / source-only CSV** sentences. That is a visible inconsistency, not proof that the replacement description has been approved. Organizer idea qualification and awards remain unconfirmed. [Public listing](https://openexchange.intersystems.com/package/SilentShift).
