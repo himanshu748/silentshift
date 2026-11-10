@@ -37,8 +37,18 @@ Open Exchange approval/publication, organiser email/message, community post/comm
 - [Staff video feature](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production#comment-288552): confirms featuring, not award or bonus qualification.
 - Main's older hosting review says permission is absent. The later source-branch review records Irene's Nov 8 contest-demo permission; **deployment**, not that historical permission gate, remains unverified. No hosting or online-demo bonus is claimed.
 
-### Next gated action
+### Earlier proposed gated action — superseded by the queue check below
 
 Send **only the existing corrected OEX description** for approval, after the owner replies exactly `submit`. Do not publish a release/package, cancel approval, change contest registration or send an organiser message. If the site offers a second consequential action beyond submitting these description edits, stop. Then read the public listing anonymously and log whether moderation is still pending or the corrected text is live.
 
 Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. AI Hub issue #17 is not duplicated or commented on. Questionnaire is not resubmitted. No money is spent, EAP software is not redistributed, and no public Git push or other external write is performed.
+
+
+## 2026-11-10 14:02:17 IST — Check for an existing moderation request
+
+- **Action:** re-read the existing OEX owner editor without pressing Save, Send for approval or any cancellation control. It shows Published, unpublished changes and Send for approval; no Awaiting Review or Cancel approval indicator is visible. [Fresh UI readback](../evidence/voting-week-nov10/approval-status-recheck.txt) · [screenshot](../evidence/voting-week-nov10/approval-status-recheck.jpg).
+- **Historical cross-check:** the November 8 publication receipt records successful submission of the later 0.3.0 description correction. The earlier 08:26 UTC approval email preceded that correction; the 10:00 UTC email confirms IPM publication, not approval of the corrected description. The owner's 10:14 UTC sent message also explicitly records the correction submission. Targeted Gmail searches included Spam and found no later confirmation for this description. No private mail headers or raw mailbox exports were added to Git.
+- **Result:** the live moderation queue is **unconfirmed**, not proven empty. The previous suggestion to submit immediately is superseded. An available Send button does not conclusively establish that no request is queued.
+- **Decision:** do not resubmit the description. [One short queue-check reply is prepared](oex-description-queue-note.md), addressed to the existing Open Exchange team conversation. It asks them to process the existing correction if queued, or say whether resubmission is needed. It does not repeat the resolved idea-visibility request, ask for another release or make an award claim.
+- **Next gated action:** only this **email reply**, after exact `submit`. That approval would not authorise an OEX form submission. Nothing was sent, posted, saved in OEX/Gmail, published, cancelled or pushed. Contest registration and package/video/article/idea fields were untouched.
+- [Sanitised queue-check receipt](../evidence/voting-week-nov10/approval-queue-check.json). Native tests and models were not run for this read-only check.

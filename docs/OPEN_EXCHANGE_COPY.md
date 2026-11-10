@@ -6,7 +6,9 @@
 
 The public listing still has legacy 0.2.0/source-only CSV body text. The owner form already contains the corrected **native IPM 0.3.0 / separately built React 0.2.1** description, with **unpublished changes**. The dedicated DPI-I-689 association is visible anonymously; qualification remains unconfirmed. Nothing was changed, saved or sent in this pass.
 
-Use [this exact existing owner description](agent-runs/oex-description-approval.md) as the single approval target. It preserves the idea, video, MP4, articles and honest limits, and excludes unpublished provider/frontend/benchmark work. Wait for the owner's exact **`submit`** before sending only these description edits for approval. No release, IPM publication or contest-setting change is authorised by that action.
+**Queue-state check:** a prior successful description submission is recorded. The editor does not show a pending badge, but this does not prove the queue is empty. [The prepared team reply](agent-runs/oex-description-queue-note.md) supersedes immediate resubmission; nothing is sent without exact `submit`.
+
+Use [this exact existing owner description](agent-runs/oex-description-approval.md) as the single approval target. It preserves the idea, video, MP4, articles and honest limits, and excludes unpublished provider/frontend/benchmark work. Keep these description edits on hold until OEX clarifies the queue state. Approval to send the queue-check email does not authorise submitting this form; any later form submission needs its own exact **`submit`**. No release, IPM publication or contest-setting change is included.
 
 The November 9 source-branch proposal below remains preparation history; it is **not** the current approval target.
 

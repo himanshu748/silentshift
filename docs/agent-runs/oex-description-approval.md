@@ -2,7 +2,9 @@
 
 Read back from the existing owner form on 2026-11-10 13:55:41 IST. This is the already-saved draft, not a new edit. Public native IPM is 0.3.0; React 0.2.1 runs separately from source. No unpublished provider/frontend/benchmark work is included.
 
-**Pending action:** send this existing description for approval. Do not create a release or republish the package. Await the owner's exact `submit` before that one action. If a later dialog proposes a release or registry publication, stop and clarify.
+**Queue check required first:** [the November 10 recheck](oex-description-queue-note.md) supersedes immediate resubmission. A previous successful submission is recorded, so absence of a live pending badge is insufficient.
+
+**Deferred action:** send this existing description for approval only after queue status is clarified. Do not create a release or republish the package. Await the owner's exact `submit` before that one action. If a later dialog proposes a release or registry publication, stop and clarify.
 
 **Preserve:** existing contest registration, checked IPM option, DPI-I-689 field, both articles, YouTube, MP4 and empty Demo URL. The current edit page exposes no Submit to Contest checkbox; registration was independently observed on contest 49, and no contest control was touched.
 
