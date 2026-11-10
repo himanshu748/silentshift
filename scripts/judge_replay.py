@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """Install public native IPM 0.3.0 and run two keyless recorded replays.
 
-Requires running Colima and the locally loaded official build-154U ARM64 and
-Web Gateway images. Creates new isolated test containers and private local test
+Requires running Colima and the official build-154U ARM64 and Web Gateway
+images. An explicitly supplied local IRIS archive can be loaded and retagged.
+Creates new isolated test containers and private local test
 credentials; retains them for inspection. No image pull, fresh model inference,
 publication, or existing application configuration change is performed. This
 checks the published native package with its pinned compatible release harness,
 not the current source branch's runtime changes or additional native tests.
+The retained release driver uses isolated Docker containers, not Compose.
 """
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import json
 import os
-from pathlib import Path
 import re
 import secrets
 import shutil
@@ -22,6 +22,8 @@ import socket
 import subprocess
 import sys
 import uuid
+from datetime import datetime, timezone
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.3.0"
@@ -36,6 +38,8 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--context", default="colima-silentshift")
     p.add_argument("--vm-profile", default="silentshift")
     p.add_argument("--image", default=IMAGE)
+    p.add_argument("--image-archive", type=Path,
+                   help="Load and verify this local official archive if --image is absent; never downloads an image")
     p.add_argument("--gateway-image", default=GATEWAY)
     p.add_argument("--api-port", type=int, default=52843)
     p.add_argument("--container", help="New silentshift-bonus-registry-* name")
@@ -43,10 +47,47 @@ def parser() -> argparse.ArgumentParser:
 
 
 def command(argv: list[str], *, env: dict[str, str] | None = None,
-            capture: bool = False) -> subprocess.CompletedProcess:
+            capture: bool = False, timeout: int | None = None) -> subprocess.CompletedProcess:
     return subprocess.run(argv, cwd=ROOT, env=env, text=True,
                           capture_output=capture, check=False,
-                          timeout=30 if capture else 1200)
+                          timeout=timeout if timeout is not None else (30 if capture else 1200))
+
+
+def verified_image(text: str) -> dict:
+    records = json.loads(text)
+    if not isinstance(records, list) or len(records) != 1 or not isinstance(records[0], dict):
+        raise ValueError("Cannot identify the loaded IRIS image; no runtime was started")
+    image = records[0]
+    if ((image.get("Config", {}).get("Labels") or {}).get(
+            "com.intersystems.platform-version") != "2026.3.0AI.154.0com"
+            or image.get("Architecture") != "arm64"):
+        raise ValueError("Use the verified official 2026.3.0AI.154.0 Community "
+                         "(154U) ARM64 image; other builds/platforms are unverified")
+    return image
+
+
+def load_local_archive(docker: list[str], archive: Path, tag: str) -> None:
+    print("Load the supplied local archive and verify build/architecture before retagging...", flush=True)
+    loaded = command([*docker, "load", "--input", str(archive.resolve())],
+                     capture=True, timeout=1200)
+    if loaded.returncode:
+        raise ValueError("Could not load the supplied local IRIS archive; no runtime was started")
+    matches: dict[str, str] = {}
+    for reference in re.findall(r"^Loaded image(?: ID)?: (.+)$", loaded.stdout, re.MULTILINE):
+        result = command([*docker, "image", "inspect", reference.strip()], capture=True)
+        if result.returncode:
+            continue
+        try:
+            image = verified_image(result.stdout)
+        except ValueError:
+            continue
+        matches[image.get("Id", reference)] = reference.strip()
+    if len(matches) != 1:
+        raise ValueError("The archive did not identify exactly one verified build-154 Community "
+                         "ARM64 image. Tag the intended image explicitly; no runtime was started.")
+    result = command([*docker, "image", "tag", next(iter(matches.values())), tag], capture=True)
+    if result.returncode:
+        raise ValueError("Could not retag the verified image as " + tag)
 
 
 def preflight(args: argparse.Namespace) -> None:
@@ -55,6 +96,8 @@ def preflight(args: argparse.Namespace) -> None:
     if args.container and not re.fullmatch(
             r"silentshift-bonus-registry-[a-z0-9-]{1,35}", args.container):
         raise ValueError("Use a new silentshift-bonus-registry-* container name")
+    if args.image_archive is not None and not args.image_archive.is_file():
+        raise ValueError("Local --image-archive file was not found; obtain the official archive yourself")
     if shutil.which("docker") is None:
         raise ValueError("Docker CLI is missing. Install it, then start Colima: "
                          "colima start --profile " + args.vm_profile)
@@ -65,18 +108,16 @@ def preflight(args: argparse.Namespace) -> None:
         raise ValueError("Docker context is unavailable: " + args.context +
                          ". Start Colima: colima start --profile " + args.vm_profile)
     result = command([*docker, "image", "inspect", args.image], capture=True)
+    if result.returncode and args.image_archive is not None:
+        load_local_archive(docker, args.image_archive, args.image)
+        result = command([*docker, "image", "inspect", args.image], capture=True)
     if result.returncode:
         raise ValueError("Required local IRIS image is missing: " + args.image +
                          ". Obtain the official build-154 Community ARM64 archive "
                          "from InterSystems, load it with docker load -i <archive>, "
                          "then docker tag <loaded-image> " + args.image +
                          ". See INSTALL.md; no image download is attempted.")
-    image = json.loads(result.stdout)[0]
-    if ((image.get("Config", {}).get("Labels") or {}).get(
-            "com.intersystems.platform-version") != "2026.3.0AI.154.0com"
-            or image.get("Architecture") != "arm64"):
-        raise ValueError("Use the verified official 2026.3.0AI.154.0 Community "
-                         "(154U) ARM64 image; other builds/platforms are unverified")
+    verified_image(result.stdout)
     if command([*docker, "image", "inspect", args.gateway_image], capture=True).returncode:
         raise ValueError("Required local Web Gateway image is missing: " +
                          args.gateway_image + ". Follow INSTALL.md step 2 first.")

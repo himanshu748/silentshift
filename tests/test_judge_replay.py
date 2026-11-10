@@ -1,8 +1,10 @@
 """Exercise judge harness boundaries without Docker, network or model calls."""
 import importlib.util
 import json
-from pathlib import Path
+import os
 import subprocess
+import sys
+from pathlib import Path
 
 import pytest
 
@@ -20,7 +22,7 @@ def harness(monkeypatch, tmp_path):
     image = {"Architecture": "arm64", "Config": {"Labels": {
         "com.intersystems.platform-version": "2026.3.0AI.154.0com"}}}
 
-    def command(argv, *, env=None, capture=False):
+    def command(argv, *, env=None, capture=False, timeout=None):
         calls.append((argv, env))
         if "image" in argv:
             return subprocess.CompletedProcess(argv, 0, json.dumps([image]), "")
@@ -71,6 +73,70 @@ def test_missing_image_stops_before_credentials_or_downloads(harness, monkeypatc
     assert "no image download" in message
     assert list(root.iterdir()) == []
     assert all("fetch_ipm.py" not in " ".join(a) for a, _ in calls)
+
+
+def test_missing_archive_stops_without_docker_or_private_files(harness, capsys):
+    root, calls, _ = harness
+    assert judge.main(["--image-archive", str(root / "absent.tar.gz")]) == 1
+    assert "--image-archive file was not found" in capsys.readouterr().err
+    assert calls == [] and list(root.iterdir()) == []
+
+
+def test_supplied_archive_loads_then_verifies_before_retagging(harness, monkeypatch):
+    root, calls, image = harness
+    archive = root / "official.tar.gz"
+    archive.write_bytes(b"synthetic archive, never sent to Docker")
+    target_exists = False
+
+    def loaded(argv, **kwargs):
+        nonlocal target_exists
+        calls.append((argv, None))
+        if "load" in argv:
+            assert kwargs["timeout"] == 1200
+            return subprocess.CompletedProcess(argv, 0, "Loaded image: vendor:154\n", "")
+        if "tag" in argv:
+            assert argv[-2:] == ["vendor:154", judge.IMAGE]
+            target_exists = True
+        if "inspect" in argv and argv[-1] == judge.IMAGE and not target_exists:
+            return subprocess.CompletedProcess(argv, 1, "", "")
+        return subprocess.CompletedProcess(argv, 0, json.dumps([image]), "")
+
+    monkeypatch.setattr(judge, "command", loaded)
+    judge.preflight(judge.parser().parse_args(["--image-archive", str(archive)]))
+    assert target_exists
+    kinds = ["load" if "load" in argv else "tag" if "tag" in argv
+             else "inspect" if "inspect" in argv else "other" for argv, _ in calls]
+    assert kinds.index("load") < kinds.index("tag")
+    assert not (root / ".local").exists()
+
+
+def test_wrong_archive_build_is_never_retagged(harness, monkeypatch, capsys):
+    root, calls, image = harness
+    archive = root / "wrong.tar.gz"
+    archive.write_bytes(b"synthetic archive")
+    image["Architecture"] = "amd64"
+
+    def wrong(argv, **kwargs):
+        calls.append((argv, None))
+        if "load" in argv:
+            return subprocess.CompletedProcess(argv, 0, "Loaded image: vendor:x64\n", "")
+        if "inspect" in argv and argv[-1] == judge.IMAGE:
+            return subprocess.CompletedProcess(argv, 1, "", "")
+        return subprocess.CompletedProcess(argv, 0, json.dumps([image]), "")
+
+    monkeypatch.setattr(judge, "command", wrong)
+    assert judge.main(["--image-archive", str(archive)]) == 1
+    assert "exactly one verified" in capsys.readouterr().err
+    assert all("tag" not in argv for argv, _ in calls)
+    assert not (root / ".local").exists()
+
+
+def test_loaded_image_is_reused_without_loading_supplied_archive(harness):
+    root, calls, _ = harness
+    archive = root / "official.tar.gz"
+    archive.write_bytes(b"synthetic archive")
+    judge.preflight(judge.parser().parse_args(["--image-archive", str(archive)]))
+    assert all("load" not in argv and "tag" not in argv for argv, _ in calls)
 
 
 @pytest.mark.parametrize("change", ["build", "architecture"])
@@ -186,3 +252,30 @@ def test_busy_port_stops_before_files(harness, monkeypatch, capsys):
     assert judge.main([]) == 1
     assert "--api-port" in capsys.readouterr().err
     assert list(root.iterdir()) == []
+
+
+def test_shell_entry_reports_missing_uv_without_running_docker(tmp_path):
+    result = subprocess.run(["/bin/sh", str(SCRIPT.with_name("judge-replay.sh"))],
+                            env={"PATH": ""}, cwd=tmp_path, text=True,
+                            capture_output=True, timeout=10, check=False)
+    assert result.returncode == 1
+    assert "uv is required" in result.stderr
+
+
+def test_shell_entry_forwards_arguments_from_another_directory(tmp_path):
+    bin_path = tmp_path / "bin"
+    bin_path.mkdir()
+    uv = bin_path / "uv"
+    uv.write_text("#!" + sys.executable + "\nimport json,os,sys\n"
+                  "print(json.dumps({'cwd':os.getcwd(),'args':sys.argv[1:]}))\n")
+    uv.chmod(0o755)
+    result = subprocess.run(["/bin/sh", str(SCRIPT.with_name("judge-replay.sh")),
+                             "--api-port", "52999", "--image-archive", "archive with spaces.tar.gz"],
+                            env={**os.environ, "PATH": str(bin_path) + os.pathsep + os.environ["PATH"]},
+                            cwd=tmp_path, text=True, capture_output=True,
+                            timeout=10, check=False)
+    assert result.returncode == 0
+    observed = json.loads(result.stdout)
+    assert observed["cwd"] == str(SCRIPT.parents[1])
+    assert observed["args"] == ["run", "python", "scripts/judge_replay.py",
+                                "--api-port", "52999", "--image-archive", "archive with spaces.tar.gz"]
