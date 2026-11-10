@@ -52,3 +52,12 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - **Decision:** do not resubmit the description. [One short queue-check reply is prepared](oex-description-queue-note.md), addressed to the existing Open Exchange team conversation. It asks them to process the existing correction if queued, or say whether resubmission is needed. It does not repeat the resolved idea-visibility request, ask for another release or make an award claim.
 - **Next gated action:** only this **email reply**, after exact `submit`. That approval would not authorise an OEX form submission. Nothing was sent, posted, saved in OEX/Gmail, published, cancelled or pushed. Contest registration and package/video/article/idea fields were untouched.
 - [Sanitised queue-check receipt](../evidence/voting-week-nov10/approval-queue-check.json). Native tests and models were not run for this read-only check.
+
+
+## 2026-11-10 14:21:36 IST — Authorised queue-check email sent
+
+- **Authorisation:** owner replied exactly `submit` to the proposal for one email reply only. This did not authorise OEX form submission or any other external action.
+- **Action:** sent the [prepared queue-check note](oex-description-queue-note.md) to `openexchange.team@intersystems.com` in the existing SilentShift conversation. No CC/BCC or attachment was added. The reply asks whether the existing correction is queued and avoids duplicate moderation submission.
+- **Verification:** Gmail readback shows **SENT**, message `1a1c4a7d62d2d426` in thread `1a1ba468d483b833`. The new reply text matches the approved draft; the mail service appended the ordinary quoted prior conversation. [Sanitised receipt](../evidence/voting-week-nov10/queue-note-sent.json). This proves sending, not recipient acknowledgement or moderation approval.
+- **Anonymous readback after sending:** HTTP 200; public archive/release 0.3.0 and dedicated idea section remain present; old 0.2.0/source-only CSV body text remains. [Public readback](../evidence/voting-week-nov10/queue-mail-public-after.json). The first default-User-Agent request returned 403; the one explicit-verifier retry succeeded. No further retry was made.
+- **Decision:** wait for the team's queue clarification. Do not resubmit the OEX form, send another follow-up, publish a package/release, change contest selections or infer bonus qualification. No model/test run, spending or Git push occurred.

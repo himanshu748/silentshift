@@ -1,6 +1,6 @@
-# OEX description queue check — unsent draft
+# OEX description queue check — sent November 10
 
-**Status:** prepared locally; not saved to Gmail and not sent. This supersedes the proposal to resubmit the description immediately. The next proposed external action is **one reply in the existing Open Exchange team email thread**, only after the owner replies exactly `submit`. That approval would not authorise an OEX form submission.
+**Status:** sent at **2026-11-10 14:21:36 IST** after the owner replied exactly `submit`. Gmail Sent readback confirms the existing thread, intended recipient and approved new reply text, followed by standard quoted correspondence. [Sent receipt](../evidence/voting-week-nov10/queue-note-sent.json). No OEX form was submitted. Await the team's response; do not send a duplicate.
 
 To: openexchange.team@intersystems.com
 Thread: existing “SilentShift contest #49 — downloadable demo and DPI-I-689 review” conversation
