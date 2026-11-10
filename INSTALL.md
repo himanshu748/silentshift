@@ -1,6 +1,6 @@
 # Install SilentShift locally
 
-This guide selects the unmerged `backend-polish-nov10` source branch, which prepares native **0.3.1** and includes the workbench originating on `push/top3`. Public main and native IPM **0.3.0** are separate release boundaries; this source candidate is not a new public package. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
+This guide runs the repository source and its separate browser workbench. Source native **0.3.1** is prepared; public native IPM **0.3.0** is a separate release boundary. A source checkout is not a new public package. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
 The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. Organizers also permit **2027.1.0AI.109.0 Community**, but it has **not** been verified for SilentShift. [Official build clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows). The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
@@ -13,7 +13,7 @@ You will download the local Qwen model (about 2.5 GB) and a Web Gateway image. A
 ## 1. Get the source and start Docker
 
 ```sh
-git clone --branch backend-polish-nov10 https://github.com/himanshu748/silentshift.git
+git clone https://github.com/himanshu748/silentshift.git
 cd silentshift
 colima start --profile silentshift
 export DOCKER_CONTEXT=colima-silentshift
@@ -150,4 +150,4 @@ The launcher obtains the pinned source snapshot matching the published package's
 | Docker context unavailable | Run `colima start --profile silentshift`; the launcher defaults to `colima-silentshift` and leaves Docker's default context unchanged |
 | API port occupied or a requested container exists | Choose another `--api-port`, for example `52983`, and let the launcher choose a fresh name. It never replaces a container |
 
-A fresh run may take several minutes for IPM download/compilation. Test containers remain available afterward; stopping them preserves their state. [Detailed historical driver commands](docs/JUDGE_VERIFICATION.md) are evidence, not additional setup steps. If you are using public main before this launcher is merged, the existing [public 0.3.0 driver recipe](docs/JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc) remains the verified path; the one-command launcher is currently a `push/top3` source deliverable.
+A fresh run may take several minutes for IPM download/compilation. Test containers remain available afterward; stopping them preserves their state. [Detailed historical driver commands](docs/JUDGE_VERIFICATION.md) are evidence, not additional setup steps. The public-package launcher deliberately uses release-matched 0.3.0 assertions. Its result does not validate the newer source candidate; [source verification](docs/JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones) records that separate boundary.

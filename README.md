@@ -71,7 +71,7 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 ### Published package and this branch
 
-Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. This `backend-polish-nov10` branch prepares **native 0.3.1**, which is not published or merged. It includes the earlier `push/top3` provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
+Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. The repository source prepares **native 0.3.1**, which is not a published package. It includes provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 

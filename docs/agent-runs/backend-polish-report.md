@@ -34,12 +34,15 @@ Protected uncommitted UI/social/article work and partial sealed results remain o
 
 **A — awaiting exact `submit`: open one draft PR `backend-polish-nov10` → `main`, with [the prepared title/body](backend-polish-pr-draft.md). Do only that one action. Do not merge, close another PR, comment or submit OEX.**
 
-Then stop for each later action:
+Then stop for each later action, following the owner's updated shipping order:
 
-1. Close superseded PR **#3**, with its one-line explanation; separate approval.
-2. Close ImgBot PR **#2**, with its one-line explanation; separate approval.
-3. Prepare the single public-0.3.0 OEX description/logo/capture bundle in the owner form, preserve idea/contest/IPM/video/MP4/articles, screenshot, then stop. One approval permits the exact save + Send for approval action once; never cancel pending approval.
-4. Phase 2 proof is now complete using the explicit Ruff inventory option. Merge, v0.3.1 tag/release, IPM publication and OEX version update still require separate owner decisions. [Prepared owner runbook](../IPM.md#owner-only-031-publication-runbook).
-5. Optional static Pages publication has its own gate. It is not a hosted native demo.
+1. **Merge with a merge commit, no squash or force-push.** Phase 3H already passed, so the prepared source manifest may remain 0.3.1 under the owner's stated exception; public IPM/OEX remain 0.3.0 until separately published. Compare the reviewed branch head again at merge time.
+2. **Close PR #3 and ImgBot PR #2**, each with its one-line explanation and its own approval, after confirming containment. Prepare remote branch deletions only after checking exact names and ancestry against the merge. Do not discard unique/unmerged work or the protected local edits.
+3. **OEX correction:** prepare native-public-0.3.0 / React-0.2.1 copy, logo and gallery from main after the merge. Preserve idea/contest/IPM/video/MP4/articles; add site/demo URLs only after their independent deployments are verified. Screenshot and stop before the exact save + Send action. Never cancel pending approval.
+4. **Landing page:** build the next revision on a new branch; collect the requested responsive/accessibility/performance evidence, real captures and scroll recording. Current static preview is an earlier candidate, not the newly requested verified site. Publish Pages only after a separate approval.
+5. **Recorded read-only demo:** prepare a static replay or inspect the existing gateway, with no public write/model-call path. Report current hosting cost before deployment and get a separate approval. Do not bundle demo deployment into the informational Pages action or claim a native online-demo bonus for a static replay.
+6. **Link updates:** README, OEX and the landing page follow their own public-change gates. 0.3.1 tag/release, public IPM publication and OEX version update each remain separate decisions. [Owner runbook](../IPM.md#owner-only-031-publication-runbook).
+
+The landing story must describe the observed semantic failure: technically successful intake can carry the wrong business meaning. No recorded case establishes general detection of messages silently disappearing in transport. Animations may explain the recorded case, but must not invent missing-delivery or repair outcomes. No current ranking or future placement is asserted.
 
 No public action may be bundled into the draft-PR approval. The public-change freeze remains **November 16, 07:00 IST**.

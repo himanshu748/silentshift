@@ -260,3 +260,16 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Next approval is only opening the prepared draft backend PR. Later closures, OEX bundle, merge/release/publication and Pages remain separate gates; [report](backend-polish-report.md).
 
 - 18:30:52 IST: after serial verification, stopped only the new completed test stacks without deleting data, then restored the earlier backend-final native/gateway pair at localhost:53003 to running. The new test containers/volumes and failed receipts are retained. Stopped this run's temporary Vite server on 5195. Local links/JSON/lint-inventory and configured-secret/session-capability scans passed; no tracked artifact exceeds 50 MiB.
+
+### 2026-11-10 18:37:49 IST — Final pushed-tip readback (local handoff note)
+
+- Remote backend-polish-nov10 is d0adca9fa4ef26fe176ae91c35d824924b3ffd7e; remote main remains a10de3f61e1d809b374832a4db67761318bc16ea. Latest hosted run 42821071803 succeeded at that exact tip; https://github.com/himanshu748/silentshift/actions/runs/42821071803. This post-push readback is local, so it does not trigger another documentation-only CI cycle. Native code qualification remains tied to 7b3d5ef.
+- Four new native body/Event Log capture URLs read anonymously with HTTP 200 and JPEG signatures. Restored the earlier backend-final production to state 1/running; all new completed verification resources are stopped and retained. Protected UI/article/social/sealed work remains unchanged. No PR or external gated action performed.
+- Refreshed the existing daily read-only monitor with current source/public/CI/gate facts, preserving schedule and notification preferences. The next exact submit approves only opening the prepared draft PR.
+
+### 2026-11-10 18:42:07 IST — Updated judge-shipping order, PR gate prepared
+
+- Read back remote main a10de3f and backend tip d0adca9. Tip Actions run 42821071803 is SUCCESS; PRs #3 and #2 remain open, no backend PR exists. No rerun was needed for the already-green tip.
+- Phase 3H is already satisfied by the linked 393 pytest, 7 native classes/22 methods, two 12/12 replays, live 5/5, connected 16/16, body/Event Log captures, Compose and clean exported-archive installation. Retained the prepared 0.3.1 manifest under the latest instruction's exception; public IPM/OEX remain 0.3.0.
+- Updated the prepared PR/report/runbook to the new order: PR approval, merge-commit approval, closure/deletion gates, then the OEX correction, followed by landing/demo work. No public gated action was taken. Made the guide target main after the intended merge and pinned PR evidence links to immutable d0adca9 so later branch deletion will not break those links. These are merge-ready documentation changes, not a fresh-main runtime claim.
+- New landing and public replay requirements remain unimplemented and unverified. The semantic story must not become an unsupported transport-loss claim; a static recorded demo will be labeled and will not be called a native hosted-demo bonus. Protected UI/article/social/sealed work is untouched.
