@@ -60,7 +60,7 @@ ClassMethod ConfigureAssets(root As %String) As %Status
         Set ^SilentShift.Config("AssetRoot") = ##class(%Library.File).NormalizeDirectory(root)
         Return $$$OK
     } Catch error {
-        Return $$$ERROR($$$GeneralError, "SilentShift asset activation failed; inspect local installation diagnostics")
+        Return ..SetupFailure("SilentShift asset activation failed; inspect local installation diagnostics", error)
     }
 }
 
@@ -85,8 +85,31 @@ ClassMethod PrepareUninstall(root As %String) As %Status
         If $Get(^SilentShift.Config("AssetRoot")) = expected Kill ^SilentShift.Config("AssetRoot")
         Return $$$OK
     } Catch error {
-        Return $$$ERROR($$$GeneralError, "Cannot establish a safe empty SilentShift installation; uninstall refused")
+        Return ..SetupFailure("Cannot establish a safe empty SilentShift installation; uninstall refused", error)
     }
+}
+
+/// Bounded operator-only diagnostic. Never records an object, request or header.
+/// Redact every configured password/key value before storage or status display.
+ClassMethod SetupFailure(friendly As %String, error As %Exception.AbstractException) As %Status
+{
+    Set diagnostic = ..RedactDiagnostic($SYSTEM.Status.GetErrorText(error.AsStatus()))
+    Try {
+        Set detail = {"timestamp": ($ZTIMESTAMP), "message": (diagnostic)}
+        Set ^SilentShift.Diagnostics("last_setup_error") = detail.%ToJSON()
+    } Catch diagnosticError {
+        // Diagnostic persistence must not hide the original failure.
+    }
+    Return $$$ERROR($$$GeneralError, friendly_": "_diagnostic)
+}
+
+ClassMethod RedactDiagnostic(message As %String) As %String
+{
+    For name = "SILENTSHIFT_IRIS_PASSWORD", "SILENTSHIFT_VIEWER_PASSWORD", "SILENTSHIFT_GATEWAY_PASSWORD", "SILENTSHIFT_LLM_API_KEY", "SILENTSHIFT_API_KEY", "OPENAI_API_KEY" {
+        Set secret = $SYSTEM.Util.GetEnviron(name)
+        If secret '= "" Set message = $REPLACE(message, secret, "[REDACTED]")
+    }
+    Return $EXTRACT(message, 1, 2048)
 }
 
 /// Validate independently of the application package, which is not importable

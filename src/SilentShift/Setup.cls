@@ -57,7 +57,7 @@ ClassMethod Install() As %Status
         If state '= $$$eProductionStateStopped Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: production requires operator recovery")
         Return ##class(Ens.Director).StartProduction("SilentShift.Production")
     } Catch error {
-        Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: native setup failed; inspect local compile/setup diagnostics")
+        Return ##class(SilentShift.IPM).SetupFailure("APP_UNAVAILABLE: native setup failed; inspect local compile/setup diagnostics", error)
     }
 }
 

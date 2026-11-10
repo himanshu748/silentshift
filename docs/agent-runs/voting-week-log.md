@@ -136,3 +136,8 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Added host-only stable-code/stage/case-id Event Log messages, Semantic stage traces and one routing info event on the normal path or successful containment. No payload, prompt, provider or exception text is logged.
 - `uv run pytest -q`: 330 passed in 21.92s; [output](../evidence/backend-polish-nov10/01-pytest.txt). Native compilation/readback still pending.
 - Earlier screenshot/Pages work remains queued; community posting is owner-handled. All external actions, including pushes, require exact `submit`.
+
+### 2026-11-10 15:22:36 IST — Backend item 2
+
+- Setup/IPM catch statuses now retain friendly context plus the bounded original error text after configured password/key values are redacted. The same text is stored server-side in `^SilentShift.Diagnostics("last_setup_error")`; persistence failure does not replace the original failure.
+- `uv run pytest -q`: 336 passed in 43.42s ([output](../evidence/backend-polish-nov10/02-pytest.txt)). The increase includes the shell/archive harness tests being prepared independently. Native diagnostic readback is pending.
