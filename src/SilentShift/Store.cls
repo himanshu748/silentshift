@@ -4,6 +4,14 @@ Include %occStatus
 Class SilentShift.Store Extends %RegisteredObject
 {
 
+/// Internal operation acknowledgment; the Partner response remains the full case.
+ClassMethod SummaryJSON(id As %String) As %String
+{
+    Set body = ##class(%DynamicObject).%FromJSON(..CaseJSON(id))
+    Set summary = {"case_id": (body.%Get("id")), "routing": (body.%Get("routing")), "version": (body.%Get("version"))}
+    Return summary.%ToJSON()
+}
+
 ClassMethod CreateCase(envelopeJSON As %String, Output id As %String, Output duplicate As %Boolean) As %Status
 {
     Set id = "", duplicate = 0, locked = 0

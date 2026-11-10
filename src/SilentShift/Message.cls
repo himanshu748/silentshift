@@ -1,3 +1,4 @@
+/// Case-bound production request. Carries identity and action, never a raw partner payload.
 Class SilentShift.Message Extends Ens.Request
 {
 Property CaseId As %String(MAXLEN = 80);

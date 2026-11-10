@@ -159,3 +159,10 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Centralized exact tool membership, native-only scope/budget/trace preamble, model default, Python import setup and precedent metadata parameters. Native callbacks perform no new Python/SQL work.
 - `/api/policies` reads the unchanged seven-rule catalog via Bridge; preserved its existing catalog version 1.1.0 separately from routing engine version 1.2.0. No policy decisions changed: AST is identical after excluding the new RULES assignment.
 - Added native regression checks for runtime prompt bytes, allowlist, redaction and catalog/default model. `uv run pytest -q`: 339 passed in 24.27s ([output](../evidence/backend-polish-nov10/04-pytest.txt)). Native helper execution still pending.
+
+### 2026-11-10 15:34:31 IST — Backend item 5
+
+- Before compacting replies, searched native process/service, web, scripts and native tests: no consumer reads References/Destination/Quarantine BodyJSON; their callers re-read Store. Partner still receives Semantic’s full case body. ProviderProbe ignores internal reply bodies.
+- Those three acknowledgments now contain only case_id, routing and version; added a native summary-shape regression and message descriptions.
+- Step-4 helpers also executed successfully on 154U: canonical JSON, default model, original runtime prompt hash and complete rule catalog ([native output](../evidence/backend-polish-nov10/04-native-smoke.txt)). This was an upgrade of the early isolated test instance, not a new clean-install claim.
+- `uv run pytest -q`: 339 passed in 21.91s ([output](../evidence/backend-polish-nov10/05-pytest.txt)). Production reply inspection remains part of final gate.

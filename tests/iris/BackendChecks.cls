@@ -41,4 +41,24 @@ Method TestSharedDefaultAndCatalog()
     Do $$$AssertEquals(rules.%Size(), 7)
     Do $$$AssertEquals(rules.%Get(4).%Get("description"), "Uncertainty above 0.35 requires review.")
 }
+
+Method TestCompactAcknowledgment()
+{
+    Set fixture = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON())
+    Set message = fixture.%Get("scenarios").%Get(0).%Get("message")
+    Do message.%Set("event_id", $SYSTEM.Util.CreateGUID())
+    Set envelope = {"message": (message), "scenario_id": "synthetic-compact-reply-check"}
+    Set sc = ##class(SilentShift.Store).CreateCase(envelope.%ToJSON(), .id, .duplicate)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set result = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).SummaryJSON(id))
+    Do $$$AssertEquals(result.%Size(), 3)
+    Do $$$AssertEquals(result.%Get("case_id"), id)
+    Do $$$AssertEquals(result.%Get("routing"), "PROCESSING")
+    Do $$$AssertEquals(result.%Get("version"), 1)
+    Set full = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Do $$$AssertTrue(full.%IsDefined("message"))
+    Do $$$AssertTrue(full.%IsDefined("events"))
+}
+
 }
