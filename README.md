@@ -8,7 +8,47 @@ If an approved amendment *does* allow `20 CASE`, the same order goes through. **
 
 **[Watch the captioned demo](https://youtu.be/a4dOcqu89EA)** · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
-[Preview the separate source workbench home page](evidence/browser/top3-multipage/home-light-desktop.png). This is a recorded source-branch capture, not a hosted app.
+## Inspect the workflow without installing
+
+These November 10 captures show one synthetic **recorded replay** in the local source workbench on 154U ARM64. They show the interface and persisted native messages, not fresh inference or a hosted demo. [Capture provenance and limits](docs/evidence/backend-polish-nov10/11-native-ui.json).
+
+**1 — The policy makes the mismatch explicit.** Incoming `20 CASE`, approved `240 EA`, no authorized conversion: the order is held.
+
+![The source workbench compares incoming 20 CASE with the approved 240 EA reference and shows the critical policy decision](docs/assets/voting-week-nov10/02-policy-evidence.jpg)
+
+<details>
+<summary>2 — Inspect the original order</summary>
+
+![The original synthetic order payload in the source workbench](docs/assets/voting-week-nov10/01-original-order.jpg)
+
+</details>
+
+<details>
+<summary>3 — Inspect the agent’s evidence reads and recorded recommendation</summary>
+
+The mode is labeled recorded replay. Four case-scoped evidence reads and the recommendation are inspectable; the policy remains the final authority.
+
+![The workbench shows the recorded native agent recommendation and case-scoped evidence reads](docs/assets/voting-week-nov10/03-native-agent.jpg)
+
+</details>
+
+<details>
+<summary>4 — Open the native Workflow task</summary>
+
+This critical case has an actual native task; approval is disabled. No review decision was submitted while making this capture. [Separately executed approve/reject/concurrency proof](docs/evidence/backend-polish-nov10/upgrade-review.json).
+
+![The source Review view shows the native task and disables approval of a critical contradiction](docs/assets/voting-week-nov10/04-workflow-review.jpg)
+
+</details>
+
+<details>
+<summary>5 — Read the provider response in native Visual Trace</summary>
+
+Session 58 records the model, provider, prompt version, recorded mode, timing and tool call. Tokens and cost remain unknown for replay. The temporary synthetic-message read permissions used for capture were restored exactly afterward.
+
+![Native Visual Trace Body properties show the recorded provider response metadata](docs/assets/voting-week-nov10/07-provider-native-metadata.jpg)
+
+</details>
 
 <a id="native-build-154-setup"></a>
 <a id="installation"></a>
@@ -25,46 +65,13 @@ To execute the workflow yourself, use the [keyless replay](#keyless-replay-no-mo
 
 SilentShift is for integration operations teams handling partner order feeds. It puts the incoming value, independently approved commitment, recommendation and permitted next action in one case, reducing the need to reconstruct that comparison across payloads, contracts and logs. The `20 CASE` / `240 EA` example illustrates that task; no customer time or money savings have been measured.
 
-## Inspect the workflow without installing
-
-**1 — Compare the business values, not just the JSON.** The captured quantity/unit findings point to the approved contract; the critical case is held and its approve action is disabled. [Case walkthrough](docs/JUDGE_GUIDE.md).
-
-![A captured investigation compares incoming 20 CASE with approved 240 EA and shows a policy quarantine](docs/assets/demo-unit-quarantine.jpg)
-
-<details>
-<summary>2 — CSV intake: a held line and a legitimate line use the same native path</summary>
-
-The operator provides two separate sources: an incoming order feed and an approved-reference export. In this November 8 source-run capture, the unsupported line has no simulator receipt; the matching line delivered once. Native 0.3.0 contains the backend/parser; the web bundle is built separately. [Executed CSV receipt](docs/evidence/csv-isolated-nov8.json).
-
-![CSV results show separate source files, an unsupported 20 CASE line quarantined and a matching 240 EA line delivered to the simulator](docs/assets/csv-isolated-nov8-desktop.png)
-
-</details>
-
-<details>
-<summary>3 — Human review: inspect the native task and permitted action</summary>
-
-The worklist is read from IRIS Workflow. The operator sees its task/case association and policy checks. A reason and current version are required for a decision; critical contradictions cannot be approved. [Actual approve/reject evidence](docs/evidence/review-ui.json).
-
-![Recorded native Workflow worklist with a selected case, reference evidence and reviewer controls](docs/assets/review-native-worklist.png)
-
-</details>
-
-<details>
-<summary>4 — Visual Trace: inspect one provider exchange in its business session</summary>
-
-This is the native portal's persisted message body, with model/provider, prompt version, duration, tool-call metadata and available usage. It is a historical live call, not a new inference from viewing this README. Replay explicitly marks its mode and leaves current usage unknown. [Metadata and restoration receipt](docs/evidence/provider-body-captures.json).
-
-![Native Visual Trace message properties for an actual provider response](docs/assets/provider-success-body-safari.png)
-
-</details>
-
 <a id="local-checks-without-iris"></a>
 <a id="prove-the-native-journey"></a>
 <a id="optional-local-intake-and-procedural-guidance"></a>
 
 ### Published package and this branch
 
-Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. The new multi-page workbench, configurable providers and bounded demo gateway are on **`push/top3`**, not a newly published package. Use that source checkout for these changes. Earlier native-source receipts cover their recorded replay/local-Ollama snapshots; the public-package check below does not renew verification of all unpublished runtime changes. OpenAI, Gemini and OpenRouter are configuration/protocol-tested only, not verified against their services. [Source verification](docs/evidence/top3-quality.json) · [Provider configuration](docs/PROVIDERS.md).
+Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. The multi-page workbench, configurable providers and bounded demo gateway originated on **`push/top3`**. This local **`backend-polish-nov10`** branch adds native diagnostics and maintainability changes; neither branch is a newly published package. Do not confuse this source checkout with the public native archive. Earlier native-source receipts cover their recorded replay/local-Ollama snapshots; the public-package check below does not renew verification of all unpublished runtime changes. OpenAI, Gemini and OpenRouter are configuration/protocol-tested only, not verified against their services. [Source verification](docs/evidence/top3-quality.json) · [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 
@@ -75,10 +82,10 @@ Use the numbered [INSTALL.md](INSTALL.md) checklist for prerequisites, the separ
 After starting the documented Colima profile and loading the official build-154 ARM64 and Web Gateway images:
 
 ```sh
-uv run python scripts/judge_replay.py
+./scripts/judge-replay.sh
 ```
 
-The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It fetches pinned verification source and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies the public package, not unpublished source runtime changes.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
+The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies the public package, not unpublished source runtime changes.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
 
 The [fresh-main check](docs/evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, both **12/12** replays and **207 Python tests** on the declared build. Its exact clone and scope are recorded separately from the launcher check. For a port already in use, pass `--api-port 52983`; never replace an existing container or lower disk limits.
 

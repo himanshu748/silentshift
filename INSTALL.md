@@ -1,6 +1,6 @@
 # Install SilentShift locally
 
-This source-branch guide starts the IRIS backend and browser workbench from `push/top3`. Public main and native IPM 0.3.0 are separate release boundaries. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
+This source guide covers the IRIS backend and browser workbench originating on `push/top3`. The separate `backend-polish-nov10` maintenance snapshot is unreleased; the clone command below intentionally selects `push/top3` and does not include those changes. Public main and native IPM 0.3.0 are separate release boundaries. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
 The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. Organizers also permit **2027.1.0AI.109.0 Community**, but it has **not** been verified for SilentShift. [Official build clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows). The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
@@ -121,8 +121,10 @@ This alternative verifies the **public native IPM 0.3.0 backend**, not the full 
 2. Run this command from the source checkout containing the launcher:
 
    ```sh
-   uv run python scripts/judge_replay.py
+   ./scripts/judge-replay.sh
    ```
+
+The launcher uses isolated Docker containers rather than Compose; the normal live setup above uses Compose. It automatically selects an unused private /28 network without deleting existing networks. If needed, pass a verified disjoint `--network-subnet 10.253.250.0/28`. To load a local vendor archive when the required tag is absent, add `--image-archive /absolute/path/to/official-build154-docker.tar.gz`; the launcher checks build and ARM64 architecture before retagging. It never downloads IRIS.
 
 3. Expect `unit_suite_passed: true`, `replay_passed: true`, then a second `checks=12/12; passed=true`, `routing=QUARANTINED` and `delivery_count=0`. The launcher prints the actual session IDs and local Visual Trace URLs. [Fresh public main commands and output](docs/evidence/voting-week-nov10/judge-main-commands.txt).
 4. Keep the private credentials and test resources for inspection. The launcher prints only the credential **path**, not passwords. Opening the native portal needs a permitted local IRIS account; a printed link is not anonymous portal access.

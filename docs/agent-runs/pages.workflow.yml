@@ -1,0 +1,32 @@
+name: SilentShift static judge page
+
+# Prepared only. Copy to .github/workflows after a separate approval.
+# Manual dispatch only; a source push must never publish the site implicitly.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: silentshift-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/site
+      - name: Deploy static page
+        id: deployment
+        uses: actions/deploy-pages@v4
