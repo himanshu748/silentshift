@@ -2,9 +2,9 @@
 
 Read back from the existing owner form on 2026-11-10 13:55:41 IST. This is the already-saved draft, not a new edit. Public native IPM is 0.3.0; React 0.2.1 runs separately from source. No unpublished provider/frontend/benchmark work is included.
 
-**Queue check required first:** [the November 10 recheck](oex-description-queue-note.md) supersedes immediate resubmission. A previous successful submission is recorded, so absence of a live pending badge is insufficient.
+**Current Phase 1 status:** the owner's renewed November 10 instruction requests preparation to submit this existing description, with no other edits. Fresh browser readback matches the body below; Send for approval is active. The November 8 queue remains unconfirmed, and the authorised queue-check email has no new reply. That uncertainty is disclosed, not treated as resolved. [Fresh preparation receipt](../evidence/voting-week-nov10/phase1-approval-ready.json).
 
-**Deferred action:** send this existing description for approval only after queue status is clarified. Do not create a release or republish the package. Await the owner's exact `submit` before that one action. If a later dialog proposes a release or registry publication, stop and clarify.
+**Next gated action:** after exact `submit`, send only this existing description for approval. Do not press Save or change fields. Do not create a release or republish the package. If a later dialog asks to publish a release/package, stop and clarify. The earlier email approval has been consumed and does not authorise this action.
 
 **Preserve:** existing contest registration, checked IPM option, DPI-I-689 field, both articles, YouTube, MP4 and empty Demo URL. The current edit page exposes no Submit to Contest checkbox; registration was independently observed on contest 49, and no contest control was touched.
 
