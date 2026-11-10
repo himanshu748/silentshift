@@ -135,7 +135,7 @@ def execute(args):
                 'install PublicCommunity/silentshift '+args.version+' -synchronous')
         print('IPM '+install_command,flush=True)
         cli(install_command,'15-install')
-        version_text=session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\n'
+        session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\n'
             'if \'$isobject(module) halt\nwrite "SS_MODULE_VERSION=",module.VersionString,!\n'
             'if module.VersionString\'='+literal(args.version)+' halt\nwrite "SS_VERSION_OK",!',
             '16-version',marker='SS_VERSION_OK')

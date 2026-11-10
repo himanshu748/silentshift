@@ -40,7 +40,7 @@ def validate_trial(config, now, actual_timer):
 
 def execute(root):
     if os.geteuid()!=0: raise ValueError('Root operator required')
-    if subprocess.run(['systemctl','is-active','--quiet','silentshift-expiry.timer']).returncode:
+    if subprocess.run(['systemctl','is-active','--quiet','silentshift-expiry.timer'], check=False).returncode:
         raise ValueError('Install and verify the approved termination timer first')
     os.chdir(root)
     config=json.loads(Path('deployment-private.json').read_text())
@@ -49,7 +49,7 @@ def execute(root):
     actual_timer=int(subprocess.check_output(['date','-d',next_timer,'+%s'],text=True))
     expiry=validate_trial(config,time.time(),actual_timer)
     def run(args, *, data=None, timeout=1200):
-        r=subprocess.run(args,input=data,text=True,capture_output=True,timeout=timeout)
+        r=subprocess.run(args,input=data,text=True,capture_output=True,timeout=timeout, check=False)
         log=Path('operator-install.log')
         with log.open('a') as f:f.write(r.stdout+r.stderr)
         log.chmod(0o600)
@@ -117,7 +117,7 @@ WantedBy=multi-user.target
     run(['docker','network','create','--label','project=silentshift','silentshift-demo'])
     run(['docker','run','-d','--init','--name','silentshift-demo-native','--hostname','silentshift-demo-native','--network','silentshift-demo','--network-alias','iris','--add-host','host.docker.internal:host-gateway','--memory','3g','--cpus','1.5','--shm-size','256m','--env-file',str(root/'runtime.env'),'--log-opt','max-size=10m','--log-opt','max-file=2',IMAGE])
     for _ in range(120):
-        r=subprocess.run(['docker','exec','-i','silentshift-demo-native','iris','session','IRIS','-U','%SYS'],input='write "SS_READY",!\nhalt\n',text=True,capture_output=True)
+        r=subprocess.run(['docker','exec','-i','silentshift-demo-native','iris','session','IRIS','-U','%SYS'],input='write "SS_READY",!\nhalt\n',text=True,capture_output=True, check=False)
         if r.returncode==0 and 'SS_READY' in r.stdout.splitlines():break
         time.sleep(1)
     else:raise RuntimeError('IRIS not ready')

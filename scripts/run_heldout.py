@@ -57,6 +57,7 @@ class Native:
             self.docker + ["exec", "-i", self.args.container, "iris", "session", "IRIS", "-U", "SILENTSHIFT"],
             input=commands + "\nhalt\n", capture_output=True, text=True,
             timeout=timeout, cwd=ROOT, env=self.env,
+            check=False,
         )
         lines = [line.removeprefix("HELDOUT=") for line in p.stdout.splitlines() if line.startswith("HELDOUT=")]
         if p.returncode or len(lines) != 1:

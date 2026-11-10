@@ -237,3 +237,8 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - Owner authorized branch-only work/pushes and CI reruns; PR actions, main merge, OEX saves/approval, tags/releases, registry/Pages publication and communications remain individually gated. Re-ran latest main run 42569241885 and backend run 42811379567, attempt 2. Both executed steps: the old billing lock no longer blocks these attempts. Main completed successfully.
 - Backend ran 373 Python checks: 372 passed, one failed because the default shallow checkout could not resolve frozen historical commit d1d752c. Preserved [failure log](../evidence/voting-finish-nov10/ci-backend-initial-failure.txt). Added fetch-depth: 0 to checkout; the baseline assertion and all checks remain unchanged. Local pytest: 373 passed in 20.89s ([output](../evidence/voting-finish-nov10/ci-checkout-fix-pytest.txt)).
+
+### 2026-11-10 17:43:31 IST — CI green and safe lint cleanup
+
+- Main attempt 2 and backend fix commit da2e9e9 both passed hosted Actions; [run metadata and counts](../evidence/voting-finish-nov10/ci-restored.json). No billing/settings or main code changes.
+- Safe lint changes reduced findings from 83 to 40. Every remaining finding has a file/line/rule/reason in [the exception inventory](../RUFF_REMAINING.md); no blanket ignore or failing check suppression. Native runtime/policy/fixtures/raw evidence untouched. `uv run pytest -q`: 373 passed in 29.54s ([output](../evidence/voting-finish-nov10/safe-lint-pytest.txt)).

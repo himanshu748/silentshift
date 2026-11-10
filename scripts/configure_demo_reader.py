@@ -43,7 +43,9 @@ def main():
     docker=['docker']+(['--context',a.context] if a.context else [])
     def session(namespace,script):
         run=subprocess.run(docker+['exec','-i',a.container,'iris','session','IRIS','-U',namespace],
-                           input=script+'\nhalt\n',capture_output=True,text=True,timeout=60)
+                           input=script+'\nhalt\n',capture_output=True,text=True,timeout=60,
+            check=False,
+        )
         text=(run.stdout+run.stderr).replace(password,'<redacted>')
         log=a.env_file.with_suffix('.reader-setup.log')
         with log.open('a') as f:f.write(text)

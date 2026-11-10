@@ -85,7 +85,9 @@ def private_write(path: Path, text: str) -> None:
 def command(arguments: list[str], log: Path | None = None, *, data: str | None = None,
         timeout: int = 900, env: dict | None = None, check: bool = True):
     result = subprocess.run(arguments, input=data, text=True, capture_output=True,
-        timeout=timeout, env=env, cwd=ROOT, umask=0o077)
+        timeout=timeout, env=env, cwd=ROOT, umask=0o077,
+        check=False,
+    )
     if log:
         private_write(log, result.stdout + result.stderr)
     if check and result.returncode:

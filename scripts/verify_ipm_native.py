@@ -30,7 +30,7 @@ def literal(value: str) -> str:
 
 
 def run(args, log: Path, *, input_text=None, timeout=900) -> str:
-    result = subprocess.run(args, input=input_text, text=True, capture_output=True, timeout=timeout)
+    result = subprocess.run(args, input=input_text, text=True, capture_output=True, timeout=timeout, check=False)
     log.write_text(result.stdout + result.stderr, encoding='utf-8')
     log.chmod(0o600)
     if result.returncode:

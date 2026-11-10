@@ -1,0 +1,289 @@
+{
+  "before": 83,
+  "after": 40,
+  "command": "uv run ruff check --output-format json",
+  "exit_code": 1,
+  "no_ignores_added": true,
+  "findings": [
+    {
+      "file": "demo_gateway/server.py",
+      "line": 129,
+      "code": "TRY004",
+      "message": "Prefer `TypeError` exception for invalid type",
+      "reason": "Existing validation errors are deliberately ValueError, caught by a stable redacted error boundary. Changing exception types would change that contract."
+    },
+    {
+      "file": "demo_gateway/server.py",
+      "line": 238,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Unpublished gateway boundary marks work uncertain or returns a stable redacted error; malformed cookies start a fresh visitor. No hosting or failure-contract change in this pass."
+    },
+    {
+      "file": "demo_gateway/server.py",
+      "line": 345,
+      "code": "S110",
+      "message": "`try`-`except`-`pass` detected, consider logging the exception",
+      "reason": "Malformed cookie parsing falls back to a fresh visitor; raw cookie/exception logging could expose session data. Gateway remains unpublished."
+    },
+    {
+      "file": "demo_gateway/server.py",
+      "line": 345,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Unpublished gateway boundary marks work uncertain or returns a stable redacted error; malformed cookies start a fresh visitor. No hosting or failure-contract change in this pass."
+    },
+    {
+      "file": "demo_gateway/server.py",
+      "line": 444,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Unpublished gateway boundary marks work uncertain or returns a stable redacted error; malformed cookies start a fresh visitor. No hosting or failure-contract change in this pass."
+    },
+    {
+      "file": "docs/evidence/backend-polish-nov10/fresh-source-commands.py",
+      "line": 1,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/backend-polish-nov10/fresh-source-commands.py",
+      "line": 5,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/backend-polish-nov10/fresh-source-commands.py",
+      "line": 14,
+      "code": "C400",
+      "message": "Unnecessary generator (rewrite as a list comprehension)",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/candidate-030-resume_replay.py",
+      "line": 1,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/candidate-030-resume_replay.py",
+      "line": 4,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/candidate-030-resume_replay.py",
+      "line": 10,
+      "code": "PLW1510",
+      "message": "`subprocess.run` without explicit `check` argument",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/candidate-030-resume_replay.py",
+      "line": 21,
+      "code": "PLW1510",
+      "message": "`subprocess.run` without explicit `check` argument",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/candidate-030-resume_replay.py",
+      "line": 45,
+      "code": "FURB167",
+      "message": "Use of regular expression alias `re.M`",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/ship-030-csv-probe.py",
+      "line": 1,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/ship-030-csv-probe.py",
+      "line": 2,
+      "code": "F401",
+      "message": "`subprocess` imported but unused",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/ship-030-csv-probe.py",
+      "line": 5,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/voting-week-nov10/check_public.py",
+      "line": 1,
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "docs/evidence/voting-week-nov10/check_public.py",
+      "line": 47,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Immutable historical executed-command artifact; rewriting it would falsify the preserved evidence. Kept in lint output, not ignored."
+    },
+    {
+      "file": "pilot/orders.py",
+      "line": 18,
+      "code": "PLC0414",
+      "message": "Import alias does not rename original package",
+      "reason": "Explicit same-name aliases preserve the legacy pilot re-export API; the previous unused-import cleanup broke its callers. Retained compatibility surface."
+    },
+    {
+      "file": "pilot/orders.py",
+      "line": 21,
+      "code": "PLC0414",
+      "message": "Import alias does not rename original package",
+      "reason": "Explicit same-name aliases preserve the legacy pilot re-export API; the previous unused-import cleanup broke its callers. Retained compatibility surface."
+    },
+    {
+      "file": "pilot/orders.py",
+      "line": 24,
+      "code": "PLC0414",
+      "message": "Import alias does not rename original package",
+      "reason": "Explicit same-name aliases preserve the legacy pilot re-export API; the previous unused-import cleanup broke its callers. Retained compatibility surface."
+    },
+    {
+      "file": "pilot/orders.py",
+      "line": 27,
+      "code": "PLC0414",
+      "message": "Import alias does not rename original package",
+      "reason": "Explicit same-name aliases preserve the legacy pilot re-export API; the previous unused-import cleanup broke its callers. Retained compatibility surface."
+    },
+    {
+      "file": "pilot/orders.py",
+      "line": 30,
+      "code": "PLC0414",
+      "message": "Import alias does not rename original package",
+      "reason": "Explicit same-name aliases preserve the legacy pilot re-export API; the previous unused-import cleanup broke its callers. Retained compatibility surface."
+    },
+    {
+      "file": "python/silentshift/csv_orders.py",
+      "line": 54,
+      "code": "SIM102",
+      "message": "Use a single `if` statement instead of nested `if` statements",
+      "reason": "Runtime CSV parser is held unchanged during this verification pass; this is a style-only refactor, not a failing import contract."
+    },
+    {
+      "file": "python/silentshift/embeddings.py",
+      "line": 63,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Redacted dependency boundary deliberately converts any embedding failure to LOCAL_EMBEDDING_UNAVAILABLE without transport/credential details; narrowing it changes failure behavior."
+    },
+    {
+      "file": "python/silentshift/engine.py",
+      "line": 92,
+      "code": "TRY004",
+      "message": "Prefer `TypeError` exception for invalid type",
+      "reason": "Frozen deterministic baseline, including its ValueError validation contract and Decimal syntax. No policy-source rewrite during the held-out comparison."
+    },
+    {
+      "file": "python/silentshift/engine.py",
+      "line": 99,
+      "code": "FURB157",
+      "message": "Verbose expression in `Decimal` constructor",
+      "reason": "Frozen deterministic baseline, including its ValueError validation contract and Decimal syntax. No policy-source rewrite during the held-out comparison."
+    },
+    {
+      "file": "python/silentshift/engine.py",
+      "line": 122,
+      "code": "FURB157",
+      "message": "Verbose expression in `Decimal` constructor",
+      "reason": "Frozen deterministic baseline, including its ValueError validation contract and Decimal syntax. No policy-source rewrite during the held-out comparison."
+    },
+    {
+      "file": "python/silentshift/evaluation.py",
+      "line": 196,
+      "code": "PLC0206",
+      "message": "Extracting value from dictionary without calling `.items()`",
+      "reason": "Evaluation aggregation is retained as the measured benchmark implementation; no metric or case-processing rewrite for a style preference."
+    },
+    {
+      "file": "scripts/bootstrap.py",
+      "line": 40,
+      "code": "UP036",
+      "message": "Version block is outdated for minimum Python version",
+      "reason": "Friendly direct-Python prerequisite error is retained for users who invoke this script without the project environment."
+    },
+    {
+      "file": "scripts/judge_replay.py",
+      "line": 110,
+      "code": "TRY004",
+      "message": "Prefer `TypeError` exception for invalid type",
+      "reason": "Existing validation errors are deliberately ValueError, caught by a stable redacted error boundary. Changing exception types would change that contract."
+    },
+    {
+      "file": "scripts/run_sealed.py",
+      "line": 105,
+      "code": "RUF059",
+      "message": "Unpacked variable `path` is never used",
+      "reason": "Unfinished sealed benchmark harness is frozen during its partial run; unused local binding has no route authority and is deferred until that run is closed."
+    },
+    {
+      "file": "scripts/verify_native_precedents.py",
+      "line": 83,
+      "code": "TRY004",
+      "message": "Prefer `TypeError` exception for invalid type",
+      "reason": "Existing validation errors are deliberately ValueError, caught by a stable redacted error boundary. Changing exception types would change that contract."
+    },
+    {
+      "file": "scripts/verify_native_precedents.py",
+      "line": 217,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Top-level evidence recorder must preserve a failed receipt and suppress transport details for unexpected dependency errors; narrowing this boundary requires separate failure-contract review."
+    },
+    {
+      "file": "scripts/verify_native_provider.py",
+      "line": 97,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Top-level evidence recorder must preserve a failed receipt and suppress transport details for unexpected dependency errors; narrowing this boundary requires separate failure-contract review."
+    },
+    {
+      "file": "scripts/verify_native_review_queue.py",
+      "line": 123,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Top-level evidence recorder must preserve a failed receipt and suppress transport details for unexpected dependency errors; narrowing this boundary requires separate failure-contract review."
+    },
+    {
+      "file": "scripts/verify_native_runbooks.py",
+      "line": 86,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Top-level evidence recorder must preserve a failed receipt and suppress transport details for unexpected dependency errors; narrowing this boundary requires separate failure-contract review."
+    },
+    {
+      "file": "scripts/verify_native_workflow.py",
+      "line": 197,
+      "code": "BLE001",
+      "message": "Do not catch blind exception: `Exception`",
+      "reason": "Top-level evidence recorder must preserve a failed receipt and suppress transport details for unexpected dependency errors; narrowing this boundary requires separate failure-contract review."
+    },
+    {
+      "file": "tests/test_ipm_package.py",
+      "line": 48,
+      "code": "S102",
+      "message": "Use of `exec` detected",
+      "reason": "Unit test executes a method body extracted only from the checked-in IPM class to test installer validation. No user/network text is executed; not claimed as native compilation."
+    },
+    {
+      "file": "tests/test_provider_transport.py",
+      "line": 46,
+      "code": "SIM117",
+      "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+      "reason": "Security regression intentionally shows two nested HTTP-server lifetimes for the cross-origin redirect test. Assertions and credential-containment contract are retained."
+    }
+  ]
+}

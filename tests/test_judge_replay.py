@@ -203,7 +203,7 @@ def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(
 
 @pytest.mark.parametrize("failed_stage", ["fetch-release", "fetch-ipm", "install"])
 def test_failed_stage_stops_before_later_commands(harness, monkeypatch, capsys, failed_stage):
-    root, calls, _ = harness
+    _root, calls, _ = harness
     monkeypatch.setattr(judge, "preflight", lambda _: None)
     success = judge.command
 
