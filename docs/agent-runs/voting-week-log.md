@@ -188,3 +188,11 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - All source compiled and production started on 154U. First native suite exposed an invalid test assumption: an Ensemble host cannot be instantiated with plain %New without production configuration. Replaced that with status-checked Ens.Director reads of the actual running hosts and adapter.
 - Native suite retry: All PASSED. This was an isolated same-instance source upgrade, not a fresh-install claim. Original failure retained. Keyless replay: 12/12, session 46, five provider pairs, QUARANTINED, zero receipts; no fresh inference.
 - `uv run pytest -q`: 339 passed in 21.06s ([output](../evidence/backend-polish-nov10/07d-pytest.txt)).
+
+### 2026-11-10 16:00:18 IST — Backend item 8 and production checks
+
+- Exported nine generated Storage Default blocks using $SYSTEM.OBJ.ExportUDL after compiling on 154U; copied only those exact blocks into Data classes and ReviewTask. Commit c3302c3 contains only storage additions. [Hashes/provenance](../evidence/backend-polish-nov10/08-storage.json). `uv run pytest -q`: 339 passed in 20.44s.
+- Native suite retry produced All PASSED: seven classes / 22 methods. Recorded replay scored 12/12 at session 46. Native CSV commit/repeat with an existing-case annotation succeeded; no CSV cases were dispatched for inference. [Probe](../evidence/backend-polish-nov10/csv-probe.txt).
+- Review queue verifier initially assumed an /opt source mount. Added a backwards-compatible --test-root for copied native checks, then it passed reject 26/26 and approve 26/26, including concurrency and one delivery receipt. [Receipt](../evidence/backend-polish-nov10/upgrade-review.json).
+- A separate metadata-inspection helper failed twice (interactive loop, then temporary helper indentation). Stopped that helper, rejected its partial result and recorded passed=false; do not claim it verifies compact production reply bodies. [Blocked receipt](../evidence/backend-polish-nov10/08-production-routes.json). Native compact-summary unit test remains separately passed. No runtime workaround was introduced.
+- `uv run pytest -q` after the verifier path fix: 339 passed in 21.19s ([output](../evidence/backend-polish-nov10/08b-pytest.txt)). 0.3.1 promotion remains on hold pending complete production readback.

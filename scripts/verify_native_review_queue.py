@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from bootstrap import read_env
+from verify_ipm_native import literal
 from verify_native import Client, native_build
 from verify_native_trace import native
 from verify_native_workflow import observed, task_checks
@@ -29,6 +30,8 @@ def main() -> int:
     parser.add_argument('--env-file', type=Path, default=ROOT / '.env')
     parser.add_argument('--context')
     parser.add_argument('--container')
+    parser.add_argument('--test-root', default='/opt/silentshift/tests/iris',
+                        help='Native container directory holding the current test classes')
     parser.add_argument('--allow-new-synthetic-cases', action='store_true')
     parser.add_argument('--output', type=Path, default=ROOT / 'evidence/native/review-queue.json')
     args = parser.parse_args()
@@ -49,7 +52,7 @@ def main() -> int:
         if status != 200 or not native_build(health.get('build')) or not health.get('production', {}).get('running'):
             raise ValueError('Live build154 production is required')
         script = ('set ok=1\nfor f="TraceChecks","WorkflowChecks" {'
-                  'set sc=$SYSTEM.OBJ.Load("/opt/silentshift/tests/iris/"_f_".cls","ck") '
+                  'set sc=$SYSTEM.OBJ.Load(' + literal(args.test_root.rstrip('/') + '/') + '_f_".cls","ck") '
                   'if $SYSTEM.Status.IsError(sc) set ok=0}\nwrite "REVIEW_TESTS=",ok,!')
         if native(args, script, 'REVIEW_TESTS=') != '1':
             raise ValueError('Native review inspection classes failed to compile')

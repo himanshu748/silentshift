@@ -166,3 +166,7 @@ The sealed source is registered before first access to v3. No tuning will follow
 ## Backend polish — November 10, 2026
 
 Ruff remained non-clean after its initial read and safe-fix pass (154 initial full-tree findings; 79 final). Stopped lint cleanup rather than using unsafe fixes or rewriting historical evidence. No Ruff CI gate added. Pytest initially caught removed pilot re-exports; restored explicit exports, then 339 passed. Native defaults test initially used an invalid bare host constructor; switched to actual Ens.Director settings reads; native retry All PASSED and recorded replay 12/12. These are local source checks, not a new public release. See [voting-week log](agent-runs/voting-week-log.md).
+
+### Stopped metadata exporter after two failures
+
+November 10: the extra native routing-reply/Event Log exporter failed first in interactive compound-loop mode, then compiling a temporary helper with unindented ObjectScript commands. Stopped it under the two-failure rule. Its partial JSON is not accepted evidence; [status receipt](evidence/backend-polish-nov10/08-production-routes.json) explicitly says passed=false. Existing native 7-class/22-method pass, 12/12 replay and 26/26-per-case review receipts retain their separate scope. No source behavior was changed to work around the inspection helper.
