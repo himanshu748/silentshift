@@ -1,0 +1,54 @@
+{
+  "checked_at_utc": "2026-11-10T12:37:22.843051+00:00",
+  "container": "silentshift-bonus-load-voting-finish-nov10",
+  "api_port": 53023,
+  "synthetic": true,
+  "delivered": {
+    "case_id": "C553F4BE-DCFF-11F1-994E-21106723194A",
+    "session_id": 86,
+    "visual_trace_url": "http://127.0.0.1:53023/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=86",
+    "reply_header_id": 110,
+    "reply_object_id": 91,
+    "body_properties_observed": true,
+    "body_screenshot_saved": true,
+    "event_log_id": 31,
+    "event_log_source": "Semantic",
+    "event_log_text": "SS_ROUTING_FINAL stage=routing case_id=C553F4BE-DCFF-11F1-994E-21106723194A",
+    "event_screenshot": "docs/assets/voting-finish-nov10/delivered-event-log.jpg",
+    "body_screenshot": "docs/assets/voting-finish-nov10/delivered-destination-body.jpg",
+    "body_json": {
+      "case_id": "C553F4BE-DCFF-11F1-994E-21106723194A",
+      "routing": "DELIVERED",
+      "version": 8
+    }
+  },
+  "held": {
+    "case_id": "915AB958-DCFF-11F1-994E-21106723194A",
+    "session_id": 30,
+    "visual_trace_url": "http://127.0.0.1:53023/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=30",
+    "reply_header_id": 54,
+    "reply_object_id": 43,
+    "visible_properties": [
+      "BodyJSON",
+      "RecommendationJSON",
+      "MetadataJSON"
+    ],
+    "body_screenshot": "docs/assets/voting-finish-nov10/held-quarantine-body.jpg",
+    "event_log_id": 28,
+    "event_log_source": "Semantic",
+    "event_log_text": "SS_ROUTING_FINAL stage=routing case_id=915AB958-DCFF-11F1-994E-21106723194A",
+    "event_screenshot": "docs/assets/voting-finish-nov10/held-event-log.jpg",
+    "body_json": {
+      "case_id": "915AB958-DCFF-11F1-994E-21106723194A",
+      "routing": "QUARANTINED",
+      "version": 8
+    }
+  },
+  "failure": {
+    "stage": "delivered native Contents capture",
+    "observed": "In-app browser crashed while selecting native Contents; a fresh same-browser session-86 tab also crashed. Body properties had been observed before the crash; no delivered-body screenshot was saved. No browser security warning was bypassed.",
+    "status": "Recovered after serializing native verification, restarting the OOM-affected native instance, and signing in again. Actual compact XML Contents screenshots saved for both operations; original crash was not hidden."
+  },
+  "permission_restoration_receipt": "docs/evidence/voting-finish-nov10/permissions-restored.json",
+  "complete": true
+}

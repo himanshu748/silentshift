@@ -1,6 +1,51 @@
 # Backend-polish verification — November 10, 2026 (UTC)
 
+## Voting-week finish — fresh GitHub clones
+
+**November 10, 2026 (IST).** The prepared native **0.3.1** source snapshot is **`7b3d5efafb07fd54530c912f6b9cdbb710462020`**, on `backend-polish-nov10`. Main and public native IPM/OEX remain **0.3.0**, React **0.2.1**. No merge, PR action, tag/release, registry publication, OEX save/approval, Pages deployment or external message ran in this finish. Later documentation commits preserve this code snapshot; they are not additional native runs.
+
+| Executed check | Actual result and scope | Receipt / output |
+| --- | --- | --- |
+| Hosted main rerun | Passed; real steps executed at `a10de3f`, not a billing-lock annotation | [Run metadata](evidence/voting-finish-nov10/ci-restored.json), [main run](https://github.com/himanshu748/silentshift/actions/runs/42569241885) |
+| Hosted backend candidate | Passed at `7b3d5ef`; **393 pytest in 23.17s**, types/build, **54 browser checks in 1.1m** | [CI metadata](evidence/voting-finish-nov10/candidate-031-ci.json), [complete output](evidence/voting-finish-nov10/candidate-031-ci-output.txt), [run](https://github.com/himanshu748/silentshift/actions/runs/42818397027) |
+| Fresh GitHub source load, native suite, explicit startup | **0.3.1**, **7 classes / 22 methods**, build **154U ARM64**, no application source mounts; **68.371s** for this load/suite/first-replay driver | [Candidate summary](evidence/voting-finish-nov10/candidate-031-summary.json), [load receipt](evidence/voting-finish-nov10/candidate-031-load.json), [native assertions](evidence/voting-finish-nov10/candidate-031-native-tests.txt) |
+| Two recorded API replays in that candidate | **12/12 twice**, sessions **24 / 58**, quarantined with no deliveries and no LLM inference | [First](evidence/voting-finish-nov10/candidate-031-replay-1.json), [repeat](evidence/voting-finish-nov10/candidate-031-replay-2.json) |
+| Exported archive installed in a second fresh container | Passed actual local-filesystem repository install; **80.522s**, pristine namespace and empty application checked. Production intentionally remains stopped there. Not public-registry installation or a second API run. | [Archive inspection](evidence/voting-finish-nov10/candidate-031-archive.json), [clean install](evidence/voting-finish-nov10/candidate-031-install.json), [command](evidence/voting-finish-nov10/candidate-031-install-command.txt), [output](evidence/voting-finish-nov10/candidate-031-install-output.txt) |
+| Fresh source live Scenario Lab run | **5/5 final routes**, local Qwen and local embeddings, at `da2e9e9`; **3/5 raw proposals** matched the labels. This is five synthetic scenarios, not general accuracy. | [Live receipt](evidence/voting-finish-nov10/fresh-live-five.json), [native load](evidence/voting-finish-nov10/fresh-native.json), [output](evidence/voting-finish-nov10/fresh-live-five-output.txt) |
+| Fresh-clone connected browser reads | **16/16 in 46.6s**, desktop and mobile, at client `daead01` against that real native case set | [Receipt](evidence/voting-finish-nov10/connected-final.json), [full output](evidence/voting-finish-nov10/connected-final-output.txt) |
+| Fresh GitHub source Compose command | Native production + real workbench; **12/12**, session **2**, **35.451s**, at `2dc0e92`. Browser login loaded the actual case and labeled recorded mode. | [Receipt](evidence/voting-finish-nov10/compose-final.json), [replay](evidence/voting-finish-nov10/compose-replay.json), [startup](evidence/voting-finish-nov10/compose-up.txt) |
+| Fresh candidate Python / web | **393 pytest in 31.29s**; `npm run check` and `npm run build` passed locally, with nonfatal dependency directives reported | [Python output](evidence/voting-finish-nov10/candidate-031-pytest.txt), [summary](evidence/voting-finish-nov10/candidate-031-summary.json); hosted web output linked above |
+| Ruff | **40 remaining**, down from **83**; each file/line/rule has a reason. No blanket ignores, check deletion or clean-lint claim. | [Inventory](RUFF_REMAINING.md), [machine receipt](evidence/voting-finish-nov10/ruff-remaining.json) |
+| Actual native reply bodies and Event Log | Delivered session **86**, quarantine session **30**, both compact bodies and routing INFO events captured; exact temporary permissions restored | [Capture receipt](evidence/voting-finish-nov10/native-ui.json), [restoration](evidence/voting-finish-nov10/permissions-restored.json) |
+
+### How the missing connected cases were produced
+
+The live verifier submitted the five synthetic cases through the authenticated **Scenario Lab API → Partner Service → Semantic Process → native AI Hub → policy → operations** path. It did not insert a delivered case, recommendation, vector result or Workflow task to satisfy the UI. The isolated driver separately administrator-indexed the installed synthetic approved-amendment catalog through native `IndexAmendments`; delivery's normal Precedents operation indexed the resolved case. [Catalog receipt](evidence/voting-finish-nov10/amendment-index.json) · [reproduction guide](CONNECTED_CHECKS.md).
+
+Only `module.xml` differs among native package files between the live/connected native snapshot and the versioned candidate; executable classes, Python assets, fixture and replay bytes match. [Exact package identity](evidence/voting-finish-nov10/candidate-031-source-identity.json). Fresh candidate load/replays establish the new package identity separately. Protected pre-existing UI edits and unfinished sealed-benchmark results are outside these commits. The earlier CSV browser and approve/reject receipts retain their dated scope; they were not relabeled as new runs.
+
+### Native body captures
+
+- [Destination acknowledgment](assets/voting-finish-nov10/delivered-destination-body.jpg): case `C553F4BE-DCFF-11F1-994E-21106723194A`, header **110**, body **91**, `routing=DELIVERED`.
+- [Quarantine acknowledgment](assets/voting-finish-nov10/held-quarantine-body.jpg): case `915AB958-DCFF-11F1-994E-21106723194A`, header **54**, body **43**, `routing=QUARANTINED`.
+- [Delivered routing Event Log](assets/voting-finish-nov10/delivered-event-log.jpg), [held routing Event Log](assets/voting-finish-nov10/held-event-log.jpg).
+
+Each acknowledgment's `BodyJSON` contains only `case_id`, `routing` and its operation-time `version`; empty recommendation/metadata properties carry no full case. Later Workflow/audit updates can increment the persisted case version. The complete case remains in the Partner response and API. These are native UI screenshots, not generated trace illustrations.
+
+### Failures retained and corrected
+
+The first hosted backend rerun really failed because a shallow clone lacked frozen baseline commit `d1d752c`. Full-history checkout fixed access to that baseline without changing the assertion. [Failure](evidence/voting-finish-nov10/ci-backend-initial-failure.txt). The first fresh connected run then found the stale exact prompt assertion `1.3.1`; source/runtime already used `1.4.2`. [Failure](evidence/voting-finish-nov10/connected-initial-failure.txt). The exact assertion was updated, not relaxed.
+
+Concurrent native instances exhausted the existing **2 GiB** VM: connected reads lost transport, and the first Compose startup received signal 9. Completed test instances were stopped without deleting data; the affected native instance was restarted and the unchanged full connected suite passed serially. [Interrupted output](evidence/voting-finish-nov10/connected-after-prompt-fix-oom.txt). A serial Compose attempt then found a real read-only `node_modules` mount failure. The launcher now uses a dedicated writable frontend volume and refuses another running build-154 instance. [Both failures](evidence/voting-finish-nov10/compose-failures.json).
+
+Native Contents initially crashed the in-app browser. After native memory recovery and a new sign-in, both compact XML bodies were captured successfully; the informational XSLT deprecation banner was dismissed, no browser security warning bypassed. Both read-permission windows were closed. The candidate's first preflight rejected an already reserved subnet before creating a container; the next invocation selected a disjoint subnet from Docker's actual IPAM snapshot. [Preflight](evidence/voting-finish-nov10/candidate-031-preflight.txt), [executed candidate command](evidence/voting-finish-nov10/candidate-031-command.txt). None of these paths was silently replaced by fixture injection.
+
+---
+
+
 ## Current local branch repeat
+
+**Historical earlier November 10 checkpoint.** The fresh GitHub repeat above supersedes its incomplete connected/capture gates; the original outputs below remain unchanged.
 
 A fresh **local Git clone** of `backend-polish-nov10` at **`76d9ef17f660d3d9ca9aa428257563055111fb51`** loaded source into an isolated, already-licensed **2026.3.0AI.154.0 Community / 154U ARM64** container with **no application source mounts**. It was not a GitHub clone of an unpushed branch. Initial activation failed when Docker default network pools were exhausted; the still-empty installed instance was then activated on an inspected disjoint private /28. No networks were deleted. [Receipt](evidence/backend-polish-nov10/fresh-source.json), [executed resume driver](evidence/backend-polish-nov10/fresh-source-commands.py). Subsequent harness/docs commits preserve the native executable tree: [identity](evidence/backend-polish-nov10/source-identity.json).
 
@@ -18,7 +63,7 @@ A fresh **local Git clone** of `backend-polish-nov10` at **`76d9ef17f660d3d9ca9a
 
 **Incomplete acceptance:** no delivered-case Visual Trace/Event Log capture was produced in this fresh instance. The additional review verifier stopped after two environment-preparation errors, before creating cases ([blocked receipt](evidence/backend-polish-nov10/fresh-review-blocked.json)). Earlier same-instance upgrade review passed **26/26 per case**, including one receipt under concurrent approval ([receipt](evidence/backend-polish-nov10/upgrade-review.json)); it is not relabeled as fresh-instance verification. The earlier metadata exporter failed twice and remains [failed evidence](evidence/backend-polish-nov10/08-production-routes.json). Primary native UI readback subsequently proved the held References reply separately.
 
-No fresh model inference or renewed live-five-case/CSV-browser result is claimed by these replay checks. Protected pre-existing uncommitted UI work is outside the fresh-clone snapshot. The shell launcher uses Docker orchestration, **not Compose**; the normal live installation still uses Compose. Public IPM/OEX remain **0.3.0**, React **0.2.1**. **0.3.1 is not prepared** while required readback/connected-data gates remain incomplete. No package/tag/release/push/OEX action occurred.
+No fresh model inference or renewed live-five-case/CSV-browser result is claimed by these replay checks. Protected pre-existing uncommitted UI work is outside the fresh-clone snapshot. The shell launcher uses Docker orchestration, **not Compose**; the normal live installation still uses Compose. Public IPM/OEX remain **0.3.0**, React **0.2.1**. **At that earlier checkpoint, 0.3.1 was not prepared** while required readback/connected-data gates remained incomplete. No package/tag/release/push/OEX action occurred.
 
 # Judge verification
 

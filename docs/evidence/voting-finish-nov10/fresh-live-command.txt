@@ -1,0 +1,5 @@
+git clone --branch backend-polish-nov10 --single-branch https://github.com/himanshu748/silentshift.git <fresh-clone>
+cd <fresh-clone>
+# HEAD: da2e9e9e064e09fa1e30e7891df13e142b6234b7
+# Private generated .env and checksum-verified local IPM installer were prepared before execution.
+uv run python scripts/verify_bonus_release.py --source load --version 0.3.0 --execution-mode live --allow-model-calls --container silentshift-bonus-load-voting-finish-nov10 --api-port 53023 --network-subnet 10.253.248.0/28 --context colima-silentshift --vm-profile silentshift --env-file .env --execute

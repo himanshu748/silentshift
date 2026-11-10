@@ -1,0 +1,977 @@
+local-checks	Set up job	﻿2026-11-10T12:45:05.3376948Z Current runner version: '2.338.2'
+local-checks	Set up job	2026-11-10T12:45:05.3401419Z ##[group]Runner Image Provisioner
+local-checks	Set up job	2026-11-10T12:45:05.3402394Z Hosted Compute Agent
+local-checks	Set up job	2026-11-10T12:45:05.3402997Z Version: 20261028.624
+local-checks	Set up job	2026-11-10T12:45:05.3403607Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+local-checks	Set up job	2026-11-10T12:45:05.3404473Z Build Date: 2026-10-28T21:51:42Z
+local-checks	Set up job	2026-11-10T12:45:05.3405158Z Worker ID: {52be2b8a-3744-46bd-b1cc-f2662ff3ac3c}
+local-checks	Set up job	2026-11-10T12:45:05.3405954Z Region: westus2
+local-checks	Set up job	2026-11-10T12:45:05.3406510Z Cloud: Azure
+local-checks	Set up job	2026-11-10T12:45:05.3407057Z ##[endgroup]
+local-checks	Set up job	2026-11-10T12:45:05.3408562Z ##[group]Operating System
+local-checks	Set up job	2026-11-10T12:45:05.3409212Z Ubuntu
+local-checks	Set up job	2026-11-10T12:45:05.3409792Z 26.04.1
+local-checks	Set up job	2026-11-10T12:45:05.3410490Z LTS
+local-checks	Set up job	2026-11-10T12:45:05.3411063Z ##[endgroup]
+local-checks	Set up job	2026-11-10T12:45:05.3411684Z ##[group]Runner Image
+local-checks	Set up job	2026-11-10T12:45:05.3412288Z Image: ubuntu-26.04
+local-checks	Set up job	2026-11-10T12:45:05.3412925Z Version: 20261101.186.1
+local-checks	Set up job	2026-11-10T12:45:05.3414076Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261101.186/images/ubuntu/Ubuntu2604-Readme.md
+local-checks	Set up job	2026-11-10T12:45:05.3416217Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261101.186
+local-checks	Set up job	2026-11-10T12:45:05.3417249Z ##[endgroup]
+local-checks	Set up job	2026-11-10T12:45:05.3418365Z ##[group]GITHUB_TOKEN Permissions
+local-checks	Set up job	2026-11-10T12:45:05.3420980Z Contents: read
+local-checks	Set up job	2026-11-10T12:45:05.3421691Z Metadata: read
+local-checks	Set up job	2026-11-10T12:45:05.3422271Z ##[endgroup]
+local-checks	Set up job	2026-11-10T12:45:05.3424801Z Secret source: Actions
+local-checks	Set up job	2026-11-10T12:45:05.3426083Z Cache mode: write
+local-checks	Set up job	2026-11-10T12:45:05.3426993Z Prepare workflow directory
+local-checks	Set up job	2026-11-10T12:45:05.3812267Z Prepare all required actions
+local-checks	Set up job	2026-11-10T12:45:05.3872395Z Getting action download info
+local-checks	Set up job	2026-11-10T12:45:05.7148678Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+local-checks	Set up job	2026-11-10T12:45:05.8477405Z Download action repository 'actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+local-checks	Set up job	2026-11-10T12:45:06.0978011Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+local-checks	Set up job	2026-11-10T12:45:06.2692816Z Complete job name: local-checks
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-11-10T12:45:06.3692745Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3693858Z with:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3694283Z   fetch-depth: 0
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3694747Z   persist-credentials: false
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3695286Z   repository: himanshu748/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3699032Z   token: ***
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3699460Z   ssh-strict: true
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3699889Z   ssh-user: git
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3700313Z   clean: true
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3700926Z   sparse-checkout-cone-mode: true
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3701448Z   fetch-tags: false
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3701898Z   show-progress: true
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3702342Z   lfs: false
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3702755Z   submodules: false
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3703197Z   set-safe-directory: true
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3703698Z   allow-unsafe-pr-checkout: false
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.3704483Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7060988Z Syncing repository: himanshu748/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7062900Z ##[group]Getting Git version info
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7063846Z Working directory is '/home/runner/work/silentshift/silentshift'
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7064986Z [command]/usr/bin/git version
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7087129Z git version 2.56.0
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7110567Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7121537Z Temporarily overriding HOME='/home/runner/work/_temp/9cc0a1c4-c8ce-476c-b647-f1ab74f8e8f0' before making global git config changes
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7123869Z Adding repository directory to the temporary git global config as a safe directory
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7126812Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/silentshift/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7202601Z Deleting the contents of '/home/runner/work/silentshift/silentshift'
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7205371Z ##[group]Determining repository object format
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7206925Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7207663Z ##[group]Initializing the repository
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7212684Z [command]/usr/bin/git init /home/runner/work/silentshift/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7363376Z hint: Using 'master' as the name for the initial branch. This default branch name
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7365116Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7366800Z hint: to use in all of your new repositories, which will suppress this warning,
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7368090Z hint: call:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7369004Z hint:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7369904Z hint: 	git config --global init.defaultBranch <name>
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7370900Z hint:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7371522Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7372483Z hint: 'development'. The just-created branch can be renamed via this command:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7373225Z hint:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7373648Z hint: 	git branch -m <name>
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7374166Z hint:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7374795Z hint: Disable this message with "git config set advice.defaultBranchName false"
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7383296Z Initialized empty Git repository in /home/runner/work/silentshift/silentshift/.git/
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7397075Z [command]/usr/bin/git remote add origin https://github.com/himanshu748/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7455826Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7457191Z ##[group]Disabling automatic garbage collection
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7458569Z [command]/usr/bin/git config --local gc.auto 0
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7497776Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7499316Z ##[group]Setting up auth
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7500178Z Removing SSH command configuration
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7504353Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.7544508Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8063890Z Removing HTTP extra header
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8069305Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8101890Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8364625Z Removing includeIf entries pointing to credentials config files
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8368244Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8403069Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8673337Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8713714Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/silentshift/silentshift/.git.path /home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8745626Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/silentshift/silentshift/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8782071Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8814265Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8845757Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8847201Z ##[group]Fetching the repository
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:06.8852982Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7510081Z From https://github.com/himanshu748/silentshift
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7511993Z  * [new branch]      backend-polish-nov10 -> origin/backend-polish-nov10
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7513189Z  * [new branch]      chore/ipm-030-final-docs-nov8 -> origin/chore/ipm-030-final-docs-nov8
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7514420Z  * [new branch]      chore/ipm-030-judge-freeze-nov8 -> origin/chore/ipm-030-judge-freeze-nov8
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7515580Z  * [new branch]      feat/native-sponsor-workflows -> origin/feat/native-sponsor-workflows
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7516564Z  * [new branch]      imgbot               -> origin/imgbot
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7517308Z  * [new branch]      main                 -> origin/main
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7518048Z  * [new branch]      push/top3            -> origin/push/top3
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7525092Z [command]/usr/bin/git branch --list --remote origin/backend-polish-nov10
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7555146Z   origin/backend-polish-nov10
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7565197Z [command]/usr/bin/git rev-parse refs/remotes/origin/backend-polish-nov10
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7591450Z 7b3d5efafb07fd54530c912f6b9cdbb710462020
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7603015Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7603860Z ##[group]Determining the checkout info
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7604712Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7612588Z [command]/usr/bin/git sparse-checkout disable
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7673756Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7706470Z ##[group]Checking out the ref
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.7711068Z [command]/usr/bin/git checkout --progress --force -B backend-polish-nov10 refs/remotes/origin/backend-polish-nov10
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9276698Z Switched to a new branch 'backend-polish-nov10'
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9282534Z branch 'backend-polish-nov10' set up to track 'origin/backend-polish-nov10'.
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9297823Z ##[endgroup]
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9354495Z [command]/usr/bin/git log -1 --format=%H
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9382508Z 7b3d5efafb07fd54530c912f6b9cdbb710462020
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9393683Z ##[group]Removing auth
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9394620Z Removing SSH command configuration
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9411441Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9432970Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9717870Z Removing HTTP extra header
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9741534Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:08.9756735Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0037977Z Removing includeIf entries pointing to credentials config files
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0046507Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0072489Z includeif.gitdir:/home/runner/work/silentshift/silentshift/.git.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0073686Z includeif.gitdir:/home/runner/work/silentshift/silentshift/.git/worktrees/*.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0074921Z includeif.gitdir:/github/workspace/.git.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0161588Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0164149Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/silentshift/silentshift/.git.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0165506Z /home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0168107Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/silentshift/silentshift/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-7db55b95\-679e\-4719\-afd7\-f2df8b261196\.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0181756Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/silentshift/silentshift/.git/worktrees/*.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0190659Z /home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0200660Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/silentshift/silentshift/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-7db55b95\-679e\-4719\-afd7\-f2df8b261196\.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0238539Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0264649Z /github/runner_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0273234Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-7db55b95\-679e\-4719\-afd7\-f2df8b261196\.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0306399Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0329981Z /github/runner_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0338702Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-7db55b95\-679e\-4719\-afd7\-f2df8b261196\.config
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0372865Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0637767Z Removing credentials config '/home/runner/work/_temp/git-credentials-7db55b95-679e-4719-afd7-f2df8b261196.config'
+local-checks	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:45:09.0647478Z ##[endgroup]
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	﻿2026-11-10T12:45:09.0908903Z ##[group]Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0909348Z with:
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0909552Z   python-version: 3.12
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0909796Z   check-latest: false
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0912511Z   token: ***
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0912865Z   mirror: https://raw.githubusercontent.com/actions/python-versions/main
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0913285Z   update-environment: true
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0913535Z   allow-prereleases: false
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0913787Z   freethreaded: false
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.0914029Z ##[endgroup]
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.2059783Z ##[group]Installed versions
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.2179630Z Successfully set up CPython (3.12.16)
+local-checks	Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	2026-11-10T12:45:09.2180762Z ##[endgroup]
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	﻿2026-11-10T12:45:09.2324427Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2324872Z with:
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2325082Z   node-version: 24
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2325319Z   package-manager-cache: false
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2325581Z   check-latest: false
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2328058Z   token: ***
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2328261Z env:
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2328528Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2328978Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2329426Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2329809Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2330185Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2330789Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.2331128Z ##[endgroup]
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:09.3701077Z Found in cache @ /opt/hostedtoolcache/node/24.22.2/x64
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:10.0729194Z ##[group]Environment details
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:11.7080108Z node: v24.22.2
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:11.7080706Z npm: 11.19.1
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:11.7081064Z yarn: 1.22.22
+local-checks	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-11-10T12:45:11.7081763Z ##[endgroup]
+local-checks	Run python -m pip install uv	﻿2026-11-10T12:45:11.7220882Z ##[group]Run python -m pip install uv
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7221273Z [36;1mpython -m pip install uv[0m
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7329947Z shell: /usr/bin/bash -e {0}
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7330213Z env:
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7330662Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7331385Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7331817Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7332192Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7332573Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7332954Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run python -m pip install uv	2026-11-10T12:45:11.7333269Z ##[endgroup]
+local-checks	Run python -m pip install uv	2026-11-10T12:45:12.8692994Z Collecting uv
+local-checks	Run python -m pip install uv	2026-11-10T12:45:12.9020185Z   Downloading uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+local-checks	Run python -m pip install uv	2026-11-10T12:45:12.9141801Z Downloading uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.2 MB)
+local-checks	Run python -m pip install uv	2026-11-10T12:45:12.9960759Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.2/17.2 MB 261.8 MB/s  0:00:00
+local-checks	Run python -m pip install uv	2026-11-10T12:45:13.0501361Z Installing collected packages: uv
+local-checks	Run python -m pip install uv	2026-11-10T12:45:13.2219619Z Successfully installed uv-0.13.7
+local-checks	Run python -m pip install uv	2026-11-10T12:45:13.2228348Z
+local-checks	Run python -m pip install uv	2026-11-10T12:45:13.2229001Z [notice] A new release of pip is available: 26.2.2 -> 26.3
+local-checks	Run python -m pip install uv	2026-11-10T12:45:13.2229868Z [notice] To update, run: pip install --upgrade pip
+local-checks	Run uv sync --locked	﻿2026-11-10T12:45:13.2722976Z ##[group]Run uv sync --locked
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2723314Z [36;1muv sync --locked[0m
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2775123Z shell: /usr/bin/bash -e {0}
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2775378Z env:
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2775642Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2776098Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2776537Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2776921Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2777321Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2777710Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.2778044Z ##[endgroup]
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.3357890Z Using CPython 3.12.16 interpreter at: /opt/hostedtoolcache/Python/3.12.16/x64/bin/python3
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.3359174Z Creating virtual environment at: .venv
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.3378514Z Resolved 14 packages in 0.73ms
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.3974200Z Downloading pygments (1.2MiB)
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.4172390Z Downloading hypothesis (1.1MiB)
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.4175111Z Downloading ruff (10.1MiB)
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.5264136Z  Downloaded hypothesis
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.5298326Z  Downloaded pygments
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6197121Z  Downloaded ruff
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6199546Z Prepared 8 packages in 281ms
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6290061Z Installed 8 packages in 8ms
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6290941Z  + hypothesis==6.170.14
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6291528Z  + iniconfig==2.3.1
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6292085Z  + packaging==26.3
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6292659Z  + pluggy==1.7.0
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6300766Z  + pygments==2.21.0
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6301803Z  + pytest==9.2.0
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6302435Z  + ruff==0.17.4
+local-checks	Run uv sync --locked	2026-11-10T12:45:13.6302765Z  + sortedcontainers==2.4.0
+local-checks	Run uv run pytest -q	﻿2026-11-10T12:45:13.6359787Z ##[group]Run uv run pytest -q
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6360111Z [36;1muv run pytest -q[0m
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6410817Z shell: /usr/bin/bash -e {0}
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6411073Z env:
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6411337Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6411787Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6412232Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6412631Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6413021Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6413420Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run uv run pytest -q	2026-11-10T12:45:13.6413743Z ##[endgroup]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:16.2588897Z ........................................................................ [ 18%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:27.9941854Z ........................................................................ [ 36%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:28.0526464Z ........................................................................ [ 54%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:32.2066212Z ........................................................................ [ 73%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:33.3514095Z ........................................................................ [ 91%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:37.4742843Z .................................                                        [100%]
+local-checks	Run uv run pytest -q	2026-11-10T12:45:37.4743532Z 393 passed in 23.17s
+local-checks	Run npm ci	﻿2026-11-10T12:45:37.5269406Z ##[group]Run npm ci
+local-checks	Run npm ci	2026-11-10T12:45:37.5269687Z [36;1mnpm ci[0m
+local-checks	Run npm ci	2026-11-10T12:45:37.5320942Z shell: /usr/bin/bash -e {0}
+local-checks	Run npm ci	2026-11-10T12:45:37.5321195Z env:
+local-checks	Run npm ci	2026-11-10T12:45:37.5321461Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm ci	2026-11-10T12:45:37.5321915Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run npm ci	2026-11-10T12:45:37.5322341Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm ci	2026-11-10T12:45:37.5322718Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm ci	2026-11-10T12:45:37.5323128Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm ci	2026-11-10T12:45:37.5323512Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run npm ci	2026-11-10T12:45:37.5323833Z ##[endgroup]
+local-checks	Run npm ci	2026-11-10T12:45:41.9330656Z
+local-checks	Run npm ci	2026-11-10T12:45:41.9331695Z added 32 packages, and audited 33 packages in 4s
+local-checks	Run npm ci	2026-11-10T12:45:41.9332205Z
+local-checks	Run npm ci	2026-11-10T12:45:41.9338393Z 11 packages are looking for funding
+local-checks	Run npm ci	2026-11-10T12:45:41.9339009Z   run `npm fund` for details
+local-checks	Run npm ci	2026-11-10T12:45:41.9343169Z
+local-checks	Run npm ci	2026-11-10T12:45:41.9343440Z found 0 vulnerabilities
+local-checks	Run npm run check && npm run build	﻿2026-11-10T12:45:41.9865146Z ##[group]Run npm run check && npm run build
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9865519Z [36;1mnpm run check && npm run build[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9916781Z shell: /usr/bin/bash -e {0}
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9917035Z env:
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9917316Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9917770Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9918227Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9918611Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9919031Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9919416Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:41.9919738Z ##[endgroup]
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:42.0898918Z
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:42.0899522Z > silentshift-web@0.2.1 check
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:42.0901680Z > tsc --noEmit
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:42.0902337Z
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:43.1362989Z
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:43.1363671Z > silentshift-web@0.2.1 build
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:43.1364413Z > tsc --noEmit && vite build
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:43.1364743Z
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.3045359Z [36mvite v8.3.5 [32mbuilding client environment for production...[36m[39m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.3160675Z transforming...
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.5375707Z ✓ 2166 modules transformed.
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.5819598Z rendering chunks...
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6411453Z computing gzip size...
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6483101Z dist/run-locally/index.html                                         1.50 kB │ gzip:   0.76 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6484360Z dist/product/index.html                                             1.52 kB │ gzip:   0.79 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6485350Z dist/evidence-record/index.html                                     1.57 kB │ gzip:   0.77 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6486329Z dist/safeguards/index.html                                          1.57 kB │ gzip:   0.78 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6487375Z dist/how-it-works/index.html                                        1.64 kB │ gzip:   0.84 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6488853Z dist/index.html                                                     1.98 kB │ gzip:   0.97 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6490131Z dist/assets/ibm-plex-mono-vietnamese-500-normal-C8zxqsMH.woff       5.61 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6491523Z dist/assets/ibm-plex-mono-vietnamese-400-normal-DDuiU_S-.woff       5.62 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6492688Z dist/assets/ibm-plex-mono-cyrillic-ext-500-normal-BIfNGwUT.woff     5.77 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6494295Z dist/assets/ibm-plex-mono-cyrillic-ext-400-normal-DMdlQ8Kv.woff     5.82 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6495478Z dist/assets/ibm-plex-mono-vietnamese-400-normal-BulugwFq.woff2      5.86 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6496619Z dist/assets/ibm-plex-mono-vietnamese-500-normal-DZ4AoWbu.woff2      6.04 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6497725Z dist/assets/ibm-plex-mono-cyrillic-ext-400-normal-xuaO2J-f.woff2    6.91 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6498911Z dist/assets/ibm-plex-mono-cyrillic-ext-500-normal-BqneJy0T.woff2    6.97 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6500103Z dist/assets/ibm-plex-mono-cyrillic-400-normal-CEL4l2ZJ.woff         7.20 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6501595Z dist/assets/ibm-plex-mono-cyrillic-500-normal-Ael50iVv.woff         7.20 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6502822Z dist/assets/ibm-plex-mono-cyrillic-400-normal-BSMlKf0J.woff2        8.35 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6504129Z dist/assets/ibm-plex-mono-cyrillic-500-normal-Bq9vWWag.woff2        8.46 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6505331Z dist/assets/manrope-vietnamese-wght-normal-usUDDRr7.woff2           8.52 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6506519Z dist/assets/manrope-greek-wght-normal-DL7QRZyv.woff2                9.44 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6507698Z dist/assets/ibm-plex-mono-latin-ext-400-normal-D3D2R8hC.woff       11.76 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6508830Z dist/assets/ibm-plex-mono-latin-ext-500-normal-CZ70TYgx.woff       11.76 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6509959Z dist/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff           13.14 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6511348Z dist/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff           13.15 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6512856Z dist/assets/ibm-plex-mono-latin-ext-400-normal-BmRBH3aV.woff2      13.34 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6514005Z dist/assets/ibm-plex-mono-latin-ext-500-normal-CAhNIIs5.woff2      13.43 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6515169Z dist/assets/manrope-cyrillic-wght-normal-Dvxsihut.woff2            14.50 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6516321Z dist/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2          14.70 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6517474Z dist/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2          14.88 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6518741Z dist/assets/manrope-latin-ext-wght-normal-Ch3YOpNY.woff2           15.12 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6519904Z dist/assets/manrope-latin-wght-normal-DHIcAJRg.woff2               24.83 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6521520Z dist/assets/main-TbW3NGiD.css                                      67.43 kB │ gzip:  14.96 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6522885Z dist/assets/main-BuVjguk5.js                                      454.76 kB │ gzip: 132.09 kB
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6523464Z
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6525238Z [33m[33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use client" in "node_modules/lucide-react/dist/esm/Icon.mjs" may not be preserved when bundling.
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6527676Z    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m node_modules/lucide-react/dist/esm/Icon.mjs:2:1 [38;5;246m][0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6528657Z    [38;5;246m│[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6529200Z  [38;5;246m2 │[0m "use client";
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6529817Z  [38;5;240m  │[0m ──────┬──────
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6530802Z  [38;5;240m  │[0m       ╰──────── module level directive may not be preserved
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6531275Z  [38;5;240m  │[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6531931Z  [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6532515Z [38;5;246m───╯[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6532749Z [39m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6533727Z [33m[33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use client" in "node_modules/lucide-react/dist/esm/context.mjs" may not be preserved when bundling.
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6534850Z    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m node_modules/lucide-react/dist/esm/context.mjs:2:1 [38;5;246m][0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6535348Z    [38;5;246m│[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6535628Z  [38;5;246m2 │[0m "use client";
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6535950Z  [38;5;240m  │[0m ──────┬──────
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6536704Z  [38;5;240m  │[0m       ╰──────── module level directive may not be preserved
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6537113Z  [38;5;240m  │[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6537738Z  [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6538298Z [38;5;246m───╯[0m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6538521Z [39m
+local-checks	Run npm run check && npm run build	2026-11-10T12:45:44.6538785Z [32m✓ built in 343ms[39m
+local-checks	Run npx playwright install --with-deps chromium	﻿2026-11-10T12:45:44.6855233Z ##[group]Run npx playwright install --with-deps chromium
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6855694Z [36;1mnpx playwright install --with-deps chromium[0m
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6907230Z shell: /usr/bin/bash -e {0}
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6907483Z env:
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6907750Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6908207Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6908651Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6909059Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6909453Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6909853Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:44.6910173Z ##[endgroup]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.4513881Z Installing dependencies...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.4604515Z Switching to root user to install dependencies...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5551849Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5743126Z Get:6 https://packages.microsoft.com/ubuntu/26.04/prod resolute InRelease [3964 B]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5866728Z Hit:2 http://azure.archive.ubuntu.com/ubuntu resolute InRelease
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5900669Z Get:3 http://azure.archive.ubuntu.com/ubuntu resolute-updates InRelease [137 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5938265Z Get:4 http://azure.archive.ubuntu.com/ubuntu resolute-backports InRelease [137 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.5978785Z Get:5 http://azure.archive.ubuntu.com/ubuntu resolute-security InRelease [137 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6056132Z Get:7 https://packages.microsoft.com/ubuntu/26.04/prod resolute/main arm64 Packages [138 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6324315Z Get:8 https://packages.microsoft.com/ubuntu/26.04/prod resolute/main amd64 Packages [152 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6422385Z Get:9 http://azure.archive.ubuntu.com/ubuntu resolute-updates/main amd64v3 Packages [869 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6554768Z Get:10 http://azure.archive.ubuntu.com/ubuntu resolute-updates/main Translation-en [195 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6579272Z Get:11 http://azure.archive.ubuntu.com/ubuntu resolute-updates/universe amd64v3 Packages [390 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6601568Z Get:12 http://azure.archive.ubuntu.com/ubuntu resolute-updates/universe Translation-en [122 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6615244Z Get:13 http://azure.archive.ubuntu.com/ubuntu resolute-updates/restricted amd64v3 Packages [603 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6718774Z Get:14 http://azure.archive.ubuntu.com/ubuntu resolute-updates/restricted Translation-en [125 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6750287Z Get:15 http://azure.archive.ubuntu.com/ubuntu resolute-security/main amd64v3 Packages [717 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6874138Z Get:16 http://azure.archive.ubuntu.com/ubuntu resolute-security/main Translation-en [157 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6889050Z Get:17 http://azure.archive.ubuntu.com/ubuntu resolute-security/universe amd64v3 Packages [212 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.6915923Z Get:18 http://azure.archive.ubuntu.com/ubuntu resolute-security/universe Translation-en [70.7 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.7365107Z Get:19 http://azure.archive.ubuntu.com/ubuntu resolute-security/restricted amd64v3 Packages [586 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:45.7401536Z Get:20 http://azure.archive.ubuntu.com/ubuntu resolute-security/restricted Translation-en [121 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:47.6883539Z Fetched 4871 kB in 0s (12.1 MB/s)
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.3203406Z Reading package lists...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.3492715Z Reading package lists...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.4846348Z Building dependency tree...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.4854068Z Reading state information...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5147760Z libasound2t64 is already the newest version (1.2.15.3-1ubuntu1.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5148540Z libasound2t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5149260Z libatk-bridge2.0-0t64 is already the newest version (2.60.4-0ubuntu0.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5149977Z libatk-bridge2.0-0t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5151094Z libatk1.0-0t64 is already the newest version (2.60.4-0ubuntu0.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5151756Z libatk1.0-0t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5153020Z libatspi2.0-0t64 is already the newest version (2.60.4-0ubuntu0.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5153665Z libatspi2.0-0t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5154240Z libcairo2 is already the newest version (1.18.4-3).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5154774Z libcairo2 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5155387Z libcups2t64 is already the newest version (2.4.16-1ubuntu1.3).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5156017Z libcups2t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5156628Z libdbus-1-3 is already the newest version (1.16.2-2ubuntu4).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5157208Z libdbus-1-3 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5157747Z libdrm2 is already the newest version (2.4.131-1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5158263Z libdrm2 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5158833Z libgbm1 is already the newest version (26.0.8-1ubuntu0.3).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5159398Z libgbm1 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5160009Z libglib2.0-0t64 is already the newest version (2.88.0-1ubuntu0.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5160813Z libglib2.0-0t64 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5161443Z libnspr4 is already the newest version (2:4.38.2-1ubuntu1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5162014Z libnspr4 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5162594Z libnss3 is already the newest version (2:3.120-1ubuntu2.2).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5163148Z libnss3 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5163706Z libpango-1.0-0 is already the newest version (1.57.0-1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5164294Z libpango-1.0-0 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5164951Z libx11-6 is already the newest version (2:1.8.13-1ubuntu0.1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5165535Z libx11-6 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5166102Z libxcb1 is already the newest version (1.17.0-2ubuntu1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5166646Z libxcb1 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5167254Z libxcomposite1 is already the newest version (1:0.4.6-1build1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5167892Z libxcomposite1 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5168474Z libxdamage1 is already the newest version (1:1.1.7-1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5169025Z libxdamage1 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5169604Z libxext6 is already the newest version (2:1.3.4-1build3).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5170168Z libxext6 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5170922Z libxfixes3 is already the newest version (1:6.0.0-2build2).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5171512Z libxfixes3 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5172084Z libxkbcommon0 is already the newest version (1.13.1-1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5172671Z libxkbcommon0 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5173287Z libxrandr2 is already the newest version (2:1.5.4-1build1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5173858Z libxrandr2 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5174440Z xvfb is already the newest version (2:21.1.22-1ubuntu1.3).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5175182Z fonts-noto-color-emoji is already the newest version (2.051-1build1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5175969Z libfontconfig1 is already the newest version (2.17.1-3ubuntu1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5176591Z libfontconfig1 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5177267Z libfreetype6 is already the newest version (2.14.2+dfsg-1ubuntu0.2).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5177900Z libfreetype6 set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5178551Z fonts-liberation is already the newest version (1:2.1.5-3build1).
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5179195Z fonts-liberation set to manually installed.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.5635810Z Solving dependencies...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6460602Z The following additional packages will be installed:
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6461348Z   xfonts-encodings xfonts-utils
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6466294Z Recommended packages:
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6466793Z   fonts-ipafont-mincho fonts-tlwg-loma
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6668685Z The following NEW packages will be installed:
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6669268Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6674146Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6674832Z   xfonts-utils
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6876717Z 0 upgraded, 9 newly installed, 0 to remove and 52 not upgraded.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6877421Z Need to get 21.9 MB of archives.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6877883Z After this operation, 80.2 MB of additional disk space will be used.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:48.6878398Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:45:57.4044181Z Get:2 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-ipafont-gothic all 00303-23ubuntu1 [3703 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:46:26.4487304Z Get:3 http://azure.archive.ubuntu.com/ubuntu resolute/main amd64v3 fonts-freefont-ttf all 20211204+svn4273-4build1 [5656 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:47:25.2080750Z Ign:4 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-tlwg-loma-otf all 1:0.7.3-1build1
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:47:56.2404971Z Ign:5 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-unifont all 1:16.0.04-1build1
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:47:56.4703649Z Get:6 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-wqy-zenhei all 0.9.45-8build1 [7863 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:36.9776961Z Get:7 http://azure.archive.ubuntu.com/ubuntu resolute/main amd64v3 xfonts-encodings all 1:1.0.5-0ubuntu3 [576 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:40.3964155Z Get:8 http://azure.archive.ubuntu.com/ubuntu resolute/main amd64v3 xfonts-utils amd64 1:7.7+7build1 [97.3 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:42.1546442Z Get:9 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 xfonts-cyrillic all 1:1.0.5+nmu1build1 [384 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:43.8049389Z Get:10 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 xfonts-scalable all 1:1.0.3-1.3build1 [304 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:45.8208431Z Get:4 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-tlwg-loma-otf all 1:0.7.3-1build1 [106 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:48:46.4357765Z Get:5 http://azure.archive.ubuntu.com/ubuntu resolute/universe amd64v3 fonts-unifont all 1:16.0.04-1build1 [3169 kB]
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.1503666Z Fetched 21.9 MB in 3min 12s (114 kB/s)
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.1757110Z Selecting previously unselected package fonts-ipafont-gothic.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2097929Z (Reading database ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2098702Z (Reading database ... 5%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2099412Z (Reading database ... 10%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2099836Z (Reading database ... 15%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2100171Z (Reading database ... 20%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2100882Z (Reading database ... 25%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2101423Z (Reading database ... 30%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2101981Z (Reading database ... 35%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2102491Z (Reading database ... 40%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2102884Z (Reading database ... 45%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2103207Z (Reading database ... 50%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.2980302Z (Reading database ... 55%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.4524335Z (Reading database ... 60%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.6540487Z (Reading database ... 65%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.7511451Z (Reading database ... 70%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:01.9512299Z (Reading database ... 75%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.0765475Z (Reading database ... 80%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.1956428Z (Reading database ... 85%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.3309403Z (Reading database ... 90%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.4567090Z (Reading database ... 95%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.4567731Z (Reading database ... 100%
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.4568657Z (Reading database ... 213197 files and directories currently installed.)
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.4605950Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-23ubuntu1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.4710673Z Unpacking fonts-ipafont-gothic (00303-23ubuntu1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.5386078Z Selecting previously unselected package fonts-freefont-ttf.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.5524086Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-4build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.5532662Z Unpacking fonts-freefont-ttf (20211204+svn4273-4build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6333264Z Selecting previously unselected package fonts-tlwg-loma-otf.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6469728Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6478207Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6704287Z Selecting previously unselected package fonts-unifont.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6839745Z Preparing to unpack .../3-fonts-unifont_1%3a16.0.04-1build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.6847408Z Unpacking fonts-unifont (1:16.0.04-1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.7902997Z Selecting previously unselected package fonts-wqy-zenhei.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.8040116Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.8180107Z Unpacking fonts-wqy-zenhei (0.9.45-8build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9030045Z Selecting previously unselected package xfonts-encodings.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9167624Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu3_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9174441Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu3) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9463268Z Selecting previously unselected package xfonts-utils.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9600832Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+7build1_amd64v3.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9608187Z Unpacking xfonts-utils (1:7.7+7build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:02.9981129Z Selecting previously unselected package xfonts-cyrillic.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.0116154Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.0124884Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.0470105Z Selecting previously unselected package xfonts-scalable.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.0604323Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3build1_all.deb ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.0613347Z Unpacking xfonts-scalable (1:1.0.3-1.3build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1053832Z Setting up fonts-wqy-zenhei (0.9.45-8build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1212329Z Setting up fonts-freefont-ttf (20211204+svn4273-4build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1234034Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1254643Z Setting up xfonts-encodings (1:1.0.5-0ubuntu3) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1274402Z Setting up fonts-ipafont-gothic (00303-23ubuntu1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1337681Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1354092Z Setting up fonts-unifont (1:16.0.04-1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1375688Z Setting up xfonts-utils (1:7.7+7build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1429820Z Setting up xfonts-cyrillic (1:1.0.5+nmu1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.1875627Z Setting up xfonts-scalable (1:1.0.3-1.3build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.2278654Z Processing triggers for man-db (2.13.1-1build1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.2302075Z Not building database; man-db/auto-update is not 'true'.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.2314338Z Processing triggers for fontconfig (2.17.1-3ubuntu1) ...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9779728Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9780681Z Running kernel seems to be up-to-date.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9781022Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9781191Z Restarting services...
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9868107Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9868617Z Service restarts being deferred:
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9872634Z  systemctl restart hosted-compute-agent.service
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9873063Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9873442Z No containers need to be restarted.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9873764Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9874093Z No user sessions are running outdated binaries.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9874463Z
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:03.9911735Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:04.7821922Z Downloading Chrome for Testing 156.0.8078.4 (playwright chromium v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-linux64.zip
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.1882553Z |                                                                                |   0% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.3806493Z |■■■■■■■■                                                                        |  10% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.4893900Z |■■■■■■■■■■■■■■■■                                                                |  20% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.5952785Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.7438580Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.8487962Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:05.9608573Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:06.0546345Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:06.1842220Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:06.2751473Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:06.3742109Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 191.1 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.3622930Z Chrome for Testing 156.0.8078.4 (playwright chromium v1248) downloaded to /home/runner/.cache/ms-playwright/chromium-1248
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.3627794Z Downloading FFmpeg (playwright ffmpeg v1013) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1013/ffmpeg-linux.zip
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.8330102Z |                                                                                |   0% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.8839994Z |■■■■■■■■                                                                        |  10% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9071916Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9213375Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9307507Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9378000Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9443418Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9506464Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9550018Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9591936Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:09.9625812Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.2 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.0258058Z FFmpeg (playwright ffmpeg v1013) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1013
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.0261434Z Downloading Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) from https://cdn.playwright.dev/builds/cft/156.0.8078.4/linux64/chrome-headless-shell-linux64.zip
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.4265455Z |                                                                                |   0% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.5333415Z |■■■■■■■■                                                                        |  10% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.6085587Z |■■■■■■■■■■■■■■■■                                                                |  20% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.6638964Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.7404256Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.7907148Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.8558913Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.9242664Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:10.9851709Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:11.0513582Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:11.1237604Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB
+local-checks	Run npx playwright install --with-deps chromium	2026-11-10T12:49:13.2396390Z Chrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1248
+local-checks	Run npm run test:e2e	﻿2026-11-10T12:49:13.2665422Z ##[group]Run npm run test:e2e
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2665746Z [36;1mnpm run test:e2e[0m
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2715071Z shell: /usr/bin/bash -e {0}
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2715321Z env:
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2715586Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2716029Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2716452Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2716830Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2717214Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2717588Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.2717904Z ##[endgroup]
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.3710595Z
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.3711090Z > silentshift-web@0.2.1 test:e2e
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.3711630Z > playwright test
+local-checks	Run npm run test:e2e	2026-11-10T12:49:13.3712253Z
+local-checks	Run npm run test:e2e	2026-11-10T12:49:14.7170981Z
+local-checks	Run npm run test:e2e	2026-11-10T12:49:14.7171684Z Running 54 tests using 1 worker
+local-checks	Run npm run test:e2e	2026-11-10T12:49:14.7172340Z
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0768728Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0770012Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0771414Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0821792Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0866607Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0886275Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0887842Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0889018Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0890127Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0891555Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0892481Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.0893624Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.2288561Z   ✓   1 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Investigations renders an honest disconnected state (831ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8102748Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8132629Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8171524Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8172599Z [WebServer] 12:49:16 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8173401Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.8174461Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:16.9421961Z   ✓   2 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Review renders an honest disconnected state (696ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5432383Z [WebServer] 12:49:17 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5454981Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5455892Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5456778Z [WebServer] 12:49:17 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5461558Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5462631Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5642052Z [WebServer] 12:49:17 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5643504Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5644598Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5645692Z [WebServer] 12:49:17 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5646603Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.5648349Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:17.6939775Z   ✓   3 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Scenario Lab renders an honest disconnected state (736ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3031843Z [WebServer] 12:49:18 PM [vite] http proxy error: /api/overview
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3046475Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3049307Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3052286Z [WebServer] 12:49:18 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3053264Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3054419Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3055593Z [WebServer] 12:49:18 PM [vite] http proxy error: /api/overview
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3056967Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3058140Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3059414Z [WebServer] 12:49:18 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3060625Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.3061844Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:18.4742513Z   ✓   4 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Overview renders an honest disconnected state (765ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0298344Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0325407Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0351538Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0392301Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0401125Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0404367Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0405833Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0433081Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0473780Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0477328Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0478357Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.0479518Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.1782712Z   ✓   5 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Message Explorer renders an honest disconnected state (684ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7841987Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/evaluations
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7868297Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7869756Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7871402Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7872668Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7873870Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7876296Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/evaluations
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7877375Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7878587Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7879809Z [WebServer] 12:49:19 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7881029Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.7882217Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:19.9115784Z   ✓   6 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Evaluations renders an honest disconnected state (718ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4867589Z [WebServer] 12:49:20 PM [vite] http proxy error: /api/policies
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4870164Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4872159Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4884301Z [WebServer] 12:49:20 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4885163Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4901961Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4954875Z [WebServer] 12:49:20 PM [vite] http proxy error: /api/policies
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4971243Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4972282Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4973811Z [WebServer] 12:49:20 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4974662Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.4975625Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:20.6162451Z   ✓   7 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Policies renders an honest disconnected state (691ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2627672Z [WebServer] 12:49:21 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2652430Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2653922Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2655319Z [WebServer] 12:49:21 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2656213Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.2657395Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:21.4239988Z   ✓   8 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › System Health renders an honest disconnected state (790ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0736969Z [WebServer] 12:49:22 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0741177Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0742393Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0752246Z [WebServer] 12:49:22 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0753802Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.0754844Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1052003Z [WebServer] 12:49:22 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1101812Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1126150Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1148063Z [WebServer] 12:49:22 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1156769Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.1158879Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.6228872Z [WebServer] 12:49:22 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.6230053Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.6231126Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:22.7038341Z   ✓   9 [desktop-disconnected] › e2e/disconnected.spec.ts:27:1 › login failure preserves native unavailability and Escape restores focus (1.3s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2681178Z [WebServer] 12:49:23 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2694055Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2695221Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2696466Z [WebServer] 12:49:23 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2697409Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2699041Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2741207Z [WebServer] 12:49:23 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2763053Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2791748Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2797203Z [WebServer] 12:49:23 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2798271Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.2799564Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:23.4145104Z   ✓  10 [desktop-disconnected] › e2e/disconnected.spec.ts:44:1 › keyboard skip link reaches the main workspace (694ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0031529Z [WebServer] 12:49:23 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0051952Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0053268Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0054494Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0055500Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0056691Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0057954Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0058943Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0060037Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0062369Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0063312Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.0064436Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2618649Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2619764Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2621742Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2623039Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2624053Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2625218Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.2903587Z   ✓  11 [desktop-disconnected] › e2e/disconnected.spec.ts:52:1 › navigation remains usable with reduced motion and captures actual UI (864ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8693635Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8721705Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8731535Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8741425Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8742436Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8743604Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8744818Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8745788Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8746854Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8748504Z [WebServer] 12:49:24 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8749425Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:24.8750671Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:25.1806780Z   ✓  12 [desktop-disconnected] › e2e/disconnected.spec.ts:76:1 › quick navigation works with keyboard and restores focus on Escape (879ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:30.6907696Z   ✓  13 [desktop-disconnected] › e2e/landing.spec.ts:5:1 › public landing and section links never request the native API (5.5s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:31.4895390Z   ✓  14 [desktop-disconnected] › e2e/landing.spec.ts:38:1 › public proof is scoped and real JSON and product captures are available (784ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1518154Z [WebServer] 12:49:32 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1526341Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1533779Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1535072Z [WebServer] 12:49:32 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1536613Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1537630Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1631755Z [WebServer] 12:49:32 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1633240Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1634476Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1635697Z [WebServer] 12:49:32 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1636708Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.1637816Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.2435550Z   ✓  15 [desktop-disconnected] › e2e/landing.spec.ts:74:1 › workbench action opens the actual unavailable-upstream experience (738ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:32.9877383Z   ✓  16 [desktop-disconnected] › e2e/landing.spec.ts:89:1 › keyboard skip link and reduced-motion landing remain usable (730ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:33.7491817Z   ✓  17 [desktop-disconnected] › e2e/landing.spec.ts:108:1 › 320px landing preserves readable actions without overflow and captures the real page (750ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:38.2189703Z   ✓  18 [desktop-disconnected] › e2e/landing.spec.ts:148:1 › illustrated decision changes with authority and walkthrough completes without API calls (4.5s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:38.9673748Z   ✓  19 [desktop-disconnected] › e2e/landing.spec.ts:164:1 › reduced motion keeps the decision interactive without animation (737ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:40.1903356Z   ✓  20 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › how-it-works is a separate public document with a refreshable URL (1.2s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:41.3155528Z   ✓  21 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › product is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:42.4226954Z   ✓  22 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › safeguards is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:43.6048312Z   ✓  23 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › evidence-record is a separate public document with a refreshable URL (1.2s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:44.7193867Z   ✓  24 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › run-locally is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:46.7242429Z   ✓  25 [desktop-disconnected] › e2e/multipage.spec.ts:39:1 › public navigation supports keyboard, history and reduced motion (2.0s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:47.5422574Z   ✓  26 [desktop-disconnected] › e2e/session-entry.spec.ts:4:1 › missing session offers one workbench connection action without stealing focus (796ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:48.3499310Z   ✓  27 [desktop-disconnected] › e2e/session-entry.spec.ts:30:1 › permission refusal stays distinct from a missing session (796ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5323207Z [WebServer] 12:49:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5329262Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5335843Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5337029Z [WebServer] 12:49:49 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5338485Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5339489Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5364341Z [WebServer] 12:49:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5413171Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5433218Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5434347Z [WebServer] 12:49:49 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5461502Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.5462872Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:49.6876129Z   ✓  28 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Investigations renders an honest disconnected state (778ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2273986Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2283699Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2285562Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2302025Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2303795Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.2305118Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.3420109Z   ✓  29 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Review renders an honest disconnected state (639ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9224715Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9242315Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9243371Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9244465Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9245329Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9246328Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9247356Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9248214Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9249301Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9276228Z [WebServer] 12:49:50 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9361244Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:50.9451406Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.0574388Z   ✓  30 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Scenario Lab renders an honest disconnected state (703ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6707962Z [WebServer] 12:49:51 PM [vite] http proxy error: /api/overview
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6731281Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6813262Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6871588Z [WebServer] 12:49:51 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6911121Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6961404Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.6981575Z [WebServer] 12:49:51 PM [vite] http proxy error: /api/overview
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.7025844Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.7051594Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.7054846Z [WebServer] 12:49:51 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.7055975Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.7057293Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:51.8065920Z   ✓  31 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Overview renders an honest disconnected state (738ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3647374Z [WebServer] 12:49:52 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3664035Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3665373Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3701646Z [WebServer] 12:49:52 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3702888Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3704815Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3706309Z [WebServer] 12:49:52 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3707447Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3708921Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3710954Z [WebServer] 12:49:52 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3712080Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.3713309Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:52.5012241Z   ✓  32 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Message Explorer renders an honest disconnected state (682ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0799057Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/evaluations
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0832750Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0848931Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0862003Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0881649Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0890854Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0892283Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0893359Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0895260Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0896815Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/evaluations
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0897885Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.0898835Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.1927274Z   ✓  33 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Evaluations renders an honest disconnected state (680ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7622795Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/policies
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7654115Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7656455Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7657592Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7658401Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7659426Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7660660Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/policies
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7661439Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7662384Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7663382Z [WebServer] 12:49:53 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7664166Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.7665112Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:53.8839403Z   ✓  34 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Policies renders an honest disconnected state (677ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4477178Z [WebServer] 12:49:54 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4500138Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4521815Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4523400Z [WebServer] 12:49:54 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4524481Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.4525707Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:54.5809800Z   ✓  35 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › System Health renders an honest disconnected state (683ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1619538Z [WebServer] 12:49:55 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1663643Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1676001Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1701594Z [WebServer] 12:49:55 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1702693Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1703957Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1705273Z [WebServer] 12:49:55 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1706334Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1707479Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1708679Z [WebServer] 12:49:55 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1709647Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.1711073Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.6039666Z [WebServer] 12:49:55 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.6041185Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.6042590Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:55.6762583Z   ✓  36 [mobile-disconnected] › e2e/disconnected.spec.ts:27:1 › login failure preserves native unavailability and Escape restores focus (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2590009Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2595246Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2596458Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2621288Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2672756Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2674223Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2675510Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2676440Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2678465Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2679566Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2680714Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.2681893Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.3798777Z   ✓  37 [mobile-disconnected] › e2e/disconnected.spec.ts:44:1 › keyboard skip link reaches the main workspace (690ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9711511Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9738673Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9751415Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9752716Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9753696Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9762752Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9764057Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9764891Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9765812Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9766762Z [WebServer] 12:49:56 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9767520Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:56.9768423Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2245729Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2246897Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2247880Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2267847Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/scenarios
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2269144Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2271227Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.2545119Z   ✓  38 [mobile-disconnected] › e2e/disconnected.spec.ts:52:1 › navigation remains usable with reduced motion and captures actual UI (862ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8305605Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8313720Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8315409Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8318736Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8319834Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8321305Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8322700Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8323801Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8325004Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8326180Z [WebServer] 12:49:57 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8327210Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:49:57.8328375Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:49:58.1231458Z   ✓  39 [mobile-disconnected] › e2e/disconnected.spec.ts:76:1 › quick navigation works with keyboard and restores focus on Escape (857ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:03.4650214Z   ✓  40 [mobile-disconnected] › e2e/landing.spec.ts:5:1 › public landing and section links never request the native API (5.3s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.2251130Z   ✓  41 [mobile-disconnected] › e2e/landing.spec.ts:38:1 › public proof is scoped and real JSON and product captures are available (747ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9329769Z [WebServer] 12:50:04 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9333814Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9335142Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9336510Z [WebServer] 12:50:04 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9337350Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9338378Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9412992Z [WebServer] 12:50:04 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9414277Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9415536Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9416892Z [WebServer] 12:50:04 PM [vite] http proxy error: /api/health
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9417875Z [WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+local-checks	Run npm run test:e2e	2026-11-10T12:50:04.9419407Z [WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:05.0026546Z   ✓  42 [mobile-disconnected] › e2e/landing.spec.ts:74:1 › workbench action opens the actual unavailable-upstream experience (765ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:05.7147195Z   ✓  43 [mobile-disconnected] › e2e/landing.spec.ts:89:1 › keyboard skip link and reduced-motion landing remain usable (702ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:06.4986940Z   ✓  44 [mobile-disconnected] › e2e/landing.spec.ts:108:1 › 320px landing preserves readable actions without overflow and captures the real page (771ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:10.9111618Z   ✓  45 [mobile-disconnected] › e2e/landing.spec.ts:148:1 › illustrated decision changes with authority and walkthrough completes without API calls (4.4s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:11.6854405Z   ✓  46 [mobile-disconnected] › e2e/landing.spec.ts:164:1 › reduced motion keeps the decision interactive without animation (761ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:12.8355723Z   ✓  47 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › how-it-works is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:13.9264010Z   ✓  48 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › product is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:15.0329249Z   ✓  49 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › safeguards is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:16.1712964Z   ✓  50 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › evidence-record is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:17.2791288Z   ✓  51 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › run-locally is a separate public document with a refreshable URL (1.1s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:19.2601036Z   ✓  52 [mobile-disconnected] › e2e/multipage.spec.ts:39:1 › public navigation supports keyboard, history and reduced motion (2.0s)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:20.1253105Z   ✓  53 [mobile-disconnected] › e2e/session-entry.spec.ts:4:1 › missing session offers one workbench connection action without stealing focus (847ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:20.8495729Z   ✓  54 [mobile-disconnected] › e2e/session-entry.spec.ts:30:1 › permission refusal stays distinct from a missing session (710ms)
+local-checks	Run npm run test:e2e	2026-11-10T12:50:20.9436704Z
+local-checks	Run npm run test:e2e	2026-11-10T12:50:20.9447819Z   54 passed (1.1m)
+local-checks	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	﻿2026-11-10T12:50:20.9809826Z Post job cleanup.
+local-checks	Post Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0	﻿2026-11-10T12:50:21.1233373Z Post job cleanup.
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-11-10T12:50:21.2662764Z Post job cleanup.
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3663757Z [command]/usr/bin/git version
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3715346Z git version 2.56.0
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3769163Z Temporarily overriding HOME='/home/runner/work/_temp/aa2d20b0-5bd0-4b06-a958-27a9a1c05002' before making global git config changes
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3771044Z Adding repository directory to the temporary git global config as a safe directory
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3782932Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/silentshift/silentshift
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3864079Z Removing SSH command configuration
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3891413Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.3942498Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.4514194Z Removing HTTP extra header
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.4541802Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.4692615Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.5195385Z Removing includeIf entries pointing to credentials config files
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.5203993Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+local-checks	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-11-10T12:50:21.5250778Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+local-checks	Complete job	﻿2026-11-10T12:50:21.5817457Z Cleaning up orphan processes

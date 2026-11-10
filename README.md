@@ -56,7 +56,7 @@ Session 58 records the model, provider, prompt version, recorded mode, timing an
 ## For judges: two minutes, no installation
 
 1. **Watch the first 90 seconds of the [captioned demo](https://youtu.be/a4dOcqu89EA).** Start with the unsupported `20 CASE` hold and the approved amendment. The full recording is 2:30 and predates CSV and the newer source interface.
-2. **[Inspect the captured workflow below](#inspect-the-workflow-without-installing).** Compare the order and approved reference, see a native Workflow task, then open the actual Visual Trace message properties. These are recorded local synthetic cases; they require no login and are not an online demo.
+2. **[Inspect the captured workflow above](#inspect-the-workflow-without-installing).** Compare the order and approved reference, see a native Workflow task, then open the actual Visual Trace message properties. These are recorded local synthetic cases; they require no login and are not an online demo.
 3. **[Check one bonus at a time](#contest-bonuses).** Each row links to execution or publication evidence and separates it from organizer qualification.
 
 To execute the workflow yourself, use the [keyless replay](#keyless-replay-no-model-no-api-key) after obtaining the official image, or follow [INSTALL.md](INSTALL.md) for fresh local Ollama inference. The recorded route should be `QUARANTINED`, `delivery_count=0`, with `checks=12/12; passed=true`.
@@ -71,7 +71,7 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 ### Published package and this branch
 
-Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. The multi-page workbench, configurable providers and bounded demo gateway originated on **`push/top3`**. This local **`backend-polish-nov10`** branch adds native diagnostics and maintainability changes; neither branch is a newly published package. Do not confuse this source checkout with the public native archive. Earlier native-source receipts cover their recorded replay/local-Ollama snapshots; the public-package check below does not renew verification of all unpublished runtime changes. OpenAI, Gemini and OpenRouter are configuration/protocol-tested only, not verified against their services. [Source verification](docs/evidence/top3-quality.json) · [Provider configuration](docs/PROVIDERS.md).
+Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. This `backend-polish-nov10` branch prepares **native 0.3.1**, which is not published or merged. It includes the earlier `push/top3` provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 
@@ -88,6 +88,16 @@ After starting the documented Colima profile and loading the official build-154 
 The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies the public package, not unpublished source runtime changes.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
 
 The [fresh-main check](docs/evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, both **12/12** replays and **207 Python tests** on the declared build. Its exact clone and scope are recorded separately from the launcher check. For a port already in use, pass `--api-port 52983`; never replace an existing container or lower disk limits.
+
+### Open the source workbench without a model
+
+After the [image and Compose prerequisites](INSTALL.md#optional-source-workbench-without-a-model), run:
+
+```sh
+./scripts/judge-compose.sh
+```
+
+This starts the current-source IRIS production and React workbench with private generated local accounts, then proves the recorded hold with `checks=12/12; passed=true`. It prints the workbench and Visual Trace URLs. It uses dedicated volumes and refuses another running build-154 instance in the same Docker context. [Fresh-clone execution and browser proof](docs/evidence/voting-finish-nov10/compose-final.json). This is separate from installing public native 0.3.0 above; it invokes no LLM and establishes no hosted demo.
 
 ## How the decision works
 

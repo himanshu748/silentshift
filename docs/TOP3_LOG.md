@@ -172,3 +172,8 @@ Ruff remained non-clean after its initial read and safe-fix pass (154 initial fu
 November 10: the extra native routing-reply/Event Log exporter failed first in interactive compound-loop mode, then compiling a temporary helper with unindented ObjectScript commands. Stopped it under the two-failure rule. Its partial JSON is not accepted evidence; [status receipt](evidence/backend-polish-nov10/08-production-routes.json) explicitly says passed=false. Existing native 7-class/22-method pass, 12/12 replay and 26/26-per-case review receipts retain their separate scope. No source behavior was changed to work around the inspection helper.
 
 - 2026-11-10 16:56:30 IST: Final-instance review screenshot preparation stopped after two environment errors (scripts import path, then invalid multiline environment entry). No native case or review decision was attempted. See `docs/evidence/backend-polish-nov10/fresh-review-blocked.json`; do not treat earlier upgrade review as this fresh instance.
+
+
+## 2026-11-10 — Compose verification failures retained
+
+The first fresh Compose run on `2fc57f7` exhausted the shared 2 GiB VM while other native test instances were running. A serial fresh project then exposed a real read-only nested-mount failure for `node_modules`, before the web process started. Both failures and untouched retained resources are recorded in [the receipt](evidence/voting-finish-nov10/compose-failures.json). Stopped the completed test instances without deleting data. Moved to a focused launcher repair: use a dedicated writable frontend volume, exclude local environment files, and reject another running build-154 instance rather than starting over it. A new fresh-clone run checks that actual repair; no model or policy was changed.

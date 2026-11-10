@@ -4,8 +4,7 @@ This is a **local, recorded-response** path for the current source checkout.
 It starts the real IRIS production and React workbench. It does not install the
 public IPM package, invoke Ollama, download a model or establish a hosted demo.
 Only **2026.3.0AI.154.0 Community / 154U ARM64** is the intended native target.
-Actual runtime verification must be recorded separately from the static/unit
-checks made while preparing this launcher.
+The [fresh GitHub source run](evidence/voting-finish-nov10/compose-final.json) passed startup, the unchanged recorded replay and a real workbench login. Its failed predecessors remain [visible](evidence/voting-finish-nov10/compose-failures.json); the successful snapshot is separate from the subsequently versioned package candidate.
 
 ## Prerequisites
 

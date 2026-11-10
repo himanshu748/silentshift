@@ -1,6 +1,6 @@
 # Install SilentShift locally
 
-This source guide covers the IRIS backend and browser workbench originating on `push/top3`. The separate `backend-polish-nov10` maintenance snapshot is unreleased; the clone command below intentionally selects `push/top3` and does not include those changes. Public main and native IPM 0.3.0 are separate release boundaries. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
+This guide selects the unmerged `backend-polish-nov10` source branch, which prepares native **0.3.1** and includes the workbench originating on `push/top3`. Public main and native IPM **0.3.0** are separate release boundaries; this source candidate is not a new public package. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
 The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. Organizers also permit **2027.1.0AI.109.0 Community**, but it has **not** been verified for SilentShift. [Official build clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows). The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
@@ -13,7 +13,7 @@ You will download the local Qwen model (about 2.5 GB) and a Web Gateway image. A
 ## 1. Get the source and start Docker
 
 ```sh
-git clone --branch push/top3 https://github.com/himanshu748/silentshift.git
+git clone --branch backend-polish-nov10 https://github.com/himanshu748/silentshift.git
 cd silentshift
 colima start --profile silentshift
 export DOCKER_CONTEXT=colima-silentshift
@@ -33,6 +33,19 @@ docker pull containers.intersystems.com/intersystems/webgateway:2026.1
 ```
 
 The tag is a local name for the vendor image you loaded; it does not download IRIS.
+
+## Optional: source workbench without a model
+
+After steps 1–2, you can inspect a real recorded native case without installing Ollama or editing `.env`. Load the public Node helper image, then use the source Compose launcher:
+
+```sh
+docker pull node:24-alpine
+./scripts/judge-compose.sh
+```
+
+Use Compose 2.24 or later. Run one native test stack at a time; the launcher refuses another build-154 instance in this Docker context and does not stop it. It creates a dedicated project, private credentials and volumes, starts the native API and workbench, and runs the unchanged replay assertions. Expect `checks=12/12; passed=true`, a Visual Trace URL and the workbench URL. Read the printed local `runtime.env` file privately for your reviewer login; never copy it into a message or Git. The replay demonstrates a hold only; vector retrieval is intentionally unavailable without embeddings.
+
+[Actual fresh-clone result](docs/evidence/voting-finish-nov10/compose-final.json). This source path is different from the [public-package replay](#optional-check-without-a-model). The [Compose reference](docs/JUDGE_COMPOSE.md) covers different ports, direct `docker compose ... up`, retained resources and failures. For fresh local inference, continue with steps 3–7 instead.
 
 ## 3. Set your local passwords
 

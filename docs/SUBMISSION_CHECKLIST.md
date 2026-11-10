@@ -1,6 +1,8 @@
-> **November 10 backend branch:** fresh local source load passed 7 classes / 22 native methods, both recorded replays 12/12, 339 pytest and 54 disconnected browser checks. Connected checks passed 12 and failed 4 for missing delivered/precedent setup; delivered-case capture remains absent. [Current scoped results](JUDGE_VERIFICATION.md#current-local-branch-repeat). Public IPM stays 0.3.0; 0.3.1 is not prepared. Every existing bonus status below is unchanged.
+> **November 10 voting-week finish:** fresh GitHub candidate `7b3d5ef` is native **0.3.1, prepared but unpublished**. Native **7 classes / 22 methods**, both **12/12** replays, a separate clean archive install, **5/5** live source routes, **16/16** connected browser checks, **393 pytest** and hosted CI pass. The source Compose workbench passes **12/12** and real browser login. **40 Ruff findings remain individually explained**, not suppressed. [Scoped receipts](JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones). Public native IPM/OEX stay **0.3.0**, React **0.2.1**; bonus statuses are unchanged.
 
 # Submission checklist
+
+**Checked November 10, 2026 (IST): unpublished backend candidate.** [Candidate summary](evidence/voting-finish-nov10/candidate-031-summary.json), [native captures and restoration](evidence/voting-finish-nov10/native-ui.json), [remaining lint inventory](RUFF_REMAINING.md). Earlier dated checks below remain history.
 
 ## November 9: final `push/top3` source checkpoint
 
@@ -69,15 +71,24 @@ This was an existing-instance source-upgrade/regression pass on **154U ARM64**, 
 1. **Description update approved November 8.** Saved and sent as description edits, with contest/IPM checked, idea/video/articles preserved and app release unchanged. An approval email arrived and the new copy is visible anonymously. The owner page shows DPI-I-689 under **Ideas to the app**; anonymous retrieved text still lacks that section. The downloadable video and a focused request for idea qualification were sent to the existing Open Exchange team contact. [Receipt](evidence/oex-update-nov8.json). Their earlier moderation explanation is historical; no new reply or awarded points are claimed. An automated duplicate-version IPM error followed the edit, but the existing [public archive remains identical](evidence/oex-update-nov8-ipm.json). No new package version was requested.
 2. **AI Hub bug filed.** [Issue #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) is open under `himanshu748`; the body matches the prepared reproduction and evidence. [Filing receipt](evidence/ai-hub-bug-filed.json). Vendor confirmation and organizer qualification remain pending. Do not file a duplicate; keep the signal-11 candidate separate and unclaimed.
 3. **Articles and questionnaire need no duplicate submission.** Both articles returned HTTP 200 in the [new anonymous browser check](evidence/final-pass-nov8-public.json) and link OEX. The overview now distinguishes the current 192-token request budget from the 700-token ingress ceiling, with source links; the correction was saved in place and verified while signed out. Historical experiment results remain unchanged. [Correction receipt](evidence/article-clarification.json). Questionnaire confirmation is already retained.
-4. **Hosting remains stopped.** Obtain written vendor confirmation or an eligible separately licensed runtime before reconsidering a public demo. No paid host, card, provider or new subscription was used.
+4. **Hosting remains stopped.** Written contest-demo permission was received, as recorded in [HOSTING_REVIEW.md](HOSTING_REVIEW.md), but the trial never reached a verified deployment. No paid host, card, provider or new subscription was used.
 
 ## Published vs main
+
+### Current voting-week candidate: 0.3.1 is prepared, not published
+
+Remote main remains `a10de3f61e1d809b374832a4db67761318bc16ea`. Public native IPM and OEX remain **0.3.0**; React remains **0.2.1**. The unmerged `backend-polish-nov10` branch now declares **0.3.1** in `module.xml`, `pyproject.toml` and the lockfile. Its provider/cited-prose work and backend maintenance are not in public 0.3.0. The [0.3.1 changelog](../CHANGELOG.md) separates native package changes from source-only frontend/Compose work.
+
+The [fresh GitHub candidate summary](evidence/voting-finish-nov10/candidate-031-summary.json) covers source `7b3d5efafb07fd54530c912f6b9cdbb710462020`, a clean IPM source load/startup/native suite, both recorded replays and a second fresh-container install from the exported local archive. This is **not** public-registry 0.3.1 installation. [Archive inspection](evidence/voting-finish-nov10/candidate-031-archive.json) · [local-filesystem install](evidence/voting-finish-nov10/candidate-031-install.json). Later documentation commits do not renew native execution or change that source snapshot.
+
+The [exact branch inventory](evidence/voting-finish-nov10/branch-inventory.json) lists the source commits since remote main. Every PR/main merge, PR closure/comment, tag/release, IPM publication, OEX save/approval and Pages publication still requires its own exact `submit`. Follow the [owner-only 0.3.1 runbook](IPM.md#owner-only-031-publication-runbook). Before publication, use public 0.3.0 instructions for the public package. After owner publication, change this state only when a new anonymous public archive and literal registry install prove 0.3.1 is live; candidate receipts alone do not establish that state.
+
 
 ### Unmerged voting-week source branch
 
 `push/top3` adds configurable model providers, the frozen held-out evaluation, the CoCo workbench/multi-page site and their test/evidence work. These are not a new public registry package. [Current source qualification](evidence/top3-quality.json) and [multi-page checks](evidence/top3-multipage.json) state the exact source and runtime boundaries. Main/public native IPM remain at their existing release; merge, package publication and listing edits are separate actions. No tag or package was published in this pass.
 
-### Current state after owner-authorized publication
+### November 8 publication checkpoint (retained history)
 
 - **Public native registry and OEX release:** **0.3.0**, [downloaded anonymously](evidence/ship-030-public-artifact.json), installed by literal `zpm "install silentshift"` in a fresh container and verified with startup, all native tests and both replays. [Registry receipt](evidence/ship-030-registry.json). The React workbench remains **0.2.1**, built/run separately.
 - **Published source snapshot:** `a7aa217f1fc8d96f56bac6fd3110618eec21c353`. All **474** archived tracked files match that GitHub clone byte for byte. [Full comparison](evidence/ship-030-source-archive.json). The **45 native classes / 11 assets** and manifest also match the fully exercised candidate. [Native package boundary](evidence/ship-030-public-artifact.json).
