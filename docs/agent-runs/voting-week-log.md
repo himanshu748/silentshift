@@ -242,3 +242,8 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - Main attempt 2 and backend fix commit da2e9e9 both passed hosted Actions; [run metadata and counts](../evidence/voting-finish-nov10/ci-restored.json). No billing/settings or main code changes.
 - Safe lint changes reduced findings from 83 to 40. Every remaining finding has a file/line/rule/reason in [the exception inventory](../RUFF_REMAINING.md); no blanket ignore or failing check suppression. Native runtime/policy/fixtures/raw evidence untouched. `uv run pytest -q`: 373 passed in 29.54s ([output](../evidence/voting-finish-nov10/safe-lint-pytest.txt)).
+
+### 2026-11-10 17:48:38 IST — Real operator cases prepared; stale connected expectation found
+
+- Fresh GitHub clone da2e9e9 source load on a new isolated 154U ARM64 container passed its full native suite and 5/5 live local-model scenarios. Case submission used the same authenticated Scenario Lab API as operators; no fabricated delivered state or precedent response was inserted. Installed synthetic reference catalog and source-bound native indexing are explicitly separate.
+- Delivered amendment and actual retrieved precedents now exist. Connected browser pass reached 14/16; both remaining failures are the old exact prompt expectation 1.3.1 versus source/runtime 1.4.2. [Failure output](../evidence/voting-finish-nov10/connected-initial-failure.txt). Updated the exact expected version to match the checked-in Investigator parameter; no assertion was removed or relaxed. Added [setup instructions](../CONNECTED_CHECKS.md). A fresh-clone repeat follows.

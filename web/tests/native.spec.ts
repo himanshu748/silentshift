@@ -398,7 +398,7 @@ test("precedent evidence matches real case-scoped vector results and recorded to
   expect(context.dimensions).toBe(384);
   expect(context.decision_authority).toBe(false);
   expect(context.matches.length).toBeLessThanOrEqual(3);
-  expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.3.1");
+  expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.4.2");
   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
   await login(page);
   await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);

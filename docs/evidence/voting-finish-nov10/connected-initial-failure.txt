@@ -1,0 +1,77 @@
+
+> silentshift-web@0.2.1 test:e2e:native
+> playwright test --config=playwright.native.config.ts
+
+
+Running 16 tests using 1 worker
+
+(node:50246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (1.9s)
+  ✓   2 [desktop-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (1.2s)
+  ✘   3 [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (167ms)
+(node:50256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 [desktop-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (2.4s)
+  ✓   5 [desktop-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (1.8s)
+  ✓   6 [desktop-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (5.7s)
+  ✓   7 [desktop-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (1.7s)
+  ✓   8 [desktop-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable (1.1s)
+(node:50318) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [mobile-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (1.8s)
+  ✓  10 [mobile-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (2.1s)
+  ✘  11 [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (211ms)
+(node:50341) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  12 [mobile-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (3.3s)
+  ✓  13 [mobile-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (1.7s)
+  ✓  14 [mobile-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (2.3s)
+  ✓  15 [mobile-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (1.6s)
+  ✓  16 [mobile-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable (3.6s)
+
+
+  1) [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "silentshift-investigator/1.3.1"
+    Received: "silentshift-investigator/1.4.2"
+
+      399 |   expect(context.decision_authority).toBe(false);
+      400 |   expect(context.matches.length).toBeLessThanOrEqual(3);
+    > 401 |   expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.3.1");
+          |                                        ^
+      402 |   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
+      403 |   await login(page);
+      404 |   await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);
+        at <fresh-clone>/web/tests/native.spec.ts:401:40
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-desktop-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-desktop-native/error-context.md
+
+  2) [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "silentshift-investigator/1.3.1"
+    Received: "silentshift-investigator/1.4.2"
+
+      399 |   expect(context.decision_authority).toBe(false);
+      400 |   expect(context.matches.length).toBeLessThanOrEqual(3);
+    > 401 |   expect(actual.agent?.prompt_version).toBe("silentshift-investigator/1.3.1");
+          |                                        ^
+      402 |   await page.goto(`/#investigations/${encodeURIComponent(actual.id)}`);
+      403 |   await login(page);
+      404 |   await expect(page.getByRole("region", { name: "Provenance", exact: true })).toContainText(actual.id);
+        at <fresh-clone>/web/tests/native.spec.ts:401:40
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-mobile-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-mobile-native/error-context.md
+
+  2 failed
+    [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+    [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+  14 passed (39.6s)
