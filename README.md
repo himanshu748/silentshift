@@ -6,7 +6,7 @@ A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every tra
 
 If an approved amendment *does* allow `20 CASE`, the same order goes through. **The difference between those two outcomes is the authority behind the order, and that's the decision the AI Hub agent helps make.**
 
-**[Watch the captioned demo](https://youtu.be/a4dOcqu89EA)** · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
+**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
 ## Inspect the workflow without installing
 
@@ -56,7 +56,7 @@ Session 58 records the model, provider, prompt version, recorded mode, timing an
 ## For judges: two minutes, no installation
 
 1. **Watch the first 90 seconds of the [captioned demo](https://youtu.be/a4dOcqu89EA).** Start with the unsupported `20 CASE` hold and the approved amendment. The full recording is 2:30 and predates CSV and the newer source interface.
-2. **[Inspect the captured workflow above](#inspect-the-workflow-without-installing).** Compare the order and approved reference, see a native Workflow task, then open the actual Visual Trace message properties. These are recorded local synthetic cases; they require no login and are not an online demo.
+2. **[Explore the interactive recorded-evidence gallery](https://himanshu748.github.io/silentshift/#workbench)** or [inspect the captures above](#inspect-the-workflow-without-installing). Compare the order and approved reference, see a native Workflow task, then open the actual Visual Trace message properties. This static tour uses recorded local synthetic cases; it requires no login and does not run a hosted native production.
 3. **[Check one bonus at a time](#contest-bonuses).** Each row links to execution or publication evidence and separates it from organizer qualification.
 
 To execute the workflow yourself, use the [keyless replay](#keyless-replay-no-model-no-api-key) after obtaining the official image, or follow [INSTALL.md](INSTALL.md) for fresh local Ollama inference. The recorded route should be `QUARANTINED`, `delivery_count=0`, with `checks=12/12; passed=true`.
