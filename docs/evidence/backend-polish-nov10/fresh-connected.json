@@ -1,0 +1,35 @@
+{
+  "source_head": "76d9ef17f660d3d9ca9aa428257563055111fb51",
+  "runtime": "154U ARM64",
+  "command": "SILENTSHIFT_NATIVE_E2E=1 SILENTSHIFT_WEB_URL=http://127.0.0.1:5191 SILENTSHIFT_API_URL=http://127.0.0.1:53003/silentshift/api npm run test:e2e:native",
+  "credentials": "generated private runtime environment, not recorded",
+  "checks_passed": 12,
+  "checks_failed": 4,
+  "elapsed_seconds": 44.7,
+  "passed": false,
+  "failures": [
+    {
+      "scope": "desktop-native",
+      "test": "delivered amendment",
+      "reason": "No existing approved-amendment DELIVERED case in fresh replay instance"
+    },
+    {
+      "scope": "desktop-native",
+      "test": "precedent evidence",
+      "reason": "No case with retrieved precedents and observed fourth tool read in fresh replay instance"
+    },
+    {
+      "scope": "mobile-native",
+      "test": "delivered amendment",
+      "reason": "No existing approved-amendment DELIVERED case in fresh replay instance"
+    },
+    {
+      "scope": "mobile-native",
+      "test": "precedent evidence",
+      "reason": "No case with retrieved precedents and observed fourth tool read in fresh replay instance"
+    }
+  ],
+  "fixture_injection": false,
+  "runtime_changes_to_make_tests_pass": false,
+  "retry": false
+}

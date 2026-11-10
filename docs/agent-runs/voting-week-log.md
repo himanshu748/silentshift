@@ -214,3 +214,15 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - `./scripts/judge-replay.sh --api-port 53013 --container silentshift-bonus-registry-shell-final-nov10` completed at source `f9fc970b197e8c2830a784ede062a4485a18b7a2`. Public native 0.3.0 installed, production started, release-matched 5 classes / 12 methods passed, both recorded replays passed 12/12 (sessions 24 / 58). [Summary](../evidence/backend-polish-nov10/public-shell-summary.json), [output](../evidence/backend-polish-nov10/public-shell-output.txt). Automatic disjoint-subnet selection avoided the exhausted Docker default pool; no network was removed. This is not a new source-runtime gate or fresh inference.
 - Existing OEX organizer threads, including their Spam-labelled messages if any, have no new response; last organizer reply remains Irene’s November 8 message. The November 10 queue-check email remains unanswered. No message sent.
+
+### 2026-11-10 17:07:54 IST — Presentation bundle and final scope
+
+- Five November 10 recorded-source captures added to the README and static candidate. Static page checked at 390px and 1440px: no horizontal overflow, seven images loaded, keyboard run anchor and no observed browser errors. Reduced-motion CSS present; OS emulation not performed. [Receipt](../evidence/voting-week-nov10/site-final-browser.json). No Pages publishing.
+- One corrected OEX bundle replaces the older description-only target; its commit-addressed capture URLs must become public through an approved push before form preparation. No OEX save/Send action. Public readback still has the known stale body and public idea association; no new organizer reply. Broken OEX null-path image reported in the handoff, no email sent.
+- Connected suite finished 12 passed / 4 failed for absent delivered/precedent cases. Kept failure output, no rerun or fixture injection. Ruff final whole-tree count 83, including three raw command-artifact findings; no CI lint gate. 0.3.1 remains unprepared. [Full report and exact gates](backend-polish-report.md).
+- Updated the existing daily monitor with current branch/gate/bundle state, preserved schedule and notifications. Community visibility phase remains owner-handled. No external publication or spending.
+
+### 2026-11-10 17:10:53 IST — Handoff checks
+
+- Scoped local-link check passed for README, INSTALL, verification/checklist/build status, current OEX copy, static-site guide and final report; new evidence JSON parses. Diff whitespace check passed. No tracked file over 50 MiB and no tag exists. Pattern and configured-secret-value scans found no signals in the relevant changed text; this is a scoped check, not a comprehensive security audit.
+- Stopped only the newly completed public-shell verification pair to reduce memory pressure; retained its containers, data and exported proof. Source UI/native instance remains running. No data/image/volume was deleted. Local main was not changed or pushed. Protected pre-existing UI edits and sealed-evaluation files remain untouched/uncommitted.

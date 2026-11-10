@@ -1,4 +1,4 @@
-# Local backend polish — November 10, 2026 (UTC)
+> **November 10 backend branch:** fresh local source load passed 7 classes / 22 native methods, both recorded replays 12/12, 339 pytest and 54 disconnected browser checks. Connected checks passed 12 and failed 4 for missing delivered/precedent setup; delivered-case capture remains absent. [Current scoped results](JUDGE_VERIFICATION.md#current-local-branch-repeat). Public IPM stays 0.3.0; 0.3.1 is not prepared. Every existing bonus status below is unchanged.
 
 Branch `backend-polish-nov10` is not published. The isolated same-instance source upgrade compiled on 154U ARM64, passed seven native classes / 22 methods and a 12/12 recorded replay; native approve/reject checks passed 26/26 per case. [Evidence log](agent-runs/voting-week-log.md). The additional production metadata exporter failed twice and was stopped; no complete body/Event Log screenshot readback or 0.3.1 promotion is claimed. Fresh-clone verification remains pending. Public native IPM stays 0.3.0.
 

@@ -1,4 +1,4 @@
-> **Unreleased branch note — November 10, 2026:** `backend-polish-nov10` inherits unpublished source work from `push/top3`; public native IPM/OEX remain 0.3.0. The manifest/project still say 0.3.0; do not publish this branch under the existing version. The [exact branch inventory](evidence/backend-polish-nov10/source-inventory.json) distinguishes it from the public archive. 0.3.1 preparation is on hold pending production readback. Existing bonus statuses below are unchanged. No new registry/OEX/tag/push action occurred.
+> **November 10 backend branch:** fresh local source load passed 7 classes / 22 native methods, both recorded replays 12/12, 339 pytest and 54 disconnected browser checks. Connected checks passed 12 and failed 4 for missing delivered/precedent setup; delivered-case capture remains absent. [Current scoped results](JUDGE_VERIFICATION.md#current-local-branch-repeat). Public IPM stays 0.3.0; 0.3.1 is not prepared. Every existing bonus status below is unchanged.
 
 # Submission checklist
 

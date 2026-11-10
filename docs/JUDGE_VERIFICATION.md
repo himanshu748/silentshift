@@ -1,6 +1,24 @@
-# Backend-polish branch status — November 10, 2026 (UTC)
+# Backend-polish verification — November 10, 2026 (UTC)
 
-The historical main/public-install gates below do not cover the new `backend-polish-nov10` runtime changes. The local source upgrade passed the native suite (7 classes / 22 methods), recorded replay (12/12) and guarded review (26/26 per case). [Native tests](evidence/backend-polish-nov10/07-native-unit-retry.txt), [replay](evidence/backend-polish-nov10/upgrade-replay.json), [review](evidence/backend-polish-nov10/upgrade-review.json). These are same-instance upgrade results. Fresh-clone verification and complete production body/Event Log screenshots remain pending. The [failed metadata exporter](evidence/backend-polish-nov10/08-production-routes.json) is not passing evidence. Public native IPM remains 0.3.0; 0.3.1 is not prepared or published.
+## Current local branch repeat
+
+A fresh **local Git clone** of `backend-polish-nov10` at **`76d9ef17f660d3d9ca9aa428257563055111fb51`** loaded source into an isolated, already-licensed **2026.3.0AI.154.0 Community / 154U ARM64** container with **no application source mounts**. It was not a GitHub clone of an unpushed branch. Initial activation failed when Docker default network pools were exhausted; the still-empty installed instance was then activated on an inspected disjoint private /28. No networks were deleted. [Receipt](evidence/backend-polish-nov10/fresh-source.json), [executed resume driver](evidence/backend-polish-nov10/fresh-source-commands.py). Subsequent harness/docs commits preserve the native executable tree: [identity](evidence/backend-polish-nov10/source-identity.json).
+
+| Check | Result from this pass | Evidence |
+| --- | --- | --- |
+| Source load / production / native suite | Passed; **7 classes / 22 methods** | [Native output](evidence/backend-polish-nov10/fresh-source-native.txt) |
+| Recorded API replays | **12/12 twice**, sessions **24 / 58**, held with no deliveries | [First](evidence/backend-polish-nov10/fresh-source-replay-1.json), [second](evidence/backend-polish-nov10/fresh-source-replay-2.json) |
+| Fresh source Python | **339 passed in 41.99s** | [Output](evidence/backend-polish-nov10/fresh-source-pytest.txt) |
+| TypeScript / production build | Passed | [Types](evidence/backend-polish-nov10/fresh-source-types.txt), [build](evidence/backend-polish-nov10/fresh-source-build.txt) |
+| Disconnected/responsive browser suite | **54 passed (2.3m)** | [Output](evidence/backend-polish-nov10/fresh-source-browser.txt) |
+| Connected read-only browser suite | **12 passed / 4 failed (44.7s)**; delivered-amendment and retrieved-precedent cases absent in this clean replay instance | [Receipt](evidence/backend-polish-nov10/fresh-connected.json), [full failure output](evidence/backend-polish-nov10/fresh-connected-output.txt) |
+| Revised install/network harness | **373 pytest passed in 36.54s** | [Output](evidence/backend-polish-nov10/10-harness-pytest.txt) |
+| Fresh local clone of revised shell launcher | Public native **0.3.0** installed; release-matched **5 classes / 12 methods**, both replays **12/12** | [Summary](evidence/backend-polish-nov10/public-shell-summary.json), [command](evidence/backend-polish-nov10/public-shell-command.sh), [output](evidence/backend-polish-nov10/public-shell-output.txt) |
+| Native UI readback | Held case, compact References reply, recorded provider metadata and Event Log entries captured | [Capture receipt](evidence/backend-polish-nov10/11-native-ui.json), [permissions restored](evidence/backend-polish-nov10/11-permissions-restored.json) |
+
+**Incomplete acceptance:** no delivered-case Visual Trace/Event Log capture was produced in this fresh instance. The additional review verifier stopped after two environment-preparation errors, before creating cases ([blocked receipt](evidence/backend-polish-nov10/fresh-review-blocked.json)). Earlier same-instance upgrade review passed **26/26 per case**, including one receipt under concurrent approval ([receipt](evidence/backend-polish-nov10/upgrade-review.json)); it is not relabeled as fresh-instance verification. The earlier metadata exporter failed twice and remains [failed evidence](evidence/backend-polish-nov10/08-production-routes.json). Primary native UI readback subsequently proved the held References reply separately.
+
+No fresh model inference or renewed live-five-case/CSV-browser result is claimed by these replay checks. Protected pre-existing uncommitted UI work is outside the fresh-clone snapshot. The shell launcher uses Docker orchestration, **not Compose**; the normal live installation still uses Compose. Public IPM/OEX remain **0.3.0**, React **0.2.1**. **0.3.1 is not prepared** while required readback/connected-data gates remain incomplete. No package/tag/release/push/OEX action occurred.
 
 # Judge verification
 

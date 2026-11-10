@@ -1,0 +1,111 @@
+
+> silentshift-web@0.2.1 test:e2e:native
+> playwright test --config=playwright.native.config.ts
+
+
+Running 16 tests using 1 worker
+
+(node:43973) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (6.7s)
+  ✘   2 [desktop-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (435ms)
+(node:43991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (575ms)
+(node:43998) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 [desktop-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (6.9s)
+  ✓   5 [desktop-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (3.0s)
+  ✓   6 [desktop-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (1.5s)
+  ✓   7 [desktop-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (3.8s)
+  ✓   8 [desktop-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable (2.5s)
+(node:44017) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [mobile-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (1.5s)
+  ✘  10 [mobile-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (96ms)
+(node:44024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (276ms)
+(node:44030) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  12 [mobile-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (2.2s)
+  ✓  13 [mobile-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (1.3s)
+  ✓  14 [mobile-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (1.7s)
+  ✓  15 [mobile-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (1.1s)
+  ✓  16 [mobile-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable (1.1s)
+
+
+  1) [desktop-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome
+
+    Error: An existing delivered amendment is required; this suite never injects a fixture.
+
+      372 |   const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+      373 |   const delivered = cases.items.find((item) => item.scenario_id === "approved-amendment" && item.routing === "DELIVERED" && item.policy?.decision === "ALLOW");
+    > 374 |   if (!delivered) throw new Error("An existing delivered amendment is required; this suite never injects a fixture.");
+          |                         ^
+      375 |   const actual = await read(`/cases/${encodeURIComponent(delivered.id)}`, CaseSchema);
+      376 |   expect(actual.delivery_count).toBe(1);
+      377 |   expect(actual.delivery_receipt).toBeTruthy();
+        at <fresh-clone>/web/tests/native.spec.ts:374:25
+
+    Error Context: ../evidence/browser/connected/test-results/native-a-delivered-amendme-37734-dence-and-simulator-outcome-desktop-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-a-delivered-amendme-37734-dence-and-simulator-outcome-desktop-native/error-context.md
+
+  2) [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+
+    Error: Prepare an actual native case with retrieved precedents and an observed fourth tool read; this suite never creates one.
+
+      391 |   const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+      392 |   const candidate = cases.items.find((item) => item.precedent_context?.status === "retrieved" && item.precedent_context.matches.length > 0 && (item.agent?.tool_reads?.precedents ?? 0) > 0);
+    > 393 |   if (!candidate) throw new Error("Prepare an actual native case with retrieved precedents and an observed fourth tool read; this suite never creates one.");
+          |                         ^
+      394 |   const actual = await read(`/cases/${encodeURIComponent(candidate.id)}`, CaseSchema);
+      395 |   const context = actual.precedent_context!;
+      396 |   expect(context.implementation).toBe("IRIS VECTOR_COSINE");
+        at <fresh-clone>/web/tests/native.spec.ts:393:25
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-desktop-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-desktop-native/error-context.md
+
+  3) [mobile-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome
+
+    Error: An existing delivered amendment is required; this suite never injects a fixture.
+
+      372 |   const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+      373 |   const delivered = cases.items.find((item) => item.scenario_id === "approved-amendment" && item.routing === "DELIVERED" && item.policy?.decision === "ALLOW");
+    > 374 |   if (!delivered) throw new Error("An existing delivered amendment is required; this suite never injects a fixture.");
+          |                         ^
+      375 |   const actual = await read(`/cases/${encodeURIComponent(delivered.id)}`, CaseSchema);
+      376 |   expect(actual.delivery_count).toBe(1);
+      377 |   expect(actual.delivery_receipt).toBeTruthy();
+        at <fresh-clone>/web/tests/native.spec.ts:374:25
+
+    Error Context: ../evidence/browser/connected/test-results/native-a-delivered-amendme-37734-dence-and-simulator-outcome-mobile-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-a-delivered-amendme-37734-dence-and-simulator-outcome-mobile-native/error-context.md
+
+  4) [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+
+    Error: Prepare an actual native case with retrieved precedents and an observed fourth tool read; this suite never creates one.
+
+      391 |   const cases = await read("/cases?limit=50&offset=0", CasesSchema);
+      392 |   const candidate = cases.items.find((item) => item.precedent_context?.status === "retrieved" && item.precedent_context.matches.length > 0 && (item.agent?.tool_reads?.precedents ?? 0) > 0);
+    > 393 |   if (!candidate) throw new Error("Prepare an actual native case with retrieved precedents and an observed fourth tool read; this suite never creates one.");
+          |                         ^
+      394 |   const actual = await read(`/cases/${encodeURIComponent(candidate.id)}`, CaseSchema);
+      395 |   const context = actual.precedent_context!;
+      396 |   expect(context.implementation).toBe("IRIS VECTOR_COSINE");
+        at <fresh-clone>/web/tests/native.spec.ts:393:25
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-mobile-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-precedent-evidence--43838-lts-and-recorded-tool-reads-mobile-native/error-context.md
+
+  4 failed
+    [desktop-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome
+    [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+    [mobile-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome
+    [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads
+  12 passed (44.7s)
