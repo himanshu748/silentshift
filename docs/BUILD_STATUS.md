@@ -1,5 +1,14 @@
 # Build status
 
+## November 10 voting-week judge-path polish (local, not published)
+
+All 44 public contest listings and linked READMEs were read without executing competitors' apps. [Scoped comparison](agent-runs/competitor-scan.md). The judge path now has a local no-install evidence tour and a one-command public-package replay launcher. No native runtime, routing policy, agent behavior, model, build declaration or public package changed in this pass.
+
+The [fresh-main public gate](evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, two **12/12** replays and **207 Python tests**. The [separate launcher gate](evidence/voting-week-nov10/judge-wrapper.json) also passed in a new isolated 154U ARM64 container with pinned release-matched tests. Current local checks: **330 Python tests**, TypeScript and build passed; [scope/warnings](evidence/voting-week-nov10/judge-polish-checks.json). This does not newly qualify the unpublished native source, connected UI, sealed benchmark, x64 or build 109. Existing UI edits and unfinished local evaluation data were preserved.
+
+Public OEX/native IPM stays **0.3.0**, separate React **0.2.1**. OEX description submission is prepared and still gated; the public legacy text has not been corrected by these local changes. Organizer qualification remains unconfirmed; all Not claimed statuses stay unchanged.
+
+
 ## Final source checkpoint, November 9
 
 The full Python suite passed **286 tests in 18.88 seconds**, including the new pure trial-duration/timer checks; [exact output](evidence/top3-final-pytest.txt). All **59** native package source files remain byte-identical to the fresh native replay/live snapshot; [source-footprint receipt](evidence/top3-final-source.json). The separate [multi-page/browser/CSV gate](evidence/top3-multipage.json) and [fresh native gate](evidence/top3-quality.json) keep their original execution scope.

@@ -1,5 +1,13 @@
 # Judge verification
 
+## One-command public-package launcher — November 10, 2026 (IST)
+
+The new local `push/top3` launcher, `uv run python scripts/judge_replay.py`, passed a separate clean-container run. It pins verification source to the public 0.3.0 snapshot `a7aa217f1fc8d96f56bac6fd3110618eec21c353`, fetches the checksum-pinned IPM installer, generates private test credentials and never changes the app's `.env`. Current source native tests are deliberately not copied into the older published backend.
+
+Result: public 0.3.0 install/startup, **5 native classes / 12 methods**, two **12/12** recorded replays, sessions **24 / 58**, quarantine and zero deliveries. [Launcher receipt](evidence/voting-week-nov10/judge-wrapper.json) · [exact output and duration](evidence/voting-week-nov10/judge-wrapper-output.txt) · [native assertions](evidence/voting-week-nov10/judge-wrapper-native-tests.txt). This is a local launcher plus fresh pinned-source checkout and isolated registry install, not a fresh GitHub clone of the unpushed final branch or a test of its unpublished runtime changes. No model or image download occurred.
+
+The current local Python suite passed **330 tests in 22.60s**; the launcher-specific tests passed **12 in 0.42s**. TypeScript and the frontend build passed, with existing non-fatal bundler warnings. [Local checks and environment-example coverage](evidence/voting-week-nov10/judge-polish-checks.json). Pre-existing uncommitted UI edits remain separate from this documentation/harness change; these checks are not a new connected-browser or live five-case run.
+
 ## Voting-week public main repeat — November 10, 2026 (IST)
 
 A fresh GitHub clone of **main `a10de3f61e1d809b374832a4db67761318bc16ea`** repeated the documented public-package path in a new isolated **2026.3.0AI.154.0 Community / 154U ARM64** container, with no application source mounts. The official runtime and gateway images were already loaded; no new IRIS image or model was downloaded. Private local test credentials were configured without provider keys. This is a **public 0.3.0 install**, not a source upgrade or verification of unpublished `push/top3` runtime changes.
