@@ -18,4 +18,56 @@ Index EventUnique On EventKey [ Unique ];
 Index ContractLookup On ContractId;
 Index RoutingLookup On Routing;
 Index ReceivedLookup On ReceivedAt;
+
+Storage Default
+{
+<Data name="CaseRecordDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>EventKey</Value>
+</Value>
+<Value name="3">
+<Value>Fingerprint</Value>
+</Value>
+<Value name="4">
+<Value>Source</Value>
+</Value>
+<Value name="5">
+<Value>EventId</Value>
+</Value>
+<Value name="6">
+<Value>ContractId</Value>
+</Value>
+<Value name="7">
+<Value>ScenarioId</Value>
+</Value>
+<Value name="8">
+<Value>ReceivedAt</Value>
+</Value>
+<Value name="9">
+<Value>RawPayload</Value>
+</Value>
+<Value name="10">
+<Value>Body</Value>
+</Value>
+<Value name="11">
+<Value>ReferenceSnapshot</Value>
+</Value>
+<Value name="12">
+<Value>Version</Value>
+</Value>
+<Value name="13">
+<Value>Routing</Value>
+</Value>
+</Data>
+<DataLocation>^SilentShift.Data.CaseRecordD</DataLocation>
+<DefaultData>CaseRecordDefaultData</DefaultData>
+<IdLocation>^SilentShift.Data.CaseRecordD</IdLocation>
+<IndexLocation>^SilentShift.Data.CaseRecordI</IndexLocation>
+<StreamLocation>^SilentShift.Data.CaseRecordS</StreamLocation>
+<Type>%Storage.Persistent</Type>
+}
+
 }

@@ -60,4 +60,29 @@ Method OnAction(pAction As %String) As %Status
     If ..%TaskStatus.IsComplete Return $$$OK
     Return ..CompleteTask($ZCONVERT(pAction, "U"))
 }
+
+Storage Default
+{
+<Data name="ReviewTaskDefaultData">
+<Subscript>"ReviewTask"</Subscript>
+<Value name="1">
+<Value>CaseId</Value>
+</Value>
+<Value name="2">
+<Value>CreatedCaseVersion</Value>
+</Value>
+<Value name="3">
+<Value>ReviewedCaseVersion</Value>
+</Value>
+<Value name="4">
+<Value>ReviewReason</Value>
+</Value>
+<Value name="5">
+<Value>ReviewIdempotencyKey</Value>
+</Value>
+</Data>
+<DefaultData>ReviewTaskDefaultData</DefaultData>
+<Type>%Storage.Persistent</Type>
+}
+
 }
