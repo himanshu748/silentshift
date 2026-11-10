@@ -1,0 +1,46 @@
+{
+  "checked_at_ist": "2026-11-10T21:21:55.138544+05:30",
+  "access": "AWS CLI and strictly host-key-pinned read-only SSH",
+  "host": "crashcart-demo-nov10",
+  "region": "us-east-1",
+  "ip": "32.193.44.79",
+  "architecture": "x86_64",
+  "vcpus": 2,
+  "memory_total_bytes": 1998614528,
+  "memory_available_bytes": 1500553216,
+  "swap_bytes": 0,
+  "disk_available_bytes": 58375380992,
+  "existing_container": "crashcart-demo",
+  "existing_container_image": "caddy:2.11.9-alpine",
+  "existing_container_memory_usage": "12.5MiB / 256MiB",
+  "existing_container_cpu": "0.00%",
+  "public_checks": [
+    {
+      "url": "https://crashcart.32.193.44.79.sslip.io/",
+      "status": 200,
+      "sha256": "f2b3e70f163fb9441d926bdffdc3bdff8a72766fb558655d77348fceaa25af4c",
+      "bytes": 8312
+    },
+    {
+      "url": "https://crashcart.32.193.44.79.sslip.io/healthz",
+      "status": 200,
+      "sha256": "b29652599f47bd5ad8a7eeb71eff3492a693fb13cb46f7679f80d9b3332c3ea3",
+      "bytes": 127,
+      "body": {
+        "status": "recorded-demo",
+        "service": "crashcart",
+        "scope": "static-asset-serving",
+        "live_services_checked": false
+      }
+    }
+  ],
+  "root_body_unchanged": true,
+  "remote_mutations": false,
+  "firewall_changes": false,
+  "ephemeral_local_ssh_keys_removed": true,
+  "native_target": "linux/arm64 2026.3.0AI.154.0 / 154U",
+  "native_hosting_blocker": "Verified Compose is ARM64-only; existing Crashcart host is x86_64. No emulation or alternate runtime attempted.",
+  "deployment": false,
+  "spend": false,
+  "scope": "Point-in-time read-only native-host preflight; no new hosting or capacity claim"
+}

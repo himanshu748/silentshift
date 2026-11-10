@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-11-10T16:29:43.675791+00:00",
+  "source_base": "9f3178e3672d54df5eb711e94d9f688ed450d861",
+  "scope": "Isolated worktree; existing native/package/workbench sources unchanged; no native execution or cloud deployment",
+  "pytest": {
+    "command": "uv run pytest -q",
+    "exit_code": 0,
+    "passed": 393,
+    "seconds": 24.44,
+    "output": "pytest.txt"
+  },
+  "typescript": {
+    "command": "npm --prefix web run check",
+    "exit_code": 0,
+    "output": "typescript.txt"
+  },
+  "build": {
+    "command": "npm --prefix web run build",
+    "exit_code": 0,
+    "output": "build.txt",
+    "warnings": "Existing lucide-react use-client directive warnings retained; build succeeded"
+  },
+  "workbench_browser": {
+    "command": "npm --prefix web run test:e2e -- --config=.playwright-landing-local.config.ts",
+    "exit_code": 0,
+    "passed": 54,
+    "elapsed_display": "1.0m",
+    "output": "workbench-browser.txt",
+    "config": "workbench-port-config.txt",
+    "scope": "Original disconnected suites, unchanged assertions; temporary port 5207 preserves owner server on 5189",
+    "initial_attempt": "workbench-browser-first.txt; Playwright config merge retained original port. No tests ran. Corrected only the temporary config."
+  },
+  "static_landing": {
+    "command": "node scripts/check_static_landing.cjs http://127.0.0.1:5197/ docs/evidence/landing-demo-nov10",
+    "exit_code": 0,
+    "receipt": "browser.json"
+  },
+  "native_tests_this_pass": false,
+  "native_scenarios_this_pass": false
+}

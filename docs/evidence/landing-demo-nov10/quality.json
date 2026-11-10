@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-11-10T16:31:10.969078+00:00",
+  "scope": "Local static page on loopback; not deployed-host or field-user performance",
+  "driver": "Lighthouse CLI 13.6.0 / Chrome",
+  "thresholds": {
+    "performance": 90,
+    "accessibility": 95,
+    "best-practices": 95,
+    "seo": 95
+  },
+  "reports": {
+    "mobile": {
+      "fetched_at": "2026-11-10T16:29:14.329Z",
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": "2.1\u00a0s",
+        "largest-contentful-paint": "2.1\u00a0s",
+        "total-blocking-time": "40\u00a0ms",
+        "cumulative-layout-shift": "0",
+        "speed-index": "2.1\u00a0s"
+      },
+      "initial_transfer_bytes": 511940,
+      "full_report": "lighthouse-mobile.json.gz",
+      "raw_report_sha256": "5cb92b4210044593d888b7e3d96e73d766d7108f5d41110895c469ed2d3824eb",
+      "command": "CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node .local/site-tools/node_modules/lighthouse/cli/index.js http://127.0.0.1:5197/ --chrome-flags='--headless --no-sandbox' --output=json --output-path=.local/landing-qa/lighthouse-mobile-release.json --only-categories=performance,accessibility,best-practices,seo --quiet"
+    },
+    "desktop": {
+      "fetched_at": "2026-11-10T16:29:26.142Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": "0.5\u00a0s",
+        "largest-contentful-paint": "0.7\u00a0s",
+        "total-blocking-time": "0\u00a0ms",
+        "cumulative-layout-shift": "0",
+        "speed-index": "0.5\u00a0s"
+      },
+      "initial_transfer_bytes": 511940,
+      "full_report": "lighthouse-desktop.json.gz",
+      "raw_report_sha256": "59ff61fc0332c4c86cbc51caba43eac1b958625102af0f47b7444b0476ff27ff",
+      "command": "CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node .local/site-tools/node_modules/lighthouse/cli/index.js http://127.0.0.1:5197/ --preset=desktop --chrome-flags='--headless --no-sandbox' --output=json --output-path=.local/landing-qa/lighthouse-desktop-release.json --only-categories=performance,accessibility,best-practices,seo --quiet"
+    }
+  },
+  "passed": true,
+  "source_sha256": {
+    "docs/site/index.html": "f83eb22b3840260bd9ed5ae5f09985a91cf8f7fdb7de98fa062b0a87b49c6199",
+    "docs/site/styles.css": "603b95e9e1bd15a7d12524932e7d4fa20f654027cb52228417adfc7606da9573",
+    "docs/site/site.js": "872cc463c91fa2ba8779c180d6ffd3a415f7c5d96fb741843226c84952bfbacb"
+  }
+}

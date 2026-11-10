@@ -1,3 +1,25 @@
+# Latest local landing checkpoint — 2026-11-10 22:03:08 IST
+
+The isolated `landing-demo-nov10` candidate adds a static recorded-evidence product
+page, not a hosted native app. **46/46** static checks,
+**54** unchanged disconnected workbench checks,
+**393 pytest in 24.44s**, TypeScript/build pass.
+Latest local Lighthouse: mobile **97/100/100/100**,
+desktop **100/100/100/100**
+(performance/accessibility/best practices/SEO). [Scoped report, outputs and captures](agent-runs/landing-demo-nov10.md).
+
+All **163** compared existing package/runtime/workbench/launcher/front-door
+files are byte-identical to main `9f3178e`; no native scenario or unit-suite rerun
+is claimed. The source branch, PR and Pages publication are not pushed or deployed.
+Native hosting on the requested Crashcart host is blocked by its x86_64
+architecture versus ARM64 154U. [Boundary](evidence/landing-demo-nov10/change-boundary.json)
+· [hosting plan](agent-runs/landing-demo-deployment.md). No IPM, OEX or release edit.
+
+The dated checkpoints below retain their original publication/verification scope;
+their earlier version and pending-state statements are historical.
+
+---
+
 > **PR #4 GitGuardian fix:** the literal required-variable marker was verified and the exact incident classified as a false positive. Compose still rejects missing/empty passwords; startup length/uniqueness checks are unchanged. Local pytest: **393 passed**; configuration checks **7/7**. [Scoped report](agent-runs/gitguardian-pr4.md). Hosted green status requires final PR readback.
 
 > **November 10 voting-week finish:** fresh GitHub candidate `7b3d5ef` is native **0.3.1, prepared but unpublished**. Native **7 classes / 22 methods**, both **12/12** replays, a separate clean archive install, **5/5** live source routes, **16/16** connected browser checks, **393 pytest** and hosted CI pass. The source Compose workbench passes **12/12** and real browser login. **40 Ruff findings remain individually explained**, not suppressed. [Scoped receipts](JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones). Public native IPM/OEX stay **0.3.0**, React **0.2.1**; bonus statuses are unchanged.

@@ -287,3 +287,21 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - Owner authorized fixing the false positive and getting PR #4 green, then stopping before merge. GitGuardian extracted only the literal ?Set from required-value expressions. Verified all ten grouped contexts before classifying the single exact incident 38253018 as Ignored / Not a secret (false positive). No other source repository was modified, no scanner or check was disabled/skipped, no blanket ignore or history rewrite. Existing GitHub sign-in worked without new account, permissions or terms.
 - Simplified the three password guards to standard required-value syntax, retaining rejection of unset/empty values. Startup validation for three distinct passwords of at least twelve characters remains unchanged. Real Compose config checks passed 7/7 without runtime creation or model calls; pytest passed 393 in 21.78s. [Report](gitguardian-pr4.md). Branch push and final hosted checks follow; no merge, readiness change, PR comment, deployment or publication.
+
+### 2026-11-10 21:02:00 IST — Landing/demo task started; required stop at cloud preflight
+
+- Created isolated local branch/worktree landing-demo-nov10 at verified remote main 9f3178e, preserving all original uncommitted work. Read the applicable engineering/design contract, existing site, README, Compose launcher, hosting review and video script. Applied motion-design and browser-recording guidance; no generated narration or provider calls.
+- AWS Core read-only host inventory failed before API execution: UNAUTHORIZED / connection requires reauthentication. The supplied 32.193.44.79 also differs from Crashcart’s locally documented 52.202.25.181 URL. Honored the owner STOP-on-failure/ambiguity rule: no SSH or credential fallback, no site/host change or spending. Partial source audit is in landing-demo-nov10.md. No new page, screenshots/Lighthouse/recording, push/PR/merge, Pages/demo deployment, IPM/OEX/release edit or branch deletion.
+
+### 2026-11-10 21:21:55 IST — Owner-authorized CLI Crashcart preflight
+
+- AWS CLI works; confirmed correct new host crashcart-demo-nov10 / 32.193.44.79. Read-only, strictly pinned SSH reports x86_64 and 2 GiB-class RAM, with 1500553216 bytes available and no swap. Existing Caddy container uses 12.5 MiB; public root and static health return 200, root hash unchanged. No remote mutation, firewall change, container/image transfer or spending. Temporary local SSH keys removed.
+- Stop: current verified SilentShift Compose/image is ARM64-only, so cohosting the verified native stack on this x86_64 host is not an as-is deploy. No unapproved emulation, image/build substitution or static fallback. New branch remains local at 9f3178e; landing, Lighthouse, screenshots/recording, push/PR and deployment remain unperformed. User must resolve native-image/host compatibility or explicitly change demo scope.
+
+### 2026-11-10 22:03:08 IST — CLI landing candidate verified; publication stopped
+
+- Owner explicitly requested independent CLI work after the host preflight. Built the isolated `landing-demo-nov10` static product page from main `9f3178e`; preserved the original checkout and its uncommitted work.
+- Static browser checks 46/46; Python 393 in 24.44s; unchanged workbench suites 54 passed; TypeScript/build pass. Latest Lighthouse mobile 97/100/100/100, desktop 100/100/100/100. Earlier failures and repairs are retained.
+- Created desktop/mobile captures and an actual 19.96s scroll recording. Added a manual-only, main-only Pages workflow; no dispatch or configuration change.
+- Read-only Crashcart inspection confirms x86_64 versus the qualified ARM64 image; native deployment blocked. Root and healthz returned 200; no remote changes or spend. Public OEX is 0.3.1 but body still says native 0.3.0; fields untouched.
+- Decision: prepare local commits and PR copy, then stop for exact `submit` to push/open the PR only. [Report](landing-demo-nov10.md); [quality](../evidence/landing-demo-nov10/quality.json); [tests](../evidence/landing-demo-nov10/tests.json).
