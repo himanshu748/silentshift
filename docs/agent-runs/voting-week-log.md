@@ -95,3 +95,44 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Public native IPM **0.3.0** installed using literal `zpm "install silentshift"`; production started, **5 native classes / 12 methods** passed, and two recorded replays passed **12/12** each, sessions **24 / 58**, quarantined with zero deliveries. Fresh-clone `uv run pytest -q`: **207 passed in 11.40s**. [Receipt](../evidence/voting-week-nov10/judge-main-nov10.json) · [executed commands/output](../evidence/voting-week-nov10/judge-main-commands.txt).
 - The new test IRIS/gateway were retained stopped after capture to limit memory before the separate wrapper check. No prior container, source, model or benchmark result was deleted or changed. No fresh inference or new native live5/5 claim.
 - Found a harness-boundary issue during preparation: current source adds native cited-finding/permission tests that public0.3.0 cannot satisfy. The new launcher now uses a pinned release-matched verification checkout; it does not call an older public package a test of unpublished runtime code. Wrapper native verification is separate and not yet claimed here.
+
+
+## 2026-11-10 15:06:53 IST — Phase 3 judge-path improvements and validation
+
+- Added the source-only `scripts/judge_replay.py` launcher and focused failure-boundary tests. It preflights the exact local build/architecture, gateway, context and port; obtains a pinned compatible verification checkout, generates private credentials, installs public0.3.0 and runs two recorded replays. It never edits existing `.env`, lowers disk limits, pulls an IRIS image, calls a model or replaces a container.
+- Actual launcher gate: **5 native classes / 12 methods**, two **12/12** recorded replays, quarantine and zero deliveries, sessions **24 / 58**; total command **155.331 seconds**. [Receipt](../evidence/voting-week-nov10/judge-wrapper.json). This tests public0.3.0, not unpublished narrative/provider runtime changes.
+- Actual working-tree checks: `uv run pytest -q`: **330 passed in 22.60s**; focused launcher tests: **12 passed in 0.42s**; TypeScript/build passed with existing non-fatal lucide-react directive warnings. A real deliberately missing-image invocation returned the intended clear error before creating run files. All Compose variable names are represented in `.env.example`. [Checks](../evidence/voting-week-nov10/judge-polish-checks.json).
+- README now leads with the operator problem and a no-install video/captured-evidence path. Four existing captures have contextual annotations; measured benchmark results and every honest limit are preserved below that path. Added per-bonus evidence links and a short intended-user/value section. INSTALL distinguishes source branch, public package and unverified build109; the keyless route is one command with three first-run remedies.
+- Earlier link check, before the final README setup consolidation: **52 local paths/anchors** and **7 external URLs**, all resolved. [Receipt](../evidence/voting-week-nov10/judge-links.json). No native runtime source, routing policy, source model execution or UI code was changed in this pass. Pre-existing UI edits and incomplete sealed-run data were preserved, not staged as part of this work.
+
+## 2026-11-10 15:06:53 IST — Phase 4 drafts and Phase 5 daily read-only loop
+
+- Updated the existing [technical article draft](../articles/draft-what-was-hard.md) rather than creating another duplicate. Prepared one [voting-thread comment](voting-thread-comment.md) and one [LinkedIn post](linkedin-post.md), each useful and without vote solicitation, vote exchanges or competitor criticism. All are unsent and require separate exact-`submit` approval. A third article would add no further article-bonus points.
+- Prepared a [future OEX screenshot addendum](oex-screenshot-addendum.md), explicitly separate from the currently approved-for-review description. It was not entered into the OEX form. The currently prepared owner description remains unchanged at its exact-`submit` gate.
+- Prepared the [local CSV media supplement](csv-supplement.md) using existing captured UI, H.264/AAC and captions, not a new live recording. No upload, narration generation, re-upload of the original demo or provider call.
+- Updated the existing monitoring automation, without creating a duplicate, to run daily at **06:00 IST**. It checks public listing, organiser mail including Spam, official leaderboard, meaningful rival updates and existing issue/support feedback; it may append only a factual local log entry. It cannot send, submit, publish, vote, run models/tests, deploy or spend. Its November16 morning check must provide the final read-only status and remove the automation before the 07:00 IST public-change freeze.
+- No public Git push, package publication, OEX edit, email, post/comment, upload, tag/release, questionnaire resubmission or new bug filing occurred. The 14:21 IST email remains the only previously authorised external action in today's log. Remaining gates: description approval, owner merge/publication choices and external idea/bug qualification. No rank or award is predicted.
+
+
+## 2026-11-10 15:09:24 IST — Final local readback for this pass
+
+- The OEX owner form still matches the exact prepared description and shows unpublished changes plus Send for approval. No form action was taken. Both mail conversations were re-read; no new organiser reply has arrived after the authorised 14:21 IST message. The next exact `submit` still refers only to the unchanged OEX description submission, not any post, video, gallery or email.
+- The separate wrapper test containers were retained stopped after evidence capture; no existing app/benchmark container was modified and nothing was deleted. Re-starting the matching retained test pair is required to inspect its printed local trace URL. A user's successful launcher run retains its new resources for inspection.
+- Local CSV supplement: **48.021333 seconds**, **1920×1080 H.264**, silent AAC, English captions, under 50 MiB. Historical November8 captures are visibly labelled throughout, with source hashes in the receipt. No generated voice, staged UI/model response, new live inference, upload or public-demo claim. [Media details](../evidence/voting-week-nov10/csv-supplement.json).
+- No main-branch push, PR edit, registry publication, public listing change or social post occurred. Current docs/harness commits are local on `push/top3`; unrelated pre-existing frontend edits and incomplete sealed-run data remain uncommitted and untouched. This is a local checkpoint, not the November16 final public freeze report.
+
+
+## 2026-11-10 15:13:35 IST — Final documentation checks
+
+- Consolidated the README's full setup instructions into INSTALL rather than duplicating them. Final link probe: **51 local paths/anchors** and **7 external URLs**, all resolved. This is the final receipt; the earlier 52-link count described the pre-consolidation draft.
+- AI Hub issue17 was read again: still open, no comments or labels, no vendor/organizer confirmation. [Readback](../evidence/voting-week-nov10/issue17-final.json). No bug action was taken.
+- The original complete v2 comparison remains in the README with every result/limit, now explicitly labelled as preceding later pipeline changes. The incomplete sealed run is not presented as a result. No label or model output was edited.
+- Native source and UI behavior were not changed in this pass. The new code is only the release-pinned verification launcher and its focused tests. No new source-native5/5, connected-browser or live deployment result is claimed. All gated drafts remain unsent.
+
+### 2026-11-10 15:20:56 IST — Backend addendum, item 1
+
+- Created `backend-polish-nov10`; preserved earlier staged drafts and user UI changes without committing them. No push.
+- Official announcement says: “You can continue improving your application throughout both the submission and voting periods.” Source: https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows (read today).
+- Added host-only stable-code/stage/case-id Event Log messages, Semantic stage traces and one routing info event on the normal path or successful containment. No payload, prompt, provider or exception text is logged.
+- `uv run pytest -q`: 330 passed in 21.92s; [output](../evidence/backend-polish-nov10/01-pytest.txt). Native compilation/readback still pending.
+- Earlier screenshot/Pages work remains queued; community posting is owner-handled. All external actions, including pushes, require exact `submit`.

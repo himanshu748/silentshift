@@ -1,4 +1,4 @@
-Include %occStatus
+Include (%occStatus, Ensemble)
 
 /// Native orchestration: each operation is a real queued host with its own pool.
 Class SilentShift.Process.Semantic Extends Ens.BusinessProcess
@@ -6,6 +6,7 @@ Class SilentShift.Process.Semantic Extends Ens.BusinessProcess
 Method OnRequest(request As SilentShift.Message, Output response As SilentShift.Reply) As %Status
 {
     Set response = ##class(SilentShift.Reply).%New(), id = request.CaseId, stage = "start"
+    $$$TRACE("SS_STAGE stage=start case_id="_id)
     Try {
         If request.Action '= "review_route" {
             Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
@@ -22,11 +23,13 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             Set sc = ##class(SilentShift.Store).AddEvent(id, "semantic_check_started", detail.%ToJSON())
             $$$ThrowOnError(sc)
             Set stage = "reference-retrieval"
+            $$$TRACE("SS_STAGE stage=reference-retrieval case_id="_id)
             Set sc = ..SendRequestSync("References", request, .referenceReply, 10)
             $$$ThrowOnError(sc)
             Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
             Set message = body.%Get("message"), references = body.%Get("references")
             Set stage = "semantic-assessment"
+            $$$TRACE("SS_STAGE stage=semantic-assessment case_id="_id)
             Set assessmentJSON = ##class(SilentShift.Bridge).Assess(body.%Get("raw_payload"), references.%ToJSON(), body.%Get("clock"))
             Set assessment = ##class(%DynamicObject).%FromJSON(assessmentJSON)
             Do body.%Set("assessment", assessment)
@@ -49,6 +52,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             }
             If (approvedCount <= 10) && (peerCount <= 10) {
                 Set stage = "supporting-procedures"
+            $$$TRACE("SS_STAGE stage=supporting-procedures case_id="_id)
                 Set optionalStatus = ..SendRequestSync("Runbooks", request, .runbookReply, 10)
                 Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "matches": [], "decision_authority": false, "failure_code": "RUNBOOK_RETRIEVAL_UNAVAILABLE"}
                 If $$$ISOK(optionalStatus), $ISOBJECT(runbookReply), runbookReply.BodyJSON '= "" {
@@ -62,6 +66,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
                 Set sc = ##class(SilentShift.Store).AddEvent(id, "runbook_retrieved", detail.%ToJSON())
                 $$$ThrowOnError(sc)
                 Set stage = "similar-precedents"
+            $$$TRACE("SS_STAGE stage=similar-precedents case_id="_id)
                 Set optionalStatus = ..SendRequestSync("Precedents", request, .precedentReply, 10)
                 Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "model": "all-minilm:22m", "dimensions": 384, "matches": [], "decision_authority": false, "failure_code": "PRECEDENT_RETRIEVAL_UNAVAILABLE"}
                 If $$$ISOK(optionalStatus), $ISOBJECT(precedentReply), precedentReply.BodyJSON '= "" {
@@ -83,6 +88,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             Set sc = ##class(SilentShift.Store).AddEvent(id, "agent_invoked", detail.%ToJSON())
             $$$ThrowOnError(sc)
             Set stage = "agent-investigation", raw = "", metadata = {"mode": "native-ai-hub", "status": "failed", "failure_code": "AI_UNAVAILABLE_OR_TIMEOUT"}
+            $$$TRACE("SS_STAGE stage=agent-investigation case_id="_id)
             Set sc = ..SendRequestSync("Investigator", request, .agentReply, agentWait)
             If $$$ISOK(sc), $ISOBJECT(agentReply) {
                 Set raw = agentReply.RecommendationJSON
@@ -116,6 +122,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             }
             If policyInput '= "" Do body.%Set("policy_recommendation", ##class(%DynamicObject).%FromJSON(policyInput))
             Set stage = "policy-evaluation"
+            $$$TRACE("SS_STAGE stage=policy-evaluation case_id="_id)
             Set evidenceContext = {"message": (body.%Get("message")), "references": (body.%Get("references"))}
             Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessmentJSON, policyInput, evidenceContext.%ToJSON()))
             Do body.%Set("policy", policy)
@@ -129,11 +136,13 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
             $$$ThrowOnError(sc)
         }
         Set stage = "routing"
+        $$$TRACE("SS_STAGE stage=routing case_id="_id)
         Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id)), policy = body.%Get("policy")
         Set target = "Quarantine"
         If $ISOBJECT(policy), policy.%Get("downstream_permitted") Set target = "Destination"
         Set sc = ..SendRequestSync(target, request, .routeReply, 10)
         $$$ThrowOnError(sc)
+        $$$LOGINFO("SS_ROUTING_FINAL stage=routing case_id="_id)
         // Completed source records become future evidence in a separate pool.
         // Indexing cannot change policy, case state or the committed receipt.
         Set routed = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
@@ -166,6 +175,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
         Set response.BodyJSON = ##class(SilentShift.Store).CaseJSON(id)
         Return $$$OK
     } Catch error {
+        $$$LOGERROR("SS_PRODUCTION_STEP_FAILED stage="_stage_" case_id="_id)
         // Preserve evidence, contain the case, and expose only a stable stage.
         Try {
             Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
@@ -179,9 +189,11 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
                 Set detail = {"code": "PRODUCTION_STEP_FAILED", "stage": (stage), "downstream_effect": false}
                 Set ignored = ##class(SilentShift.Store).AddEvent(id, "processing_failed", detail.%ToJSON())
                 Set ignored = ..SendRequestSync("Quarantine", request, .heldReply, 10)
+                If $$$ISOK(ignored) $$$LOGINFO("SS_ROUTING_FINAL stage=containment case_id="_id)
             }
             Set response.BodyJSON = ##class(SilentShift.Store).CaseJSON(id)
         } Catch containmentError {
+            $$$LOGERROR("SS_CONTAINMENT_FAILED stage=containment case_id="_id)
             Return $$$ERROR($$$GeneralError, "APP_UNAVAILABLE: production failed; delivery was not authorized")
         }
         Return $$$OK

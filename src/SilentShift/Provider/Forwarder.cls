@@ -105,6 +105,7 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         }
         }
     } Catch error {
+        $$$LOGWARNING("SS_PROVIDER_CALL_FAILED stage=provider-forward case_id="_request.CaseId)
         // Never return provider exception text: it can contain response bodies.
         // An OK framework status prevents Ensemble's automatic BO retries.
         Set response.HTTPStatus = 502

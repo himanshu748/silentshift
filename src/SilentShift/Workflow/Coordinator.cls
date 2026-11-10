@@ -1,4 +1,4 @@
-Include %occStatus
+Include (%occStatus, Ensemble)
 
 /// Durable async business process: waits for the native deferred task response
 /// without keeping an HTTP call or operation job waiting for a human.
@@ -20,22 +20,40 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
     Set assessment = body.%Get("assessment")
     If $ISOBJECT(assessment), assessment.%Get("classification") = "VERIFIED_CONTRADICTION" Set task.%Actions = "REJECT"
     Set task.%UserName = "", task.%Title = ""
-    Return ..SendRequestAsync("ReviewWorklist", task, 1, "semantic-human-review", "Native semantic review task")
+    Set sc = ..SendRequestAsync("ReviewWorklist", task, 1, "semantic-human-review", "Native semantic review task")
+    If $$$ISERR(sc) $$$LOGERROR("SS_WORKFLOW_DISPATCH_FAILED stage=workflow-dispatch case_id="_request.CaseId)
+    Return sc
 }
 
 Method OnResponse(request As SilentShift.Message, ByRef response As SilentShift.Reply, callrequest As %Persistent, callresponse As %Persistent, pCompletionKey As %String) As %Status
 {
-    If '$ISOBJECT(callresponse) Return $$$ERROR($$$GeneralError, "Native workflow returned no response")
-    If 'callresponse.%IsA("SilentShift.Workflow.ReviewTask") Return $$$ERROR($$$GeneralError, "Native workflow response type is invalid")
+    If '$ISOBJECT(callresponse) {
+        $$$LOGERROR("SS_WORKFLOW_ASSOCIATION_INVALID stage=workflow-completion case_id="_request.CaseId)
+        Return $$$ERROR($$$GeneralError, "Native workflow returned no response")
+    }
+    If 'callresponse.%IsA("SilentShift.Workflow.ReviewTask") {
+        $$$LOGERROR("SS_WORKFLOW_ASSOCIATION_INVALID stage=workflow-completion case_id="_request.CaseId)
+        Return $$$ERROR($$$GeneralError, "Native workflow response type is invalid")
+    }
     If callresponse.%Action = "DUPLICATE_SUPPRESSED" Return $$$OK
-    If (callresponse.CaseId '= request.CaseId) || 'callresponse.%TaskStatus.IsComplete Return $$$ERROR($$$GeneralError, "Native workflow completion association is invalid")
+    If (callresponse.CaseId '= request.CaseId) || 'callresponse.%TaskStatus.IsComplete {
+        $$$LOGERROR("SS_WORKFLOW_ASSOCIATION_INVALID stage=workflow-completion case_id="_request.CaseId)
+        Return $$$ERROR($$$GeneralError, "Native workflow completion association is invalid")
+    }
     Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(request.CaseId)), workflow = body.%Get("workflow")
-    If '$ISOBJECT(workflow) Return $$$ERROR($$$GeneralError, "Native workflow case association is missing")
-    If workflow.%Get("task_id") '= callresponse.%Id() Return $$$ERROR($$$GeneralError, "Native workflow task association differs")
+    If '$ISOBJECT(workflow) {
+        $$$LOGERROR("SS_WORKFLOW_ASSOCIATION_INVALID stage=workflow-completion case_id="_request.CaseId)
+        Return $$$ERROR($$$GeneralError, "Native workflow case association is missing")
+    }
+    If workflow.%Get("task_id") '= callresponse.%Id() {
+        $$$LOGERROR("SS_WORKFLOW_ASSOCIATION_INVALID stage=workflow-completion case_id="_request.CaseId)
+        Return $$$ERROR($$$GeneralError, "Native workflow task association differs")
+    }
     Set headerId = ""
     If $ISOBJECT(..%CurrentResponseHeader) Set headerId = ..%CurrentResponseHeader.%Id()
     Set data = {"status": "completed", "completion_received": true, "completion_header_id": (headerId), "completion_action": (callresponse.%Action), "completed_by": (callresponse.%UserName), "completion_received_at": (##class(SilentShift.TraceEvent).UTC()), "completion_response_id": (callresponse.%Id())}
     Set sc = ##class(SilentShift.Store).SetWorkflow(request.CaseId, data.%ToJSON(), "workflow_completion_received")
+    If $$$ISERR(sc) $$$LOGERROR("SS_WORKFLOW_SAVE_FAILED stage=workflow-completion case_id="_request.CaseId)
     If $$$ISOK(sc) Set response.BodyJSON = ##class(SilentShift.Store).CaseJSON(request.CaseId)
     Return sc
 }

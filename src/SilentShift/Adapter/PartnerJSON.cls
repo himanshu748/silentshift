@@ -1,4 +1,4 @@
-Include %occStatus
+Include (%occStatus, Ensemble)
 
 /// Trusted-operator UTF-8 JSON drop feed. Atomic rename .json.ready -> .json.work.
 /// Terminal acknowledgments describe persisted outcomes, never transport guesses.
@@ -182,6 +182,7 @@ Method ProcessFile(name As %String, ready As %Boolean) [ Private ]
         }
         Lock -^SilentShift.Lock("partner-file", name)
     } Catch error {
+        $$$LOGERROR("SS_FILE_RECOVERY_REQUIRED stage=partner-file case_id="_$GET(id))
         Set attempt = $INCREMENT(^SilentShift.PartnerFiles("files", name, "failures"))
         Set ^SilentShift.PartnerFiles("files", name, "error") = "FILE_OPERATOR_RECOVERY_REQUIRED"
         Set maximumRetries = $SELECT(..MaxRetries < 1: 1, ..MaxRetries > 5: 5, 1: ..MaxRetries)

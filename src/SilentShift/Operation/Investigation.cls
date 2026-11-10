@@ -1,4 +1,4 @@
-Include %occStatus
+Include (%occStatus, Ensemble)
 
 Class SilentShift.Operation.Investigation Extends Ens.BusinessOperation
 {
@@ -34,6 +34,7 @@ Method Investigate(request As SilentShift.Message, Output response As SilentShif
     // An unavailable agent is a business outcome, not an automatic retry. The
     // process applies fail-closed policy to an empty proposal and holds the case.
     If $$$ISERR(sc) {
+        $$$LOGWARNING("SS_AI_INVESTIGATION_FAILED stage=agent-investigation case_id="_request.CaseId)
         Set metadata = {"mode": "native-ai-hub", "status": "failed", "failure_code": "AI_INVESTIGATION_FAILED"}
         If metadataJSON '= "" Set metadata = ##class(%DynamicObject).%FromJSON(metadataJSON)
         If 'metadata.%IsDefined("failure_code") Do metadata.%Set("failure_code", "AI_INVESTIGATION_FAILED")
