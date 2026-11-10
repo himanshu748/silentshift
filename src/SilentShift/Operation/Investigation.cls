@@ -71,16 +71,28 @@ Method BeginChat(model As %String, started As %String)
 
 /// Server-bound tool observer. Native callbacks only append bounded metadata;
 /// production dispatch is deferred until Chat exits. No tool text is retained.
-Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String, spanId As %String, started As %String, finished As %String = "", records As %Integer = 0, truncated As %Boolean = 0, failureCode As %String = "")
+Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String, spanId As %String, started As %String,
+    finished As %String = "", records As %Integer = 0, truncated As %Boolean = 0, failureCode As %String = "")
 {
     Try {
         If (caseId '= ..TraceCaseId) || '$ISOBJECT(..TraceBuffer) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace scope mismatch"))
-        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") && (toolName '= "find_similar_precedents") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
+        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") && (toolName '= "find_similar_precedents") {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
+        }
         If ..TraceBuffer.%Size() >= 24 {
             Set ..TraceCaptureFailures = ..TraceCaptureFailures + 1
             Return
         }
-        Set item = {"event_kind": (eventKind), "tool_name": (toolName), "span_id": (spanId), "started": (started), "finished": (finished), "records": (records), "truncated": false, "failure_code": (failureCode)}
+        Set item = {
+            "event_kind": (eventKind),
+            "tool_name": (toolName),
+            "span_id": (spanId),
+            "started": (started),
+            "finished": (finished),
+            "records": (records),
+            "truncated": false,
+            "failure_code": (failureCode)
+        }
         Do item.%Set("truncated", truncated, "boolean")
         Do ..TraceBuffer.%Push(item)
     } Catch error {
@@ -147,7 +159,18 @@ Method FinishObservation(metadata As %DynamicObject) [ Private ]
     }
     If $ISOBJECT(metadata.%Get("evidence_budget")) Set event.EvidenceBudgetJSON = metadata.%Get("evidence_budget").%ToJSON()
     Do ..EnqueueTrace(event)
-    Set trace = {"mode": "native-interoperability", "granularity": "agent_invocation_and_tool", "invocation_id": (..TraceInvocationId), "prompt_version": (event.PromptVersion), "enqueued_events": (..TraceEnqueued), "enqueue_failures": (..TraceEnqueueFailures), "capture_failures": (..TraceCaptureFailures), "persistence_status": "async_unverified", "sdk_provider_round_metadata_available": false, "provider_http_trace_available": true}
+    Set trace = {
+        "mode": "native-interoperability",
+        "granularity": "agent_invocation_and_tool",
+        "invocation_id": (..TraceInvocationId),
+        "prompt_version": (event.PromptVersion),
+        "enqueued_events": (..TraceEnqueued),
+        "enqueue_failures": (..TraceEnqueueFailures),
+        "capture_failures": (..TraceCaptureFailures),
+        "persistence_status": "async_unverified",
+        "sdk_provider_round_metadata_available": false,
+        "provider_http_trace_available": true
+    }
     Do metadata.%Set("trace", trace)
     Do metadata.%Set("usage_scope", $SELECT(event.ExecutionMode = "recorded-replay":"unavailable_for_replay",1:"final_response_only"))
     Do metadata.%Set("session_totals", "", "null")

@@ -194,11 +194,30 @@ Method ProcessFile(name As %String, ready As %Boolean) [ Private ]
 Method Outcome(name As %String, item As %DynamicObject) As %DynamicObject [ Private ]
 {
     Set policy = item.%Get("policy"), receipt = ""
-    Set ack = {"protocol": "silentshift-partner-file/1", "file": (name_".json"), "status": "COMPLETED", "input_sha256": ($GET(^SilentShift.PartnerFiles("files", name, "sha256"))), "input_bytes": ($GET(^SilentShift.PartnerFiles("files", name, "bytes"))), "case_id": (item.%Get("id")), "routing": (item.%Get("routing")), "trace_id": (item.%Get("trace_id")), "policy_decision": (policy.%Get("decision")), "delivery_count": (item.%Get("delivery_count")), "delivery_receipt": null, "recorded_at": (##class(SilentShift.TraceEvent).UTC())}
+    Set ack = {
+        "protocol": "silentshift-partner-file/1",
+        "file": (name_".json"),
+        "status": "COMPLETED",
+        "input_sha256": ($GET(^SilentShift.PartnerFiles("files", name, "sha256"))),
+        "input_bytes": ($GET(^SilentShift.PartnerFiles("files", name, "bytes"))),
+        "case_id": (item.%Get("id")),
+        "routing": (item.%Get("routing")),
+        "trace_id": (item.%Get("trace_id")),
+        "policy_decision": (policy.%Get("decision")),
+        "delivery_count": (item.%Get("delivery_count")),
+        "delivery_receipt": null,
+        "recorded_at": (##class(SilentShift.TraceEvent).UTC())
+    }
     Do ack.%Set("duplicate_event", $GET(^SilentShift.PartnerFiles("files", name, "duplicate"), 0), "boolean")
     Set delivery = ##class(SilentShift.Data.Delivery).%OpenId(item.%Get("id"))
     If $ISOBJECT(delivery) {
-        Set receipt = {"case_id": (delivery.CaseId), "delivered_at": (delivery.DeliveredAt), "policy_version": (delivery.PolicyVersion), "case_version": (delivery.CaseVersion), "destination": "included-iris-simulator"}
+        Set receipt = {
+            "case_id": (delivery.CaseId),
+            "delivered_at": (delivery.DeliveredAt),
+            "policy_version": (delivery.PolicyVersion),
+            "case_version": (delivery.CaseVersion),
+            "destination": "included-iris-simulator"
+        }
         Do ack.%Set("delivery_receipt", receipt)
     }
     Return ack
@@ -206,7 +225,17 @@ Method Outcome(name As %String, item As %DynamicObject) As %DynamicObject [ Priv
 
 Method Reject(name As %String, code As %String, id As %String = "") [ Private ]
 {
-    Set ack = {"protocol": "silentshift-partner-file/1", "file": (name_".json"), "status": "REJECTED_INPUT", "error": (code), "case_id": (id), "input_bytes": (##class(%File).GetFileSize(..#ROOT_"/"_name_".json.work")), "input_sha256": null, "delivery_receipt": null, "recorded_at": (##class(SilentShift.TraceEvent).UTC())}
+    Set ack = {
+        "protocol": "silentshift-partner-file/1",
+        "file": (name_".json"),
+        "status": "REJECTED_INPUT",
+        "error": (code),
+        "case_id": (id),
+        "input_bytes": (##class(%File).GetFileSize(..#ROOT_"/"_name_".json.work")),
+        "input_sha256": null,
+        "delivery_receipt": null,
+        "recorded_at": (##class(SilentShift.TraceEvent).UTC())
+    }
     If $GET(^SilentShift.PartnerFiles("files", name, "sha256")) '= "" Do ack.%Set("input_sha256", ^SilentShift.PartnerFiles("files", name, "sha256"))
     If id '= "" Do ack.%Set("status", "OPERATOR_HOLD")
     Set ^SilentShift.PartnerFiles("files", name, "ack") = ack.%ToJSON()

@@ -24,9 +24,13 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
         Set locked = 1, encoded = $GET(^CacheTemp.SilentShift.Provider("call",call,"binding"))
         If encoded = "" Throw ##class(%Exception.General).%New("PROVIDER_CALL_MISSING")
         Set binding = ##class(%DynamicObject).%FromJSON(encoded)
-        If (request.ExecutionMode '= binding.%Get("ExecutionMode", "live")) || (request.ExecutionMode '= ##class(SilentShift.Provider.Lease).ExecutionMode()) Throw ##class(%Exception.General).%New("PROVIDER_MODE_BINDING_INVALID")
+        If (request.ExecutionMode '= binding.%Get("ExecutionMode", "live")) || (request.ExecutionMode '= ##class(SilentShift.Provider.Lease).ExecutionMode()) {
+            Throw ##class(%Exception.General).%New("PROVIDER_MODE_BINDING_INVALID")
+        }
         Set leaseKey = $GET(^CacheTemp.SilentShift.Provider("call",call,"lease"))
-        If (binding.CaseId '= request.CaseId) || (binding.SessionId '= request.ProductionSessionId) || (binding.Model '= request.Model) || (binding.InvocationSpanId '= request.InvocationSpanId) Throw ##class(%Exception.General).%New("PROVIDER_CALL_BINDING_INVALID")
+        If (binding.CaseId '= request.CaseId) || (binding.SessionId '= request.ProductionSessionId) || (binding.Model '= request.Model) || (binding.InvocationSpanId '= request.InvocationSpanId) {
+            Throw ##class(%Exception.General).%New("PROVIDER_CALL_BINDING_INVALID")
+        }
         If (binding.Expires < ##class(SilentShift.Provider.Lease).Seconds()) || '..CaseActive(binding) Throw ##class(%Exception.General).%New("PROVIDER_CALL_EXPIRED")
         If '$DATA(^CacheTemp.SilentShift.Provider("lease",leaseKey,"binding")) Throw ##class(%Exception.General).%New("PROVIDER_LEASE_CLOSED")
         If $GET(^CacheTemp.SilentShift.Provider("call",call,"state")) '= "pending" Throw ##class(%Exception.General).%New("PROVIDER_CALL_ALREADY_SENT")
@@ -63,46 +67,46 @@ Method Forward(request As SilentShift.Provider.CallRequest, Output response As S
                 Set rawResponse=""
             }
         } Else {
-        // EntityBody's legacy stream setter copies a supplied stream into a
-        // GlobalBinaryStream. Set its explicit location before writing instead;
-        // even an accidental save then targets only nonjournaled IRISTEMP.
-        Set http = ##class(%Net.HttpRequest).%New(), inbound = ##class(SilentShift.Provider.BoundedBinaryStream).%New()
-        Set outbound = http.EntityBody
-        Set outbound.%Location = $NAME(^CacheTemp.SilentShift.Provider("call",call,"stream"))
-        Set sc = outbound.Write(raw)
-        $$$ThrowOnError(sc)
-        Set raw = ""
-        Set http.Server = host, http.Port = config.%Get("port"), http.Https = 0
-        Set http.FollowRedirect = 0, http.AcceptGzip = 0, http.PostGzip = 0
-        Set http.ReadRawMode = 1, http.WriteRawMode = 1, http.SocketTimeout = 0
-        Set remaining = binding.Expires-##class(SilentShift.Provider.Lease).Seconds()
-        If remaining < 1 Throw ##class(%Exception.General).%New("PROVIDER_CALL_EXPIRED")
-        Set http.Timeout = remaining, http.OpenTimeout = $SELECT(remaining > 5:5,1:remaining), http.WriteTimeout = $SELECT(remaining > 5:5,1:remaining)
-        Set http.ContentType = "application/json", http.ContentCharset = "utf-8"
-        Set sc = http.SetHeader("Accept-Encoding","identity")
-        $$$ThrowOnError(sc)
-        Set http.ResponseStream = inbound
-        Set sc = http.Post(config.%Get("path"))
-        If '$ISOBJECT(http.HttpResponse) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
-        Set upstream = http.HttpResponse.StatusCode
-        If (upstream < 100) || (upstream > 599) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
-        Set response.UpstreamHTTPStatus = upstream
-        Set contractError = ..ResponseContractError(http.HttpResponse,inbound)
-        If contractError '= "" {
-            Set response.HTTPStatus = 502, response.ErrorCode = contractError
-        } ElseIf inbound.Exceeded || (inbound.Size > ##class(SilentShift.Provider.Lease).#MAXBYTES) {
-            Set response.HTTPStatus = 502, response.ErrorCode = "PROVIDER_RESPONSE_BOUNDS"
-        } Else {
-            If $$$ISERR(sc) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
-            Do inbound.Rewind()
-            Set rawResponse = inbound.Read(##class(SilentShift.Provider.Lease).#MAXBYTES+1)
-            If $LENGTH(rawResponse) > ##class(SilentShift.Provider.Lease).#MAXBYTES Throw ##class(%Exception.General).%New("PROVIDER_RESPONSE_BOUNDS")
-            Set response.HTTPStatus = upstream, response.ResponseBytes = $LENGTH(rawResponse)
-            Set response.ErrorCode = $SELECT(upstream >= 400:"UPSTREAM_HTTP_ERROR",1:"")
-            Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
-            Do ..ResponseMetadata(rawResponse,response)
-            Set rawResponse = ""
-        }
+            // EntityBody's legacy stream setter copies a supplied stream into a
+            // GlobalBinaryStream. Set its explicit location before writing instead;
+            // even an accidental save then targets only nonjournaled IRISTEMP.
+            Set http = ##class(%Net.HttpRequest).%New(), inbound = ##class(SilentShift.Provider.BoundedBinaryStream).%New()
+            Set outbound = http.EntityBody
+            Set outbound.%Location = $NAME(^CacheTemp.SilentShift.Provider("call",call,"stream"))
+            Set sc = outbound.Write(raw)
+            $$$ThrowOnError(sc)
+            Set raw = ""
+            Set http.Server = host, http.Port = config.%Get("port"), http.Https = 0
+            Set http.FollowRedirect = 0, http.AcceptGzip = 0, http.PostGzip = 0
+            Set http.ReadRawMode = 1, http.WriteRawMode = 1, http.SocketTimeout = 0
+            Set remaining = binding.Expires-##class(SilentShift.Provider.Lease).Seconds()
+            If remaining < 1 Throw ##class(%Exception.General).%New("PROVIDER_CALL_EXPIRED")
+            Set http.Timeout = remaining, http.OpenTimeout = $SELECT(remaining > 5:5,1:remaining), http.WriteTimeout = $SELECT(remaining > 5:5,1:remaining)
+            Set http.ContentType = "application/json", http.ContentCharset = "utf-8"
+            Set sc = http.SetHeader("Accept-Encoding","identity")
+            $$$ThrowOnError(sc)
+            Set http.ResponseStream = inbound
+            Set sc = http.Post(config.%Get("path"))
+            If '$ISOBJECT(http.HttpResponse) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
+            Set upstream = http.HttpResponse.StatusCode
+            If (upstream < 100) || (upstream > 599) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
+            Set response.UpstreamHTTPStatus = upstream
+            Set contractError = ..ResponseContractError(http.HttpResponse,inbound)
+            If contractError '= "" {
+                Set response.HTTPStatus = 502, response.ErrorCode = contractError
+            } ElseIf inbound.Exceeded || (inbound.Size > ##class(SilentShift.Provider.Lease).#MAXBYTES) {
+                Set response.HTTPStatus = 502, response.ErrorCode = "PROVIDER_RESPONSE_BOUNDS"
+            } Else {
+                If $$$ISERR(sc) Throw ##class(%Exception.General).%New("PROVIDER_TRANSPORT_FAILED")
+                Do inbound.Rewind()
+                Set rawResponse = inbound.Read(##class(SilentShift.Provider.Lease).#MAXBYTES+1)
+                If $LENGTH(rawResponse) > ##class(SilentShift.Provider.Lease).#MAXBYTES Throw ##class(%Exception.General).%New("PROVIDER_RESPONSE_BOUNDS")
+                Set response.HTTPStatus = upstream, response.ResponseBytes = $LENGTH(rawResponse)
+                Set response.ErrorCode = $SELECT(upstream >= 400:"UPSTREAM_HTTP_ERROR",1:"")
+                Do ..PublishResponse(call,leaseKey,binding,rawResponse,response)
+                Do ..ResponseMetadata(rawResponse,response)
+                Set rawResponse = ""
+            }
         }
     } Catch error {
         $$$LOGWARNING("SS_PROVIDER_CALL_FAILED stage=provider-forward case_id="_request.CaseId)

@@ -25,7 +25,28 @@ Method AsJSON() As %String
 {
     Set tools = []
     If ..ToolNamesJSON '= "" Set tools = ##class(%DynamicArray).%FromJSON(..ToolNamesJSON)
-    Set item = {"trace_schema":"silentshift-provider-call/1","granularity":"provider_http_call","event_kind":"provider_request","call_id":(..CallId),"case_id":(..CaseId),"production_session_id":(..ProductionSessionId),"invocation_span_id":(..InvocationSpanId),"round":(..Round),"model":(..Model),"prompt_version":(..PromptVersion),"started_at":(..StartedAt),"request_bytes":(..RequestBytes),"tool_names":(tools),"application_retry_count":0,"provider_retry_count":null,"fallback_used":false,"content_retained":false,"payload_storage":"IRISTEMP_nonjournaled_until_relay_completion","billing_cost":null,"usage_scope":"actual_http_response_only"}
+    Set item = {
+        "trace_schema":"silentshift-provider-call/1",
+        "granularity":"provider_http_call",
+        "event_kind":"provider_request",
+        "call_id":(..CallId),
+        "case_id":(..CaseId),
+        "production_session_id":(..ProductionSessionId),
+        "invocation_span_id":(..InvocationSpanId),
+        "round":(..Round),
+        "model":(..Model),
+        "prompt_version":(..PromptVersion),
+        "started_at":(..StartedAt),
+        "request_bytes":(..RequestBytes),
+        "tool_names":(tools),
+        "application_retry_count":0,
+        "provider_retry_count":null,
+        "fallback_used":false,
+        "content_retained":false,
+        "payload_storage":"IRISTEMP_nonjournaled_until_relay_completion",
+        "billing_cost":null,
+        "usage_scope":"actual_http_response_only"
+    }
     Do item.%Set("structured_final", ..StructuredFinal, "boolean")
     Do item.%Set("request_phase", $SELECT(..StructuredFinal:"structured-final",1:"sdk-request"))
     Do item.%Set("provider", ..Provider)

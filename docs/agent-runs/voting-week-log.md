@@ -141,3 +141,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 
 - Setup/IPM catch statuses now retain friendly context plus the bounded original error text after configured password/key values are redacted. The same text is stored server-side in `^SilentShift.Diagnostics("last_setup_error")`; persistence failure does not replace the original failure.
 - `uv run pytest -q`: 336 passed in 43.42s ([output](../evidence/backend-polish-nov10/02-pytest.txt)). The increase includes the shell/archive harness tests being prepared independently. Native diagnostic readback is pending.
+
+### 2026-11-10 15:26:19 IST — Backend item 3
+
+- Formatting-only cleanup in the requested classes; the API token stream is unchanged apart from whitespace. XData joins JSON string fragments without separators.
+- Pre-relocation system prompt: 1,959 UTF-8 bytes, SHA-256 `6e7453ef1af46af157c64dbc0ea93953da508c5b278b3dd1c25b71b5ff7aedc3`. Byte-equality regression passed.
+- `uv run pytest -q`: 337 passed in 25.73s ([output](../evidence/backend-polish-nov10/03-pytest.txt)). Native compile remains pending.
