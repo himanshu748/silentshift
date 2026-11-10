@@ -1,0 +1,65 @@
+# Executed in an isolated worktree, branch landing-demo-nov10
+# Base/main/tag: 9f3178e3672d54df5eb711e94d9f688ed450d861
+# No native run, push, PR or deployment.
+
+python3 -m http.server 5197 --bind 127.0.0.1 --directory docs/site
+node --check docs/site/site.js
+npm --prefix web ci --no-audit --no-fund
+uv run pytest -q
+npm --prefix web run check
+npm --prefix web run build
+node scripts/check_static_landing.cjs http://127.0.0.1:5197/ docs/evidence/landing-demo-nov10
+
+# The owner's existing preview occupied 5189. This exact temporary config isolated
+# all original disconnected tests without changing their assertions:
+import { defineConfig } from '@playwright/test';
+import original from './playwright.config';
+
+// Same suite and assertions, isolated port; preserve the owner's server on 5189.
+export default defineConfig({
+  ...original,
+  use: { ...original.use, baseURL: 'http://127.0.0.1:5207' },
+  webServer: {
+    ...original.webServer,
+    command: 'npm run dev -- --port 5207 --strictPort',
+    url: 'http://127.0.0.1:5207',
+  },
+});
+
+npm --prefix web run test:e2e -- --config=.playwright-landing-local.config.ts
+# The temporary web/.playwright-landing-local.config.ts was then removed.
+
+# Local Lighthouse tool dependency, outside package manifests:
+# npm install --prefix .local/site-tools --no-audit --no-fund gsap lighthouse
+# Installed versions recorded by the private lock: GSAP 3.15.1 / Lighthouse 13.6.0.
+CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node .local/site-tools/node_modules/lighthouse/cli/index.js http://127.0.0.1:5197/ --chrome-flags='--headless --no-sandbox' --output=json --output-path=.local/landing-qa/lighthouse-mobile-release.json --only-categories=performance,accessibility,best-practices,seo --quiet
+CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node .local/site-tools/node_modules/lighthouse/cli/index.js http://127.0.0.1:5197/ --preset=desktop --chrome-flags='--headless --no-sandbox' --output=json --output-path=.local/landing-qa/lighthouse-desktop-release.json --only-categories=performance,accessibility,best-practices,seo --quiet
+
+# Actual scroll recording, CLI driver source:
+const fs=require('fs');const {chromium}=require(process.cwd()+'/web/node_modules/playwright');
+(async()=>{const browser=await chromium.launch({channel:'chrome',headless:true});const context=await browser.newContext({viewport:{width:1920,height:1080},recordVideo:{dir:'.local/landing-qa/recording',size:{width:1920,height:1080}}});const page=await context.newPage();await page.goto('http://127.0.0.1:5197/');await page.waitForTimeout(2800);await page.evaluate(async()=>{const end=document.documentElement.scrollHeight-innerHeight;await new Promise(resolve=>{const started=performance.now();function tick(now){const t=Math.min((now-started)/18000,1);const ease=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;scrollTo({top:end*ease,behavior:'instant'});if(t<1)requestAnimationFrame(tick);else resolve();}requestAnimationFrame(tick);});});await page.waitForTimeout(1800);const video=page.video();await context.close();const videoPath=await video.path();await browser.close();fs.writeFileSync('.local/landing-qa/recording-source.json',JSON.stringify({videoPath,driver:'Playwright Chromium / Chrome channel via Node CLI',scope:'Continuous recording of actual static page rendering and GSAP scroll; no native run, simulated inference, cursor overlay or narration',viewport:{width:1920,height:1080},captured_at:new Date().toISOString()},null,2));console.log(videoPath)})().catch(e=>{console.error(e);process.exit(1)});
+
+# Executed: node .local/landing-qa/record.cjs
+# Video encoding / actual ffprobe receipt source:
+import json,subprocess
+from pathlib import Path
+r=json.load(open('.local/landing-qa/recording-source.json'))
+out='docs/evidence/landing-demo-nov10/scroll-preview.mp4'
+subprocess.run(['ffmpeg','-y','-hide_banner','-loglevel','error','-ss','1.5','-i',r['videoPath'],'-t','20','-an','-c:v','libx264','-crf','22','-preset','medium','-pix_fmt','yuv420p','-movflags','+faststart',out],check=True)
+subprocess.run(['ffmpeg','-y','-hide_banner','-loglevel','error','-ss','8','-i',out,'-frames:v','1','-update','1','docs/evidence/landing-demo-nov10/scroll-midpoint.png'],check=True)
+p=subprocess.run(['ffprobe','-v','error','-show_entries','stream=codec_name,width,height,r_frame_rate','-show_entries','format=duration,size','-of','json',out],capture_output=True,text=True,check=True)
+r['videoPath']='<private browser-recording source>';r['output']=out;r['ffprobe']=json.loads(p.stdout);r['encoding']='Trim first 1.5s; 20s requested H.264 segment; no audio, invented frames or native execution';Path('docs/evidence/landing-demo-nov10/recording.json').write_text(json.dumps(r,indent=2)+'\n');print(p.stdout)
+
+# Executed: python3 .local/landing-qa/encode.py
+# Paths and encoded output are in recording.json. No audio or synthetic inference.
+
+# Read-only mutable-state checks:
+git ls-remote origin refs/heads/main refs/tags/v0.3.1
+gh release view v0.3.1 --repo himanshu748/silentshift --json name,tagName,url,targetCommitish,isDraft,publishedAt
+gh run list --repo himanshu748/silentshift --branch main --limit 2 --json databaseId,headSha,conclusion,status,url,name
+docker --context colima-silentshift ps --format '{{.Names}} {{.Status}}'
+# AWS CLI / pinned SSH measurements were read-only. Credentials and account identity
+# stayed in ignored .local; only the redacted result is in host-preflight.json.
+
+# Evidence text paths are normalized to <landing-worktree>; trailing whitespace
+# and blank EOF lines are stripped. Test results and failures are not changed.

@@ -1,0 +1,13 @@
+import { defineConfig } from '@playwright/test';
+import original from './playwright.config';
+
+// Same suite and assertions, isolated port; preserve the owner's server on 5189.
+export default defineConfig({
+  ...original,
+  use: { ...original.use, baseURL: 'http://127.0.0.1:5207' },
+  webServer: {
+    ...original.webServer,
+    command: 'npm run dev -- --port 5207 --strictPort',
+    url: 'http://127.0.0.1:5207',
+  },
+});
