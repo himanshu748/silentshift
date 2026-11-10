@@ -2,6 +2,8 @@
 
 **Public native IPM and OEX release: 0.3.0; separate React frontend: 0.2.1.** The [fresh public install](JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc) passed startup, all native tests and two recorded replays. The [full source gate](JUDGE_VERIFICATION.md#final-release-candidate-source-freeze-november-8-2026-utc) separately covers live investigations, CSV browser import and the web suites. [Published-versus-main ledger](SUBMISSION_CHECKLIST.md#published-vs-main).
 
+The unmerged backend branch prepares native **0.3.1**, verified in [a fresh source load and separate archive install](evidence/voting-finish-nov10/candidate-031-summary.json). It is not public 0.3.0. For a model-free source workbench, use the [Compose option in the install guide](../INSTALL.md#optional-source-workbench-without-a-model); public-package replay stays separately pinned.
+
 An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift helps the integration operator answer the next question: **is there approved evidence that makes this change legitimate?**
 
 Start with **Quantity mismatch**, which holds the unsupported change. Then inspect **Approved amendment**, which allows the same incoming value because an approved amendment is effective at event time. The difference is the authority behind the order. Follow that evidence to the policy decision and the simulator receipt.

@@ -1,0 +1,61 @@
+{
+  "scope": "local Ollama protocol only; outside IRIS, not native or benchmark evidence",
+  "started": 1794241817.513237,
+  "first": {
+    "id": "chatcmpl-744",
+    "object": "chat.completion",
+    "created": 1794241821,
+    "model": "qwen3-silentshift:4b-instruct",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "89H6aRjF5AHCvIATcwJvgPzrjS7K3Xo4",
+              "index": 0,
+              "type": "function",
+              "function": {
+                "name": "GetSyntheticEvidence",
+                "arguments": "{}"
+              }
+            }
+          ]
+        },
+        "finish_reason": "tool_calls"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 189,
+      "completion_tokens": 18,
+      "total_tokens": 207
+    }
+  },
+  "second": {
+    "id": "chatcmpl-493",
+    "object": "chat.completion",
+    "created": 1794241836,
+    "model": "qwen3-silentshift:4b-instruct",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"cited_findings\": [], \"decision\": \"ALLOW\", \"evidence_ids\": [\"toy-contract\"], \"explanation\": \"The order quantity (8 EA) matches the approved quantity (8 EA) and is within the approved authority, thus the order is valid.\", \"uncertainty\": 0}"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 134,
+      "completion_tokens": 68,
+      "total_tokens": 202
+    }
+  },
+  "passed": true,
+  "elapsed_seconds": 18.870747804641724
+}

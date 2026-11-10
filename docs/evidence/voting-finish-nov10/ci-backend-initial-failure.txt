@@ -1,0 +1,110 @@
+local-checks	Run uv run pytest -q	﻿2026-11-10T12:01:05.1647058Z ##[group]Run uv run pytest -q
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1647378Z [36;1muv run pytest -q[0m
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1696914Z shell: /usr/bin/bash -e {0}
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1697169Z env:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1697441Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1697916Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1698360Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1698743Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1699151Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1699540Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+local-checks	Run uv run pytest -q	2026-11-10T12:01:05.1699874Z ##[endgroup]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:07.7975457Z ..............................................F......................... [ 19%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:19.5383963Z ........................................................................ [ 38%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:19.5923967Z ........................................................................ [ 57%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:23.6026780Z ........................................................................ [ 77%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:27.7538724Z ........................................................................ [ 96%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8365466Z .............                                                            [100%]
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8366344Z =================================== FAILURES ===================================
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8367787Z ______________ test_deterministic_baseline_source_has_not_changed ______________
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8368334Z 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8368687Z     def test_deterministic_baseline_source_has_not_changed():
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8369496Z >       frozen=subprocess.check_output(['git','show','d1d752c:python/silentshift/engine.py'],cwd=ROOT,text=True)
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8370133Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8370424Z 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8370586Z tests/test_cited_findings.py:93: 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8370988Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8372377Z /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/subprocess.py:466: in check_output
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8373631Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8374710Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8375274Z 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8375832Z input = None, capture_output = False, timeout = None, check = True
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8376916Z popenargs = (['git', 'show', 'd1d752c:python/silentshift/engine.py'],)
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8378300Z kwargs = {'stdout': -1, 'cwd': PosixPath('/home/runner/work/silentshift/silentshift'), 'text': True}
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8378998Z 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8379201Z     def run(*popenargs,
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8379949Z             input=None, capture_output=False, timeout=None, check=False, **kwargs):
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8380944Z         """Run command with arguments and return a CompletedProcess instance.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8381753Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8382370Z         The returned instance will have attributes args, returncode, stdout and
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8383059Z         stderr. By default, stdout and stderr are not captured, and those attributes
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8383648Z         will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8384173Z         or pass capture_output=True to capture both.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8384460Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8384773Z         If check is True and the exit code was non-zero, it raises a
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8385318Z         CalledProcessError. The CalledProcessError object will have the return code
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8385922Z         in the returncode attribute, and output & stderr attributes if those streams
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8386559Z         were captured.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8387384Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8388010Z         If timeout (seconds) is given and the process takes too long,
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8388796Z          a TimeoutExpired exception will be raised.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8389319Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8389837Z         There is an optional argument "input", allowing you to
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8390759Z         pass bytes or a string to the subprocess's stdin.  If you use this argument
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8391942Z         you may not also use the Popen constructor's "stdin" argument, as
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8392669Z         it will be used internally.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8393116Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8393779Z         By default, all communication is in bytes, and therefore any "input" should
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8394764Z         be bytes, and the stdout and stderr will be bytes. If in text mode, any
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8395756Z         "input" should be a string, and stdout and stderr will be strings decoded
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8396705Z         according to locale encoding, or by "encoding" if set. Text mode is
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8397701Z         triggered by setting any of text, encoding, errors or universal_newlines.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8398376Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8398937Z         The other arguments are the same as for the Popen constructor.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8399577Z         """
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8399933Z         if input is not None:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8400457Z             if kwargs.get('stdin') is not None:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8401760Z                 raise ValueError('stdin and input arguments may not both be used.')
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8402552Z             kwargs['stdin'] = PIPE
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8402978Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8403328Z         if capture_output:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8404076Z             if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8405084Z                 raise ValueError('stdout and stderr arguments may not be used '
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8405937Z                                  'with capture_output.')
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8406558Z             kwargs['stdout'] = PIPE
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8407073Z             kwargs['stderr'] = PIPE
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8407514Z     
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8408000Z         with Popen(*popenargs, **kwargs) as process:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8408558Z             try:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8409195Z                 stdout, stderr = process.communicate(input, timeout=timeout)
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8409968Z             except TimeoutExpired as exc:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8410539Z                 process.kill()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8411035Z                 if _mswindows:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8411922Z                     # Windows accumulates the output in a single blocking
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8412763Z                     # read() call run on child threads, with the timeout
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8413582Z                     # being done in a join() on those threads.  communicate()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8414421Z                     # _after_ kill() is required to collect that and add it
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8415170Z                     # to the exception.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8415850Z                     exc.stdout, exc.stderr = process.communicate()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8416441Z                 else:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8417013Z                     # POSIX _communicate already populated the output so
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8417731Z                     # far into the TimeoutExpired exception.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8418328Z                     process.wait()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8418798Z                 raise
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8419444Z             except:  # Including KeyboardInterrupt, communicate handled that.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8420153Z                 process.kill()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8420852Z                 # We don't call process.wait() as .__exit__ does that for us.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8421695Z                 raise
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8422152Z             retcode = process.poll()
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8422678Z             if check and retcode:
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8423689Z >               raise CalledProcessError(retcode, process.args,
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8424497Z                                          output=stdout, stderr=stderr)
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8426036Z E               subprocess.CalledProcessError: Command '['git', 'show', 'd1d752c:python/silentshift/engine.py']' returned non-zero exit status 128.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8427067Z 
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8427762Z /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/subprocess.py:571: CalledProcessError
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8428453Z ----------------------------- Captured stderr call -----------------------------
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8428899Z fatal: invalid object name 'd1d752c'.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8429318Z =========================== short test summary info ============================
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8430585Z FAILED tests/test_cited_findings.py::test_deterministic_baseline_source_has_not_changed - subprocess.CalledProcessError: Command '['git', 'show', 'd1d752c:python/silentshift/engine.py']' returned non-zero exit status 128.
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.8431799Z 1 failed, 372 passed in 22.95s
+local-checks	Run uv run pytest -q	2026-11-10T12:01:28.9019822Z ##[error]Process completed with exit code 1.

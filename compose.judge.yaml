@@ -1,0 +1,129 @@
+# Source-only keyless judge stack. No image is built or downloaded here.
+# Bring the licensed 154U ARM64 image and the public Gateway/Node images first.
+name: ${COMPOSE_PROJECT_NAME:-silentshift-judge}
+
+# Require external values here; judge-prepare.py checks length and uniqueness.
+x-judge-environment: &judge-environment
+  SILENTSHIFT_IRIS_USERNAME: ${SILENTSHIFT_IRIS_USERNAME:?Set a distinct reviewer username}
+  SILENTSHIFT_IRIS_PASSWORD: ${SILENTSHIFT_IRIS_PASSWORD:?}
+  SILENTSHIFT_VIEWER_USERNAME: ${SILENTSHIFT_VIEWER_USERNAME:?Set a distinct viewer username}
+  SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?}
+  SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?}
+  SILENTSHIFT_JUDGE_PROJECT: ${COMPOSE_PROJECT_NAME:-silentshift-judge}
+  SILENTSHIFT_PROVIDER_MODE: recorded-replay
+  SILENTSHIFT_PROVIDER: ollama
+  SILENTSHIFT_API_KEY: ""
+  SILENTSHIFT_MODEL: qwen3-silentshift:4b-instruct
+  SILENTSHIFT_AGENT_WAIT_SECONDS: "120"
+  SILENTSHIFT_LLM_BASE_URL: http://host.lima.internal:11434/v1/
+  SILENTSHIFT_EMBED_BASE_URL: ""
+  SILENTSHIFT_EMBED_MODEL: all-minilm:22m
+  SILENTSHIFT_PARTNER_FILES_ENABLED: "0"
+
+services:
+  prepare:
+    image: ${IRIS_IMAGE:?Load the official 2026.3.0AI.154.0 Community ARM64 image and set IRIS_IMAGE}
+    pull_policy: never
+    platform: linux/arm64
+    user: "0:0"
+    entrypoint: ["/usr/irissys/bin/irispython"]
+    command: ["/opt/silentshift/docker/judge-prepare.py"]
+    network_mode: none
+    environment: *judge-environment
+    volumes:
+      - ./:/opt/silentshift:ro
+      - judge-state:/silentshift-state
+    restart: "no"
+
+  iris:
+    image: ${IRIS_IMAGE:?Load the official 2026.3.0AI.154.0 Community ARM64 image and set IRIS_IMAGE}
+    pull_policy: never
+    platform: linux/arm64
+    init: true
+    hostname: iris
+    command: ["--after", "/usr/irissys/bin/irispython /opt/silentshift/docker/judge-start.py"]
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+    environment: *judge-environment
+    volumes:
+      - ./:/opt/silentshift:ro
+      - judge-manager:/usr/irissys/mgr
+      - judge-state:/silentshift-state
+    healthcheck:
+      test: ["CMD-SHELL", "test -s /silentshift-state/bootstrap.ok && iris qlist IRIS | cut -d '^' -f 4 | grep -q running"]
+      interval: 3s
+      timeout: 5s
+      start_period: 10s
+      retries: 100
+    mem_limit: 3g
+    cpus: 2
+    shm_size: 256m
+    restart: "no"
+    logging:
+      options:
+        max-size: 10m
+        max-file: "2"
+
+  gateway:
+    image: ${WEBGATEWAY_IMAGE:-containers.intersystems.com/intersystems/webgateway:2026.1}
+    pull_policy: never
+    platform: linux/arm64
+    init: true
+    depends_on:
+      iris:
+        condition: service_healthy
+    environment:
+      ISC_CSP_CONF_FILE: /silentshift-state/CSP.conf
+      ISC_CSP_INI_FILE: /silentshift-state/CSP.ini
+    volumes:
+      - judge-state:/silentshift-state
+    ports:
+      - "127.0.0.1:${SILENTSHIFT_JUDGE_API_PORT:-53033}:80"
+    restart: "no"
+    logging:
+      options:
+        max-size: 10m
+        max-file: "2"
+
+  web:
+    image: ${NODE_IMAGE:-node:24-alpine}
+    pull_policy: never
+    platform: linux/arm64
+    init: true
+    working_dir: /work
+    command: ["node", "/judge-web.mjs"]
+    depends_on:
+      gateway:
+        condition: service_started
+    environment:
+      IRIS_API_ORIGIN: http://gateway/silentshift
+      npm_config_cache: /tmp/npm-cache
+    volumes:
+      - ./web:/source/web:ro
+      - ./docker/judge-web.mjs:/judge-web.mjs:ro
+      - judge-web:/work
+    ports:
+      - "127.0.0.1:${SILENTSHIFT_JUDGE_WEB_PORT:-5193}:5173"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 3s
+      timeout: 5s
+      start_period: 15s
+      retries: 100
+    restart: "no"
+    logging:
+      options:
+        max-size: 10m
+        max-file: "2"
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${SILENTSHIFT_JUDGE_SUBNET:-10.253.247.0/28}
+
+volumes:
+  judge-manager:
+  judge-state:
+  judge-web:

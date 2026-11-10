@@ -1,6 +1,6 @@
 import importlib.util
-from pathlib import Path
 import subprocess
+from pathlib import Path
 from unittest.mock import Mock
 
 spec = importlib.util.spec_from_file_location("compose_support", Path(__file__).parents[1] / "scripts/compose_support.py")

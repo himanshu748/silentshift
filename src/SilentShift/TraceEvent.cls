@@ -33,7 +33,42 @@ Property EvidenceBudgetJSON As %String(MAXLEN = 512);
 
 Method AsJSON() As %String
 {
-    Set item = {"trace_schema": "silentshift-ai-trace/1", "granularity": "agent_invocation_and_tool", "case_id": (..CaseId), "production_session_id": (..ProductionSessionId), "event_kind": (..EventKind), "span_kind": (..SpanKind), "span_id": (..SpanId), "parent_span_id": (..ParentSpanId), "model": (..Model), "prompt_version": (..PromptVersion), "attempt": (..Attempt), "application_retry_count": (..ApplicationRetryCount), "provider_retry_count": null, "fallback_used": false, "model_invoked": false, "native_chat_returned": false, "status": (..Status), "started_at": (..StartedAt), "finished_at": (..FinishedAt), "duration_ms": null, "usage_scope": "final_response_only", "final_response_usage": null, "session_totals": null, "provider_round_usage": null, "provider_round_count": null, "billing_cost": null, "cost_status": "unavailable", "tool_name": (..ToolName), "record_count": null, "evidence_truncated": false, "failure_code": (..FailureCode), "failure_stage": (..FailureStage), "buffered_until_chat_exit": false, "content_retained": false}
+    Set item = {
+        "trace_schema": "silentshift-ai-trace/1",
+        "granularity": "agent_invocation_and_tool",
+        "case_id": (..CaseId),
+        "production_session_id": (..ProductionSessionId),
+        "event_kind": (..EventKind),
+        "span_kind": (..SpanKind),
+        "span_id": (..SpanId),
+        "parent_span_id": (..ParentSpanId),
+        "model": (..Model),
+        "prompt_version": (..PromptVersion),
+        "attempt": (..Attempt),
+        "application_retry_count": (..ApplicationRetryCount),
+        "provider_retry_count": null,
+        "fallback_used": false,
+        "model_invoked": false,
+        "native_chat_returned": false,
+        "status": (..Status),
+        "started_at": (..StartedAt),
+        "finished_at": (..FinishedAt),
+        "duration_ms": null,
+        "usage_scope": "final_response_only",
+        "final_response_usage": null,
+        "session_totals": null,
+        "provider_round_usage": null,
+        "provider_round_count": null,
+        "billing_cost": null,
+        "cost_status": "unavailable",
+        "tool_name": (..ToolName),
+        "record_count": null,
+        "evidence_truncated": false,
+        "failure_code": (..FailureCode),
+        "failure_stage": (..FailureStage),
+        "buffered_until_chat_exit": false,
+        "content_retained": false
+    }
     Do item.%Set("execution_mode", ..ExecutionMode)
     If ..ExecutionMode = "recorded-replay" Do item.%Set("usage_scope", "unavailable_for_replay")
     Do item.%Set("fallback_used", ..FallbackUsed, "boolean")

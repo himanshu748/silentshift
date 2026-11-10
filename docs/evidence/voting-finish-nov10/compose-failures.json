@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-11-10T12:42:42.349368+00:00",
+  "failures": [
+    {
+      "project": "silentshift-judge-finish-nov10",
+      "source_commit": "2fc57f790606a9fabcdae7eb2e4dfb7cb87c7906",
+      "passed": false,
+      "cause": "Parallel native instances exhausted the 2 GiB VM; native startup received signal 9. OOM also interrupted connected reads. No test was weakened.",
+      "receipt": "silentshift-judge-finish-nov10-receipt.json",
+      "output": "silentshift-judge-finish-nov10-02-up.txt"
+    },
+    {
+      "project": "silentshift-judge-finish-serial-nov10",
+      "source_commit": "2fc57f790606a9fabcdae7eb2e4dfb7cb87c7906",
+      "passed": false,
+      "cause": "Fresh-clone frontend bind was read-only and lacked node_modules. Docker could not create the nested volume mountpoint. The next commit isolates writable frontend state instead of making source writable.",
+      "receipt": "silentshift-judge-finish-serial-nov10-receipt.json",
+      "output": "silentshift-judge-finish-serial-nov10-02-up.txt"
+    }
+  ],
+  "resources_deleted": false,
+  "fix_commit": "2dc0e9208da97283695e63fd77808c5f6eb9e3cc"
+}

@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-11-09T06:50:58.314105+00:00",
+  "branch": "push/top3",
+  "runtime": "2026.3.0AI.154.0 / 154U ARM64",
+  "source_install_command": "load /home/irisowner/silentshift-bonus/stage",
+  "source_install_passed": true,
+  "source_mounts": 0,
+  "native_unit_classes": [
+    "SilentShift.Test.AdapterChecks",
+    "SilentShift.Test.ProviderChecks",
+    "SilentShift.Test.ReplayChecks",
+    "SilentShift.Test.RuntimeChecks",
+    "SilentShift.Test.TraceChecks"
+  ],
+  "native_unit_methods": [
+    "TestContracts",
+    "TestIterator",
+    "TestAuthorizationRejectsUnknownCapability",
+    "TestExpiredCapability",
+    "TestMetadataOnlyMessages",
+    "TestPerCallModelTokensAndLatency",
+    "TestPlaybackCannotLookLikeLiveInference",
+    "TestPlaybackScopeAndCriticalPolicy",
+    "TestRecordedResponseProgression",
+    "TestApprovedReferenceLimit",
+    "TestPeerReferenceLimit",
+    "TestTypedMetadata"
+  ],
+  "unit_passed": true,
+  "keyless_end_to_end_replay_passed": false,
+  "external_providers_live_verified": [],
+  "local_protocol_provider_tests": {
+    "passed": 31,
+    "elapsed_seconds": 4.67
+  },
+  "pytest": {
+    "passed": 242,
+    "elapsed_seconds": 8.86
+  },
+  "attempts": [
+    {
+      "container": "silentshift-bonus-load-top3-replay",
+      "status": "interrupted-after-control-daemon-exit",
+      "native_unit_result_retained": false,
+      "deleted_with_user_approval": true
+    },
+    {
+      "container": "silentshift-bonus-load-top3-replay-2",
+      "status": "interrupted-after-control-daemon-exit",
+      "unit_passed": true,
+      "replay_completed": false,
+      "deleted_with_user_approval": true
+    }
+  ],
+  "blocker": "Two native verification attempts interrupted during global VM memory pressure. Kernel OOM log confirms irisdb processes were killed; no completed replay trace is claimed. No third provider gate attempted.",
+  "controls": {
+    "paid_provider_calls": false,
+    "published": false,
+    "main_changed": false
+  },
+  "source_sha256": {
+    "src/SilentShift/Provider/Config.cls": "b69ed5c762178aafb4930931b62b5acac3054f4a72f844fb4adf69ed4361ab93",
+    "src/SilentShift/Provider/Lease.cls": "68a11cb44b0b29c87848467298a6447487bdc4f4fc2aea064a893e7dae32d5cf",
+    "src/SilentShift/Provider/Forwarder.cls": "1a68f36d3493200c84696605c3298ecacc47aee43e02e4f43bc6f2eba51ff0a2",
+    "src/SilentShift/AI/Investigator.cls": "6169c8c2b4f1b7fa687342749283c229acfd2fad97e5be5da2b926618cc59a43",
+    "python/silentshift/provider_config.py": "11d9dda34ba1c3375273506aea03d4411ac9598ed700ef4631a9f0be22b1f292",
+    "python/silentshift/provider_transport.py": "79b3f79610d63151925420e1867a8f024a152e6e44045a130764171fd6ffc70c",
+    "module.xml": "cbef127257738c797410d80ed8432836b91ac8d8aa2c3a4b14c4b756e0a41f6c"
+  }
+}

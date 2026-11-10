@@ -1,4 +1,64 @@
+> **PR #4 GitGuardian fix:** the literal required-variable marker was verified and the exact incident classified as a false positive. Compose still rejects missing/empty passwords; startup length/uniqueness checks are unchanged. Local pytest: **393 passed**; configuration checks **7/7**. [Scoped report](agent-runs/gitguardian-pr4.md). Hosted green status requires final PR readback.
+
+> **November 10 voting-week finish:** fresh GitHub candidate `7b3d5ef` is native **0.3.1, prepared but unpublished**. Native **7 classes / 22 methods**, both **12/12** replays, a separate clean archive install, **5/5** live source routes, **16/16** connected browser checks, **393 pytest** and hosted CI pass. The source Compose workbench passes **12/12** and real browser login. **40 Ruff findings remain individually explained**, not suppressed. [Scoped receipts](JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones). Public native IPM/OEX stay **0.3.0**, React **0.2.1**; bonus statuses are unchanged.
+
 # Build status
+
+## November 10 voting-week judge-path polish (local, not published)
+
+All 44 public contest listings and linked READMEs were read without executing competitors' apps. [Scoped comparison](agent-runs/competitor-scan.md). The judge path now has a local no-install evidence tour and a one-command public-package replay launcher. No native runtime, routing policy, agent behavior, model, build declaration or public package changed in this pass.
+
+The [fresh-main public gate](evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, two **12/12** replays and **207 Python tests**. The [separate launcher gate](evidence/voting-week-nov10/judge-wrapper.json) also passed in a new isolated 154U ARM64 container with pinned release-matched tests. Current local checks: **330 Python tests**, TypeScript and build passed; [scope/warnings](evidence/voting-week-nov10/judge-polish-checks.json). This does not newly qualify the unpublished native source, connected UI, sealed benchmark, x64 or build 109. Existing UI edits and unfinished local evaluation data were preserved.
+
+Public OEX/native IPM stays **0.3.0**, separate React **0.2.1**. OEX description submission is prepared and still gated; the public legacy text has not been corrected by these local changes. Organizer qualification remains unconfirmed; all Not claimed statuses stay unchanged.
+
+
+## Final source checkpoint, November 9
+
+The full Python suite passed **286 tests in 18.88 seconds**, including the new pure trial-duration/timer checks; [exact output](evidence/top3-final-pytest.txt). All **59** native package source files remain byte-identical to the fresh native replay/live snapshot; [source-footprint receipt](evidence/top3-final-source.json). The separate [multi-page/browser/CSV gate](evidence/top3-multipage.json) and [fresh native gate](evidence/top3-quality.json) keep their original execution scope.
+
+The approved AWS trial was stopped early after the direct/resumable transfer failed. Native installation never began, public application ingress never opened, and no cloud investigation or HTTPS demo is claimed. The instance, root volume, security group and key pair were removed; [target-side closure readback](evidence/top3-aws-trial-result.json). The local app, model/archive originals, benchmark and evidence are preserved. No registry or Open Exchange change occurred.
+
+
+## November 9: bounded demo boundary (source branch only)
+
+The new gateway keeps investigation and policy execution inside IRIS. The full Python suite passed **278 tests in 18.40 seconds**. Two actual local guided samples reached the native production; the quantity case held with zero simulator deliveries, and the approved amendment delivered once. Printable native Visual Trace rendered. The second gateway result required operator reconciliation after a gateway restart; its gateway duration is unavailable. Interactive Production Configuration and reviewer task access remain blocked in this restricted demo. [Exact local scope and receipts](evidence/top3-demo-local.json).
+
+AWS deployment is in progress under the owner-approved four-hour CPU trial; local evidence does not establish public availability or an online-demo bonus. No main, registry, listing or video change is authorized.
+
+
+## Serialized source quality gate — November 9, 2026 UTC
+
+The executable source snapshot **`718ec9f65317655379c0194d326f755dccc44a64`** now passes the default-provider fresh-source gate. With the benchmark finished, storage recovered and only one IRIS instance running at a time, **248 Python tests passed in 21.49 seconds**. A new source-loaded **154U ARM64** container with no application mounts passed production startup, **5 native classes / 12 methods** and two **12/12** keyless API replays, sessions **24 / 58**. A separate fresh live source instance passed the same native suite and **5/5** local Ollama scenarios, sessions **30 / 58 / 86 / 113 / 141**. The frontend passed **16** read-only checks against that fresh backend in **16.6 seconds**. [Receipt, source hashes and commands](evidence/top3-quality.json) · [Python output](evidence/top3-quality-pytest.txt) · [replay unit output](evidence/top3-quality-replay-unit.txt) · [live unit output](evidence/top3-quality-live-unit.txt).
+
+The earlier timing and VM-memory failures are retained below; their pending default-provider gates are superseded by this new, serialized pass. Source was not changed to force a pass. These are source loads, not a new public registry install. External provider execution remains unverified. Public IPM/OEX remain **0.3.0**, React **0.2.1**, and no other IRIS build is claimed. Both verification pairs are retained stopped; the normal local production is restored. Subsequent README/design/evidence edits do not alter the verified executable source.
+
+## Unpublished multi-page site — November 9, 2026 UTC
+
+Source `252bdd62ac60a1088320586cfc71e766766c0fb5` adds separate public documents for Home, How it works, Workbench tour, Safeguards, Evidence record and Run locally. Neither repository nor global `AGENTS.md` requires a single-page site. CoCo selected the page hierarchy and visual direction. Existing workbench hash links and the native API proxy remain compatible; public pages make no authenticated API calls. [Receipt, source hashes and scope](evidence/top3-multipage.json).
+
+TypeScript/build passed, including **6** HTML documents. The final browser run passed **54** checks; native read-only checks passed **16** in **35.4 seconds**. Serving the production build with a plain loopback static server passed **12** desktop/mobile document journeys without a single-page fallback. The new CSV UI run passed **32** checks with fresh native traces **3451 / 3479**. All **5/5** fresh live scenarios passed, traces **3506 / 3534 / 3562 / 3589 / 3617**, including actual AI Hub execution, the four evidence-tool reads, idempotent receipts and critical-release denial. [CSV receipt](evidence/top3-multipage-csv-ui.json) · [native scenarios](evidence/top3-multipage-native-five.json) · [browser output](evidence/top3-multipage-browser.txt) · [native browser output](evidence/top3-multipage-native-browser.txt) · [static-document checks](evidence/top3-multipage-static.json).
+
+The first browser attempt retained a real **320px** footer overflow and a menu-test locator error. Both were repaired; no assertion was dropped. Native runtime/policy, API/schema contracts and dependencies were unchanged in this UI pass. This is retained-runtime verification, not a fresh native source load or `%UnitTest` rerun. The full Python rerun after the earlier timing-harness repair remains pending under the two-failure stop rule. Main, README, public IPM/OEX, hosted-demo status and provider-branch verification limits remain unchanged.
+
+## Held-out comparison completed — November 9, 2026 UTC
+
+The frozen release **154U ARM64** evaluation completed **144** native investigations over **48** synthetic orders, retaining **5** failed attempts. Rules-only scored **33/48** correct routes; agent + policy scored **33/48**, **33/48** and **30/48**. It reduced wrong simulator deliveries relative to the baseline's counterfactual releases, but **did not improve correct routing in the unstructured split**: both scored **1/16** per trial. This is not an overall correct-routing improvement or a customer-data accuracy estimate. [Full results and every failure](EVAL_HELDOUT.md) · [coverage](../evidence/heldout/coverage.json) · [integrity receipt](../evidence/heldout/verification.json). README/listing wording remains unchanged pending owner review.
+
+## Earlier CoCo frontend checkpoint — November 9, 2026 UTC
+
+`push/top3` source `7b8b17087f4d2c43b47a16e4a5aafbc55f494118` rebuilds the landing page and native workbench. CoCo chose the visual direction from the product description and existing integration contracts. Authentication, API schemas, dependencies and native policy remain unchanged. The running preview uses the real same-origin IRIS API; no mock case records were added. [Verification receipt](evidence/top3-coco-frontend.json) · [brief](TOP3_FRONTEND_BRIEF.md).
+
+TypeScript and production build passed. The serialized browser suites passed **42** landing/offline/session checks and **16** read-only checks against the retained **154U ARM64** runtime. The rebuilt CSV importer passed **32** checks with two fresh local-model investigations: one quarantined without delivery and one delivered once. The fresh five-scenario native run passed **5/5**, including native execution, all four evidence-tool reads, trace IDs and idempotent receipts. [CSV receipt](evidence/top3-coco-csv-ui.json) · [native scenarios](evidence/top3-coco-native-five.json) · [browser output](evidence/top3-coco-browser.txt) · [connected output](evidence/top3-coco-native-browser.txt).
+
+**Python full-suite follow-up remains pending.** Two full runs ended with Hypothesis wall-clock timing flakes: **246 passed / 2 failed**, then **247 passed / 1 failed**. Their correctness assertions passed on replay. The property-test harness now removes incidental wall-clock deadlines while preserving the generation strategies, example limits and assertions; the focused engine module passed **71 tests in 4.66 seconds** afterward. No third full-suite attempt was made under the two-run limit, so this pass makes no post-repair **248/248** claim. [First output](evidence/top3-coco-python-full-1.txt) · [second output](evidence/top3-coco-python-full-2.txt) · [focused repair check](evidence/top3-coco-engine-harness.txt).
+
+This is retained-runtime frontend and live-scenario verification, **not** a clean source install or a new native `%UnitTest` run. The earlier configurable-provider branch limits below still apply. Main, README, the public package, Open Exchange and the video remain unchanged; this frontend has not been published or deployed. Synthetic inputs and simulator-only delivery remain explicit limits.
+
+## Unpublished provider branch — November 9, 2026
+
+`push/top3` adds deployment-configurable Ollama, OpenAI, Gemini, OpenRouter and OpenAI-compatible routes behind the native provider gateway. Python configuration/protocol tests passed; a clean ARM64 154U source load compiled and its native suite passed **5 classes / 12 methods**. The overall Python suite passed **242 tests**. Two local native attempts were interrupted by VM out-of-memory kills, so the end-to-end replay and actual external-service compatibility remain **unverified**. No third provider gate was attempted. This branch is not main or the public IPM 0.3.0 package. [Partial receipt](evidence/top3-provider-partial-nov9.json) · [Provider configuration and limits](PROVIDERS.md).
+
 
 ## Public native 0.3.0 shipped and verified — November 8, 2026 UTC
 
@@ -309,3 +369,10 @@ Scenario E injects a labeled hostile validator proposal after an actual native r
 The authenticated OEX Apply dialog showed no published application on this account. No separate pre-development registration was found; OEX publication/approval and contest application are separate. Rules/deadline and organizer clarification are in `CONTEST_COMPLIANCE.md`.
 
 </details>
+
+
+## Unpublished prose-repair candidate — November 9 UTC: blocked
+
+The new local push/top3 candidate changes native source and is **not covered by the earlier unchanged-source qualification**. Its Python suite passed 317 tests in 21.54 seconds; the operator-run native suite passed six classes / fifteen methods, and two keyless replays passed 12/12 each. The real live five-case core gate failed twice; the latest attempt had no successful agent/tool executions and held the approved amendment. The current repair is not verified or merge-ready. [Status and receipts](EVAL_SEALED.md).
+
+The v3 labels were sealed before diagnosis and remain untouched; no sealed evaluation or full tuned dev rerun was performed. Public packages, main and the remote draft PR remain unchanged. No hosted demo or measured accuracy improvement is claimed.

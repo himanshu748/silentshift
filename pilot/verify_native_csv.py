@@ -11,13 +11,13 @@ import copy
 import json
 import os
 import shutil
-from pathlib import Path
 import subprocess
 import sys
 import uuid
+from pathlib import Path
 
-from orders import ROOT, Client, prepare
 from bootstrap import read_env
+from orders import ROOT, Client, prepare
 
 
 def main() -> int:
@@ -38,7 +38,7 @@ def main() -> int:
     checks, imports = {}, {}
 
     def run(argv, *, data=None):
-        result = subprocess.run(argv, input=data, text=True, capture_output=True, timeout=600)
+        result = subprocess.run(argv, input=data, text=True, capture_output=True, timeout=600, check=False)
         if result.returncode:
             raise ValueError("Operator command failed; diagnostics withheld")
         return result.stdout
@@ -107,7 +107,9 @@ def main() -> int:
                "--approved", str(output / "approved.csv"), "--submit-local", "--output"]
     def execute_cli(filename):
         result = subprocess.run(command + [str(output / filename)], env=env, text=True,
-                                capture_output=True, timeout=600)
+                                capture_output=True, timeout=600,
+            check=False,
+        )
         if result.returncode:
             raise ValueError("Native CSV CLI failed; inspect its private checkpoint before resuming")
         return json.loads((output / filename).read_text())

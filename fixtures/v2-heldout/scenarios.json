@@ -1,0 +1,1897 @@
+{
+  "dataset_version": "silentshift-heldout/2.0.0",
+  "synthetic": true,
+  "clock": "2026-11-09T06:00:00Z",
+  "label_authoring": "Contract-first, before any rule/model evaluation; implementation-aware author, no independent human adjudication. Prose-source authority is stipulated synthetic input provenance, not email authentication performed by the app.",
+  "scenarios": [
+    {
+      "category": "unstructured",
+      "subtype": "prose_amendment",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-017",
+        "correlation_id": "heldout-order-017",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H017",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "108",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H017:v1",
+          "contract_id": "PO-SYN-H017",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "90",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H017: exactly 90 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment A, effective 8 November 2026 at 00:00 UTC: replace the quantity above with exactly 108 EA for this purchase order. All other terms remain unchanged. This amendment supersedes the quantity in the earlier table.",
+          "text_provenance": {
+            "type": "signed_amendment",
+            "approved_by": "synthetic-buyer-controller",
+            "approved_at": "2026-11-08T00:00:00Z"
+          }
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The signed effective amendment supersedes the table and authorizes exactly the submitted 108 EA."
+      },
+      "id": "HO-001"
+    },
+    {
+      "category": "clean",
+      "subtype": "harmless_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-039",
+        "correlation_id": "heldout-order-039",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H039",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "6",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time",
+        "notes": "Packing comment: expedite if practical; no substitution or quantity change is requested."
+      },
+      "references": [
+        {
+          "id": "reference:H039:v1",
+          "contract_id": "PO-SYN-H039",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "6",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H039: exactly 6 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The incoming values match the effective approved contract; the message comment grants no new authority and changes no commitment."
+      },
+      "id": "HO-002"
+    },
+    {
+      "category": "clean",
+      "subtype": "exact_decimal_equivalence",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-043",
+        "correlation_id": "heldout-order-043",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H043",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "125.00",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H043:v1",
+          "contract_id": "PO-SYN-H043",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "125",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H043: exactly 125 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The submitted 125.00 EA equals the approved 125 EA exactly; decimal formatting does not change quantity."
+      },
+      "id": "HO-003"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-002",
+        "correlation_id": "heldout-order-002",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H002",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "125",
+        "unit": "LB",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H002:v1",
+          "contract_id": "PO-SYN-H002",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "125",
+          "unit": "KG",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H002: exactly 125 KG of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 125 KG; the order declares 125 LB and no conversion is authorized."
+      },
+      "id": "HO-004"
+    },
+    {
+      "category": "clean",
+      "subtype": "inactive_history",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-047",
+        "correlation_id": "heldout-order-047",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H047",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "35",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H047:v1",
+          "contract_id": "PO-SYN-H047",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "35",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H047: exactly 35 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        },
+        {
+          "id": "reference:H047:old",
+          "contract_id": "PO-SYN-H047",
+          "authority": "approved",
+          "effective_from": "2026-10-01T00:00:00Z",
+          "effective_to": "2026-11-01T00:00:00Z",
+          "product_id": "SKU-CERAMIC",
+          "quantity": "999",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Historical approval: 999 EA, expired 1 November. It does not govern this event."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "An unambiguous approved commitment is effective at event time and matches the incoming values; formatting or historical context does not contradict it."
+      },
+      "id": "HO-005"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "prose_supersession_conflict",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-031",
+        "correlation_id": "heldout-order-031",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H031",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "36",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H031:v1",
+          "contract_id": "PO-SYN-H031",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "32",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H031: exactly 32 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This is revision 1; use a later explicitly superseding approved revision if one is supplied."
+        },
+        {
+          "id": "reference:H031:v2",
+          "contract_id": "PO-SYN-H031",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "36",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved revision 2, signed and effective 8 November: this PO now requires exactly 36 EA and expressly supersedes revision 1 in full. The earlier row remains in the export for history only; its effective-to column is stale. Product and business unit are unchanged."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "Approved revision 2 explicitly supersedes revision 1 and authorizes the submitted 36 EA; the old export row is historical."
+      },
+      "id": "HO-006"
+    },
+    {
+      "category": "structured",
+      "subtype": "expired_contract",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-015",
+        "correlation_id": "heldout-order-015",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H015",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "31",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H015:v1",
+          "contract_id": "PO-SYN-H015",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-01T00:30:00Z",
+          "product_id": "SKU-CERAMIC",
+          "quantity": "31",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H015: exactly 31 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This approval expires at 2026-11-01T00:30:00Z; no extension is present."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "The only approval expires at 2026-11-01T00:30:00Z, at or before the event; obtain current authority before release."
+      },
+      "id": "HO-007"
+    },
+    {
+      "category": "structured",
+      "subtype": "expired_contract",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-016",
+        "correlation_id": "heldout-order-016",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H016",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "15.25",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H016:v1",
+          "contract_id": "PO-SYN-H016",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T05:54:59Z",
+          "product_id": "SKU-CERAMIC",
+          "quantity": "15.25",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H016: exactly 15.25 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This approval expires at 2026-11-09T05:54:59Z; no extension is present."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "The only approval expires at 2026-11-09T05:54:59Z, at or before the event; obtain current authority before release."
+      },
+      "id": "HO-008"
+    },
+    {
+      "category": "clean",
+      "subtype": "harmless_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-038",
+        "correlation_id": "heldout-order-038",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H038",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "88",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time",
+        "notes": "Supplier comment: a different customer changed CASE units last week. This purchase order still uses the approved EA terms."
+      },
+      "references": [
+        {
+          "id": "reference:H038:v1",
+          "contract_id": "PO-SYN-H038",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "88",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H038: exactly 88 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The incoming values match the effective approved contract; the message comment grants no new authority and changes no commitment."
+      },
+      "id": "HO-009"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "superseding_email",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-023",
+        "correlation_id": "heldout-order-023",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H023",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "14",
+        "unit": "BUNDLE",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H023:v1",
+          "contract_id": "PO-SYN-H023",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "84",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H023: exactly 84 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "superseding_email": {
+            "sender": "synthetic-authorized-buyer@example.invalid",
+            "verified_by": "synthetic-contracts-desk",
+            "approved_at": "2026-11-08T13:00:00Z",
+            "body": "Regarding this PO, our authorized buying desk approves the exact replacement order 14 BUNDLE, effective immediately. This email supersedes the 84 EA representation in the original schedule. Keep product and business unit unchanged."
+          }
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The independently verified, approved buyer email supersedes the old schedule with exactly 14 BUNDLE."
+      },
+      "id": "HO-010"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-008",
+        "correlation_id": "heldout-order-008",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H008",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "145",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H008:v1",
+          "contract_id": "PO-SYN-H008",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "144",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H008: exactly 144 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 144 EA, not the submitted 145 EA."
+      },
+      "id": "HO-011"
+    },
+    {
+      "category": "clean",
+      "subtype": "exact_decimal_equivalence",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-042",
+        "correlation_id": "heldout-order-042",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H042",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "0.50",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H042:v1",
+          "contract_id": "PO-SYN-H042",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "0.5",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H042: exactly 0.5 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The submitted 0.50 EA equals the approved 0.5 EA exactly; decimal formatting does not change quantity."
+      },
+      "id": "HO-012"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "prose_amendment",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-018",
+        "correlation_id": "heldout-order-018",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H018",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "420",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H018:v1",
+          "contract_id": "PO-SYN-H018",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "450",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H018: exactly 450 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment A, effective 8 November 2026 at 00:00 UTC: replace the quantity above with exactly 420 EA for this purchase order. All other terms remain unchanged. This amendment supersedes the quantity in the earlier table.",
+          "text_provenance": {
+            "type": "signed_amendment",
+            "approved_by": "synthetic-buyer-controller",
+            "approved_at": "2026-11-08T00:00:00Z"
+          }
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The signed effective amendment supersedes the table and authorizes exactly the submitted 420 EA."
+      },
+      "id": "HO-013"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-005",
+        "correlation_id": "heldout-order-005",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H005",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "48",
+        "unit": "PACK",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H005:v1",
+          "contract_id": "PO-SYN-H005",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "48",
+          "unit": "BOX",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H005: exactly 48 BOX of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 48 BOX; the order declares 48 PACK and no conversion is authorized."
+      },
+      "id": "HO-014"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "superseding_email",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-025",
+        "correlation_id": "heldout-order-025",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H025",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "65",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H025:v1",
+          "contract_id": "PO-SYN-H025",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "65",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H025: exactly 65 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "superseding_email": {
+            "sender": "synthetic-authorized-buyer@example.invalid",
+            "verified_by": "synthetic-contracts-desk",
+            "approved_at": "2026-11-08T10:00:00Z",
+            "body": "Cancel this PO effective immediately. This approved cancellation supersedes the earlier 65 EA schedule; no goods may be dispatched."
+          }
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The verified cancellation email supersedes the original schedule and prohibits this 65 EA order."
+      },
+      "id": "HO-015"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "conflicting_prose",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-029",
+        "correlation_id": "heldout-order-029",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H029",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "40",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H029:v1",
+          "contract_id": "PO-SYN-H029",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "40",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H029: exactly 40 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Approved dispatch note: release this order on 9 November. This note has no precedence over other same-day approved notes."
+        },
+        {
+          "id": "reference:H029:v2",
+          "contract_id": "PO-SYN-H029",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "40",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H029: exactly 40 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Approved dispatch note: do not release this order until 12 November. Both notes have equal authority and no supersession or resolution is recorded."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "Two equally approved dispatch notes conflict on release timing; neither may be selected without clarification."
+      },
+      "id": "HO-016"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "buyer_po_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-022",
+        "correlation_id": "heldout-order-022",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H022",
+        "product_id": "SKU-OLD-CLAMP",
+        "quantity": "28",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H022:v1",
+          "contract_id": "PO-SYN-H022",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-OLD-CLAMP",
+          "quantity": "28",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H022: exactly 28 EA of SKU-OLD-CLAMP, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "buyer_po_note": "Signed buyer correction, effective 8 November: replace SKU-OLD-CLAMP with SKU-NEW-CLAMP for all 28 EA. The old clamp must not be supplied. The table has not yet been refreshed."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The effective buyer correction prohibits the old product; this order still supplies SKU-OLD-CLAMP."
+      },
+      "id": "HO-017"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-003",
+        "correlation_id": "heldout-order-003",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H003",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "80",
+        "unit": "GAL",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H003:v1",
+          "contract_id": "PO-SYN-H003",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "80",
+          "unit": "L",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H003: exactly 80 L of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 80 L; the order declares 80 GAL and no conversion is authorized."
+      },
+      "id": "HO-018"
+    },
+    {
+      "category": "clean",
+      "subtype": "unusual_valid_value",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-033",
+        "correlation_id": "heldout-order-033",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H033",
+        "product_id": "SKU-SINGLE-CASE",
+        "quantity": "1",
+        "unit": "CASE",
+        "business_unit": "NORTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H033:v1",
+          "contract_id": "PO-SYN-H033",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-SINGLE-CASE",
+          "quantity": "1",
+          "unit": "CASE",
+          "business_unit": "NORTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H033: exactly 1 CASE of SKU-SINGLE-CASE, business unit NORTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The valid active contract expressly requires 1 CASE of SKU-SINGLE-CASE for NORTH, exactly as submitted."
+      },
+      "id": "HO-019"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "buyer_po_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-020",
+        "correlation_id": "heldout-order-020",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H020",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "12",
+        "unit": "CRATE",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H020:v1",
+          "contract_id": "PO-SYN-H020",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "72",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H020: exactly 72 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "buyer_po_note": "Buyer-authorized PO addendum, signed 8 November: for this PO only, accept the order representation 12 CRATE in place of 72 EA. Each CRATE contains six EA. This explicitly replaces the original representation; no additional quantity is due."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The signed buyer PO addendum explicitly authorizes 12 CRATE as the replacement representation of the 72 EA commitment."
+      },
+      "id": "HO-020"
+    },
+    {
+      "category": "clean",
+      "subtype": "timezone",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-045",
+        "correlation_id": "heldout-order-045",
+        "kind": "order",
+        "occurred_at": "2026-11-09T11:25:00+05:30",
+        "contract_id": "PO-SYN-H045",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "18",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H045:v1",
+          "contract_id": "PO-SYN-H045",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "18",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H045: exactly 18 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "An unambiguous approved commitment is effective at event time and matches the incoming values; formatting or historical context does not contradict it."
+      },
+      "id": "HO-021"
+    },
+    {
+      "category": "clean",
+      "subtype": "harmless_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-037",
+        "correlation_id": "heldout-order-037",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H037",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "14",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time",
+        "notes": "Warehouse memo: the word HOLD printed on the carton is a product label, not an order hold. The approved commitment is unchanged."
+      },
+      "references": [
+        {
+          "id": "reference:H037:v1",
+          "contract_id": "PO-SYN-H037",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "14",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H037: exactly 14 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The incoming values match the effective approved contract; the message comment grants no new authority and changes no commitment."
+      },
+      "id": "HO-022"
+    },
+    {
+      "category": "structured",
+      "subtype": "expired_contract",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-013",
+        "correlation_id": "heldout-order-013",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H013",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "22",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H013:v1",
+          "contract_id": "PO-SYN-H013",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-08T00:00:00Z",
+          "product_id": "SKU-CERAMIC",
+          "quantity": "22",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H013: exactly 22 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This approval expires at 2026-11-08T00:00:00Z; no extension is present."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "The only approval expires at 2026-11-08T00:00:00Z, at or before the event; obtain current authority before release."
+      },
+      "id": "HO-023"
+    },
+    {
+      "category": "clean",
+      "subtype": "unusual_valid_value",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-034",
+        "correlation_id": "heldout-order-034",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H034",
+        "product_id": "SKU-FASTENER",
+        "quantity": "999999",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H034:v1",
+          "contract_id": "PO-SYN-H034",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-FASTENER",
+          "quantity": "999999",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H034: exactly 999999 EA of SKU-FASTENER, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The valid active contract expressly requires 999999 EA of SKU-FASTENER for SOUTH, exactly as submitted."
+      },
+      "id": "HO-024"
+    },
+    {
+      "category": "clean",
+      "subtype": "exact_decimal_equivalence",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-044",
+        "correlation_id": "heldout-order-044",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H044",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "42.000000",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H044:v1",
+          "contract_id": "PO-SYN-H044",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "42.0",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H044: exactly 42.0 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The submitted 42.000000 EA equals the approved 42.0 EA exactly; decimal formatting does not change quantity."
+      },
+      "id": "HO-025"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-006",
+        "correlation_id": "heldout-order-006",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H006",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "300",
+        "unit": "FT",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H006:v1",
+          "contract_id": "PO-SYN-H006",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "300",
+          "unit": "M",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H006: exactly 300 M of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 300 M; the order declares 300 FT and no conversion is authorized."
+      },
+      "id": "HO-026"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "text_only_conversion",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-026",
+        "correlation_id": "heldout-order-026",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H026",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "12",
+        "unit": "BOX",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H026:v1",
+          "contract_id": "PO-SYN-H026",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "96",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H026: exactly 96 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Packing and interface clause: one BOX equals exactly 8 EA for this SKU. This PO expressly permits its 96 EA commitment to be submitted as 12 BOX; the receiver accepts this representation without an additional amendment."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The approved packing/interface clause explicitly permits exactly 12 BOX for the 96 EA commitment."
+      },
+      "id": "HO-027"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-010",
+        "correlation_id": "heldout-order-010",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H010",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "250",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H010:v1",
+          "contract_id": "PO-SYN-H010",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "2500",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H010: exactly 2500 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 2500 EA, not the submitted 250 EA."
+      },
+      "id": "HO-028"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "text_only_conversion",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-027",
+        "correlation_id": "heldout-order-027",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H027",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "10",
+        "unit": "CARTON",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H027:v1",
+          "contract_id": "PO-SYN-H027",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "150",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H027: exactly 150 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Packing and interface clause: one CARTON equals exactly 15 EA for this SKU. This PO expressly permits its 150 EA commitment to be submitted as 10 CARTON; the receiver accepts this representation without an additional amendment."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The approved packing/interface clause explicitly permits exactly 10 CARTON for the 150 EA commitment."
+      },
+      "id": "HO-029"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "buyer_po_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-021",
+        "correlation_id": "heldout-order-021",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H021",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "54",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H021:v1",
+          "contract_id": "PO-SYN-H021",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "54",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H021: exactly 54 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "buyer_po_note": "Approved buyer instruction, issued 8 November at 12:00 UTC for this PO: cancel the order in full. Do not dispatch any goods under the original 54 EA commitment."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved cancellation withdraws the 54 EA commitment before the event; dispatch of this order is prohibited."
+      },
+      "id": "HO-030"
+    },
+    {
+      "category": "clean",
+      "subtype": "unusual_valid_value",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-035",
+        "correlation_id": "heldout-order-035",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H035",
+        "product_id": "SKU-PIGMENT",
+        "quantity": "0.125",
+        "unit": "KG",
+        "business_unit": "LAB",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H035:v1",
+          "contract_id": "PO-SYN-H035",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-PIGMENT",
+          "quantity": "0.125",
+          "unit": "KG",
+          "business_unit": "LAB",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H035: exactly 0.125 KG of SKU-PIGMENT, business unit LAB, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The valid active contract expressly requires 0.125 KG of SKU-PIGMENT for LAB, exactly as submitted."
+      },
+      "id": "HO-031"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-011",
+        "correlation_id": "heldout-order-011",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H011",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "7.5",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H011:v1",
+          "contract_id": "PO-SYN-H011",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "0.75",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H011: exactly 0.75 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 0.75 EA, not the submitted 7.5 EA."
+      },
+      "id": "HO-032"
+    },
+    {
+      "category": "clean",
+      "subtype": "exact_decimal_equivalence",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-041",
+        "correlation_id": "heldout-order-041",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H041",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "10.000",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H041:v1",
+          "contract_id": "PO-SYN-H041",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "10",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H041: exactly 10 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The submitted 10.000 EA equals the approved 10 EA exactly; decimal formatting does not change quantity."
+      },
+      "id": "HO-033"
+    },
+    {
+      "category": "clean",
+      "subtype": "unusual_valid_value",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-036",
+        "correlation_id": "heldout-order-036",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H036",
+        "product_id": "SKU-RESIN",
+        "quantity": "12.750",
+        "unit": "L",
+        "business_unit": "WEST",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H036:v1",
+          "contract_id": "PO-SYN-H036",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-RESIN",
+          "quantity": "12.750",
+          "unit": "L",
+          "business_unit": "WEST",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H036: exactly 12.750 L of SKU-RESIN, business unit WEST, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The valid active contract expressly requires 12.750 L of SKU-RESIN for WEST, exactly as submitted."
+      },
+      "id": "HO-034"
+    },
+    {
+      "category": "clean",
+      "subtype": "effective_start",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-046",
+        "correlation_id": "heldout-order-046",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H046",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "27",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H046:v1",
+          "contract_id": "PO-SYN-H046",
+          "authority": "approved",
+          "effective_from": "2026-11-09T05:55:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "27",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H046: exactly 27 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "An unambiguous approved commitment is effective at event time and matches the incoming values; formatting or historical context does not contradict it."
+      },
+      "id": "HO-035"
+    },
+    {
+      "category": "structured",
+      "subtype": "expired_contract",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-014",
+        "correlation_id": "heldout-order-014",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H014",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "96",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H014:v1",
+          "contract_id": "PO-SYN-H014",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-11-09T05:55:00Z",
+          "product_id": "SKU-CERAMIC",
+          "quantity": "96",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H014: exactly 96 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This approval expires at 2026-11-09T05:55:00Z; no extension is present."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "The only approval expires at 2026-11-09T05:55:00Z, at or before the event; obtain current authority before release."
+      },
+      "id": "HO-036"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-007",
+        "correlation_id": "heldout-order-007",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H007",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "74",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H007:v1",
+          "contract_id": "PO-SYN-H007",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "75",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H007: exactly 75 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 75 EA, not the submitted 74 EA."
+      },
+      "id": "HO-037"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "conflicting_prose",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-030",
+        "correlation_id": "heldout-order-030",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H030",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "120",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H030:v1",
+          "contract_id": "PO-SYN-H030",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "120",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H030: exactly 120 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Approved dispatch note: release this order on 9 November. This note has no precedence over other same-day approved notes."
+        },
+        {
+          "id": "reference:H030:v2",
+          "contract_id": "PO-SYN-H030",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "120",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H030: exactly 120 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Approved dispatch note: do not release this order until 12 November. Both notes have equal authority and no supersession or resolution is recorded."
+        }
+      ],
+      "ground_truth": {
+        "decision": "REQUEST_REVIEW",
+        "reason": "Two equally approved dispatch notes conflict on release timing; neither may be selected without clarification."
+      },
+      "id": "HO-038"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-001",
+        "correlation_id": "heldout-order-001",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H001",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "36",
+        "unit": "CASE",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H001:v1",
+          "contract_id": "PO-SYN-H001",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "36",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H001: exactly 36 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 36 EA; the order declares 36 CASE and no conversion is authorized."
+      },
+      "id": "HO-039"
+    },
+    {
+      "category": "clean",
+      "subtype": "agreeing_references",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-048",
+        "correlation_id": "heldout-order-048",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H048",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "46",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H048:v1",
+          "contract_id": "PO-SYN-H048",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "46",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H048: exactly 46 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        },
+        {
+          "id": "reference:H048:copy",
+          "contract_id": "PO-SYN-H048",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "46",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H048: exactly 46 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Independently approved confirming copy; no changed terms."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "An unambiguous approved commitment is effective at event time and matches the incoming values; formatting or historical context does not contradict it."
+      },
+      "id": "HO-040"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "superseding_email",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-024",
+        "correlation_id": "heldout-order-024",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H024",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "20",
+        "unit": "CARTON",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H024:v1",
+          "contract_id": "PO-SYN-H024",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "200",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H024: exactly 200 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+          "superseding_email": {
+            "sender": "synthetic-authorized-buyer@example.invalid",
+            "verified_by": "synthetic-contracts-desk",
+            "approved_at": "2026-11-08T13:00:00Z",
+            "body": "Regarding this PO, our authorized buying desk approves the exact replacement order 20 CARTON, effective immediately. This email supersedes the 200 EA representation in the original schedule. Keep product and business unit unchanged."
+          }
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The independently verified, approved buyer email supersedes the old schedule with exactly 20 CARTON."
+      },
+      "id": "HO-041"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "text_only_conversion",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-028",
+        "correlation_id": "heldout-order-028",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H028",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "10",
+        "unit": "BOX",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H028:v1",
+          "contract_id": "PO-SYN-H028",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "60",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H028: exactly 60 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Packing clause effective 8 November: each BOX contains eight EA, not the historical six. The exact purchase commitment remains 60 EA. BOX orders must preserve that quantity; no overage is allowed."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "Ten boxes contain 80 EA under the current eight-per-box clause, exceeding the exact 60 EA commitment."
+      },
+      "id": "HO-042"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-009",
+        "correlation_id": "heldout-order-009",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H009",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "12.05",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H009:v1",
+          "contract_id": "PO-SYN-H009",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "12.50",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H009: exactly 12.50 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 12.50 EA, not the submitted 12.05 EA."
+      },
+      "id": "HO-043"
+    },
+    {
+      "category": "clean",
+      "subtype": "harmless_note",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-040",
+        "correlation_id": "heldout-order-040",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H040",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "320",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time",
+        "notes": "Historical note: the previous order was cancelled. This is a distinct approved purchase order with no cancellation instruction."
+      },
+      "references": [
+        {
+          "id": "reference:H040:v1",
+          "contract_id": "PO-SYN-H040",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "320",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H040: exactly 320 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "The incoming values match the effective approved contract; the message comment grants no new authority and changes no commitment."
+      },
+      "id": "HO-044"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "prose_amendment",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-019",
+        "correlation_id": "heldout-order-019",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H019",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "100",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H019:v1",
+          "contract_id": "PO-SYN-H019",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "100",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H019: exactly 100 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment B, effective 8 November 2026: the exact quantity for this PO is reduced to 80 EA; the former 100 EA table entry is obsolete. No over-delivery is permitted."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The effective signed amendment replaces 100 EA with exactly 80 EA; the incoming 100 EA exceeds the new commitment."
+      },
+      "id": "HO-045"
+    },
+    {
+      "category": "unstructured",
+      "subtype": "prose_supersession_conflict",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-032",
+        "correlation_id": "heldout-order-032",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H032",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "100",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H032:v1",
+          "contract_id": "PO-SYN-H032",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "110",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H032: exactly 110 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. This is revision 1; use a later explicitly superseding approved revision if one is supplied."
+        },
+        {
+          "id": "reference:H032:v2",
+          "contract_id": "PO-SYN-H032",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "100",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved revision 2, signed and effective 8 November: this PO now requires exactly 100 EA and expressly supersedes revision 1 in full. The earlier row remains in the export for history only; its effective-to column is stale. Product and business unit are unchanged."
+        }
+      ],
+      "ground_truth": {
+        "decision": "ALLOW",
+        "reason": "Approved revision 2 explicitly supersedes revision 1 and authorizes the submitted 100 EA; the old export row is historical."
+      },
+      "id": "HO-046"
+    },
+    {
+      "category": "structured",
+      "subtype": "unit_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-004",
+        "correlation_id": "heldout-order-004",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H004",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "7",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H004:v1",
+          "contract_id": "PO-SYN-H004",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "7",
+          "unit": "CASE",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H004: exactly 7 CASE of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved commitment is 7 CASE; the order declares 7 EA and no conversion is authorized."
+      },
+      "id": "HO-047"
+    },
+    {
+      "category": "structured",
+      "subtype": "quantity_mismatch",
+      "message": {
+        "source": "synthetic-heldout-partner",
+        "event_id": "heldout-012",
+        "correlation_id": "heldout-order-012",
+        "kind": "order",
+        "occurred_at": "2026-11-09T05:55:00Z",
+        "contract_id": "PO-SYN-H012",
+        "product_id": "SKU-CERAMIC",
+        "quantity": "36",
+        "unit": "EA",
+        "business_unit": "SOUTH",
+        "timestamp_semantics": "event_time"
+      },
+      "references": [
+        {
+          "id": "reference:H012:v1",
+          "contract_id": "PO-SYN-H012",
+          "authority": "approved",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "product_id": "SKU-CERAMIC",
+          "quantity": "18",
+          "unit": "EA",
+          "business_unit": "SOUTH",
+          "timestamp_semantics": "event_time",
+          "contract_text": "Approved purchase order PO-SYN-H012: exactly 18 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them."
+        }
+      ],
+      "ground_truth": {
+        "decision": "QUARANTINE",
+        "reason": "The contract requires exactly 18 EA, not the submitted 36 EA."
+      },
+      "id": "HO-048"
+    }
+  ]
+}

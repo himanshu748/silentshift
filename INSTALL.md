@@ -1,8 +1,8 @@
 # Install SilentShift locally
 
-This guide starts the IRIS backend and the browser workbench. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
+This guide runs the repository source and its separate browser workbench. Source native **0.3.1** is prepared; public native IPM **0.3.0** is a separate release boundary. A source checkout is not a new public package. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
-The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
+The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. Organizers also permit **2027.1.0AI.109.0 Community**, but it has **not** been verified for SilentShift. [Official build clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows). The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.0**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Fresh public installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
 ## Before you start
 
@@ -33,6 +33,19 @@ docker pull containers.intersystems.com/intersystems/webgateway:2026.1
 ```
 
 The tag is a local name for the vendor image you loaded; it does not download IRIS.
+
+## Optional: source workbench without a model
+
+After steps 1–2, you can inspect a real recorded native case without installing Ollama or editing `.env`. Load the public Node helper image, then use the source Compose launcher:
+
+```sh
+docker pull node:24-alpine
+./scripts/judge-compose.sh
+```
+
+Use Compose 2.24 or later. Run one native test stack at a time; the launcher refuses another build-154 instance in this Docker context and does not stop it. It creates a dedicated project, private credentials and volumes, starts the native API and workbench, and runs the unchanged replay assertions. Expect `checks=12/12; passed=true`, a Visual Trace URL and the workbench URL. Read the printed local `runtime.env` file privately for your reviewer login; never copy it into a message or Git. The printed native Visual Trace URL opens the case session. The reviewer can inspect the trace, but reading native message bodies requires an existing administrator with message-content access; the application does not silently widen reviewer permissions. The README includes the captured native bodies for the no-login path. The replay demonstrates a hold only; vector retrieval is intentionally unavailable without embeddings.
+
+[Actual fresh-clone result](docs/evidence/voting-finish-nov10/compose-final.json). This source path is different from the [public-package replay](#optional-check-without-a-model). The [Compose reference](docs/JUDGE_COMPOSE.md) covers different ports, direct `docker compose ... up`, retained resources and failures. For fresh local inference, continue with steps 3–7 instead.
 
 ## 3. Set your local passwords
 
@@ -115,26 +128,26 @@ Stopping containers preserves their database. Do not delete volumes to troublesh
 
 ## Optional: check without a model
 
-This is an alternative **backend verification**, not the full live workbench installation above. It installs the **currently published** native IPM version, starts a separate production, runs native tests and replays one frozen synthetic order. The independently checked public version is **0.3.0**, installed from the community registry in a new isolated container. [Commands and results](docs/JUDGE_VERIFICATION.md#public-030-install--november-8-2026-utc). It does not download or call Ollama. Only the recorded quantity-mismatch case is supported in this mode.
+This alternative verifies the **public native IPM 0.3.0 backend**, not the full web installation or unpublished source features. It uses recorded provider answers for the synthetic quantity-mismatch case. It performs no fresh inference, calls no paid provider and needs no Ollama model or API key.
 
-Complete steps 1–3 first. You can skip steps 4–7. The Web Gateway image must already be loaded. The driver requires at least **1.8 GiB free on the Mac and 3 GiB in the Docker VM**. It refuses an existing container name; choose another suffix and port if you have run this example before.
+1. Start the existing Colima profile as in step 1. Load the separately obtained official **154U ARM64** image and Web Gateway as in step 2. No model, application `.env`, account website login or frontend build is needed for this check.
+2. Run this command from the source checkout containing the launcher:
 
-```sh
-uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
-chmod 644 .local/ipm/vendor/zpm-0.10.10.xml
-PUBLIC_IPM_VERSION=0.3.0
-uv run python scripts/verify_bonus_release.py --source public-registry --install-latest \
-  --version "$PUBLIC_IPM_VERSION" \
-  --execution-mode recorded-replay --container silentshift-bonus-registry-judge \
-  --api-port 52843 --execute
-```
+   ```sh
+   ./scripts/judge-replay.sh
+   ```
 
-The driver uses the public `zpm "install silentshift"` command. It should finish with `unit_suite_passed: true` and `replay_passed: true`. Repeat the API journey and print its Visual Trace URL with:
+The launcher uses isolated Docker containers rather than Compose; the normal live setup above uses Compose. It automatically selects an unused private /28 network without deleting existing networks. If needed, pass a verified disjoint `--network-subnet 10.253.250.0/28`. To load a local vendor archive when the required tag is absent, add `--image-archive /absolute/path/to/official-build154-docker.tar.gz`; the launcher checks build and ARM64 architecture before retagging. It never downloads IRIS.
 
-```sh
-uv run python scripts/trace_example.py \
-  --api http://127.0.0.1:52843/silentshift/api \
-  --context colima-silentshift --container silentshift-bonus-registry-judge
-```
+3. Expect `unit_suite_passed: true`, `replay_passed: true`, then a second `checks=12/12; passed=true`, `routing=QUARANTINED` and `delivery_count=0`. The launcher prints the actual session IDs and local Visual Trace URLs. [Fresh public main commands and output](docs/evidence/voting-week-nov10/judge-main-commands.txt).
+4. Keep the private credentials and test resources for inspection. The launcher prints only the credential **path**, not passwords. Opening the native portal needs a permitted local IRIS account; a printed link is not anonymous portal access.
 
-Expected: `checks=12/12; passed=true`, `routing=QUARANTINED` and `delivery_count=0`. Containers remain available for inspection. Opening the printed native trace requires a permitted local IRIS portal account. [Recorded clean-install commands and results](docs/JUDGE_VERIFICATION.md) are evidence from earlier runs, not additional setup steps.
+The launcher obtains the pinned source snapshot matching the published package's verification harness, downloads the checksum-pinned official IPM installer and runs literal `zpm "install silentshift"`. It creates its own distinct local test accounts in a fresh container; it does not change your existing `.env` or app. It retains the **1.8 GiB host / 3 GiB VM** disk floors. Never lower those limits. Other builds and x64 remain unverified.
+
+| First-run problem | Next action |
+| --- | --- |
+| Required local IRIS image missing | Obtain the official build-154 Community ARM64 archive yourself, then follow step 2 to load and tag it. The launcher does not download or redistribute it |
+| Docker context unavailable | Run `colima start --profile silentshift`; the launcher defaults to `colima-silentshift` and leaves Docker's default context unchanged |
+| API port occupied or a requested container exists | Choose another `--api-port`, for example `52983`, and let the launcher choose a fresh name. It never replaces a container |
+
+A fresh run may take several minutes for IPM download/compilation. Test containers remain available afterward; stopping them preserves their state. [Detailed historical driver commands](docs/JUDGE_VERIFICATION.md) are evidence, not additional setup steps. The public-package launcher deliberately uses release-matched 0.3.0 assertions. Its result does not validate the newer source candidate; [source verification](docs/JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones) records that separate boundary.

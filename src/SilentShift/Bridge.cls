@@ -1,30 +1,42 @@
 /// Pure Python business arithmetic executes inside IRIS, never an external API.
 Class SilentShift.Bridge Extends %RegisteredObject
 {
+/// Initialize application imports only; callers retain their existing modules.
+ClassMethod Import() [ Language = python ]
+{
+    import iris, sys
+    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
+    if asset_python not in sys.path:
+        sys.path.insert(0, asset_python)
+}
+
+/// The catalog has its own legacy API version; routing policy is unchanged.
+ClassMethod PolicyRules() As %String [ Language = python ]
+{
+    import iris, json
+    iris.cls('SilentShift.Bridge').Import()
+    from silentshift.engine import RULES
+    return json.dumps(RULES, separators=(',', ':'))
+}
+
 ClassMethod Assess(messageJSON As %String, referencesJSON As %String, clock As %String) As %String [ Language = python ]
 {
     import iris, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.engine import assess_json
     return assess_json(messageJSON, referencesJSON, clock)
 }
-ClassMethod Policy(assessmentJSON As %String, recommendationJSON As %String) As %String [ Language = python ]
+ClassMethod Policy(assessmentJSON As %String, recommendationJSON As %String, evidenceContextJSON As %String = "") As %String [ Language = python ]
 {
     import iris, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.engine import policy_json
-    return policy_json(assessmentJSON, recommendationJSON)
+    return policy_json(assessmentJSON, recommendationJSON, evidence_context_json=evidenceContextJSON)
 }
 ClassMethod Canonical(value As %String) As %String [ Language = python ]
 {
     import iris, json, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.engine import strict_loads
     return json.dumps(strict_loads(value, max_bytes=1048576), sort_keys=True, separators=(',', ':'), allow_nan=False)
 }
@@ -52,9 +64,7 @@ ClassMethod FixtureJSON() As %String [ Language = python ]
 ClassMethod IsRequiredBuild(version As %String) As %Boolean [ Language = python ]
 {
     import iris, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.evaluation import _build154
     return _build154(version)
 }
@@ -63,9 +73,7 @@ ClassMethod IsRequiredBuild(version As %String) As %Boolean [ Language = python 
 ClassMethod Embed(textsJSON As %String, base As %String = "", model As %String = "") As %String [ Language = python ]
 {
     import iris, json, os, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.embeddings import encode
     base = base or os.environ.get('SILENTSHIFT_EMBED_BASE_URL', '')
     model = model or os.environ.get('SILENTSHIFT_EMBED_MODEL', 'all-minilm:22m')

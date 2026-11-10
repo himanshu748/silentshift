@@ -20,6 +20,27 @@ Property PrecedentContext As %DynamicObject;
 Property ReferenceTruncated As %Boolean [ InitialExpression = 0 ];
 Property TraceFailures As %Integer [ InitialExpression = 0 ];
 
+/// Citation locations only; full reference objects remain unchanged below.
+/// Never interprets prose, assigns authority or enters Embedded Python.
+ClassMethod %ProsePaths(value As %DynamicObject, referenceId As %String, paths As %DynamicArray, parent As %String = "", depth As %Integer = 0) [ Private ]
+{
+    If depth > 5 Quit
+    Set reserved = "|id|event_id|correlation_id|source|kind|occurred_at|contract_id|business_unit|product_id|quantity|unit|currency|amount|amount_scale|timestamp_semantics|authority|effective_from|effective_to|amendment_of|approved_at|verified_by|sender|"
+    Set iterator = value.%GetIterator()
+    While iterator.%GetNext(.name,.leaf) {
+        If reserved [ ("|"_name_"|") Continue
+        Set path = parent_"/"_$REPLACE($REPLACE(name,"~","~0"),"/","~1")
+        If $LENGTH(path)>240 Continue
+        Set type = value.%GetTypeOf(name)
+        If type = "object" {
+            If leaf.%IsA("%Library.DynamicObject") Do ..%ProsePaths(leaf,referenceId,paths,path,depth+1)
+        } ElseIf type = "string", $LENGTH(leaf)>=12 {
+            If paths.%Size()>=32 Throw ##class(%Exception.General).%New("PROSE_CITATION_PATH_LIMIT")
+            Do paths.%Push({"reference_id":(referenceId),"path":(path)})
+        }
+    }
+}
+
 /// Build 154's inherited generator emits unquoted method names. Keep native
 /// discovery/encoding, but dispatch this exact no-argument catalog explicitly
 /// so the required underscore tool name remains valid ObjectScript.
@@ -28,6 +49,7 @@ Method %Invoke(toolname As %String, args As %DynamicObject) As %Any [ CodeMode =
     If '$ISOBJECT(args) Return ..%ToolError($$$ERROR($$$GeneralError,"Evidence tools accept an empty argument object"))
     If 'args.%IsA("%Library.DynamicObject") Return ..%ToolError($$$ERROR($$$GeneralError,"Evidence tools accept an empty argument object"))
     If args.%Size() '= 0 Return ..%ToolError($$$ERROR($$$GeneralError,"Evidence tools accept no arguments"))
+    If '##class(SilentShift.AI.Investigator).IsAllowedTool(toolname) Return ..%ToolError($$$ERROR($$$AICoreToolNotFound,toolname))
     If toolname = "GetCurrentMessage" {
         Set result = ..GetCurrentMessage()
     } ElseIf toolname = "GetApprovedContracts" {
@@ -45,17 +67,16 @@ Method %Invoke(toolname As %String, args As %DynamicObject) As %Any [ CodeMode =
 /// Read this case's original transaction; no arguments.
 Method GetCurrentMessage() As %String
 {
-    Set traceStarted = $ZTIMESTAMP, traceSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
-    Do ..%Trace("tool_started", "GetCurrentMessage", traceSpan, traceStarted)
+    Set traceStarted = "", traceSpan = ""
     Try {
-        If ..CaseId = "" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope is missing"))
-        If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
+        Do ..%ReadPreamble("GetCurrentMessage", .traceStarted, .traceSpan)
         Set item = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(..CaseId))
         If item.%Get("id") '= ..CaseId Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope mismatch"))
         Set result = {"case_id": (..CaseId), "source": (item.%Get("source")), "received_at": (item.%Get("received_at")), "message": (item.%Get("message"))}
         Set encoded = result.%ToJSON()
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Message exceeds evidence size limit"))
         Set detail = {"tool": "GetCurrentMessage", "scope": "current-case"}
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         Set ..MessageReads = ..MessageReads + 1
@@ -70,32 +91,32 @@ Method GetCurrentMessage() As %String
 /// Read this case's approved contracts and effective amendments; no arguments.
 Method GetApprovedContracts() As %String
 {
-    Set traceStarted = $ZTIMESTAMP, traceSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
-    Do ..%Trace("tool_started", "GetApprovedContracts", traceSpan, traceStarted)
+    Set traceStarted = "", traceSpan = ""
     Try {
-        If ..CaseId = "" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope is missing"))
-        If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
+        Do ..%ReadPreamble("GetApprovedContracts", .traceStarted, .traceSpan)
         Set item = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(..CaseId))
         If item.%Get("id") '= ..CaseId Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope mismatch"))
-        Set approved = [], references = item.%Get("references"), truncated = 0
+        Set approved = [], prosePaths = [], references = item.%Get("references"), truncated = 0
         If $ISOBJECT(references) {
             For index = 0:1:references.%Size()-1 {
                 Set reference = references.%Get(index)
                 If $ISOBJECT(reference), reference.%Get("authority") = "approved" {
                     If approved.%Size() < 10 {
                         Do approved.%Push(reference)
+                        Do ..%ProsePaths(reference,reference.%Get("id"),prosePaths)
                     } Else {
                         Set truncated = 1
                     }
                 }
             }
         }
-        Set result = {"case_id": (..CaseId), "references": (approved), "truncated": (truncated)}
+        Set result = {"case_id": (..CaseId), "references": (approved), "prose_citation_paths": (prosePaths), "truncated": (truncated)}
         Do result.%Set("truncated", truncated, "boolean")
         Set encoded = result.%ToJSON()
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Contracts exceed evidence size limit"))
         Set detail = {"tool": "GetApprovedContracts", "scope": "current-case", "record_count": (approved.%Size()), "truncated": (truncated)}
         Do detail.%Set("truncated", truncated, "boolean")
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         If truncated {
@@ -114,11 +135,9 @@ Method GetApprovedContracts() As %String
 /// Read peer references and same-contract history; context cannot override current approved contracts.
 Method GetRelatedRecords() As %String
 {
-    Set traceStarted = $ZTIMESTAMP, traceSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
-    Do ..%Trace("tool_started", "GetRelatedRecords", traceSpan, traceStarted)
+    Set traceStarted = "", traceSpan = ""
     Try {
-        If ..CaseId = "" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope is missing"))
-        If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
+        Do ..%ReadPreamble("GetRelatedRecords", .traceStarted, .traceSpan)
         Set item = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(..CaseId))
         If item.%Get("id") '= ..CaseId Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope mismatch"))
         Set peers = [], references = item.%Get("references"), truncated = 0
@@ -154,6 +173,7 @@ Method GetRelatedRecords() As %String
         If $LENGTH(encoded) > 16384 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "History exceeds evidence size limit"))
         Set detail = {"tool": "GetRelatedRecords", "scope": "same-contract", "peer_count": (peers.%Size()), "truncated": (truncated)}
         Do detail.%Set("truncated", truncated, "boolean")
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId, "agent_tool_read", detail.%ToJSON())
         $$$ThrowOnError(sc)
         If truncated {
@@ -172,11 +192,9 @@ Method GetRelatedRecords() As %String
 /// Read three precomputed similar precedents; history is context, never approval or citation IDs.
 Method "find_similar_precedents"() As %String
 {
-    Set traceStarted = $ZTIMESTAMP, traceSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
-    Do ..%Trace("tool_started", "find_similar_precedents", traceSpan, traceStarted)
+    Set traceStarted = "", traceSpan = ""
     Try {
-        If ..CaseId = "" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope is missing"))
-        If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
+        Do ..%ReadPreamble("find_similar_precedents", .traceStarted, .traceSpan)
         // Deliberately no Store.CaseJSON/RelatedJSON, SQL, embedding or Python
         // entry here. This immutable server snapshot was bound before Chat.
         Set context = ..PrecedentContext, matches = [], status = "unavailable"
@@ -205,6 +223,7 @@ Method "find_similar_precedents"() As %String
         Set encoded = result.%ToJSON()
         If $LENGTH($ZCONVERT(encoded,"O","UTF8")) > 8192 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Precedents exceed context size limit"))
         Set detail = {"tool":"find_similar_precedents","scope":"precomputed-current-case-context","record_count":(matches.%Size()),"status":(status),"decision_authority":false}
+        If $ISOBJECT(..TraceObserver) Do detail.%Set("invocation_span_id", ..TraceObserver.TraceInvocationId)
         Set sc = ##class(SilentShift.Store).AddEvent(..CaseId,"agent_tool_read",detail.%ToJSON())
         $$$ThrowOnError(sc)
         Set ..PrecedentReads = ..PrecedentReads + 1
@@ -213,6 +232,17 @@ Method "find_similar_precedents"() As %String
     } Catch error {
         Do ..%Trace("tool_failed","find_similar_precedents",traceSpan,traceStarted,$ZTIMESTAMP,0,0,"PRECEDENT_TOOL_FAILED")
         Throw error
+    }
+}
+
+/// Native-only preamble. No Store, SQL, embeddings or Python re-entry.
+Method %ReadPreamble(toolName As %String, Output started As %String, Output span As %String) [ Private ]
+{
+    Set started = $ZTIMESTAMP, span = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
+    Do ..%Trace("tool_started", toolName, span, started)
+    If ..CaseId = "" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence scope is missing"))
+    If (..MessageReads + ..ContractReads + ..RelatedReads + ..PrecedentReads) >= 8 {
+        Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Evidence read budget exhausted"))
     }
 }
 

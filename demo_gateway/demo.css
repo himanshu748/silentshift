@@ -1,0 +1,23 @@
+.demo-header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 16px 0; }
+.demo-header > .link { margin-left: auto; }
+.demo-main { max-width: 1040px; padding-top: 64px; padding-bottom: 64px; }
+.demo-main h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.06; letter-spacing: -.04em; margin: 20px 0 28px; }
+.demo-lead { max-width: 65ch; font-size: 1.2rem; line-height: 1.6; }
+.demo-main > section { margin-top: 28px; }
+.demo-controls fieldset { display: grid; gap: 12px; border: 0; margin: 20px 0; padding: 0; }
+.demo-sample { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px; cursor: pointer; }
+.demo-sample input { margin-top: 5px; flex: 0 0 auto; }
+.demo-sample span { display: grid; gap: 6px; }
+.demo-sample span span { color: var(--ink-2); }
+.demo-sample:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.demo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.demo-actions .btn { min-height: 44px; white-space: normal; }
+.demo-result .meta div { min-width: 0; }
+.demo-result .meta dd { overflow-wrap: anywhere; }
+.demo-result pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 400px; overflow-y: auto; }
+#error { color: var(--hold); border-left: 3px solid currentColor; padding-left: 12px; }
+#viewer-access { max-width: 520px; padding: 16px 0; }
+#viewer-access input { width: 100%; margin: 6px 0 16px; }
+.demo-limits { color: var(--ink-2); font-size: var(--t-13); }
+[hidden] { display: none !important; }
+@media (max-width: 600px) { .demo-main { padding-top: 32px; } .demo-header > .link { margin-left: 0; } }

@@ -89,7 +89,19 @@ ClassMethod CaseDocument(id As %String) As %DynamicObject [ Private ]
     }
     If resolved = "" Return ""
     Set summary = $EXTRACT(record.Routing_". "_..BusinessText(message)_". Assessment: "_assessment.%Get("classification"),1,400)
-    Set document = {"source_type":"resolved_case","source_id":(id),"source_key":(id),"source_scope":(record.ScenarioId),"source_hash":(record.Fingerprint),"contract_id":(record.ContractId),"kind":(message.%Get("kind")),"summary":(summary),"outcome":(record.Routing),"resolved_at":(resolved),"synthetic":null}
+    Set document = {
+        "source_type":"resolved_case",
+        "source_id":(id),
+        "source_key":(id),
+        "source_scope":(record.ScenarioId),
+        "source_hash":(record.Fingerprint),
+        "contract_id":(record.ContractId),
+        "kind":(message.%Get("kind")),
+        "summary":(summary),
+        "outcome":(record.Routing),
+        "resolved_at":(resolved),
+        "synthetic":null
+    }
     If body.%GetTypeOf("synthetic") = "boolean" Do document.%Set("synthetic",body.%Get("synthetic"),"boolean")
     Return ..Seal(document)
 }
@@ -117,7 +129,19 @@ ClassMethod AmendmentDocument(key As %String) As %DynamicObject [ Private ]
     Set kind = $SELECT(value.%IsDefined("quantity") && value.%IsDefined("unit"):"order",value.%IsDefined("amount") && value.%IsDefined("currency"):"payment",1:"")
     If kind = "" Return ""
     Set summary = $EXTRACT("APPROVED_AMENDMENT. "_..BusinessText(value,kind)_". Effective from "_effective,1,400)
-    Set document = {"source_type":"approved_amendment","source_id":(record.ReferenceId),"source_key":(key),"source_scope":(record.ScenarioScope),"source_hash":(##class(SilentShift.Bridge).Hash(record.Body)),"contract_id":(record.ContractId),"kind":(kind),"summary":(summary),"outcome":"APPROVED_AMENDMENT","resolved_at":(effective),"synthetic":null}
+    Set document = {
+        "source_type":"approved_amendment",
+        "source_id":(record.ReferenceId),
+        "source_key":(key),
+        "source_scope":(record.ScenarioScope),
+        "source_hash":(##class(SilentShift.Bridge).Hash(record.Body)),
+        "contract_id":(record.ContractId),
+        "kind":(kind),
+        "summary":(summary),
+        "outcome":"APPROVED_AMENDMENT",
+        "resolved_at":(effective),
+        "synthetic":null
+    }
     If value.%GetTypeOf("synthetic") = "boolean" {
         Do document.%Set("synthetic",value.%Get("synthetic"),"boolean")
     } ElseIf record.ScenarioScope '= "" {
@@ -203,22 +227,34 @@ ClassMethod Seed(Output report As %String, maxCases As %Integer = 100) As %Statu
     If $$$ISERR(sc) Return sc
     Set sc = ..IndexHistory(.history,maxCases)
     If $$$ISERR(sc) Return sc
-    Set report = {"status":"indexed","model":"all-minilm:22m","dimensions":384,"approved_amendments":(##class(%DynamicObject).%FromJSON(amendments)),"resolved_cases":(##class(%DynamicObject).%FromJSON(history)),"decision_authority":false}.%ToJSON()
+    Set report = {
+        "status":"indexed",
+        "model":(..#MODEL),
+        "dimensions":(..#DIMENSIONS),
+        "approved_amendments":(##class(%DynamicObject).%FromJSON(amendments)),
+        "resolved_cases":(##class(%DynamicObject).%FromJSON(history)),
+        "decision_authority":false
+    }.%ToJSON()
     Return $$$OK
 }
 
-/// Embeddings happen outside transactions/locks in batches of at most16.
+/// Embeddings happen outside transactions/locks in batches of at most 16.
 /// A per-source lock then serializes each single-statement SQL upsert.
 ClassMethod Persist(documents As %DynamicArray, Output report As %String) As %Status [ Private ]
 {
     Set report = "", locked = 0
     Try {
         If $TLEVEL || (documents.%Size() > 100) Return $$$ERROR($$$GeneralError,"PRECEDENT_INDEX_LIMIT")
-        Set select = ##class(%SQL.Statement).%New(), sc = select.%Prepare("SELECT PrecedentId,ContentHash,EmbeddingModel,CASE WHEN Embedding IS NULL THEN 0 ELSE 1 END AS VectorPresent FROM SilentShift_Data.Precedent WHERE PrecedentId = ?")
+        Set select = ##class(%SQL.Statement).%New(), sc = select.%Prepare(("SELECT PrecedentId,ContentHash,EmbeddingModel,CASE WHEN Embedding IS NULL THEN 0 ELSE 1 END AS VectorPresent FROM"_
+            " SilentShift_Data.Precedent WHERE PrecedentId = ?"))
         $$$ThrowOnError(sc)
-        Set insert = ##class(%SQL.Statement).%New(), sc = insert.%Prepare("INSERT INTO SilentShift_Data.Precedent (PrecedentId,SourceId,SourceKey,SourceType,SourceScope,SourceHash,ContractId,Kind,Summary,Outcome,ResolvedAt,IndexedAt,ContentHash,EmbeddingModel,Synthetic,Embedding) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,TO_VECTOR(?,DOUBLE))")
+        Set insert = ##class(%SQL.Statement).%New(), sc = insert.%Prepare(("INSERT INTO SilentShift_Data.Precedent"_
+            " (PrecedentId,SourceId,SourceKey,SourceType,SourceScope,SourceHash,ContractId,Kind,Summary,Outcome,ResolvedAt,IndexedAt,"_
+            "ContentHash,EmbeddingModel,Synthetic,Embedding) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,TO_VECTOR(?,DOUBLE))"))
         $$$ThrowOnError(sc)
-        Set update = ##class(%SQL.Statement).%New(), sc = update.%Prepare("UPDATE SilentShift_Data.Precedent SET SourceId=?,SourceKey=?,SourceType=?,SourceScope=?,SourceHash=?,ContractId=?,Kind=?,Summary=?,Outcome=?,ResolvedAt=?,IndexedAt=?,ContentHash=?,EmbeddingModel=?,Synthetic=?,Embedding=TO_VECTOR(?,DOUBLE) WHERE PrecedentId=?")
+        Set update = ##class(%SQL.Statement).%New(), sc = update.%Prepare(("UPDATE SilentShift_Data.Precedent SET"_
+            " SourceId=?,SourceKey=?,SourceType=?,SourceScope=?,SourceHash=?,ContractId=?,Kind=?,Summary=?,Outcome=?,ResolvedAt=?,Ind"_
+            "exedAt=?,ContentHash=?,EmbeddingModel=?,Synthetic=?,Embedding=TO_VECTOR(?,DOUBLE) WHERE PrecedentId=?"))
         $$$ThrowOnError(sc)
         Set work = [], unchanged = 0, written = 0, calls = 0
         For index = 0:1:documents.%Size()-1 {
@@ -232,7 +268,9 @@ ClassMethod Persist(documents As %DynamicArray, Output report As %String) As %St
             Set texts = [], last = $SELECT(first+15 < work.%Size():first+15,1:work.%Size()-1)
             For index = first:1:last Do texts.%Push(work.%Get(index).%Get("summary"))
             Set generated = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Embed(texts.%ToJSON(),"",..#MODEL)), vectors = generated.%Get("vectors")
-            If (generated.%Get("model") '= ..#MODEL) || (generated.%Get("dimensions") '= ..#DIMENSIONS) || (vectors.%Size() '= texts.%Size()) Throw ##class(%Exception.General).%New("PRECEDENT_EMBEDDING_CONTRACT")
+            If (generated.%Get("model") '= ..#MODEL) || (generated.%Get("dimensions") '= ..#DIMENSIONS) || (vectors.%Size() '= texts.%Size()) {
+                Throw ##class(%Exception.General).%New("PRECEDENT_EMBEDDING_CONTRACT")
+            }
             Set calls = calls+1
             For index = first:1:last {
                 Set document = work.%Get(index), id = document.%Get("precedent_id"), vector = vectors.%Get(index-first).%ToJSON()
@@ -243,16 +281,29 @@ ClassMethod Persist(documents As %DynamicArray, Output report As %String) As %St
                 Set synthetic = $SELECT(document.%GetTypeOf("synthetic")="boolean":document.%Get("synthetic"),1:"")
                 Set at = ##class(SilentShift.TraceEvent).UTC()
                 If found.%Next() {
-                    Set result = update.%Execute(document.%Get("source_id"),document.%Get("source_key"),document.%Get("source_type"),document.%Get("source_scope"),document.%Get("source_hash"),document.%Get("contract_id"),document.%Get("kind"),document.%Get("summary"),document.%Get("outcome"),document.%Get("resolved_at"),at,document.%Get("content_sha256"),..#MODEL,synthetic,vector,id)
+                    Set result = update.%Execute(document.%Get("source_id"),document.%Get("source_key"),document.%Get("source_type"),
+                        document.%Get("source_scope"),document.%Get("source_hash"),document.%Get("contract_id"),document.%Get("kind"),document.%Get("summary"),
+                        document.%Get("outcome"),document.%Get("resolved_at"),at,document.%Get("content_sha256"),..#MODEL,synthetic,vector,id)
                 } Else {
-                    Set result = insert.%Execute(id,document.%Get("source_id"),document.%Get("source_key"),document.%Get("source_type"),document.%Get("source_scope"),document.%Get("source_hash"),document.%Get("contract_id"),document.%Get("kind"),document.%Get("summary"),document.%Get("outcome"),document.%Get("resolved_at"),at,document.%Get("content_sha256"),..#MODEL,synthetic,vector)
+                    Set result = insert.%Execute(id,document.%Get("source_id"),document.%Get("source_key"),document.%Get("source_type"),
+                        document.%Get("source_scope"),document.%Get("source_hash"),document.%Get("contract_id"),document.%Get("kind"),document.%Get("summary"),
+                        document.%Get("outcome"),document.%Get("resolved_at"),at,document.%Get("content_sha256"),..#MODEL,synthetic,vector)
                 }
                 If result.%SQLCODE < 0 Throw ##class(%Exception.General).%New("PRECEDENT_WRITE_FAILED")
                 Lock -^SilentShift.Lock("precedent-index",id)
                 Set locked = 0, written = written+1
             }
         }
-        Set report = {"status":"indexed","model":"all-minilm:22m","dimensions":384,"eligible_sources":(documents.%Size()),"written":(written),"unchanged":(unchanged),"local_embedding_requests":(calls),"decision_authority":false}.%ToJSON()
+        Set report = {
+            "status":"indexed",
+            "model":(..#MODEL),
+            "dimensions":(..#DIMENSIONS),
+            "eligible_sources":(documents.%Size()),
+            "written":(written),
+            "unchanged":(unchanged),
+            "local_embedding_requests":(calls),
+            "decision_authority":false
+        }.%ToJSON()
         Return $$$OK
     } Catch error {
         If locked Lock -^SilentShift.Lock("precedent-index",id)
@@ -262,7 +313,16 @@ ClassMethod Persist(documents As %DynamicArray, Output report As %String) As %St
 
 ClassMethod Unavailable(caseId As %String) As %String
 {
-    Return {"status":"unavailable","case_id":(caseId),"implementation":"IRIS VECTOR_COSINE","model":"all-minilm:22m","dimensions":384,"matches":[],"decision_authority":false,"failure_code":"PRECEDENT_RETRIEVAL_UNAVAILABLE"}.%ToJSON()
+    Return {
+        "status":"unavailable",
+        "case_id":(caseId),
+        "implementation":"IRIS VECTOR_COSINE",
+        "model":(..#MODEL),
+        "dimensions":(..#DIMENSIONS),
+        "matches":[],
+        "decision_authority":false,
+        "failure_code":"PRECEDENT_RETRIEVAL_UNAVAILABLE"
+    }.%ToJSON()
 }
 
 ClassMethod SearchForCase(body As %DynamicObject) As %String
@@ -275,7 +335,11 @@ ClassMethod SearchForCase(body As %DynamicObject) As %String
         Set generated = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Embed(texts.%ToJSON(),"",..#MODEL))
         If (generated.%Get("model") '= ..#MODEL) || (generated.%Get("dimensions") '= ..#DIMENSIONS) Throw ##class(%Exception.General).%New("PRECEDENT_EMBEDDING_CONTRACT")
         Set vector = generated.%Get("vectors").%Get(0).%ToJSON(), statement = ##class(%SQL.Statement).%New()
-        Set sc = statement.%Prepare("SELECT TOP 3 PrecedentId,SourceId,SourceType,ContractId,Kind,Summary,Outcome,Synthetic,VECTOR_COSINE(Embedding,TO_VECTOR(?,DOUBLE)) AS Similarity FROM SilentShift_Data.Precedent WHERE ContractId=? AND Kind=? AND EmbeddingModel=? AND Embedding IS NOT NULL AND (SourceType='approved_amendment' OR (SourceType='resolved_case' AND SourceId<>? AND ResolvedAt<=?)) ORDER BY Similarity DESC,PrecedentId")
+        Set sc = statement.%Prepare(("SELECT TOP 3"_
+            " PrecedentId,SourceId,SourceType,ContractId,Kind,Summary,Outcome,Synthetic,VECTOR_COSINE(Embedding,TO_VECTOR(?,DOUBLE))"_
+            " AS Similarity FROM SilentShift_Data.Precedent WHERE ContractId=? AND Kind=? AND EmbeddingModel=? AND Embedding IS NOT"_
+            " NULL AND (SourceType='approved_amendment' OR (SourceType='resolved_case' AND SourceId<>? AND ResolvedAt<=?)) ORDER BY"_
+            " Similarity DESC,PrecedentId"))
         $$$ThrowOnError(sc)
         Set rows = statement.%Execute(vector,message.%Get("contract_id"),message.%Get("kind"),..#MODEL,id,received), matches = []
         If rows.%SQLCODE < 0 Throw ##class(%Exception.General).%New("PRECEDENT_SEARCH_FAILED")
@@ -288,13 +352,23 @@ ClassMethod SearchForCase(body As %DynamicObject) As %String
             // epsilon only; keep the actual SQL value when normalization acts.
             If score > 1 Set score = 1
             If score < -1 Set score = -1
-            Set item = {"precedent_id":(rows.%Get("PrecedentId")),"source_id":(rows.%Get("SourceId")),"source_type":(rows.%Get("SourceType")),"contract_id":(rows.%Get("ContractId")),"kind":(rows.%Get("Kind")),"summary":(rows.%Get("Summary")),"outcome":(rows.%Get("Outcome")),"decision_authority":false,"synthetic":null}
+            Set item = {
+                "precedent_id":(rows.%Get("PrecedentId")),
+                "source_id":(rows.%Get("SourceId")),
+                "source_type":(rows.%Get("SourceType")),
+                "contract_id":(rows.%Get("ContractId")),
+                "kind":(rows.%Get("Kind")),
+                "summary":(rows.%Get("Summary")),
+                "outcome":(rows.%Get("Outcome")),
+                "decision_authority":false,
+                "synthetic":null
+            }
             Do item.%Set("similarity",score,"number")
             If score '= rawScore Do item.%Set("raw_similarity",rawScore,"number")
             If rows.%Get("Synthetic") '= "" Do item.%Set("synthetic",rows.%Get("Synthetic"),"boolean")
             Do matches.%Push(item)
         }
-        Return {"status":"retrieved","case_id":(id),"implementation":"IRIS VECTOR_COSINE","model":"all-minilm:22m","dimensions":384,"matches":(matches),"decision_authority":false}.%ToJSON()
+        Return {"status":"retrieved","case_id":(id),"implementation":"IRIS VECTOR_COSINE","model":(..#MODEL),"dimensions":(..#DIMENSIONS),"matches":(matches),"decision_authority":false}.%ToJSON()
     } Catch unavailable {
         Return ..Unavailable(id)
     }

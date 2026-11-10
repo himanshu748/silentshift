@@ -45,7 +45,8 @@ ClassMethod ChatCompletions() As %Status
         If $LENGTH(raw) > ##class(SilentShift.Provider.Lease).#MAXBYTES Return ..Fail(413,"PROVIDER_REQUEST_BOUNDS")
         // This CSP job is separate from the SDK callback job. Strict parsing
         // validates duplicate keys/nonfinite values without re-entering Python
-        // from a native agent callback. The original bytes are forwarded.
+        // from a native agent callback. Bytes remain unchanged except the
+        // explicitly traced local final-format request after four scoped reads.
         Set payload = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Canonical($ZCONVERT(raw,"I","UTF8")))
         If payload.%Get("model") '= binding.Model Return ..Fail(422,"PROVIDER_MODEL_REJECTED")
         Set iterator = payload.%GetIterator()
@@ -77,7 +78,7 @@ ClassMethod ChatCompletions() As %Status
                 Set item = tools.%Get(index), function = item.%Get("function")
                 If '$ISOBJECT(function) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Set name = function.%Get("name")
-                If (name '= "GetCurrentMessage") && (name '= "GetApprovedContracts") && (name '= "GetRelatedRecords") && (name '= "find_similar_precedents") Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
+                If '##class(SilentShift.AI.Investigator).IsAllowedTool(name) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Do names.%Push(name)
             }
         }

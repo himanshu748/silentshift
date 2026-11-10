@@ -8,11 +8,11 @@ This is deliberately not evidence of a clean or public-registry installation.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import json
-from pathlib import Path
 import re
 import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
 
 from fetch_ipm import SHA256, SIZE, VERSION, fetch
 from inspect_ipm import inspect
@@ -30,7 +30,7 @@ def literal(value: str) -> str:
 
 
 def run(args, log: Path, *, input_text=None, timeout=900) -> str:
-    result = subprocess.run(args, input=input_text, text=True, capture_output=True, timeout=timeout)
+    result = subprocess.run(args, input=input_text, text=True, capture_output=True, timeout=timeout, check=False)
     log.write_text(result.stdout + result.stderr, encoding='utf-8')
     log.chmod(0o600)
     if result.returncode:

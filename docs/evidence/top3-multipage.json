@@ -1,0 +1,158 @@
+{
+  "recorded_at_utc": "2026-11-09T11:26:37.356494+00:00",
+  "branch": "push/top3",
+  "verified_source_commit": "252bdd62ac60a1088320586cfc71e766766c0fb5",
+  "scope": "Multi-page public site, existing native workbench, retained release 0.3.0 ARM64 154U runtime; not a fresh source load of configurable-provider changes.",
+  "instructions_check": {
+    "repository_and_global_AGENTS_checked": true,
+    "single_page_requirement_found": false,
+    "global_or_repository_AGENTS_modified": false
+  },
+  "generation": {
+    "tool": "Snowflake Cortex Code 1.2.35",
+    "model": "auto",
+    "resolved_model": "claude-opus-5-5",
+    "result": "success",
+    "iterations": 26,
+    "duration_ms": 491176,
+    "allowed_tools": [
+      "read",
+      "write",
+      "edit",
+      "grep",
+      "glob"
+    ],
+    "initial_preparation_run": "Intentionally interrupted after reads to narrow the available tool catalog; no written files from that run.",
+    "visual_direction": "Chosen by CoCo; owner supplied no prescribed palette or layout.",
+    "cloud_workspace_or_warehouse_created": false,
+    "private_generation_logs_committed": false
+  },
+  "checks": {
+    "types": {
+      "command": "npm --prefix web run check",
+      "passed": true
+    },
+    "build": {
+      "command": "npm --prefix web run build",
+      "passed": true,
+      "html_documents": 6
+    },
+    "browser": {
+      "command": "npm --prefix web run test:e2e -- --max-failures=2",
+      "passed": 54,
+      "elapsed": "1.6m",
+      "first_attempt": {
+        "passed": 50,
+        "failed": 2,
+        "not_run": 2,
+        "causes": [
+          "Real 320px footer badge overflow, repaired by allowing wrapping.",
+          "Test locator matched Open after the menu label changed to Close; repaired without removing assertions."
+        ]
+      }
+    },
+    "native_browser": {
+      "command": "SILENTSHIFT_NATIVE_E2E=1 npm --prefix web run test:e2e:native -- --max-failures=2",
+      "passed": 16,
+      "elapsed_seconds": 35.4
+    },
+    "production_static_documents": {
+      "command": "node .local/top3/coco/verify-multipage-static.mjs",
+      "passed": true,
+      "journeys": 12,
+      "viewports": [
+        "1440x960",
+        "390x844"
+      ],
+      "server": "Python http.server bound to loopback, without SPA fallback or API proxy; stopped after verification."
+    },
+    "csv_native_ui": {
+      "command": "node scripts/verify_csv_ui.mjs --execute --output-directory .local/top3/coco/multipage-csv-ui",
+      "passed": 32,
+      "fresh_cases": [
+        {
+          "case_id": "7B500216-DC2E-11F1-8CE9-8AFB344FC2BC",
+          "trace_id": "3451",
+          "routing": "QUARANTINED",
+          "delivery_count": 0,
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1,
+            "precedents": 1
+          }
+        },
+        {
+          "case_id": "9428D76F-DC2E-11F1-8CE9-8AFB344FC2BC",
+          "trace_id": "3479",
+          "routing": "DELIVERED",
+          "delivery_count": 1,
+          "agent_status": "returned",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1,
+            "precedents": 1
+          }
+        }
+      ],
+      "reused_existing_cases": false
+    },
+    "native_scenarios": {
+      "command": "uv run --env-file .env python scripts/verify_native.py --allow-model-calls --output .local/top3/coco/multipage-native-five.json",
+      "passed": 5,
+      "native_verified": true,
+      "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+      "trace_ids": [
+        "3506",
+        "3534",
+        "3562",
+        "3589",
+        "3617"
+      ]
+    },
+    "full_python_after_timing_repair": {
+      "status": "not rerun under the two-failure stop rule",
+      "earlier_receipt": "top3-coco-frontend.json"
+    }
+  },
+  "frontend_sha256": {
+    "web/e2e/landing.spec.ts": "0f8ffa8ca0d6cc56dac504e244fdf89728d01683f5c974664b34bc72de5105ff",
+    "web/e2e/multipage.spec.ts": "b38ec9d5f6c9dad2de9880bfd62cdbdef4c4c1693a92d14d4cc691e769e44640",
+    "web/evidence-record/index.html": "3b5c671a29c4b88538d730c433459108a690f876752add97e3cc48e0ef44b354",
+    "web/how-it-works/index.html": "9bfb9d8768e7364123467f287464f0345971afbe42e8f39d3ad33da3504ae969",
+    "web/index.html": "1c58973bc25ef2c8d5784f333b542f4ef059cd11268fb0b77170c60868201266",
+    "web/product/index.html": "a4fc200852bd21a0d90c565dcf1179a60e408db409c1f394e5c9ce830ca572a8",
+    "web/run-locally/index.html": "d7525826aefa210d9de08c5d93a895937ab1210a586b8df9e4513eef18b72630",
+    "web/safeguards/index.html": "2ea43386bdb6b3d7e80ac8e32ddf00c488cdc505d3a0416a8c7830ae39b36a59",
+    "web/src/App.tsx": "ac3e98deadc964229e28d6089d7c8d223faa6b1ef5a6ea8adc75260cc795885c",
+    "web/src/FlowPreview.tsx": "9972cc8e0722983ef87d597ef789b4e937ee6739847e394ea9463347c5df96a8",
+    "web/src/Landing.tsx": "c81b282f10b6b2a25f7acc087a17a08e5ace5c54c61f9f01abe9e0d63ab10c87",
+    "web/src/landing.css": "8fb631b1fd7e7c37f955ca37283557b879f0f839c4299ee18c3a6758d4dbde43",
+    "web/src/main.tsx": "35a60f27a8fbf490591d343011e0a0116d806ad886df458eb1d9ba5be21b263d",
+    "web/vite.config.ts": "0304bcbaef277059c2b69d46c413cd7526ca670feeaf17219e93749092e1c692"
+  },
+  "protected_files_sha256": {
+    "web/src/api.ts": "40dcdbb46718dc37e69af6b39b34fec1d707ea9d8904b87cbbc86226c475d9cf",
+    "web/src/schema.ts": "7d71c30f695f60f7242193c8436ad2fb5cbe08c98a9aacc5f22ff8253496ce91",
+    "web/package.json": "baeefd5c83e7c0c23e5c4f0fd78c03701ac5c6de3a493dc54694dd9c2051c185",
+    "web/package-lock.json": "aaf55684336bce9e7951467eaf8dae1b994bc6a9ced58effed5ebf78f471d223",
+    "web/tsconfig.json": "e33b5179d28467bfca2e31d37ba194b269fd67257ea6c96a8a107165dbda1649"
+  },
+  "native_runtime_source_changes_in_this_ui_pass": [],
+  "screenshots_sha256": {
+    "evidence/browser/top3-multipage/home-light-desktop.png": "80a9eab81c0114446b47b1c63b42e0dfd98edae5b9e01553134983835ba7e572",
+    "evidence/browser/top3-multipage/home-mobile.png": "bb21e35ae0c448e3e7cc2aebe74dd6ba2d11bfbf276733dbd1c69b173f0ce198",
+    "evidence/browser/top3-multipage/mobile-navigation.png": "8c30b3293200248c210dcbc9832bbf21b158474ef8617fa99a79c9f7998beb4c",
+    "evidence/browser/top3-multipage/safeguards-mobile.png": "eb96ece5555d2e0177952ebdf146960f38724604504939b2add84192c4b81bca",
+    "evidence/browser/top3-multipage/csv-results-desktop.png": "266b8528106c7769887149ff17547f69024f4d260429cc5e20d7afa6670d86ed",
+    "evidence/browser/top3-multipage/how-it-works-desktop.png": "52182c640a21fd511afc9b4b6bad5252ea34660bb74d5afda1018185aa80a12c"
+  },
+  "limits": [
+    "Synthetic inputs and simulator-only delivery. No hosted demo.",
+    "New provider branch replay and external provider execution retain their unverified status.",
+    "No native %UnitTest or clean-install rerun in this UI pass.",
+    "README and listing benchmark wording awaits owner approval; main, registry and OEX unchanged."
+  ]
+}

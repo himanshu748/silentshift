@@ -20,4 +20,65 @@ Property Embedding As %Library.Vector(DATATYPE = "DOUBLE", LEN = 384);
 Index PrecedentKey On PrecedentId [ IdKey, Unique ];
 Index RetrievalScope On (ContractId, Kind, EmbeddingModel);
 Index SourceLookup On (SourceType, SourceKey) [ Unique ];
+
+Storage Default
+{
+<Data name="PrecedentDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>SourceId</Value>
+</Value>
+<Value name="3">
+<Value>SourceKey</Value>
+</Value>
+<Value name="4">
+<Value>SourceType</Value>
+</Value>
+<Value name="5">
+<Value>SourceScope</Value>
+</Value>
+<Value name="6">
+<Value>SourceHash</Value>
+</Value>
+<Value name="7">
+<Value>ContractId</Value>
+</Value>
+<Value name="8">
+<Value>Kind</Value>
+</Value>
+<Value name="9">
+<Value>Summary</Value>
+</Value>
+<Value name="10">
+<Value>Outcome</Value>
+</Value>
+<Value name="11">
+<Value>ResolvedAt</Value>
+</Value>
+<Value name="12">
+<Value>IndexedAt</Value>
+</Value>
+<Value name="13">
+<Value>ContentHash</Value>
+</Value>
+<Value name="14">
+<Value>EmbeddingModel</Value>
+</Value>
+<Value name="15">
+<Value>Synthetic</Value>
+</Value>
+<Value name="16">
+<Value>Embedding</Value>
+</Value>
+</Data>
+<DataLocation>^SilentShift.Data.PrecedentD</DataLocation>
+<DefaultData>PrecedentDefaultData</DefaultData>
+<IdLocation>^SilentShift.Data.PrecedentD</IdLocation>
+<IndexLocation>^SilentShift.Data.PrecedentI</IndexLocation>
+<StreamLocation>^SilentShift.Data.PrecedentS</StreamLocation>
+<Type>%Storage.Persistent</Type>
+}
+
 }

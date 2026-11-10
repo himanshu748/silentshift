@@ -3,7 +3,7 @@
   <Document name="silentshift.ZPM">
     <Module>
       <Name>silentshift</Name>
-      <Version>0.3.0</Version>
+      <Version>0.3.1</Version>
       <Description>Native IRIS semantic integration checks with evidence-bound agent proposals and deterministic routing policy.</Description>
       <Keywords>interoperability,ai-agents,semantic-integrity</Keywords>
       <Author>
@@ -43,6 +43,7 @@
       <Resource Name="SilentShift.Provider.BoundedBinaryStream.CLS"/>
       <Resource Name="SilentShift.Provider.CallRequest.CLS"/>
       <Resource Name="SilentShift.Provider.CallResponse.CLS"/>
+      <Resource Name="SilentShift.Provider.Config.CLS"/>
       <Resource Name="SilentShift.Provider.Forwarder.CLS"/>
       <Resource Name="SilentShift.Provider.Ingress.CLS"/>
       <Resource Name="SilentShift.Provider.Lease.CLS"/>
@@ -64,6 +65,8 @@
       <FileCopy Name="python/silentshift/evaluation.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/evaluation.py"/>
       <FileCopy Name="python/silentshift/embeddings.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/embeddings.py"/>
       <FileCopy Name="python/silentshift/csv_orders.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/csv_orders.py"/>
+      <FileCopy Name="python/silentshift/provider_config.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/provider_config.py"/>
+      <FileCopy Name="python/silentshift/provider_transport.py" Target="${mgrdir}silentshift/${namespace}/python/silentshift/provider_transport.py"/>
       <FileCopy Name="fixtures/v1/scenarios.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/scenarios.json"/>
       <FileCopy Name="fixtures/v1/manifest.json" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/manifest.json"/>
       <FileCopy Name="fixtures/v1/README.md" Target="${mgrdir}silentshift/${namespace}/fixtures/v1/README.md"/>

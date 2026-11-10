@@ -83,8 +83,8 @@ def main() -> int:
     }
     receipt_path = output.with_suffix(".receipt.json")
     try:
-        run = subprocess.run(command, input=script, text=True, capture_output=True, timeout=60)
-        copy = subprocess.run(docker + ["cp", args.container + ":" + remote_file, str(output)], capture_output=True)
+        run = subprocess.run(command, input=script, text=True, capture_output=True, timeout=60, check=False)
+        copy = subprocess.run(docker + ["cp", args.container + ":" + remote_file, str(output)], capture_output=True, check=False)
         if run.returncode != 0 or copy.returncode != 0:
             output.with_suffix(".renderer.log").write_text(run.stdout + run.stderr)
             errors = [line.strip() for line in run.stdout.splitlines() if "SSVG_ERROR=" in line]

@@ -9,18 +9,19 @@ No publishing, registry server, image download or model call is implicit.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import hashlib
+import ipaddress
 import json
 import math
 import os
-from pathlib import Path, PurePosixPath
 import re
 import shutil
 import subprocess
 import sys
 import tarfile
 import time
+from datetime import datetime, timezone
+from pathlib import Path, PurePosixPath
 from urllib.parse import urlparse
 
 from bootstrap import read_env
@@ -37,6 +38,44 @@ RUNTIME_KEYS = ('SILENTSHIFT_IRIS_USERNAME', 'SILENTSHIFT_IRIS_PASSWORD',
     'SILENTSHIFT_EMBED_BASE_URL', 'SILENTSHIFT_EMBED_MODEL')
 
 
+def validate_network_subnet(value: str | None) -> str | None:
+    """Accept only canonical RFC1918 IPv4 networks, /24 through /28."""
+    if value is None:
+        return None
+    try:
+        network = ipaddress.ip_network(value, strict=True)
+    except ValueError as error:
+        raise ValueError('--network-subnet requires a canonical RFC1918 IPv4 /24../28') from error
+    private = tuple(ipaddress.ip_network(block) for block in
+                    ('10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16'))
+    if (network.version != 4 or not 24 <= network.prefixlen <= 28
+            or not any(network.subnet_of(block) for block in private)):
+        raise ValueError('--network-subnet requires an RFC1918 IPv4 /24../28')
+    return str(network)
+
+
+def available_network_subnet(value: str | None, docker: list[str]) -> str | None:
+    """Inspect existing Docker IPAM without pruning or changing any network."""
+    value = validate_network_subnet(value)
+    if value is None:
+        return None
+    identifiers = command([*docker, 'network', 'ls', '--quiet'], timeout=30).stdout.split()
+    if identifiers:
+        networks = json.loads(command([*docker, 'network', 'inspect', *identifiers], timeout=30).stdout)
+        requested = ipaddress.ip_network(value)
+        for existing in networks:
+            for config in ((existing.get('IPAM') or {}).get('Config') or []):
+                subnet = config.get('Subnet')
+                if not subnet:
+                    continue
+                current = ipaddress.ip_network(subnet, strict=False)
+                if current.version == 4 and requested.overlaps(current):
+                    raise ValueError('--network-subnet overlaps existing Docker network ' +
+                                     str(existing.get('Name', existing.get('Id', 'unknown'))) +
+                                     ' (' + str(current) + '); choose another private subnet')
+    return value
+
+
 def private_write(path: Path, text: str) -> None:
     descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     with os.fdopen(descriptor, 'w', encoding='utf-8') as stream:
@@ -46,7 +85,9 @@ def private_write(path: Path, text: str) -> None:
 def command(arguments: list[str], log: Path | None = None, *, data: str | None = None,
         timeout: int = 900, env: dict | None = None, check: bool = True):
     result = subprocess.run(arguments, input=data, text=True, capture_output=True,
-        timeout=timeout, env=env, cwd=ROOT, umask=0o077)
+        timeout=timeout, env=env, cwd=ROOT, umask=0o077,
+        check=False,
+    )
     if log:
         private_write(log, result.stdout + result.stderr)
     if check and result.returncode:
@@ -100,6 +141,7 @@ def runtime_environment(args) -> dict:
 
 
 def preflight(args) -> dict:
+    validate_network_subnet(getattr(args, 'network_subnet', None))
     if not re.fullmatch(r'silentshift-ipm-clean-[a-z0-9][a-z0-9_.-]{0,60}', args.container):
         raise ValueError('Choose a new container name beginning silentshift-ipm-clean-')
     if args.allow_model_calls and not args.activate_runtime:
@@ -115,6 +157,7 @@ def preflight(args) -> dict:
             or hashlib.sha256(vendor.read_bytes()).hexdigest() != SHA256):
         raise ValueError('Pinned IPM installer is absent or mismatched; no download is attempted')
     docker = ['docker', '--context', args.context]
+    available_network_subnet(getattr(args, 'network_subnet', None), docker)
     image = json.loads(command([*docker, 'image', 'inspect', args.image], timeout=30).stdout)[0]
     labels = image.get('Config', {}).get('Labels') or {}
     if labels.get('com.intersystems.platform-version') != '2026.3.0AI.154.0com':
@@ -343,7 +386,8 @@ def activate(args, output, runtime, docker, session, run, *, network_id=None):
     """Explicit setup; this starts only the new instance's production."""
     container = args.container
     if network_id is None:
-        run([*docker, 'network', 'create', '--label',
+        subnet = available_network_subnet(getattr(args, 'network_subnet', None), docker)
+        run([*docker, 'network', 'create', *(['--subnet', subnet] if subnet else []), '--label',
             'silentshift.scope=clean-ipm-verification', container], '18-network')
     else:
         actual = run([*docker, 'network', 'inspect', '--format', '{{.Id}}', container], '18-existing-network').strip()
@@ -456,6 +500,7 @@ def main() -> int:
     parser.add_argument('--vendor', type=Path, default=ROOT / '.local/ipm/vendor/zpm-0.10.10.xml')
     parser.add_argument('--context', default='colima-silentshift')
     parser.add_argument('--vm-profile', default='silentshift')
+    parser.add_argument('--network-subnet', help='Optional unused RFC1918 IPv4 /24../28 for the new test network')
     parser.add_argument('--image', default='silentshift-iris:2026.3.0AI.154.0')
     parser.add_argument('--gateway-image', default='containers.intersystems.com/intersystems/webgateway:2026.1')
     parser.add_argument('--container', default='silentshift-ipm-clean-' + datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S'))

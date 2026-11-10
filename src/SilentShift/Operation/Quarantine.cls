@@ -5,7 +5,7 @@ Method Hold(request As SilentShift.Message, Output response As SilentShift.Reply
 {
     Set response = ##class(SilentShift.Reply).%New()
     Set sc = ##class(SilentShift.Store).Hold(request.CaseId)
-    If $$$ISOK(sc) Set response.BodyJSON = ##class(SilentShift.Store).CaseJSON(request.CaseId)
+    If $$$ISOK(sc) Set response.BodyJSON = ##class(SilentShift.Store).SummaryJSON(request.CaseId)
     Return sc
 }
 XData MessageMap

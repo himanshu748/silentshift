@@ -41,7 +41,7 @@ ClassMethod LocalHost(Output host As %String) As %Status
         If url = ("http://"_allowed_":11434/v1/") Set host = allowed
     }
     If host = "" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_ROUTE_REQUIRED")
-    If $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL") '= "qwen3-silentshift:4b-instruct" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
+    If $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL") '= ##class(SilentShift.Provider.Config).DefaultModel() Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
     Return $$$OK
 }
 
@@ -65,9 +65,8 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
             Set sc = ##class(SilentShift.Provider.Replay).CheckCase(caseId)
             $$$ThrowOnError(sc)
         }
-        Set sc = ..LocalHost(.host)
-        $$$ThrowOnError(sc)
-        If model '= "qwen3-silentshift:4b-instruct" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
+        Set config=##class(SilentShift.Provider.Config).Read(),host=config.%Get("host")
+        If model '= config.%Get("model") Return $$$ERROR($$$GeneralError,"PROVIDER_MODEL_CONFIGURATION_MISMATCH")
         If '..CaseMatches(caseId,sessionId) Return $$$ERROR($$$GeneralError,"PROVIDER_CASE_BINDING_INVALID")
         If (promptVersion = "") || ($LENGTH(promptVersion) > 80) Return $$$ERROR($$$GeneralError,"PROVIDER_PROMPT_VERSION_INVALID")
         If invocationSpan = "" Set invocationSpan = $TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
@@ -76,6 +75,8 @@ ClassMethod Open(caseId As %String, sessionId As %Integer, model As %String, pro
         Set token = $TRANSLATE($SYSTEM.Encryption.Base64Encode($SYSTEM.Encryption.GenCryptRand(32,1),1),"+/","-_")
         Set key = ..TokenKey(token), expires = ..Seconds()+##class(SilentShift.AI.Investigator).WaitSeconds()+5
         Set binding = {"CaseId":(caseId),"SessionId":(sessionId),"Model":(model),"PromptVersion":(promptVersion),"InvocationSpanId":(invocationSpan),"Host":(host),"Expires":(expires)}
+        Do binding.%Set("RouteSignature",##class(SilentShift.Bridge).Hash(config.%ToJSON()))
+        Do binding.%Set("Provider",config.%Get("trace_provider"))
         Do binding.%Set("ExecutionMode", mode)
         Set ^CacheTemp.SilentShift.Provider("lease",key,"binding") = binding.%ToJSON()
         Set ^CacheTemp.SilentShift.Provider("lease",key,"count") = 0
@@ -108,6 +109,36 @@ ClassMethod AuthorizeBearer(header As %String, Output binding As %DynamicObject)
     }
 }
 
+/// Shape only the final local-model request after this invocation's four reads.
+/// This is pre-inference request configuration, never output repair or retry.
+ClassMethod ShapeFinal(raw As %String, binding As %DynamicObject, Output shaped As %Boolean) As %String
+{
+    Set shaped=0
+    If (binding.%Get("ExecutionMode")'="live") || (binding.%Get("Provider")'="ollama/openai-compatible") || (binding.%Get("PromptVersion")'="silentshift-investigator/1.4.2") Return raw
+    Set statement=##class(%SQL.Statement).%New()
+    Set sc=statement.%Prepare("SELECT Detail FROM SilentShift_Data.AuditEvent WHERE CaseId=? AND Kind='agent_tool_read'")
+    $$$ThrowOnError(sc)
+    Set rows=statement.%Execute(binding.CaseId),seen=0
+    If rows.%SQLCODE<0 Throw ##class(%Exception.General).%New("FINAL_FORMAT_READ_CHECK_FAILED")
+    While rows.%Next() {
+        Set detail=##class(%DynamicObject).%FromJSON(rows.%Get("Detail"))
+        If detail.%Get("invocation_span_id")'=binding.InvocationSpanId Continue
+        Set tool=detail.%Get("tool")
+        If tool="GetCurrentMessage" Set reads("message")=1
+        If tool="GetApprovedContracts" Set reads("contracts")=1
+        If tool="GetRelatedRecords" Set reads("related")=1
+        If tool="find_similar_precedents" Set reads("precedents")=1
+    }
+    If '$DATA(reads("message")) || '$DATA(reads("contracts")) || '$DATA(reads("related")) || '$DATA(reads("precedents")) Return raw
+    Set body=##class(%DynamicObject).%FromJSON($ZCONVERT(raw,"I","UTF8"))
+    Do body.%Remove("tools"),body.%Remove("tool_choice"),body.%Remove("parallel_tool_calls")
+    Do body.%Set("response_format",##class(SilentShift.AI.Investigator).FinalResponseFormat())
+    Set result=$ZCONVERT(body.%ToJSON(),"O","UTF8")
+    If $LENGTH(result)>..#MAXBYTES Throw ##class(%Exception.General).%New("FINAL_FORMAT_REQUEST_BOUNDS")
+    Set shaped=1
+    Return result
+}
+
 /// Claims one actual call after authentication and bounded payload validation.
 ClassMethod Claim(header As %String, raw As %String, Output request As SilentShift.Provider.CallRequest, tools As %String = "[]") As %Status
 {
@@ -126,11 +157,15 @@ ClassMethod Claim(header As %String, raw As %String, Output request As SilentShi
         Set request.CaseId = binding.CaseId, request.ProductionSessionId = binding.SessionId
         Set request.InvocationSpanId = binding.InvocationSpanId, request.Round = round
         Set request.Model = binding.Model, request.PromptVersion = binding.PromptVersion
+        Set request.Provider=binding.%Get("Provider","ollama/openai-compatible")
         Set request.ExecutionMode = binding.%Get("ExecutionMode", "live")
         If request.ExecutionMode = "recorded-replay" {
             Set request.Provider = "recorded-ollama/openai-compatible"
             Set request.ReplayRecordId = ##class(SilentShift.Provider.Replay).#RECORDID
         }
+        Set raw=..ShapeFinal(raw,binding,.shaped)
+        If shaped Set tools="[]"
+        Set request.StructuredFinal=shaped
         Set request.StartedAt = ##class(SilentShift.TraceEvent).UTC(), request.RequestBytes = $LENGTH(raw)
         Set request.ToolNamesJSON = tools
         Set call = request.CallId

@@ -1,0 +1,59 @@
+{
+  "scope": "Current local working tree; preserves pre-existing UI edits. No live/source-native regression run.",
+  "pytest": {
+    "command": "uv run pytest -q",
+    "passed": 330,
+    "elapsed_seconds": 22.6
+  },
+  "focused_harness": {
+    "command": "uv run pytest -q tests/test_judge_replay.py",
+    "passed": 12,
+    "elapsed_seconds": 0.42
+  },
+  "typescript": {
+    "command": "npm --prefix web run check",
+    "passed": true
+  },
+  "build": {
+    "command": "npm --prefix web run build",
+    "passed": true,
+    "warning": "Existing lucide-react use-client directives produce non-fatal bundler warnings"
+  },
+  "dotenv_example": {
+    "compose_variables": [
+      "IRIS_IMAGE",
+      "SILENTSHIFT_AGENT_WAIT_SECONDS",
+      "SILENTSHIFT_API_KEY",
+      "SILENTSHIFT_EMBED_BASE_URL",
+      "SILENTSHIFT_EMBED_MODEL",
+      "SILENTSHIFT_GATEWAY_PASSWORD",
+      "SILENTSHIFT_IRIS_PASSWORD",
+      "SILENTSHIFT_IRIS_USERNAME",
+      "SILENTSHIFT_LLM_BASE_URL",
+      "SILENTSHIFT_MODEL",
+      "SILENTSHIFT_PARTNER_FILES_ENABLED",
+      "SILENTSHIFT_PROVIDER",
+      "SILENTSHIFT_PROVIDER_MODE",
+      "SILENTSHIFT_VIEWER_PASSWORD",
+      "SILENTSHIFT_VIEWER_USERNAME",
+      "WEBGATEWAY_IMAGE"
+    ],
+    "missing": []
+  },
+  "real_missing_image_check": {
+    "command": [
+      "uv",
+      "run",
+      "python",
+      "scripts/judge_replay.py",
+      "--image",
+      "silentshift-missing-check:never",
+      "--api-port",
+      "52993"
+    ],
+    "expected_exit_code": 1,
+    "actual_exit_code": 1,
+    "no_new_private_run_files": true,
+    "stderr": "Judge replay stopped: Required local IRIS image is missing: silentshift-missing-check:never. Obtain the official build-154 Community ARM64 archive from InterSystems, load it with docker load -i <archive>, then docker tag <loaded-image> silentshift-missing-check:never. See INSTALL.md; no image download is attempted."
+  }
+}

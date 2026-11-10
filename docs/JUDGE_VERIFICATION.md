@@ -1,4 +1,120 @@
+# Backend-polish verification — November 10, 2026 (UTC)
+
+## Voting-week finish — fresh GitHub clones
+
+**November 10, 2026 (IST).** The prepared native **0.3.1** source snapshot is **`7b3d5efafb07fd54530c912f6b9cdbb710462020`**, on `backend-polish-nov10`. Main and public native IPM/OEX remain **0.3.0**, React **0.2.1**. No merge, PR action, tag/release, registry publication, OEX save/approval, Pages deployment or external message ran in this finish. Later documentation commits preserve this code snapshot; they are not additional native runs.
+
+| Executed check | Actual result and scope | Receipt / output |
+| --- | --- | --- |
+| Hosted main rerun | Passed; real steps executed at `a10de3f`, not a billing-lock annotation | [Run metadata](evidence/voting-finish-nov10/ci-restored.json), [main run](https://github.com/himanshu748/silentshift/actions/runs/42569241885) |
+| Hosted backend candidate | Passed at `7b3d5ef`; **393 pytest in 23.17s**, types/build, **54 browser checks in 1.1m** | [CI metadata](evidence/voting-finish-nov10/candidate-031-ci.json), [complete output](evidence/voting-finish-nov10/candidate-031-ci-output.txt), [run](https://github.com/himanshu748/silentshift/actions/runs/42818397027) |
+| Fresh GitHub source load, native suite, explicit startup | **0.3.1**, **7 classes / 22 methods**, build **154U ARM64**, no application source mounts; **68.371s** for this load/suite/first-replay driver | [Candidate summary](evidence/voting-finish-nov10/candidate-031-summary.json), [load receipt](evidence/voting-finish-nov10/candidate-031-load.json), [native assertions](evidence/voting-finish-nov10/candidate-031-native-tests.txt) |
+| Two recorded API replays in that candidate | **12/12 twice**, sessions **24 / 58**, quarantined with no deliveries and no LLM inference | [First](evidence/voting-finish-nov10/candidate-031-replay-1.json), [repeat](evidence/voting-finish-nov10/candidate-031-replay-2.json) |
+| Exported archive installed in a second fresh container | Passed actual local-filesystem repository install; **80.522s**, pristine namespace and empty application checked. Production intentionally remains stopped there. Not public-registry installation or a second API run. | [Archive inspection](evidence/voting-finish-nov10/candidate-031-archive.json), [clean install](evidence/voting-finish-nov10/candidate-031-install.json), [command](evidence/voting-finish-nov10/candidate-031-install-command.txt), [output](evidence/voting-finish-nov10/candidate-031-install-output.txt) |
+| Fresh source live Scenario Lab run | **5/5 final routes**, local Qwen and local embeddings, at `da2e9e9`; **3/5 raw proposals** matched the labels. This is five synthetic scenarios, not general accuracy. | [Live receipt](evidence/voting-finish-nov10/fresh-live-five.json), [native load](evidence/voting-finish-nov10/fresh-native.json), [output](evidence/voting-finish-nov10/fresh-live-five-output.txt) |
+| Fresh-clone connected browser reads | **16/16 in 46.6s**, desktop and mobile, at client `daead01` against that real native case set | [Receipt](evidence/voting-finish-nov10/connected-final.json), [full output](evidence/voting-finish-nov10/connected-final-output.txt) |
+| Fresh GitHub source Compose command | Native production + real workbench; **12/12**, session **2**, **35.451s**, at `2dc0e92`. Browser login loaded the actual case and labeled recorded mode. | [Receipt](evidence/voting-finish-nov10/compose-final.json), [replay](evidence/voting-finish-nov10/compose-replay.json), [startup](evidence/voting-finish-nov10/compose-up.txt) |
+| Fresh candidate Python / web | **393 pytest in 31.29s**; `npm run check` and `npm run build` passed locally, with nonfatal dependency directives reported | [Python output](evidence/voting-finish-nov10/candidate-031-pytest.txt), [summary](evidence/voting-finish-nov10/candidate-031-summary.json); hosted web output linked above |
+| Ruff | **40 remaining**, down from **83**; each file/line/rule has a reason. No blanket ignores, check deletion or clean-lint claim. | [Inventory](RUFF_REMAINING.md), [machine receipt](evidence/voting-finish-nov10/ruff-remaining.json) |
+| Actual native reply bodies and Event Log | Delivered session **86**, quarantine session **30**, both compact bodies and routing INFO events captured; exact temporary permissions restored | [Capture receipt](evidence/voting-finish-nov10/native-ui.json), [restoration](evidence/voting-finish-nov10/permissions-restored.json) |
+
+### How the missing connected cases were produced
+
+The live verifier submitted the five synthetic cases through the authenticated **Scenario Lab API → Partner Service → Semantic Process → native AI Hub → policy → operations** path. It did not insert a delivered case, recommendation, vector result or Workflow task to satisfy the UI. The isolated driver separately administrator-indexed the installed synthetic approved-amendment catalog through native `IndexAmendments`; delivery's normal Precedents operation indexed the resolved case. [Catalog receipt](evidence/voting-finish-nov10/amendment-index.json) · [reproduction guide](CONNECTED_CHECKS.md).
+
+Only `module.xml` differs among native package files between the live/connected native snapshot and the versioned candidate; executable classes, Python assets, fixture and replay bytes match. [Exact package identity](evidence/voting-finish-nov10/candidate-031-source-identity.json). Fresh candidate load/replays establish the new package identity separately. Protected pre-existing UI edits and unfinished sealed-benchmark results are outside these commits. The earlier CSV browser and approve/reject receipts retain their dated scope; they were not relabeled as new runs.
+
+### Native body captures
+
+- [Destination acknowledgment](assets/voting-finish-nov10/delivered-destination-body.jpg): case `C553F4BE-DCFF-11F1-994E-21106723194A`, header **110**, body **91**, `routing=DELIVERED`.
+- [Quarantine acknowledgment](assets/voting-finish-nov10/held-quarantine-body.jpg): case `915AB958-DCFF-11F1-994E-21106723194A`, header **54**, body **43**, `routing=QUARANTINED`.
+- [Delivered routing Event Log](assets/voting-finish-nov10/delivered-event-log.jpg), [held routing Event Log](assets/voting-finish-nov10/held-event-log.jpg).
+
+Each acknowledgment's `BodyJSON` contains only `case_id`, `routing` and its operation-time `version`; empty recommendation/metadata properties carry no full case. Later Workflow/audit updates can increment the persisted case version. The complete case remains in the Partner response and API. These are native UI screenshots, not generated trace illustrations.
+
+### Failures retained and corrected
+
+The first hosted backend rerun really failed because a shallow clone lacked frozen baseline commit `d1d752c`. Full-history checkout fixed access to that baseline without changing the assertion. [Failure](evidence/voting-finish-nov10/ci-backend-initial-failure.txt). The first fresh connected run then found the stale exact prompt assertion `1.3.1`; source/runtime already used `1.4.2`. [Failure](evidence/voting-finish-nov10/connected-initial-failure.txt). The exact assertion was updated, not relaxed.
+
+Concurrent native instances exhausted the existing **2 GiB** VM: connected reads lost transport, and the first Compose startup received signal 9. Completed test instances were stopped without deleting data; the affected native instance was restarted and the unchanged full connected suite passed serially. [Interrupted output](evidence/voting-finish-nov10/connected-after-prompt-fix-oom.txt). A serial Compose attempt then found a real read-only `node_modules` mount failure. The launcher now uses a dedicated writable frontend volume and refuses another running build-154 instance. [Both failures](evidence/voting-finish-nov10/compose-failures.json).
+
+Native Contents initially crashed the in-app browser. After native memory recovery and a new sign-in, both compact XML bodies were captured successfully; the informational XSLT deprecation banner was dismissed, no browser security warning bypassed. Both read-permission windows were closed. The candidate's first preflight rejected an already reserved subnet before creating a container; the next invocation selected a disjoint subnet from Docker's actual IPAM snapshot. [Preflight](evidence/voting-finish-nov10/candidate-031-preflight.txt), [executed candidate command](evidence/voting-finish-nov10/candidate-031-command.txt). None of these paths was silently replaced by fixture injection.
+
+---
+
+
+## Current local branch repeat
+
+**Historical earlier November 10 checkpoint.** The fresh GitHub repeat above supersedes its incomplete connected/capture gates; the original outputs below remain unchanged.
+
+A fresh **local Git clone** of `backend-polish-nov10` at **`76d9ef17f660d3d9ca9aa428257563055111fb51`** loaded source into an isolated, already-licensed **2026.3.0AI.154.0 Community / 154U ARM64** container with **no application source mounts**. It was not a GitHub clone of an unpushed branch. Initial activation failed when Docker default network pools were exhausted; the still-empty installed instance was then activated on an inspected disjoint private /28. No networks were deleted. [Receipt](evidence/backend-polish-nov10/fresh-source.json), [executed resume driver](evidence/backend-polish-nov10/fresh-source-commands.py). Subsequent harness/docs commits preserve the native executable tree: [identity](evidence/backend-polish-nov10/source-identity.json).
+
+| Check | Result from this pass | Evidence |
+| --- | --- | --- |
+| Source load / production / native suite | Passed; **7 classes / 22 methods** | [Native output](evidence/backend-polish-nov10/fresh-source-native.txt) |
+| Recorded API replays | **12/12 twice**, sessions **24 / 58**, held with no deliveries | [First](evidence/backend-polish-nov10/fresh-source-replay-1.json), [second](evidence/backend-polish-nov10/fresh-source-replay-2.json) |
+| Fresh source Python | **339 passed in 41.99s** | [Output](evidence/backend-polish-nov10/fresh-source-pytest.txt) |
+| TypeScript / production build | Passed | [Types](evidence/backend-polish-nov10/fresh-source-types.txt), [build](evidence/backend-polish-nov10/fresh-source-build.txt) |
+| Disconnected/responsive browser suite | **54 passed (2.3m)** | [Output](evidence/backend-polish-nov10/fresh-source-browser.txt) |
+| Connected read-only browser suite | **12 passed / 4 failed (44.7s)**; delivered-amendment and retrieved-precedent cases absent in this clean replay instance | [Receipt](evidence/backend-polish-nov10/fresh-connected.json), [full failure output](evidence/backend-polish-nov10/fresh-connected-output.txt) |
+| Revised install/network harness | **373 pytest passed in 36.54s** | [Output](evidence/backend-polish-nov10/10-harness-pytest.txt) |
+| Fresh local clone of revised shell launcher | Public native **0.3.0** installed; release-matched **5 classes / 12 methods**, both replays **12/12** | [Summary](evidence/backend-polish-nov10/public-shell-summary.json), [command](evidence/backend-polish-nov10/public-shell-command.sh), [output](evidence/backend-polish-nov10/public-shell-output.txt) |
+| Native UI readback | Held case, compact References reply, recorded provider metadata and Event Log entries captured | [Capture receipt](evidence/backend-polish-nov10/11-native-ui.json), [permissions restored](evidence/backend-polish-nov10/11-permissions-restored.json) |
+
+**Incomplete acceptance:** no delivered-case Visual Trace/Event Log capture was produced in this fresh instance. The additional review verifier stopped after two environment-preparation errors, before creating cases ([blocked receipt](evidence/backend-polish-nov10/fresh-review-blocked.json)). Earlier same-instance upgrade review passed **26/26 per case**, including one receipt under concurrent approval ([receipt](evidence/backend-polish-nov10/upgrade-review.json)); it is not relabeled as fresh-instance verification. The earlier metadata exporter failed twice and remains [failed evidence](evidence/backend-polish-nov10/08-production-routes.json). Primary native UI readback subsequently proved the held References reply separately.
+
+No fresh model inference or renewed live-five-case/CSV-browser result is claimed by these replay checks. Protected pre-existing uncommitted UI work is outside the fresh-clone snapshot. The shell launcher uses Docker orchestration, **not Compose**; the normal live installation still uses Compose. Public IPM/OEX remain **0.3.0**, React **0.2.1**. **At that earlier checkpoint, 0.3.1 was not prepared** while required readback/connected-data gates remained incomplete. No package/tag/release/push/OEX action occurred.
+
 # Judge verification
+
+## One-command public-package launcher — November 10, 2026 (IST)
+
+The new local `push/top3` launcher, `uv run python scripts/judge_replay.py`, passed a separate clean-container run. It pins verification source to the public 0.3.0 snapshot `a7aa217f1fc8d96f56bac6fd3110618eec21c353`, fetches the checksum-pinned IPM installer, generates private test credentials and never changes the app's `.env`. Current source native tests are deliberately not copied into the older published backend.
+
+Result: public 0.3.0 install/startup, **5 native classes / 12 methods**, two **12/12** recorded replays, sessions **24 / 58**, quarantine and zero deliveries. [Launcher receipt](evidence/voting-week-nov10/judge-wrapper.json) · [exact output and duration](evidence/voting-week-nov10/judge-wrapper-output.txt) · [native assertions](evidence/voting-week-nov10/judge-wrapper-native-tests.txt). This is a local launcher plus fresh pinned-source checkout and isolated registry install, not a fresh GitHub clone of the unpushed final branch or a test of its unpublished runtime changes. No model inference or IRIS image download occurred.
+
+The current local Python suite passed **330 tests in 22.60s**; the launcher-specific tests passed **12 in 0.42s**. TypeScript and the frontend build passed, with existing non-fatal bundler warnings. [Local checks and environment-example coverage](evidence/voting-week-nov10/judge-polish-checks.json). Pre-existing uncommitted UI edits remain separate from this documentation/harness change; these checks are not a new connected-browser or live five-case run.
+
+## Voting-week public main repeat — November 10, 2026 (IST)
+
+A fresh GitHub clone of **main `a10de3f61e1d809b374832a4db67761318bc16ea`** repeated the documented public-package path in a new isolated **2026.3.0AI.154.0 Community / 154U ARM64** container, with no application source mounts. The official runtime and gateway images were already loaded; no new IRIS image or model was downloaded. Private local test credentials were configured without provider keys. This is a **public 0.3.0 install**, not a source upgrade or verification of unpublished `push/top3` runtime changes.
+
+| Executed check | Observed result | Evidence |
+| --- | --- | --- |
+| Literal public `zpm "install silentshift"`, version check and explicit production start | Native 0.3.0, passed | [Receipt](evidence/voting-week-nov10/judge-main-nov10.json) |
+| Full release-matched native suite | **5 classes / 12 methods; All PASSED** | [Complete assertion output](evidence/voting-week-nov10/judge-main-native-tests.txt) |
+| First no-key API replay | **12/12**, session **24**, QUARANTINED, **0 deliveries** | [First replay](evidence/voting-week-nov10/judge-main-first-replay.json) |
+| Repeat no-key API replay | **12/12**, session **58**, QUARANTINED, **0 deliveries** | [Repeat replay](evidence/voting-week-nov10/judge-main-second-replay.json) |
+| Fresh main Python suite | **207 passed in 11.40s** | [Commands and output](evidence/voting-week-nov10/judge-main-commands.txt) |
+
+No fresh inference, embeddings, live five-case scenario run or browser regression suite ran in this repeat. Those earlier receipts retain their original scope. The new test containers are retained stopped; starting them again is needed to inspect their printed local trace URLs. No existing app container or benchmark data was changed. Whole-install wall time was not captured, so no total elapsed claim is made.
+
+Historical sections below remain unchanged. A source-branch harness must not copy newer native tests into this older published package; the separate one-command wrapper pins release-matched verification source.
+
+
+## November 9: final `push/top3` source checkpoint
+
+The [final checkpoint](evidence/top3-final-checkpoint.json) records **286 Python tests passing in 18.88 seconds** and the normal local production healthy. All **59 native package source files** remain byte-identical to the fresh quality-gate snapshot; [footprint](evidence/top3-final-source.json). The [fresh native replay/live gate](evidence/top3-quality.json) and [multi-page/browser/CSV gate](evidence/top3-multipage.json) retain their recorded scope. The new demo gateway has [two local native cases and printable-trace evidence](evidence/top3-demo-local.json); this does not establish public hosting.
+
+The AWS trial stopped before native installation after transfer failure, and its resources were removed; [closure readback](evidence/top3-aws-trial-result.json). Online demo remains **Not claimed**. Main, native IPM 0.3.0, the listing and video were not changed by this branch. The prepared host installer is not end-to-end cloud-qualified. Historical verification sections below are preserved.
+
+
+## Voting-week source branch repeat — November 9, 2026 UTC
+
+This pass verifies executable source **`718ec9f65317655379c0194d326f755dccc44a64` on `push/top3`**, not a new main/public-package release. Two newly created official **2026.3.0AI.154.0 Community / 154U ARM64** containers used source loading with **zero application source mounts**. They ran sequentially after the benchmark finished and the normal app was temporarily stopped. This is a fresh-container source gate, not a fresh GitHub-clone installation or a public registry install. No new image was downloaded.
+
+| Check | Observed result | Receipt/output |
+| --- | --- | --- |
+| Full Python suite after the earlier timing-harness repair | **248 passed in 21.49 seconds** | [Exact output](evidence/top3-quality-pytest.txt) |
+| Keyless source install and production startup | Passed | [Source identity and commands](evidence/top3-quality.json) |
+| Full native suite, replay instance | **5 classes / 12 methods passed** | [Native assertions](evidence/top3-quality-replay-unit.txt) |
+| Two keyless API replays | **12/12 each**, sessions **24 / 58**, quarantined with zero deliveries | [First](evidence/top3-quality-replay-first.json), [second](evidence/top3-quality-replay-second.json) |
+| Separate fresh live source instance | Native suite **5 classes / 12 methods**, live scenarios **5/5** | [Native unit output](evidence/top3-quality-live-unit.txt), [actual scenarios](evidence/top3-quality-live-five.json) |
+| Frontend connected to that fresh live backend | **16 passed in 16.6 seconds**, no request mocks | [Browser output](evidence/top3-quality-fresh-native-browser.txt) |
+
+Live sessions: **30, 58, 86, 113, 141** in the separate live container. Session numbers belong to their own containers and are not interchangeable. New source gates close the previous default-provider replay/live and full-Python follow-ups; earlier failed attempts remain preserved. External provider services are still unverified. Both test instances were retained stopped, and the normal local app was restored. Subsequent README/design/evidence edits do not change the verified executable snapshot. [Detailed scope and source hashes](evidence/top3-quality.json).
+
+The published-package and main-branch histories below retain their original dates, commits and test scope.
 
 ## Public 0.3.0 install — November 8, 2026 (UTC)
 

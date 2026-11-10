@@ -4,16 +4,18 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 from compose_support import compose_command
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'python'))
+from silentshift.provider_config import resolve_provider
 
 
 def read_env(path: Path) -> dict[str, str]:
@@ -42,6 +44,11 @@ def main() -> int:
     parser.add_argument('--image-archive', type=Path, help='Official architecture-specific EAP archive to docker load locally')
     args = parser.parse_args()
     env = read_env(ROOT / '.env')
+    try:
+        resolve_provider(env)
+    except ValueError as error:
+        print(str(error), file=sys.stderr)
+        return 2
     required = ('IRIS_IMAGE', 'SILENTSHIFT_IRIS_USERNAME', 'SILENTSHIFT_IRIS_PASSWORD',
                 'SILENTSHIFT_VIEWER_USERNAME', 'SILENTSHIFT_VIEWER_PASSWORD', 'SILENTSHIFT_GATEWAY_PASSWORD')
     missing = [name for name in required if not env.get(name)]

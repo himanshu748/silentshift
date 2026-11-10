@@ -6,9 +6,7 @@ Class SilentShift.CSV Extends %RegisteredObject
 ClassMethod Prepare(raw As %String, commit As %Boolean = 0) As %String [ Language = python ]
 {
     import iris, json, sys, csv
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.csv_orders import prepare_request
     try:
         result = prepare_request(raw, commit=bool(commit))
@@ -23,6 +21,8 @@ ClassMethod Preview(raw As %String, commit As %Boolean = 0) As %DynamicObject
 {
     Set prepared = ##class(%DynamicObject).%FromJSON(..Prepare(raw,commit))
     Set bundle = prepared.%Get("bundle"), records = bundle.%Get("records")
+    // Preserve pristine parsed input before readback annotations mutate records.
+    If commit Set cleanBundle = ##class(%DynamicObject).%FromJSON(bundle.%ToJSON())
     For index=0:1:records.%Size()-1 {
         Set row = records.%Get(index), message = row.%Get("message")
         Set key = ##class(SilentShift.Bridge).PairHash(message.%Get("source"),message.%Get("event_id"))
@@ -47,10 +47,9 @@ ClassMethod Preview(raw As %String, commit As %Boolean = 0) As %DynamicObject
     }
     Set result = {"preview_hash":(prepared.%Get("preview_hash")),"feed_sha256":(bundle.%Get("feed_sha256")),"approved_sha256":(bundle.%Get("approved_sha256")),"records":(records),"references":(bundle.%Get("references")),"mode":"per-line-simulator","atomic_order_delivery":false,"order_completeness":"not_verified"}
     If commit {
-        // Reparse the originals for the write, without readback annotations.
-        Set clean = ##class(%DynamicObject).%FromJSON(..Prepare(raw,1))
+        // Use the pristine copy for writes, without readback annotations.
         Set input = ##class(%DynamicObject).%FromJSON(raw)
-        Set imported = ..ImportReferences(clean.%Get("bundle"),clean.%Get("preview_hash"),clean.%Get("reason"),input.%Get("orders_csv"),input.%Get("approved_csv"))
+        Set imported = ..ImportReferences(cleanBundle,prepared.%Get("preview_hash"),prepared.%Get("reason"),input.%Get("orders_csv"),input.%Get("approved_csv"))
         Do result.%Set("import",imported)
     }
     Return result

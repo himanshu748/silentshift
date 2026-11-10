@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 import hashlib
-import io
 import importlib.util
-import json
-from pathlib import Path
+import io
 import re
 import shutil
 import sys
@@ -13,6 +11,7 @@ import tarfile
 import textwrap
 import types
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import pytest
 
@@ -88,7 +87,7 @@ def test_stage_excludes_private_and_generated_material(source, tmp_path):
     actual = {path.relative_to(destination).as_posix() for path in destination.rglob('*') if path.is_file()}
     assert actual == expected | {'package-inventory.json'}
     assert result['native_install_verified'] is False
-    assert result['version'] == packaging.module_version(source) == '0.3.0'
+    assert result['version'] == packaging.module_version(source) == '0.3.1'
     assert result['registry_published'] is False
     for item in result['files']:
         assert item['sha256'] == hashlib.sha256((destination / item['path']).read_bytes()).hexdigest()
@@ -221,7 +220,7 @@ def archive_fixture(source, destination, extra=None, mutate=None):
 def test_archive_boundary_accepts_native_export_layout_fixture(source, tmp_path):
     archive = archive_fixture(source, tmp_path / 'synthetic-boundary.tgz')
     result = inspector.inspect(archive, source)
-    assert result['version'] == packaging.module_version(source) == '0.3.0'
+    assert result['version'] == packaging.module_version(source) == '0.3.1'
     assert result['class_count'] == len(list(source.glob('src/SilentShift/**/*.cls')))
     assert result['archive_boundary_verified'] is True
     assert result['native_install_verified'] is False

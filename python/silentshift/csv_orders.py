@@ -13,10 +13,10 @@ import os
 import re
 from pathlib import Path
 
-from .engine import _decimal, _time, _text, strict_loads
+from .engine import _decimal, _text, _time, strict_loads
 
-FEED = "partner,event_id,order_id,line_id,occurred_at,product_id,quantity,unit,business_unit".split(",")
-REFERENCE = "partner,order_id,line_id,revision,effective_from,effective_to,approved_by,approved_at,product_id,quantity,unit,business_unit".split(",")
+FEED = ["partner", "event_id", "order_id", "line_id", "occurred_at", "product_id", "quantity", "unit", "business_unit"]
+REFERENCE = ["partner", "order_id", "line_id", "revision", "effective_from", "effective_to", "approved_by", "approved_at", "product_id", "quantity", "unit", "business_unit"]
 MAX_BYTES = 131072
 MAX_ROWS = 20
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1 — prepared source candidate, not published
+
+- **Provider configuration:** inherits the unpublished `push/top3` provider selection and internal gateway. Only local Ollama is live-qualified; OpenAI, Gemini, OpenRouter and compatible endpoints retain configuration/protocol-test scope. Keyless replay remains separate from inference.
+- **Cited prose evidence:** inherits case-scoped prose projection, required invocation-scoped evidence reads and validated exact-quote findings. A cited finding can add containment; it cannot release an existing rule hold. The held-out results retain their limitations; the sealed benchmark is unfinished and no accuracy gain is asserted.
+- **Native diagnostics:** privacy-safe host Event Log codes/stage traces, bounded redacted setup errors and compact internal acknowledgments. The full Partner response remains available. XData preserves the branch's prompt bytes; shared evidence/model/import/catalog helpers and compiler-exported build-154 Storage improve maintainability without rewriting the frozen routing engine.
+- **Operator configuration:** bounded host settings and a single CSV parse retain original authority data. The native CSV backend was already included in public 0.3.0.
+- **Source workbench and installation:** the multi-page frontend, source-only demo gateway and one-command isolated Compose judge path are repository deliverables. The frontend remains version 0.2.1 and is not installed by IPM. Compose keeps source read-only and writes frontend dependencies into a dedicated volume; no model or hosted demo is needed for its recorded replay.
+- **Verification:** full-history CI checkout preserves the historical policy assertion; exact prompt-version and connected-setup fixes retain every check. Safe lint fixes and an explicit remaining-finding inventory replace a blanket clean-lint claim. Frozen fixtures and replay records are unchanged.
+
+`module.xml` and the Python project now declare **0.3.1** for this candidate. Public native IPM and OEX remain **0.3.0**. Candidate preparation is not publication: clean IPM load, published-registry installation, merge, tag/release and OEX moderation are distinct gates. See [current scoped verification](docs/JUDGE_VERIFICATION.md) before publishing. No package, tag or release was published in this pass.
+
 ## 0.3.0 — published November 8, 2026
 
 Compared with the public 0.2.0 source snapshot `d3637bbe85812035e6258320c81af93305e95560`:

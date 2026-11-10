@@ -267,8 +267,8 @@ def main() -> int:
         for label, payload in (("malformed", b"{"), ("oversize", b" " * 131073), ("envelope", json.dumps({"message": message, "clock": "2099-01-01T00:00:00Z", "scenario_id": "approved-amendment", "fault": {"decision": "ALLOW"}, "references": []}).encode())):
             name = "adapter-" + run_id + "-" + label
             submit(name, payload)
-            ack = wait_for(lambda: acknowledgment(name), label + " rejection")
-            wait_for(lambda: path(name, ".hold").is_file(), label + " retained input")
+            ack = wait_for(lambda name=name: acknowledgment(name), label + " rejection")
+            wait_for(lambda name=name: path(name, ".hold").is_file(), label + " retained input")
             state = inspect(args, name)
             ok = ack["status"] == "REJECTED_INPUT" and ack["case_id"] == state["case_id"] == "" and ack["delivery_receipt"] is None and path(name, ".hold").read_bytes() == payload
             failures.append({"file": name, "input_bytes": len(payload), "ack": ack, "native_state": state, "passed": ok})

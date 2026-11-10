@@ -1,0 +1,50 @@
+{
+  "observed_at_utc": "2026-11-10T13:39:31.238584+00:00",
+  "repository": "himanshu748/silentshift",
+  "pr": 4,
+  "historical_check_id": 129854912861,
+  "incident_id": 38253018,
+  "detector": "Generic Password",
+  "extracted_literal": "?Set",
+  "reported_silentshift_occurrences": [
+    {
+      "commit": "2fc57f790606a9fabcdae7eb2e4dfb7cb87c7906",
+      "file": "compose.judge.yaml",
+      "line": 7
+    },
+    {
+      "commit": "2fc57f790606a9fabcdae7eb2e4dfb7cb87c7906",
+      "file": "compose.judge.yaml",
+      "line": 9
+    },
+    {
+      "commit": "2fc57f790606a9fabcdae7eb2e4dfb7cb87c7906",
+      "file": "compose.judge.yaml",
+      "line": 10
+    }
+  ],
+  "triage": "All three are required-environment variable expressions, not credential values. The grouped incident has ten matching template occurrences; each context was verified before classification. Other repository source was not modified.",
+  "dashboard_status": "Ignored",
+  "dashboard_reason": "Not a secret (false positive)",
+  "scope": "One exact literal incident, not a path, repository or detector exclusion",
+  "security_checks_skipped": false,
+  "scanner_disabled": false,
+  "branch_protection_changed": false,
+  "history_rewritten": false,
+  "new_syntax": "${VARIABLE:?}",
+  "unset_or_empty_rejected": true,
+  "startup_minimum_length_and_uniqueness": "Existing docker/judge-prepare.py validation unchanged",
+  "compose_validation_receipt": "compose-validation.json",
+  "pytest_passed": 393,
+  "pytest_elapsed_seconds": 21.78,
+  "new_head_ci": "Pending branch push and hosted check readback; no success asserted in this pre-push receipt",
+  "sources": [
+    "https://docs.gitguardian.com/internal-monitoring/prevent/detect-secrets-in-real-time-in-github",
+    "https://docs.docker.com/reference/compose-file/interpolation/"
+  ],
+  "staged_pattern_scan": {
+    "findings": 0,
+    "files_omitted": 0,
+    "scope": "Full staged file contents at scan time; known patterns only, no Git history or arbitrary untracked content"
+  }
+}

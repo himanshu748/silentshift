@@ -1,11 +1,14 @@
 import copy
-import json
 from pathlib import Path
 
 import pytest
-
 from silentshift.engine import assess, validate_policy
-from silentshift.evaluation import aggregate_native, load_dataset, policy_regression, _build154
+from silentshift.evaluation import (
+    _build154,
+    aggregate_native,
+    load_dataset,
+    policy_regression,
+)
 
 DATASET_PATH = Path(__file__).resolve().parents[1] / "fixtures/v1/scenarios.json"
 DATASET = load_dataset(DATASET_PATH)

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Run a fresh synthetic order through SilentShift's native IRIS AI Hub investigation and inspect the actual result.">
+  <title>Start a live investigation · SilentShift</title>
+  <link rel="icon" href="/favicon.svg">
+  <!-- APP_STYLES -->
+  <link rel="stylesheet" href="/demo/demo.css">
+  <script src="/demo/client.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#demo-main">Skip to content</a>
+  <header class="site-header"><div class="site-wrap demo-header">
+    <a class="site-brand" href="/">SilentShift</a>
+    <span class="tag tag-agent">Live trial · synthetic orders</span>
+    <a class="link" href="/#investigations">Read-only workbench</a>
+  </div></header>
+  <main id="demo-main" class="site-wrap demo-main" tabindex="-1">
+    <p class="site-kicker">Start here</p>
+    <h1>Same order.<br>Different authority.</h1>
+    <p class="demo-lead">An order says <strong>20 CASE</strong>. Its approved contract says <strong>240 EA</strong>.
+      Run a fresh investigation to see whether the governing evidence permits delivery.</p>
+    <p>Native IRIS AI Hub reads the evidence. Deterministic policy decides the route.
+      These orders and their delivery destination are synthetic.</p>
+    <section class="panel demo-controls" aria-labelledby="sample-heading">
+      <h2 id="sample-heading">Choose the evidence</h2>
+      <fieldset id="samples">
+        <legend class="sr-only">Fixed synthetic sample</legend>
+        <label class="demo-sample"><input type="radio" name="scenario" value="quantity-mismatch" checked>
+          <span><strong>No approved conversion</strong><span>20 CASE against 240 EA. The demonstrated policy holds the contradiction.</span></span></label>
+        <label class="demo-sample"><input type="radio" name="scenario" value="approved-amendment">
+          <span><strong>An effective approved amendment</strong><span>The same 20 CASE order, now authorized by an independent amendment.</span></span></label>
+      </fieldset>
+      <div class="demo-actions">
+        <button id="run" type="button" class="btn btn-primary" disabled>Run a live investigation</button>
+        <button id="reset" type="button" class="btn btn-secondary" disabled>Reset journey</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">Connecting to the live demo…</p>
+      <p id="error" role="alert" hidden></p>
+      <p class="small quiet">Reset clears this journey's selection, never native cases or delivery history.
+        One investigation runs at a time. Requests are limited; no model call is retried automatically.</p>
+    </section>
+    <section id="result" class="panel demo-result" aria-labelledby="result-heading" hidden>
+      <p class="kicker">Observed native result</p>
+      <h2 id="result-heading"></h2>
+      <p id="reason"></p>
+      <dl id="facts" class="meta"></dl>
+      <div id="result-links" class="demo-actions"></div>
+      <details class="disclosure"><summary>Original order and retained references</summary><pre id="sources" tabindex="0"></pre></details>
+    </section>
+    <section class="panel" aria-labelledby="inspect-heading">
+      <h2 id="inspect-heading">Follow the result into the product</h2>
+      <p>Open the case to compare the incoming value with the selected reference, inspect actual evidence reads,
+        and follow its policy, native trace and simulator receipt. The shared demo account can read cases and
+        native Visual Trace. Reviewer tasks and interactive Production Configuration are unavailable through this restricted demo. It cannot approve reviews, change production settings or commit imports.</p>
+      <div class="demo-actions"><a class="btn btn-secondary" href="/#investigations">Open the workbench</a>
+        <a class="btn btn-secondary" href="/#health">Read production status</a></div>
+      <button id="access" class="btn btn-ghost" type="button" aria-expanded="false" aria-controls="viewer-access">Show read-only viewer login</button>
+      <div id="viewer-access" hidden>
+        <p>Use this dedicated public-demo account, not a personal IRIS or InterSystems website password.</p>
+        <label class="label" for="viewer-name">Demo viewer username</label><input id="viewer-name" readonly autocomplete="off">
+        <label class="label" for="viewer-password">Demo viewer password</label><input id="viewer-password" type="password" readonly autocomplete="off">
+        <button id="show-password" type="button" class="btn btn-ghost">Show demo password</button>
+      </div>
+    </section>
+    <section class="demo-limits" aria-label="Demo limits">
+      <p id="limits"></p><p id="expires"></p>
+      <p>This is a time-limited live trial, not a production service. Only fixed synthetic samples are admitted.
+        Arbitrary intake, review actions and CSV commits are blocked at the demo boundary.</p>
+      <p>The larger held-out comparison did not establish an overall AI accuracy improvement or improved
+        unstructured routing. <a class="link" href="https://github.com/himanshu748/silentshift/blob/push/top3/docs/EVAL_HELDOUT.md">Read every result and limitation.</a></p>
+    </section>
+  </main>
+</body>
+</html>

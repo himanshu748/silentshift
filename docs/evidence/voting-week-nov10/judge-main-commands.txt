@@ -1,0 +1,25 @@
+# Fresh main clone: a10de3f61e1d809b374832a4db67761318bc16ea
+# Already-loaded official154U ARM64 and Web Gateway. No provider keys.
+# Private .env configured from example: distinct local passwords, wait120, explicit local embedding URL.
+colima start --profile silentshift
+export DOCKER_CONTEXT=colima-silentshift
+git clone --depth 1 --branch main https://github.com/himanshu748/silentshift.git <fresh-clone>
+cd <fresh-clone>
+uv run python scripts/fetch_ipm.py --output .local/ipm/vendor/zpm-0.10.10.xml
+chmod 644 .local/ipm/vendor/zpm-0.10.10.xml
+uv run python scripts/verify_bonus_release.py --source public-registry --install-latest --version 0.3.0 --execution-mode recorded-replay --container silentshift-bonus-registry-voting-nov10 --api-port 52963 --execute
+uv run python scripts/trace_example.py --api http://127.0.0.1:52963/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-voting-nov10 --output evidence/native/voting-repeat.json
+uv run pytest -q
+
+# Observed output
+unit_suite_passed: true
+replay_passed: true
+session_id: 24
+repeat session_id: 58
+checks=12/12; passed=true
+routing=QUARANTINED; delivery_count=0
+207 passed in 11.40s
+
+# Full assertion output: judge-main-native-tests.txt
+# Replay bodies: judge-main-first-replay.json; judge-main-second-replay.json
+# Whole-install CLI wall time was not captured; no elapsed total is asserted.

@@ -1,0 +1,89 @@
+{
+  "checked_at_utc": "2026-11-10T12:51:07.283140+00:00",
+  "source_commit": "7b3d5efafb07fd54530c912f6b9cdbb710462020",
+  "candidate_version": "0.3.1",
+  "public_version": "0.3.0",
+  "frontend_version": "0.2.1",
+  "fresh_github_clone": true,
+  "runtime": "2026.3.0AI.154.0 Community / 154U ARM64",
+  "source_mounts": 0,
+  "native_classes_passed": 7,
+  "native_methods_passed": 22,
+  "native_classes": [
+    "SilentShift.Test.AdapterChecks",
+    "SilentShift.Test.BackendChecks",
+    "SilentShift.Test.CitedFindingsChecks",
+    "SilentShift.Test.ProviderChecks",
+    "SilentShift.Test.ReplayChecks",
+    "SilentShift.Test.RuntimeChecks",
+    "SilentShift.Test.TraceChecks"
+  ],
+  "replays": [
+    {
+      "checks_passed": 12,
+      "checks_total": 12,
+      "session_id": "24",
+      "visual_trace_url": "http://127.0.0.1:53043/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=24"
+    },
+    {
+      "checks_passed": 12,
+      "checks_total": 12,
+      "session_id": "58",
+      "visual_trace_url": "http://127.0.0.1:53043/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=58"
+    }
+  ],
+  "pytest": {
+    "passed": 393,
+    "elapsed_seconds": 31.29,
+    "output": "candidate-031-pytest.txt"
+  },
+  "typescript": {
+    "command": "npm run check",
+    "exit_code": 0,
+    "fresh_clone": true
+  },
+  "frontend_build": {
+    "command": "npm run build",
+    "exit_code": 0,
+    "fresh_clone": true,
+    "nonfatal_warnings": "lucide-react use-client directives in two dependencies"
+  },
+  "live_native": {
+    "passed": 5,
+    "total": 5,
+    "source_commit": "da2e9e9e064e09fa1e30e7891df13e142b6234b7",
+    "receipt": "fresh-live-five.json",
+    "renewed_after_version_bump": false
+  },
+  "connected_browser": {
+    "passed": 16,
+    "total": 16,
+    "receipt": "connected-final.json"
+  },
+  "compose": {
+    "checks_passed": 12,
+    "total": 12,
+    "receipt": "compose-final.json"
+  },
+  "native_captures_complete": true,
+  "permission_restoration": "permissions-restored.json",
+  "ruff_findings": 40,
+  "ruff_disposition": "Each finding retained with a file/line/rule/reason; no clean-lint claim or blanket ignore",
+  "registry_published": false,
+  "tag_created": false,
+  "main_changed": false,
+  "archive_clean_install": {
+    "passed": true,
+    "receipt": "candidate-031-install.json",
+    "scope": "actual local-filesystem repository install, empty stopped application; startup/native-suite/replays are separately verified in the source-load container"
+  },
+  "hosted_ci": {
+    "conclusion": "success",
+    "url": "https://github.com/himanshu748/silentshift/actions/runs/42818397027",
+    "head_sha": "7b3d5efafb07fd54530c912f6b9cdbb710462020",
+    "pytest_passed": 393,
+    "pytest_elapsed_seconds": 23.17,
+    "disconnected_browser_passed": 54,
+    "browser_time": "1.1m"
+  }
+}

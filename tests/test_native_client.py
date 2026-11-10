@@ -6,7 +6,6 @@ from threading import Thread
 
 import pytest
 
-
 spec = importlib.util.spec_from_file_location("verify_native", Path(__file__).parents[1] / "scripts/verify_native.py")
 native = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(native)

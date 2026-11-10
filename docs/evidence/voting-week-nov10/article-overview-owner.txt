@@ -1,0 +1,296 @@
+Browser tab: 3, Title: "Catching semantic failures in an IRIS interoperability production | IDC", URL: "https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production".
+0 AXWebArea Catching semantic failures in an IRIS interoperability production | IDC, URL: community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production
+	1 container
+		2 link Description: Skip to main content, Value: community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production#main-content
+		3 container
+			4 link Description: Learning, Value: learning.intersystems.com/
+			5 link Description: Documentation, Value: docs.intersystems.com/
+			6 text Community
+			7 link Description: Open Exchange, Value: openexchange.intersystems.com/
+			8 link Description: Ideas Portal, Value: ideas.intersystems.com/
+			9 link Description: Global Masters, Value: globalmasters.intersystems.com/
+			10 link Description: Certification, Value: intersystems.com/support-learning/learning-services/certification-program/
+			11 link Description: Partner Directory, Value: partner.intersystems.com/
+			12 link Description: Startup Hub, Value: startup.intersystems.com/
+		13 container
+			14 container block-intersystems-branding
+				15 link community.intersystems.com/
+			16 container navbarSupportedContent
+				17 text Search by posts, members, tags
+				18 container block-intersystems-intersystemsnewbuttonpost
+					19 link community.intersystems.com/node/add/post
+					20 link Description: Ask DC AI, Value: community.intersystems.com/ask-dc-ai
+				21 text EN
+				22 text 2
+				23 link community.intersystems.com/direct
+				24 content list
+					25 button (collapsed) Secondary Actions: Expand
+		26 container Tabs
+			27 content list
+				28 link Description: View, Value: community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production
+				29 link Description: Edit, Value: community.intersystems.com/node/590710/edit
+		30 container block-intersystems-content
+			31 container
+				32 text 0
+				33 link Description: 0, Value: community.intersystems.com/intsys_bookmark/node/590710
+				34 text 66
+			35 container
+				36 container user-profile-block
+					37 text Written by
+					38 link Description: Himanshu Kumar, Value: community.intersystems.com/user/himanshu-kumar
+					39 link javascript:
+				40 container
+					41 text Article
+					42 link Description: Himanshu Kumar, Value: community.intersystems.com/user/himanshu-kumar
+					43 text · Nov 4  (Edited)  2m read
+					44 container
+						45 link Description: Open Exchange, Value: openexchange.intersystems.com/package/SilentShift
+						46 link community.intersystems.com/node/590711
+					47 heading Catching semantic failures in an IRIS interoperability production, Value: 1
+						48 text Catching semantic failures in an IRIS interoperability production
+				49 container
+					50 link Description: #InterSystems IRIS, Value: community.intersystems.com/tags/intersystems-iris
+					51 link Description: #AI Hub, Value: community.intersystems.com/tags/ai-hub
+					52 link Description: #AI Programming Contest, Value: community.intersystems.com/tags/ai-programming-contest
+					53 link Description: #Interoperability, Value: community.intersystems.com/tags/interoperability
+				54 container
+					55 text An integration accepts an order for  20 CASE . The JSON parses, the required fields are present, and the destination is reachable. The approved contract, however, specifies  240 EA .
+				56 text A developer might recognize a plausible explanation: twenty cases of twelve items. That explanation becomes dangerous when the integration treats it as permission. The message contains no approved pack size, and a plausible conversion does not establish what the partner agreed to send.
+				57 text SilentShift holds that order before delivery and assembles the evidence an integration operator needs to resolve it. It runs inside an InterSystems IRIS interoperability production, using a native AI Hub agent to investigate and Embedded Python policy to authorize the route. The examples below use synthetic transactions and an IRIS destination simulator.
+				58 heading Define the business commitment before asking the model, Value: 2
+					59 text Define the business commitment before asking the model
+				60 text The central comparison is between a message and the approved reference records effective when its business event occurred. A surprising value alone proves very little.
+				61 text Consider two investigations with the same incoming quantity and unit:
+				62 table
+					63 row
+						64 cell
+							65 text Incoming order
+						66 cell
+							67 text Reference evidence at event time
+						68 cell
+							69 text Required outcome
+					70 row
+						71 cell
+							72 text 20 CASE
+						73 cell
+							74 text Active approved contract requires
+							75 text 240 EA
+							76 text ; no authorized transformation
+						77 cell
+							78 text Hold the contradiction
+					79 row
+						80 cell
+							81 text 20 CASE
+						82 cell
+							83 text Approved amendment requires
+							84 text 20 CASE
+							85 text ; its predecessor has expired
+						86 cell
+							87 text Permit delivery when the remaining release checks pass
+				88 text The second row prevents the detector from becoming a blanket change blocker. An old value differs, but the business has authorized the new one.
+				89 container
+					90 text The
+					91 link Description: assessment engine, Value: github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py
+					92 text  makes this distinction before routing. Reference validity uses a half-open interval:
+				93 container
+					94 button ObjectScript
+					95 text effective_from <= occurred_at < effective_to
+
+				96 text An open-ended reference omits the upper bound. Overlapping approved records that disagree produce unresolved evidence; the engine cannot select whichever record makes delivery convenient. An amendment must also have a retrieved approved predecessor with a valid temporal relationship. Matching the current value is insufficient if that lineage is missing.
+				97 text Authority is explicit. Reference records come from the server's reference store; message fields cannot promote themselves to approved evidence. Peer records may expose a concern, but even agreeing peers cannot grant release authority.
+				98 container
+					99 text Representation also belongs to the contract. In the payment example,  12550  minor EUR units and  125.50  major units describe the same numeric amount after a conversion. An interface expecting major units can still receive the wrong representation. SilentShift compares the declared amount and scale using exact decimal values and preserves the original payload. Its normalization helpers do not repair or rewrite a transaction during routing.
+				100 heading Give the agent a bounded investigation, Value: 2
+					101 text Give the agent a bounded investigation
+				102 text The agent helps the operator connect the message, reference records and relevant history. Its tools expose four narrow reads:
+				103 table
+					104 row
+						105 cell
+							106 text Tool
+						107 cell
+							108 text Evidence it contributes
+					109 row
+						110 cell
+							111 text GetCurrentMessage
+						112 cell
+							113 text The transaction under investigation
+					114 row
+						115 cell
+							116 text GetApprovedContracts
+						117 cell
+							118 text Approved contract evidence for that case
+					119 row
+						120 cell
+							121 text GetRelatedRecords
+						122 cell
+							123 text Related records already bound to the investigation
+					124 row
+						125 cell
+							126 text find_similar_precedents
+						127 cell
+							128 text Up to three resolved cases or approved amendments, with source IDs and similarity scores
+				129 container
+					130 text The
+					131 link Description: tool implementation, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/AI/EvidenceTools.cls
+					132 text  binds access to a server-selected case. The model cannot supply an arbitrary case ID, execute SQL, amend a contract or call the destination.
+				133 container
+					134 text The native  %AI.Agent  reads those tools and returns a small proposal:  decision ,  evidence_ids ,  explanation  and  uncertainty . The allowed decisions are  ALLOW ,  QUARANTINE  and  REQUEST_REVIEW . The response is parsed and validated before it can influence routing. Unknown evidence IDs, an unexpected schema or malformed output cannot become a release decision.
+				135 container
+					136 text The local agent uses Ollama  qwen3-silentshift:4b-instruct  with a six-iteration session limit. The current
+					137 link Description: Investigator, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/AI/Investigator.cls
+					138 text  requests at most  192 output tokens per exchange ; the
+					139 link Description: provider ingress, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/Provider/API.cls
+					140 text  independently rejects budgets above  700 tokens . The admission ceiling is separate from the configured request budget, and neither is a measured session total. The enclosing production wait is separately bounded; expiry leaves the case held. That timeout does not establish that the provider has cancelled its work.
+				141 heading Keep relevance separate from authority, Value: 2
+					142 text Keep relevance separate from authority
+				143 container
+					144 text Precedent retrieval answers a useful operator question: has a similar case been resolved before? Local  all-minilm:22m  embeddings populate 384-dimensional native IRIS  VECTOR  columns; cosine search returns source records and scores.
+				145 text A high score measures similarity. It cannot establish that the current partner has an approved conversion, that an amendment was effective at this event time, or that yesterday's release applies today.
+				146 container
+					147 text SilentShift therefore keeps precedent retrieval outside the authoritative contract comparison. A retrieved delivery can inform the recommendation and guide the operator to a prior resolution. It cannot remove a critical finding. A
+					148 link Description: native veto test, Value: github.com/himanshu748/silentshift/blob/main/docs/evidence/precedent-veto.json
+					149 text  retrieved earlier deliveries and then supplied a valid-looking  ALLOW  proposal for a current critical contradiction. Policy retained the hold.
+				150 text This boundary lets retrieval add context without making historical mistakes self-reinforcing.
+				151 heading Authorize delivery at the production boundary, Value: 2
+					152 text Authorize delivery at the production boundary
+				153 text The processing path stays inside IRIS:
+				154 container
+					155 button ObjectScript
+					156 container code-1
+						157 text Partner Business Service
+  → Semantic Business Process
+      → reference reads + native AI Hub investigation
+      → Embedded Python assessment  and  policy
+  → destination Operation  OR  quarantine/review
+
+				158 container
+					159 text The agent's proposal passes through
+					160 link Description: validate_policy, Value: github.com/himanshu748/silentshift/blob/main/python/silentshift/engine.py
+					161 text . Automatic delivery requires a resolved comparison to approved evidence, a complete valid recommendation, all required evidence citations, uncertainty at or below  0.35 , and no critical contradiction or duplicate event. The agent must also propose  ALLOW .
+				162 text A model concern can keep an otherwise eligible case in review. It cannot turn inconclusive evidence into a verified business contradiction. Conversely, an optimistic explanation cannot release a case that deterministic assessment has classified as critical.
+				163 container
+					164 text The destination
+					165 link Description: rechecks authorization, Value: github.com/himanshu748/silentshift/blob/main/src/SilentShift/Store.cls
+					166 text  before persisting a unique simulator receipt. This matters because the final effect deserves its own guard, even when earlier processing has already evaluated policy.
+				167 container
+					168 text For the operator, the result is one investigation containing the original payload, reference snapshot, tool reads, policy checks and destination receipt. Eligible holds can proceed through native Workflow review; critical contradictions remain blocked from approval. The
+					169 link Description: companion article, Value: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery
+					170 text  follows the failure and recovery behavior of that human decision.
+				171 image An approved amendment and its simulator delivery in SilentShift
+				172 heading Trace the recommendation to the business outcome, Value: 2
+					173 text Trace the recommendation to the business outcome
+				174 text An operator investigating a held order needs to distinguish a provider failure, a missing reference, an invalid proposal and a deliberate policy veto.
+				175 container
+					176 text SilentShift records each actual local LLM HTTP exchange as a typed interoperability request/response pair in the original case session. Visual Trace connects those pairs to native tool reads and the final route. The
+					177 link Description: recorded examples, Value: github.com/himanshu748/silentshift/blob/main/docs/AI_TRACING.md
+					178 text  include a successful investigation and a real upstream HTTP 400 that left the case held with zero deliveries.
+				179 text Persistent provider messages contain metadata rather than raw prompt and response bodies: model, instruction version, correlation, duration, HTTP outcome and bounded tool-call metadata. Usage belongs to the particular response when available. Session totals, billing cost and provider retry classification remain unavailable. These distinctions prevent a trace from implying measurements it never collected.
+				180 heading Read the result at two levels, Value: 2
+					181 text Read the result at two levels
+				182 container
+					183 text The
+					184 link Description: clean installed production run, Value: github.com/himanshu748/silentshift/blob/main/docs/evidence/ipm-clean-install.json
+					185 text  produced four of five expected model proposals and all five expected final routes. The approved amendment delivered once; the other four cases had zero deliveries. In the conflicting-reference case, the model proposed quarantine while deterministic policy preserved the required review route.
+				186 text Those results test two different contracts: whether the agent produced the expected proposal, and whether the application contained or delivered correctly. Reporting only the final five-of-five result would hide the model disagreement.
+				187 text The five frozen scenarios are also solved by the rule-only baseline. They demonstrate the integrated investigation and containment behavior; they do not establish an AI accuracy improvement or production readiness. External destinations, broader datasets and production capacity remain untested.
+				188 container
+					189 text To inspect the difference yourself, follow the
+					190 link Description: native build-154 setup, Value: github.com/himanshu748/silentshift#native-build-154-setup
+					191 text , then run scenarios A and C in the workbench. Compare their effective references before reading the recommendation. A should remain held; C should have one simulator receipt. The
+					192 link Description: 2:30 captioned demo, Value: youtu.be/a4dOcqu89EA
+					193 text  shows that sequence and the native components behind it.
+				194 container
+					195 link Description: Open Exchange application, Value: openexchange.intersystems.com/package/SilentShift
+					196 text  ·
+					197 link Description: Source and installation, Value: github.com/himanshu748/silentshift
+					198 text  ·
+					199 link Description: Reproduction guide, Value: github.com/himanshu748/silentshift/blob/main/docs/JUDGE_GUIDE.md
+				200 link Description: Check the related application on InterSystems Open Exchange, Value: openexchange.intersystems.com/package/SilentShift
+				201 container related-posts
+					202 text Related posts
+					203 content list
+						204 text Catching semantic failures in an IRIS interoperability production
+						205 link Description: Recoverable human review in IRIS: from approval to one delivery, Value: community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery
+				235 container node-post-field-comments
+					236 container
+						237 text Discussion ( 1 )
+						238 container Subscribers
+							239 text 1
+						240 container edit-comment-body-wrapper
+							241 container Rich Text Editor
+								242 toolbar Editor toolbar
+									243 pop up button (collapsed) Description: Paragraph, Heading, Secondary Actions: Expand
+									244 checkbox Bold, Value: 0
+									245 checkbox Italic, Value: 0
+									246 checkbox Bulleted List, Value: 0
+									247 container
+										248 checkbox Numbered List, Value: 0
+										249 pop up button (collapsed) Numbered List, Secondary Actions: Expand
+									250 button Upload image from computer
+									251 checkbox Source, Value: 0
+										252 text Source
+									253 checkbox Code, Value: 0
+									254 container
+										255 checkbox Insert code block, Value: 0
+										256 pop up button (collapsed) Insert code block, Secondary Actions: Expand
+									257 pop up button (collapsed) Emoji, Secondary Actions: Expand
+									258 button Page Break
+								259 text entry area (settable) Description: Rich Text Editor. Editing area: main. Press ⌥0 for help., Value:
+
+							260 text Words: 0
+							261 text Characters: 0
+							262 container edit-comment-body-0-format
+								263 pop up button (collapsed, settable) Value: Markdown, ID: edit-comment-body-0-format--2, Secondary Actions: Expand
+									264 menu
+										265 Full HTML
+										266 (selected) Markdown
+						267 container edit-actions
+							268 button Preview, ID: preview-ajax-comments-reply-form-node-590710-field-comments-0-0
+							269 button Add reply, ID: edit-ajax-comments-reply-form-node-590710-field-comments-0-0
+					270 container comment-288552
+						271 container
+							272 link Description: Iryna Mologa, Value: community.intersystems.com/user/irynamologa
+							273 text · Nov 8  (Edited)
+						274 container
+							275 text Hi
+							276 link Description: Himanshu, Value: community.intersystems.com/user/himanshu-kumar
+							277 text ! 👋
+							278 text We just featured your video on
+							279 link Description: InterSystems Developers YouTube, Value: youtube.com/@InterSystemsDevelopers
+							280 text ! 🔥
+							281 text 🎬
+							282 link Description: SilentShift, Value: youtube.com/watch?v=E3K2FoaRKAY
+						283 AXWebArea SilentShift - YouTube, URL: youtube.com/embed/E3K2FoaRKAY?
+							284 container
+								285 container Description: YouTube Video Player, ID: movie_player
+								286 container
+									287 button Play video
+									288 button Description: Hide player controls, ID: player-controls-a11y-toggle
+									289 container player-control-overlay
+										290 container
+											291 link Description: SilentShift, Value: youtube.com/watch?v=E3K2FoaRKAY
+											292 link Description: InterSystems Developers, Value: youtube.com/channel/UCPdsARw9vriybylWSjGrd0A
+											293 button
+											294 container
+												295 text InterSystems Developers 5.25K subscribers
+										296 container
+											297 button Share
+											298 button Watch later
+											299 link Description: Watch on YouTube, Value: youtube.com/watch?v=E3K2FoaRKAY
+						300 link Description: 0, Value: community.intersystems.com/intsys_vote/comment/288552
+						301 link Description: 0, Value: community.intersystems.com/intsys_bookmark/comment/288552
+						302 content list
+							303 link Description: Reply, Value: community.intersystems.com/ajax_comments/reply/node/590710/field_comments/288552
+		224 container
+			225 content list
+				226 link Description: Privacy & Terms, Value: intersystems.com/privacy-policy/
+				227 link Description: Guarantee, Value: intersystems.com/guarantee/
+				228 link Description: Section 508, Value: intersystems.com/section-508/
+				229 link Description: Contest Terms, Value: community.intersystems.com/intersystems-online-programming-contest-terms
+				230 link Description: Code of Conduct, Value: community.intersystems.com/node/464261
+				231 link Description: Moderation Policy, Value: community.intersystems.com/node/590421
+				232 text Cookies Settings
+			233 text © 2026 InterSystems Corporation.  All rights reserved.
+		234 link Description: Ask DC AI, Value: community.intersystems.com/ask-dc-ai, ID: floating-ask-ai
+
+The focused UI element is 0 AXWebArea Catching semantic failures in an IRIS interoperability production | IDC, URL: community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production

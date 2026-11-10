@@ -1,0 +1,73 @@
+
+> silentshift-web@0.2.1 test:e2e:native
+> playwright test --config=playwright.native.config.ts
+
+
+Running 16 tests using 1 worker
+
+  ✓   1 [desktop-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (2.8s)
+  ✓   2 [desktop-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (1.2s)
+  ✓   3 [desktop-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (1.4s)
+  ✓   4 [desktop-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (2.5s)
+  ✓   5 [desktop-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (1.1s)
+  ✓   6 [desktop-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (1.3s)
+  ✓   7 [desktop-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (997ms)
+  ✓   8 [desktop-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable (4.3s)
+  ✓   9 [mobile-native] › tests/native.spec.ts:255:1 › existing evidence, policy, audit and native trace agree with actual IRIS records (1.9s)
+  ✓  10 [mobile-native] › tests/native.spec.ts:371:1 › a delivered amendment shows its actual evidence and simulator outcome (1.3s)
+  ✓  11 [mobile-native] › tests/native.spec.ts:390:1 › precedent evidence matches real case-scoped vector results and recorded tool reads (1.8s)
+  ✓  12 [mobile-native] › tests/native.spec.ts:436:1 › all eight routes expose real read-only state or reviewer permission (2.4s)
+  ✓  13 [mobile-native] › tests/native.spec.ts:543:1 › selecting another queued case returns to its visible disposition (1.3s)
+  ✘  14 [mobile-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety (20.1s)
+  ✘  15 [mobile-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto (0ms)
+  -  16 [mobile-native] › tests/native.spec.ts:624:1 › keyboard navigation, reduced motion and memory-only session lifecycle remain usable
+
+
+  1) [mobile-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety
+
+    Error: Viewer worklist permission check failed; sensitive transport details suppressed.
+
+      565 | test("native Review worklist matches actual tasks and preserves dialog keyboard safety", async ({ page }, testInfo) => {
+      566 |   const denied = await api.get(`${apiBase!.replace(/\/$/, "")}/reviews?limit=50&offset=0`).catch(() => {
+    > 567 |     throw new Error("Viewer worklist permission check failed; sensitive transport details suppressed.");
+          |           ^
+      568 |   });
+      569 |   expect(denied.status()).toBe(403);
+      570 |   const tasks = await read("/reviews?limit=50&offset=0", ReviewsSchema, true);
+        at <fresh-clone>/web/tests/native.spec.ts:567:11
+        at <fresh-clone>/web/tests/native.spec.ts:566:18
+
+    Error Context: ../evidence/browser/connected/test-results/native-native-Review-workl-dfcd1-rves-dialog-keyboard-safety-mobile-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-native-Review-workl-dfcd1-rves-dialog-keyboard-safety-mobile-native/error-context.md
+
+  2) [mobile-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto
+
+    Error: Native GET /health failed; sensitive transport details suppressed.
+
+      76 |     .catch(() => {
+      77 |       // API transport call logs can include request headers on a timeout.
+    > 78 |       throw new Error(
+         |             ^
+      79 |         `Native GET ${endpoint} failed; sensitive transport details suppressed.`,
+      80 |       );
+      81 |     });
+        at <fresh-clone>/web/tests/native.spec.ts:78:13
+        at read (<fresh-clone>/web/tests/native.spec.ts:74:20)
+        at <fresh-clone>/web/tests/native.spec.ts:190:12
+
+    Error Context: ../evidence/browser/connected/test-results/native-critical-quarantines-retain-the-reviewer-release-veto-mobile-native/error-context.md
+
+    Error Context: ../evidence/browser/connected/test-results/native-critical-quarantines-retain-the-reviewer-release-veto-mobile-native/error-context.md
+
+  2 failed
+    [mobile-native] › tests/native.spec.ts:565:1 › native Review worklist matches actual tasks and preserves dialog keyboard safety
+    [mobile-native] › tests/native.spec.ts:609:1 › critical quarantines retain the reviewer release veto
+  1 did not run
+  13 passed (1.2m)
+(node:52206) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:52307) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:52362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

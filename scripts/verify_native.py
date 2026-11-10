@@ -22,8 +22,8 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "python"))
-from silentshift.engine import strict_loads  # noqa: E402
-from silentshift.evaluation import aggregate_native, load_dataset, _build154  # noqa: E402
+from silentshift.engine import strict_loads
+from silentshift.evaluation import _build154, aggregate_native, load_dataset
 
 
 def native_build(value: object) -> bool:

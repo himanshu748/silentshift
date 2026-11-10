@@ -1,0 +1,71 @@
+{
+  "checked_at_ist": "2026-11-10T14:51:01.326838+05:30",
+  "scope": "Fresh GitHub clone of public main; fresh isolated public0.3 registry install. Does not test unpublished source branch runtime.",
+  "source_head": "a10de3f61e1d809b374832a4db67761318bc16ea",
+  "source_branch": "main",
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "installed_version": "0.3.0",
+  "install_command": "install silentshift",
+  "production_started": true,
+  "source_mounts": 0,
+  "image_id": "sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713",
+  "native_unit_class_count": 5,
+  "native_unit_method_count": 12,
+  "native_classes": [
+    "SilentShift.Test.AdapterChecks",
+    "SilentShift.Test.ProviderChecks",
+    "SilentShift.Test.ReplayChecks",
+    "SilentShift.Test.RuntimeChecks",
+    "SilentShift.Test.TraceChecks"
+  ],
+  "native_methods": [
+    "TestContracts",
+    "TestIterator",
+    "TestAuthorizationRejectsUnknownCapability",
+    "TestExpiredCapability",
+    "TestMetadataOnlyMessages",
+    "TestPerCallModelTokensAndLatency",
+    "TestPlaybackCannotLookLikeLiveInference",
+    "TestPlaybackScopeAndCriticalPolicy",
+    "TestRecordedResponseProgression",
+    "TestApprovedReferenceLimit",
+    "TestPeerReferenceLimit",
+    "TestTypedMetadata"
+  ],
+  "native_unit_passed": true,
+  "replays": [
+    {
+      "session_id": "24",
+      "case_id": "1AC50E54-DCE7-11F1-A44E-4B0F17F9F6FB",
+      "checks_passed": 12,
+      "checks_total": 12,
+      "passed": true,
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "visual_trace_url": "http://127.0.0.1:52963/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=24"
+    },
+    {
+      "session_id": "58",
+      "case_id": "3BA9F09E-DCE7-11F1-A44E-4B0F17F9F6FB",
+      "checks_passed": 12,
+      "checks_total": 12,
+      "passed": true,
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "visual_trace_url": "http://127.0.0.1:52963/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=58"
+    }
+  ],
+  "fresh_clone_pytest": {
+    "passed": 207,
+    "elapsed_seconds": 11.4,
+    "command": "uv run pytest -q",
+    "output": "207 passed in 11.40s"
+  },
+  "provider_keys": "none; private local test passwords generated without display",
+  "fresh_inference": false,
+  "new_image_downloaded": false,
+  "existing_containers_modified": false,
+  "container": "silentshift-bonus-registry-voting-nov10",
+  "new_resources_retained": true,
+  "resource_state_after_verification": "new test IRIS and gateway retained stopped to limit memory before separate wrapper gate"
+}

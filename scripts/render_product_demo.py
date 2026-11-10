@@ -20,7 +20,6 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CANVAS, SURFACE, TEXT, MUTED, MINT, BORDER = (
     "#0B1116", "#121C23", "#EBF3F5", "#A2B4BC", "#44D6B4", "#2B3D47"

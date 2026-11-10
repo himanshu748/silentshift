@@ -1,0 +1,19 @@
+
+Node: silentshift-bonus-load-backend-early-nov10, Instance: IRIS
+
+SILENTSHIFT>
+
+Load started on 11/10/2026 10:26:21
+Loading file /home/irisowner/BackendInspection.cls as udl
+Compiling class SilentShift.Test.BackendInspection
+Compiling routine SilentShift.Test.BackendInspection.1
+ERROR: SilentShift.Test.BackendInspection.cls(Inspect+3) #1026: Invalid command : 'ix=0:1:ids.%Size()-1' : Offset:6 [for^SilentShift.Test.BackendInspection.1]
+ TEXT: for ix=0:1:ids.%Size()-1 {
+ERROR: SilentShift.Test.BackendInspection.cls(Inspect+22) #1026: Invalid command : 'result.%ToJSON() }' : Offset:25 [}+1^SilentShift.Test.BackendInspection.1]
+ TEXT:  Return result.%ToJSON() }
+Detected 2 errors during load.
+
+SILENTSHIFT>
+
+ERROR #5475: Error compiling routine: SilentShift.Test.BackendInspection.1.  Errors:  ERROR: SilentShift.Test.BackendInspection.cls(Inspect+3) #1026: Invalid command : 'ix=0:1:ids.%Size()-1' : Offset:6 [for^SilentShift.Test.BackendInspection.1]
+  > ERROR #5030: An error occurred while compiling class 'SilentShift.Test.BackendInspection'

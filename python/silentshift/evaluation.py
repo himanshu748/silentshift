@@ -7,16 +7,23 @@ the actual IRIS production; this module cannot authenticate a hand-authored file
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 import hashlib
 import json
 import math
-from pathlib import Path
 import re
+from collections import Counter
+from pathlib import Path
 from statistics import mean
 from typing import Any
 
-from .engine import DECISIONS, assess, rule_only, strict_loads, validate_policy, _recommendation_errors
+from .engine import (
+    DECISIONS,
+    _recommendation_errors,
+    assess,
+    rule_only,
+    strict_loads,
+    validate_policy,
+)
 
 
 def load_dataset(path: str | Path) -> dict[str, Any]:
@@ -59,10 +66,10 @@ def policy_regression(dataset: dict[str, Any]) -> dict[str, Any]:
 def _build154(version: Any) -> bool:
     if not isinstance(version, str):
         return False
-    if re.search(r"(?<![\d.])2026\.3\.0AI\.154\.0(?![\d.])", version, re.I):
+    if re.search(r"(?<![\d.])2026\.3\.0AI\.154\.0(?![\d.])", version, re.IGNORECASE):
         return True
-    return (bool(re.search(r"(?<![\d.])2026\.3\.0AI(?![\d.])", version, re.I))
-            and bool(re.search(r"\bBuild\s*154(?:U)?\b", version, re.I)))
+    return (bool(re.search(r"(?<![\d.])2026\.3\.0AI(?![\d.])", version, re.IGNORECASE))
+            and bool(re.search(r"\bBuild\s*154(?:U)?\b", version, re.IGNORECASE)))
 
 
 def _number(value: Any) -> bool:

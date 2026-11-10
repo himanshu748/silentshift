@@ -20,7 +20,7 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
         If envelope.%Get("action") = "review" {
             Set id = envelope.%Get("case_id")
             Set reviewRequest = envelope.%Get("review")
-            Set reviewed = ##class(SilentShift.Store).Review(id, reviewRequest.%ToJSON(), envelope.%Get("reviewer"))
+            Do ##class(SilentShift.Store).Review(id, reviewRequest.%ToJSON(), envelope.%Get("reviewer"))
             Set request.Action = "review_route"
         } Else {
             Set sc = ##class(SilentShift.Store).CreateCase(payload, .id, .duplicate)

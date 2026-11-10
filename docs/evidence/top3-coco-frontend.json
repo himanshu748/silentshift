@@ -1,0 +1,141 @@
+{
+  "recorded_at_utc": "2026-11-09T09:56:28.806942+00:00",
+  "branch": "push/top3",
+  "verified_source_commit": "7b8b17087f4d2c43b47a16e4a5aafbc55f494118",
+  "scope": "Rebuilt frontend against an existing retained native instance; not a clean source install or a native UnitTest rerun.",
+  "generation": {
+    "tool": "Snowflake Cortex Code 1.2.35",
+    "selected_model": "auto",
+    "passes": [
+      {
+        "status": "error_max_turns",
+        "is_error": true,
+        "iterations": 35,
+        "reported_models": [
+          "claude-opus-5-5"
+        ]
+      },
+      {
+        "status": "success",
+        "is_error": false,
+        "iterations": 10,
+        "reported_models": [
+          "claude-opus-5-5"
+        ]
+      }
+    ],
+    "visual_direction": "Chosen by CoCo after the owner removed palette and layout prescriptions.",
+    "native_cloud_workspace_created": false,
+    "warehouse_created": false,
+    "new_infrastructure_created": false,
+    "private_prompts_and_model_thinking_committed": false
+  },
+  "runtime": {
+    "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "native_model_names": [
+      "qwen3-silentshift:4b-instruct"
+    ],
+    "prompt_versions": [
+      "silentshift-investigator/1.3.1"
+    ]
+  },
+  "checks": {
+    "types": {
+      "exit_code": 0
+    },
+    "build": {
+      "exit_code": 0
+    },
+    "browser": {
+      "passed": 42,
+      "elapsed_reported": "2.5m",
+      "exit_code": 0
+    },
+    "native_read_only_browser": {
+      "passed": 16,
+      "elapsed_reported": "1.8m",
+      "exit_code": 0
+    },
+    "csv_native_ui": {
+      "passed": 32,
+      "checks": 32,
+      "fresh_cases": 2,
+      "case_ids": [
+        "5E193536-DC20-11F1-9476-C2E98B84FA58",
+        "8CE0AF24-DC20-11F1-9476-C2E98B84FA58"
+      ],
+      "trace_ids": [
+        "3256",
+        "3284"
+      ]
+    },
+    "native_scenarios": {
+      "passed": 5,
+      "cases": 5,
+      "native_verified": true,
+      "trace_ids": [
+        "3311",
+        "3339",
+        "3367",
+        "3394",
+        "3422"
+      ]
+    },
+    "python_full_attempts": [
+      {
+        "failed": 2,
+        "passed": 246,
+        "elapsed_seconds": 118.87,
+        "cause": "Hypothesis wall-clock FlakyFailure; functional assertions succeeded on replay"
+      },
+      {
+        "failed": 1,
+        "passed": 247,
+        "elapsed_seconds": 34.78,
+        "cause": "Hypothesis wall-clock FlakyFailure; functional assertions succeeded on replay"
+      }
+    ],
+    "engine_after_harness_fix": {
+      "passed": 71,
+      "elapsed_seconds": 4.66,
+      "assertions_changed": false
+    },
+    "full_pytest_after_harness_fix": {
+      "status": "not rerun",
+      "reason": "Two full-suite timing failures retained; focused engine-module repair verified separately."
+    }
+  },
+  "frontend_sha256": {
+    "web/src/App.tsx": "03fd882c00527c6a27d045ce16ff29c08b2579a3b7214cb5f1bdbe3fa7924730",
+    "web/src/CSVImport.tsx": "e183918f1e514679dd8bdb23db9acc7b70f54be38d865ce11d15882abb0b1b84",
+    "web/src/FlowPreview.tsx": "278339762dd9bc475a9c70b0552a621762110e231dec8295ffd24c0bdc515537",
+    "web/src/Investigations.tsx": "eab58a47591d1ccc10d86abdaed856657f8064137ee63daa7f2ebf433c92fc5c",
+    "web/src/Landing.tsx": "1149d58cdff012ac1d14037f125c381c60230a80913d54b1d4bb62f0b6455bc1",
+    "web/src/Reviews.tsx": "8348fa8aa467df5fa91839a79d2915945f9ee4752a998a9cf1224e79ee0b2257",
+    "web/src/SessionWelcome.tsx": "be546e205cd01e1b321f7384997aeda969a3e3a22e10033c756fcdb9ff2a9358",
+    "web/src/Views.tsx": "86d5b13ffb3480bf99a26801d7fd64e3b56ddb0a3f7ae4c069c7df6c015a2854",
+    "web/src/api.ts": "40dcdbb46718dc37e69af6b39b34fec1d707ea9d8904b87cbbc86226c475d9cf",
+    "web/src/csv-import.css": "e21f777f6bb34489b41128e8f8a6cb0c95d4d1c06046864b832cb044729349d4",
+    "web/src/landing.css": "3228fa12f50db9b3ac97f7138604c59947fba5a14ea75b604e5cfddcbd55a0ef",
+    "web/src/main.tsx": "aabb580893409769aac8dcf4d4a05eeca08173683ae56ec555585fb0e6a1ce48",
+    "web/src/schema.ts": "7d71c30f695f60f7242193c8436ad2fb5cbe08c98a9aacc5f22ff8253496ce91",
+    "web/src/styles.css": "50893a56dd506c30f13a55a208e30bf9ca50a4b7d9aa5752589ac368d39a3b10",
+    "web/src/tokens.css": "dcf538600333348333b861f4b34b79d50fa06870f2ff73c81fa2028e9e2fd64e",
+    "web/src/ui.tsx": "ddaea37cfbcf3c0d7a2de58c356ccc55629d8143cfb0ff41aa0de2cbe1f7dedb"
+  },
+  "screenshots_sha256": {
+    "evidence/browser/top3-coco/csv-results-desktop.png": "076d44f4239e9a6cd0747b6a98c2b4505bfa3cd9bb923d27084eeb61b77b9f66",
+    "evidence/browser/top3-coco/landing-desktop.png": "8e2be3a5182fbc6082ec7ebda1ddd62ae3e535429b920187d69e577d6e1790c0",
+    "evidence/browser/top3-coco/landing-light-desktop.png": "936bc0dea322dc33a8479cc0ed01c82b4a10347c72c3acf4f953d8327baaaf94",
+    "evidence/browser/top3-coco/landing-mobile.png": "61ac15214f30a1d3a4a421b7e8957ddd789cb84bb1820cdf32e3257ec3734bd9",
+    "evidence/browser/top3-coco/workbench-desktop.png": "e66514a5bc695a9c714f9cb03b2078bbf3e4392529ad1c2ae9c72803522eb679",
+    "evidence/browser/top3-coco/workbench-mobile.png": "97c908fcf9a3eb78ddccc090194afb66b5ff80f36f32e0654baa3a13c53a17db"
+  },
+  "limits": [
+    "Main, README, IPM and Open Exchange unchanged. No main push or publication.",
+    "No new native/backend/policy behavior was changed by the frontend rebuild. API client, schema and dependencies were retained.",
+    "The complete Python suite has not been rerun after the property-test harness repair; no post-repair 248/248 claim.",
+    "Read-only native browser checks inspect actual persisted synthetic cases; CSV and five-case checks perform fresh local inference with simulator-only delivery.",
+    "No online demo, award, ranking, external-provider compatibility or held-out accuracy claim follows from this UI pass."
+  ]
+}

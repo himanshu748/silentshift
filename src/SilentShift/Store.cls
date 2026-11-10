@@ -4,6 +4,14 @@ Include %occStatus
 Class SilentShift.Store Extends %RegisteredObject
 {
 
+/// Internal operation acknowledgment; the Partner response remains the full case.
+ClassMethod SummaryJSON(id As %String) As %String
+{
+    Set body = ##class(%DynamicObject).%FromJSON(..CaseJSON(id))
+    Set summary = {"case_id": (body.%Get("id")), "routing": (body.%Get("routing")), "version": (body.%Get("version"))}
+    Return summary.%ToJSON()
+}
+
 ClassMethod CreateCase(envelopeJSON As %String, Output id As %String, Output duplicate As %Boolean) As %Status
 {
     Set id = "", duplicate = 0, locked = 0
@@ -35,7 +43,27 @@ ClassMethod CreateCase(envelopeJSON As %String, Output id As %String, Output dup
         Set id = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
         Set received = ##class(SilentShift.Bridge).Now()
         Set scenarioId = envelope.%Get("scenario_id", "")
-        Set body = {"id": (id), "event_id": (eventId), "source": (source), "received_at": (received), "message": (message), "raw_payload": (raw), "scenario_id": (scenarioId), "dataset_version": (envelope.%Get("dataset_version")), "clock": (envelope.%Get("clock", received)), "references": [], "assessment": null, "recommendation": null, "agent": null, "policy": null, "routing": "PROCESSING", "version": 1, "trace_id": "", "review": null, "synthetic": false}
+        Set body = {
+            "id": (id),
+            "event_id": (eventId),
+            "source": (source),
+            "received_at": (received),
+            "message": (message),
+            "raw_payload": (raw),
+            "scenario_id": (scenarioId),
+            "dataset_version": (envelope.%Get("dataset_version")),
+            "clock": (envelope.%Get("clock", received)),
+            "references": [],
+            "assessment": null,
+            "recommendation": null,
+            "agent": null,
+            "policy": null,
+            "routing": "PROCESSING",
+            "version": 1,
+            "trace_id": "",
+            "review": null,
+            "synthetic": false
+        }
         If scenarioId '= "" {
             Do body.%Set("synthetic", 1, "boolean")
             If $ISOBJECT(envelope.%Get("fault")) Do body.%Set("fault", envelope.%Get("fault"))
@@ -225,7 +253,14 @@ ClassMethod RelatedJSON(id As %String) As %String
         Set candidate = ##class(%DynamicObject).%FromJSON(rows.%Get("Body"))
         Set assessment = candidate.%Get("assessment"), classification = "not_assessed"
         If $ISOBJECT(assessment) Set classification = assessment.%Get("classification")
-        Set item = {"id": (candidate.%Get("id")), "received_at": (candidate.%Get("received_at")), "classification": (classification), "routing": (candidate.%Get("routing")), "review": (candidate.%Get("review")), "is_contract_authority": false}
+        Set item = {
+            "id": (candidate.%Get("id")),
+            "received_at": (candidate.%Get("received_at")),
+            "classification": (classification),
+            "routing": (candidate.%Get("routing")),
+            "review": (candidate.%Get("review")),
+            "is_contract_authority": false
+        }
         Do related.%Push(item)
         If $ISOBJECT(candidate.%Get("review")) Do reviewed.%Push(item)
     }
@@ -270,7 +305,17 @@ ClassMethod OverviewJSON() As %String
         If $ISOBJECT(assessment), assessment.%Get("classification") = "VERIFIED_CONTRADICTION" Set contradictions = contradictions + 1
     }
     Set recentPage = ##class(%DynamicObject).%FromJSON(..ListCases(10, 0))
-    Set result = {"processed": (total), "contradictions": (contradictions), "recent": (recentPage.%Get("items")), "total_processed": (total), "verified_contradictions": (contradictions), "pending_reviews": (reviews), "quarantined": (held), "delivered": (delivered), "processing": (processing)}
+    Set result = {
+        "processed": (total),
+        "contradictions": (contradictions),
+        "recent": (recentPage.%Get("items")),
+        "total_processed": (total),
+        "verified_contradictions": (contradictions),
+        "pending_reviews": (reviews),
+        "quarantined": (held),
+        "delivered": (delivered),
+        "processing": (processing)
+    }
     Return result.%ToJSON()
 }
 
@@ -286,10 +331,14 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
     }
     If request.%GetTypeOf("expected_version") '= "number" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review version must be an integer"))
     Set expectedVersion = request.%Get("expected_version") + 0
-    If (expectedVersion < 1) || ((expectedVersion \ 1) '= expectedVersion) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review version must be a positive integer"))
+    If (expectedVersion < 1) || ((expectedVersion \ 1) '= expectedVersion) {
+        Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review version must be a positive integer"))
+    }
     Set action = request.%Get("action"), reason = $ZSTRIP(request.%Get("reason"), "<>W"), token = request.%Get("idempotency_key")
     If (action '= "approve") && (action '= "reject") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review action is invalid"))
-    If ($LENGTH(reason) < 3) || ($LENGTH(reason) > 2000) || (token = "") || ($LENGTH(token) > 160) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review requires a bounded reason and idempotency key"))
+    If ($LENGTH(reason) < 3) || ($LENGTH(reason) > 2000) || (token = "") || ($LENGTH(token) > 160) {
+        Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_INVALID: review requires a bounded reason and idempotency key"))
+    }
     Set reviewKey = ##class(SilentShift.Bridge).PairHash(id, token)
     Set fingerprint = ##class(SilentShift.Bridge).Hash(reviewer_":"_##class(SilentShift.Bridge).Canonical(requestJSON)), locked = 0
     Try {
@@ -307,13 +356,17 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         Set record = ##class(SilentShift.Data.CaseRecord).%OpenId(id)
         If '$ISOBJECT(record) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_NOT_FOUND: investigation does not exist"))
         If request.%Get("expected_version") '= record.Version Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: investigation version changed"))
-        If (record.Routing = "PROCESSING") || (record.Routing = "DELIVERED") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: investigation cannot be reviewed in its current state"))
+        If (record.Routing = "PROCESSING") || (record.Routing = "DELIVERED") {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: investigation cannot be reviewed in its current state"))
+        }
         Set body = ##class(%DynamicObject).%FromJSON(record.Body), assessment = body.%Get("assessment")
         If '$ISOBJECT(assessment) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: no semantic assessment is available"))
         Set decision = $SELECT(action = "approve": "ALLOW", 1: "QUARANTINE")
         Set proposed = {"decision": (decision), "evidence_ids": (assessment.%Get("evidence_ids")), "explanation": (reason), "uncertainty": 0}
         Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(), proposed.%ToJSON()))
-        If action = "approve", 'policy.%Get("downstream_permitted") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_FORBIDDEN: deterministic policy forbids this release"))
+        If action = "approve", 'policy.%Get("downstream_permitted") {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_FORBIDDEN: deterministic policy forbids this release"))
+        }
         If action = "reject" {
             // An authorized human rejection is a workflow disposition, not a
             // model allegation of a verified semantic contradiction.
@@ -329,8 +382,12 @@ ClassMethod Review(id As %String, requestJSON As %String, reviewer As %String) A
         // claim a real native task. The prior-receipt branch above preserves
         // exact-key recovery without creating a replacement decision.
         If '$ISOBJECT(workflow) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: a native workflow task is required for a new review decision"))
-        If workflow.%Get("engine") '= "native-iris-workflow" Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: a native workflow task is required for a new review decision"))
-        If $ISOBJECT(body.%Get("review")) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: native workflow review is already decided; reuse its original review key"))
+        If workflow.%Get("engine") '= "native-iris-workflow" {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: a native workflow task is required for a new review decision"))
+        }
+        If $ISOBJECT(body.%Get("review")) {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: native workflow review is already decided; reuse its original review key"))
+        }
         // Claim only after version and deterministic policy validation.
         // Native claim persists independently; no user transaction spans
         // the native engine's deferred-response enqueue/completion path.
@@ -390,7 +447,9 @@ ClassMethod SetWorkflow(id As %String, fieldsJSON As %String, eventKind As %Stri
         $$$ThrowOnError(sc)
         Set body = ##class(%DynamicObject).%FromJSON(record.Body), workflow = body.%Get("workflow")
         If '$ISOBJECT(workflow) Set workflow = {}
-        If fields.%IsDefined("task_id"), workflow.%Get("task_id") '= "", fields.%Get("task_id") '= workflow.%Get("task_id") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: workflow task association cannot change"))
+        If fields.%IsDefined("task_id"), workflow.%Get("task_id") '= "", fields.%Get("task_id") '= workflow.%Get("task_id") {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: workflow task association cannot change"))
+        }
         Set before = workflow.%ToJSON(), iterator = fields.%GetIterator()
         While iterator.%GetNext(.field, .value) {
             Do workflow.%Set(field, value, fields.%GetTypeOf(field))
@@ -434,9 +493,13 @@ ClassMethod Deliver(id As %String) As %Status
         }
         Set body = ##class(%DynamicObject).%FromJSON(record.Body), assessment = body.%Get("assessment"), savedPolicy = body.%Get("policy")
         Set recommendation = body.%Get("policy_recommendation", body.%Get("recommendation"))
-        If '$ISOBJECT(assessment) || '$ISOBJECT(savedPolicy) || '$ISOBJECT(recommendation) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: delivery evidence is incomplete"))
+        If '$ISOBJECT(assessment) || '$ISOBJECT(savedPolicy) || '$ISOBJECT(recommendation) {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: delivery evidence is incomplete"))
+        }
         Set policy = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(), recommendation.%ToJSON()))
-        If 'savedPolicy.%Get("downstream_permitted") || 'policy.%Get("downstream_permitted") || assessment.%Get("critical") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: delivery policy denied"))
+        If 'savedPolicy.%Get("downstream_permitted") || 'policy.%Get("downstream_permitted") || assessment.%Get("critical") {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "APP_CONFLICT: delivery policy denied"))
+        }
         Set receipt = ##class(SilentShift.Data.Delivery).%New()
         Set receipt.CaseId = id, receipt.DeliveredAt = ##class(SilentShift.Bridge).Now(), receipt.Payload = record.RawPayload
         Set receipt.PolicyVersion = policy.%Get("policy_version"), receipt.CaseVersion = record.Version

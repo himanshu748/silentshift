@@ -1,8 +1,12 @@
-Include %occStatus
+Include (%occStatus, Ensemble)
 
 Class SilentShift.Operation.Investigation Extends Ens.BusinessOperation
 {
 Parameter INVOCATION = "Queue";
+Parameter SETTINGS = "AgentWaitSeconds:Basic,Model:Basic";
+/// Empty settings retain the deployment environment's existing configuration.
+Property AgentWaitSeconds As %String(MAXLEN = 3) [ InitialExpression = "" ];
+Property Model As %String(MAXLEN = 160) [ InitialExpression = "" ];
 Property TraceCaseId As %String;
 Property TraceInvocationId As %String;
 Property TraceModel As %String;
@@ -34,6 +38,7 @@ Method Investigate(request As SilentShift.Message, Output response As SilentShif
     // An unavailable agent is a business outcome, not an automatic retry. The
     // process applies fail-closed policy to an empty proposal and holds the case.
     If $$$ISERR(sc) {
+        $$$LOGWARNING("SS_AI_INVESTIGATION_FAILED stage=agent-investigation case_id="_request.CaseId)
         Set metadata = {"mode": "native-ai-hub", "status": "failed", "failure_code": "AI_INVESTIGATION_FAILED"}
         If metadataJSON '= "" Set metadata = ##class(%DynamicObject).%FromJSON(metadataJSON)
         If 'metadata.%IsDefined("failure_code") Do metadata.%Set("failure_code", "AI_INVESTIGATION_FAILED")
@@ -52,8 +57,9 @@ Method ResetObservation(caseId As %String) [ Private ]
 {
     Set ..TraceCaseId = caseId, ..TraceInvocationId = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
     Set ..TraceRunStarted = $ZTIMESTAMP, ..TraceChatStarted = "", ..TraceBuffer = []
-    Set ..TraceModel = $EXTRACT($SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL"), 1, 160)
-    If ..TraceModel = "" Set ..TraceModel = "qwen3-silentshift:4b-instruct"
+    Set configuredModel = ##class(SilentShift.Provider.Config).ModelSetting()
+    Set ..TraceModel = $EXTRACT($SELECT(configuredModel '= "": configuredModel, 1: $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL")), 1, 160)
+    If ..TraceModel = "" Set ..TraceModel = ##class(SilentShift.Provider.Config).DefaultModel()
     Set ..TraceEnqueued = 0, ..TraceEnqueueFailures = 0, ..TraceCaptureFailures = 0
 }
 
@@ -70,16 +76,28 @@ Method BeginChat(model As %String, started As %String)
 
 /// Server-bound tool observer. Native callbacks only append bounded metadata;
 /// production dispatch is deferred until Chat exits. No tool text is retained.
-Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String, spanId As %String, started As %String, finished As %String = "", records As %Integer = 0, truncated As %Boolean = 0, failureCode As %String = "")
+Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String, spanId As %String, started As %String,
+    finished As %String = "", records As %Integer = 0, truncated As %Boolean = 0, failureCode As %String = "")
 {
     Try {
         If (caseId '= ..TraceCaseId) || '$ISOBJECT(..TraceBuffer) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace scope mismatch"))
-        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") && (toolName '= "find_similar_precedents") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
+        If '##class(SilentShift.AI.Investigator).IsAllowedTool(toolName) {
+            Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
+        }
         If ..TraceBuffer.%Size() >= 24 {
             Set ..TraceCaptureFailures = ..TraceCaptureFailures + 1
             Return
         }
-        Set item = {"event_kind": (eventKind), "tool_name": (toolName), "span_id": (spanId), "started": (started), "finished": (finished), "records": (records), "truncated": false, "failure_code": (failureCode)}
+        Set item = {
+            "event_kind": (eventKind),
+            "tool_name": (toolName),
+            "span_id": (spanId),
+            "started": (started),
+            "finished": (finished),
+            "records": (records),
+            "truncated": false,
+            "failure_code": (failureCode)
+        }
         Do item.%Set("truncated", truncated, "boolean")
         Do ..TraceBuffer.%Push(item)
     } Catch error {
@@ -146,7 +164,18 @@ Method FinishObservation(metadata As %DynamicObject) [ Private ]
     }
     If $ISOBJECT(metadata.%Get("evidence_budget")) Set event.EvidenceBudgetJSON = metadata.%Get("evidence_budget").%ToJSON()
     Do ..EnqueueTrace(event)
-    Set trace = {"mode": "native-interoperability", "granularity": "agent_invocation_and_tool", "invocation_id": (..TraceInvocationId), "prompt_version": (event.PromptVersion), "enqueued_events": (..TraceEnqueued), "enqueue_failures": (..TraceEnqueueFailures), "capture_failures": (..TraceCaptureFailures), "persistence_status": "async_unverified", "sdk_provider_round_metadata_available": false, "provider_http_trace_available": true}
+    Set trace = {
+        "mode": "native-interoperability",
+        "granularity": "agent_invocation_and_tool",
+        "invocation_id": (..TraceInvocationId),
+        "prompt_version": (event.PromptVersion),
+        "enqueued_events": (..TraceEnqueued),
+        "enqueue_failures": (..TraceEnqueueFailures),
+        "capture_failures": (..TraceCaptureFailures),
+        "persistence_status": "async_unverified",
+        "sdk_provider_round_metadata_available": false,
+        "provider_http_trace_available": true
+    }
     Do metadata.%Set("trace", trace)
     Do metadata.%Set("usage_scope", $SELECT(event.ExecutionMode = "recorded-replay":"unavailable_for_replay",1:"final_response_only"))
     Do metadata.%Set("session_totals", "", "null")

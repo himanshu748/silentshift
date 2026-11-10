@@ -8,17 +8,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from pathlib import Path, PurePosixPath
 import re
 import shutil
 import tempfile
 import xml.etree.ElementTree as ET
+from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_FILES = (
     'python/silentshift/__init__.py', 'python/silentshift/engine.py',
     'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
     'python/silentshift/csv_orders.py',
+    'python/silentshift/provider_config.py', 'python/silentshift/provider_transport.py',
     'fixtures/v1/scenarios.json', 'fixtures/v1/manifest.json',
     'fixtures/v1/README.md', 'fixtures/provider-replay.json', 'fixtures/runbooks.json', 'LICENSE',
 )

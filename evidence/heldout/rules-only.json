@@ -1,0 +1,1224 @@
+{
+  "identity": {
+    "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+    "namespace": "SILENTSHIFT",
+    "model": "qwen3-silentshift:4b-instruct",
+    "prompt_version": "silentshift-investigator/1.3.1",
+    "execution_mode": "live",
+    "module_version": "0.3.0",
+    "assets": {
+      "engine_sha256": "63f4d212793e4c6b6ad65374c5302cc863561e4d01607f566f580e2984f151de",
+      "architecture": "aarch64",
+      "python": "3.12.3"
+    }
+  },
+  "dataset_sha256": "e02747e587495dd2587a3813277a15451c7715638d9ff9962186a09e8986ef55",
+  "cases": [
+    {
+      "scenario_id": "HO-001",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "108",
+            "expected": "90",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H017:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H017:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H017:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.151037
+    },
+    {
+      "scenario_id": "HO-002",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H039:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H039:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.136203
+    },
+    {
+      "scenario_id": "HO-003",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H043:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H043:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.102788
+    },
+    {
+      "scenario_id": "HO-004",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "LB",
+            "expected": "KG",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H002:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H002:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H002:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.112912
+    },
+    {
+      "scenario_id": "HO-005",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H047:old",
+          "reference:H047:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H047:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.111662
+    },
+    {
+      "scenario_id": "HO-006",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "CONFLICTING_REFERENCES",
+            "field": "quantity",
+            "observed": [
+              "32",
+              "36"
+            ],
+            "expected": "one unambiguous authoritative value",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H031:v1",
+              "reference:H031:v2"
+            ],
+            "explanation": "Independent active references disagree; the engine cannot select a convenient answer."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H031:v1",
+          "reference:H031:v2"
+        ],
+        "active_reference_ids": [
+          "reference:H031:v1",
+          "reference:H031:v2"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.117621
+    },
+    {
+      "scenario_id": "HO-007",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "MISSING_REFERENCE",
+            "field": "contract_id",
+            "observed": "PO-SYN-H015",
+            "expected": "approved contract effective at event time",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H015:v1"
+            ],
+            "explanation": "No valid reference covers this event time."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H015:v1"
+        ],
+        "active_reference_ids": [],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.080663
+    },
+    {
+      "scenario_id": "HO-008",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "MISSING_REFERENCE",
+            "field": "contract_id",
+            "observed": "PO-SYN-H016",
+            "expected": "approved contract effective at event time",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H016:v1"
+            ],
+            "explanation": "No valid reference covers this event time."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H016:v1"
+        ],
+        "active_reference_ids": [],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.087413
+    },
+    {
+      "scenario_id": "HO-009",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H038:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H038:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.097413
+    },
+    {
+      "scenario_id": "HO-010",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "14",
+            "expected": "84",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H023:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "BUNDLE",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H023:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H023:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H023:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.123329
+    },
+    {
+      "scenario_id": "HO-011",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "145",
+            "expected": "144",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H008:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H008:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H008:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.124579
+    },
+    {
+      "scenario_id": "HO-012",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H042:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H042:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.108204
+    },
+    {
+      "scenario_id": "HO-013",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "420",
+            "expected": "450",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H018:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H018:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H018:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.105497
+    },
+    {
+      "scenario_id": "HO-014",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "PACK",
+            "expected": "BOX",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H005:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H005:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H005:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.125912
+    },
+    {
+      "scenario_id": "HO-015",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H025:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H025:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.097038
+    },
+    {
+      "scenario_id": "HO-016",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H029:v1",
+          "reference:H029:v2"
+        ],
+        "active_reference_ids": [
+          "reference:H029:v1",
+          "reference:H029:v2"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.114287
+    },
+    {
+      "scenario_id": "HO-017",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H022:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H022:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.10283
+    },
+    {
+      "scenario_id": "HO-018",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "GAL",
+            "expected": "L",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H003:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H003:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H003:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.142411
+    },
+    {
+      "scenario_id": "HO-019",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H033:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H033:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.104455
+    },
+    {
+      "scenario_id": "HO-020",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "12",
+            "expected": "72",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H020:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "CRATE",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H020:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H020:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H020:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.105122
+    },
+    {
+      "scenario_id": "HO-021",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H045:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H045:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.119662
+    },
+    {
+      "scenario_id": "HO-022",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H037:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H037:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.105954
+    },
+    {
+      "scenario_id": "HO-023",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "MISSING_REFERENCE",
+            "field": "contract_id",
+            "observed": "PO-SYN-H013",
+            "expected": "approved contract effective at event time",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H013:v1"
+            ],
+            "explanation": "No valid reference covers this event time."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H013:v1"
+        ],
+        "active_reference_ids": [],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.108371
+    },
+    {
+      "scenario_id": "HO-024",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H034:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H034:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.104371
+    },
+    {
+      "scenario_id": "HO-025",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H044:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H044:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.098413
+    },
+    {
+      "scenario_id": "HO-026",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "FT",
+            "expected": "M",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H006:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H006:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H006:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.105037
+    },
+    {
+      "scenario_id": "HO-027",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "12",
+            "expected": "96",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H026:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "BOX",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H026:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H026:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H026:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.10283
+    },
+    {
+      "scenario_id": "HO-028",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "250",
+            "expected": "2500",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H010:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H010:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H010:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.149828
+    },
+    {
+      "scenario_id": "HO-029",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "10",
+            "expected": "150",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H027:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "CARTON",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H027:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H027:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H027:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.10733
+    },
+    {
+      "scenario_id": "HO-030",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H021:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H021:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.186576
+    },
+    {
+      "scenario_id": "HO-031",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H035:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H035:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.106788
+    },
+    {
+      "scenario_id": "HO-032",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "7.5",
+            "expected": "0.75",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H011:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H011:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H011:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.117454
+    },
+    {
+      "scenario_id": "HO-033",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H041:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H041:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.119912
+    },
+    {
+      "scenario_id": "HO-034",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H036:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H036:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.095371
+    },
+    {
+      "scenario_id": "HO-035",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H046:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H046:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.093163
+    },
+    {
+      "scenario_id": "HO-036",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "MISSING_REFERENCE",
+            "field": "contract_id",
+            "observed": "PO-SYN-H014",
+            "expected": "approved contract effective at event time",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H014:v1"
+            ],
+            "explanation": "No valid reference covers this event time."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H014:v1"
+        ],
+        "active_reference_ids": [],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.099288
+    },
+    {
+      "scenario_id": "HO-037",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "74",
+            "expected": "75",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H007:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H007:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H007:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.108538
+    },
+    {
+      "scenario_id": "HO-038",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H030:v1",
+          "reference:H030:v2"
+        ],
+        "active_reference_ids": [
+          "reference:H030:v1",
+          "reference:H030:v2"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.121454
+    },
+    {
+      "scenario_id": "HO-039",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "CASE",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H001:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H001:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H001:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.101413
+    },
+    {
+      "scenario_id": "HO-040",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H048:copy",
+          "reference:H048:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H048:copy",
+          "reference:H048:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.120995
+    },
+    {
+      "scenario_id": "HO-041",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "20",
+            "expected": "200",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H024:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "CARTON",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H024:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H024:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H024:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.10958
+    },
+    {
+      "scenario_id": "HO-042",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "10",
+            "expected": "60",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H028:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "BOX",
+            "expected": "EA",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H028:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H028:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H028:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.111412
+    },
+    {
+      "scenario_id": "HO-043",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "12.05",
+            "expected": "12.50",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H009:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H009:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H009:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.157327
+    },
+    {
+      "scenario_id": "HO-044",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H040:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H040:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.09708
+    },
+    {
+      "scenario_id": "HO-045",
+      "decision": "ALLOW",
+      "assessment": {
+        "classification": "CLEAR",
+        "findings": [],
+        "evidence_ids": [
+          "reference:H019:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H019:v1"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.09758
+    },
+    {
+      "scenario_id": "HO-046",
+      "decision": "REQUEST_REVIEW",
+      "assessment": {
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "findings": [
+          {
+            "code": "CONFLICTING_REFERENCES",
+            "field": "quantity",
+            "observed": [
+              "110",
+              "100"
+            ],
+            "expected": "one unambiguous authoritative value",
+            "severity": "warning",
+            "evidence_ids": [
+              "reference:H032:v1",
+              "reference:H032:v2"
+            ],
+            "explanation": "Independent active references disagree; the engine cannot select a convenient answer."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H032:v1",
+          "reference:H032:v2"
+        ],
+        "active_reference_ids": [
+          "reference:H032:v1",
+          "reference:H032:v2"
+        ],
+        "critical": false,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.173118
+    },
+    {
+      "scenario_id": "HO-047",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "field": "unit",
+            "observed": "EA",
+            "expected": "CASE",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H004:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H004:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H004:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.134578
+    },
+    {
+      "scenario_id": "HO-048",
+      "decision": "QUARANTINE",
+      "assessment": {
+        "classification": "VERIFIED_CONTRADICTION",
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "field": "quantity",
+            "observed": "36",
+            "expected": "18",
+            "severity": "critical",
+            "evidence_ids": [
+              "reference:H012:v1"
+            ],
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized."
+          }
+        ],
+        "evidence_ids": [
+          "reference:H012:v1"
+        ],
+        "active_reference_ids": [
+          "reference:H012:v1"
+        ],
+        "critical": true,
+        "schema_version": "silentshift-message/1"
+      },
+      "elapsed_ms": 0.103579
+    }
+  ],
+  "timing_scope": "assess + unchanged rule_only inside IRIS Embedded Python; session overhead excluded"
+}
