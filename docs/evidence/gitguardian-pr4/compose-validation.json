@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-11-10T13:37:19.532668+00:00",
+  "command": "docker compose --env-file <empty-file> -f compose.judge.yaml config; JSON inspection for valid private values, --quiet for missing/empty values",
+  "docker_resources_created": false,
+  "model_calls": false,
+  "checks": [
+    {
+      "check": "valid values bind unchanged to prepare and iris",
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_IRIS_PASSWORD",
+      "state": "unset",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_IRIS_PASSWORD",
+      "state": "empty",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_VIEWER_PASSWORD",
+      "state": "unset",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_VIEWER_PASSWORD",
+      "state": "empty",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_GATEWAY_PASSWORD",
+      "state": "unset",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    },
+    {
+      "variable": "SILENTSHIFT_GATEWAY_PASSWORD",
+      "state": "empty",
+      "exit_code": 1,
+      "error_names_variable": true,
+      "passed": true
+    }
+  ],
+  "checks_passed": 7,
+  "checks_total": 7,
+  "startup_validation": "docker/judge-prepare.py remains unchanged and enforces three distinct passwords of at least 12 characters",
+  "passed": true
+}

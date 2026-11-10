@@ -1,3 +1,5 @@
+> **PR #4 GitGuardian fix:** the literal required-variable marker was verified and the exact incident classified as a false positive. Compose still rejects missing/empty passwords; startup length/uniqueness checks are unchanged. Local pytest: **393 passed**; configuration checks **7/7**. [Scoped report](agent-runs/gitguardian-pr4.md). Hosted green status requires final PR readback.
+
 > **November 10 voting-week finish:** fresh GitHub candidate `7b3d5ef` is native **0.3.1, prepared but unpublished**. Native **7 classes / 22 methods**, both **12/12** replays, a separate clean archive install, **5/5** live source routes, **16/16** connected browser checks, **393 pytest** and hosted CI pass. The source Compose workbench passes **12/12** and real browser login. **40 Ruff findings remain individually explained**, not suppressed. [Scoped receipts](JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones). Public native IPM/OEX stay **0.3.0**, React **0.2.1**; bonus statuses are unchanged.
 
 # Build status

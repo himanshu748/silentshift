@@ -2,12 +2,13 @@
 # Bring the licensed 154U ARM64 image and the public Gateway/Node images first.
 name: ${COMPOSE_PROJECT_NAME:-silentshift-judge}
 
+# Require external values here; judge-prepare.py checks length and uniqueness.
 x-judge-environment: &judge-environment
   SILENTSHIFT_IRIS_USERNAME: ${SILENTSHIFT_IRIS_USERNAME:?Set a distinct reviewer username}
-  SILENTSHIFT_IRIS_PASSWORD: ${SILENTSHIFT_IRIS_PASSWORD:?Set a private reviewer password of at least 12 characters}
+  SILENTSHIFT_IRIS_PASSWORD: ${SILENTSHIFT_IRIS_PASSWORD:?}
   SILENTSHIFT_VIEWER_USERNAME: ${SILENTSHIFT_VIEWER_USERNAME:?Set a distinct viewer username}
-  SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?Set a private viewer password of at least 12 characters}
-  SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?Set a private gateway password of at least 12 characters}
+  SILENTSHIFT_VIEWER_PASSWORD: ${SILENTSHIFT_VIEWER_PASSWORD:?}
+  SILENTSHIFT_GATEWAY_PASSWORD: ${SILENTSHIFT_GATEWAY_PASSWORD:?}
   SILENTSHIFT_JUDGE_PROJECT: ${COMPOSE_PROJECT_NAME:-silentshift-judge}
   SILENTSHIFT_PROVIDER_MODE: recorded-replay
   SILENTSHIFT_PROVIDER: ollama
