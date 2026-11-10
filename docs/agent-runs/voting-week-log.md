@@ -166,3 +166,11 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Those three acknowledgments now contain only case_id, routing and version; added a native summary-shape regression and message descriptions.
 - Step-4 helpers also executed successfully on 154U: canonical JSON, default model, original runtime prompt hash and complete rule catalog ([native output](../evidence/backend-polish-nov10/04-native-smoke.txt)). This was an upgrade of the early isolated test instance, not a new clean-install claim.
 - `uv run pytest -q`: 339 passed in 21.91s ([output](../evidence/backend-polish-nov10/05-pytest.txt)). Production reply inspection remains part of final gate.
+
+### 2026-11-10 15:40:30 IST — Backend item 6
+
+- Semantic now calls private stages in the original order. ApplyScenarioFault statements/strings match the pre-refactor conditional exactly ([comparison](../evidence/backend-polish-nov10/06-fault-invariant.json)).
+- Declared administrator settings with existing defaults: normal step timeout 10s, optional-reference limit 10 per authority, empty Investigator wait/model overrides falling back to environment, adapter InboxPath defaulting to ROOT. Containment keeps its fixed 10s bound if configuration itself is invalid.
+- One routing INFO is emitted only after the final response is constructed; failure then containment does not duplicate it.
+- `uv run pytest -q`: 339 passed in 50.54s ([output](../evidence/backend-polish-nov10/06-pytest.txt)). Native settings/default tests remain pending.
+- Static page also rendered locally at desktop/mobile breakpoints with keyboard anchor navigation and loaded historical captures; not published, and new production captures are still pending.

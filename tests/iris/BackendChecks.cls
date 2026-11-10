@@ -61,4 +61,22 @@ Method TestCompactAcknowledgment()
     Do $$$AssertTrue(full.%IsDefined("events"))
 }
 
+
+Method TestDefaultHostSettings()
+{
+    Set semantic = ##class(SilentShift.Process.Semantic).%New()
+    Do $$$AssertEquals(semantic.StepTimeoutSeconds, 10)
+    Do $$$AssertEquals(semantic.MaxReferencesPerAuthority, 10)
+    Set investigation = ##class(SilentShift.Operation.Investigation).%New()
+    Do $$$AssertEquals(investigation.AgentWaitSeconds, "")
+    Do $$$AssertEquals(investigation.Model, "")
+    Do $$$AssertEquals(##class(SilentShift.Provider.Config).ModelSetting(), "")
+    Set expected = $SYSTEM.Util.GetEnviron("SILENTSHIFT_AGENT_WAIT_SECONDS")
+    If expected = "" Set expected = 60
+    Do $$$AssertEquals(##class(SilentShift.AI.Investigator).WaitSeconds(), +expected)
+    Set adapter = ##class(SilentShift.Adapter.PartnerJSON).%New()
+    Do $$$AssertEquals(adapter.InboxPath, ##class(SilentShift.Adapter.PartnerJSON).#ROOT)
+    Do $$$AssertTrue('##class(SilentShift.Adapter.PartnerJSON).RootSafe("relative/inbox"))
+    Do $$$AssertTrue('##class(SilentShift.Adapter.PartnerJSON).RootSafe("/tmp/../tmp"))
+}
 }

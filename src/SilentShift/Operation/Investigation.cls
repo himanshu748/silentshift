@@ -3,6 +3,10 @@ Include (%occStatus, Ensemble)
 Class SilentShift.Operation.Investigation Extends Ens.BusinessOperation
 {
 Parameter INVOCATION = "Queue";
+Parameter SETTINGS = "AgentWaitSeconds:Basic,Model:Basic";
+/// Empty settings retain the deployment environment's existing configuration.
+Property AgentWaitSeconds As %String(MAXLEN = 3) [ InitialExpression = "" ];
+Property Model As %String(MAXLEN = 160) [ InitialExpression = "" ];
 Property TraceCaseId As %String;
 Property TraceInvocationId As %String;
 Property TraceModel As %String;
@@ -53,7 +57,8 @@ Method ResetObservation(caseId As %String) [ Private ]
 {
     Set ..TraceCaseId = caseId, ..TraceInvocationId = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
     Set ..TraceRunStarted = $ZTIMESTAMP, ..TraceChatStarted = "", ..TraceBuffer = []
-    Set ..TraceModel = $EXTRACT($SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL"), 1, 160)
+    Set configuredModel = ##class(SilentShift.Provider.Config).ModelSetting()
+    Set ..TraceModel = $EXTRACT($SELECT(configuredModel '= "": configuredModel, 1: $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL")), 1, 160)
     If ..TraceModel = "" Set ..TraceModel = ##class(SilentShift.Provider.Config).DefaultModel()
     Set ..TraceEnqueued = 0, ..TraceEnqueueFailures = 0, ..TraceCaptureFailures = 0
 }

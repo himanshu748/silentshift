@@ -77,7 +77,9 @@ ClassMethod FinalResponseFormat() As %DynamicObject
 /// Explicit deployment budget. Invalid configuration fails before inference.
 ClassMethod WaitSeconds() As %Integer
 {
-    Set value = $SYSTEM.Util.GetEnviron("SILENTSHIFT_AGENT_WAIT_SECONDS")
+    Set value = ##class(Ens.Director).GetHostSettingValue("Investigator", "AgentWaitSeconds", .sc)
+    If $$$ISERR(sc) Set value = ""
+    If value = "" Set value = $SYSTEM.Util.GetEnviron("SILENTSHIFT_AGENT_WAIT_SECONDS")
     If value = "" Return 60
     If (value'?1.3N) || (value < 10) || (value > 120) Throw ##class(%Exception.General).%New("INVALID_AGENT_WAIT_CONFIGURATION")
     Return value + 0

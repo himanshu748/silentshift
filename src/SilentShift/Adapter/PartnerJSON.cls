@@ -7,7 +7,8 @@ Class SilentShift.Adapter.PartnerJSON Extends Ens.InboundAdapter
 {
 Parameter ROOT = "/var/opt/silentshift/partner-inbox";
 Parameter OUTCOMEWAITMS = 600000;
-Parameter SETTINGS = "CallInterval:Basic,BatchLimit:Basic,MaxBytes:Basic,MaxRetries:Basic";
+Parameter SETTINGS = "CallInterval:Basic,BatchLimit:Basic,MaxBytes:Basic,MaxRetries:Basic,InboxPath:Basic";
+Property InboxPath As %String(MAXLEN = 1024) [ InitialExpression = {..#ROOT} ];
 Property BatchLimit As %Integer(MINVAL = 1, MAXVAL = 16) [ InitialExpression = 4 ];
 Property MaxBytes As %Integer(MINVAL = 1024, MAXVAL = 131072) [ InitialExpression = 131072 ];
 Property MaxRetries As %Integer(MINVAL = 1, MAXVAL = 5) [ InitialExpression = 3 ];
@@ -21,14 +22,18 @@ ClassMethod SafeName(name As %String) As %Boolean
     Return 1
 }
 
-ClassMethod RootSafe() As %Boolean
+ClassMethod RootSafe(root As %String = "") As %Boolean
 {
-    Return ##class(%File).DirectoryExists(..#ROOT) && (##class(%File).ResolvePath(..#ROOT) = ..#ROOT)
+    If root = "" Set root = ..#ROOT
+    If ($EXTRACT(root, 1) '= "/") || ($LENGTH(root) > 1024) Return 0
+    Return ##class(%File).DirectoryExists(root) && (##class(%File).ResolvePath(root) = root)
 }
 
-ClassMethod Regular(path As %String) As %Boolean
+ClassMethod Regular(path As %String, root As %String = "") As %Boolean
 {
-    If ##class(%File).GetDirectory(path) '= (..#ROOT_"/") Return 0
+    If root = "" Set root = ..#ROOT
+    If '..RootSafe(root) Return 0
+    If ##class(%File).GetDirectory(path) '= (root_"/") Return 0
     If ##class(%File).ResolvePath(path) '= path Return 0
     Return (##class(%File).Attributes(path) \ 4096 # 16) = 8
 }
@@ -39,9 +44,9 @@ ClassMethod EntryExists(path As %String) As %Boolean
     Return ##class(%File).Exists(path) || (##class(%File).Attributes(path) > 0)
 }
 
-ClassMethod ReadBytes(path As %String, maximum As %Integer) As %String
+ClassMethod ReadBytes(path As %String, maximum As %Integer, root As %String = "") As %String
 {
-    If '..Regular(path) Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
+    If '..Regular(path, root) Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
     If ##class(%File).GetFileSize(path) > maximum Throw ##class(%Exception.General).%New("FILE_INPUT_TOO_LARGE")
     Set stream = ##class(%Stream.FileBinary).%New()
     Set sc = stream.LinkToFile(path)
@@ -55,11 +60,13 @@ ClassMethod ReadBytes(path As %String, maximum As %Integer) As %String
 
 /// Consume valid final rows even when FileSetFetch sets AtEnd=1 on that row.
 /// The shared native iterator is bounded and exercised without model calls.
-ClassMethod ListFiles(pattern As %String, maximum As %Integer = 256) As %DynamicArray
+ClassMethod ListFiles(pattern As %String, maximum As %Integer = 256, root As %String = "") As %DynamicArray
 {
+    If root = "" Set root = ..#ROOT
+    If '..RootSafe(root) Throw ##class(%Exception.General).%New("FILE_SCAN_ROOT_INVALID")
     Set files = [], maximum = $SELECT(maximum < 1: 1, maximum > 256: 256, 1: maximum)
     If (pattern [ "/") || (pattern [ "\") || (pattern [ "..") Throw ##class(%Exception.General).%New("FILE_SCAN_PATTERN_INVALID")
-    Set sc = ##class(%File).FileSetExecute(.handle, ..#ROOT, pattern, "Name", 0)
+    Set sc = ##class(%File).FileSetExecute(.handle, root, pattern, "Name", 0)
     $$$ThrowOnError(sc)
     Try {
         For index = 1:1:maximum {
@@ -81,12 +88,12 @@ Method OnTask() As %Status
 {
     Set ..BusinessHost.%WaitForNextCallInterval = 1
     If $SYSTEM.Util.GetEnviron("SILENTSHIFT_PARTNER_FILES_ENABLED") '= "1" Return $$$OK
-    If '..RootSafe() Return $$$ERROR($$$GeneralError, "Partner inbox is absent or unsafe")
+    If '..RootSafe(..InboxPath) Return $$$ERROR($$$GeneralError, "Partner inbox is absent or unsafe")
     Set count = 0, batch = $SELECT(..BatchLimit < 1: 1, ..BatchLimit > 16: 16, 1: ..BatchLimit)
     // Resume claimed work before accepting more inputs. Both loops are bounded.
     For pattern = "*.json.work", "*.json.ready" {
         Try {
-            Set files = ..ListFiles(pattern, 256)
+            Set files = ..ListFiles(pattern, 256, ..InboxPath)
             For index = 0:1:files.%Size()-1 {
                 If count >= batch Quit
                 Set filename = ##class(%File).GetFilename(files.%Get(index))
@@ -106,23 +113,23 @@ Method OnTask() As %Status
 
 Method ProcessFile(name As %String, ready As %Boolean) [ Private ]
 {
-    Set base = ..#ROOT_"/"_name_".json", work = base_".work", locked = 0
+    Set base = ..InboxPath_"/"_name_".json", work = base_".work", locked = 0
     Try {
         Lock +^SilentShift.Lock("partner-file", name):0
         If '$TEST Return
         Set locked = 1
         If ready {
-            If '..Regular(base_".ready") Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
+            If '..Regular(base_".ready", ..InboxPath) Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
             If ..EntryExists(work) {
                 Lock -^SilentShift.Lock("partner-file", name)
                 Return
             }
             If '##class(%File).Rename(base_".ready", work) Throw ##class(%Exception.General).%New("FILE_CLAIM_FAILED")
         }
-        If '..Regular(work) Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
+        If '..Regular(work, ..InboxPath) Throw ##class(%Exception.General).%New("FILE_NOT_REGULAR")
         If $GET(^SilentShift.PartnerFiles("files", name, "ack")) '= "" {
             If $GET(^SilentShift.PartnerFiles("files", name, "sha256")) '= "" {
-                Set bytes = ..ReadBytes(work, 131072)
+                Set bytes = ..ReadBytes(work, 131072, ..InboxPath)
                 Set digest = $ZCONVERT($SYSTEM.Encryption.ToHex($SYSTEM.Encryption.SHAHash(256, bytes)), "L")
                 If digest '= ^SilentShift.PartnerFiles("files", name, "sha256") Throw ##class(%Exception.General).%New("FILE_CONTENT_CHANGED")
             }
@@ -132,7 +139,7 @@ Method ProcessFile(name As %String, ready As %Boolean) [ Private ]
             If ##class(%File).GetFileSize(work) > maximum {
                 Do ..Reject(name, "FILE_INPUT_TOO_LARGE")
             } Else {
-                Set bytes = ..ReadBytes(work, maximum)
+                Set bytes = ..ReadBytes(work, maximum, ..InboxPath)
                 Set digest = $ZCONVERT($SYSTEM.Encryption.ToHex($SYSTEM.Encryption.SHAHash(256, bytes)), "L")
                 If $GET(^SilentShift.PartnerFiles("files", name, "sha256"), digest) '= digest Throw ##class(%Exception.General).%New("FILE_CONTENT_CHANGED")
                 Set ^SilentShift.PartnerFiles("files", name, "sha256") = digest
@@ -231,7 +238,7 @@ Method Reject(name As %String, code As %String, id As %String = "") [ Private ]
         "status": "REJECTED_INPUT",
         "error": (code),
         "case_id": (id),
-        "input_bytes": (##class(%File).GetFileSize(..#ROOT_"/"_name_".json.work")),
+        "input_bytes": (##class(%File).GetFileSize(..InboxPath_"/"_name_".json.work")),
         "input_sha256": null,
         "delivery_receipt": null,
         "recorded_at": (##class(SilentShift.TraceEvent).UTC())
@@ -245,10 +252,10 @@ Method Reject(name As %String, code As %String, id As %String = "") [ Private ]
 
 Method FinishFile(name As %String) [ Private ]
 {
-    Set base = ..#ROOT_"/"_name_".json", target = base_".ack.json"
+    Set base = ..InboxPath_"/"_name_".json", target = base_".ack.json"
     Set encoded = $ZCONVERT(^SilentShift.PartnerFiles("files", name, "ack"), "O", "UTF8")
     If ..EntryExists(target) {
-        If ..ReadBytes(target, 8192) '= encoded Throw ##class(%Exception.General).%New("FILE_ACK_COLLISION")
+        If ..ReadBytes(target, 8192, ..InboxPath) '= encoded Throw ##class(%Exception.General).%New("FILE_ACK_COLLISION")
     } Else {
         Set temporary = base_".ack."_$TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")_".tmp"
         If ..EntryExists(temporary) Throw ##class(%Exception.General).%New("FILE_ACK_COLLISION")
@@ -258,13 +265,13 @@ Method FinishFile(name As %String) [ Private ]
         Set sc = stream.%Save()
         $$$ThrowOnError(sc)
         Do stream.%Close()
-        If '..Regular(temporary) Throw ##class(%Exception.General).%New("FILE_ACK_UNSAFE")
+        If '..Regular(temporary, ..InboxPath) Throw ##class(%Exception.General).%New("FILE_ACK_UNSAFE")
         If '##class(%File).Rename(temporary, target) Throw ##class(%Exception.General).%New("FILE_ACK_FAILED")
     }
     Set suffix = $SELECT($GET(^SilentShift.PartnerFiles("files", name, "reject")): ".hold", 1: ".done")
     If ..EntryExists(base_suffix) {
         If suffix '= ".done" Throw ##class(%Exception.General).%New("FILE_ARCHIVE_COLLISION")
-        If '..Regular(base_suffix) Throw ##class(%Exception.General).%New("FILE_ARCHIVE_UNSAFE")
+        If '..Regular(base_suffix, ..InboxPath) Throw ##class(%Exception.General).%New("FILE_ARCHIVE_UNSAFE")
         If '##class(%File).Compare(base_".work", base_suffix) Throw ##class(%Exception.General).%New("FILE_ARCHIVE_COLLISION")
         // An identical redrop reuses its existing ack and retains both inputs.
         Set suffix = ".duplicate."_$TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
