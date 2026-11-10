@@ -20,13 +20,29 @@ from package_ipm import ROOT, module_version, stage
 from verify_ipm_clean import (
     RELEASE,
     activate,
+    available_network_subnet,
     command,
     prepare_native,
     private_write,
     runtime_environment,
     space,
+    validate_network_subnet,
 )
 from verify_ipm_native import literal
+
+
+def verification_inputs(args):
+    """Select test assertions separately from the backend being installed."""
+    source = Path(getattr(args, 'verification_source', None) or ROOT).resolve()
+    if source != ROOT.resolve() and (args.source != 'public-registry'
+                                    or args.execution_mode != 'recorded-replay'):
+        raise ValueError('Alternate --verification-source is only for public-registry recorded-replay; '
+                         'source-load verification must use its own source tests')
+    tests = source / 'tests/iris'
+    trace = source / 'scripts/trace_example.py'
+    if not tests.is_dir() or not trace.is_file():
+        raise ValueError('--verification-source must contain tests/iris and scripts/trace_example.py')
+    return {'source': source, 'tests': tests, 'trace': trace}
 
 
 def execute(args):
@@ -34,9 +50,12 @@ def execute(args):
         raise ValueError('Live verification requires --allow-model-calls for local inference')
     if args.install_latest and args.source != 'public-registry':
         raise ValueError('--install-latest requires --source public-registry')
+    validate_network_subnet(getattr(args, 'network_subnet', None))
+    verification = verification_inputs(args)
     if not re.fullmatch(r'silentshift-bonus-(load|registry)-[a-z0-9-]{1,35}', args.container):
         raise ValueError('Use a new silentshift-bonus-load-* or silentshift-bonus-registry-* container')
     docker=['docker','--context',args.context]
+    subnet = available_network_subnet(getattr(args, 'network_subnet', None), docker)
     def checked(argv, **kw): return command(argv, **kw)
     if checked([*docker,'container','inspect',args.container],check=False).returncode == 0:
         raise ValueError('Container exists; do not replace it')
@@ -51,7 +70,8 @@ def execute(args):
     runtime['SILENTSHIFT_PROVIDER_MODE']=args.execution_mode
     plan={'container':args.container,'source':args.source,'version':args.version,
         'image_id':image['Id'],'source_mounts':0,'existing_runtime_modified':False,
-        'execution_mode':args.execution_mode,'space':before_space,'executed':False}
+        'execution_mode':args.execution_mode,'space':before_space,'executed':False,
+        'verification_source':str(verification['source']),'network_subnet':subnet}
     if not args.execute: return plan
     output=ROOT/'.local/ipm/bonus-runs'/args.container
     output.mkdir(parents=True,mode=0o700)
@@ -122,7 +142,7 @@ def execute(args):
         if args.source=='load':
             cli('package silentshift -path '+base+'/export/','17-package')
             run([*docker,'cp',args.container+':'+base+'/export.tgz',str(output/('silentshift-'+args.version+'.tgz'))],'18-export')
-        run([*docker,'cp',str(ROOT/'tests/iris'),args.container+':'+base+'/tests'],'19-tests')
+        run([*docker,'cp',str(verification['tests']),args.container+':'+base+'/tests'],'19-tests')
         print('Starting the installed native production ('+args.execution_mode+')...',flush=True)
         if args.source=='public-registry':
             run([*docker,'network','disconnect','bridge',args.container],'20-disconnect-egress')
@@ -148,7 +168,7 @@ def execute(args):
         if args.execution_mode == 'recorded-replay':
             phase='recorded playback'
             print('Running the no-key synthetic playback example...',flush=True)
-            run([os.sys.executable,str(ROOT/'scripts/trace_example.py'),'--api',
+            run([os.sys.executable,str(verification['trace']),'--api',
                 f'http://127.0.0.1:{args.api_port}/silentshift/api','--context',args.context,
                 '--container',args.container,'--output',str(output/'replay.json')],
                 '27-replay',env=child,timeout=300)
@@ -194,6 +214,9 @@ def main():
     p.add_argument('--allow-model-calls',action='store_true',help='Permit only the configured local Ollama live verification')
     p.add_argument('--context',default='colima-silentshift')
     p.add_argument('--vm-profile',default='silentshift')
+    p.add_argument('--network-subnet',help='Optional unused RFC1918 IPv4 /24../28 for the new test network')
+    p.add_argument('--verification-source',type=Path,
+        help='Registry recorded-replay only: explicit source of native tests and trace assertions; defaults to this checkout')
     p.add_argument('--image',default='silentshift-iris:2026.3.0AI.154.0')
     p.add_argument('--gateway-image',default='containers.intersystems.com/intersystems/webgateway:2026.1')
     p.add_argument('--api-port',type=int,default=52793)

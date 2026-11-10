@@ -6,13 +6,15 @@ images. An explicitly supplied local IRIS archive can be loaded and retagged.
 Creates new isolated test containers and private local test
 credentials; retains them for inspection. No image pull, fresh model inference,
 publication, or existing application configuration change is performed. This
-checks the published native package with its pinned compatible release harness,
-not the current source branch's runtime changes or additional native tests.
-The retained release driver uses isolated Docker containers, not Compose.
+checks the published native package with pinned compatible release tests/replay
+assertions and the current checkout's install orchestration, not current-source
+runtime changes or additional native tests. It uses Docker, not Compose.
+By default it selects a Docker-IPAM-disjoint /28 inside 10.253.0.0/16.
 """
 from __future__ import annotations
 
 import argparse
+import ipaddress
 import json
 import os
 import re
@@ -37,6 +39,7 @@ def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--context", default="colima-silentshift")
     p.add_argument("--vm-profile", default="silentshift")
+    p.add_argument("--network-subnet", help="Explicit unused RFC1918 IPv4 /24../28; default selects a disjoint /28 inside 10.253.0.0/16")
     p.add_argument("--image", default=IMAGE)
     p.add_argument("--image-archive", type=Path,
                    help="Load and verify this local official archive if --image is absent; never downloads an image")
@@ -90,7 +93,52 @@ def load_local_archive(docker: list[str], archive: Path, tag: str) -> None:
         raise ValueError("Could not retag the verified image as " + tag)
 
 
+def unused_network_subnet(docker: list[str]) -> str:
+    """Select from one read-only IPAM snapshot; never try network mutations."""
+    listing = command([*docker, "network", "ls", "--quiet"], capture=True)
+    if listing.returncode:
+        raise ValueError("Cannot list Docker networks for test subnet selection; no network was created")
+    identifiers = listing.stdout.split()
+    occupied = []
+    if identifiers:
+        inspected = command([*docker, "network", "inspect", *identifiers], capture=True)
+        if inspected.returncode:
+            raise ValueError("Cannot inspect Docker IPAM for test subnet selection; no network was created")
+        try:
+            networks = json.loads(inspected.stdout)
+            if not isinstance(networks, list):
+                raise ValueError("Expected network list")
+            for network in networks:
+                if not isinstance(network, dict) or "IPAM" not in network:
+                    raise ValueError("Expected Docker IPAM metadata")
+                for config in ((network.get("IPAM") or {}).get("Config") or []):
+                    if config.get("Subnet"):
+                        subnet = ipaddress.ip_network(config["Subnet"], strict=False)
+                        if subnet.version == 4:
+                            occupied.append(subnet)
+        except (ValueError, TypeError, AttributeError) as error:
+            raise ValueError("Cannot read Docker IPAM snapshot for test subnet selection; "
+                             "no network was created") from error
+    pool = ipaddress.ip_network("10.253.0.0/16")
+    for candidate in pool.subnets(new_prefix=28):
+        if not any(candidate.overlaps(existing) for existing in occupied):
+            return str(candidate)
+    raise ValueError("No unused /28 remains in 10.253.0.0/16. Supply an inspected, "
+                     "nonoverlapping --network-subnet; no network was created")
+
+
 def preflight(args: argparse.Namespace) -> None:
+    if args.network_subnet is not None:
+        try:
+            network = ipaddress.ip_network(args.network_subnet, strict=True)
+            private = [ipaddress.ip_network(block) for block in
+                       ("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16")]
+            valid = (network.version == 4 and 24 <= network.prefixlen <= 28
+                     and any(network.subnet_of(block) for block in private))
+        except ValueError:
+            valid = False
+        if not valid:
+            raise ValueError("--network-subnet requires a canonical RFC1918 IPv4 /24../28")
     if not 1024 <= args.api_port <= 65535:
         raise ValueError("Use an unprivileged --api-port between 1024 and 65535")
     if args.container and not re.fullmatch(
@@ -107,6 +155,10 @@ def preflight(args: argparse.Namespace) -> None:
     if command([*docker, "info"], capture=True).returncode:
         raise ValueError("Docker context is unavailable: " + args.context +
                          ". Start Colima: colima start --profile " + args.vm_profile)
+    if args.network_subnet is None:
+        args.network_subnet = unused_network_subnet(docker)
+        print("Selected private test subnet: " + args.network_subnet +
+              " (read-only Docker IPAM snapshot; no network created yet)", flush=True)
     result = command([*docker, "image", "inspect", args.image], capture=True)
     if result.returncode and args.image_archive is not None:
         load_local_archive(docker, args.image_archive, args.image)
@@ -175,7 +227,7 @@ def private_environment(run: str) -> Path:
 
 
 def release_source(directory: Path, env: dict[str, str]) -> int:
-    """Fetch the public release's tests/harness, never current-branch tests."""
+    """Fetch the public release's native tests/replay, never branch assertions."""
     directory.mkdir(mode=0o700)
     git_env = {**env, "GIT_TERMINAL_PROMPT": "0",
                "GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_NOSYSTEM": "1"}
@@ -203,7 +255,8 @@ def run(args: argparse.Namespace) -> int:
     container = args.container or "silentshift-bonus-registry-judge-" + run_id
     env_file = private_environment(run_id)
     child = child_environment()
-    print("Public 0.3.0 with pinned release harness; not current source runtime. "
+    print("Public 0.3.0 with pinned release tests/replay and current install orchestration; "
+          "not current source runtime. "
           "Recorded replay only; no model calls. New test containers and private "
           "credentials are retained.", flush=True)
     source = env_file.parent / "source"
@@ -211,17 +264,19 @@ def run(args: argparse.Namespace) -> int:
     result = release_source(source, child)
     if result:
         return result
-    installer = source / ".local/ipm/vendor/zpm-0.10.10.xml"
+    installer = ROOT / ".local/ipm/vendor/zpm-0.10.10.xml"
     stages = [
         ("Fetch the pinned official IPM installer", [sys.executable,
-         str(source / "scripts/fetch_ipm.py"), "--output", str(installer)]),
+         str(ROOT / "scripts/fetch_ipm.py"), "--output", str(installer)]),
         ("Install, start production, run native tests and first replay", [sys.executable,
-         str(source / "scripts/verify_bonus_release.py"), "--source", "public-registry",
+         str(ROOT / "scripts/verify_bonus_release.py"), "--source", "public-registry",
+         "--verification-source", str(source),
          "--install-latest", "--version", VERSION, "--execution-mode", "recorded-replay",
          "--container", container, "--api-port", str(args.api_port),
          "--context", args.context, "--vm-profile", args.vm_profile,
          "--image", args.image, "--gateway-image", args.gateway_image,
-         "--env-file", str(env_file), "--execute"]),
+         "--env-file", str(env_file), "--execute",
+         *(["--network-subnet", args.network_subnet] if args.network_subnet else [])]),
         ("Repeat the API replay and print its Visual Trace URL", [sys.executable,
          str(source / "scripts/trace_example.py"), "--api",
          f"http://127.0.0.1:{args.api_port}/silentshift/api", "--context", args.context,

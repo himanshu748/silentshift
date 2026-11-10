@@ -91,6 +91,8 @@ def test_supplied_archive_loads_then_verifies_before_retagging(harness, monkeypa
     def loaded(argv, **kwargs):
         nonlocal target_exists
         calls.append((argv, None))
+        if argv[-2:] == ["ls", "--quiet"]:
+            return subprocess.CompletedProcess(argv, 0, "", "")
         if "load" in argv:
             assert kwargs["timeout"] == 1200
             return subprocess.CompletedProcess(argv, 0, "Loaded image: vendor:154\n", "")
@@ -118,6 +120,8 @@ def test_wrong_archive_build_is_never_retagged(harness, monkeypatch, capsys):
 
     def wrong(argv, **kwargs):
         calls.append((argv, None))
+        if argv[-2:] == ["ls", "--quiet"]:
+            return subprocess.CompletedProcess(argv, 0, "", "")
         if "load" in argv:
             return subprocess.CompletedProcess(argv, 0, "Loaded image: vendor:x64\n", "")
         if "inspect" in argv and argv[-1] == judge.IMAGE:
@@ -158,7 +162,7 @@ def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(
     monkeypatch.setenv("OPENAI_API_KEY", "synthetic-external-key")
     monkeypatch.setenv("GH_TOKEN", "synthetic-github-token")
     monkeypatch.setattr(judge, "preflight", lambda _: None)
-    assert judge.main(["--api-port", "52999"]) == 0
+    assert judge.main(["--api-port", "52999", "--network-subnet", "10.243.8.0/24"]) == 0
     files = list((root / ".local/judge").glob("*/runtime.env"))
     assert len(files) == 1
     env_file = files[0]
@@ -176,15 +180,17 @@ def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(
         assert secret not in output.out + output.err
         assert all(secret not in json.dumps(env) for _, env in calls)
     source = env_file.parent / "source"
-    installer = source / ".local/ipm/vendor/zpm-0.10.10.xml"
+    installer = root / ".local/ipm/vendor/zpm-0.10.10.xml"
     install = next(argv for argv, _ in calls if any(Path(arg).name == "verify_bonus_release.py" for arg in argv))
     repeat = next(argv for argv, _ in calls if any(Path(arg).name == "trace_example.py" for arg in argv))
-    assert install[1] == str(source / "scripts/verify_bonus_release.py")
+    assert install[1] == str(root / "scripts/verify_bonus_release.py")
+    assert install[install.index("--verification-source") + 1] == str(source)
+    assert install[install.index("--network-subnet") + 1] == "10.243.8.0/24"
     assert repeat[1] == str(source / "scripts/trace_example.py")
     fetch = next(argv for argv, _ in calls if argv[0] == "git" and "fetch" in argv)
     assert fetch[-4:] == ["--depth", "1", judge.REPOSITORY, judge.RELEASE_COMMIT]
     assert any(argv[-2:] == ["rev-parse", "HEAD"] for argv, _ in calls)
-    assert "pinned release harness; not current source runtime" in output.out
+    assert "pinned release tests/replay and current install orchestration" in output.out
     assert install[install.index("--version") + 1] == "0.3.0"
     assert install[install.index("--execution-mode") + 1] == "recorded-replay"
     assert "--install-latest" in install and "--allow-model-calls" not in install
@@ -252,6 +258,78 @@ def test_busy_port_stops_before_files(harness, monkeypatch, capsys):
     assert judge.main([]) == 1
     assert "--api-port" in capsys.readouterr().err
     assert list(root.iterdir()) == []
+
+
+@pytest.mark.parametrize("value", ["8.8.8.0/24", "10.0.0.1/24", "10.0.0.0/29", "fd00::/24"])
+def test_invalid_network_subnet_stops_before_docker_or_files(harness, capsys, value):
+    root, calls, _ = harness
+    assert judge.main(["--network-subnet", value]) == 1
+    assert "RFC1918" in capsys.readouterr().err
+    assert calls == [] and list(root.iterdir()) == []
+
+
+def test_automatic_subnet_skips_occupied_blocks_from_one_read_only_snapshot(harness, monkeypatch):
+    _, calls, _ = harness
+    def snapshot(argv, **kwargs):
+        calls.append((argv, None))
+        if argv[-2:] == ["ls", "--quiet"]:
+            return subprocess.CompletedProcess(argv, 0, "first second", "")
+        return subprocess.CompletedProcess(argv, 0, json.dumps([
+            {"IPAM": {"Config": [{"Subnet": "10.253.0.0/28"}, {"Subnet": "fd00::/64"}]}},
+            {"IPAM": {"Config": [{"Subnet": "10.253.0.16/29"}]}}
+        ]), "")
+    monkeypatch.setattr(judge, "command", snapshot)
+    assert judge.unused_network_subnet(["docker"]) == "10.253.0.32/28"
+    assert [argv for argv, _ in calls] == [["docker", "network", "ls", "--quiet"],
+                                         ["docker", "network", "inspect", "first", "second"]]
+
+
+def test_default_wrapper_forwards_selected_explicit_subnet(harness):
+    _, calls, _ = harness
+    assert judge.main([]) == 0
+    install = next(argv for argv, _ in calls if any(Path(arg).name == "verify_bonus_release.py" for arg in argv))
+    assert install[install.index("--network-subnet") + 1] == "10.253.0.0/28"
+    assert len([argv for argv, _ in calls if argv[-2:] == ["ls", "--quiet"]]) == 1
+
+
+def test_explicit_subnet_does_not_trigger_automatic_snapshot(harness):
+    _, calls, _ = harness
+    args = judge.parser().parse_args(["--network-subnet", "192.168.240.0/28"])
+    judge.preflight(args)
+    assert args.network_subnet == "192.168.240.0/28"
+    assert all("network" not in argv for argv, _ in calls)
+
+
+def test_automatic_subnet_exhaustion_does_not_try_creating_networks(harness, monkeypatch):
+    root, calls, _ = harness
+    def occupied(argv, **kwargs):
+        calls.append((argv, None))
+        payload = "existing" if argv[-2:] == ["ls", "--quiet"] else json.dumps([
+            {"IPAM": {"Config": [{"Subnet": "10.0.0.0/8"}]}}
+        ])
+        return subprocess.CompletedProcess(argv, 0, payload, "")
+    monkeypatch.setattr(judge, "command", occupied)
+    with pytest.raises(ValueError, match="No unused /28 remains"):
+        judge.unused_network_subnet(["docker"])
+    assert len(calls) == 2 and list(root.iterdir()) == []
+    assert all("create" not in argv and "prune" not in argv for argv, _ in calls)
+
+
+@pytest.mark.parametrize("failure", ["list", "inspect", "malformed"])
+def test_failed_subnet_inspection_stops_before_private_files(harness, monkeypatch, capsys, failure):
+    root, calls, _ = harness
+    def unavailable(argv, **kwargs):
+        calls.append((argv, None))
+        if "info" in argv:
+            return subprocess.CompletedProcess(argv, 0, "", "")
+        if argv[-2:] == ["ls", "--quiet"]:
+            return subprocess.CompletedProcess(argv, 1 if failure == "list" else 0, "existing", "")
+        return subprocess.CompletedProcess(argv, 1 if failure == "inspect" else 0, "not JSON", "")
+    monkeypatch.setattr(judge, "command", unavailable)
+    assert judge.main([]) == 1
+    assert "test subnet selection" in capsys.readouterr().err
+    assert list(root.iterdir()) == []
+    assert all("create" not in argv and "prune" not in argv for argv, _ in calls)
 
 
 def test_shell_entry_reports_missing_uv_without_running_docker(tmp_path):
