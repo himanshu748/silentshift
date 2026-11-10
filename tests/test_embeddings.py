@@ -4,7 +4,6 @@ import json
 from unittest.mock import patch
 
 import pytest
-
 from silentshift.embeddings import encode, local_endpoint
 
 

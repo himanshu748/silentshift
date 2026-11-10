@@ -85,7 +85,7 @@ def main() -> int:
                 raise ValueError('Review boundary failed before decision')
             if action == 'approve':
                 barrier = threading.Barrier(2)
-                def submit(_: int):
+                def submit(_: int, barrier=barrier, request=request, case_id=case_id):
                     separate_client = Client(api, reviewer, password)
                     barrier.wait(timeout=10)
                     return separate_client.call(f'/cases/{case_id}/review', request)[0]

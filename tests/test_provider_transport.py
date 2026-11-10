@@ -1,12 +1,13 @@
-from contextlib import contextmanager
-from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import base64
 import json
 import ssl
+from contextlib import contextmanager
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from threading import Thread
+
 import pytest
 from silentshift.provider_config import resolve_provider
-from silentshift.provider_transport import forward,MAX_BYTES
+from silentshift.provider_transport import MAX_BYTES, forward
 
 
 @contextmanager

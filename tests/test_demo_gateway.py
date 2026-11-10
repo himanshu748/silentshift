@@ -1,11 +1,11 @@
 """Demo-boundary tests with an explicit fake upstream; not native IRIS evidence."""
-from dataclasses import replace
 import http.client
 import json
-from pathlib import Path
 import sys
 import threading
 import uuid
+from dataclasses import replace
+from pathlib import Path
 
 import pytest
 

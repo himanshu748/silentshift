@@ -1,13 +1,17 @@
 """Citation provenance grants containment only, never release authority."""
 import ast
 import copy
-import inspect
 import json
 import subprocess
 from pathlib import Path
 
 import pytest
-from silentshift.engine import assess, assess_json, policy_json, rule_only, validate_policy
+from silentshift.engine import (
+    assess,
+    policy_json,
+    rule_only,
+    validate_policy,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 

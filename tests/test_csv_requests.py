@@ -2,7 +2,6 @@
 import json
 
 import pytest
-
 from silentshift.csv_orders import prepare_bytes, prepare_request
 
 

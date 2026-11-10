@@ -1,7 +1,8 @@
 """Deployment-owned OpenAI-compatible provider configuration; no model calls."""
 from __future__ import annotations
-from dataclasses import asdict, dataclass
+
 import re
+from dataclasses import asdict, dataclass
 from urllib.parse import urlsplit, urlunsplit
 
 DEFAULT_MODEL = 'qwen3-silentshift:4b-instruct'

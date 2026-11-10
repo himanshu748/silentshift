@@ -67,6 +67,7 @@ ClassMethod ErrorResponse(error As %Exception.AbstractException) As %Status
     // Never store request objects or headers, and never return this to a client.
     Try {
         Set diagnostic = message
+        // Legacy key names are redaction-only; provider configuration uses SILENTSHIFT_API_KEY.
         For name = "SILENTSHIFT_IRIS_PASSWORD", "SILENTSHIFT_VIEWER_PASSWORD", "SILENTSHIFT_GATEWAY_PASSWORD", "SILENTSHIFT_LLM_API_KEY", "SILENTSHIFT_API_KEY", "OPENAI_API_KEY" {
             Set secret = $SYSTEM.Util.GetEnviron(name)
             If secret '= "" Set diagnostic = $REPLACE(diagnostic, secret, "[REDACTED]")

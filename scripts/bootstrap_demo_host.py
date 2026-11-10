@@ -5,16 +5,16 @@ Run as root in a private /opt/silentshift-demo bundle after the termination time
 is active. Never publishes images or packages; never creates AWS resources.
 """
 from __future__ import annotations
+
 import argparse
 import datetime
 import hashlib
 import json
 import os
-from pathlib import Path
 import subprocess
 import tarfile
 import time
-import urllib.request
+from pathlib import Path
 
 IMAGE = 'sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713'
 OLLAMA_SHA = '47c82a67e59e060a735d1cb50a2acf020126a3a4be3f6847d5b58b7dd59620b6'

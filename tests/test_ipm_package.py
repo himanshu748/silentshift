@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 import hashlib
-import io
 import importlib.util
-import json
-from pathlib import Path
+import io
 import re
 import shutil
 import sys
@@ -13,6 +11,7 @@ import tarfile
 import textwrap
 import types
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import pytest
 

@@ -7,26 +7,26 @@ proxied. SQLite records admission before dispatch; uncertain calls are not retri
 from __future__ import annotations
 
 import base64
-from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
 import hashlib
 import hmac
-from http.cookies import SimpleCookie
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-import mimetypes
 import math
+import mimetypes
 import os
-from pathlib import Path
 import re
 import secrets
 import sqlite3
 import threading
 import time
+import uuid
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
+from http.cookies import SimpleCookie
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import parse_qs, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
-import uuid
 
 SCENARIOS = {"quantity-mismatch", "currency-scaling", "approved-amendment", "conflicting-references", "unsafe-agent-output"}
 UUID = re.compile(r"[A-Fa-f0-9]{8}(?:-[A-Fa-f0-9]{4}){3}-[A-Fa-f0-9]{12}\Z")

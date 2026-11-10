@@ -8,11 +8,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from pathlib import Path, PurePosixPath
 import re
 import shutil
 import tempfile
 import xml.etree.ElementTree as ET
+from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_FILES = (

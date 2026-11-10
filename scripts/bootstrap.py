@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 from compose_support import compose_command
 

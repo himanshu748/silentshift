@@ -6,9 +6,9 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
 import tempfile
 import urllib.request
+from pathlib import Path
 
 VERSION = '0.10.10'
 URL = 'https://github.com/intersystems/ipm/releases/download/v0.10.10/zpm-0.10.10.xml'

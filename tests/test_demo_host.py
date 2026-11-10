@@ -1,7 +1,7 @@
 """Pure approval/timer checks; these do not establish an EC2 installation."""
 import datetime
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 

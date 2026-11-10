@@ -5,20 +5,26 @@ Only uniquely named new local resources are created. Existing stacks and the
 Docker default context are untouched. Credentials and command logs stay private.
 """
 from __future__ import annotations
+
 import argparse
-from datetime import datetime, timezone
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
 import subprocess
 import time
+from pathlib import Path
 
 from fetch_ipm import SHA256, SIZE
-from package_ipm import ROOT, stage, module_version
+from package_ipm import ROOT, module_version, stage
 from verify_ipm_clean import (
-    RELEASE, activate, command, prepare_native, private_write, runtime_environment, space,
+    RELEASE,
+    activate,
+    command,
+    prepare_native,
+    private_write,
+    runtime_environment,
+    space,
 )
 from verify_ipm_native import literal
 

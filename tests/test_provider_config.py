@@ -1,4 +1,5 @@
 import json
+
 import pytest
 from silentshift.provider_config import resolve_provider
 

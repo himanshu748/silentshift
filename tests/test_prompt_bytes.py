@@ -1,14 +1,14 @@
 """The XData relocation must not tune the released investigator prompt."""
-from pathlib import Path
 import hashlib
 import json
 import re
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 def test_system_prompt_relocation_preserves_original_bytes():
     source = (ROOT / "src/SilentShift/AI/Investigator.cls").read_text()
-    block = re.search(r'XData SystemPrompt \[ MimeType = "application/json" \]\s*\{(.*?)\n\}', source, re.S)
+    block = re.search(r'XData SystemPrompt \[ MimeType = "application/json" \]\s*\{(.*?)\n\}', source, re.DOTALL)
     assert block is not None
     fragments = json.loads(block.group(1))
     assert all(isinstance(part, str) for part in fragments)

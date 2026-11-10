@@ -9,18 +9,18 @@ No publishing, registry server, image download or model call is implicit.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import hashlib
 import json
 import math
 import os
-from pathlib import Path, PurePosixPath
 import re
 import shutil
 import subprocess
 import sys
 import tarfile
 import time
+from datetime import datetime, timezone
+from pathlib import Path, PurePosixPath
 from urllib.parse import urlparse
 
 from bootstrap import read_env

@@ -5,16 +5,17 @@ No prompt/policy changes, fixture relabelling, output repair, or selective retri
 The operator-only harness is excluded from the native release manifest.
 """
 from __future__ import annotations
+
 import argparse
-from datetime import datetime, timezone
 import hashlib
 import json
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import time
 import uuid
+from datetime import datetime, timezone
+from pathlib import Path
 
 from bootstrap import read_env
 from verify_ipm_native import literal

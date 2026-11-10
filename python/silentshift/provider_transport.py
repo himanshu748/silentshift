@@ -4,10 +4,11 @@ No redirects/retries, disk staging, or secret/content logging. The caller owns
 native request/response tracing; credentials never enter that message body.
 """
 from __future__ import annotations
+
 import base64
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, HTTPRedirectHandler, HTTPSHandler, build_opener
 import ssl
+from urllib.error import HTTPError, URLError
+from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener
 
 MAX_BYTES=262144
 

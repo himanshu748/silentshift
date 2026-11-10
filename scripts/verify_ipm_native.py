@@ -8,11 +8,11 @@ This is deliberately not evidence of a clean or public-registry installation.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import json
-from pathlib import Path
 import re
 import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
 
 from fetch_ipm import SHA256, SIZE, VERSION, fetch
 from inspect_ipm import inspect

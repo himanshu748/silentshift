@@ -5,11 +5,12 @@ No engine, rule, model or prior run outputs are imported. One seed, one new
 output directory. Labels follow the stipulated contracts, not observed routes.
 """
 from __future__ import annotations
+
 import argparse
 import hashlib
 import json
-from pathlib import Path
 import random
+from pathlib import Path
 
 
 def generate(seed):

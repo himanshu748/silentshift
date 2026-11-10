@@ -14,9 +14,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "python"))
 sys.path.insert(0, str(ROOT / "scripts"))
-from verify_native import Client, native_build  # noqa: E402
-
-from silentshift.csv_orders import FEED, REFERENCE, MAX_BYTES, MAX_ROWS, digest, prepare  # noqa: E402
+from silentshift.csv_orders import (
+    FEED as FEED,
+)
+from silentshift.csv_orders import (
+    MAX_BYTES as MAX_BYTES,
+)
+from silentshift.csv_orders import (
+    MAX_ROWS as MAX_ROWS,
+)
+from silentshift.csv_orders import (
+    REFERENCE as REFERENCE,
+)
+from silentshift.csv_orders import (
+    digest as digest,
+)
+from silentshift.csv_orders import (
+    prepare,
+)
+from verify_native import Client, native_build
 
 
 def submit(bundle: dict, client: Client, checkpoint=lambda: None) -> dict:

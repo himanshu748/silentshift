@@ -6,9 +6,9 @@ deletion, account-wide cleanup, image upload or billing-setting change occurs.
 """
 import argparse
 import json
-from pathlib import Path
 import re
 import subprocess
+from pathlib import Path
 
 
 def tags_match(tags, deployment):

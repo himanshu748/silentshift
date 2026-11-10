@@ -3,11 +3,17 @@ import json
 from pathlib import Path
 
 import pytest
-from hypothesis import given, settings, strategies as st
-
+from hypothesis import given, settings
+from hypothesis import strategies as st
 from silentshift.engine import (
-    assess, assess_json, evaluate_json, normalize_currency, normalize_quantity,
-    policy_json, rule_only, strict_loads, validate_policy,
+    assess,
+    assess_json,
+    evaluate_json,
+    normalize_currency,
+    normalize_quantity,
+    policy_json,
+    rule_only,
+    validate_policy,
 )
 
 DATASET = json.loads((Path(__file__).resolve().parents[1] / "fixtures/v1/scenarios.json").read_text())

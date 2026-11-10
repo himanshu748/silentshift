@@ -1,5 +1,6 @@
 """Preregistered metrics: keep failures in denominators and effects distinct."""
 from __future__ import annotations
+
 import json
 from statistics import median
 

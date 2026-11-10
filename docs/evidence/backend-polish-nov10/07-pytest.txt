@@ -1,0 +1,364 @@
+..............................FFFFFFFFFFFFFFFFF......................... [ 21%]
+........................................................................ [ 42%]
+........................................................................ [ 63%]
+........................................................................ [ 84%]
+...................................................                      [100%]
+=================================== FAILURES ===================================
+________ test_maps_independent_authority_without_transforming_quantity _________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_maps_independent_authorit0')
+
+    def test_maps_independent_authority_without_transforming_quantity(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_maps_independent_authorit0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+___________________ test_rejects_unsafe_numeric_inputs[NaN] ____________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in0')
+quantity = 'NaN'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_________________ test_rejects_unsafe_numeric_inputs[Infinity] _________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in1')
+quantity = 'Infinity'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in1')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+____________________ test_rejects_unsafe_numeric_inputs[0] _____________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in2')
+quantity = '0'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in2')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+____________________ test_rejects_unsafe_numeric_inputs[-1] ____________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in3')
+quantity = '-1'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in3')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_______________ test_rejects_unsafe_numeric_inputs[1.0000000001] _______________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in4')
+quantity = '1.0000000001'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in4')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_______________ test_rejects_unsafe_numeric_inputs[1e100000000] ________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in5')
+quantity = '1e100000000'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in5')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+___________________ test_rejects_unsafe_numeric_inputs[ 20] ____________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in6')
+quantity = ' 20'
+
+    @pytest.mark.parametrize("quantity", ["NaN", "Infinity", "0", "-1", "1.0000000001", "1e100000000", " 20"])
+    def test_rejects_unsafe_numeric_inputs(tmp_path, quantity):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_unsafe_numeric_in6')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+__________________ test_rejects_duplicate_identity_and_header __________________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_duplicate_identit0')
+
+    def test_rejects_duplicate_identity_and_header(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_duplicate_identit0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+________ test_source_row_tracks_physical_line_when_csv_has_blank_lines _________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_source_row_tracks_physica0')
+
+    def test_source_row_tracks_physical_line_when_csv_has_blank_lines(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_source_row_tracks_physica0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+__________ test_rejects_extra_cell_naive_time_same_file_and_oversize ___________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_extra_cell_naive_0')
+
+    def test_rejects_extra_cell_naive_time_same_file_and_oversize(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_rejects_extra_cell_naive_0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_____ test_event_identity_survives_reordering_but_changed_order_conflicts ______
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_event_identity_survives_r0')
+
+    def test_event_identity_survives_reordering_but_changed_order_conflicts(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_event_identity_survives_r0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+___ test_order_summary_holds_mixed_outcomes_and_never_claims_atomic_delivery ___
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_order_summary_holds_mixed0')
+
+    def test_order_summary_holds_mixed_outcomes_and_never_claims_atomic_delivery(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_order_summary_holds_mixed0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_____ test_uncertain_dispatch_retains_completed_lines_and_pending_identity _____
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_uncertain_dispatch_retain0')
+
+    def test_uncertain_dispatch_retains_completed_lines_and_pending_identity(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_uncertain_dispatch_retain0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+_____________ test_existing_output_prevents_any_native_submission ______________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_existing_output_prevents_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10957f6e0>
+
+    def test_existing_output_prevents_any_native_submission(tmp_path, monkeypatch):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_existing_output_prevents_0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+____ test_native_submission_stops_before_any_side_effect_when_space_is_low _____
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_native_submission_stops_b0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10957cb00>
+
+    def test_native_submission_stops_before_any_side_effect_when_space_is_low(tmp_path, monkeypatch):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_native_submission_stops_b0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+________ test_failed_investigation_is_visible_alongside_the_held_route _________
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_failed_investigation_is_v0')
+
+    def test_failed_investigation_is_visible_alongside_the_held_route(tmp_path):
+>       feed, refs = inputs(tmp_path)
+                     ^^^^^^^^^^^^^^^^
+
+tests/test_csv_pilot.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tmp_path = PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-14/test_failed_investigation_is_v0')
+
+    def inputs(tmp_path):
+>       feed = write(tmp_path / "orders.csv", pilot.FEED, [["partner-a", "event-1", "PO-1", "1", "2026-11-06T15:00:00Z", "SKU-1", "20", "CASE", "WEST"]])
+                                              ^^^^^^^^^^
+E       AttributeError: module 'pilot_orders' has no attribute 'FEED'
+
+tests/test_csv_pilot.py:23: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_csv_pilot.py::test_maps_independent_authority_without_transforming_quantity
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[NaN] - Att...
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[Infinity]
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[0] - Attri...
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[-1] - Attr...
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[1.0000000001]
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[1e100000000]
+FAILED tests/test_csv_pilot.py::test_rejects_unsafe_numeric_inputs[ 20] - Att...
+FAILED tests/test_csv_pilot.py::test_rejects_duplicate_identity_and_header - ...
+FAILED tests/test_csv_pilot.py::test_source_row_tracks_physical_line_when_csv_has_blank_lines
+FAILED tests/test_csv_pilot.py::test_rejects_extra_cell_naive_time_same_file_and_oversize
+FAILED tests/test_csv_pilot.py::test_event_identity_survives_reordering_but_changed_order_conflicts
+FAILED tests/test_csv_pilot.py::test_order_summary_holds_mixed_outcomes_and_never_claims_atomic_delivery
+FAILED tests/test_csv_pilot.py::test_uncertain_dispatch_retains_completed_lines_and_pending_identity
+FAILED tests/test_csv_pilot.py::test_existing_output_prevents_any_native_submission
+FAILED tests/test_csv_pilot.py::test_native_submission_stops_before_any_side_effect_when_space_is_low
+FAILED tests/test_csv_pilot.py::test_failed_investigation_is_visible_alongside_the_held_route
+17 failed, 322 passed in 26.56s

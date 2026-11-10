@@ -3,9 +3,7 @@ import json
 from pathlib import Path
 
 import pytest
-
 from silentshift.engine import assess_json, strict_loads, validate_policy
-
 
 DATA = json.loads((Path(__file__).parents[1] / "fixtures/v1/scenarios.json").read_text())
 

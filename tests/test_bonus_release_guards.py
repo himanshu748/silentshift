@@ -1,8 +1,8 @@
 """No Docker or provider access is needed to reject unsafe verifier options."""
 import os
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 
 import pytest
 

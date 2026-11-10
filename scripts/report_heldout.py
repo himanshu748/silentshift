@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Report every frozen held-out result, including invalids and lost comparisons."""
 from __future__ import annotations
+
 import argparse
+import json
 from collections import Counter
 from datetime import datetime, timezone
-import hashlib
-import json
 from pathlib import Path
 from statistics import mean, median, pstdev
 
-from heldout_metrics import raw_proposal, score_row, summarize, ROUTES
-from run_heldout import ROOT, DATA_SHA, LABEL_COMMIT, frozen_dataset, write_json
-from silentshift.engine import strict_loads, _recommendation_errors
+from heldout_metrics import ROUTES, raw_proposal, score_row, summarize
+from run_heldout import DATA_SHA, LABEL_COMMIT, ROOT, frozen_dataset, write_json
+from silentshift.engine import _recommendation_errors, strict_loads
 
 
 def report(source: Path, destination: Path):

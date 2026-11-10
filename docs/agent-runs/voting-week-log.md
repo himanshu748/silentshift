@@ -174,3 +174,11 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - One routing INFO is emitted only after the final response is constructed; failure then containment does not duplicate it.
 - `uv run pytest -q`: 339 passed in 50.54s ([output](../evidence/backend-polish-nov10/06-pytest.txt)). Native settings/default tests remain pending.
 - Static page also rendered locally at desktop/mobile breakpoints with keyboard anchor navigation and loaded historical captures; not published, and new production captures are still pending.
+
+### 2026-11-10 15:44:45 IST — Backend item 7
+
+- Discarded unused Review return value while preserving the call. CSV preserves a pristine parsed bundle before annotations, eliminating a redundant parse without admitting annotated authority. pyproject now matches module 0.3.0; Ruff 0.17.4 is a dev dependency.
+- The requested Investigator HTTPS branch is already absent. Legacy API key names remain redaction-only and are commented accordingly. Configurable providers already exist on this source branch; claiming every live path is pinned by Lease.LocalHost would be false. Only local Qwen execution is qualified here.
+- Ruff safe fixes applied outside fixtures/raw evidence. Initial whole-tree count: 154; scoped pre-fix: 144; final whole-tree: 79. Remaining findings retained, no failing Ruff CI step added, no unsafe fixes. Historical evidence scripts were not rewritten.
+- Auto-removal of pilot re-exports caused 17 tests to fail; restored explicit exports. Preserved the original engine Decimal literals and proved all engine functions/classes have identical ASTs ([invariants](../evidence/backend-polish-nov10/07-policy-invariants.json)). Fixed loop binding in review and adapter verification helpers.
+- Final `uv run pytest -q`: 339 passed in 22.24s ([output](../evidence/backend-polish-nov10/07c-pytest.txt)). Original failure and both subsequent passing runs retained.

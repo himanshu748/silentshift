@@ -1,8 +1,8 @@
+import copy
 import csv
 import importlib.util
-import copy
-from types import SimpleNamespace
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
