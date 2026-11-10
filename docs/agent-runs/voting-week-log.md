@@ -78,3 +78,12 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - **Owner request:** create a SilentShift logo. Used the built-in image generation tool to create an S mark from offset record forms, a matching wordmark and a standalone square icon. Used the existing product's ink/accent tokens; did not redesign the frontend.
 - **Artifacts:** [transparent wordmark PNG](../assets/brand/silentshift-logo-v1.png), [transparent icon PNG](../assets/brand/silentshift-icon-v1.png), [generation receipt](../assets/brand/logo-v1-receipt.json), [prompts and usage](../assets/brand/README.md). Raster assets, not vector masters. Both inspected visually; metadata checks are recorded alongside them.
 - **Boundary:** source images copied into the workspace, originals preserved. No existing logo, app code, OEX field or runtime behavior was replaced. No upload, public push, approval submission, release or paid provider call occurred. The existing OEX description remains at its separate exact-`submit` gate; this logo request does not approve submission or a logo upload.
+
+
+## 2026-11-10 14:52:12 IST — Phase 2 public competitive scan
+
+- Read all **44** contest listing pages and **44** linked default-branch READMEs anonymously. [Comparison report](competitor-scan.md) records author, task, stated AI Hub/native boundaries, media, package/setup signals, candidate bonus technologies and visible review counts. [Observation receipt](../evidence/voting-week-nov10/competitor-scan.json). No competing app was installed, logged into, exercised or model-tested.
+- Ten editorial comparison targets and five prioritised gaps are documented. These are public-presentation judgments, not expert rankings or functional test results. Four advertised runtime-demo landing pages returned HTTP 200; no native/live-demo inference was verified. Subscription counters were not relabelled likes or votes.
+- The official voting post still has no published leaderboard comments in the inspected anonymous text; voting is blind. Third and later articles bring no additional article bonus. No new award, point total, win probability or health outcome is claimed.
+- Gmail check: both existing OEX conversations contain no new organiser reply; the latest remains our authorised 14:21 IST queue-check email. No duplicate follow-up was sent. The new mission's prepare-only OEX approval gate remains active; `go on` is not exact `submit`.
+- No public edit, post, vote, email, registry action, release, hosting or spending occurred.
