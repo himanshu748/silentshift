@@ -71,3 +71,10 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - **Public readback:** {"url": "https://openexchange.intersystems.com/package/SilentShift", "authentication": "none", "http_status": 200, "archive_030_visible": true, "legacy_native_020_visible": true, "legacy_source_only_csv_visible": true, "dedicated_idea_section_visible": true}. This checks visibility, not moderation's internal queue.
 - **Prepared artifact:** [exact unchanged description](oex-description-approval.md), [fresh screenshot](../evidence/voting-week-nov10/phase1-approval-ready.jpg), [sanitised receipt](../evidence/voting-week-nov10/phase1-approval-ready.json), [owner readback](../evidence/voting-week-nov10/phase1-approval-ready-owner.txt).
 - **STOP:** no Save, Send for approval, release, email, post, upload, tag, registry publication, deployment, spending or public Git push occurred. The next exact `submit` would authorise only submitting these description edits. Later external actions each need their own approval. No runtime or model/test execution took place.
+
+
+## 2026-11-10T14:32:35.751726+05:30 — Logo assets created locally
+
+- **Owner request:** create a SilentShift logo. Used the built-in image generation tool to create an S mark from offset record forms, a matching wordmark and a standalone square icon. Used the existing product's ink/accent tokens; did not redesign the frontend.
+- **Artifacts:** [transparent wordmark PNG](../assets/brand/silentshift-logo-v1.png), [transparent icon PNG](../assets/brand/silentshift-icon-v1.png), [generation receipt](../assets/brand/logo-v1-receipt.json), [prompts and usage](../assets/brand/README.md). Raster assets, not vector masters. Both inspected visually; metadata checks are recorded alongside them.
+- **Boundary:** source images copied into the workspace, originals preserved. No existing logo, app code, OEX field or runtime behavior was replaced. No upload, public push, approval submission, release or paid provider call occurred. The existing OEX description remains at its separate exact-`submit` gate; this logo request does not approve submission or a logo upload.
