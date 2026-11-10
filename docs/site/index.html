@@ -1,128 +1,849 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SilentShift holds technically valid B2B orders when their business meaning contradicts the approved commitment. Explore the native IRIS workflow, recorded evidence and local replay.">
-  <meta name="theme-color" content="#f4f2ec">
-  <title>SilentShift — Successful transport. Correct meaning.</title>
-  <link rel="icon" href="assets/silentshift-icon.png" type="image/png">
-  <link rel="preload" href="assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header wrap">
-    <a class="brand" href="#main" aria-label="SilentShift home"><img src="assets/silentshift-icon.png" width="40" height="40" alt=""><span>SilentShift</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#workflow">The workflow</a>
-      <a href="#evidence">See the evidence</a>
-      <a href="#run">Run locally</a>
-      <a class="nav-cta" href="https://openexchange.intersystems.com/package/SilentShift">Open Exchange <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
-  <main id="main">
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">For B2B integration operations</p>
-        <h1 id="hero-title">An order can pass its schema.<br><em>And still mean the wrong thing.</em></h1>
-        <p class="lead">SilentShift catches changes in business meaning before delivery. An IRIS AI Hub agent investigates the evidence; deterministic policy decides what happens next.</p>
-        <div class="actions">
-          <a class="button primary" href="#watch">Watch the workflow <span aria-hidden="true">↓</span></a>
-          <a class="button secondary" href="#run">Run a keyless replay <span aria-hidden="true">→</span></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SilentShift checks business meaning in IRIS integrations. Inspect evidence-bound AI Hub proposals, deterministic routing and native Visual Trace in a synthetic order workflow."
+    />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta
+      property="og:title"
+      content="SilentShift — Successful messages. Correct meaning."
+    />
+    <meta
+      property="og:description"
+      content="Semantic integration checks for IRIS, with evidence-bound agent proposals and deterministic routing."
+    />
+    <meta property="og:type" content="website" />
+    <title>SilentShift — Successful messages. Correct meaning.</title>
+    <link rel="icon" href="assets/mark.png" type="image/png" />
+    <link rel="canonical" href="https://himanshu748.github.io/silentshift/" />
+    <link
+      rel="preload"
+      href="assets/manrope-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="assets/vendor/gsap.min.js" defer></script>
+    <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="assets/vendor/SplitText.min.js" defer></script>
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="SilentShift home"
+        ><img src="assets/mark.png" width="32" height="32" alt="" /><span
+          >SilentShift<span class="brand-stop">.</span></span
+        ></a
+      >
+      <nav aria-label="Primary navigation">
+        <a href="#how-it-works">The workflow</a
+        ><a href="#workbench">Workbench</a><a href="#judges">For judges</a
+        ><a class="nav-install" href="#install"
+          >Run it locally <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="small-square" aria-hidden="true"></span> Meaning is the
+            missing check.
+          </p>
+          <h1 id="hero-title" class="hero-title">
+            Successful<br />messages.<br /><em>Correct meaning.</em>
+          </h1>
+          <p class="hero-description">
+            Semantic integration checks for IRIS, with evidence-bound agent
+            proposals and deterministic routing.
+          </p>
+          <div class="hero-actions">
+            <button
+              class="button primary magnetic"
+              type="button"
+              data-open-demo
+            >
+              Try live demo <span aria-hidden="true">↗</span></button
+            ><a class="button text-button magnetic" href="#film"
+              ><span class="play-symbol" aria-hidden="true">▷</span> Watch
+              video</a
+            >
+          </div>
+          <p class="demo-status">
+            <span aria-hidden="true">○</span> Public native demo not deployed.
+            Recorded evidence below.
+          </p>
+          <div class="install-command">
+            <span class="mono-label">Install in a prepared IRIS namespace</span
+            ><button
+              class="copy-button"
+              type="button"
+              data-copy='zpm "install silentshift"'
+            >
+              <code>zpm "install silentshift"</code
+              ><span class="copy-label"
+                >Copy <span aria-hidden="true">⧉</span></span
+              ></button
+            ><span class="sr-only" role="status" data-copy-status></span>
+          </div>
         </div>
-        <p class="scope-note">Synthetic orders · IRIS destination simulator · Recorded evidence</p>
-      </div>
-      <aside class="order-card" aria-labelledby="order-title">
-        <div class="card-top"><p id="order-title">One order. Two different meanings.</p><span class="status hold">Hold</span></div>
-        <div class="value-pair">
-          <div><span class="label">Incoming order</span><strong>20 <small>CASE</small></strong></div>
-          <span class="versus" aria-label="compared with">↔</span>
-          <div><span class="label">Approved contract</span><strong>240 <small>EA</small></strong></div>
+        <figure class="hero-visual">
+          <div class="visual-topline">
+            <span class="mono-label">Inside the native workbench</span
+            ><span class="recorded-pill">Recorded case</span>
+          </div>
+          <div class="workbench-frame">
+            <img
+              class="hero-capture"
+              src="assets/policy.webp"
+              width="900"
+              height="2370"
+              fetchpriority="high"
+              alt="Real recorded workbench: unsupported incoming quantity 20 CASE against approved 240 EA; quarantined by policy."
+            />
+          </div>
+          <figcaption>
+            <span class="caption-rule" aria-hidden="true"></span> A successful
+            intake. An unsupported change.<br /><span class="caption-muted"
+              >Synthetic recorded replay · native session 58</span
+            >
+          </figcaption>
+          <span class="frame-registration" aria-hidden="true">SS / 01</span>
+        </figure>
+        <div class="hero-bottom">
+          <span>Built inside InterSystems IRIS AI Hub</span
+          ><span>Agent proposes. Policy decides.</span
+          ><a href="#problem"
+            >Follow the evidence <span aria-hidden="true">↓</span></a
+          >
         </div>
-        <p class="order-detail">Valid JSON. Successful transport. No approved conversion between these units.</p>
-        <div class="outcome"><span class="signal" aria-hidden="true"></span><div><strong>Hold the order.</strong><p>The agent cannot invent a conversion or release a critical contradiction.</p></div></div>
-        <div class="amendment"><span class="status allow">Approved change</span><p>If an effective, approved amendment permits <code>20 CASE</code>, the same order can proceed. Authority changes the decision.</p></div>
-      </aside>
-    </section>
-
-    <section class="section wrap" id="watch" aria-labelledby="watch-title">
-      <div class="section-heading"><p class="eyebrow">Start here</p><h2 id="watch-title">From incoming order to inspectable decision.</h2><p>Watch the original captioned demonstration, then inspect the real case records below.</p></div>
-      <div class="video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/a4dOcqu89EA" title="SilentShift captioned demonstration: held order, approved amendment and native IRIS trace" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="video-notes"><p>This recording predates the CSV workbench and newer source interface. It shows synthetic cases and simulator delivery.</p><p><a href="https://youtu.be/a4dOcqu89EA">Watch on YouTube</a> <span aria-hidden="true">·</span> <a href="https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4">Download the MP4</a></p></div>
-    </section>
-
-    <section class="section workflow-section" id="workflow" aria-labelledby="workflow-title">
-      <div class="wrap">
-        <div class="section-heading"><p class="eyebrow">Native IRIS interoperability</p><h2 id="workflow-title">The agent proposes.<br>The policy authorizes.</h2><p>Each investigation stays inside the business workflow, with the original order, independent references, recommendation and route available for inspection.</p></div>
-        <ol class="decision-flow" aria-label="How a decision moves through SilentShift">
-          <li><span class="step">01</span><h3>Receive</h3><p>A Business Service accepts the order and preserves its original payload.</p></li>
-          <li><span class="step">02</span><h3>Compare</h3><p>The Business Process retrieves independently approved references and assesses the business fields.</p></li>
-          <li class="agent-step"><span class="step">03</span><h3>Investigate</h3><p>The native AI Hub agent reads case-scoped evidence and proposes a recommendation.</p></li>
-          <li class="policy-step"><span class="step">04</span><h3>Authorize</h3><p>Deterministic policy checks the proposal, citations and contradictions. Missing evidence never grants release.</p></li>
-          <li><span class="step">05</span><h3>Route &amp; review</h3><p>Operations hold or deliver to the simulator. Eligible holds create native Workflow tasks.</p></li>
-        </ol>
-        <div class="principles">
-          <article><h3>Evidence stays independent</h3><p>An incoming CSV order cannot approve its own contract. The reference source is separate, and importing it requires explicit authorization.</p></article>
-          <article><h3>Review has boundaries</h3><p>A written reason, current case version and idempotency key are required. Critical contradictions cannot be approved.</p></article>
-          <article><h3>The call has a business context</h3><p>Provider request/response messages appear in the case’s Visual Trace, alongside routing and human-review steps.</p></article>
+      </section>
+      <section
+        class="problem-section section"
+        id="problem"
+        aria-labelledby="problem-title"
+      >
+        <div class="wrap problem-grid">
+          <div>
+            <p class="eyebrow">01 / The quiet failure</p>
+            <h2 id="problem-title" class="reveal">
+              A green transport check<br />isn’t the whole story.
+            </h2>
+          </div>
+          <p class="section-intro reveal">
+            An order can parse, pass its schema and arrive successfully—while
+            asking for something the approved contract never authorized.
+          </p>
         </div>
-      </div>
-    </section>
-
-    <section class="section wrap" id="evidence" aria-labelledby="evidence-title">
-      <div class="section-heading"><p class="eyebrow">Inspect the product</p><h2 id="evidence-title">The evidence is part of the interface.</h2><p>These are recorded local captures, not an interactive hosted app. Open any image to inspect its full resolution.</p></div>
-      <div class="evidence-grid">
-        <figure class="capture">
-          <a class="image-link" href="assets/01-original-order.jpg"><img src="assets/01-original-order.jpg" width="900" height="1657" loading="lazy" alt="Original synthetic order payload in the local workbench."></a>
-          <figcaption><span class="capture-number">01 / Original order</span><h3>Inspect the incoming values.</h3><p>November 10 local source capture, session 58. Synthetic recorded replay; no fresh inference. Open the image for full resolution.</p></figcaption>
-        </figure>
-        <figure class="capture capture-wide">
-          <a class="image-link" href="assets/02-policy-evidence.jpg"><img src="assets/02-policy-evidence.jpg" width="900" height="2370" loading="lazy" alt="Critical comparison of incoming 20 CASE with approved 240 EA."></a>
-          <figcaption><span class="capture-number">02 / Policy decision</span><h3>See why this order is held.</h3><p>November 10 local source capture, session 58. Synthetic recorded replay; no fresh inference. Open the image for full resolution.</p></figcaption>
-        </figure>
-        <figure class="capture">
-          <a class="image-link" href="assets/03-native-agent.jpg"><img src="assets/03-native-agent.jpg" width="900" height="2246" loading="lazy" alt="Recorded native agent mode, scoped evidence reads and recommendation."></a>
-          <figcaption><span class="capture-number">03 / Agent investigation</span><h3>Read the evidence behind the recommendation.</h3><p>November 10 local source capture, session 58. Synthetic recorded replay; no fresh inference. Open the image for full resolution.</p></figcaption>
-        </figure>
-        <figure class="capture">
-          <a class="image-link" href="assets/04-workflow-review.jpg"><img src="assets/04-workflow-review.jpg" width="900" height="2523" loading="lazy" alt="Native Workflow task with critical-case approval disabled."></a>
-          <figcaption><span class="capture-number">04 / Workflow review</span><h3>Keep review inside its authority.</h3><p>November 10 local source capture, session 58. Synthetic recorded replay; no fresh inference. Open the image for full resolution.</p></figcaption>
-        </figure>
-        <figure class="capture">
-          <a class="image-link" href="assets/07-provider-native-metadata.jpg"><img src="assets/07-provider-native-metadata.jpg" width="1280" height="720" loading="lazy" alt="Native Body properties with model, provider, prompt version, timing and tool calls."></a>
-          <figcaption><span class="capture-number">05 / Visual Trace</span><h3>Inspect the persisted provider response.</h3><p>November 10 local source capture, session 58. Synthetic recorded replay; no fresh inference. Open the image for full resolution.</p></figcaption>
-        </figure>
-      </div>
-      <p class="evidence-link"><a href="https://github.com/himanshu748/silentshift/blob/main/docs/BONUS_EVIDENCE.md">Read the execution evidence and its limits <span aria-hidden="true">↗</span></a></p>
-    </section>
-
-    <section class="section run-section" id="run" aria-labelledby="run-title">
-      <div class="wrap run-grid">
-        <div><p class="eyebrow">Reproduce it locally</p><h2 id="run-title">A keyless path.<br>A real native trace.</h2><p class="lead-small">After the prerequisites in the installation guide, run the recorded example without a model or provider key.</p><a class="button primary" href="https://github.com/himanshu748/silentshift/blob/main/INSTALL.md">Open the single installation guide <span aria-hidden="true">↗</span></a></div>
-        <div class="terminal" aria-label="Keyless replay command and expected result">
-          <div class="terminal-top"><span>From the source checkout</span><span class="status replay">Recorded replay</span></div>
-          <pre><code>./scripts/judge-replay.sh</code></pre>
-          <div class="expected"><span class="label">Expected recorded result</span><code>checks=12/12; passed=true<br>routing=QUARANTINED<br>delivery_count=0</code><p>The launcher prints a session ID and Visual Trace URL.</p></div>
+        <div class="wrap comparison reveal">
+          <div class="comparison-cell">
+            <span class="mono-label">What arrived</span>
+            <p class="comparison-value">20 <span>CASE</span></p>
+            <p>Valid message. Different business meaning.</p>
+          </div>
+          <div class="comparison-divider" aria-hidden="true">
+            <span>≠</span>
+          </div>
+          <div class="comparison-cell">
+            <span class="mono-label">What was approved</span>
+            <p class="comparison-value">240 <span>EA</span></p>
+            <p>No approved conversion in the governing record.</p>
+          </div>
+          <div class="comparison-outcome">
+            <span class="outcome-label">The permitted route</span
+            ><strong>Hold before delivery.</strong>
+            <p>
+              An effective approved amendment can change the answer. Similarity,
+              a confident model and a successful transport cannot.
+            </p>
+          </div>
         </div>
+      </section>
+      <section
+        class="story-section section"
+        id="how-it-works"
+        aria-labelledby="story-title"
+      >
+        <div class="wrap section-heading">
+          <p class="eyebrow">02 / Follow the decision</p>
+          <h2 id="story-title" class="reveal">
+            Follow the evidence.<br />Understand the decision.
+          </h2>
+          <p class="section-intro">
+            Three boundaries, from incoming value to permitted action.
+          </p>
+        </div>
+        <div class="story-shell">
+          <div class="story-stage wrap">
+            <div class="story-rail" aria-hidden="true">
+              <span>CHECK</span><span>EVIDENCE</span><span>ROUTE</span>
+              <div class="story-progress"><i></i></div>
+            </div>
+            <div class="story-panels">
+              <article class="story-panel" id="step-check">
+                <div class="story-text">
+                  <span class="step-index">01 / Check</span>
+                  <h3>Compare the message<br />with independent authority.</h3>
+                  <p>
+                    Keep the original payload. Select the approved contract and
+                    effective amendment separately. A partner’s incoming values
+                    cannot approve themselves.
+                  </p>
+                  <span class="step-footnote"
+                    >Original event + immutable reference snapshot</span
+                  >
+                </div>
+                <figure class="story-image">
+                  <img
+                    src="assets/order.webp"
+                    width="900"
+                    height="1657"
+                    loading="lazy"
+                    alt="Recorded original order payload in the source workbench."
+                  />
+                  <figcaption>
+                    Original order · recorded local source capture
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="story-panel" id="step-evidence">
+                <div class="story-text">
+                  <span class="step-index">02 / Evidence</span>
+                  <h3>
+                    Let the agent investigate.<br />Keep its sources visible.
+                  </h3>
+                  <p>
+                    Native AI Hub reads case-scoped tools and proposes a route
+                    with evidence IDs and uncertainty. Retrieved precedents add
+                    context; they don’t supply release authority.
+                  </p>
+                  <span class="step-footnote"
+                    >Read-only tools · bounded native investigation</span
+                  >
+                </div>
+                <figure class="story-image">
+                  <img
+                    src="assets/agent.webp"
+                    width="900"
+                    height="2246"
+                    loading="lazy"
+                    alt="Recorded AI Hub recommendation with its actual evidence reads."
+                  />
+                  <figcaption>
+                    Agent evidence · recorded provider responses
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="story-panel" id="step-route">
+                <div class="story-text">
+                  <span class="step-index">03 / Route</span>
+                  <h3>The policy has<br />the final word.</h3>
+                  <p>
+                    Automatic delivery requires a valid recommendation, complete
+                    evidence and a resolved comparison. A critical contradiction
+                    stays held. Eligible actions go to native human review.
+                  </p>
+                  <span class="step-footnote"
+                    >Deterministic validator → routing Operations</span
+                  >
+                </div>
+                <figure class="story-image">
+                  <img
+                    src="assets/policy.webp"
+                    width="900"
+                    height="2370"
+                    loading="lazy"
+                    alt="Recorded policy outcome: quarantine, with explicit reasons and independent reference."
+                  />
+                  <figcaption>
+                    Policy decision · simulator-only destination
+                  </figcaption>
+                </figure>
+              </article>
+            </div>
+            <p class="story-scope">
+              A scroll through recorded evidence, not a new investigation.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        class="workbench-section section"
+        id="workbench"
+        aria-labelledby="workbench-title"
+      >
+        <div class="wrap">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow">03 / The operator’s workspace</p>
+              <h2 id="workbench-title" class="reveal">
+                The reason.<br />The record.<br />The next permitted action.
+              </h2>
+            </div>
+            <p class="section-intro">
+              Inspect the original order, the recommendation and the policy in
+              the same case. These are real captures from a local native replay.
+            </p>
+          </div>
+          <div class="tour" data-tour>
+            <div
+              class="tour-tabs"
+              role="tablist"
+              aria-label="Recorded workbench views"
+            >
+              <button
+                id="tour-tab-0"
+                role="tab"
+                aria-selected="true"
+                aria-controls="tour-panel"
+                type="button"
+                data-tour-index="0"
+              >
+                <span>01</span> Policy decision</button
+              ><button
+                id="tour-tab-1"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                aria-controls="tour-panel"
+                type="button"
+                data-tour-index="1"
+              >
+                <span>02</span> Agent evidence</button
+              ><button
+                id="tour-tab-2"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                aria-controls="tour-panel"
+                type="button"
+                data-tour-index="2"
+              >
+                <span>03</span> Workflow review</button
+              ><button
+                id="tour-tab-3"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                aria-controls="tour-panel"
+                type="button"
+                data-tour-index="3"
+              >
+                <span>04</span> Visual Trace
+              </button>
+            </div>
+            <div
+              class="tour-panel"
+              id="tour-panel"
+              role="tabpanel"
+              aria-labelledby="tour-tab-0"
+              tabindex="0"
+            >
+              <div class="tour-image">
+                <img
+                  id="tour-image"
+                  src="assets/policy.webp"
+                  width="900"
+                  height="2370"
+                  loading="lazy"
+                  alt="Policy evidence for the recorded unsupported 20 CASE order."
+                />
+              </div>
+              <div class="tour-caption">
+                <div>
+                  <span class="mono-label"
+                    >Recorded native case / session 58</span
+                  >
+                  <h3 id="tour-title">Understand why the order was held.</h3>
+                  <p id="tour-description">
+                    Incoming values and the approved reference sit beside the
+                    deterministic outcome. A critical contradiction cannot be
+                    approved through review.
+                  </p>
+                </div>
+                <a
+                  id="tour-original"
+                  href="assets/02-policy-evidence.jpg"
+                  target="_blank"
+                  rel="noopener"
+                  >Open full capture <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <p class="capture-source">
+            Synthetic recorded replay on 154U ARM64. No fresh inference was
+            performed for these captures.
+            <a
+              href="https://github.com/himanshu748/silentshift/blob/main/docs/evidence/backend-polish-nov10/11-native-ui.json"
+              >Capture provenance</a
+            >.
+          </p>
+        </div>
+      </section>
+      <section
+        class="native-section section"
+        id="native"
+        aria-labelledby="native-title"
+      >
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">04 / Native by design</p>
+            <h2 id="native-title" class="reveal">
+              The agent lives<br />inside the production.
+            </h2>
+            <p class="section-intro">
+              IRIS owns the case, investigation, policy and receipt. The browser
+              helps an operator understand them.
+            </p>
+          </div>
+          <div class="native-grid">
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">↳</span>
+              <h3>Interoperability</h3>
+              <p>
+                Business Services, a Business Process and Operations preserve
+                the transaction’s native session.
+              </p>
+            </article>
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">◈</span>
+              <h3>IRIS AI Hub</h3>
+              <p>
+                A native agent makes bounded, case-scoped evidence reads and
+                proposes a structured route.
+              </p>
+            </article>
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">&lt;/&gt;</span>
+              <h3>Embedded Python</h3>
+              <p>
+                Business arithmetic and policy execute inside IRIS. The
+                deterministic gate remains authoritative.
+              </p>
+            </article>
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">⋮</span>
+              <h3>IRIS Vector Search</h3>
+              <p>
+                Resolved precedents provide context with IDs and scores, never
+                permission to override current authority.
+              </p>
+            </article>
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">⇄</span>
+              <h3>Native Workflow</h3>
+              <p>
+                Eligible review actions require permission, a reason, the
+                current version and an idempotency key.
+              </p>
+            </article>
+            <article class="native-card reveal">
+              <span class="native-mark" aria-hidden="true">⌁</span>
+              <h3>Visual Trace</h3>
+              <p>
+                Provider calls are native request/response messages alongside
+                the case’s routing and review.
+              </p>
+              <a href="https://ideas.intersystems.com/ideas/DPI-I-689"
+                >Community idea DPI-I-689 <span aria-hidden="true">↗</span></a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        class="boundary-section section"
+        aria-labelledby="boundary-title"
+      >
+        <div class="wrap boundary-grid">
+          <div>
+            <p class="eyebrow">05 / A clear authority boundary</p>
+            <h2 id="boundary-title" class="reveal">
+              The agent proposes.<br /><em>The policy decides.</em>
+            </h2>
+          </div>
+          <div class="boundary-rules">
+            <article>
+              <span aria-hidden="true">01</span>
+              <div>
+                <h3>Evidence is scoped.</h3>
+                <p>
+                  The agent cannot turn message text into new tools, permissions
+                  or approved contract authority.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span aria-hidden="true">02</span>
+              <div>
+                <h3>Uncertainty contains the case.</h3>
+                <p>
+                  Missing evidence, malformed output and unresolved
+                  contradictions cannot justify automatic delivery.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span aria-hidden="true">03</span>
+              <div>
+                <h3>Review is a bounded action.</h3>
+                <p>
+                  A reviewer cannot approve a critical contradiction. Legitimate
+                  changes need corrected input or governing evidence.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        class="architecture-section section"
+        aria-labelledby="architecture-title"
+      >
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">06 / From message to receipt</p>
+            <h2 id="architecture-title" class="reveal">
+              One business case.<br />An inspectable path.
+            </h2>
+          </div>
+          <ol class="architecture">
+            <li>
+              <span>Intake</span><strong>Business Service</strong
+              ><small>REST, CSV or ready JSON file</small>
+            </li>
+            <li>
+              <span>Coordinate</span><strong>Business Process</strong
+              ><small>Preserved case and references</small>
+            </li>
+            <li>
+              <span>Investigate</span><strong>AI Hub + evidence</strong
+              ><small>Read-only tools, native calls</small>
+            </li>
+            <li>
+              <span>Authorize</span><strong>Deterministic policy</strong
+              ><small>Server-owned routing decision</small>
+            </li>
+            <li>
+              <span>Act</span><strong>Routing Operations</strong
+              ><small>Simulator delivery or quarantine</small>
+            </li>
+          </ol>
+          <div class="architecture-notes">
+            <p>
+              <span class="annotation-line" aria-hidden="true"></span> Held
+              cases expose only eligible native Workflow actions.
+            </p>
+            <a
+              href="https://github.com/himanshu748/silentshift/blob/main/ARCHITECTURE.md"
+              >Read the architecture <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section
+        class="film-section section"
+        id="film"
+        aria-labelledby="film-title"
+      >
+        <div class="wrap">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow">07 / See the whole story</p>
+              <h2 id="film-title" class="reveal">
+                Hold the mismatch.<br />Allow the amendment.
+              </h2>
+            </div>
+            <p class="section-intro">
+              A captioned, 2:30 walkthrough of recorded native cases: policy,
+              precedents, Visual Trace, human review and file intake.
+            </p>
+          </div>
+          <div class="film-frame">
+            <button
+              class="film-load"
+              type="button"
+              data-load-film
+              aria-label="Play the captioned recorded product demo"
+            >
+              <img
+                src="assets/video-poster.webp"
+                width="1280"
+                height="720"
+                loading="lazy"
+                alt="Recorded native investigation in the SilentShift product demo."
+              /><span class="film-play"
+                ><span aria-hidden="true">▷</span> Play the recorded demo
+                <small>2:30 · English captions</small></span
+              ></button
+            ><template id="film-template"
+              ><video
+                controls
+                preload="none"
+                playsinline
+                poster="assets/video-poster.webp"
+                aria-label="SilentShift captioned recorded product demonstration"
+              >
+                <source
+                  src="https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4"
+                  type="video/mp4"
+                />
+                <track
+                  kind="captions"
+                  src="assets/demo-captions.vtt"
+                  srclang="en"
+                  label="English"
+                  default
+                />
+                <p>
+                  <a href="https://youtu.be/a4dOcqu89EA"
+                    >Watch the captioned demo on YouTube</a
+                  >.
+                </p>
+              </video></template
+            >
+          </div>
+          <div class="film-caption">
+            <p>
+              Historical synthetic core workflow; the recording predates CSV and
+              the newer interface. Simulator-only delivery. No fresh inference
+              is implied.
+            </p>
+            <a href="https://youtu.be/a4dOcqu89EA"
+              >Watch on YouTube <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section
+        class="judges-section section"
+        id="judges"
+        aria-labelledby="judges-title"
+      >
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">08 / For judges</p>
+            <h2 id="judges-title" class="reveal">
+              Two minutes.<br />Follow one decision.
+            </h2>
+          </div>
+          <ol class="judge-path">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Watch the concrete example.</h3>
+                <p>
+                  Start with the unsupported 20 CASE order, then the amendment
+                  that authorizes it.
+                </p>
+                <a href="#film"
+                  >Play the captioned recording
+                  <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Inspect the evidence.</h3>
+                <p>
+                  Read the policy, recorded agent evidence, native Workflow task
+                  and provider message.
+                </p>
+                <a href="#workbench"
+                  >Explore the real captures
+                  <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Run the native replay.</h3>
+                <p>
+                  With the official image loaded, reproduce the keyless hold and
+                  open the printed Visual Trace.
+                </p>
+                <a href="#install"
+                  >Open the local path <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </li>
+          </ol>
+          <div class="limits">
+            <h3>Read the measured limits</h3>
+            <p>
+              The completed v2 held-out comparison used 48 synthetic orders.
+              Rules-only routed 33/48 correctly; agent + policy routed 33/48,
+              33/48 and 30/48 across three trials. Both achieved 1/16 correct
+              routes on the unstructured split. This does not establish an
+              overall accuracy advantage. Later pipeline changes and an
+              incomplete sealed evaluation do not establish an improvement.
+            </p>
+            <a
+              href="https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_HELDOUT.md"
+              >Read every measured result and failure
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section
+        class="install-section section"
+        id="install"
+        aria-labelledby="install-title"
+      >
+        <div class="wrap install-grid">
+          <div>
+            <p class="eyebrow">09 / Make the trace your own</p>
+            <h2 id="install-title" class="reveal">
+              Start with a replay.<br />Inspect a real production.
+            </h2>
+            <p class="section-intro">
+              Keyless mode uses recorded provider responses inside the native
+              IRIS workflow. No model or paid API key is required.
+            </p>
+            <a
+              class="button primary magnetic"
+              href="https://github.com/himanshu748/silentshift/blob/main/INSTALL.md"
+              >Open the single install guide
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span>Source workbench / recorded replay</span
+              ><span aria-hidden="true">↗</span>
+            </div>
+            <p class="terminal-prerequisite">
+              First: official 154U ARM64 image, Docker/Compose, uv and the
+              documented helper images.
+            </p>
+            <pre><code>git clone https://github.com/himanshu748/silentshift.git
+cd silentshift
+./scripts/judge-compose.sh</code></pre>
+            <div class="terminal-result">
+              <span class="mono-label">Expected recorded result</span
+              ><code>checks=12/12; passed=true</code>
+              <p>QUARANTINED · delivery_count=0</p>
+              <p>
+                Open the workbench and Visual Trace URLs printed by the
+                launcher.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="wrap install-limits">
+          <p>
+            <strong>Bring the runtime.</strong> Tested locally only on
+            InterSystems IRIS Community AI Hub 2026.3.0AI.154.0 / 154U ARM64.
+            The licensed image is not redistributed. Other builds and
+            architectures are not claimed verified.
+          </p>
+          <p>
+            <strong>Know the boundary.</strong> All supplied orders are
+            synthetic; delivery is to an IRIS simulator. No real ERP connection,
+            production-readiness, hosted native demo or awarded contest bonus is
+            claimed.
+          </p>
+        </div>
+      </section>
+      <section
+        class="reading-section section wrap"
+        aria-labelledby="reading-title"
+      >
+        <p class="eyebrow">Keep investigating</p>
+        <h2 id="reading-title" class="reveal">
+          Read the engineering<br />behind the decision.
+        </h2>
+        <div class="reading-grid">
+          <a
+            class="reading-card"
+            href="https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production"
+            ><span class="mono-label">Developer Community</span>
+            <h3>
+              Catching semantic failures in an IRIS interoperability production
+            </h3>
+            <span aria-hidden="true">↗</span></a
+          ><a
+            class="reading-card"
+            href="https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery"
+            ><span class="mono-label">Developer Community</span>
+            <h3>Recoverable human review: from approval to one delivery</h3>
+            <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <a class="brand" href="#main"
+          ><img src="assets/mark.png" width="32" height="32" alt="" /><span
+            >SilentShift.</span
+          ></a
+        >
+        <p>
+          Successful transport is the start.<br />Correct meaning is the point.
+        </p>
+        <a class="back-top" href="#main"
+          >Back to top <span aria-hidden="true">↑</span></a
+        >
       </div>
-      <div class="wrap setup-notes">
-        <p><strong>Bring the official image.</strong> The verified local target is IRIS Community AI Hub <code>2026.3.0AI.154.0 / 154U ARM64</code>. Obtain the EAP image from InterSystems yourself; it is not redistributed here. Other builds and architectures are not claimed tested.</p>
-        <p><strong>Know which version you’re reading.</strong> Public native IPM and OEX are <code>0.3.0</code>; React is separately versioned <code>0.2.1</code>. Source-branch work is not a new public package. The replay checks the public native package, not every unpublished source change.</p>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="https://openexchange.intersystems.com/package/SilentShift"
+            >Open Exchange</a
+          ><a href="https://github.com/himanshu748/silentshift">Source</a
+          ><a
+            href="https://github.com/himanshu748/silentshift/blob/main/docs/IPM.md"
+            >IPM</a
+          ><a href="https://ideas.intersystems.com/ideas/DPI-I-689">DPI-I-689</a
+          ><a
+            href="https://github.com/himanshu748/silentshift/blob/main/LICENSE"
+            >MIT license</a
+          >
+        </nav>
+        <button
+          class="motion-toggle"
+          type="button"
+          aria-pressed="false"
+          data-motion-toggle
+        >
+          Pause motion <span aria-hidden="true">Ⅱ</span>
+        </button>
       </div>
-    </section>
-
-    <section class="section wrap reading" aria-labelledby="reading-title">
-      <div class="section-heading"><p class="eyebrow">Go deeper</p><h2 id="reading-title">Read the decisions behind the workflow.</h2></div>
-      <div class="reading-grid">
-        <a class="reading-card" href="https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production"><span>Developer Community</span><h3>Catching semantic failures in an IRIS interoperability production</h3><p>The problem, native agent and deterministic boundary.</p><span class="arrow" aria-hidden="true">↗</span></a>
-        <a class="reading-card" href="https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery"><span>Developer Community</span><h3>Recoverable human review: from approval to one delivery</h3><p>The durable task, version check and simulator receipt.</p><span class="arrow" aria-hidden="true">↗</span></a>
+    </footer>
+    <dialog id="demo-dialog" aria-labelledby="demo-dialog-title">
+      <button
+        class="dialog-close"
+        type="button"
+        data-close-demo
+        aria-label="Close demo information"
+      >
+        ×
+      </button>
+      <p class="eyebrow">Deployment status</p>
+      <h2 id="demo-dialog-title">The native demo<br />isn’t hosted yet.</h2>
+      <p>
+        You can inspect the recorded workbench now, or run the actual keyless
+        IRIS production locally. The recorded captures are not a live hosted
+        service.
+      </p>
+      <div class="dialog-actions">
+        <a class="button primary" href="#workbench" data-close-demo
+          >Explore recorded evidence <span aria-hidden="true">↗</span></a
+        ><a
+          href="https://github.com/himanshu748/silentshift/blob/main/INSTALL.md"
+          >Run locally</a
+        >
       </div>
-      <div class="honest-limits"><h3>What this demonstrates—and what it doesn’t</h3><p>All supplied orders are synthetic, and delivery is simulator-only. There is no hosted native demo or real ERP connection. The completed v2 held-out evaluation did not show an overall correct-routing gain or better unstructured routing; later pipeline work is not evidence of a measured improvement. Technology-bonus qualification and awards remain for the organizers to decide.</p></div>
-    </section>
-  </main>
-  <footer class="site-footer wrap"><a class="brand" href="#main"><img src="assets/silentshift-icon.png" width="32" height="32" alt=""><span>SilentShift</span></a><p>Source and evidence, without a login.</p><nav aria-label="Footer navigation"><a href="https://openexchange.intersystems.com/package/SilentShift">Open Exchange</a><a href="https://github.com/himanshu748/silentshift">GitHub</a><a href="https://github.com/himanshu748/silentshift/blob/main/INSTALL.md">Install</a><a href="https://ideas.intersystems.com/ideas/DPI-I-689">DPI-I-689</a></nav></footer>
-</body>
+    </dialog>
+  </body>
 </html>
