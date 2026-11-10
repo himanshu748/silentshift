@@ -54,7 +54,7 @@ Method ResetObservation(caseId As %String) [ Private ]
     Set ..TraceCaseId = caseId, ..TraceInvocationId = $TRANSLATE($SYSTEM.Util.CreateGUID(), "{}", "")
     Set ..TraceRunStarted = $ZTIMESTAMP, ..TraceChatStarted = "", ..TraceBuffer = []
     Set ..TraceModel = $EXTRACT($SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL"), 1, 160)
-    If ..TraceModel = "" Set ..TraceModel = "qwen3-silentshift:4b-instruct"
+    If ..TraceModel = "" Set ..TraceModel = ##class(SilentShift.Provider.Config).DefaultModel()
     Set ..TraceEnqueued = 0, ..TraceEnqueueFailures = 0, ..TraceCaptureFailures = 0
 }
 
@@ -76,7 +76,7 @@ Method CaptureTool(caseId As %String, eventKind As %String, toolName As %String,
 {
     Try {
         If (caseId '= ..TraceCaseId) || '$ISOBJECT(..TraceBuffer) Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace scope mismatch"))
-        If (toolName '= "GetCurrentMessage") && (toolName '= "GetApprovedContracts") && (toolName '= "GetRelatedRecords") && (toolName '= "find_similar_precedents") {
+        If '##class(SilentShift.AI.Investigator).IsAllowedTool(toolName) {
             Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Trace tool is not allowed"))
         }
         If ..TraceBuffer.%Size() >= 24 {

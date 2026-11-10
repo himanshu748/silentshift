@@ -68,7 +68,7 @@ Method OnRequest(request As SilentShift.Message, Output response As SilentShift.
                 Set stage = "similar-precedents"
             $$$TRACE("SS_STAGE stage=similar-precedents case_id="_id)
                 Set optionalStatus = ..SendRequestSync("Precedents", request, .precedentReply, 10)
-                Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "model": "all-minilm:22m", "dimensions": 384, "matches": [], "decision_authority": false, "failure_code": "PRECEDENT_RETRIEVAL_UNAVAILABLE"}
+                Set context = {"status": "unavailable", "implementation": "IRIS VECTOR_COSINE", "model": (##class(SilentShift.Precedents).#MODEL), "dimensions": (##class(SilentShift.Precedents).#DIMENSIONS), "matches": [], "decision_authority": false, "failure_code": "PRECEDENT_RETRIEVAL_UNAVAILABLE"}
                 If $$$ISOK(optionalStatus), $ISOBJECT(precedentReply), precedentReply.BodyJSON '= "" {
                     Set context = ##class(%DynamicObject).%FromJSON(precedentReply.BodyJSON)
                 }

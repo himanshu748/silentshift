@@ -41,7 +41,7 @@ ClassMethod LocalHost(Output host As %String) As %Status
         If url = ("http://"_allowed_":11434/v1/") Set host = allowed
     }
     If host = "" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_ROUTE_REQUIRED")
-    If $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL") '= "qwen3-silentshift:4b-instruct" Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
+    If $SYSTEM.Util.GetEnviron("SILENTSHIFT_MODEL") '= ##class(SilentShift.Provider.Config).DefaultModel() Return $$$ERROR($$$GeneralError,"PROVIDER_LOCAL_MODEL_REQUIRED")
     Return $$$OK
 }
 

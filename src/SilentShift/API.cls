@@ -86,9 +86,7 @@ ClassMethod ErrorResponse(error As %Exception.AbstractException) As %Status
 ClassMethod StrictJSON(value As %String, maxBytes As %Integer = 131072) As %String [ Language = python ]
 {
     import iris, json, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.engine import strict_loads
     try:
         parsed = strict_loads(value, max_bytes=maxBytes)
@@ -274,14 +272,7 @@ ClassMethod Review(id As %String) As %Status
 
 ClassMethod Policies() As %Status
 {
-    Set rules = []
-    Do rules.%Push({"id":"NO_CRITICAL_CONTRADICTION", "description":"Invalid messages and verified critical contradictions cannot be released, including by a reviewer."})
-    Do rules.%Push({"id":"EVIDENCE_COMPLETE", "description":"Every independent reference must be known and cited before release."})
-    Do rules.%Push({"id":"SEMANTICS_RESOLVED", "description":"Only a resolved comparison to an effective approved contract permits release."})
-    Do rules.%Push({"id":"RECOMMENDATION_VALID", "description":"Malformed JSON, unsupported actions and unknown evidence IDs fail safely."})
-    Do rules.%Push({"id":"UNCERTAINTY_BOUNDED", "description":"Uncertainty above 0.35 requires review."})
-    Do rules.%Push({"id":"NOT_DUPLICATE", "description":"A duplicate source/event key returns the existing case and never repeats delivery."})
-    Do rules.%Push({"id":"REVIEW_AUTHORIZATION", "description":"Review requires SSReview, a reason, current version and idempotency key."})
+    Set rules = ##class(%DynamicArray).%FromJSON(##class(SilentShift.Bridge).PolicyRules())
     Set result = {"version":"silentshift-policy/1.1.0", "rules":(rules), "automatic_transformations":false}
     Return ..JSON(result.%ToJSON())
 }
@@ -338,9 +329,7 @@ ClassMethod Evaluations() As %Status
 ClassMethod Aggregate(artifactJSON As %String) As %String [ Language = python ]
 {
     import iris, json, sys
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.engine import strict_loads
     from silentshift.evaluation import aggregate_native, load_dataset
     dataset = load_dataset(iris.cls('SilentShift.IPM').AssetPath('fixtures/v1/scenarios.json'))

@@ -6,6 +6,14 @@ Class SilentShift.AI.Investigator Extends %RegisteredObject
 {
 Parameter PROMPTVERSION = "silentshift-investigator/1.4.2";
 
+Parameter TOOLNAMES = "GetCurrentMessage,GetApprovedContracts,GetRelatedRecords,find_similar_precedents";
+
+/// Exact list membership; concatenated or delimiter-bearing names are rejected.
+ClassMethod IsAllowedTool(name As %String) As %Boolean
+{
+    Return $LISTFIND($LISTFROMSTRING(..#TOOLNAMES, ","), name) > 0
+}
+
 /// Read the versioned prompt fragments without adding separators or newlines.
 ClassMethod SystemPrompt() As %String
 {
@@ -174,7 +182,7 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         Set seen = "|"
         For index = 0:1:discovered.%Size()-1 {
             Set definition = discovered.%Get(index), name = definition.%Get("name")
-            If (name '= "GetCurrentMessage") && (name '= "GetApprovedContracts") && (name '= "GetRelatedRecords") && (name '= "find_similar_precedents") {
+            If '..IsAllowedTool(name) {
                 Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Native tool allowlist rejected discovery"))
             }
             If seen [ ("|"_name_"|") Throw ##class(%Exception.StatusException).CreateFromStatus($$$ERROR($$$GeneralError, "Duplicate native evidence tool"))

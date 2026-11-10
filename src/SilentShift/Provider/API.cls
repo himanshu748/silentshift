@@ -78,7 +78,7 @@ ClassMethod ChatCompletions() As %Status
                 Set item = tools.%Get(index), function = item.%Get("function")
                 If '$ISOBJECT(function) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Set name = function.%Get("name")
-                If (name '= "GetCurrentMessage") && (name '= "GetApprovedContracts") && (name '= "GetRelatedRecords") && (name '= "find_similar_precedents") Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
+                If '##class(SilentShift.AI.Investigator).IsAllowedTool(name) Return ..Fail(422,"PROVIDER_TOOLS_REJECTED")
                 Do names.%Push(name)
             }
         }

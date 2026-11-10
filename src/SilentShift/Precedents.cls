@@ -229,8 +229,8 @@ ClassMethod Seed(Output report As %String, maxCases As %Integer = 100) As %Statu
     If $$$ISERR(sc) Return sc
     Set report = {
         "status":"indexed",
-        "model":"all-minilm:22m",
-        "dimensions":384,
+        "model":(..#MODEL),
+        "dimensions":(..#DIMENSIONS),
         "approved_amendments":(##class(%DynamicObject).%FromJSON(amendments)),
         "resolved_cases":(##class(%DynamicObject).%FromJSON(history)),
         "decision_authority":false
@@ -296,8 +296,8 @@ ClassMethod Persist(documents As %DynamicArray, Output report As %String) As %St
         }
         Set report = {
             "status":"indexed",
-            "model":"all-minilm:22m",
-            "dimensions":384,
+            "model":(..#MODEL),
+            "dimensions":(..#DIMENSIONS),
             "eligible_sources":(documents.%Size()),
             "written":(written),
             "unchanged":(unchanged),
@@ -317,8 +317,8 @@ ClassMethod Unavailable(caseId As %String) As %String
         "status":"unavailable",
         "case_id":(caseId),
         "implementation":"IRIS VECTOR_COSINE",
-        "model":"all-minilm:22m",
-        "dimensions":384,
+        "model":(..#MODEL),
+        "dimensions":(..#DIMENSIONS),
         "matches":[],
         "decision_authority":false,
         "failure_code":"PRECEDENT_RETRIEVAL_UNAVAILABLE"
@@ -368,7 +368,7 @@ ClassMethod SearchForCase(body As %DynamicObject) As %String
             If rows.%Get("Synthetic") '= "" Do item.%Set("synthetic",rows.%Get("Synthetic"),"boolean")
             Do matches.%Push(item)
         }
-        Return {"status":"retrieved","case_id":(id),"implementation":"IRIS VECTOR_COSINE","model":"all-minilm:22m","dimensions":384,"matches":(matches),"decision_authority":false}.%ToJSON()
+        Return {"status":"retrieved","case_id":(id),"implementation":"IRIS VECTOR_COSINE","model":(..#MODEL),"dimensions":(..#DIMENSIONS),"matches":(matches),"decision_authority":false}.%ToJSON()
     } Catch unavailable {
         Return ..Unavailable(id)
     }

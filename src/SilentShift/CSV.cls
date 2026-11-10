@@ -6,9 +6,7 @@ Class SilentShift.CSV Extends %RegisteredObject
 ClassMethod Prepare(raw As %String, commit As %Boolean = 0) As %String [ Language = python ]
 {
     import iris, json, sys, csv
-    asset_python = iris.cls('SilentShift.IPM').AssetPath('python')
-    if asset_python not in sys.path:
-        sys.path.insert(0, asset_python)
+    iris.cls('SilentShift.Bridge').Import()
     from silentshift.csv_orders import prepare_request
     try:
         result = prepare_request(raw, commit=bool(commit))

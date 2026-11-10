@@ -19,6 +19,39 @@ SCHEMA_VERSION = "silentshift-message/1"
 MAX_AGE = timedelta(hours=24)
 MAX_FUTURE = timedelta(minutes=5)
 MAX_UNCERTAINTY = 0.35
+
+# Read-only UI catalog. This describes policy; it does not participate in routing.
+RULES = [
+    {
+        'id': 'NO_CRITICAL_CONTRADICTION',
+        'description': 'Invalid messages and verified critical contradictions cannot be released, including by a reviewer.',
+    },
+    {
+        'id': 'EVIDENCE_COMPLETE',
+        'description': 'Every independent reference must be known and cited before release.',
+    },
+    {
+        'id': 'SEMANTICS_RESOLVED',
+        'description': 'Only a resolved comparison to an effective approved contract permits release.',
+    },
+    {
+        'id': 'RECOMMENDATION_VALID',
+        'description': 'Malformed JSON, unsupported actions and unknown evidence IDs fail safely.',
+    },
+    {
+        'id': 'UNCERTAINTY_BOUNDED',
+        'description': f'Uncertainty above {MAX_UNCERTAINTY:g} requires review.',
+    },
+    {
+        'id': 'NOT_DUPLICATE',
+        'description': 'A duplicate source/event key returns the existing case and never repeats delivery.',
+    },
+    {
+        'id': 'REVIEW_AUTHORIZATION',
+        'description': 'Review requires SSReview, a reason, current version and idempotency key.',
+    },
+]
+
 DECISIONS = {"ALLOW", "QUARANTINE", "REQUEST_REVIEW"}
 CLASSIFICATIONS = {
     "INVALID_MESSAGE", "SUSPICIOUS", "VERIFIED_CONTRADICTION",

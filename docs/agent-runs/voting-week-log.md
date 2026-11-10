@@ -153,3 +153,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - First native candidate load failed: spaces inside two UUID pattern alternations caused ObjectScript #1020. [Original failure](../evidence/backend-polish-nov10/03-native-compile-failed.txt). Restored both exact patterns and added a regression test.
 - Second load compiled and activated all candidate classes/assets successfully in the same fresh test container; this is a retry of a failed load, not a second fresh-install claim. [Output](../evidence/backend-polish-nov10/03-native-compile-retry.txt). No production/model invocation in this retry.
 - `uv run pytest -q`: 338 passed in 21.22s ([output](../evidence/backend-polish-nov10/03b-pytest.txt)). Final fresh-clone gate remains required.
+
+### 2026-11-10 15:32:33 IST — Backend item 4
+
+- Centralized exact tool membership, native-only scope/budget/trace preamble, model default, Python import setup and precedent metadata parameters. Native callbacks perform no new Python/SQL work.
+- `/api/policies` reads the unchanged seven-rule catalog via Bridge; preserved its existing catalog version 1.1.0 separately from routing engine version 1.2.0. No policy decisions changed: AST is identical after excluding the new RULES assignment.
+- Added native regression checks for runtime prompt bytes, allowlist, redaction and catalog/default model. `uv run pytest -q`: 339 passed in 24.27s ([output](../evidence/backend-polish-nov10/04-pytest.txt)). Native helper execution still pending.
