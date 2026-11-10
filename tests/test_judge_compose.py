@@ -115,6 +115,22 @@ def test_wrong_iris_architecture_is_rejected(preflight):
         judge.preflight(args, {})
 
 
+def test_another_native_instance_is_not_stopped(preflight, monkeypatch):
+    args, calls, _ = preflight
+    original = judge.command
+
+    def running(argv, **kwargs):
+        if 'ps' in argv and '--quiet' in argv:
+            calls.append(argv)
+            return subprocess.CompletedProcess(argv, 0, 'another-native-instance', '')
+        return original(argv, **kwargs)
+
+    monkeypatch.setattr(judge, 'command', running)
+    with pytest.raises(ValueError, match='no instance was stopped'):
+        judge.preflight(args, {})
+    assert all('stop' not in call and 'up' not in call for call in calls)
+
+
 def test_private_environment_cannot_inherit_a_paid_provider(preflight, monkeypatch):
     args, _, _ = preflight
     args.network_subnet = '10.253.123.0/28'

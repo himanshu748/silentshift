@@ -101,6 +101,12 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> tuple[list[str],
         raise ValueError('Official 154U ARM64 IRIS image is missing. Obtain it from InterSystems, '
                          'docker load -i <archive>, then tag it ' + IMAGE + '; no image is downloaded')
     verified_image(present.stdout)
+    running = command([*docker, 'ps', '--quiet', '--filter', 'ancestor=' + args.image], env=env)
+    if running.returncode:
+        raise ValueError('Cannot inspect running native instances; no new stack was started')
+    if running.stdout.strip():
+        raise ValueError('Another build-154 IRIS instance is running in this Docker context. '
+                         'Finish that test or use an isolated context first; no instance was stopped')
     for image, description in ((args.gateway_image, 'Web Gateway'), (args.node_image, 'Node workbench')):
         if command([*docker, 'image', 'inspect', image], env=env).returncode:
             raise ValueError(description + ' image is missing; load/pull its documented public image first: ' + image)

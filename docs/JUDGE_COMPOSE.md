@@ -47,6 +47,10 @@ SILENTSHIFT namespace, compiles current source, configures its local accounts an
 starts the production. The source is mounted read-only. A pre-existing namespace
 without this project's ownership marker is rejected. Repeating the same raw
 Compose configuration preserves its cases and requires the original passwords.
+The frontend is copied into this project's own writable volume, excluding local
+environment files and generated dependencies. npm and Vite never write to the
+read-only checkout. Run one native judge stack at a time: the launcher refuses
+another running build-154 instance in the same context instead of stopping it.
 The native startup hook submits no orders. The launcher then calls the existing
 authenticated Scenario API and runs the unchanged `trace_example.py` assertions.
 

@@ -91,7 +91,7 @@ services:
     platform: linux/arm64
     init: true
     working_dir: /work
-    command: ["sh", "-c", "npm ci --no-audit --no-fund && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"]
+    command: ["node", "/judge-web.mjs"]
     depends_on:
       gateway:
         condition: service_started
@@ -99,8 +99,9 @@ services:
       IRIS_API_ORIGIN: http://gateway/silentshift
       npm_config_cache: /tmp/npm-cache
     volumes:
-      - ./web:/work:ro
-      - judge-node-modules:/work/node_modules
+      - ./web:/source/web:ro
+      - ./docker/judge-web.mjs:/judge-web.mjs:ro
+      - judge-web:/work
     ports:
       - "127.0.0.1:${SILENTSHIFT_JUDGE_WEB_PORT:-5193}:5173"
     healthcheck:
@@ -124,4 +125,4 @@ networks:
 volumes:
   judge-manager:
   judge-state:
-  judge-node-modules:
+  judge-web:
