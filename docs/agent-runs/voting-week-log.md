@@ -147,3 +147,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Formatting-only cleanup in the requested classes; the API token stream is unchanged apart from whitespace. XData joins JSON string fragments without separators.
 - Pre-relocation system prompt: 1,959 UTF-8 bytes, SHA-256 `6e7453ef1af46af157c64dbc0ea93953da508c5b278b3dd1c25b71b5ff7aedc3`. Byte-equality regression passed.
 - `uv run pytest -q`: 337 passed in 25.73s ([output](../evidence/backend-polish-nov10/03-pytest.txt)). Native compile remains pending.
+
+### 2026-11-10 15:29:21 IST — Native formatting regression corrected
+
+- First native candidate load failed: spaces inside two UUID pattern alternations caused ObjectScript #1020. [Original failure](../evidence/backend-polish-nov10/03-native-compile-failed.txt). Restored both exact patterns and added a regression test.
+- Second load compiled and activated all candidate classes/assets successfully in the same fresh test container; this is a retry of a failed load, not a second fresh-install claim. [Output](../evidence/backend-polish-nov10/03-native-compile-retry.txt). No production/model invocation in this retry.
+- `uv run pytest -q`: 338 passed in 21.22s ([output](../evidence/backend-polish-nov10/03b-pytest.txt)). Final fresh-clone gate remains required.

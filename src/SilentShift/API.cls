@@ -235,7 +235,7 @@ ClassMethod RunScenario(id As %String) As %Status
 {
     Try {
         Set request = ..Body(.raw), runId = request.%Get("run_id")
-        If (request.%Size() '= 1) || (runId'?36(1AN, 1"-")) Return ..Fail(422, "INVALID_RUN_ID", "Supply one UUID run_id; reuse it for a safe retry.")
+        If (request.%Size() '= 1) || (runId'?36(1AN,1"-")) Return ..Fail(422, "INVALID_RUN_ID", "Supply one UUID run_id; reuse it for a safe retry.")
         Set data = ..FixtureData(), selected = ""
         For i = 0:1:data.scenarios.%Size()-1 {
             Set item = data.scenarios.%Get(i)
@@ -352,7 +352,7 @@ ClassMethod CaptureEvaluation() As %Status
     Set locked = 0
     Try {
         Set request = ..Body(.raw), runId = request.%Get("run_id"), ids = request.%Get("case_ids")
-        If (request.%Size() '= 2) || (runId'?36(1AN, 1"-")) || '$ISOBJECT(ids) Return ..Fail(422, "INVALID_EVALUATION", "Supply run_id and the five native case_ids.")
+        If (request.%Size() '= 2) || (runId'?36(1AN,1"-")) || '$ISOBJECT(ids) Return ..Fail(422, "INVALID_EVALUATION", "Supply run_id and the five native case_ids.")
         If (ids.%ClassName(1) '= "%Library.DynamicArray") || (ids.%Size() '= 5) Return ..Fail(422, "INVALID_EVALUATION", "A frozen evaluation requires five case IDs.")
         Set records = [], seen = "|", verified = 1
         Set data = ..FixtureData()

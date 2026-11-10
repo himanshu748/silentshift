@@ -16,3 +16,10 @@ def test_system_prompt_relocation_preserves_original_bytes():
     assert len(prompt) == 1959
     assert hashlib.sha256(prompt).hexdigest() == "6e7453ef1af46af157c64dbc0ea93953da508c5b278b3dd1c25b71b5ff7aedc3"
     assert 'Set agent.SystemPrompt = ..SystemPrompt()' in source
+
+
+def test_api_uuid_pattern_keeps_objectscript_pattern_spacing():
+    source = (ROOT / "src/SilentShift/API.cls").read_text()
+    # Spaces within a COS pattern alternation are syntax, not formatting.
+    assert source.count("runId'?36(1AN,1\"-\")") == 2
+    assert "runId'?36(1AN, 1\"-\")" not in source
