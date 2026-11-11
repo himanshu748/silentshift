@@ -1,5 +1,9 @@
 # Native package maintenance and publication
 
+## Current verification — unpublished 0.3.2
+
+The [citation follow-up archive](evidence/citation-fix-nov11/archive-install.json) installed through the real IPM local-filesystem repository in a pristine offline 154U ARM64 container. No source mounts, model calls or production startup were used in that archive check; its ten application tables stayed empty. Live/source checks retain their separate scope. [Full receipt](evidence/citation-fix-nov11/summary.json). This did not publish 0.3.2.
+
 ## Current package boundary — Java PEX candidate
 
 Public native IPM/OEX are **0.3.1**. This branch prepares **0.3.2**, including the owned Java receipt-export sources/build script and native PEX messages/setup. The published 0.3.1 package does **not** contain Java PEX. The React workbench remains separately built **0.2.1**. No tag, package or listing was published in this pass.

@@ -8,9 +8,9 @@ SilentShift currently keeps routing evidence inside IRIS. This adds a Java PEX r
 
 The source candidate is native 0.3.2, unpublished. Public IPM/OEX stay 0.3.1 and do not include this feature. React stays 0.2.1. Compose compiles owned Java source against the preloaded build-154 SDK locally; IPM packages owned source/build assets, not vendor JARs or signing keys.
 
-**Blocked:** the API verifier passed 5/5, but the explicit ObjectScript repeat passed 4/5 because the approved-amendment proposal omitted a required citation. Policy correctly held it; the assertion remains unchanged. Do not merge or publish this candidate as fully verified. Fresh archive install has not run.
+**Local blocking failure resolved:** pre-inference generation now retains the complete case citation manifest after four scoped reads. Three planned sets passed 15/15, followed by 5/5 on the final message-storage layout. All 20 Java receipts verified independently. Native 8/26, 394 pytest, TS/build and 54 disconnected browser checks passed. The actual regenerated 0.3.2 archive installed in a pristine offline container, left empty/stopped. Hosted branch CI is still unexecuted until the owner approves pushing. [Current evidence](../evidence/citation-fix-nov11/summary.json).
 
-Validation and scope are recorded in docs/evidence/bonus-claims-nov11/java-pex.json and docs/JAVA_PEX.md. The clean source Compose path runs keyless replay without a model; the separate clean source-loaded IPM instance runs live Ollama. No new build or architecture is claimed. Native gateway testing is local only; hosted CI cannot test the restricted EAP image.
+Validation and scope are recorded in docs/evidence/citation-fix-nov11/summary.json and docs/JAVA_PEX.md. The earlier clean source Compose path ran keyless replay without a model. This follow-up used the retained source-upgraded instance for live Ollama and a separate pristine offline instance for archive installation; it did not rerun the full keyless API example. No new build or architecture is claimed. Native gateway testing is local only; hosted CI cannot test the restricted EAP image.
 
 - [x] Real native PEX request/response and signed receipt in a case session.
 - [x] Native retry and stopped-exporter tests; no policy/fixture changes.

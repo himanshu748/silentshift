@@ -4,6 +4,7 @@
 
 - Add a Java PEX `ReceiptExporter` Business Operation invoked by Destination and Quarantine after their existing routing commits. Native request/response bodies keep the export in the case's Visual Trace session.
 - Sign bounded outcome/evidence receipts with a per-instance RSA-2048 key. Atomic publication refuses replacement; repeated outcomes reuse the original receipt, and later review decisions append another record.
+- Bind the local final-generation citation manifest to the current case assessment after all four evidence reads. This prevents omitted predecessor IDs without editing responses or weakening policy. Keep the system prompt unchanged and record a separate format version in append-compatible message storage.
 - Preserve routing when export fails or times out. Signing establishes receipt integrity under an operator-held key, not correctness of the business decision or a tamper-proof host.
 - Build the owned Java JAR locally against build 154's shipped Java 11/PEX SDK. IPM includes the owned Java sources/build script, never vendor JARs, EAP images or signing keys. Explicit native setup compiles those assets; package activation still starts no production or model.
 - Retain the keyless Compose launcher, separate React 0.2.1 workbench and unchanged policy/fixture bytes. Add JUnit and real native gateway, retry and outage checks. See [scoped Java verification](docs/JAVA_PEX.md).

@@ -1,3 +1,11 @@
+# Citation follow-up — November 11, 2026 (IST)
+
+The missing-citation failure is fixed in the unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI is still pending the gated push.
+
+[Fix and limitations](CITATION_COMPLETENESS.md) · [new receipt](evidence/citation-fix-nov11/summary.json). **0.3.2 remains unpublished; public 0.3.1 is unchanged.** The earlier failed run below remains history and is not rewritten as passing.
+
+## Earlier checkpoint
+
 # Java PEX source-candidate verification — November 11, 2026 (IST)
 
 **Java PEX: claim prepared (3 points), not submitted or awarded.** Native **0.3.2** is prepared but unpublished; public native IPM/OEX remain **0.3.1**, which lacks this operation. React remains **0.2.1**.
@@ -6,7 +14,7 @@ The real [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/P
 
 The tested environment remains **2026.3.0AI.154.0 / 154U ARM64**. Fixtures, assessment/policy bytes and safety vetoes are unchanged. The export is an integrity record with operator-held keys, not externally certified identity, guaranteed export or tamper-proof storage. [Detailed limits and reproduction](JAVA_PEX.md). No hosted demo, .NET implementation, new bug or organizer qualification is claimed. No public action was taken.
 
-**Release gate blocked:** the API five-case run passed 5/5, but an explicit ObjectScript repeat passed 4/5. The approved-amendment model output omitted required citations; the unchanged `EVIDENCE_COMPLETE` gate held it for review. All ten cases produced valid Java receipt responses. The failing assertion is retained, not weakened. No further model retry or policy/prompt change was made; the second fresh archive install and hosted branch CI remain unverified. [Failure](evidence/bonus-claims-nov11/java-pex-objectscript-repeat.json).
+**Historical release-gate failure, superseded by the citation follow-up:** the API five-case run passed 5/5, but an explicit ObjectScript repeat passed 4/5. The approved-amendment model output omitted required citations; the unchanged `EVIDENCE_COMPLETE` gate held it for review. All ten cases produced valid Java receipt responses. The failing assertion is retained, not weakened. No further model retry or policy/prompt change was made; the second fresh archive install and hosted branch CI remain unverified. [Failure](evidence/bonus-claims-nov11/java-pex-objectscript-repeat.json).
 
 ## Earlier bonus review
 
