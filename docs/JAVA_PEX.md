@@ -35,6 +35,7 @@ A signature establishes integrity under that signing key, **not business correct
 
 ## Idempotency and failure boundaries
 
+- Execution mode comes from the saved investigation's `agent.execution_mode`, never the current server environment. Older cases without that field use their recognized saved `agent.mode`; missing or invalid provenance declines export while routing keeps its committed result. [Mode-switch regression and exact scope](evidence/receipt-mode-nov11/summary.json): separate replay/live IRIS sessions returned identical signed bytes and one file for the same synthetic persisted case. This is not a full container-restart test.
 - Each case/outcome/evidence fingerprint has one immutable JSON file. A completed file is published atomically without replacement. Retries verify and return its original timestamp/signature. A corrupt or mismatched existing receipt is rejected rather than overwritten.
 - A later human-review outcome appends another decision receipt. It does not rewrite the earlier hold. `REVIEW` and `REJECTED` remain distinct from `QUARANTINED` and `DELIVERED`.
 - Each routing operation waits at most five seconds for export and preserves its original routing status on failure. A warning and the failed interoperability request remain observable. An export outage can leave an audit gap; there is no claim of guaranteed export, automatic recovery or changed delivery safety.

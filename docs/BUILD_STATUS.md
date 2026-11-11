@@ -1,3 +1,11 @@
+# Receipt provenance follow-up — November 11, 2026 (IST)
+
+The unpublished **0.3.2** candidate now derives receipt execution mode from saved case metadata, with a bounded legacy fallback. A new regression fails on the preceding implementation and passes after the fix. Retained-instance **154U ARM64** checks passed: **8 native classes / 28 methods**, **7 JUnit**, **394 pytest**, TypeScript/build and **54 browser checks**. Separate IRIS sessions with replay/live process settings reused one identical signed receipt for a unit-arranged synthetic case. No policy, routing, investigator or frozen-fixture change was made.
+
+[Receipt and limits](evidence/receipt-mode-nov11/summary.json) · [outputs](evidence/receipt-mode-nov11/output.txt). These checks do not rerun the earlier live five-scenario or offline archive-install gate; their original receipts remain history below. PR #9's previous CI passed at `50477f8`; CI for this fix needs a branch update. **No merge or 0.3.2 publication.**
+
+## Earlier checkpoint
+
 # Citation follow-up — November 11, 2026 (IST)
 
 The missing-citation failure is fixed in the unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI is still pending the gated push.
