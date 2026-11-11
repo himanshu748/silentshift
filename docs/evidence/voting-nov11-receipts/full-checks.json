@@ -1,0 +1,70 @@
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 20.55
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_java_core.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.45
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.64
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 0.97
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "test:e2e"
+    ],
+    "exit_code": 0,
+    "seconds": 46.35
+  },
+  {
+    "command": [
+      "node",
+      "--test",
+      "tests/receipt-inspector.test.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.32
+  },
+  {
+    "command": [
+      "node",
+      "scripts/check_receipt_inspector.cjs"
+    ],
+    "exit_code": 0,
+    "seconds": 1.83
+  }
+]
