@@ -9,6 +9,8 @@ ClassMethod Install() As %Status
     Try {
         If '##class(SilentShift.Bridge).IsRequiredBuild($ZVERSION) Return $$$ERROR($$$GeneralError, "APP_INVALID: required IRIS AI Hub build is 2026.3.0AI.154.0")
         If $NAMESPACE '= "SILENTSHIFT" Return $$$ERROR($$$GeneralError, "APP_INVALID: install requires SILENTSHIFT namespace")
+        Set sc = ##class(SilentShift.PEX.Support).Configure()
+        $$$ThrowOnError(sc)
         Set sc = ..SecurityConfig()
         $$$ThrowOnError(sc)
         Set sc = ##class(SilentShift.Workflow.Support).Configure()

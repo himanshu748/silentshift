@@ -24,6 +24,10 @@ XData ProductionDefinition
   <Item Name="ReviewWorklist" Category="Human review" ClassName="EnsLib.Workflow.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="Native Workflow Engine task distribution" LogTraceEvents="false" Schedule="" />
   <Item Name="Destination" Category="Routing" ClassName="SilentShift.Operation.Destination" PoolSize="1" Enabled="true" Foreground="false" Comment="Idempotent IRIS simulator; rechecks policy" LogTraceEvents="false" Schedule="" />
   <Item Name="Quarantine" Category="Routing" ClassName="SilentShift.Operation.Quarantine" PoolSize="1" Enabled="true" Foreground="false" Comment="Held messages cannot reach destination" LogTraceEvents="false" Schedule="" />
+<Item Name="ReceiptExporter" Category="Audit" ClassName="EnsLib.PEX.BusinessOperation" PoolSize="1" Enabled="true">
+    <Setting Target="Host" Name="%gatewayName">%Java Server</Setting>
+    <Setting Target="Host" Name="%remoteClassname">SilentShift.PEX.ReceiptExporter</Setting>
+</Item>
 </Production>
 }
 }
