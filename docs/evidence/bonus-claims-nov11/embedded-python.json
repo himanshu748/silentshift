@@ -1,0 +1,36 @@
+{
+  "checked_at_ist": "2026-11-11T10:02:26.452823+05:30",
+  "source_commit": "3bacc61c9f2a5acfa4c2d15ab21a2baab3df38c8",
+  "runtime_scope": "2026.3.0AI.154.0 / 154U ARM64 only",
+  "files": [
+    {
+      "path": "src/SilentShift/Bridge.cls",
+      "sha256": "18e63a9efa627094378e82a0709eb1985081d4432823d57ff70f84b0a01c9c6d",
+      "matches_historical_live_gate": true
+    },
+    {
+      "path": "src/SilentShift/Process/Semantic.cls",
+      "sha256": "8b0feaaab3d9f0e2a326eba806d7b50abeb542fcc4af670a49a1625da99bea65",
+      "matches_historical_live_gate": true
+    },
+    {
+      "path": "python/silentshift/engine.py",
+      "sha256": "7bfba71b184fa94624039ddb4e8830f1f7060455a1d623464e42d48e12675f15",
+      "matches_historical_live_gate": true
+    }
+  ],
+  "language_declarations": [
+    "SilentShift.Bridge.Assess [ Language = python ]",
+    "SilentShift.Bridge.Policy [ Language = python ]"
+  ],
+  "production_calls": [
+    "SilentShift.Process.Semantic.AssessCase calls SilentShift.Bridge.Assess",
+    "SilentShift.Process.Semantic.EvaluatePolicy calls SilentShift.Bridge.Policy"
+  ],
+  "historical_execution_receipt": "docs/evidence/voting-finish-nov10/fresh-live-five.json",
+  "source_identity_receipt": "docs/evidence/voting-finish-nov10/candidate-031-source-identity.json",
+  "new_native_run": false,
+  "technical_disqualification_found": false,
+  "previous_not_claimed_reason": "Owner November 5 scope instruction, superseded by November 11 explicit instruction to claim proved Embedded Python usage. Separate unisolated signal-11 bug is not claimed.",
+  "organizer_qualification": "unconfirmed"
+}
