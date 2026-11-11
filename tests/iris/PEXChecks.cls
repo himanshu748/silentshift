@@ -64,6 +64,34 @@ Method TestUnavailableExporterPreservesRouting()
     Do $$$AssertEquals(after.%Get("delivery_count"),0,"Java outage creates no simulator delivery")
 }
 
+/// Explicit live driver, excluded from automatic keyless unit runs. It submits
+/// each frozen envelope through Partner.ProcessInput, exactly as the API does.
+ClassMethod RunFrozen(allowLocalModelCalls As %Boolean = 0, Output reportJSON As %String) As %Status
+{
+    Try {
+        If 'allowLocalModelCalls || '##class(SilentShift.Test.TraceChecks).LocalRouteSafe() Return $$$ERROR($$$GeneralError,"Explicit local model opt-in is required")
+        If $SYSTEM.Util.GetEnviron("SILENTSHIFT_PROVIDER_MODE") = "recorded-replay" Return $$$ERROR($$$GeneralError,"Five-scenario Java test requires live local inference")
+        Set data = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON()), ids = []
+        For index = 0:1:data.scenarios.%Size()-1 {
+            Set scenario = data.scenarios.%Get(index), message = scenario.%Get("message")
+            Set run = $TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
+            Do message.%Set("event_id",message.%Get("event_id")_"-"_run),message.%Set("correlation_id",run)
+            Set envelope = {"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":(scenario.%Get("id")),"dataset_version":(data.%Get("dataset_version")),"clock":(data.%Get("clock"))}
+            If scenario.%Get("id") = "unsafe-agent-output" Do envelope.%Set("fault",scenario.%Get("test_recommendation"))
+            Set stream = ##class(%Stream.GlobalCharacter).%New(), sc = stream.Write(envelope.%ToJSON())
+            $$$ThrowOnError(sc)
+            Kill service
+            Set sc = ##class(Ens.Director).CreateBusinessService("Partner",.service)
+            $$$ThrowOnError(sc)
+            Set sc = service.ProcessInput(stream,.reply)
+            $$$ThrowOnError(sc)
+            Set body = ##class(%DynamicObject).%FromJSON(reply.BodyJSON)
+            Do ids.%Push(body.%Get("id"))
+        }
+        Return ..CheckFrozen(ids.%ToJSON(),.reportJSON)
+    } Catch error { Return error.AsStatus() }
+}
+
 /// Check the actual cases just run through the native API; never invent a route.
 ClassMethod CheckFrozen(caseIDsJSON As %String, Output reportJSON As %String) As %Status
 {
@@ -82,6 +110,11 @@ ClassMethod CheckFrozen(caseIDsJSON As %String, Output reportJSON As %String) As
             }
             If 'matched || (seen[("|"_scenario_"|")) Return $$$ERROR($$$GeneralError,"Scenario IDs must cover the frozen five exactly once")
             Set seen = seen_scenario_"|"
+            Set agent = body.%Get("agent"), reads = agent.%Get("tool_reads")
+            If (agent.%Get("mode") '= "native-ai-hub") || (agent.%Get("status") '= "returned") Return $$$ERROR($$$GeneralError,"Live native investigation did not return")
+            For tool = "message", "contracts", "related", "precedents" {
+                If reads.%Get(tool) < 1 Return $$$ERROR($$$GeneralError,"Live native evidence read missing")
+            }
             Set inspection = ..Inspect(id)
             If 'inspection.%Get("passed") Return $$$ERROR($$$GeneralError,"Native Java receipt assertion failed")
             If body.%Get("policy").%Get("decision") '= expected Return $$$ERROR($$$GeneralError,"Frozen policy result changed")

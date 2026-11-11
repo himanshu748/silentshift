@@ -47,10 +47,14 @@ class ReceiptStoreTest {
     }
     @Test void concurrentRetriesPublishOnce() throws Exception {
         ReceiptStore store = new ReceiptStore(directory);
+        ReceiptStore secondWriter = new ReceiptStore(directory);
         ExecutorService pool = Executors.newFixedThreadPool(4);
         try {
             java.util.List<Future<String>> results = new java.util.ArrayList<>();
-            for (int i=0; i<8; i++) results.add(pool.submit(() -> store.export(payload("DELIVERED"))));
+            for (int i=0; i<8; i++) {
+                ReceiptStore writer = i % 2 == 0 ? store : secondWriter;
+                results.add(pool.submit(() -> writer.export(payload("DELIVERED"))));
+            }
             String first = results.get(0).get();
             for (Future<String> result : results) assertEquals(first, result.get());
         } finally { pool.shutdownNow(); }
