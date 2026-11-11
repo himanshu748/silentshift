@@ -356,3 +356,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - At the owner's request, changed the README Java PEX row to Claimed, with code/wiring/tests/trace links, while explicitly retaining unpublished 0.3.2 and pending qualification. Aligned the current checklist/evidence explanation.
 - Confirmed no feat/java-pex-nov11 remote branch or PR exists. No exact submit was consumed. Push/PR, merge and publication remain gated.
 - Owner deferred the Java bonus follow-up until afterward. The original bonus comment is public; the Java-specific update has not been posted. Recheck link availability and version wording before preparing its separately approved posting action. No comment, message or external action was sent.
+
+## November 11, 2026 — shipping preparation and public-comment readback (12:45 IST)
+
+- Branch b62f671 is clean, main is still 1c92e09, and no feat/java-pex-nov11 remote branch or PR exists. Prepared the exact PR body privately, with immutable Java code/wiring/live-trace links and explicit local/CI/publication scopes. No push or PR was executed; the owner's submit-only gate remains active.
+- The main bonus comment was genuinely posted/verified in the earlier 10:51 receipt, but current public readback did not show it: regular HTML, cache-busted dynamic HTML (HTTP 200, fresh Last-Modified), and a new anonymous Chrome context found no comment 288603. Saved current screenshot/receipts privately under .local/java-pex-ship/. Its owner/moderation state and reason for missing visibility are unverified.
+- Prepared a main-claim repost draft covering the currently public 0.3.1, with the Java update deferred until its links are public. Check owner status before any duplicate. The user's conditional priority is main-claim visibility first if a repost is needed. No repost, Java follow-up, release, merge or other external mutation occurred.
