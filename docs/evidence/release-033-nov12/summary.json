@@ -60,5 +60,10 @@
     "hosted_state_at_capture": "Both SUCCESS on 56c21c0; later evidence-only commits require their own status readback."
   },
   "cleanup": "Only approved inactive caches and the explicitly approved stopped builder were removed. Archive/logs and independent install container retained. VM trimming did not materially restore macOS space.",
-  "gates": "No merge, tag/release, IPM/OEX publish/edit, support email send or new evaluation. Support follow-up is an unsent Gmail draft; a reply is not a release prerequisite."
+  "gates": "No merge, tag/release, IPM/OEX publish/edit, support email send or new evaluation. Support follow-up is an unsent Gmail draft; a reply is not a release prerequisite.",
+  "launcher_followup": {
+    "regression_before": "1 failed, 28 passed",
+    "regression_after": "29 passed",
+    "scope": "Explicitly install the verified public 0.3.2 version rather than moving latest; no native package code or model changes. Public 0.3.3 gate is required before promoting the launcher."
+  }
 }

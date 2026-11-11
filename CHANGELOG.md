@@ -6,6 +6,7 @@
 
 - Put the existing held-out wrong-delivery/review trade-off beside its accuracy limits in the README, landing, evidence tour and prepared listing text. Preserve every original trial, failure and label; no new evaluation was run.
 - Add source-linked prose examples explaining reviewer assist, plus a static evidence tour and receipt inspector. These Pages tools are recorded synthetic evidence, not a hosted native investigation.
+- Pin the existing judge replay to its exact verified 0.3.2 registry version instead of requesting latest while asserting 0.3.2. New package publication no longer silently changes that replay path.
 - Refresh installation/judge documentation and prepare a re-cut video script only. No video upload or new inference is part of this release.
 - Keep native classes, Java/Python runtime sources, routing policy, agent behavior, packaged fixtures and install hooks unchanged from 0.3.2. Release verification must use a fresh local package install before merge and a fresh public-registry install after publication.
 

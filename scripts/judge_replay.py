@@ -6,7 +6,8 @@ images. An explicitly supplied local IRIS archive can be loaded and retagged.
 Creates new isolated test containers and private local test
 credentials; retains them for inspection. No image pull, fresh model inference,
 publication, or existing application configuration change is performed. This
-checks the published native package with pinned compatible release tests/replay
+installs its exact verified registry version rather than a moving latest version, and
+checks it with pinned compatible release tests/replay
 assertions and the current checkout's install orchestration, not current-source
 runtime changes or additional native tests. It uses Docker, not Compose.
 By default it selects a Docker-IPAM-disjoint /28 inside 10.253.0.0/16.
@@ -271,7 +272,7 @@ def run(args: argparse.Namespace) -> int:
         ("Install, start production, run native tests and first replay", [sys.executable,
          str(ROOT / "scripts/verify_bonus_release.py"), "--source", "public-registry",
          "--verification-source", str(source),
-         "--install-latest", "--version", VERSION, "--execution-mode", "recorded-replay",
+         "--version", VERSION, "--execution-mode", "recorded-replay",
          "--container", container, "--api-port", str(args.api_port),
          "--context", args.context, "--vm-profile", args.vm_profile,
          "--image", args.image, "--gateway-image", args.gateway_image,

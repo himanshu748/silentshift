@@ -22,3 +22,7 @@ PR #14 was merged as `921b37d`, and [Pages run 43080719000](https://github.com/h
 An updated support follow-up is an **unsent Gmail draft** in the existing OEX thread. It reports the missing description-only editor choice, acknowledges the intended matching 0.3.3 package and makes clear that a reply is not a release prerequisite. The obsolete draft forbidding all IPM 0.3.3 publication must not be sent.
 
 No merge, v0.3.3 tag/release, IPM/OEX publication/edit, support email send, new inference or new evaluation occurred. Finish the remaining native/replay gate before asking to merge; tag/GitHub release and OEX/IPM publish each retain separate exact-submit approvals. **Type 0.3.3 manually, never 1.0.0.** The public-registry 0.3.3 install remains a future post-publication check, distinct from the successful local-filesystem install.
+
+## Protect the existing judge path before publishing
+
+The launcher previously combined install-latest with expected version 0.3.2. A new 0.3.3 publication would therefore break its version check. The follow-up removes moving-latest selection while retaining the exact 0.3.2 version and release-matched assertion source. Its command-contract regression failed on the preceding launcher (**1 failed, 28 passed**) and passed after the fix (**29 passed**). Native resources and the tested 0.3.3 archive are unchanged. [Before](../evidence/release-033-nov12/launcher-regression-before.txt) · [after](../evidence/release-033-nov12/launcher-regression-after.txt). This is a harness repair, not another native or model evaluation.

@@ -1,0 +1,53 @@
+.........F...................                                            [100%]
+=================================== FAILURES ===================================
+_ test_private_credentials_and_recorded_commands_do_not_leak_live_environment __
+
+harness = (PosixPath('/private/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/pytest-of-himanshujha/pytest-11/test_private_cred...), ...], {'Architecture': 'arm64', 'Config': {'Labels': {'com.intersystems.platform-version': '2026.3.0AI.154.0com'}}})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b83a360>
+capsys = <_pytest.capture.CaptureFixture object at 0x10b7f9af0>
+
+    def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(harness, monkeypatch, capsys):
+        root, calls, _ = harness
+        monkeypatch.setenv("SILENTSHIFT_API_KEY", "synthetic-private-provider-key")
+        monkeypatch.setenv("SILENTSHIFT_IRIS_PASSWORD", "synthetic-existing-password")
+        monkeypatch.setenv("OPENAI_API_KEY", "synthetic-external-key")
+        monkeypatch.setenv("GH_TOKEN", "synthetic-github-token")
+        monkeypatch.setattr(judge, "preflight", lambda _: None)
+        assert judge.main(["--api-port", "52999", "--network-subnet", "10.243.8.0/24"]) == 0
+        files = list((root / ".local/judge").glob("*/runtime.env"))
+        assert len(files) == 1
+        env_file = files[0]
+        assert env_file.stat().st_mode & 0o777 == 0o600
+        assert env_file.parent.stat().st_mode & 0o777 == 0o700
+        values = dict(line.split("=", 1) for line in env_file.read_text().splitlines())
+        passwords = [value for key, value in values.items() if key.endswith("PASSWORD")]
+        assert len(passwords) == len(set(passwords)) == 3
+        assert all(len(value) >= 12 for value in passwords)
+        assert values["SILENTSHIFT_PROVIDER_MODE"] == "recorded-replay"
+        assert not (root / ".env").exists()
+        output = capsys.readouterr()
+        for secret in [*passwords, "synthetic-private-provider-key", "synthetic-existing-password",
+                       "synthetic-external-key", "synthetic-github-token"]:
+            assert secret not in output.out + output.err
+            assert all(secret not in json.dumps(env) for _, env in calls)
+        source = env_file.parent / "source"
+        installer = root / ".local/ipm/vendor/zpm-0.10.10.xml"
+        install = next(argv for argv, _ in calls if any(Path(arg).name == "verify_bonus_release.py" for arg in argv))
+        repeat = next(argv for argv, _ in calls if any(Path(arg).name == "trace_example.py" for arg in argv))
+        assert install[1] == str(root / "scripts/verify_bonus_release.py")
+        assert install[install.index("--verification-source") + 1] == str(source)
+        assert install[install.index("--network-subnet") + 1] == "10.243.8.0/24"
+        assert repeat[1] == str(source / "scripts/trace_example.py")
+        fetch = next(argv for argv, _ in calls if argv[0] == "git" and "fetch" in argv)
+        assert fetch[-4:] == ["--depth", "1", judge.REPOSITORY, judge.RELEASE_COMMIT]
+        assert any(argv[-2:] == ["rev-parse", "HEAD"] for argv, _ in calls)
+        assert "pinned release tests/replay and current install orchestration" in output.out
+        assert install[install.index("--version") + 1] == "0.3.2"
+        assert install[install.index("--execution-mode") + 1] == "recorded-replay"
+>       assert "--install-latest" not in install and "--allow-model-calls" not in install
+E       AssertionError: assert ('--install-latest' not in ['/Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift/.local/java-pex-nov...n/T/pytest-of-himanshujha/pytest-11/test_private_credentials_and_r0/.local/judge/20261111-194639-99e8e3b6/source', ...])
+
+tests/test_judge_replay.py:196: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_judge_replay.py::test_private_credentials_and_recorded_commands_do_not_leak_live_environment
+1 failed, 28 passed in 1.26s

@@ -10,7 +10,7 @@
 - Add three source-linked prose examples showing the original clause, rule result, agent citation/recommendation and final policy hold. Pending review is not presented as a correct final route or a completed human decision.
 - Provide a guided recorded evidence tour and a browser receipt inspector. The inspector checks a real saved payload/signature and detects an edited copy; signing-key identity and business correctness remain separate questions.
 - Refresh the judge/install documentation and prepare a re-cut video script. Existing video and article links stay unchanged. These static recorded pages are not a hosted native demo.
-- Keep the public keyless launcher pinned to its current 0.3.2 release until 0.3.3 is actually published and independently installed. The isolated local-archive verifier can exercise literal `zpm "install silentshift"`; it now explicitly checks the installed manifest identity against the inspected archive.
+- Keep the public keyless launcher explicitly pinned to its verified 0.3.2 registry version, avoiding the old moving-latest/version-assertion conflict when 0.3.3 is published. Promote it only after 0.3.3 is independently installed. The isolated local-archive verifier can exercise literal `zpm "install silentshift"`; it now explicitly checks the installed manifest identity against the inspected archive.
 
 ## Publication prerequisites
 
