@@ -191,7 +191,7 @@ def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(
     assert fetch[-4:] == ["--depth", "1", judge.REPOSITORY, judge.RELEASE_COMMIT]
     assert any(argv[-2:] == ["rev-parse", "HEAD"] for argv, _ in calls)
     assert "pinned release tests/replay and current install orchestration" in output.out
-    assert install[install.index("--version") + 1] == "0.3.0"
+    assert install[install.index("--version") + 1] == "0.3.2"
     assert install[install.index("--execution-mode") + 1] == "recorded-replay"
     assert "--install-latest" in install and "--allow-model-calls" not in install
     assert "--live" not in repeat
