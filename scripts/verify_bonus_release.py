@@ -118,6 +118,7 @@ def execute(args):
             'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_PYTHON_OK",!',
             '08-python','%SYS','SS_PYTHON_OK')
         run([*docker,'cp',str(vendor),args.container+':'+base+'/zpm.xml'],'09-copy-client')
+        run([*docker,'exec','--user','0',args.container,'chown','51773:51773',base+'/zpm.xml'],'09-client-owner')
         session('set sc=$system.OBJ.Load('+literal(base+'/zpm.xml')+',"ck")\n'
             'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_CLIENT_OK",!',
             '10-client',marker='SS_CLIENT_OK')
