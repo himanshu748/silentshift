@@ -309,9 +309,15 @@ def execute(args, plan: dict) -> dict:
             'if \'$isobject(module) halt\n'
             'if module.VersionString\'="' + VERSION + '" halt\n'
             'write "SS_CLIENT_OK",!', '12-client', marker='SS_CLIENT_OK')
-        for label, cli in (('13-disable-analytics', 'config set analytics 0'),
-                ('14-filesystem-repo', 'repo -name LocalArchive -fs -depth 2 -path ' + RELEASE + '/repository/'),
-                ('15-install', plan['install_command'])):
+        commands = [('13-disable-analytics', 'config set analytics 0')]
+        if getattr(args, 'install_latest', False):
+            # The literal unqualified install must resolve only from this new
+            # namespace's inspected archive, never a default remote registry.
+            commands.append(('13-local-only', 'repo -delete-all -r'))
+        commands.extend([
+            ('14-filesystem-repo', 'repo -name LocalArchive -fs -depth 2 -path ' + RELEASE + '/repository/'),
+            ('15-install', plan['install_command'])])
+        for label, cli in commands:
             session('set sc=##class(%IPM.Main).Shell(' + literal(cli) + ')\n'
                 'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\n'
                 'write "SS_COMMAND_OK",!', label, marker='SS_COMMAND_OK')
