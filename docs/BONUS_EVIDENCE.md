@@ -2,6 +2,8 @@
 
 The missing-citation failure is fixed in the unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI is still pending the gated push.
 
+**Java PEX is Claimed in the source README at the owner’s request; qualification remains pending.** The Java-specific public follow-up is deferred until its evidence links are public; this source declaration is not a posted claim or an awarded bonus.
+
 [Fix and limitations](CITATION_COMPLETENESS.md) · [new receipt](evidence/citation-fix-nov11/summary.json). **0.3.2 remains unpublished; public 0.3.1 is unchanged.** The earlier failed run below remains history and is not rewritten as passing.
 
 ## Earlier checkpoint
