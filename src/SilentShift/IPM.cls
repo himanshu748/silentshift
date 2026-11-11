@@ -130,7 +130,7 @@ ClassMethod ValidateAssets(root As %String) As %String [ Language = python, Priv
             if current.is_symlink():
                 return 'SilentShift asset directories must not be symbolic links'
             current = current.parent
-        required = ('python/silentshift/__init__.py', 'python/silentshift/engine.py',
+        required = ('java/build.sh', 'java/src/main/java/SilentShift/PEX/ReceiptExporter.java', 'java/src/main/java/SilentShift/PEX/ReceiptStore.java', 'python/silentshift/__init__.py', 'python/silentshift/engine.py',
             'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
             'python/silentshift/csv_orders.py',
             'python/silentshift/provider_config.py', 'python/silentshift/provider_transport.py',

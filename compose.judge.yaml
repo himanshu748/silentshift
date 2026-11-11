@@ -1,4 +1,4 @@
-# Source-only keyless judge stack. No image is built or downloaded here.
+# Keyless judge stack. Builds owned Java source against the preloaded EAP image locally.
 # Bring the licensed 154U ARM64 image and the public Gateway/Node images first.
 name: ${COMPOSE_PROJECT_NAME:-silentshift-judge}
 
@@ -36,7 +36,11 @@ services:
     restart: "no"
 
   iris:
-    image: ${IRIS_IMAGE:?Load the official 2026.3.0AI.154.0 Community ARM64 image and set IRIS_IMAGE}
+    image: silentshift-pex-local:0.3.2
+    build:
+      context: .
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE:?Load the verified ARM64 build 154 image first}
     pull_policy: never
     platform: linux/arm64
     init: true

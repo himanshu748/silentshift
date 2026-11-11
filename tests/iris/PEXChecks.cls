@@ -33,6 +33,37 @@ Method TestInvalidJavaRequestCannotCreateReceipt()
     Do $$$AssertTrue($$$ISERR(sc),"Java operation rejects a non-final, malformed outcome")
 }
 
+/// A stopped Java host must not turn a committed hold into a routing failure.
+Method TestUnavailableExporterPreservesRouting()
+{
+    Set sc = ##class(SilentShift.Test.TraceChecks).RunBudgetCase(.id)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set before = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Set stopped = 0
+    Try {
+        Set sc = ##class(Ens.Director).TempStopConfigItem("ReceiptExporter",1,1)
+        Do $$$AssertStatusOK(sc)
+        If $$$ISOK(sc) {
+            Set stopped = 1
+            Set sc = ##class(Ens.Director).CreateBusinessService("Partner", .service)
+            Do $$$AssertStatusOK(sc)
+            Set request = ##class(SilentShift.Message).%New(), request.CaseId = id
+            Set routeStatus = service.SendRequestSync("Quarantine",request,.reply,15)
+            Do $$$AssertStatusOK(routeStatus,"Java outage does not change the successful committed route")
+        }
+    } Catch error {
+        Do $$$AssertTrue(0,"Unexpected native outage test exception")
+    }
+    If stopped {
+        Set sc = ##class(Ens.Director).TempStopConfigItem("ReceiptExporter",0,1)
+        Do $$$AssertStatusOK(sc,"Restore the isolated Java operation after the outage test")
+    }
+    Set after = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Do $$$AssertEquals(after.%Get("routing"),before.%Get("routing"),"Java outage cannot change a hold")
+    Do $$$AssertEquals(after.%Get("delivery_count"),0,"Java outage creates no simulator delivery")
+}
+
 /// Check the actual cases just run through the native API; never invent a route.
 ClassMethod CheckFrozen(caseIDsJSON As %String, Output reportJSON As %String) As %Status
 {

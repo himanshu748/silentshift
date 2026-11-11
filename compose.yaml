@@ -1,7 +1,11 @@
 # EAP IRIS image MUST already be loaded locally; never push this runtime.
 services:
   iris:
-    image: ${IRIS_IMAGE:?Set IRIS_IMAGE to the locally loaded 2026.3.0AI.154.0 Community image}
+    image: silentshift-pex-local:0.3.2
+    build:
+      context: .
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE:?Load the verified ARM64 build 154 image first}
     pull_policy: never
     init: true
     restart: unless-stopped
