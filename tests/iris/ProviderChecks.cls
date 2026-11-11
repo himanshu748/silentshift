@@ -24,6 +24,12 @@ Method TestMetadataOnlyMessages()
     Do $$$AssertEquals(data.%GetTypeOf("billing_cost"),"null")
     Do $$$AssertTrue('data.%Get("content_retained"))
     Do $$$AssertTrue('data.%IsDefined("prompt") && 'data.%IsDefined("messages") && 'data.%IsDefined("authorization"))
+    Set request.StructuredFinal=1,request.FinalFormatVersion=##class(SilentShift.AI.Investigator).#FINALFORMATVERSION
+    Set sc=request.%Save()
+    Do $$$AssertStatusOK(sc)
+    Set persisted=##class(SilentShift.Provider.CallRequest).%OpenId(request.%Id())
+    Do $$$AssertTrue(persisted.StructuredFinal,"Final flag survives native message storage")
+    Do $$$AssertEquals(persisted.FinalFormatVersion,##class(SilentShift.AI.Investigator).#FINALFORMATVERSION,"Format version survives native message storage")
     Set response = ##class(SilentShift.Provider.CallResponse).%New()
     Set response.CallId = request.CallId, response.HTTPStatus = 502
     Set response.ErrorCode = "PROVIDER_TRANSPORT_FAILED", response.DurationMS = 0, response.ResponseBytes = 0

@@ -209,7 +209,7 @@ def run(args: argparse.Namespace) -> int:
         # Quiet validation avoids resolved configuration (including secrets).
         stage([*compose, 'config', '--quiet'], '01-config')
         print('Starting the source Compose judge stack; recorded replay only...', flush=True)
-        stage([*compose, 'up', '--detach', '--wait', '--wait-timeout', '300'], '02-up', 600)
+        stage([*compose, 'up', '--build', '--detach', '--wait', '--wait-timeout', '300'], '02-up', 600)
         api = f'http://127.0.0.1:{args.api_port}/silentshift/api'
         health = wait_for_api(api, values)
         receipt['runtime'] = health.get('build')

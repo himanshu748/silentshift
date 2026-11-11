@@ -6,6 +6,8 @@ Class SilentShift.AI.Investigator Extends %RegisteredObject
 {
 Parameter PROMPTVERSION = "silentshift-investigator/1.4.2";
 
+Parameter FINALFORMATVERSION = "silentshift-local-final/2";
+
 Parameter TOOLNAMES = "GetCurrentMessage,GetApprovedContracts,GetRelatedRecords,find_similar_precedents";
 
 /// Exact list membership; concatenated or delimiter-bearing names are rejected.
@@ -47,7 +49,7 @@ XData SystemPrompt [ MimeType = "application/json" ]
 /// Local structural final-answer grammar, never tool-selection rounds.
 /// The server retains all count, length and numeric bounds. Ollama 0.31.1
 /// rejects the bounded grammar; response schema is not policy validation.
-ClassMethod FinalResponseFormat() As %DynamicObject
+ClassMethod FinalResponseFormat(requiredEvidenceIds As %DynamicArray = "") As %DynamicObject
 {
     Set finding = {
         "type": "object",
@@ -70,6 +72,17 @@ ClassMethod FinalResponseFormat() As %DynamicObject
         },
         "required": ["decision", "evidence_ids", "explanation", "uncertainty", "cited_findings"],
         "additionalProperties": false
+    }
+    // This is a pre-inference grammar constraint, not output repair. The
+    // provider relay supplies only this case's persisted assessment IDs after
+    // all four invocation-scoped tool reads; policy still checks the response.
+    If $ISOBJECT(requiredEvidenceIds) {
+        If 'requiredEvidenceIds.%IsA("%Library.DynamicArray") Throw ##class(%Exception.General).%New("FINAL_FORMAT_CITATIONS_INVALID")
+        If requiredEvidenceIds.%Size() > 101 Throw ##class(%Exception.General).%New("FINAL_FORMAT_CITATIONS_INVALID")
+        For index = 0:1:requiredEvidenceIds.%Size()-1 {
+            If requiredEvidenceIds.%GetTypeOf(index) '= "string" Throw ##class(%Exception.General).%New("FINAL_FORMAT_CITATIONS_INVALID")
+        }
+        Do schema.%Get("properties").%Set("evidence_ids", {"const": (requiredEvidenceIds)})
     }
     Return {"type":"json_schema","json_schema":{"name":"silentshift_recommendation","strict":true,"schema":(schema)}}
 }
@@ -194,7 +207,8 @@ ClassMethod Run(caseId As %String, assessmentJSON As %String, Output recommendat
         Set stage = "native-agent-chat"
         Set sessionConfig = {"max_iterations": 6, "max_tokens": 512}
         Do metadata.%Set("limits", sessionConfig)
-        Do metadata.%Set("structured_final_output", "local Ollama only, after four invocation-scoped tool reads; no response repair")
+        Do metadata.%Set("structured_final_output", "local Ollama only; exact case citation set after four invocation-scoped reads; no response repair")
+        Do metadata.%Set("final_format_version", ..#FINALFORMATVERSION)
         // Build 154's bundled CompletionOptions forwards provider-specific
         // options through extra_params. Ollama 0.31.1 maps none to think=false.
         // Apply only to the explicitly local Qwen route, never other providers.

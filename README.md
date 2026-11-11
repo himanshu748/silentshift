@@ -71,6 +71,8 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 ### Published package and this branch
 
+**This branch prepares native 0.3.2 with a [Java PEX receipt exporter](docs/JAVA_PEX.md). It is not published; registry 0.3.1 does not include that operation. The [citation follow-up](docs/CITATION_COMPLETENESS.md) passed three consecutive five-case sets and a final 5/5; the regenerated archive also installed cleanly offline.**
+
 Public native IPM and Open Exchange publish **0.3.1**; the separate React package remains **0.2.1**. The [anonymous archive manifest readback](docs/evidence/bonus-claims-nov11/public.json) confirms publication, not a new public-registry installation test. This release includes provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
@@ -154,7 +156,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Second Developer Community article | 1 | Claimed | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
 | Video | 3 | Claimed | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
 | Questionnaire | 1 | Claimed | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
-| Java/.NET PEX | — | Not claimed | [Optional plan only](docs/agent-runs/bonus-claims-nov11.md#optional-java-pex-plan); no Java/.NET operation implemented |
+| Java PEX | 3 | Claimed; source verified, 0.3.2 unpublished; qualification pending | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [current execution/archive checks](docs/evidence/citation-fix-nov11/summary.json) · [Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-trace.png) |
 | Online demo | — | Not claimed | The published evidence tour is static recorded material, not a running native app |
 | Embedded Python bug | — | Not claimed | [Signal-11 candidate is not isolated or attributed](docs/bug-reports/callback-signal11-candidate.md) |
 

@@ -1,0 +1,91 @@
+{
+  "verified_at_ist": "2026-11-11T13:28:10.120447+05:30",
+  "runtime_commit": "a8176456d0d156387ba0ae0a0e853e692d317e55",
+  "branch": "feat/java-pex-nov11",
+  "version": "0.3.2",
+  "published": false,
+  "scope": "retained-instance native source upgrade, synthetic persisted unit case and real Java PEX operation; not a fresh container or a new live model run",
+  "review": "https://github.com/himanshu748/silentshift/pull/9#discussion_r4535238234",
+  "regression": {
+    "original_source": "50477f88f22c704940d995f6bf540421c09a7994",
+    "red_assertion": "Persisted replay mode overrides the deployment environment",
+    "original_failed": true,
+    "fixed_passed": true,
+    "separate_process_environment_switch": {
+      "scope": "synthetic unit-arranged persisted case; real Java PEX operation; separate IRIS sessions with different process environments, not a container restart",
+      "runs": [
+        {
+          "case_id": "E8133378-DDA4-11F1-9302-4228E55B686E",
+          "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+          "process_mode": "recorded-replay",
+          "persisted_mode": "recorded-replay",
+          "sha256": "03f5edf0ee9a7440f13b231828524d6d28f55e6e1c6afddb60ef83c92965ddfa",
+          "receipt_bytes_sha256": "f73012f04f53964f6b01d7993b22386276fa8f30ae13c22d2b721e442f5bb79c",
+          "signature_valid": 1
+        },
+        {
+          "case_id": "E8133378-DDA4-11F1-9302-4228E55B686E",
+          "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+          "process_mode": "live",
+          "persisted_mode": "recorded-replay",
+          "sha256": "03f5edf0ee9a7440f13b231828524d6d28f55e6e1c6afddb60ef83c92965ddfa",
+          "receipt_bytes_sha256": "f73012f04f53964f6b01d7993b22386276fa8f30ae13c22d2b721e442f5bb79c",
+          "signature_valid": 1
+        }
+      ],
+      "same_case_same_signed_receipt": true,
+      "receipt_file_count": 1,
+      "receipt_files": [
+        "E8133378-DDA4-11F1-9302-4228E55B686E-03f5edf0ee9a7440f13b231828524d6d28f55e6e1c6afddb60ef83c92965ddfa.json"
+      ]
+    }
+  },
+  "tests": {
+    "native": {
+      "classes": 8,
+      "methods": 28,
+      "passed": true,
+      "elapsed_seconds": 6.16
+    },
+    "junit": {
+      "passed": 7,
+      "failed": 0
+    },
+    "pytest": {
+      "passed": 394,
+      "seconds": 19.98
+    },
+    "typescript": {
+      "passed": true
+    },
+    "web_build": {
+      "passed": true
+    },
+    "browser": {
+      "passed": 54,
+      "seconds": 41.8
+    },
+    "updated_pr_ci": {
+      "executed": false,
+      "scope": "awaiting branch update; previous 50477f8 CI is not evidence for this fix"
+    }
+  },
+  "provenance_fallback": "Explicit persisted execution_mode wins. If missing, recognize persisted legacy native-ai-hub / native-ai-hub-recorded-replay. Unknown/malformed provenance declines export; existing operation preserves its committed routing status.",
+  "unchanged_paths": [
+    "src/SilentShift/Bridge.cls",
+    "src/SilentShift/Store.cls",
+    "src/SilentShift/Process/Semantic.cls",
+    "src/SilentShift/AI/Investigator.cls",
+    "src/SilentShift/Operation/Destination.cls",
+    "src/SilentShift/Operation/Quarantine.cls",
+    "fixtures/v1/scenarios.json",
+    "module.xml"
+  ],
+  "limits": [
+    "No new live five-scenario or held-out model run. Earlier 20/20 evidence retains its original source scope.",
+    "Mode-switch proof uses separate IRIS processes with different environments, not a full container restart.",
+    "The persisted case is explicitly unit-arranged synthetic data, not a claim of another agent investigation.",
+    "The prior offline archive-install receipt applies to its older archive; no new archive install was performed for this fix.",
+    "Only build 154U ARM64 was used. No release, registry or OEX publication."
+  ]
+}

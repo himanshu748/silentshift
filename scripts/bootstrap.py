@@ -119,7 +119,7 @@ def main() -> int:
                    '[APP_PATH:/csp]\nDefault_Server=IRIS\n')
     ini.chmod(0o600)
     print('Starting locally loaded IRIS runtime...')
-    run(compose + ['up', '-d', 'iris'], quiet=True)
+    run(compose + ['up', '--build', '-d', 'iris'], quiet=True)
     session = compose + ['exec', '-T', 'iris', 'iris', 'session', 'IRIS', '-U', '%SYS']
     for _ in range(60):
         ready = run(session, data='write "SILENTSHIFT_READY",! halt\n', quiet=True, check=False)

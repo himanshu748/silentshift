@@ -1,6 +1,17 @@
 # Changelog
 
-## 0.3.1 — prepared source candidate, not published
+## 0.3.2 — prepared Java PEX candidate, not published
+
+- Add a Java PEX `ReceiptExporter` Business Operation invoked by Destination and Quarantine after their existing routing commits. Native request/response bodies keep the export in the case's Visual Trace session.
+- Sign bounded outcome/evidence receipts with a per-instance RSA-2048 key. Atomic publication refuses replacement; repeated outcomes reuse the original receipt, and later review decisions append another record.
+- Bind the local final-generation citation manifest to the current case assessment after all four evidence reads. This prevents omitted predecessor IDs without editing responses or weakening policy. Keep the system prompt unchanged and record a separate format version in append-compatible message storage.
+- Preserve routing when export fails or times out. Signing establishes receipt integrity under an operator-held key, not correctness of the business decision or a tamper-proof host.
+- Build the owned Java JAR locally against build 154's shipped Java 11/PEX SDK. IPM includes the owned Java sources/build script, never vendor JARs, EAP images or signing keys. Explicit native setup compiles those assets; package activation still starts no production or model.
+- Retain the keyless Compose launcher, separate React 0.2.1 workbench and unchanged policy/fixture bytes. Add JUnit and real native gateway, retry and outage checks. See [scoped Java verification](docs/JAVA_PEX.md).
+
+Public IPM/OEX remain **0.3.1** until separately approved publication. This source manifest and Python project declare **0.3.2**; no v0.3.2 tag, registry package or OEX release was created by this preparation.
+
+## 0.3.1 — published; original preparation notes retained
 
 - **Provider configuration:** inherits the unpublished `push/top3` provider selection and internal gateway. Only local Ollama is live-qualified; OpenAI, Gemini, OpenRouter and compatible endpoints retain configuration/protocol-test scope. Keyless replay remains separate from inference.
 - **Cited prose evidence:** inherits case-scoped prose projection, required invocation-scoped evidence reads and validated exact-quote findings. A cited finding can add containment; it cannot release an existing rule hold. The held-out results retain their limitations; the sealed benchmark is unfinished and no accuracy gain is asserted.
@@ -9,7 +20,7 @@
 - **Source workbench and installation:** the multi-page frontend, source-only demo gateway and one-command isolated Compose judge path are repository deliverables. The frontend remains version 0.2.1 and is not installed by IPM. Compose keeps source read-only and writes frontend dependencies into a dedicated volume; no model or hosted demo is needed for its recorded replay.
 - **Verification:** full-history CI checkout preserves the historical policy assertion; exact prompt-version and connected-setup fixes retain every check. Safe lint fixes and an explicit remaining-finding inventory replace a blanket clean-lint claim. Frozen fixtures and replay records are unchanged.
 
-`module.xml` and the Python project now declare **0.3.1** for this candidate. Public native IPM and OEX remain **0.3.0**. Candidate preparation is not publication: clean IPM load, published-registry installation, merge, tag/release and OEX moderation are distinct gates. See [current scoped verification](docs/JUDGE_VERIFICATION.md) before publishing. No package, tag or release was published in this pass.
+**At that preparation checkpoint**, `module.xml` and the Python project declared **0.3.1**. Public native IPM and OEX remain **0.3.0**. Candidate preparation is not publication: clean IPM load, published-registry installation, merge, tag/release and OEX moderation are distinct gates. See [current scoped verification](docs/JUDGE_VERIFICATION.md) before publishing. No package, tag or release was published in this pass.
 
 ## 0.3.0 — published November 8, 2026
 

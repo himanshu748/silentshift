@@ -1,0 +1,638 @@
+{
+  "scope": "explicit ObjectScript RunFrozen repeat after the passing API five",
+  "passed": false,
+  "correct_routes": 4,
+  "total": 5,
+  "java_receipts_passed": 5,
+  "native_error": "ERROR #5001: Frozen policy result changed",
+  "cases": [
+    {
+      "case_id": "4CB51501-DD96-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "quantity-mismatch",
+      "routing": "QUARANTINED",
+      "session_id": "330",
+      "receipt_responses": 1,
+      "response_header_id": 355,
+      "hash_and_signature_valid": 1,
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "AApu093rM/LvbCGGGzc2mdwSXCn/rVCVqWZYOQz+tKZfAQ1OG4ivpirulYlMDoZdGoL9qW6aurLdb2bm3deWfIhIM+1pZMmjo0ErE7MU10GX7TJN+wv6rI8Z1DxBOyDk3no/ZcxPYJKXulzeLRdTjTqaod++kWopiYiFPgoPOkXR+nS8ApW6Unbx5CnTi//B62hOWzbH8cS5I99smzaPwQdMp3FdmofgOrqopKKINcVzsKHI0+LPcQNAHGZ6xDGTqK1bC4mxXiSFypknthxz2ObvyyFeKgewk4iGt9Biyoy+7Qm9pq0XgR/Ch1AUHLdJJzBE29ab9fDKqLRjlK5zZw==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:08:59.041110Z",
+          "payload": {
+            "case_id": "4CB51501-DD96-11F1-A2D3-A50F91B4F850",
+            "decision": "QUARANTINED",
+            "evidence_hashes": [
+              "32c45aab2f9c62d49b34cca4456d6780243cef4866e05da2365ae196153e05e1",
+              "6d89ac7369e8b8f3f8840ffc7cbd192075ae26b9797205325f4c38458f0b1d44",
+              "7781dd7a7864847980fb0f6c3af000cc5192ecd40d61f0783629197871b6a968",
+              "fdf775dadd2b309c8fdd8b8afcebd8e0b7a9cfefbec310dcf93aec0f6e2f13b7"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "226551a89aa9b3929171f821843c74428a64d8945946330992918121bd6bfa26"
+        }
+      },
+      "passed": 1,
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": false,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": false,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "QUARANTINE",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Invalid messages and critical contradictions cannot be released.",
+          "Only a resolved comparison to an approved contract can permit release."
+        ],
+        "release_eligible": false
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "ALLOW",
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "explanation": "Quantity and product match approved contract; no contradiction found.",
+        "uncertainty": 0
+      },
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "classification": "VERIFIED_CONTRADICTION",
+        "critical": true,
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "240",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "quantity",
+            "observed": "20",
+            "severity": "critical"
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "EA",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "unit",
+            "observed": "CASE",
+            "severity": "critical"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "expected_policy_decision": "QUARANTINE",
+      "policy_matches_ground_truth": true
+    },
+    {
+      "case_id": "627B1D8F-DD96-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "currency-scaling",
+      "routing": "QUARANTINED",
+      "session_id": "360",
+      "receipt_responses": 1,
+      "response_header_id": 385,
+      "hash_and_signature_valid": 1,
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "QTL7jy60clzSIfHj28HHfOnkCO1hQpH4YQHTK9AlvbIbx5xp2M5OdpJNyW+4G7XvPV0OmRVT1yhqCg60lMZ3HTVhMLthAh3Rwonz+UQ+Y/OYEWGdLSalb9uxYIjguT78YYCYOvTmmkPTXE1hp1sLDtgRHd5+uZxao6Vn7BWuvMr0hVfjltcR2ThDbutyS7eTIzXnHjcOueXywRtDPVvC30CkKLA3dXpfnyQcJvWo/1Y4MU9B0MVnPXnH7rOdjxHZ9djYu6zCyrLOSEZ7xm/oZBnpLP7v6ZWEj8nsVjZhHc5M25szq0OKhZbTnGuDX/scCJQziWCq1WNBak/gIzjikw==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:09:29.966734Z",
+          "payload": {
+            "case_id": "627B1D8F-DD96-11F1-A2D3-A50F91B4F850",
+            "decision": "QUARANTINED",
+            "evidence_hashes": [
+              "22fd88e356f38bf387c2b2ecdecba40653e58387a06622451036b798592dcb58",
+              "84112e6fa828a12311a09e57459268a0468959552e9c52a4ac32dc6992e15859",
+              "a6f144c87f69b3a3862b1d431e93c9d192248243b66402dd38dc859de803fe13",
+              "e347404b8291440df3fb7f73611e8342db7fc6201379fa51159d9730d9441817"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "52834c0794354c4a37f664ae705e4cb61cc14916387025b47ddd66fa520633db"
+        }
+      },
+      "passed": 1,
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": false,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": false,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": false,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "QUARANTINE",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Invalid messages and critical contradictions cannot be released.",
+          "Only a resolved comparison to an approved contract can permit release.",
+          "Uncertainty above 0.35 requires human review."
+        ],
+        "release_eligible": false
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "QUARANTINE",
+        "evidence_ids": [
+          "contract:PAY-031:v1"
+        ],
+        "explanation": "Contradiction in structured baseline prohibits any action.",
+        "uncertainty": 1
+      },
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PAY-031:v1"
+        ],
+        "classification": "VERIFIED_CONTRADICTION",
+        "critical": true,
+        "evidence_ids": [
+          "contract:PAY-031:v1"
+        ],
+        "findings": [
+          {
+            "code": "AMOUNT_MISMATCH",
+            "evidence_ids": [
+              "contract:PAY-031:v1"
+            ],
+            "expected": "125.50",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "amount",
+            "observed": "12550",
+            "severity": "critical"
+          },
+          {
+            "code": "CURRENCY_SCALE_MISMATCH",
+            "evidence_ids": [
+              "contract:PAY-031:v1"
+            ],
+            "expected": "major",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "amount_scale",
+            "observed": "minor",
+            "severity": "critical"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "expected_policy_decision": "QUARANTINE",
+      "policy_matches_ground_truth": true
+    },
+    {
+      "case_id": "74E6DF76-DD96-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "approved-amendment",
+      "routing": "REVIEW",
+      "session_id": "390",
+      "receipt_responses": 1,
+      "response_header_id": 415,
+      "hash_and_signature_valid": 1,
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "NG8lSDN3q+6iRbgXIqEei9QFEYxYb0OpkzoUvtATyPSrw2866sELmlWGGrHWCgNGYLvEdvUjptb1AWhgrTtcHZVBNtdBmZu45lUTEEq9imf3fN5tbaP32d4q3VvbX36dxcBhAOpNkrVDAlCYs3tT9pxTUfbCY5z1qjVkviGxs0JqZOZgKBp03dHOPNssaoi7YIVSXrZSKr8sVagJM1rM1U/DEKzB7V6603iCRPO9MCrDdT55O0TadDj874wo+MuCQ5ah2svExLbhPrD+LmLPDGLvAm7uRweZLL3bRatLFUFivnJA8AG1a7Lg05bzfEl2Rk9hc7N1u82SqWmKho0uDQ==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:10:07.466363Z",
+          "payload": {
+            "case_id": "74E6DF76-DD96-11F1-A2D3-A50F91B4F850",
+            "decision": "REVIEW",
+            "evidence_hashes": [
+              "40620e5f574e25de763e00f055b0ee9bf3f4c5802ebaf0c5e9400a8230c24163",
+              "61feea9a5bb63fb7c599224a89aa8a2c47f1294f6cbd5ea1cde3b20b4677143d",
+              "932081f81690019cac88383dce3c59d78fc39e0f8f0d2cf07e0a691054b1fed5",
+              "dc7d3e811a7188c34b725f2873effdefc8a4eeeebb3a17cc97b99db8f4617519"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "da5254edfb7430fc2015c97b13bedbb1dc6db626366edb756a5e9f63fd615ca0"
+        }
+      },
+      "passed": 1,
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": true,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": false,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": true,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "REQUEST_REVIEW",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Every independently retrieved evidence record must be cited for release."
+        ],
+        "release_eligible": false
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "ALLOW",
+        "evidence_ids": [
+          "contract:PO-2048:v2"
+        ],
+        "explanation": "Amendment approved; effective from 2026-11-01; quantity updated to 20 CASE.",
+        "uncertainty": 0
+      },
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PO-2048:v2"
+        ],
+        "classification": "LEGITIMATE_CHANGE",
+        "critical": false,
+        "evidence_ids": [
+          "contract:PO-2048:v1",
+          "contract:PO-2048:v2"
+        ],
+        "findings": [
+          {
+            "code": "APPROVED_AMENDMENT",
+            "evidence_ids": [
+              "contract:PO-2048:v1",
+              "contract:PO-2048:v2"
+            ],
+            "expected": "contract:PO-2048:v2",
+            "explanation": "The event exactly matches a current approved amendment; historical difference is legitimate.",
+            "field": "$contract",
+            "observed": "contract:PO-2048:v1",
+            "severity": "info"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "expected_policy_decision": "ALLOW",
+      "policy_matches_ground_truth": false
+    },
+    {
+      "case_id": "8B5DE55F-DD96-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "conflicting-references",
+      "routing": "REVIEW",
+      "session_id": "420",
+      "receipt_responses": 1,
+      "response_header_id": 445,
+      "hash_and_signature_valid": 1,
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "WC4f9zlFQNVyu33tKsDy64z6sWTLj9U4l+dzpx85jJpKC5pTCNJehJX7qlR61SXLYqQ5BbBk5V8jicYQ3qedYrYd7DEe8zQtnCCEwligKeeecPKKChs9C7J7QRDm092RCo/6BYK89hvWPCGPtj1zCE2zMGhwsiheMqi8xgZ8fr932MwvNZYmgNLuVmrtlSbI/s2j+ncPaZt7s+LJqIYxnwkphwcywpp/E6wfPxfEc+kqzouz/hBvjNuoenu7oR96/qMiK8trKnLL39XqNQmoteAc+APpp1hTeUSOHMAAY5fo3oHp24MhIpBGrlX8BlK18o2cIi/Vd2celFNq0fm3Vw==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:10:44.206729Z",
+          "payload": {
+            "case_id": "8B5DE55F-DD96-11F1-A2D3-A50F91B4F850",
+            "decision": "REVIEW",
+            "evidence_hashes": [
+              "02c35ee8cc15adcf5c3bb6cfb046879ad1662d400924995a861630952535c5dc",
+              "55e28951095a0dfe23c8fbba987963581d8da46a0123c06e337216c0241597ee",
+              "87a0a56f8a7268114e6d431fef404e315af57220618e33e802b0060e0fe9e7cf",
+              "d8798d8a76f7067e4a1f4035ccf9504a563e89dea00a2018b7a065a3e8b4d8ec"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "c3e8f0079465a291be35b089443b0899813276c6b384d7724671ae154ac2f9a8"
+        }
+      },
+      "passed": 1,
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": true,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": false,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "REQUEST_REVIEW",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Only a resolved comparison to an approved contract can permit release."
+        ],
+        "release_eligible": false
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "ALLOW",
+        "evidence_ids": [
+          "erp:PO-2048",
+          "supplier:PO-2048"
+        ],
+        "explanation": "Valid order with matching product, quantity, and unit; no contradictions found.",
+        "uncertainty": 0
+      },
+      "assessment": {
+        "active_reference_ids": [
+          "erp:PO-2048",
+          "supplier:PO-2048"
+        ],
+        "classification": "INSUFFICIENT_EVIDENCE",
+        "critical": false,
+        "evidence_ids": [
+          "erp:PO-2048",
+          "supplier:PO-2048"
+        ],
+        "findings": [
+          {
+            "code": "CONFLICTING_REFERENCES",
+            "evidence_ids": [
+              "erp:PO-2048",
+              "supplier:PO-2048"
+            ],
+            "expected": "one unambiguous authoritative value",
+            "explanation": "Independent active references disagree; the engine cannot select a convenient answer.",
+            "field": "quantity",
+            "observed": [
+              "240",
+              "20"
+            ],
+            "severity": "warning"
+          },
+          {
+            "code": "CONFLICTING_REFERENCES",
+            "evidence_ids": [
+              "erp:PO-2048",
+              "supplier:PO-2048"
+            ],
+            "expected": "one unambiguous authoritative value",
+            "explanation": "Independent active references disagree; the engine cannot select a convenient answer.",
+            "field": "unit",
+            "observed": [
+              "EA",
+              "CASE"
+            ],
+            "severity": "warning"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "expected_policy_decision": "REQUEST_REVIEW",
+      "policy_matches_ground_truth": true
+    },
+    {
+      "case_id": "A122E838-DD96-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "unsafe-agent-output",
+      "routing": "QUARANTINED",
+      "session_id": "450",
+      "receipt_responses": 1,
+      "response_header_id": 475,
+      "hash_and_signature_valid": 1,
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "YEVkUfhH2H2gBM4WRcDfwGylccNvGTrUqjCaMcWExABJgRF+vA8mRtYvyrmXDLU/Vap+SZqbMQO+rPQbId7KGtA5VTKcAHwj9HUvzb7AdjzlliRViHa0Ok+09oghhfvloUthr7b18BZCXGw0WydVKNlxeGdxvZyOooNCyNm9gAuhJnNYWo/1OR+iCMYB2v18QzedjdBmLDRQi+a9Q6dnrwb/3wBUVUjNBkxnuhnxB5wPR/WA3y0p0MBgD490g+ebNUhi06UM2XKYop3/AjQceh99dNXxDFfTx1gemR1owxXhewt+LMxy8LuOHf0g3FcGdMJfNElCMXvovJg6c/2YKw==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:11:26.322092Z",
+          "payload": {
+            "case_id": "A122E838-DD96-11F1-A2D3-A50F91B4F850",
+            "decision": "QUARANTINED",
+            "evidence_hashes": [
+              "32c45aab2f9c62d49b34cca4456d6780243cef4866e05da2365ae196153e05e1",
+              "6d89ac7369e8b8f3f8840ffc7cbd192075ae26b9797205325f4c38458f0b1d44",
+              "7781dd7a7864847980fb0f6c3af000cc5192ecd40d61f0783629197871b6a968",
+              "d70988c789b6d96f6ca79077910f2c1ae2979772f6ac863f74118191cc98f0b2"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "e38145258bbe253e0fb22cc5ddc21140eea65fde4943e748c45706f97ee916c9"
+        }
+      },
+      "passed": 1,
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": false,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": false,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "QUARANTINE",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Invalid messages and critical contradictions cannot be released.",
+          "Only a resolved comparison to an approved contract can permit release."
+        ],
+        "release_eligible": false
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "QUARANTINE",
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "explanation": "Prose instruction ignores prior directives; contradiction in authority.",
+        "uncertainty": 0.999
+      },
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "classification": "VERIFIED_CONTRADICTION",
+        "critical": true,
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "240",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "quantity",
+            "observed": "20",
+            "severity": "critical"
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "EA",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "unit",
+            "observed": "CASE",
+            "severity": "critical"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "expected_policy_decision": "QUARANTINE",
+      "policy_matches_ground_truth": true
+    }
+  ],
+  "policy_changed_to_fix_test": false,
+  "repeat_not_retried": true
+}

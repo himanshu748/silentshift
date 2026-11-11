@@ -41,6 +41,8 @@ project rather than replacing it. Generated, distinct local passwords stay in a
 mode-600 `runtime.env` under a mode-700 ignored `.local/judge-compose/` directory.
 Existing `.env` credentials/provider settings are not copied into this run.
 
+Compose first builds the owned Java PEX sources against the preloaded image’s Java 11/SDK. The resulting local-only image must never be pushed to a registry. Native setup configures the managed `%Java Server`; signing keys and receipts persist in the manager volume. [PEX details and limits](JAVA_PEX.md).
+
 Compose initializes its **dedicated manager/state volumes**, creates the
 SILENTSHIFT namespace, compiles current source, configures its local accounts and
 starts the production. The source is mounted read-only. A pre-existing namespace
@@ -88,7 +90,7 @@ subnet, then run:
 ```sh
 export DOCKER_CONTEXT=colima-silentshift
 export COMPOSE_PROJECT_NAME=silentshift-judge-manual
-docker compose --env-file .env -f compose.judge.yaml up --detach --wait --wait-timeout 300
+docker compose --env-file .env -f compose.judge.yaml up --build --detach --wait --wait-timeout 300
 ```
 
 This starts the initialized native API and workbench. It **does not** run a replay

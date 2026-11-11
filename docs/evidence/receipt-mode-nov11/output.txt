@@ -1,0 +1,1042 @@
+===== red.log =====
+
+Node: silentshift-bonus-load-pex-verified-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+===============================================================================
+Directory: /home/irisowner/citation-tests/
+===============================================================================
+  (root) begins ...
+    SilentShift.Test.PEXChecks begins ...
+      TestPersistedExecutionModeAndRetry() begins ...
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+AssertEquals:Persisted replay mode overrides the deployment environment (failed)  <<==== **FAILED**   (root):SilentShift.Test.PEXChecks:TestPersistedExecutionModeAndRetry
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:reply.SignatureValid (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:Reconstructed request reuses the original signed receipt (passed)
+        AssertEquals:after.%Get("routing")=="QUARANTINED" (passed)
+        AssertEquals:after.%Get("delivery_count")==0 (passed)
+        LogMessage:Duration of execution: .238455 sec.
+      TestPersistedExecutionModeAndRetry failed
+    SilentShift.Test.PEXChecks failed
+  Skipping deleting classes
+  (root) failed
+
+Use the following URL to view the result:
+http://10.253.0.130:52773/csp/sys/%25UnitTest.Portal.Indices.cls?Index=11&$NAMESPACE=SILENTSHIFT
+Some tests FAILED in suites:
+  ,(root)
+SILENTSHIFT>
+SS_TEST_EXECUTED
+
+SILENTSHIFT>
+
+===== native-command.txt =====
+set sc=$system.OBJ.Load("/tmp/ReceiptSupport.cls","ck")
+if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt
+set ^UnitTestRoot="/home/irisowner/citation-tests/"
+set manager=##class(%UnitTest.Manager).%New()
+set status=manager.RunTest("","/nodelete")
+write "SS_NATIVE_DONE",!
+halt
+
+===== native.log =====
+
+Node: silentshift-bonus-load-pex-verified-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+Load started on 11/11/2026 07:52:55
+Loading file /tmp/ReceiptSupport.cls as udl
+Compiling class SilentShift.PEX.Support
+Compiling routine SilentShift.PEX.Support.1
+Load finished successfully.
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+===============================================================================
+Directory: /home/irisowner/citation-tests/
+===============================================================================
+  (root) begins ...
+Load of directory started on 11/11/2026 07:52:55 '*.xml;*.XML;*.cls;*.mac;*.int;*.inc;*.CLS;*.MAC;*.INT;*.INC'
+
+Loading file /home/irisowner/citation-tests/AdapterChecks.cls as udl
+Loading file /home/irisowner/citation-tests/BackendChecks.cls as udl
+Loading file /home/irisowner/citation-tests/HeldoutEval.cls as udl
+Loading file /home/irisowner/citation-tests/CitedFindingsChecks.cls as udl
+Loading file /home/irisowner/citation-tests/IPMChecks.cls as udl
+Loading file /home/irisowner/citation-tests/HeldoutPrecedents.cls as udl
+Loading file /home/irisowner/citation-tests/PEXChecks.cls as udl
+Loading file /home/irisowner/citation-tests/PrecedentChecks.cls as udl
+Loading file /home/irisowner/citation-tests/ProviderChecks.cls as udl
+Loading file /home/irisowner/citation-tests/ProviderProbe.cls as udl
+Loading file /home/irisowner/citation-tests/ReplayChecks.cls as udl
+Loading file /home/irisowner/citation-tests/RuntimeChecks.cls as udl
+Loading file /home/irisowner/citation-tests/TraceChecks.cls as udl
+Loading file /home/irisowner/citation-tests/WorkflowChecks.cls as udl
+
+Compilation started on 11/11/2026 07:52:56 with qualifiers '/nodelete'
+Compiling 14 classes
+Compiling class SilentShift.Test.AdapterChecks
+Compiling class SilentShift.Test.BackendChecks
+Compiling class SilentShift.Test.HeldoutEval
+Compiling class SilentShift.Test.CitedFindingsChecks
+Compiling class SilentShift.Test.IPMChecks
+Compiling class SilentShift.Test.PEXChecks
+Compiling class SilentShift.Test.PrecedentChecks
+Compiling class SilentShift.Test.ProviderChecks
+Compiling class SilentShift.Test.ProviderProbe
+Compiling class SilentShift.Test.ReplayChecks
+Compiling class SilentShift.Test.RuntimeChecks
+Compiling class SilentShift.Test.TraceChecks
+Compiling class SilentShift.Test.WorkflowChecks
+Compiling class SilentShift.Test.HeldoutPrecedents
+Compiling routine SilentShift.Test.AdapterChecks.1
+Compiling routine SilentShift.Test.BackendChecks.1
+Compiling routine SilentShift.Test.CitedFindingsChecks.1
+Compiling routine SilentShift.Test.HeldoutEval.1
+Compiling routine SilentShift.Test.IPMChecks.1
+Compiling routine SilentShift.Test.PEXChecks.1
+Compiling routine SilentShift.Test.HeldoutPrecedents.1
+Compiling routine SilentShift.Test.PrecedentChecks.1
+Compiling routine SilentShift.Test.ProviderChecks.1
+Compiling routine SilentShift.Test.ProviderProbe.1
+Compiling routine SilentShift.Test.RuntimeChecks.1
+Compiling routine SilentShift.Test.TraceChecks.1
+Compiling routine SilentShift.Test.WorkflowChecks.1
+Compiling routine SilentShift.Test.ReplayChecks.1
+Compilation finished successfully in 0.196s.
+
+Load finished successfully.
+
+    SilentShift.Test.AdapterChecks begins ...
+      TestContracts() begins ...
+        AssertTrue:ordinary_name (passed)
+        AssertTrue:unsafe_name_1 (passed)
+        AssertTrue:unsafe_name_2 (passed)
+        AssertTrue:unsafe_name_3 (passed)
+        AssertTrue:unsafe_name_4 (passed)
+        AssertTrue:unsafe_name_5 (passed)
+        AssertTrue:unsafe_name_6 (passed)
+        AssertTrue:unsafe_name_7 (passed)
+        AssertTrue:unsafe_name_8 (passed)
+        AssertTrue:unsafe_name_9 (passed)
+        AssertTrue:unsafe_name_10 (passed)
+        AssertTrue:envelope_only_two_fields (passed)
+        AssertTrue:original_preserved (passed)
+        AssertTrue:no_partner_clock (passed)
+        AssertTrue:reserved_message (passed)
+        AssertTrue:reserved_raw_payload (passed)
+        AssertTrue:reserved_scenario_id (passed)
+        AssertTrue:reserved_dataset_version (passed)
+        AssertTrue:reserved_clock (passed)
+        AssertTrue:reserved_fault (passed)
+        AssertTrue:reserved_references (passed)
+        AssertTrue:reserved_action (passed)
+        AssertTrue:reserved_review (passed)
+        AssertTrue:reserved_reviewer (passed)
+        AssertTrue:reserved_case_id (passed)
+        AssertTrue:invalid_json_1 (passed)
+        AssertTrue:invalid_json_2 (passed)
+        AssertTrue:invalid_json_3 (passed)
+        AssertTrue:invalid_json_4 (passed)
+        LogMessage:Duration of execution: .033409 sec.
+      TestContracts passed
+      TestIterator() begins ...
+        AssertTrue:installed_api_last_row_has_at_end (passed)
+        AssertTrue:production_iterator_keeps_single_last_row (passed)
+        AssertTrue:production_iterator_keeps_all_three (passed)
+        AssertTrue:production_iterator_obeys_two_row_cap (passed)
+        AssertTrue:zero_limit_clamped_to_one (passed)
+        AssertTrue:safe_probe_is_regular (passed)
+        LogMessage:Duration of execution: .004909 sec.
+      TestIterator passed
+    SilentShift.Test.AdapterChecks passed
+    SilentShift.Test.BackendChecks begins ...
+      TestBoundedRedactedDiagnostic() begins ...
+        AssertEquals:$LENGTH(##class(SilentShift.IPM).RedactDiagnostic(message))== 2048 (passed)
+        AssertTrue:result '[ secret (passed)
+        AssertTrue:result [ "[REDACTED]" (passed)
+        AssertTrue:result '[ secret (passed)
+        AssertTrue:result [ "[REDACTED]" (passed)
+        AssertTrue:result '[ secret (passed)
+        AssertTrue:result [ "[REDACTED]" (passed)
+        LogMessage:Duration of execution: .000255 sec.
+      TestBoundedRedactedDiagnostic passed
+      TestCompactAcknowledgment() begins ...
+        AssertStatusOK:sc (passed)
+        AssertEquals:result.%Size()== 3 (passed)
+        AssertEquals:result.%Get("case_id")== id (passed)
+        AssertEquals:result.%Get("routing")== "PROCESSING" (passed)
+        AssertEquals:result.%Get("version")== 1 (passed)
+        AssertTrue:full.%IsDefined("message") (passed)
+        AssertTrue:full.%IsDefined("events") (passed)
+        LogMessage:Duration of execution: .003281 sec.
+      TestCompactAcknowledgment passed
+      TestDefaultHostSettings() begins ...
+        AssertStatusOK:sc (passed)
+        AssertEquals:value== 10 (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:value== 10 (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:value== "" (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:value== "" (passed)
+        AssertEquals:##class(SilentShift.Provider.Config).ModelSetting()== "" (passed)
+        AssertEquals:##class(SilentShift.AI.Investigator).WaitSeconds()== +expected (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:value== ##class(SilentShift.Adapter.PartnerJSON).#ROOT (passed)
+        AssertTrue:'##class(SilentShift.Adapter.PartnerJSON).RootSafe("relative/inbox") (passed)
+        AssertTrue:'##class(SilentShift.Adapter.PartnerJSON).RootSafe("/tmp/../tmp") (passed)
+        LogMessage:Duration of execution: .001715 sec.
+      TestDefaultHostSettings passed
+      TestExactToolAllowlist() begins ...
+        AssertTrue:##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:'##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:'##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:'##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:'##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        AssertTrue:'##class(SilentShift.AI.Investigator).IsAllowedTool(name) (passed)
+        LogMessage:Duration of execution: .000298 sec.
+      TestExactToolAllowlist passed
+      TestPromptBytes() begins ...
+        AssertEquals:$LENGTH($ZCONVERT(prompt, "O", "UTF8"))== 1959 (passed)
+        AssertEquals:##class(SilentShift.Bridge).Hash(prompt)== "6e7453ef1af46af157c64dbc0ea93953da508c5b278b3dd1c25b71b5ff7aedc3" (passed)
+        LogMessage:Duration of execution: .008867 sec.
+      TestPromptBytes passed
+      TestSharedDefaultAndCatalog() begins ...
+        AssertEquals:##class(SilentShift.Provider.Config).DefaultModel()== "qwen3-silentshift:4b-instruct" (passed)
+        AssertEquals:rules.%Size()== 7 (passed)
+        AssertEquals:rules.%Get(4).%Get("description")== "Uncertainty above 0.35 requires review." (passed)
+        LogMessage:Duration of execution: .007572 sec.
+      TestSharedDefaultAndCatalog passed
+    SilentShift.Test.BackendChecks passed
+    SilentShift.Test.CitedFindingsChecks begins ...
+      TestAmendmentCitationCompletenessStillRequired() begins ...
+        AssertTrue:Approved amendment requires predecessor and amendment citations (passed)
+        AssertEquals:format.%Get("json_schema").%Get("schema").%Get("properties").%Get("evidence_ids").%Get("const").%ToJSON()==ids.%ToJSON() (passed)
+        AssertEquals:A missing citation still denies release (passed)
+        AssertTrue:'policy.%Get("downstream_permitted") (passed)
+        AssertEquals:Complete citations permit this independently resolved fixture (passed)
+        AssertEquals:Complete citations never release a critical contradiction (passed)
+        AssertTrue:Historical or foreign IDs still deny release (passed)
+        LogMessage:Duration of execution: .000847 sec.
+      TestAmendmentCitationCompletenessStillRequired passed
+      TestCitationContainment() begins ...
+        AssertEquals:Exact current-evidence quote may contain the transaction (passed)
+        AssertTrue:Quotation cannot grant delivery (passed)
+        AssertEquals:Invented quote cannot justify grounded quarantine (passed)
+        AssertEquals:Agent never releases a rule hold (passed)
+        LogMessage:Duration of execution: .000641 sec.
+      TestCitationContainment passed
+      TestFinalFormatAfterInvocationReads() begins ...
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:Format cannot suppress required evidence reads (passed)
+        AssertEquals:Pre-read request bytes remain unchanged (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:Another invocation's reads do not authorize final format (passed)
+        AssertTrue:Four invocation-scoped reads enable final format (passed)
+        AssertTrue:Final request cannot call more tools (passed)
+        AssertEquals:Constrained final output is requested (passed)
+        AssertEquals:Grammar binds the current server assessment, not partner prose (passed)
+        AssertEquals:Evidence and UTF-8 messages remain intact (passed)
+        AssertTrue:Keyless replay request is unchanged (passed)
+        AssertEquals:result==raw (passed)
+        AssertTrue:Other providers are not silently reformatted (passed)
+        LogMessage:Duration of execution: .004481 sec.
+      TestFinalFormatAfterInvocationReads passed
+      TestProseCitationPaths() begins ...
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:Nested prose path is visible to the model (passed)
+        AssertTrue:JSON pointer escaping survives native projection (passed)
+        AssertEquals:Prose is returned intact (passed)
+        LogMessage:Duration of execution: .007818 sec.
+      TestProseCitationPaths passed
+    SilentShift.Test.CitedFindingsChecks passed
+    SilentShift.Test.PEXChecks begins ...
+      TestInvalidJavaRequestCannotCreateReceipt() begins ...
+        AssertStatusOK:sc (passed)
+        AssertTrue:Java operation rejects a non-final, malformed outcome (passed)
+        LogMessage:Duration of execution: .008098 sec.
+      TestInvalidJavaRequestCannotCreateReceipt passed
+      TestLegacyAndInvalidExecutionModes() begins ...
+        AssertEquals:Explicit persisted mode is authoritative (passed)
+        AssertEquals:Legacy replay provenance remains recognizable (passed)
+        AssertEquals:Legacy live provenance remains recognizable (passed)
+        AssertTrue:Unknown or malformed provenance must not be relabeled from the environment (passed)
+        AssertTrue:Unknown or malformed provenance must not be relabeled from the environment (passed)
+        AssertTrue:Unknown or malformed provenance must not be relabeled from the environment (passed)
+        AssertTrue:Unknown or malformed provenance must not be relabeled from the environment (passed)
+        AssertTrue:Unknown or malformed provenance must not be relabeled from the environment (passed)
+        LogMessage:Duration of execution: .000402 sec.
+      TestLegacyAndInvalidExecutionModes passed
+      TestPersistedExecutionModeAndRetry() begins ...
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:Persisted replay mode overrides the deployment environment (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:reply.SignatureValid (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:Reconstructed request reuses the original signed receipt (passed)
+        AssertEquals:after.%Get("routing")=="QUARANTINED" (passed)
+        AssertEquals:after.%Get("delivery_count")==0 (passed)
+        LogMessage:Duration of execution: .027095 sec.
+      TestPersistedExecutionModeAndRetry passed
+      TestRealGatewayRoundTripAndRetry() begins ...
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:Real Java PEX verifies its RSA signature (passed)
+        AssertEquals:receipt.%Get("signed").%Get("sha256")==##class(SilentShift.Bridge).Hash(##class(SilentShift.Bridge).Canonical(request.PayloadJSON)) (passed)
+        AssertStatusOK:sc (passed)
+        AssertEquals:Retry retains original timestamp and signature (passed)
+        LogMessage:Duration of execution: .014103 sec.
+      TestRealGatewayRoundTripAndRetry passed
+      TestUnavailableExporterPreservesRouting() begins ...
+        AssertStatusOK:sc (passed)
+07:52:56.558:Ens.Director: Production 'SilentShift.Production' updating... (UpdateTimeout: 10s, Force flag: 0)
+07:52:56.569:Ens.Director: ConfigItem 'ReceiptExporter' (EnsLib.PEX.BusinessOperation) stopped in job 670
+07:52:56.570:Ens.Director: Production 'SilentShift.Production' updated.
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:sc (passed)
+        AssertStatusOK:Java outage does not change the successful committed route (passed)
+07:53:01.581:Ens.Director: Production 'SilentShift.Production' updating... (UpdateTimeout: 10s, Force flag: 0)
+07:53:01.593:Ens.Director: Production 'SilentShift.Production' updated.
+        AssertStatusOK:Restore the isolated Java operation after the outage test (passed)
+        AssertEquals:Java outage cannot change a hold (passed)
+        AssertEquals:Java outage creates no simulator delivery (passed)
+        LogMessage:Duration of execution: 5.241769 sec.
+      TestUnavailableExporterPreservesRouting passed
+    SilentShift.Test.PEXChecks passed
+    SilentShift.Test.ProviderChecks begins ...
+      TestAuthorizationRejectsUnknownCapability() begins ...
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("",.binding) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("Basic synthetic",.binding) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Lease).AuthorizeBearer("Bearer synthetic-unknown-capability-0000000000000000",.binding) (passed)
+        AssertStatusNotOK:sc (passed)
+        AssertTrue:'$ISOBJECT(request) (passed)
+        LogMessage:Duration of execution: .000419 sec.
+      TestAuthorizationRejectsUnknownCapability passed
+      TestExpiredCapability() begins ...
+        AssertTrue:'accepted (passed)
+        AssertTrue:'$DATA(^CacheTemp.SilentShift.Provider("lease",key)) (passed)
+        LogMessage:Duration of execution: .000781 sec.
+      TestExpiredCapability passed
+      TestMetadataOnlyMessages() begins ...
+        AssertEquals:data.%Get("granularity")=="provider_http_call" (passed)
+        AssertEquals:data.%GetTypeOf("provider_retry_count")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        AssertTrue:'data.%Get("content_retained") (passed)
+        AssertTrue:'data.%IsDefined("prompt") && 'data.%IsDefined("messages") && 'data.%IsDefined("authorization") (passed)
+        AssertStatusOK:sc (passed)
+        AssertTrue:Final flag survives native message storage (passed)
+        AssertEquals:Format version survives native message storage (passed)
+        AssertEquals:data.%GetTypeOf("upstream_http_status")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("response_usage")=="null" (passed)
+        AssertEquals:data.%Get("http_status")==502 (passed)
+        AssertTrue:'data.%Get("fallback_used") (passed)
+        AssertTrue:'data.%IsDefined("raw_response") && 'data.%IsDefined("arguments") (passed)
+        LogMessage:Duration of execution: .003276 sec.
+      TestMetadataOnlyMessages passed
+      TestPerCallModelTokensAndLatency() begins ...
+        AssertEquals:data.%Get("provider")=="ollama/openai-compatible" (passed)
+        AssertEquals:data.%Get("model")==request.Model (passed)
+        AssertEquals:data.%Get("prompt_version")=="test-prompt/1" (passed)
+        AssertEquals:data.%Get("production_session_id")==42 (passed)
+        AssertEquals:data.%Get("duration_ms")==123 (passed)
+        AssertEquals:usage.%Get("prompt_tokens")==257 (passed)
+        AssertEquals:usage.%Get("completion_tokens")==17 (passed)
+        AssertEquals:usage.%Get("total_tokens")==274 (passed)
+        AssertEquals:data.%Get("usage_scope")=="actual_http_response_only" (passed)
+        AssertEquals:data.%Get("tool_calls").%Size()==1 (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        AssertEquals:data.%Get("response_usage").%Get("prompt_tokens")==0 (passed)
+        LogMessage:Duration of execution: .002384 sec.
+      TestPerCallModelTokensAndLatency passed
+      TestPlaybackCannotLookLikeLiveInference() begins ...
+        AssertEquals:data.%Get("granularity")=="recorded_provider_response" (passed)
+        AssertEquals:data.%Get("usage_scope")=="unavailable_for_replay" (passed)
+        AssertEquals:data.%GetTypeOf("response_usage")=="null" (passed)
+        AssertEquals:data.%GetTypeOf("upstream_http_status")=="null" (passed)
+        AssertEquals:data.%Get("replay_record_id")==##class(SilentShift.Provider.Replay).#RECORDID (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")=="null" (passed)
+        LogMessage:Duration of execution: .000502 sec.
+      TestPlaybackCannotLookLikeLiveInference passed
+      TestTransportAuditReadPrivilege() begins ...
+        AssertEquals:Provider application can verify scoped tool-read receipts (passed)
+        AssertEquals:Provider role receives no audit-table write privilege (passed)
+        AssertEquals:Provider role receives no audit-table write privilege (passed)
+        AssertEquals:Provider role receives no audit-table write privilege (passed)
+        AssertEquals:Provider role receives no additional reference-table SQL access (passed)
+        LogMessage:Duration of execution: .003805 sec.
+      TestTransportAuditReadPrivilege passed
+    SilentShift.Test.ProviderChecks passed
+    SilentShift.Test.ReplayChecks begins ...
+      TestPlaybackScopeAndCriticalPolicy() begins ...
+        AssertTrue:##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'##class(SilentShift.Provider.Replay).MatchesCase(data.%ToJSON()) (passed)
+        AssertTrue:'policy.%Get("downstream_permitted") (passed)
+        AssertEquals:policy.decision=="QUARANTINE" (passed)
+        LogMessage:Duration of execution: .003749 sec.
+      TestPlaybackScopeAndCriticalPolicy passed
+      TestRecordedResponseProgression() begins ...
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:choice.%Get("finish_reason")=="tool_calls" (passed)
+        AssertEquals:choice.%Get("message").%Get("tool_calls").%Size()==1 (passed)
+        AssertTrue:'data.%IsDefined("usage") (passed)
+        AssertEquals:proposal.decision=="QUARANTINE" (passed)
+        AssertEquals:proposal.%Get("evidence_ids").%Get(0)=="contract:PO-2048:v1" (passed)
+        AssertEquals:choice.%Get("finish_reason")=="stop" (passed)
+        AssertTrue:A final response cannot skip the four native evidence reads (passed)
+        AssertTrue:Playback has only five bounded responses (passed)
+        LogMessage:Duration of execution: .006018 sec.
+      TestRecordedResponseProgression passed
+    SilentShift.Test.ReplayChecks passed
+    SilentShift.Test.RuntimeChecks begins ...
+      TestApprovedReferenceLimit() begins ...
+        AssertStatusOK:sc (passed)
+        AssertTrue:snapshot_contains_all_11_references (passed)
+        AssertTrue:isolated_synthetic_scope (passed)
+        AssertTrue:native_partner_to_semantic_trace (passed)
+        AssertTrue:native_semantic_to_investigator_trace (passed)
+        AssertTrue:semantic_assessment_completed (passed)
+        AssertTrue:routed_to_review (passed)
+        AssertTrue:policy_denies_delivery (passed)
+        AssertTrue:no_delivery_rows (passed)
+        AssertTrue:specific_evidence_limit_failure (passed)
+        AssertTrue:model_not_invoked_boolean (passed)
+        AssertTrue:no_tool_or_chat_audits (passed)
+        AssertTrue:no_model_proposal (passed)
+        AssertTrue:observed_reference_budget (passed)
+        LogMessage:Duration of execution: .202398 sec.
+      TestApprovedReferenceLimit passed
+      TestPeerReferenceLimit() begins ...
+        AssertStatusOK:sc (passed)
+        AssertTrue:snapshot_contains_all_11_references (passed)
+        AssertTrue:isolated_synthetic_scope (passed)
+        AssertTrue:native_partner_to_semantic_trace (passed)
+        AssertTrue:native_semantic_to_investigator_trace (passed)
+        AssertTrue:semantic_assessment_completed (passed)
+        AssertTrue:routed_to_review (passed)
+        AssertTrue:policy_denies_delivery (passed)
+        AssertTrue:no_delivery_rows (passed)
+        AssertTrue:specific_evidence_limit_failure (passed)
+        AssertTrue:model_not_invoked_boolean (passed)
+        AssertTrue:no_tool_or_chat_audits (passed)
+        AssertTrue:no_model_proposal (passed)
+        AssertTrue:observed_reference_budget (passed)
+        LogMessage:Duration of execution: .12874 sec.
+      TestPeerReferenceLimit passed
+    SilentShift.Test.RuntimeChecks passed
+    SilentShift.Test.TraceChecks begins ...
+      TestTypedMetadata() begins ...
+        AssertEquals:data.%Get("usage_scope")== "final_response_only" (passed)
+        AssertEquals:data.%GetTypeOf("session_totals")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("provider_round_usage")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("provider_retry_count")== "null" (passed)
+        AssertEquals:data.%GetTypeOf("billing_cost")== "null" (passed)
+        AssertTrue:'data.%Get("content_retained") (passed)
+        LogMessage:Duration of execution: .000524 sec.
+      TestTypedMetadata passed
+    SilentShift.Test.TraceChecks passed
+  Skipping deleting classes
+  (root) passed
+
+Use the following URL to view the result:
+http://10.253.0.130:52773/csp/sys/%25UnitTest.Portal.Indices.cls?Index=13&$NAMESPACE=SILENTSHIFT
+All PASSED
+SILENTSHIFT>
+SS_NATIVE_DONE
+
+SILENTSHIFT>
+
+===== mode-switch-command.txt =====
+set row=##class(%SQL.Statement).%ExecDirect(,"SELECT TOP 1 CaseId FROM SilentShift_Data.CaseRecord WHERE Source='synthetic-pex-mode-regression' ORDER BY ReceivedAt DESC")
+if 'row.%Next() write "SS_NO_CASE",! halt
+set id=row.%Get("CaseId"),request=##class(SilentShift.PEX.Support).Request(id)
+set sc=##class(Ens.Director).CreateBusinessService("Partner",.service)
+if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt
+set sc=service.SendRequestSync("ReceiptExporter",request,.reply,15)
+if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt
+set payload=##class(%DynamicObject).%FromJSON(request.PayloadJSON),receipt=##class(%DynamicObject).%FromJSON(reply.ReceiptJSON),signed=receipt.%Get("signed")
+set report={"case_id":(id),"runtime":($ZVERSION),"process_mode":($system.Util.GetEnviron("SILENTSHIFT_PROVIDER_MODE")),"persisted_mode":(payload.%Get("execution_mode")),"sha256":(signed.%Get("sha256")),"receipt_bytes_sha256":(##class(SilentShift.Bridge).Hash(reply.ReceiptJSON)),"signature_valid":(reply.SignatureValid)}
+write "SS_MODE_PROBE=",report.%ToJSON(),!
+halt
+
+===== probe-recorded-replay.log =====
+
+Node: silentshift-bonus-load-pex-verified-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_MODE_PROBE={"case_id":"E8133378-DDA4-11F1-9302-4228E55B686E","runtime":"IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT","process_mode":"recorded-replay","persisted_mode":"recorded-replay","sha256":"03f5edf0ee9a7440f13b231828524d6d28f55e6e1c6afddb60ef83c92965ddfa","receipt_bytes_sha256":"f73012f04f53964f6b01d7993b22386276fa8f30ae13c22d2b721e442f5bb79c","signature_valid":1}
+
+SILENTSHIFT>
+
+===== probe-live.log =====
+
+Node: silentshift-bonus-load-pex-verified-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_MODE_PROBE={"case_id":"E8133378-DDA4-11F1-9302-4228E55B686E","runtime":"IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT","process_mode":"live","persisted_mode":"recorded-replay","sha256":"03f5edf0ee9a7440f13b231828524d6d28f55e6e1c6afddb60ef83c92965ddfa","receipt_bytes_sha256":"f73012f04f53964f6b01d7993b22386276fa8f30ae13c22d2b721e442f5bb79c","signature_valid":1}
+
+SILENTSHIFT>
+
+===== junit.log =====
+SILENTSHIFT_PEX_BUILD_OK
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ ReceiptStoreTest ✔
+│     ├─ corruptedExistingRecordIsNeverReplaced() ✔
+│     ├─ signedReceiptRejectsTampering() ✔
+│     ├─ inputBoundsAndTraversal() ✔
+│     ├─ standardHashVector() ✔
+│     ├─ laterDecisionAppendsWithoutOverwriting() ✔
+│     ├─ concurrentRetriesPublishOnce() ✔
+│     └─ retryAndRestartReuseOriginal() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 685 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         7 tests found           ]
+[         0 tests skipped         ]
+[         7 tests started         ]
+[         0 tests aborted         ]
+[         7 tests successful      ]
+[         0 tests failed          ]
+
+
+===== pytest.log =====
+........................................................................ [ 18%]
+........................................................................ [ 36%]
+........................................................................ [ 54%]
+........................................................................ [ 73%]
+........................................................................ [ 91%]
+..................................                                       [100%]
+394 passed in 19.98s
+
+===== types.log =====
+
+> silentshift-web@0.2.1 check
+> tsc --noEmit
+
+
+===== build.log =====
+
+> silentshift-web@0.2.1 build
+> tsc --noEmit && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 2166 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/run-locally/index.html                                         1.50 kB │ gzip:   0.76 kB
+dist/product/index.html                                             1.52 kB │ gzip:   0.79 kB
+dist/evidence-record/index.html                                     1.57 kB │ gzip:   0.77 kB
+dist/safeguards/index.html                                          1.57 kB │ gzip:   0.78 kB
+dist/how-it-works/index.html                                        1.64 kB │ gzip:   0.84 kB
+dist/index.html                                                     1.98 kB │ gzip:   0.97 kB
+dist/assets/ibm-plex-mono-vietnamese-500-normal-C8zxqsMH.woff       5.61 kB
+dist/assets/ibm-plex-mono-vietnamese-400-normal-DDuiU_S-.woff       5.62 kB
+dist/assets/ibm-plex-mono-cyrillic-ext-500-normal-BIfNGwUT.woff     5.77 kB
+dist/assets/ibm-plex-mono-cyrillic-ext-400-normal-DMdlQ8Kv.woff     5.82 kB
+dist/assets/ibm-plex-mono-vietnamese-400-normal-BulugwFq.woff2      5.86 kB
+dist/assets/ibm-plex-mono-vietnamese-500-normal-DZ4AoWbu.woff2      6.04 kB
+dist/assets/ibm-plex-mono-cyrillic-ext-400-normal-xuaO2J-f.woff2    6.91 kB
+dist/assets/ibm-plex-mono-cyrillic-ext-500-normal-BqneJy0T.woff2    6.97 kB
+dist/assets/ibm-plex-mono-cyrillic-400-normal-CEL4l2ZJ.woff         7.20 kB
+dist/assets/ibm-plex-mono-cyrillic-500-normal-Ael50iVv.woff         7.20 kB
+dist/assets/ibm-plex-mono-cyrillic-400-normal-BSMlKf0J.woff2        8.35 kB
+dist/assets/ibm-plex-mono-cyrillic-500-normal-Bq9vWWag.woff2        8.46 kB
+dist/assets/manrope-vietnamese-wght-normal-usUDDRr7.woff2           8.52 kB
+dist/assets/manrope-greek-wght-normal-DL7QRZyv.woff2                9.44 kB
+dist/assets/ibm-plex-mono-latin-ext-400-normal-D3D2R8hC.woff       11.76 kB
+dist/assets/ibm-plex-mono-latin-ext-500-normal-CZ70TYgx.woff       11.76 kB
+dist/assets/ibm-plex-mono-latin-400-normal-CvHOgSBP.woff           13.14 kB
+dist/assets/ibm-plex-mono-latin-500-normal-CB9ihrfo.woff           13.15 kB
+dist/assets/ibm-plex-mono-latin-ext-400-normal-BmRBH3aV.woff2      13.34 kB
+dist/assets/ibm-plex-mono-latin-ext-500-normal-CAhNIIs5.woff2      13.43 kB
+dist/assets/manrope-cyrillic-wght-normal-Dvxsihut.woff2            14.50 kB
+dist/assets/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2          14.70 kB
+dist/assets/ibm-plex-mono-latin-500-normal-DSY6xOcd.woff2          14.88 kB
+dist/assets/manrope-latin-ext-wght-normal-Ch3YOpNY.woff2           15.12 kB
+dist/assets/manrope-latin-wght-normal-DHIcAJRg.woff2               24.83 kB
+dist/assets/main-TbW3NGiD.css                                      67.43 kB │ gzip:  14.96 kB
+dist/assets/main-BuVjguk5.js                                      454.76 kB │ gzip: 132.09 kB
+
+[33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use client" in "node_modules/lucide-react/dist/esm/context.mjs" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m node_modules/lucide-react/dist/esm/context.mjs:2:1 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m "use client";
+ [38;5;240m  │[0m ──────┬──────
+ [38;5;240m  │[0m       ╰──────── module level directive may not be preserved
+ [38;5;240m  │[0m
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+[33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use client" in "node_modules/lucide-react/dist/esm/Icon.mjs" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m node_modules/lucide-react/dist/esm/Icon.mjs:2:1 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m "use client";
+ [38;5;240m  │[0m ──────┬──────
+ [38;5;240m  │[0m       ╰──────── module level directive may not be preserved
+ [38;5;240m  │[0m
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+✓ built in 491ms
+
+===== browser.log =====
+
+> silentshift-web@0.2.1 test:e2e
+> playwright test
+
+[WebServer] (node:36873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 54 tests using 1 worker
+
+(node:36874) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   1 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Investigations renders an honest disconnected state (770ms)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:45 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   2 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Review renders an honest disconnected state (315ms)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   3 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Scenario Lab renders an honest disconnected state (339ms)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/overview
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/overview
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   4 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Overview renders an honest disconnected state (324ms)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:46 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   5 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Message Explorer renders an honest disconnected state (307ms)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/evaluations
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/evaluations
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   6 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Evaluations renders an honest disconnected state (314ms)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/policies
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/policies
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   7 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › Policies renders an honest disconnected state (315ms)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:47 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   8 [desktop-disconnected] › e2e/disconnected.spec.ts:12:3 › System Health renders an honest disconnected state (358ms)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓   9 [desktop-disconnected] › e2e/disconnected.spec.ts:27:1 › login failure preserves native unavailability and Escape restores focus (726ms)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:48 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  10 [desktop-disconnected] › e2e/disconnected.spec.ts:44:1 › keyboard skip link reaches the main workspace (324ms)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  11 [desktop-disconnected] › e2e/disconnected.spec.ts:52:1 › navigation remains usable with reduced motion and captures actual UI (441ms)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:49 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  12 [desktop-disconnected] › e2e/disconnected.spec.ts:76:1 › quick navigation works with keyboard and restores focus on Escape (409ms)
+  ✓  13 [desktop-disconnected] › e2e/landing.spec.ts:5:1 › public landing and section links never request the native API (3.9s)
+  ✓  14 [desktop-disconnected] › e2e/landing.spec.ts:38:1 › public proof is scoped and real JSON and product captures are available (425ms)
+[WebServer] 1:25:54 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:54 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:54 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:25:54 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  15 [desktop-disconnected] › e2e/landing.spec.ts:74:1 › workbench action opens the actual unavailable-upstream experience (406ms)
+  ✓  16 [desktop-disconnected] › e2e/landing.spec.ts:89:1 › keyboard skip link and reduced-motion landing remain usable (312ms)
+  ✓  17 [desktop-disconnected] › e2e/landing.spec.ts:108:1 › 320px landing preserves readable actions without overflow and captures the real page (373ms)
+  ✓  18 [desktop-disconnected] › e2e/landing.spec.ts:148:1 › illustrated decision changes with authority and walkthrough completes without API calls (4.5s)
+  ✓  19 [desktop-disconnected] › e2e/landing.spec.ts:164:1 › reduced motion keeps the decision interactive without animation (432ms)
+  ✓  20 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › how-it-works is a separate public document with a refreshable URL (589ms)
+  ✓  21 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › product is a separate public document with a refreshable URL (557ms)
+  ✓  22 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › safeguards is a separate public document with a refreshable URL (533ms)
+  ✓  23 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › evidence-record is a separate public document with a refreshable URL (592ms)
+  ✓  24 [desktop-disconnected] › e2e/multipage.spec.ts:12:3 › run-locally is a separate public document with a refreshable URL (548ms)
+  ✓  25 [desktop-disconnected] › e2e/multipage.spec.ts:39:1 › public navigation supports keyboard, history and reduced motion (956ms)
+  ✓  26 [desktop-disconnected] › e2e/session-entry.spec.ts:4:1 › missing session offers one workbench connection action without stealing focus (354ms)
+  ✓  27 [desktop-disconnected] › e2e/session-entry.spec.ts:30:1 › permission refusal stays distinct from a missing session (353ms)
+(node:36929) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  28 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Investigations renders an honest disconnected state (329ms)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  29 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Review renders an honest disconnected state (304ms)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:05 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  30 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Scenario Lab renders an honest disconnected state (338ms)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/overview
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/overview
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  31 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Overview renders an honest disconnected state (336ms)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  32 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Message Explorer renders an honest disconnected state (302ms)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/evaluations
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/evaluations
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:06 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  33 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Evaluations renders an honest disconnected state (305ms)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/policies
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/policies
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  34 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › Policies renders an honest disconnected state (303ms)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  35 [mobile-disconnected] › e2e/disconnected.spec.ts:12:3 › System Health renders an honest disconnected state (333ms)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:07 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  36 [mobile-disconnected] › e2e/disconnected.spec.ts:27:1 › login failure preserves native unavailability and Escape restores focus (672ms)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  37 [mobile-disconnected] › e2e/disconnected.spec.ts:44:1 › keyboard skip link reaches the main workspace (305ms)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:08 PM [vite] http proxy error: /api/scenarios
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  38 [mobile-disconnected] › e2e/disconnected.spec.ts:52:1 › navigation remains usable with reduced motion and captures actual UI (421ms)
+[WebServer] 1:26:09 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:09 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:09 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:09 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  39 [mobile-disconnected] › e2e/disconnected.spec.ts:76:1 › quick navigation works with keyboard and restores focus on Escape (398ms)
+  ✓  40 [mobile-disconnected] › e2e/landing.spec.ts:5:1 › public landing and section links never request the native API (3.8s)
+  ✓  41 [mobile-disconnected] › e2e/landing.spec.ts:38:1 › public proof is scoped and real JSON and product captures are available (426ms)
+[WebServer] 1:26:14 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:14 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:14 PM [vite] http proxy error: /api/cases?limit=50&offset=0
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+[WebServer] 1:26:14 PM [vite] http proxy error: /api/health
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:9
+[WebServer]     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2083:16)
+  ✓  42 [mobile-disconnected] › e2e/landing.spec.ts:74:1 › workbench action opens the actual unavailable-upstream experience (407ms)
+  ✓  43 [mobile-disconnected] › e2e/landing.spec.ts:89:1 › keyboard skip link and reduced-motion landing remain usable (331ms)
+  ✓  44 [mobile-disconnected] › e2e/landing.spec.ts:108:1 › 320px landing preserves readable actions without overflow and captures the real page (367ms)
+  ✓  45 [mobile-disconnected] › e2e/landing.spec.ts:148:1 › illustrated decision changes with authority and walkthrough completes without API calls (4.5s)
+  ✓  46 [mobile-disconnected] › e2e/landing.spec.ts:164:1 › reduced motion keeps the decision interactive without animation (455ms)
+  ✓  47 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › how-it-works is a separate public document with a refreshable URL (570ms)
+  ✓  48 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › product is a separate public document with a refreshable URL (541ms)
+  ✓  49 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › safeguards is a separate public document with a refreshable URL (620ms)
+  ✓  50 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › evidence-record is a separate public document with a refreshable URL (806ms)
+  ✓  51 [mobile-disconnected] › e2e/multipage.spec.ts:12:3 › run-locally is a separate public document with a refreshable URL (610ms)
+  ✓  52 [mobile-disconnected] › e2e/multipage.spec.ts:39:1 › public navigation supports keyboard, history and reduced motion (973ms)
+  ✓  53 [mobile-disconnected] › e2e/session-entry.spec.ts:4:1 › missing session offers one workbench connection action without stealing focus (410ms)
+  ✓  54 [mobile-disconnected] › e2e/session-entry.spec.ts:30:1 › permission refusal stays distinct from a missing session (360ms)
+
+  54 passed (41.8s)

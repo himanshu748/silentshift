@@ -1,3 +1,29 @@
+# Receipt provenance follow-up — November 11, 2026 (IST)
+
+The unpublished **0.3.2** source fix preserves saved investigation mode when a receipt is rebuilt under another deployment setting. On retained **154U ARM64**, the new regression failed against `50477f8`, then the fixed source passed **8 native classes / 28 methods**, **7 JUnit**, **394 pytest**, TypeScript/build and **54 browser checks**. Two separate IRIS sessions using replay/live process settings returned the same signed bytes and one receipt file for one unit-arranged synthetic persisted case. This is a same-instance native check, not a fresh clone, full container restart, new live model investigation or another archive install.
+
+[Scoped receipt](evidence/receipt-mode-nov11/summary.json) · [commands and outputs](evidence/receipt-mode-nov11/output.txt). Policy, store, routing operations, investigator and frozen fixtures are unchanged. Earlier source/archive checks retain their named revisions below. Updated PR CI is pending the branch update; public 0.3.1 and unpublished 0.3.2 remain distinct.
+
+## Earlier checkpoint
+
+# Citation follow-up — November 11, 2026 (IST)
+
+The missing-citation failure is fixed in the unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI is still pending the gated push.
+
+[Fix and limitations](CITATION_COMPLETENESS.md) · [new receipt](evidence/citation-fix-nov11/summary.json). **0.3.2 remains unpublished; public 0.3.1 is unchanged.** The earlier failed run below remains history and is not rewritten as passing.
+
+## Earlier checkpoint
+
+# Java PEX candidate — November 11, 2026 (IST)
+
+Branch `feat/java-pex-nov11` prepares native **0.3.2**, not current-main/public-package verification. Main remains `1c92e095dcc2e9bc7493f1ad5e4a9b9355d78ec1`; public IPM/OEX remain **0.3.1**. Runtime code was cloned locally at `ddd01add213db99167444bbd742485ed12dbdeea` before the source Compose run; later changes are verification harness/tests and documentation. [New receipt and exact scopes](evidence/bonus-claims-nov11/java-pex.json) · [policy/fixture identity](evidence/bonus-claims-nov11/java-pex-policy-identity.json).
+
+**Historical release-gate failure, superseded by the citation follow-up:** the API five-case run passed 5/5, but an explicit ObjectScript repeat passed 4/5. The approved-amendment model output omitted required citations; the unchanged `EVIDENCE_COMPLETE` gate held it for review. All ten cases produced valid Java receipt responses. The failing assertion is retained, not weakened. No further model retry or policy/prompt change was made; the second fresh archive install and hosted branch CI remain unverified. [Failure](evidence/bonus-claims-nov11/java-pex-objectscript-repeat.json).
+
+Fresh local source Compose passed two 12/12 recorded replays and 8 native classes / 25 methods. A separately pristine, no-source-mount IPM source load passed startup and the same native suite. Its API five-case local-Ollama run passed 5/5; all five exported receipts passed independent OpenSSL verification. The subsequent direct ObjectScript repeat produced five valid Java receipts but failed its routing expectation as detailed above. No failed run is presented as passing. The exported archive was inspected; a second fresh archive installation did not run after the failure.
+
+## Earlier verified checkpoints
+
 # Backend-polish verification — November 10, 2026 (UTC)
 
 ## Voting-week finish — fresh GitHub clones

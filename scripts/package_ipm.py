@@ -16,6 +16,10 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_FILES = (
+    'java/build.sh',
+    'java/src/main/java/SilentShift/PEX/ReceiptExporter.java',
+    'java/src/main/java/SilentShift/PEX/ReceiptStore.java',
+
     'python/silentshift/__init__.py', 'python/silentshift/engine.py',
     'python/silentshift/evaluation.py', 'python/silentshift/embeddings.py',
     'python/silentshift/csv_orders.py',
