@@ -1,0 +1,46 @@
+$ uv run --no-sync pytest -q
+Result: 394 passed in 36.33s
+Output: pytest.txt
+
+$ PATH=/opt/homebrew/opt/openjdk/bin:$PATH python3 scripts/test_java_core.py
+Result: 7 successful, 0 failed
+Output: java.txt
+
+$ npm --prefix web run check
+Result: passed
+Output: types.txt
+
+$ npm --prefix web run build
+Result: passed
+Output: build.txt
+
+$ SILENTSHIFT_CHROME_CHANNEL=chrome npm --prefix web run test:e2e
+Result: 54 passed
+Output: workbench-browser.txt
+
+$ node --test tests/receipt-inspector.test.mjs tests/recorded-tour.test.mjs tests/agent-value.test.mjs
+Result: 18 passed
+Output: node-tests.txt
+
+$ python3 scripts/build_agent_value.py --check
+Result: recorded presentation matches source
+Output: build-presentation.txt
+
+$ SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_receipt_inspector.cjs .local/agent-value/inspector-browser
+Result: 33 passed
+Output: inspector-browser.json
+
+$ SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_evidence_tour.cjs .local/agent-value/tour-browser-final
+Result: 39 passed
+Output: tour-browser.json
+
+$ node scripts/check_agent_value.cjs http://127.0.0.1:5202/after/ .local/agent-value/cases-browser-final
+Result: 38 passed
+Output: cases-browser.json
+
+$ node scripts/check_static_landing.cjs http://127.0.0.1:5202/after/ .local/agent-value/landing-browser-final
+Result: 47 passed
+Output: landing-browser.json
+
+Lighthouse: raw reports retain actual URLs and configSettings; all series preserved in lighthouse-reports.tar.gz.
+No native or model evaluation command was run.

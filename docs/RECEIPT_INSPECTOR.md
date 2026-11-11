@@ -1,6 +1,6 @@
 # Inspect a Java receipt locally
 
-The static inspector checks the real synthetic export already retained in `docs/evidence/bonus-claims-nov11/java-pex-receipt.json`. It recomputes the payload SHA-256 and verifies the RSA-2048 signature using Web Crypto. It does not contact IRIS, call a model, authorize a route or modify a saved receipt.
+The public [receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) checks the real synthetic export already retained in `docs/evidence/bonus-claims-nov11/java-pex-receipt.json`. It recomputes the payload SHA-256 and verifies the RSA-2048 signature using Web Crypto. It does not contact IRIS, call a model, authorize a route or modify a saved receipt.
 
 ```sh
 python3 -m http.server 5198 --bind 127.0.0.1 --directory docs/site
@@ -23,4 +23,4 @@ node scripts/check_receipt_inspector.cjs
 
 For an already installed local Chrome, set `SILENTSHIFT_CHROME_CHANNEL=chrome` for the browser check. CI uses the runner’s installed Chrome through the same supported channel. The browser gate covers mobile/desktop, key trust, tampering, local-file bounds, keyboard/result focus, reduced-motion conditions, no-script content and absence of writes or third-party requests. [Browser receipt and captures](evidence/voting-nov11-receipts/browser.json) · [cryptographic regression output](evidence/voting-nov11-receipts/node-tests.txt). These are local static checks, not native or public-host execution.
 
-Publishing the new static files to Pages is a separate owner gate. A static verification utility is not a hosted native app and does not earn the online-demo bonus by itself. The native package and routing semantics are unchanged.
+The existing inspector was deployed from main 7ae03be on November 11. No inspector algorithm changed in this presentation branch. Any further Pages deployment remains separately gated. A static verification utility is not a hosted native app or an awarded online-demo bonus. The native package and routing semantics are unchanged.

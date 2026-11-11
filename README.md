@@ -2,11 +2,19 @@
 
 **Catch orders that are valid JSON but mean the wrong thing, before they're delivered.**
 
+**Recorded v2 comparison — 48 held-out synthetic orders:** wrong deliveries **6/23 → 2–3/23** (rules-only counterfactual release choices → agent + policy actual simulator receipts, three trials); review **12.5% → 21.5%** (pooled agent trials).
+
+**No overall accuracy gain:** correct routes **33/48 → 33/48, 33/48 and 30/48**; unstructured routing stays **1/16** in every trial. This is the existing historical comparison, not a new evaluation of the current release. [Full result and every failure](docs/EVAL_HELDOUT.md) · [Original summary](evidence/heldout/summary.json).
+
+**[What the agent saw that the rules missed](docs/AGENT_VALUE.md)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. [Static interactive page source](docs/site/agent-value.html); the new public page requires the separately approved Pages deployment.
+
+Native IPM **0.3.2** · separate source-built React workbench **0.2.1**. [Evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [Receipt inspector](https://himanshu748.github.io/silentshift/receipts.html).
+
 A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every transport and schema check passes, yet the business meaning has changed and nothing approved that change. SilentShift is an IRIS Interoperability production that holds that order. An IRIS AI Hub agent investigates it, and the operator sees why it was held.
 
 If an approved amendment *does* allow `20 CASE`, the same order goes through. **The difference between those two outcomes is the authority behind the order, and that's the decision the AI Hub agent helps make.**
 
-**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
+**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
 ## Inspect the workflow without installing
 
@@ -55,9 +63,9 @@ Session 58 records the model, provider, prompt version, recorded mode, timing an
 
 ## For judges: two minutes, no installation
 
-1. **Watch the first 90 seconds of the [captioned demo](https://youtu.be/a4dOcqu89EA).** Start with the unsupported `20 CASE` hold and the approved amendment. The full recording is 2:30 and predates CSV and the newer source interface.
-2. **[Explore the interactive recorded-evidence gallery](https://himanshu748.github.io/silentshift/#workbench)** or [inspect the captures above](#inspect-the-workflow-without-installing). Compare the order and approved reference, see a native Workflow task, then open the actual Visual Trace message properties. This static tour uses recorded local synthetic cases; it requires no login and does not run a hosted native production.
-3. **[Check one bonus at a time](#contest-bonuses).** Each row links to execution or publication evidence and separates it from organizer qualification.
+1. **[Read the HO-045 prose example](docs/AGENT_VALUE.md#ho-045).** The table says 100 EA; the amendment says 80 EA. Rules choose ALLOW, the agent cites the amendment, and policy creates a pending review hold. The raw agent is correct here; the final three-way route is still scored incorrect. All three original trials are linked.
+2. **Watch the first 90 seconds of the [captioned demo](https://youtu.be/a4dOcqu89EA).** Follow the unsupported `20 CASE` hold and approved amendment through the native workflow. The full existing recording is 2:30 and predates CSV and the newer interface.
+3. **[Open the recorded native evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** or **[check a signed receipt](https://himanshu748.github.io/silentshift/receipts.html)**. No login or installation: these public static views inspect historical synthetic records, not a hosted native production. [Bonus evidence](#contest-bonuses) is separate from awarded points.
 
 To execute the workflow yourself, use the [keyless replay](#keyless-replay-no-model-no-api-key) after obtaining the official image, or follow [INSTALL.md](INSTALL.md) for fresh local Ollama inference. The recorded route should be `QUARANTINED`, `delivery_count=0`, with `checks=12/12; passed=true`.
 
@@ -69,9 +77,9 @@ SilentShift is for integration operations teams handling partner order feeds. It
 <a id="prove-the-native-journey"></a>
 <a id="optional-local-intake-and-procedural-guidance"></a>
 
-A [local receipt inspector](docs/RECEIPT_INSPECTOR.md) independently checks a real synthetic Java PEX export and demonstrates how tampering breaks its signature. It runs in your browser without IRIS or a model; publication to Pages remains a separate step.
+The public [receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) checks a real synthetic Java PEX export and demonstrates how an edited copy fails verification. It runs locally in your browser without IRIS or a model. [Scope and key-trust limits](docs/RECEIPT_INSPECTOR.md).
 
-A [guided recorded-case tour](docs/RECORDED_TOUR.md) compares the actual unsupported-order hold and approved-amendment release, with model proposals, policy checks and signed receipts. It is a local static viewer; publishing the new Pages files remains gated.
+The public [guided recorded-case tour](https://himanshu748.github.io/silentshift/evidence-tour.html) compares the unsupported-order hold and approved-amendment delivery, with actual proposals, policy checks and signed receipts. [Recorded scope](docs/RECORDED_TOUR.md). The new held-out prose view is prepared on this branch and needs its own Pages deployment; the existing public views do not yet contain this branch’s presentation changes.
 
 ### Published package and this branch
 
@@ -138,7 +146,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 
 ## Honest limits
 
-- All orders are synthetic and deliver only to an IRIS simulator. There's no hosted demo and no real ERP or bank connection.
+- All orders are synthetic and deliver only to an IRIS simulator. There's no hosted native demo and no real ERP or bank connection.
 - Only **2026.3.0AI.154.0 Community / 154U ARM64** is qualified locally. Other builds and platforms are not claimed tested.
 - The held-out result above does not establish an overall accuracy improvement or better unstructured routing. The version used in that comparison missed genuine prose-authority cases; every failure remains in the report. Later pipeline changes are not evidence of a measured improvement.
 
@@ -149,7 +157,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Bonus | Points requested | Status | Direct evidence |
 | --- | ---: | --- | --- |
 | Docker | 2 | Claimed | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
-| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.2 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.2.tgz) · [manifest/source readback](docs/evidence/ipm-032-publication-nov11/publication.json); [literal public install/startup/replays](docs/evidence/voting-week-nov10/judge-main-nov10.json) is the earlier 0.3.0 run |
+| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.2 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.2.tgz) · [manifest/source readback](docs/evidence/ipm-032-publication-nov11/publication.json); [fresh public 0.3.2 install/startup/replays](docs/evidence/voting-nov11-judge/summary.json) |
 | Native Workflow Engine | 2 | Claimed | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
 | Custom adapter: PartnerJSON | 2 | Claimed | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
 | IRIS Vector Search | 2 | Claimed | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |

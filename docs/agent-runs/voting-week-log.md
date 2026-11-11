@@ -467,3 +467,19 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Lighthouse 13.6.0 measured both new local pages at mobile/desktop, all four category scores 100; raw reports retained. These are preview measurements and do not establish public deployment or general performance. Public existing landing returned 200 before changes; retained before/after captures.
 - Prepared release notes, description correction, PEX claim, engineering article, 2:45 script/shot list, three social alternatives and a numbered gated-action list under docs/launch. No next native version is invented, no new tag/IPM/OEX release is needed for the static tools. Native hosting remains blocked on a qualified architecture-matching host and a separate deployment/cost approval. No static-online-demo bonus claim.
 - Checked AI Hub issue #17 read-only: open, no comments or labels, last update November 5. No new defect/bonus award inferred. Freshmen history not independently audited. No listing save, post, email, video upload, Pages/native deployment, spending, branch deletion or force-push.
+
+
+## November 12, 2026 — 00:03 IST — existing agent-value presentation
+
+- Prepared branch `feat/agent-value-nov11` from main `7ae03be`; functional commit `855e014` changes static presentation, docs and tests only. Headline result is the original 6/23 counterfactual wrong releases versus 2–3/23 actual simulator deliveries, with review 12.5% to pooled 21.5%. Correct routes are 33/48 versus 33/48, 33/48 and 30/48; no overall or unstructured accuracy gain.
+- Added three source-pinned prose examples (HO-045, HO-030, HO-017), retaining all trials, exact citations, policy reasons and pending Workflow tasks. No completed reviewer outcome inferred. Native, agent, policy, frozen data and original evaluation files remain unchanged; no new inference/evaluation/native suite was run.
+- Current presentation checks: 394 pytest, 7 JUnit, 54 workbench browser, 18 Node tests; type/build and 33/39/38/47 inspector/tour/new-page/landing browser assertions pass. Final local Lighthouse landing mobile 93/100/100/100, desktop 100 throughout; tour/new page 100 throughout on both profiles. All earlier reports and preview failures remain in the [evidence bundle](../evidence/agent-value-nov11/summary.json); no general performance claim.
+- Prepared 2:20 script only, current native 0.3.2/React 0.2.1 copy and a gated docs-only OEX 0.3.3 proposal. No package/tag/release exists for that proposal; stop if OEX requires native/IPM publishing. Existing Java PEX comment 288628 was found anonymously; do not duplicate it.
+- No merge, Pages deployment, OEX edit/release, community post, YouTube/social action or spending. Hosted CI for this local branch is not yet run. [Report and exact next gates](agent-value-nov11.md).
+
+
+## November 12, 2026 — 00:05 IST — presentation branch review
+
+- Pushed `feat/agent-value-nov11` through evidence commit `14ef81d` and opened [draft PR #14](https://github.com/himanshu748/silentshift/pull/14), based on unchanged main `7ae03be`. The owner's current task permits review work and explicitly gates merging/publication. Readback: OPEN, draft, MERGEABLE; no merge attempted.
+- Push [CI run 43079176927](https://github.com/himanshu748/silentshift/actions/runs/43079176927) and PR [CI run 43079191278](https://github.com/himanshu748/silentshift/actions/runs/43079191278) started on `14ef81d`; they were in progress at this log entry. GitGuardian passed. This is not a completed-CI claim. Final review-head checks must be read back before an approved merge.
+- Main, native IPM 0.3.2, React 0.2.1, Pages and OEX remain unchanged. No public page deployment, listing edit/release, tag, package publication or post. The [publication order](../launch/gated-actions.md) remains a separate exact-submit gate for each action.

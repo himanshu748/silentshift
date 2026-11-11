@@ -1,0 +1,41 @@
+.value-main { padding-top: 55px; }
+.value-intro { max-width: 850px; margin-bottom: 40px; }
+.value-intro h1 { font-size: clamp(38px, 5.4vw, 70px); margin-bottom: 28px; line-height: 1.08; }
+.value-intro > p:not(.eyebrow) { max-width: 710px; margin-top: 20px; }
+.value-note, .value-footer { font-size: 13px; color: var(--muted); }
+.value-index { display: flex; flex-wrap: wrap; gap: 12px 28px; margin: 35px 0 60px; }
+.value-index a { font-size: 13px; font-weight: 650; }
+.value-case { border: 1px solid var(--line); background: var(--panel); margin-bottom: 48px; scroll-margin-top: 24px; }
+.value-case > header, .value-clause, .value-policy, .value-case > details { padding: clamp(22px, 3.2vw, 40px); }
+.value-case h2 { font-size: clamp(28px, 3.4vw, 43px); max-width: 700px; }
+.value-order { margin-top: 22px; font-size: 14px; }
+.value-clause, .value-policy, .value-case > details { border-top: 1px solid var(--line); }
+.value-clause { background: var(--mint); }
+.value-clause .value-note { margin-top: 16px; }
+.value-case blockquote { margin: 0; border-left: 3px solid var(--blue); padding-left: 18px; max-width: 850px; line-height: 1.7; }
+.value-comparison { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.value-comparison > section { min-width: 0; padding: clamp(22px, 3.2vw, 40px); }
+.value-comparison > section + section { border-left: 1px solid var(--line); }
+.value-case h3 { margin-bottom: 22px; font: 650 clamp(16px, 1.7vw, 21px)/1.45 var(--mono); letter-spacing: -.02em; }
+.value-comparison p, .value-comparison a { font-size: 14px; }
+.value-comparison a { display: inline-block; margin-top: 20px; }
+.value-comparison blockquote { margin-bottom: 18px; }
+.value-policy { background: #eef0e8; }
+.value-policy p { margin-top: 20px; max-width: 850px; font-size: 14px; }
+.value-case summary { cursor: pointer; font-weight: 650; }
+.value-case details p, .value-case details dl, .value-case details details { margin-top: 18px; font-size: 14px; }
+.value-case code, .value-case dd { overflow-wrap: anywhere; }
+.value-case dd { margin: 4px 0 14px; font: 12px/1.6 var(--mono); }
+.value-case pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+.value-table { overflow-x: auto; margin-top: 24px; }
+.value-table table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.value-table caption { text-align: left; margin-bottom: 12px; }
+.value-table th, .value-table td { text-align: left; border-top: 1px solid var(--line); padding: 12px 10px; }
+.value-limits { padding: 30px 0 70px; max-width: 850px; }
+.value-limits h2 { font-size: clamp(29px, 4vw, 44px); }
+.value-limits p:not(.eyebrow) { margin-top: 24px; }
+.value-footer { padding-block: 25px; border-top: 1px solid var(--line); }
+.value-footer a { margin-left: 12px; }
+@media (max-width: 760px) { .value-main { padding-top: 28px; } .value-comparison { grid-template-columns: 1fr; } .value-comparison > section + section { border-left: 0; border-top: 1px solid var(--line); } .value-index { margin-bottom: 35px; } }
+
+.value-case summary:focus-visible, .value-table:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }

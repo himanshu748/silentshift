@@ -1,6 +1,6 @@
 # Follow two recorded native cases
 
-The static tour at `docs/site/evidence-tour.html` presents two historical synthetic local-model cases from November 11. It preserves their real message/reference snapshots, model recommendation, policy checks, outcome, native session ID and Java PEX receipt. Opening it starts no IRIS process, performs no fresh inference and changes no case.
+The public [recorded tour](https://himanshu748.github.io/silentshift/evidence-tour.html), sourced at `docs/site/evidence-tour.html`, presents two historical synthetic local-model cases from November 11. It preserves their real message/reference snapshots, model recommendation, policy checks, outcome, native session ID and Java PEX receipt. Opening it starts no IRIS process, performs no fresh inference and changes no case.
 
 ```sh
 python3 -m http.server 5199 --bind 127.0.0.1 --directory docs/site
@@ -20,6 +20,6 @@ node scripts/check_evidence_tour.cjs
 
 Source hashes, exact field comparisons, matching case/outcome bindings and verification of both signatures guard against invented or silently edited evidence. Only the displayed subsets are selected; raw model traces are not presented as new observations. Public capture links retain their original run scope. Browser checks use an isolated local static server, never the native API.
 
-Pages publication is separately gated. This read-only tour is a recorded evidence viewer, not a hosted native app or a newly earned online-demo bonus.
+The existing tour was deployed from main 7ae03be on November 11. This branch adds the historical held-out result and a link to [three prose examples](AGENT_VALUE.md); those new presentation changes require a separately approved Pages deployment. The read-only tour is recorded evidence, not a hosted native app or an awarded online-demo bonus.
 
 [Tour browser receipt](evidence/voting-nov11-tour/browser.json) records the local inspection checks and captures; it is not a new native run.

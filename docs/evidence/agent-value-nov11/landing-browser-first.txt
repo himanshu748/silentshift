@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-11-11T18:14:35.527Z",
+  "target": "http://127.0.0.1:5201/",
+  "driver": "Playwright Chromium via Node CLI; Chrome channel",
+  "scope": "Static landing only; no native run or deployment",
+  "checks": [
+    {
+      "name": "Correct document title",
+      "passed": true
+    },
+    {
+      "name": "Native hosting limitation visible",
+      "passed": true
+    },
+    {
+      "name": "Primary CTA goes to recorded evidence, not a pretend live run",
+      "passed": true
+    },
+    {
+      "name": "Demo dialog opens without pretending to execute",
+      "passed": false
+    }
+  ],
+  "errors": [
+    "Failed to load resource: net::ERR_CONNECTION_RESET",
+    "Failed to load resource: net::ERR_CONNECTION_RESET"
+  ],
+  "failures": [
+    "Error: Demo dialog opens without pretending to execute\n    at check (<worktree>/scripts/check_static_landing.cjs:24:21)\n    at <worktree>/scripts/check_static_landing.cjs:57:5"
+  ],
+  "passed": false,
+  "pass_count": 3,
+  "check_count": 4
+}
