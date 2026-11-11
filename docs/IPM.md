@@ -2,7 +2,7 @@
 
 ## Current verification — published 0.3.2
 
-The [public archive readback](evidence/ipm-032-publication-nov11/publication.json) confirms native **0.3.2** and the saved receipt-mode fix. A [fresh offline installation from the final GitHub tag](evidence/ipm-032-final-nov11/summary.json) used a separately generated native archive and left the application empty/stopped. No public-registry 0.3.2 install, model call or production startup was executed in that archive check. Earlier live/source tests retain their separate scope.
+The [public archive readback](evidence/ipm-032-publication-nov11/publication.json) confirms native **0.3.2** and the saved receipt-mode fix. A [fresh offline installation from the final GitHub tag](evidence/ipm-032-final-nov11/summary.json) used a separately generated native archive and left the application empty/stopped. No model call or production startup was executed in that archive check. The later [fresh public 0.3.2 gate](evidence/voting-nov11-judge/summary.json) separately passed installation, startup, the native suite and both recorded replays. Earlier live/source tests retain their separate scope.
 
 ## Current package boundary — Java PEX included
 

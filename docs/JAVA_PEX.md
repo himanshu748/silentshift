@@ -1,6 +1,6 @@
 # Signed outcome receipts through Java PEX
 
-**Published native 0.3.2** adds `ReceiptExporter`, a real `EnsLib.PEX.BusinessOperation` backed by [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java). The [v0.3.2 release](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2) targets merged source `cfc4c279853886a72772a92ad70c2e2c5eae3819`. [Anonymous publication readback](evidence/ipm-032-publication-nov11/publication.json) confirms the registry archive and saved receipt-mode fix. This readback is not a new public-registry installation test.
+**Published native 0.3.2** adds `ReceiptExporter`, a real `EnsLib.PEX.BusinessOperation` backed by [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java). The [v0.3.2 release](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2) targets merged source `cfc4c279853886a72772a92ad70c2e2c5eae3819`. [Anonymous publication readback](evidence/ipm-032-publication-nov11/publication.json) confirms the registry archive and saved receipt-mode fix. The readback itself is not an install test; the subsequent [fresh public gate](evidence/voting-nov11-judge/summary.json) provides that separate proof.
 
 Destination and Quarantine call it **after** their existing store method commits a routing outcome. The Java operation receives a native [`ExportRequest`](../src/SilentShift/PEX/ExportRequest.cls) and returns a native [`ExportResponse`](../src/SilentShift/PEX/ExportResponse.cls) in the same case session. No Java code decides, releases, repairs or reroutes a transaction.
 
@@ -53,7 +53,7 @@ From this checkout, follow [INSTALL.md](../INSTALL.md). The one-command keyless 
 
 Compose builds a **local-only** derivative of the already-loaded vendor image, compiling the owned Java sources into a JAR. Never push that derivative to a registry. The application source remains read-only; database, Java build output and signing state use the instance's writable manager directory. Explicit native setup also compiles the installed Java source against the image SDK, so IPM does not need to redistribute vendor JARs. Package activation alone still starts no production, gateway, account setup or model call.
 
-The published IPM manifest is **0.3.2**. It includes the Java sources/build script and native request/response/setup classes. It excludes the SDK, signing keys, generated JARs, tests and frontend. The separate React workbench stays **0.2.1**. Public IPM now serves 0.3.2. Its archive manifest/source were checked; a fresh install of that public registry artifact has not been run.
+The published IPM manifest is **0.3.2**. It includes the Java sources/build script and native request/response/setup classes. It excludes the SDK, signing keys, generated JARs, tests and frontend. The separate React workbench stays **0.2.1**. Public IPM now serves 0.3.2. Its archive manifest/source were checked; a [fresh public-registry gate](evidence/voting-nov11-judge/summary.json) subsequently installed it, started production and passed native tests and both recorded replays.
 
 ## Tests and evidence
 
