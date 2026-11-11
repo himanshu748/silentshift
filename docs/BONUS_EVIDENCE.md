@@ -1,10 +1,20 @@
-# Citation follow-up — November 11, 2026 (IST)
+# Published native 0.3.2 — November 11, 2026 (IST)
 
-The missing-citation failure is fixed in the unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI is still pending the gated push.
+**Checked November 11, 2026 (IST).** GitHub release [v0.3.2](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2), OEX and the public IPM archive now identify native **0.3.2**; React remains **0.2.1**. [Anonymous publication/manifest/source readback](evidence/ipm-032-publication-nov11/publication.json). The archive includes Java PEX and the saved receipt-mode fix. Main release source is `cfc4c279853886a72772a92ad70c2e2c5eae3819`; [main CI passed](https://github.com/himanshu748/silentshift/actions/runs/42985826498).
+
+A [fresh offline archive installation from that tag](evidence/ipm-032-final-nov11/summary.json) passed with the application empty and stopped. This used a separately generated native archive, not the downloaded public registry artifact. The [receipt-mode regression](evidence/receipt-mode-nov11/summary.json) and [earlier live citation checks](evidence/citation-fix-nov11/summary.json) retain their exact snapshots. No new public-registry install, live model run, hosted demo or organizer qualification is implied. The saved listing body still says 0.3.0; [a description-only correction is prepared](OPEN_EXCHANGE_COPY.md), not saved. The Java PEX follow-up is drafted, not posted.
+
+## Historical verification and claim checkpoints
+
+The dated passages below describe their original state. Current publication status is above; the current bonus table retains each qualification limit. Do not repeat historical release or questionnaire actions.
+
+## Historical citation checkpoint — November 11, 2026 (IST)
+
+At this earlier checkpoint, the missing-citation failure was fixed in the then-unpublished **0.3.2** source candidate. The policy, assessment bridge, routing store/process and frozen inputs remain byte-identical. Three predeclared sets passed **15/15**, followed by a final **5/5** after message-storage checks. All **20** signed receipts verified independently. Native **8 classes / 26 methods**, **394 pytest**, TypeScript/build and **54** browser checks passed. The regenerated archive installed in a pristine offline container; application tables stayed empty and production stopped. Live checks are a retained-instance upgrade, not a fresh archive model run. Hosted branch CI had not yet run at that checkpoint.
 
 **Java PEX is Claimed in the source README at the owner’s request; qualification remains pending.** The Java-specific public follow-up is deferred until its evidence links are public; this source declaration is not a posted claim or an awarded bonus.
 
-[Fix and limitations](CITATION_COMPLETENESS.md) · [new receipt](evidence/citation-fix-nov11/summary.json). **0.3.2 remains unpublished; public 0.3.1 is unchanged.** The earlier failed run below remains history and is not rewritten as passing.
+[Fix and limitations](CITATION_COMPLETENESS.md) · [new receipt](evidence/citation-fix-nov11/summary.json). **At that checkpoint, 0.3.2 was unpublished and public 0.3.1 was unchanged.** The earlier failed run below remains history and is not rewritten as passing.
 
 ## Earlier checkpoint
 

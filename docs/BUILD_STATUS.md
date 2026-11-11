@@ -1,3 +1,19 @@
+# Public native 0.3.2 — November 11, 2026 (IST)
+
+OEX now publicly shows **0.3.2**, and the public IPM archive downloads without authentication with manifest **0.3.2**. Its receipt-mode source matches the tested GitHub tag. [Publication and retained-link receipt](evidence/ipm-032-publication-nov11/publication.json) · [owner release screenshot](evidence/ipm-032-publication-nov11/oex-032-published.png).
+
+The check below verified a fresh **offline** native archive installation. This publication readback inspected the separate public registry archive; it did **not** install that public artifact into another container. GitHub source/tag remains `cfc4c27`. No new model run, organizer-qualified bonus or award is claimed. Saved listing-body version wording was left unchanged. These notes remain local pending a separately authorized source push.
+
+## Earlier checkpoint
+
+# Fresh tagged 0.3.2 archive installation — November 11, 2026 (IST)
+
+A clean GitHub clone of **v0.3.2**, commit **`cfc4c279853886a72772a92ad70c2e2c5eae3819`**, generated a new real IPM archive including the receipt-mode fix. The archive installed in a second pristine **154U ARM64** container with **no application source mounts or network during installation**. Checks passed: **5 deterministic cases**, **10 invalid-path rejections**, **4 Python module origins**, and **10 empty application tables**. The newly installed receipt-mode helper returned the correct persisted/legacy modes and rejected invalid metadata. Application production stayed stopped; no model calls were made.
+
+[Current receipt](evidence/ipm-032-final-nov11/summary.json) · [package receipt](evidence/ipm-032-final-nov11/package.json) · [fresh-install receipt](evidence/ipm-032-final-nov11/install.json) · [commands/output](evidence/ipm-032-final-nov11/output.txt). This is an offline archive install, not a public-registry install or another live scenario/API run. **At this earlier archive checkpoint, GitHub v0.3.2 was released and IPM/OEX publication had not yet been performed; the newer publication readback above supersedes that state.** These verification notes are local pending a separately authorized push.
+
+## Earlier checkpoint
+
 # Receipt provenance follow-up — November 11, 2026 (IST)
 
 The unpublished **0.3.2** candidate now derives receipt execution mode from saved case metadata, with a bounded legacy fallback. A new regression fails on the preceding implementation and passes after the fix. Retained-instance **154U ARM64** checks passed: **8 native classes / 28 methods**, **7 JUnit**, **394 pytest**, TypeScript/build and **54 browser checks**. Separate IRIS sessions with replay/live process settings reused one identical signed receipt for a unit-arranged synthetic case. No policy, routing, investigator or frozen-fixture change was made.
