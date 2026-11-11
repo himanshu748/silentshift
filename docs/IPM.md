@@ -1,16 +1,16 @@
 # Native package maintenance and publication
 
-## Current verification — unpublished 0.3.2
+## Current verification — published 0.3.2
 
-The [citation follow-up archive](evidence/citation-fix-nov11/archive-install.json) installed through the real IPM local-filesystem repository in a pristine offline 154U ARM64 container. No source mounts, model calls or production startup were used in that archive check; its ten application tables stayed empty. Live/source checks retain their separate scope. [Full receipt](evidence/citation-fix-nov11/summary.json). This did not publish 0.3.2.
+The [public archive readback](evidence/ipm-032-publication-nov11/publication.json) confirms native **0.3.2** and the saved receipt-mode fix. A [fresh offline installation from the final GitHub tag](evidence/ipm-032-final-nov11/summary.json) used a separately generated native archive and left the application empty/stopped. No public-registry 0.3.2 install, model call or production startup was executed in that archive check. Earlier live/source tests retain their separate scope.
 
-## Current package boundary — Java PEX candidate
+## Current package boundary — Java PEX included
 
-Public native IPM/OEX are **0.3.1**. This branch prepares **0.3.2**, including the owned Java receipt-export sources/build script and native PEX messages/setup. The published 0.3.1 package does **not** contain Java PEX. The React workbench remains separately built **0.2.1**. No tag, package or listing was published in this pass.
+Public native IPM/OEX are **0.3.2**, including the owned Java receipt-export sources/build script and native PEX messages/setup. GitHub [v0.3.2](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2) targets `cfc4c279853886a72772a92ad70c2e2c5eae3819`. The React workbench remains separately built **0.2.1**. Publication is complete; do not run the historical publication steps again.
 
 The qualified build-154 ARM64 image supplies Java 11 and the PEX/JDBC SDK. Explicit `SilentShift.Setup.Install()` compiles the installed Java source and configures the native managed `%Java Server`; activation alone remains inert. No vendor SDK, generated signing key or EAP image is redistributed. [Implementation, tests and exact publication gate order](JAVA_PEX.md).
 
-The sections below retain the earlier package preparation/publication history. Statements about a then-unpublished 0.3.1 or live 0.3.0 describe those checkpoints, not the current registry boundary.
+The sections below retain the earlier package preparation/publication history. Statements about then-unpublished candidates or live 0.3.0/0.3.1 describe those checkpoints, not the current registry boundary.
 
 
 **Installing the application? Use [INSTALL.md](../INSTALL.md).** This file is for package maintainers. It is not part of the installation path.

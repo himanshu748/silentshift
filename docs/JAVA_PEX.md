@@ -1,6 +1,6 @@
 # Signed outcome receipts through Java PEX
 
-The **0.3.2 source candidate** adds `ReceiptExporter`, a real `EnsLib.PEX.BusinessOperation` backed by [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java). **Public IPM/OEX remain 0.3.1; that package does not include this Java operation.** Merge, tag/release and package publication require separate owner approvals.
+**Published native 0.3.2** adds `ReceiptExporter`, a real `EnsLib.PEX.BusinessOperation` backed by [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java). The [v0.3.2 release](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2) targets merged source `cfc4c279853886a72772a92ad70c2e2c5eae3819`. [Anonymous publication readback](evidence/ipm-032-publication-nov11/publication.json) confirms the registry archive and saved receipt-mode fix. This readback is not a new public-registry installation test.
 
 Destination and Quarantine call it **after** their existing store method commits a routing outcome. The Java operation receives a native [`ExportRequest`](../src/SilentShift/PEX/ExportRequest.cls) and returns a native [`ExportResponse`](../src/SilentShift/PEX/ExportResponse.cls) in the same case session. No Java code decides, releases, repairs or reroutes a transaction.
 
@@ -23,7 +23,7 @@ sequenceDiagram
 
 ## Citation follow-up
 
-The [new verification](CITATION_COMPLETENESS.md) supersedes the historical blocked status above: three predeclared sets passed 15/15, then a final source set passed 5/5. The regenerated 0.3.2 archive installed successfully in a pristine offline instance, left empty/stopped. It is still unpublished. [Current scoped receipt](evidence/citation-fix-nov11/summary.json).
+The [new verification](CITATION_COMPLETENESS.md) supersedes the historical blocked status above: three predeclared sets passed 15/15, then a final source set passed 5/5. The regenerated 0.3.2 archive installed successfully in a pristine offline instance, left empty/stopped. [Citation checkpoint receipt](evidence/citation-fix-nov11/summary.json). The later receipt-mode fix has [its own native regression](evidence/receipt-mode-nov11/summary.json); a [fresh archive install from the final release tag](evidence/ipm-032-final-nov11/summary.json) includes that fix. These are distinct checks, not new live model runs.
 
 ## What is signed
 
@@ -45,7 +45,7 @@ A signature establishes integrity under that signing key, **not business correct
 
 Only **IRIS Community AI Hub 2026.3.0AI.154.0 / 154U ARM64** is qualified here. That image supplies Java 11, the PEX SDK and JDBC library. The native managed `%Java Server` launches the Java External Language Server; an extra cloud service or Java gateway container is unnecessary. [`Production`](../src/SilentShift/Production.cls) binds the operation to that server and remote Java class. `Support.Configure` supplies its classpath and receipt directory.
 
-From this candidate checkout, follow [INSTALL.md](../INSTALL.md). The one-command keyless path remains:
+From this checkout, follow [INSTALL.md](../INSTALL.md). The one-command keyless path remains:
 
 ```sh
 ./scripts/judge-compose.sh
@@ -53,7 +53,7 @@ From this candidate checkout, follow [INSTALL.md](../INSTALL.md). The one-comman
 
 Compose builds a **local-only** derivative of the already-loaded vendor image, compiling the owned Java sources into a JAR. Never push that derivative to a registry. The application source remains read-only; database, Java build output and signing state use the instance's writable manager directory. Explicit native setup also compiles the installed Java source against the image SDK, so IPM does not need to redistribute vendor JARs. Package activation alone still starts no production, gateway, account setup or model call.
 
-The prepared IPM manifest is **0.3.2**. It includes the Java sources/build script and native request/response/setup classes. It excludes the SDK, signing keys, generated JARs, tests and frontend. The separate React workbench stays **0.2.1**. A registry install remains the old 0.3.1 until the owner publishes 0.3.2.
+The published IPM manifest is **0.3.2**. It includes the Java sources/build script and native request/response/setup classes. It excludes the SDK, signing keys, generated JARs, tests and frontend. The separate React workbench stays **0.2.1**. Public IPM now serves 0.3.2. Its archive manifest/source were checked; a fresh install of that public registry artifact has not been run.
 
 ## Tests and evidence
 
@@ -62,12 +62,10 @@ The prepared IPM manifest is **0.3.2**. It includes the Java sources/build scrip
 - With JDK 11 or later: `python3 scripts/test_java_core.py`. CI downloads only checksum-pinned public test dependencies; it does not download the restricted IRIS SDK. Native adapter compatibility is tested separately inside the operator-owned image.
 - [Execution receipt](evidence/bonus-claims-nov11/java-pex.json), [signed sample](evidence/bonus-claims-nov11/java-pex-receipt.json), [native Visual Trace](evidence/bonus-claims-nov11/java-pex-trace.png), [commands and output](evidence/bonus-claims-nov11/java-pex-output.txt).
 
-This is an unsubmitted source-candidate bonus claim draft, never an awarded-point claim. The earlier failure above is resolved by the [citation follow-up](CITATION_COMPLETENESS.md); public/hosted-CI gates remain separate. The trace screenshot is authenticated recorded replay; the execution receipt separates that run from live inference and clean package checks.
+The Java PEX claim is **prepared for organizer review, not awarded**. The authenticated [live Visual Trace](evidence/bonus-claims-nov11/java-pex-live-trace.png) shows the operation in a live case session; the earlier recorded trace and live/clean-install receipts keep their separate scopes. [Main CI](https://github.com/himanshu748/silentshift/actions/runs/42985826498) passed on the merged release source.
 
-## Prepared publication sequence — not executed
+## Publication state and next gate
 
-1. Approve pushing this branch and opening its PR. Review hosted CI, including the added public-dependency Java tests. Then separately approve a merge commit.
-2. Inspect the actual merged SHA and source identity. Prepare `v0.3.2` at that SHA and the GitHub release titled **SilentShift 0.3.2**, using the changelog. Do not reuse a version tag at another commit. Tag/release requires its own approval.
-3. In OEX, prepare **New release → 0.3.2** against that GitHub release; preserve every existing contest, IPM, idea, video, logo and article field. Show the version field before requesting approval. Do not send as 1.0.0 or cancel pending moderation.
-4. After approval/publication, independently download the registry archive and inspect its manifest, then run a fresh registry install. A local archive check below is not proof of public publication.
-5. Only after the evidence URLs are public, prepare the short follow-up to the existing bonus comment. Posting requires another approval.
+The owner-approved PR merge, v0.3.2 tag/release and OEX/IPM publication are complete. Do not repeat them. [Publication receipt](evidence/ipm-032-publication-nov11/publication.json) · [fresh offline install](evidence/ipm-032-final-nov11/summary.json). The saved OEX body still needs its separately gated description-only correction.
+
+The remaining public action is the [prepared Java PEX follow-up](agent-runs/java-pex-comment-draft.md), after the README consistency update is public. Posting requires another exact **submit**.

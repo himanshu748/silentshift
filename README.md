@@ -71,9 +71,9 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 ### Published package and this branch
 
-**This branch prepares native 0.3.2 with a [Java PEX receipt exporter](docs/JAVA_PEX.md). It is not published; registry 0.3.1 does not include that operation. The [citation follow-up](docs/CITATION_COMPLETENESS.md) passed three consecutive five-case sets and a final 5/5; the regenerated archive also installed cleanly offline.**
+**Native IPM and Open Exchange publish 0.3.2, including the [Java PEX receipt exporter](docs/JAVA_PEX.md).** After a routing outcome is committed, the production requests an immutable signed receipt. Export failure preserves the existing route. The separately built React workbench remains **0.2.1**.
 
-Public native IPM and Open Exchange publish **0.3.1**; the separate React package remains **0.2.1**. The [anonymous archive manifest readback](docs/evidence/bonus-claims-nov11/public.json) confirms publication, not a new public-registry installation test. This release includes provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
+[Anonymous publication proof](docs/evidence/ipm-032-publication-nov11/publication.json) confirms the public archive's manifest and receipt-mode source. A [fresh offline archive install from the release tag](docs/evidence/ipm-032-final-nov11/summary.json) passed in an empty, stopped instance; **the public registry artifact has not had a new install/run test**. The [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) and [earlier live citation checks](docs/CITATION_COMPLETENESS.md) retain their separate source snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 
@@ -87,7 +87,7 @@ After starting the documented Colima profile and loading the official build-154 
 ./scripts/judge-replay.sh
 ```
 
-The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This deliberately verifies the pinned 0.3.0 package, not current 0.3.1 source.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
+The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This deliberately verifies the pinned 0.3.0 package, not current 0.3.2 source.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
 
 The [fresh-main check](docs/evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, both **12/12** replays and **207 Python tests** on the declared build. Its exact clone and scope are recorded separately from the launcher check. For a port already in use, pass `--api-port 52983`; never replace an existing container or lower disk limits.
 
@@ -145,7 +145,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Bonus | Points requested | Status | Direct evidence |
 | --- | ---: | --- | --- |
 | Docker | 2 | Claimed | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
-| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.1 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.1.tgz) · [manifest readback](docs/evidence/bonus-claims-nov11/public.json); [literal public install/startup/replays](docs/evidence/voting-week-nov10/judge-main-nov10.json) is the earlier 0.3.0 run |
+| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.2 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.2.tgz) · [manifest/source readback](docs/evidence/ipm-032-publication-nov11/publication.json); [literal public install/startup/replays](docs/evidence/voting-week-nov10/judge-main-nov10.json) is the earlier 0.3.0 run |
 | Native Workflow Engine | 2 | Claimed | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
 | Custom adapter: PartnerJSON | 2 | Claimed | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
 | IRIS Vector Search | 2 | Claimed | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |
@@ -156,7 +156,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Second Developer Community article | 1 | Claimed | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
 | Video | 3 | Claimed | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
 | Questionnaire | 1 | Claimed | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
-| Java PEX | 3 | Claimed; source verified, 0.3.2 unpublished; qualification pending | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [current execution/archive checks](docs/evidence/citation-fix-nov11/summary.json) · [Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-trace.png) |
+| Java PEX | 3 | Claimed; published in native 0.3.2; qualification pending | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
 | Online demo | — | Not claimed | The published evidence tour is static recorded material, not a running native app |
 | Embedded Python bug | — | Not claimed | [Signal-11 candidate is not isolated or attributed](docs/bug-reports/callback-signal11-candidate.md) |
 

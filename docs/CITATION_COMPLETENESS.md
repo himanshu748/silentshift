@@ -31,4 +31,4 @@ The regenerated **0.3.2** archive installed in a second pristine, offline contai
 
 [Summary](evidence/citation-fix-nov11/summary.json) · [all repeat results](evidence/citation-fix-nov11/repeat-gate.json) · [final source run](evidence/citation-fix-nov11/final-native-five.json) · [archive install](evidence/citation-fix-nov11/archive-install.json) · [unchanged policy/fixtures](evidence/citation-fix-nov11/policy-identity.json) · [commands/output](evidence/citation-fix-nov11/outputs.txt).
 
-**0.3.2 stays unpublished.** No push, PR, tag, release, IPM/OEX publication, external comment or online demo was performed. Public 0.3.1 does not include this candidate. Publication and organizer qualification remain separate decisions.
+**Historical state at this citation checkpoint:** 0.3.2 was unpublished and public 0.3.1 lacked these changes. The later receipt-mode fix was merged and [0.3.2 published](evidence/ipm-032-publication-nov11/publication.json); [its final tagged archive](evidence/ipm-032-final-nov11/summary.json) passed a separate fresh offline install. Those later steps do not renew this checkpoint’s live model results or imply organizer qualification.

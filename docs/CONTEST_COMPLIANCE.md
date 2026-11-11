@@ -1,5 +1,9 @@
 # Contest compliance
 
+## Current publication and claim boundary — November 11, 2026 (IST)
+
+Native **0.3.2** is published on GitHub, OEX and IPM; React remains separately built **0.2.1**. [Anonymous publication/manifest/source receipt](evidence/ipm-032-publication-nov11/publication.json). The [fresh offline tag-archive install](evidence/ipm-032-final-nov11/summary.json) is separate from public registry installation. Only **154U ARM64** is locally qualified. Embedded Python usage and Java PEX are claimed for organizer review, not awarded; the Java follow-up remains drafted. Online demo and Embedded Python bug remain **Not claimed**. Current status is in the [bonus checklist](SUBMISSION_CHECKLIST.md#every-bonus). The dated reviews below are history, not the current release state. No additional public action is included in this documentation correction.
+
 ## November 9, 2026 public readback
 
 The [official contest page](https://openexchange.intersystems.com/contest/49) lists **43** entries and continues to name Complexity, Clarity of Instructions, Developer Experience, Applicability and Usability. Its displayed voting deadline remains November 15, 2026 at 23:59:59 EST. The [expert advice](https://community.intersystems.com/post/what-experts-look-contest-entries) is preparation guidance, not a separate formal scoring system.
