@@ -1,0 +1,329 @@
+===== Clone =====
+git clone --depth 1 --branch v0.3.2 https://github.com/himanshu748/silentshift.git <fresh-clone>
+HEAD=cfc4c279853886a72772a92ad70c2e2c5eae3819
+===== Package =====
+python3 <private-home-stage-verifier.py> --context colima-silentshift --container silentshift-ipm-clean-citations-nov11
+Checking the existing stopped SILENTSHIFT runtime...
+Loading the fresh source stage through real IPM...
+Generating the actual IPM archive...
+{"receipt": "<fresh-clone>/.local/ipm/runs/20261111T083706684071Z/receipt.json", "local_load_verified": true, "local_package_verified": true, "clean_install_verified": false, "registry_published": false, "production_left_stopped": true}
+
+===== Fresh install =====
+["python3", "scripts/verify_ipm_clean.py", "--archive", "<fresh-clone>/.local/ipm/runs/20261111T083706684071Z/silentshift-0.3.2.tgz", "--source", "<fresh-clone>", "--vendor", "<workspace>/.local/release-032-archive/zpm-0.10.10.xml", "--container", "silentshift-ipm-clean-032-final-nov11", "--execute"]
+{"receipt": "<fresh-clone>/.local/ipm/clean-runs/silentshift-ipm-clean-032-final-nov11/receipt.json", "clean_install_verified": true, "clean_api_native_verified": false, "registry_published": false, "retained_resources": {"container": "silentshift-ipm-clean-032-final-nov11"}}
+
+===== Native load =====
+
+Node: silentshift-ipm-clean-citations-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+Building dependency graph...Done.
+[SILENTSHIFT|silentshift]	Initialize START
+[SILENTSHIFT|silentshift]	Initialize SUCCESS
+[SILENTSHIFT|silentshift]	Reload START (/home/irisowner/silentshift-ipm-20261111T083706684071Z/stage/)
+[SILENTSHIFT|silentshift]	Reload SUCCESS
+[silentshift]	Module object refreshed.
+[SILENTSHIFT|silentshift]	Validate START
+[SILENTSHIFT|silentshift]	Validate SUCCESS
+[SILENTSHIFT|silentshift]	Compile START
+[SILENTSHIFT|silentshift]	Compile SUCCESS
+[SILENTSHIFT|silentshift]	Activate START
+[SILENTSHIFT|silentshift]	Configure START
+[SILENTSHIFT|silentshift]	Configure SUCCESS
+[SILENTSHIFT|silentshift]	Activate SUCCESS
+Classes and assets installed in SILENTSHIFT. No production, security configuration or model calls were started by this package. Read docs/IPM.md in the source repository; configure the required environment before explicitly calling SilentShift.Setup.Install().
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_LOCAL_LOAD_OK
+
+SILENTSHIFT>
+
+===== Native package =====
+
+Node: silentshift-ipm-clean-citations-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+[SILENTSHIFT|silentshift]	Initialize START
+[SILENTSHIFT|silentshift]	Initialize SUCCESS
+[SILENTSHIFT|silentshift]	Reload START (/home/irisowner/silentshift-ipm-20261111T083706684071Z/stage/)
+[SILENTSHIFT|silentshift]	Reload SUCCESS
+[silentshift]	Module object refreshed.
+[SILENTSHIFT|silentshift]	Validate START
+[SILENTSHIFT|silentshift]	Validate SUCCESS
+[SILENTSHIFT|silentshift]	Compile START
+[SILENTSHIFT|silentshift]	Compile SUCCESS
+[SILENTSHIFT|silentshift]	Activate START
+[SILENTSHIFT|silentshift]	Configure START
+[SILENTSHIFT|silentshift]	Configure SUCCESS
+[SILENTSHIFT|silentshift]	Activate SUCCESS
+[SILENTSHIFT|silentshift]	Package START
+[SILENTSHIFT|silentshift]	Package SUCCESS
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_LOCAL_PACKAGE_OK
+
+SILENTSHIFT>
+
+===== Pristine namespace =====
+
+Node: silentshift-ipm-clean-032-final-nov11, Instance: IRIS
+
+%SYS>
+SS_RUNTIME=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+
+%SYS>
+
+%SYS>
+
+%SYS>
+SS_PRISTINE_OK
+
+%SYS>
+
+===== Archive install =====
+
+Node: silentshift-ipm-clean-032-final-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+[33mWARNING: Modifier 'synchronous' is deprecated and will be removed in future versions. Run 'help <command name>' to view further details.[0m
+
+Building dependency graph...Done.
+[SILENTSHIFT|silentshift]	Initialize START
+[SILENTSHIFT|silentshift]	Initialize SUCCESS
+[SILENTSHIFT|silentshift]	Reload START (/home/irisowner/silentshift-ipm-release/repository/package/)
+[SILENTSHIFT|silentshift]	Reload SUCCESS
+[silentshift]	Module object refreshed.
+[SILENTSHIFT|silentshift]	Validate START
+[SILENTSHIFT|silentshift]	Validate SUCCESS
+[SILENTSHIFT|silentshift]	Compile START
+[SILENTSHIFT|silentshift]	Compile SUCCESS
+[SILENTSHIFT|silentshift]	Activate START
+[SILENTSHIFT|silentshift]	Configure START
+[SILENTSHIFT|silentshift]	Configure SUCCESS
+[SILENTSHIFT|silentshift]	Activate SUCCESS
+Classes and assets installed in SILENTSHIFT. No production, security configuration or model calls were started by this package. Read docs/IPM.md in the source repository; configure the required environment before explicitly calling SilentShift.Setup.Install().
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_COMMAND_OK
+
+SILENTSHIFT>
+
+===== Installed assertions =====
+
+Node: silentshift-ipm-clean-032-final-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+Load started on 11/11/2026 08:38:40
+Loading file /home/irisowner/silentshift-ipm-release/IPMChecks.cls as udl
+Compiling class SilentShift.Test.IPMChecks
+Compiling routine SilentShift.Test.IPMChecks.1
+Load finished successfully.
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SILENTSHIFT_IPM_ASSET_ROOT=/usr/irissys/mgr/silentshift/SILENTSHIFT/
+SILENTSHIFT_IPM_CHECKS_OK path_rejections=10 deterministic_cases=5 module_origins=4 ai_runs=0
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.CaseRecord
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.Reference
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.AuditEvent
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.Delivery
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.ReviewAction
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.Evaluation
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.Runbook
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Data.Precedent
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=SilentShift_Workflow.ReviewTask
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_EMPTY=EnsLib_Workflow.Worklist
+
+SILENTSHIFT>
+SS_CLEAN_INSTALL_OK
+
+SILENTSHIFT>
+
+===== Installed mode =====
+
+Node: silentshift-ipm-clean-032-final-nov11, Instance: IRIS
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+
+SILENTSHIFT>
+SS_INSTALLED_RECEIPT_MODE=recorded-replay,live,1
+
+SILENTSHIFT>
