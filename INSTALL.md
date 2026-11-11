@@ -1,6 +1,6 @@
 # Install SilentShift locally
 
-This guide runs the repository source and its separate browser workbench. Public native IPM **0.3.2** includes Java PEX; the React workbench is built separately. [Publication proof](docs/evidence/ipm-032-publication-nov11/publication.json) and [fresh offline archive installation](docs/evidence/ipm-032-final-nov11/summary.json) are separate checks; a new public-registry install has not been run. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
+This guide runs the repository source and its separate browser workbench. Public native IPM **0.3.2** includes Java PEX; the React workbench is built separately. [Publication proof](docs/evidence/ipm-032-publication-nov11/publication.json) and [fresh offline archive installation](docs/evidence/ipm-032-final-nov11/summary.json) are separate checks; a [fresh public 0.3.2 install](docs/evidence/voting-nov11-judge/summary.json) subsequently passed startup, the native suite and both keyless replays. Follow steps 1–7 in order. You do not need a cloud account or a paid model API key.
 
 The tested native environment is **macOS on Apple Silicon, IRIS Community AI Hub 2026.3.0AI.154.0 (154U)**. Other builds and platforms have not been qualified. Organizers also permit **2027.1.0AI.109.0 Community**, but it has **not** been verified for SilentShift. [Official build clarification](https://community.intersystems.com/post/intersystems-programming-contest-ai-agents-interoperability-workflows). The separate app/workbench is **0.2.1**. Public native IPM and OEX release are **0.3.2**. The native package includes the CSV backend/parser; it does not install the React web bundle. [Earlier public 0.3.0 installation](docs/evidence/ship-030-registry.json) · [separate live/source/browser gate](docs/evidence/candidate-030.json).
 
@@ -128,7 +128,7 @@ Stopping containers preserves their database. Do not delete volumes to troublesh
 
 ## Optional: check without a model
 
-This alternative verifies the **public native IPM 0.3.0 backend**, not the full web installation or the newer 0.3.2 package. It uses recorded provider answers for the synthetic quantity-mismatch case. It performs no fresh inference, calls no paid provider and needs no Ollama model or API key.
+This alternative verifies the **public native IPM 0.3.2 backend**, not the full web installation. It uses recorded provider answers for the synthetic quantity-mismatch case. It performs no fresh inference, calls no paid provider and needs no Ollama model or API key.
 
 1. Start the existing Colima profile as in step 1. Load the separately obtained official **154U ARM64** image and Web Gateway as in step 2. No model, application `.env`, account website login or frontend build is needed for this check.
 2. Run this command from the source checkout containing the launcher:
@@ -150,4 +150,4 @@ The launcher obtains the pinned source snapshot matching the published package's
 | Docker context unavailable | Run `colima start --profile silentshift`; the launcher defaults to `colima-silentshift` and leaves Docker's default context unchanged |
 | API port occupied or a requested container exists | Choose another `--api-port`, for example `52983`, and let the launcher choose a fresh name. It never replaces a container |
 
-A fresh run may take several minutes for IPM download/compilation. Test containers remain available afterward; stopping them preserves their state. [Detailed historical driver commands](docs/JUDGE_VERIFICATION.md) are evidence, not additional setup steps. The public-package launcher deliberately uses release-matched 0.3.0 assertions. Its result does not validate the newer 0.3.2 source/package; [source verification](docs/JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones) records that separate boundary.
+A fresh run may take several minutes for IPM download/compilation. Test containers remain available afterward; stopping them preserves their state. [Detailed historical driver commands](docs/JUDGE_VERIFICATION.md) are evidence, not additional setup steps. The public-package launcher deliberately uses release-matched 0.3.2 assertions. Its result does not validate later source changes; [source verification](docs/JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones) records that separate boundary.
