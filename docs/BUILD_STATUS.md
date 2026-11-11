@@ -1,3 +1,11 @@
+# Recorded agent-value presentation — November 12, 2026 — 00:03 IST
+
+Static/documentation snapshot **855e014** presents the existing held-out wrong-delivery/review trade-off and three original prose cases. It preserves the worse third trial and distinguishes pending human review from correct final routing. No new evaluation, native install, policy, agent, fixture or package change. Native IPM remains **0.3.2**, separate React **0.2.1**.
+
+Local checks passed: **394 pytest / 7 JUnit / 54 workbench browser tests / 18 Node tests**, TypeScript/build, and **33 inspector / 39 tour / 38 new-page / 47 landing browser assertions**. Final local Lighthouse: landing mobile **93/100/100/100**, desktop **100/100/100/100**; tour/new page **100** in all categories on both profiles. Earlier noisy results and preview failures are retained; these are not hosted guarantees. [Current scope and raw evidence](evidence/agent-value-nov11/summary.json) · [report, limits and screenshots](agent-runs/agent-value-nov11.md). Hosted CI is not yet run for this local branch. Main, Pages, OEX and the native package are unchanged; public actions remain gated.
+
+## Earlier checkpoints
+
 # Guided recorded evidence — November 11, 2026 (IST)
 
 The new static tour preserves two actual historical synthetic native records, including the incorrect ALLOW proposal stopped by deterministic policy and the separately approved amendment delivery. A receipt-inspector link retains the selected case. No native write, new model call or public deployment. **394 pytest / 7 JUnit / 54 existing browser tests**, TypeScript/build, **13 Node crypto/provenance tests**, **33 receipt-inspector / 39 tour / 47 landing assertions** pass. Another fresh public 0.3.2 container passed **8 native classes / 28 methods** and both **12/12** replays in **68.02 seconds**. Native package resources remain unchanged. [Exact footprint, scopes and raw receipts](evidence/voting-nov11-tour/summary.json). Local mobile/desktop Lighthouse runs for both new pages scored 100 in each audited category; [raw reports](evidence/voting-nov11-tour/lighthouse-summary.json) are local measurements, not hosted guarantees.

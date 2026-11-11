@@ -1,0 +1,95 @@
+{
+  "recorded_at_utc": "2026-11-11T18:32:36.136682+00:00",
+  "recorded_at_ist": "2026-11-12T00:02:36.137055+05:30",
+  "presentation_commit": "855e0143d67540b192072d7c0430d7a061a1ef11",
+  "base_commit": "7ae03be03ac6721639e83bdd9e3ed07a5350649e",
+  "branch": "feat/agent-value-nov11",
+  "scope": "Static presentation, documentation and test harness only. Existing held-out records are read, not rerun.",
+  "commands": [
+    {
+      "command": "uv run --no-sync pytest -q",
+      "output": "pytest.txt",
+      "result": "394 passed in 36.33s"
+    },
+    {
+      "command": "PATH=/opt/homebrew/opt/openjdk/bin:$PATH python3 scripts/test_java_core.py",
+      "output": "java.txt",
+      "result": "7 successful, 0 failed"
+    },
+    {
+      "command": "npm --prefix web run check",
+      "output": "types.txt",
+      "result": "passed"
+    },
+    {
+      "command": "npm --prefix web run build",
+      "output": "build.txt",
+      "result": "passed"
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome npm --prefix web run test:e2e",
+      "output": "workbench-browser.txt",
+      "result": "54 passed"
+    },
+    {
+      "command": "node --test tests/receipt-inspector.test.mjs tests/recorded-tour.test.mjs tests/agent-value.test.mjs",
+      "output": "node-tests.txt",
+      "result": "18 passed"
+    },
+    {
+      "command": "python3 scripts/build_agent_value.py --check",
+      "output": "build-presentation.txt",
+      "result": "recorded presentation matches source"
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_receipt_inspector.cjs .local/agent-value/inspector-browser",
+      "output": "inspector-browser.json",
+      "result": "33 passed"
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_evidence_tour.cjs .local/agent-value/tour-browser-final",
+      "output": "tour-browser.json",
+      "result": "39 passed"
+    },
+    {
+      "command": "node scripts/check_agent_value.cjs http://127.0.0.1:5202/after/ .local/agent-value/cases-browser-final",
+      "output": "cases-browser.json",
+      "result": "38 passed"
+    },
+    {
+      "command": "node scripts/check_static_landing.cjs http://127.0.0.1:5202/after/ .local/agent-value/landing-browser-final",
+      "output": "landing-browser.json",
+      "result": "47 passed"
+    }
+  ],
+  "protected_paths_unchanged": [
+    "src",
+    "silentshift",
+    "java",
+    "fixtures",
+    "module.xml",
+    "evidence/heldout",
+    "docs/EVAL_HELDOUT.md",
+    "scripts/run_heldout.py",
+    "scripts/report_heldout.py"
+  ],
+  "new_evaluation_executed": false,
+  "native_install_or_live_scenarios_rerun": false,
+  "native_package": "0.3.2 unchanged",
+  "react_workbench": "0.2.1 unchanged",
+  "publication": "Local branch only at capture; no merge, Pages deployment, OEX edit/release, tag, post or upload.",
+  "link_check": "links.json",
+  "quality": "lighthouse-summary.json",
+  "screenshots": [
+    "intro-1440.png",
+    "intro-375.png",
+    "case-1440.png",
+    "case-375.png"
+  ],
+  "failures_and_recovery": [
+    "Shared node_modules caused Vite font allowlist warnings. Replaced only the task-created symlink with an APFS clone copy of matching dependencies; reran types, build and all 54 workbench browser tests successfully.",
+    "Initial Python preview reset a landing JavaScript request, failing the demo-dialog check. Retained first receipt/output; switched to a local Node static server and all 47 checks passed. No assertion removed.",
+    "Lighthouse earlier runs and temporary server issue are preserved with explicit scope in lighthouse-summary.json."
+  ],
+  "external_confirmation": "The anonymous bonus-post read found Java PEX comment 288628 already present. Do not post a duplicate; it is not a points award."
+}
