@@ -14,6 +14,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:5189',
     browserName: 'chromium',
+    channel: process.env.SILENTSHIFT_CHROME_CHANNEL || undefined,
     trace: 'retain-on-failure',
   },
   projects: [

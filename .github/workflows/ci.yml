@@ -6,8 +6,10 @@ permissions:
   contents: read
 jobs:
   local-checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
+    env:
+      SILENTSHIFT_CHROME_CHANNEL: chrome
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -34,8 +36,8 @@ jobs:
         working-directory: web
       - run: npm run check && npm run build
         working-directory: web
-      - run: npx playwright install --with-deps chromium
-        working-directory: web
+      # The runner supplies Chrome. Every browser test still executes through Playwright.
+      - run: google-chrome --version
       - run: npm run test:e2e
         working-directory: web
       - run: node scripts/check_receipt_inspector.cjs

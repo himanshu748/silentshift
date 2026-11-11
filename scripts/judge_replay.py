@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install public native IPM 0.3.0 and run two keyless recorded replays.
+"""Install public native IPM 0.3.2 and run two keyless recorded replays.
 
 Requires running Colima and the official build-154U ARM64 and Web Gateway
 images. An explicitly supplied local IRIS archive can be loaded and retagged.
@@ -28,8 +28,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.3.0"
-RELEASE_COMMIT = "a7aa217f1fc8d96f56bac6fd3110618eec21c353"
+VERSION = "0.3.2"
+RELEASE_COMMIT = "cfc4c279853886a72772a92ad70c2e2c5eae3819"
 REPOSITORY = "https://github.com/himanshu748/silentshift.git"
 IMAGE = "silentshift-iris:2026.3.0AI.154.0"
 GATEWAY = "containers.intersystems.com/intersystems/webgateway:2026.1"
@@ -255,7 +255,7 @@ def run(args: argparse.Namespace) -> int:
     container = args.container or "silentshift-bonus-registry-judge-" + run_id
     env_file = private_environment(run_id)
     child = child_environment()
-    print("Public 0.3.0 with pinned release tests/replay and current install orchestration; "
+    print("Public " + VERSION + " with pinned release tests/replay and current install orchestration; "
           "not current source runtime. "
           "Recorded replay only; no model calls. New test containers and private "
           "credentials are retained.", flush=True)
