@@ -51,7 +51,9 @@ function check(name, value, detail) {
       "Native hosting limitation visible",
       await page.locator(".demo-status").isVisible(),
     );
-    await page.getByRole("button", { name: "Try live demo" }).click();
+    check("Primary CTA goes to recorded evidence, not a pretend live run",
+      await page.getByRole("link", { name: "Explore recorded cases" }).getAttribute("href") === "evidence-tour.html");
+    await page.getByRole("button", { name: "Native demo status" }).click();
     check(
       "Demo dialog opens without pretending to execute",
       (await page.getByRole("dialog").isVisible()) &&
@@ -67,7 +69,7 @@ function check(name, value, detail) {
     check(
       "Dialog focus returns to opener",
       await page
-        .getByRole("button", { name: "Try live demo" })
+        .getByRole("button", { name: "Native demo status" })
         .evaluate((e) => e === document.activeElement),
     );
     await page.locator("[data-copy]").click();

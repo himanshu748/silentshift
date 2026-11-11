@@ -40,9 +40,19 @@ async function verify(showResult = false) {
 async function loadSample() {
   invalidate(); const ticket = epoch;
   try {
-    const response = await fetch('assets/pex-sample.json');
+    const requested = new URL(location.href).searchParams.get('case');
+    const selectedCase = ['quantity-mismatch','approved-amendment'].includes(requested) ? requested : null;
+    const response = await fetch(selectedCase ? 'assets/recorded-cases.json' : 'assets/pex-sample.json');
     if (!response.ok) throw new Error('Recorded sample is unavailable. Open a local synthetic export instead.');
-    const text = await response.text();
+    let text = await response.text();
+    if (ticket !== epoch) return;
+    if (selectedCase) {
+      const selection = JSON.parse(text).cases.find(row => row.scenario_id === selectedCase);
+      if (!selection?.receipt) throw new Error('Selected recorded receipt is unavailable.');
+      text = JSON.stringify(selection.receipt, null, 2);
+      const sourceLink = document.createElement('a'); sourceLink.href = 'https://github.com/himanshu748/silentshift/blob/main/docs/evidence/bonus-claims-nov11/java-pex-frozen-cases.json'; sourceLink.textContent = 'the native receipt records';
+      element('sample-source').replaceChildren('Selected historical synthetic export from ', sourceLink, '. Viewing it runs no investigation.');
+    }
     if (ticket !== epoch) return;
     editor.value = text; expected.value = DEMO_KEY_SHA256; await verify();
   } catch (error) { if (ticket === epoch) showError(error); }

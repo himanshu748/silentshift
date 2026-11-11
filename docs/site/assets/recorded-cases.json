@@ -1,0 +1,341 @@
+{
+  "schema": "silentshift-recorded-tour/1",
+  "synthetic": true,
+  "scope": "Historical native live cases recorded November 11; viewing does not run IRIS or a model. These are demonstrations, not accuracy evidence.",
+  "native_recorded_at": "2026-11-11T06:01:56.875861+00:00",
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "source": "docs/evidence/bonus-claims-nov11/java-pex-native-five.json",
+  "source_sha256": "cdd2fb1261858b08da421c4f19ee214a62a7f51c1a36d9177150fc1196c6f56c",
+  "receipts_source": "docs/evidence/bonus-claims-nov11/java-pex-frozen-cases.json",
+  "receipts_source_sha256": "993d565392e40a283c31354152b4dcef6ae988e2651fe456fb66d6825babc5e9",
+  "cases": [
+    {
+      "id": "EF61BAE2-DD94-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "quantity-mismatch",
+      "received_at": "2026-11-11T05:58:36.625389Z",
+      "clock": "2026-11-02T07:05:00Z",
+      "message": {
+        "business_unit": "EU-WEST",
+        "contract_id": "PO-2048",
+        "correlation_id": "54e1f8d2-6625-48f3-bb03-bf76c3be7c5f",
+        "event_id": "evt-quantity-001-54e1f8d2-6625-48f3-bb03-bf76c3be7c5f",
+        "kind": "order",
+        "notes": "Transport succeeded; JSON schema is unchanged.",
+        "occurred_at": "2026-11-02T07:00:00Z",
+        "product_id": "P-ALLOY-8",
+        "quantity": "20",
+        "source": "northstar-supply",
+        "unit": "CASE"
+      },
+      "references": [
+        {
+          "authority": "approved",
+          "business_unit": "EU-WEST",
+          "contract_id": "PO-2048",
+          "effective_from": "2026-10-01T00:00:00Z",
+          "effective_to": null,
+          "id": "contract:PO-2048:v1",
+          "product_id": "P-ALLOY-8",
+          "quantity": "240",
+          "timestamp_semantics": "event_time",
+          "unit": "EA"
+        }
+      ],
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "classification": "VERIFIED_CONTRADICTION",
+        "critical": true,
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "findings": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "240",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "quantity",
+            "observed": "20",
+            "severity": "critical"
+          },
+          {
+            "code": "QUANTITY_UNIT_MISMATCH",
+            "evidence_ids": [
+              "contract:PO-2048:v1"
+            ],
+            "expected": "EA",
+            "explanation": "The event contradicts an approved contract effective at event time. No transformation is authorized.",
+            "field": "unit",
+            "observed": "CASE",
+            "severity": "critical"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "ALLOW",
+        "evidence_ids": [
+          "contract:PO-2048:v1"
+        ],
+        "explanation": "Quantity updated to 20 CASE; approved effective from 2026-10-01.",
+        "uncertainty": 0
+      },
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": false,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": false,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "QUARANTINE",
+        "downstream_permitted": false,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Invalid messages and critical contradictions cannot be released.",
+          "Only a resolved comparison to an approved contract can permit release."
+        ],
+        "release_eligible": false
+      },
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "trace_id": "59",
+      "synthetic": true,
+      "agent": {
+        "execution_mode": "live",
+        "provider": "ollama/openai-compatible",
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "f6V1HLEg1E1lD3PFrIKgZMIEyuj44qZ887mTLlqMiv0+7em+cXFpq4mWPvceio6kfekey1GUIlnwxcDw36LdAMLE7f/hn4IMSoz18Mdy54O6rnHilppO3ZyE5CXmEi2pS7+sCRCV9s83QI+PA12ztM5SgOs5ppVQzpTRhO5jwreBcFT6YclJiYYjjTb89H49VjOIJp5L29N/K2wpxA5J/jInjSciFZWcfIgjdgTGeX8pB2C8duY/28fr4NXnJecutx+2LR29TZ5ob0/0EJUE1gvLBEM0SovSNSKt9IvOoqjPgGLuQqH+wazwo3N30kLK7Yp4VL4MOirni5z6YX11ng==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T05:59:23.124303Z",
+          "payload": {
+            "case_id": "EF61BAE2-DD94-11F1-A2D3-A50F91B4F850",
+            "decision": "QUARANTINED",
+            "evidence_hashes": [
+              "1f2625f981158b144a2bca122bfb3b360163474f81ff677e5e9865d86512ba61",
+              "32c45aab2f9c62d49b34cca4456d6780243cef4866e05da2365ae196153e05e1",
+              "6d89ac7369e8b8f3f8840ffc7cbd192075ae26b9797205325f4c38458f0b1d44",
+              "7781dd7a7864847980fb0f6c3af000cc5192ecd40d61f0783629197871b6a968"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "937684a08d2412db55c4eb695f3ab1e5eacd75d0ec65758a8706bad76eb4a96e"
+        }
+      }
+    },
+    {
+      "id": "1EEE38DB-DD95-11F1-A2D3-A50F91B4F850",
+      "scenario_id": "approved-amendment",
+      "received_at": "2026-11-11T05:59:56.399042Z",
+      "clock": "2026-11-02T07:05:00Z",
+      "message": {
+        "business_unit": "EU-WEST",
+        "contract_id": "PO-2048",
+        "correlation_id": "54e1f8d2-6625-48f3-bb03-bf76c3be7c5f",
+        "event_id": "evt-amendment-001-54e1f8d2-6625-48f3-bb03-bf76c3be7c5f",
+        "kind": "order",
+        "notes": "Approved contract amendment changes delivery to 20 CASE.",
+        "occurred_at": "2026-11-02T07:00:00Z",
+        "product_id": "P-ALLOY-8",
+        "quantity": "20",
+        "source": "northstar-supply",
+        "unit": "CASE"
+      },
+      "references": [
+        {
+          "authority": "approved",
+          "business_unit": "EU-WEST",
+          "contract_id": "PO-2048",
+          "effective_from": "2026-10-01T00:00:00Z",
+          "effective_to": "2026-11-01T00:00:00Z",
+          "id": "contract:PO-2048:v1",
+          "product_id": "P-ALLOY-8",
+          "quantity": "240",
+          "timestamp_semantics": "event_time",
+          "unit": "EA"
+        },
+        {
+          "amendment_of": "contract:PO-2048:v1",
+          "authority": "approved",
+          "business_unit": "EU-WEST",
+          "contract_id": "PO-2048",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "id": "contract:PO-2048:v2",
+          "product_id": "P-ALLOY-8",
+          "quantity": "20",
+          "timestamp_semantics": "event_time",
+          "unit": "CASE"
+        }
+      ],
+      "assessment": {
+        "active_reference_ids": [
+          "contract:PO-2048:v2"
+        ],
+        "classification": "LEGITIMATE_CHANGE",
+        "critical": false,
+        "evidence_ids": [
+          "contract:PO-2048:v1",
+          "contract:PO-2048:v2"
+        ],
+        "findings": [
+          {
+            "code": "APPROVED_AMENDMENT",
+            "evidence_ids": [
+              "contract:PO-2048:v1",
+              "contract:PO-2048:v2"
+            ],
+            "expected": "contract:PO-2048:v2",
+            "explanation": "The event exactly matches a current approved amendment; historical difference is legitimate.",
+            "field": "$contract",
+            "observed": "contract:PO-2048:v1",
+            "severity": "info"
+          }
+        ],
+        "schema_version": "silentshift-message/1"
+      },
+      "recommendation": {
+        "cited_findings": [],
+        "decision": "ALLOW",
+        "evidence_ids": [
+          "contract:PO-2048:v1",
+          "contract:PO-2048:v2"
+        ],
+        "explanation": "Amendment to delivery quantity approved and effective.",
+        "uncertainty": 0
+      },
+      "policy": {
+        "checks": [
+          {
+            "code": "ASSESSMENT_VALID",
+            "passed": true,
+            "reason": "Deterministic assessment must be complete and valid."
+          },
+          {
+            "code": "NOT_DUPLICATE",
+            "passed": true,
+            "reason": "Duplicate event cannot create a second downstream effect."
+          },
+          {
+            "code": "NO_CRITICAL_CONTRADICTION",
+            "passed": true,
+            "reason": "Invalid messages and critical contradictions cannot be released."
+          },
+          {
+            "code": "RECOMMENDATION_VALID",
+            "passed": true,
+            "reason": "Agent output must satisfy the strict recommendation schema."
+          },
+          {
+            "code": "EVIDENCE_COMPLETE",
+            "passed": true,
+            "reason": "Every independently retrieved evidence record must be cited for release."
+          },
+          {
+            "code": "SEMANTICS_RESOLVED",
+            "passed": true,
+            "reason": "Only a resolved comparison to an approved contract can permit release."
+          },
+          {
+            "code": "UNCERTAINTY_BOUNDED",
+            "passed": true,
+            "reason": "Uncertainty above 0.35 requires human review."
+          }
+        ],
+        "decision": "ALLOW",
+        "downstream_permitted": true,
+        "policy_version": "silentshift-policy/1.2.0",
+        "reasons": [
+          "Recommendation satisfies all deterministic release gates."
+        ],
+        "release_eligible": true
+      },
+      "routing": "DELIVERED",
+      "delivery_count": 1,
+      "trace_id": "119",
+      "synthetic": true,
+      "agent": {
+        "execution_mode": "live",
+        "provider": "ollama/openai-compatible",
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "tool_reads": {
+          "message": 1,
+          "contracts": 1,
+          "related": 1,
+          "precedents": 1
+        }
+      },
+      "receipt": {
+        "public_key_spki": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvSo5Q5lFPETgj0XZPSpEnTXxTLsYpYfeQrKEZ+cWcjt+Yy04hOkY9071sL0YfwA6ojZL+4d/Fo1OBAjob+ik4aId7MQlujo1Ostn5lN2G86/EeDO4m6YQ9sltcq6ud28moOxiYy0mmVqzB/OR2CdGwgjhH/rILlPDDDhOIOO35qGIoyZREqqyBgP9pPBKUmJ/2fqSNYSFs3lTrwceijGzUqibIJJPfYasvuMOT+3yztZq9TVDy3iARZaN7L7nfrWXHDAV8YU4BAhkrclCkqR6MPkuyQdqcq7sjJLyn4CoiwhgiPcgntbRfQWa7uSzSZnl9YJ/lldWsWixnr8oGLaQIDAQAB",
+        "signature": "Grxi3yKeVWRmHQzt9ahiPo3HE6Wzk96MSuL0lnxNNdwikjdBn4Ee4XHem94onrHDE+ldBa+VZ+qBXKbBYyOsjz4V5sBR/dYACrlbJ/TjQs80oG9ULahbNZ264CzZdTm5wKgzRMpgdWkhtPciIiIplJ7l+1R/zO9kGIJ3RTTHOUFjEgrbLD3BEtZvBgZUBRQX4xuZXrbyNQkOn10KqtlFRv9vdOQqReY/FA20EQwOVtMaMj0M0HQC6Pp6I8eH0i9M6JCCJI1gDM2cuSkfJzKeCCQ34VPakF56tTaBihJ15fUv4ecSJYVZQA8TN8Y0wXznS0uVgEJW7/fxET4YR8HvGQ==",
+        "signature_algorithm": "SHA256withRSA",
+        "signed": {
+          "created_at": "2026-11-11T06:00:31.881794Z",
+          "payload": {
+            "case_id": "1EEE38DB-DD95-11F1-A2D3-A50F91B4F850",
+            "decision": "DELIVERED",
+            "evidence_hashes": [
+              "40620e5f574e25de763e00f055b0ee9bf3f4c5802ebaf0c5e9400a8230c24163",
+              "7eaea24b9d0dc0620f2ccc5d09604e46bfd057c9ad67f57445b3ab3d930dc71c",
+              "995d4dcafb33c461e52579772134b41292bfdc01aa3042dedd920b9bc3f65830",
+              "dc7d3e811a7188c34b725f2873effdefc8a4eeeebb3a17cc97b99db8f4617519"
+            ],
+            "execution_mode": "live",
+            "synthetic": true
+          },
+          "schema": "silentshift-java-pex/1",
+          "sha256": "3b2684c8ca43f7a98bd6bfc30ffefd018dba31283b2ff66015b2534d318c0812"
+        }
+      }
+    }
+  ]
+}
