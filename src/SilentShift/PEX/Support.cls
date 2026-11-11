@@ -18,13 +18,32 @@ ClassMethod Request(id As %String) As SilentShift.PEX.ExportRequest
         Quit:hash=""
         Do hashes.%Push(hash)
     }
-    Set mode = $SYSTEM.Util.GetEnviron("SILENTSHIFT_PROVIDER_MODE")
-    If mode '= "recorded-replay" Set mode = "live"
+    Set mode = ..ExecutionMode(body.%Get("agent"))
     Set payload = {"case_id": (id), "decision": (body.%Get("routing")), "evidence_hashes": (hashes), "execution_mode": (mode), "synthetic": (body.%Get("synthetic"))}
     Do payload.%Set("synthetic",body.%Get("synthetic"),"boolean")
     Set request = ##class(SilentShift.PEX.ExportRequest).%New()
     Set request.CaseId = id, request.Decision = body.%Get("routing"), request.PayloadJSON = payload.%ToJSON()
     Return request
+}
+
+/// A retry or review may run under a different deployment configuration.
+/// Preserve the investigation's provenance; never infer it from today's server.
+ClassMethod ExecutionMode(agent As %DynamicObject) As %String
+{
+    If $ISOBJECT(agent) {
+        If agent.%IsDefined("execution_mode") {
+            If agent.%GetTypeOf("execution_mode") '= "string" Throw ##class(%Exception.General).%New("PEX_EXECUTION_MODE_INVALID")
+            Set mode = agent.%Get("execution_mode")
+            If (mode = "live") || (mode = "recorded-replay") Return mode
+            Throw ##class(%Exception.General).%New("PEX_EXECUTION_MODE_INVALID")
+        }
+        // Legacy cases can identify provenance by the persisted investigator
+        // mode. Missing/unknown metadata declines export, not the saved route.
+        Set legacy = agent.%Get("mode", "")
+        If legacy = "native-ai-hub-recorded-replay" Return "recorded-replay"
+        If legacy = "native-ai-hub" Return "live"
+    }
+    Throw ##class(%Exception.General).%New("PEX_EXECUTION_MODE_MISSING")
 }
 
 /// JDK/PEX are supplied by the licensed local image, not bundled in IPM.

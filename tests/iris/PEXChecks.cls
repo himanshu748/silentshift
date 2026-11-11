@@ -3,6 +3,55 @@ Include (%occStatus, %outUnitTest)
 /// The round-trip tests require the real Java gateway; no model calls.
 Class SilentShift.Test.PEXChecks Extends %UnitTest.TestCase
 {
+/// Persisted replay provenance must win even when this process runs in live
+/// mode. Arrange synthetic durable state, then use the real Java operation.
+Method TestPersistedExecutionModeAndRetry()
+{
+    Set data = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Test.ReplayChecks).ExampleCase())
+    Set message = data.%Get("message"), uuid = $TRANSLATE($SYSTEM.Util.CreateGUID(),"{}","")
+    Do message.%Set("event_id",uuid),message.%Set("source","synthetic-pex-mode-regression")
+    Set envelope = {"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":"quantity-mismatch","dataset_version":"synthetic-pex-mode-regression/1"}
+    Set sc = ##class(SilentShift.Store).CreateCase(envelope.%ToJSON(),.id,.duplicate)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set body = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Do body.%Set("agent",{"mode":"native-ai-hub-recorded-replay","execution_mode":"recorded-replay"})
+    Do body.%Set("routing","QUARANTINED")
+    Set sc = ##class(SilentShift.Store).SaveCase(id,body.%ToJSON())
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set request = ##class(SilentShift.PEX.Support).Request(id)
+    Set payload = ##class(%DynamicObject).%FromJSON(request.PayloadJSON)
+    Do $$$AssertEquals(payload.%Get("execution_mode"),"recorded-replay","Persisted replay mode overrides the deployment environment")
+    Set sc = ##class(Ens.Director).CreateBusinessService("Partner",.service)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set sc = service.SendRequestSync("ReceiptExporter",request,.reply,15)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISERR(sc) Quit
+    Set first = reply.ReceiptJSON
+    Do $$$AssertTrue(reply.SignatureValid)
+    Set request = ##class(SilentShift.PEX.Support).Request(id)
+    Set sc = service.SendRequestSync("ReceiptExporter",request,.retried,15)
+    Do $$$AssertStatusOK(sc)
+    If $$$ISOK(sc) Do $$$AssertEquals(first,retried.ReceiptJSON,"Reconstructed request reuses the original signed receipt")
+    Set after = ##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Do $$$AssertEquals(after.%Get("routing"),"QUARANTINED")
+    Do $$$AssertEquals(after.%Get("delivery_count"),0)
+}
+
+Method TestLegacyAndInvalidExecutionModes()
+{
+    Do $$$AssertEquals(##class(SilentShift.PEX.Support).ExecutionMode({"execution_mode":"live","mode":"native-ai-hub-recorded-replay"}),"live","Explicit persisted mode is authoritative")
+    Do $$$AssertEquals(##class(SilentShift.PEX.Support).ExecutionMode({"mode":"native-ai-hub-recorded-replay"}),"recorded-replay","Legacy replay provenance remains recognizable")
+    Do $$$AssertEquals(##class(SilentShift.PEX.Support).ExecutionMode({"mode":"native-ai-hub"}),"live","Legacy live provenance remains recognizable")
+    For value = "{}", "null", "{""execution_mode"":""unknown"",""mode"":""native-ai-hub""}", "{""execution_mode"":null}", "{""execution_mode"":""""}" {
+        Set rejected = 0
+        Try { Set ignored = ##class(SilentShift.PEX.Support).ExecutionMode(##class(%DynamicObject).%FromJSON(value)) } Catch error { Set rejected = 1 }
+        Do $$$AssertTrue(rejected,"Unknown or malformed provenance must not be relabeled from the environment")
+    }
+}
+
 Method TestRealGatewayRoundTripAndRetry()
 {
     Set sc = ##class(Ens.Director).CreateBusinessService("Partner", .service)
