@@ -1,10 +1,12 @@
-# Main bonus claim — prepared repost, not sent
+# Main bonus claim — reposted and anonymously verified
 
 The earlier comment `288603` was recorded as posted and anonymously visible at 10:51 IST. Fresh anonymous HTML and Chrome checks at 12:42–12:44 IST did not find it. Its current signed-in/moderation state is unknown; do not call it deleted or spam without evidence.
 
 The owner requested the main claim before the shipping actions if a repost is needed. Before sending, inspect the owner view for a pending or existing comment, and avoid a duplicate if found. Recheck the linked public assets. A repost needs its own exact `submit`; do not consume that approval for pushing/opening a PR. The Java update remains separate and deferred until its code/evidence links are public.
 
-## Exact proposed text
+Reposted with the owner’s exact `submit` on November 11 at 13:05 IST. The site confirmed posting; [comment 288606](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows#comment-288606) is visible in a fresh anonymous browser (HTTP 200). All evidence links and the plain MP4 URL survived. [Receipt](../evidence/bonus-claims-nov11/main-repost-public.json). Java follow-up remains unsent.
+
+## Exact posted text
 
 Hi Tatiana,
 
