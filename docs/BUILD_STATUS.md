@@ -1,3 +1,7 @@
+# Local receipt inspector — November 11, 2026 (IST)
+
+The source-only browser utility verifies the real retained Java export, rejects tampering and distinguishes embedded-key integrity from independently pinned identity. **10 Node tests / 33 inspector browser assertions**, **394 pytest / 7 JUnit / 54 existing browser tests**, TypeScript and build pass. A separate new public 0.3.2 container passed startup, **8 native classes / 28 methods** and both **12/12** replays in **83.75 seconds**. Native package resources are unchanged. [Scoped summary and outputs](evidence/voting-nov11-receipts/summary.json) · [guide](RECEIPT_INSPECTOR.md). Static Pages deployment remains gated; this is not a hosted native demo.
+
 # Current public-package launcher — November 11, 2026 (IST)
 
 A fresh GitHub clone of launcher fix `3edf75a9021fb3aa1dc679f1f58107ca2d0c1584` installed **public native 0.3.2** using literal `zpm "install silentshift"` in a new **154U ARM64** container with no source mounts. Production startup, **8 native classes / 28 methods** and **two 12/12 recorded replays** passed in **146.23 seconds**. The release assertion source is pinned to v0.3.2's commit `cfc4c27`. No fresh inference or live five-case rerun is implied. [Receipt](evidence/voting-nov11-judge/summary.json) · [native output](evidence/voting-nov11-judge/native-tests.txt) · [exact launcher output](evidence/voting-nov11-judge/command-output.txt).

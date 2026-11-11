@@ -69,6 +69,8 @@ SilentShift is for integration operations teams handling partner order feeds. It
 <a id="prove-the-native-journey"></a>
 <a id="optional-local-intake-and-procedural-guidance"></a>
 
+A [local receipt inspector](docs/RECEIPT_INSPECTOR.md) independently checks a real synthetic Java PEX export and demonstrates how tampering breaks its signature. It runs in your browser without IRIS or a model; publication to Pages remains a separate step.
+
 ### Published package and this branch
 
 **Native IPM and Open Exchange publish 0.3.2, including the [Java PEX receipt exporter](docs/JAVA_PEX.md).** After a routing outcome is committed, the production requests an immutable signed receipt. Export failure preserves the existing route. The separately built React workbench remains **0.2.1**.

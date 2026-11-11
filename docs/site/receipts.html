@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inspect a real synthetic SilentShift Java PEX receipt. Recompute the evidence payload hash and verify its signature locally in your browser.">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>Receipt inspector — SilentShift</title>
+  <link rel="icon" href="assets/mark.png"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="receipts.css">
+  <script type="module" src="receipts.mjs"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to receipt inspector</a>
+<header class="site-header wrap"><a class="brand" href="./" aria-label="SilentShift home"><img src="assets/mark.png" width="32" height="32" alt=""><span>SilentShift<span class="brand-stop">.</span></span></a><nav aria-label="Primary navigation"><a href="./#judges">For judges</a><a href="https://github.com/himanshu748/silentshift/blob/main/docs/JAVA_PEX.md">How receipts work ↗</a></nav></header>
+<main id="main" class="receipt-main wrap">
+  <div class="receipt-intro"><p class="eyebrow">Evidence, independently checked</p><h1>A decision leaves a receipt.<br><em>Check what it proves.</em></h1><p>Recompute the payload hash. Verify the Java PEX signature. Then change a local copy and see the check fail.</p><p class="receipt-note">Recorded synthetic artifact · no IRIS connection · no model call</p></div>
+  <noscript><p class="receipt-error">Local cryptographic verification needs JavaScript. You can still <a href="assets/pex-sample.json">download the unchanged sample</a> and <a href="https://github.com/himanshu748/silentshift/blob/main/docs/JAVA_PEX.md">read its verification limits</a>.</p></noscript>
+  <div class="receipt-grid">
+    <section class="receipt-panel receipt-proof" aria-labelledby="proof-title">
+      <p class="eyebrow">01 / What the bytes say</p><h2 id="proof-title">Integrity is a check.<br>Trust is a separate question.</h2>
+      <ol class="receipt-checks"><li><span class="receipt-check-label">Payload hash</span><strong id="hash-check">Not checked</strong><span>Does the case, route and evidence match the stored SHA-256?</span></li><li><span class="receipt-check-label">RSA signature</span><strong id="signature-check">Not checked</strong><span>Was the signed record changed after export?</span></li><li><span class="receipt-check-label">Expected signing key</span><strong id="identity-check">Not checked</strong><span>A key inside a file cannot establish its own identity.</span></li></ol>
+      <div id="verification" class="receipt-verdict" data-state="unchecked" role="status" tabindex="-1" aria-live="polite" aria-atomic="true">Load the recorded sample or choose a synthetic receipt.</div>
+      <dl id="receipt-details" class="receipt-details" hidden><dt>Case</dt><dd id="case-id"></dd><dt>Persisted outcome</dt><dd id="case-decision"></dd><dt>Original investigation mode</dt><dd id="case-mode"></dd><dt>Key SHA-256 fingerprint</dt><dd id="key-fingerprint"></dd></dl>
+      <p class="receipt-limit">A valid signature does not prove the business decision was correct, that evidence was authoritative, or that the host is tamper-proof. Retain a signing-key fingerprint independently. The bundled demo key is not an externally certified identity.</p>
+    </section>
+    <section class="receipt-panel receipt-input" aria-labelledby="input-title">
+      <p class="eyebrow">02 / Inspect a record</p><h2 id="input-title">Real export. Local verification.</h2>
+      <div class="receipt-actions"><button id="load-sample" type="button" class="button primary">Load recorded sample</button><a href="assets/pex-sample.json" download="silentshift-synthetic-receipt.json">Download original ↗</a></div>
+      <label for="receipt-file">Or open a synthetic receipt (JSON, up to 64 KiB)</label><input id="receipt-file" type="file" accept=".json,application/json">
+      <label for="receipt-text">Receipt JSON</label><textarea id="receipt-text" rows="13" spellcheck="false" autocomplete="off" maxlength="65536" aria-describedby="local-only"></textarea>
+      <p id="local-only" class="receipt-note">Your selected file stays in this browser. No upload, storage, analytics or native writes. Use synthetic exports only.</p>
+      <label for="expected-key">Expected key fingerprint <span class="receipt-note">(optional, obtained independently)</span></label><input id="expected-key" type="text" spellcheck="false" autocomplete="off" maxlength="64" placeholder="64 hexadecimal characters">
+      <p id="sample-source" class="receipt-note">The sample is an unchanged November 11 export from <a href="https://github.com/himanshu748/silentshift/blob/main/docs/evidence/bonus-claims-nov11/java-pex-receipt.json">the native evidence</a>. Its saved mode is live; viewing it does not run an investigation.</p>
+      <div class="receipt-actions"><button id="verify" type="button" class="button primary">Verify receipt</button><button id="tamper" type="button" class="button">Test an edited copy</button></div>
+      <p class="receipt-note">The edited-copy test changes only this editor’s outcome field and keeps the old signature. It changes no saved file, native case or routing policy.</p>
+    </section>
+  </div>
+  <section class="receipt-end"><p class="eyebrow">The production still owns the route</p><h2>Verification explains an outcome.<br>It never authorizes one.</h2><p>IRIS commits the policy-controlled route, then asks Java PEX to export the receipt. If export fails, the committed route stays unchanged.</p><a href="./#install" class="button primary">Run the native workflow ↗</a><a href="https://openexchange.intersystems.com/package/SilentShift" class="button">View on Open Exchange ↗</a></section>
+</main><footer class="wrap receipt-footer">Synthetic data. Evaluation build. Only 154U ARM64 is locally qualified. <a href="./">Back to SilentShift</a></footer>
+</body></html>
