@@ -45,6 +45,7 @@ async function loadSample() {
     const response = await fetch(selectedCase ? 'assets/recorded-cases.json' : 'assets/pex-sample.json');
     if (!response.ok) throw new Error('Recorded sample is unavailable. Open a local synthetic export instead.');
     let text = await response.text();
+    if (ticket !== epoch) return;
     if (selectedCase) {
       const selection = JSON.parse(text).cases.find(row => row.scenario_id === selectedCase);
       if (!selection?.receipt) throw new Error('Selected recorded receipt is unavailable.');

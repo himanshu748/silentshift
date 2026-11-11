@@ -14,6 +14,7 @@ test('selection pins real public source bytes and contains only the two intended
  assert.deepEqual(selection.cases.map(c=>c.scenario_id),['quantity-mismatch','approved-amendment']);
  for(const c of selection.cases){const original=source.records.find(r=>r.id===c.id);assert.ok(original);assert.equal(c.synthetic,true);
   for(const field of ['message','references','recommendation','policy','assessment','routing','delivery_count','trace_id'])assert.deepEqual(c[field],original[field]);
+  for (const [key,value] of Object.entries(c.agent)) assert.deepEqual(value,original.agent[key]);
   assert.deepEqual(c.receipt,receipts.cases.find(r=>r.case_id===c.id).receipt);
  }
 });

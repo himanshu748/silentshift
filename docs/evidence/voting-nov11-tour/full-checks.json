@@ -1,0 +1,89 @@
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 26.58
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_java_core.py"
+    ],
+    "exit_code": 0,
+    "seconds": 5.78
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "ci"
+    ],
+    "exit_code": 0,
+    "seconds": 2.86
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.02
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 1.94
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "test:e2e"
+    ],
+    "exit_code": 0,
+    "seconds": 98.82
+  },
+  {
+    "command": [
+      "node",
+      "--test",
+      "tests/receipt-inspector.test.mjs",
+      "tests/recorded-tour.test.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 7.43
+  },
+  {
+    "command": [
+      "node",
+      "scripts/check_receipt_inspector.cjs"
+    ],
+    "exit_code": 0,
+    "seconds": 34.67
+  },
+  {
+    "command": [
+      "node",
+      "scripts/check_evidence_tour.cjs"
+    ],
+    "exit_code": 0,
+    "seconds": 19.73
+  }
+]
