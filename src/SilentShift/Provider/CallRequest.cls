@@ -19,6 +19,7 @@ Property CostStatus As %String(MAXLEN = 32) [ InitialExpression = "unavailable" 
 Property StartedAt As %String(MAXLEN = 40);
 Property RequestBytes As %Integer;
 Property ToolNamesJSON As %String(MAXLEN = 512);
+Property FinalFormatVersion As %String(MAXLEN = 80);
 Property StructuredFinal As %Boolean [ InitialExpression = 0 ];
 
 Method AsJSON() As %String
@@ -47,6 +48,7 @@ Method AsJSON() As %String
         "billing_cost":null,
         "usage_scope":"actual_http_response_only"
     }
+    Do item.%Set("final_format_version", ..FinalFormatVersion)
     Do item.%Set("structured_final", ..StructuredFinal, "boolean")
     Do item.%Set("request_phase", $SELECT(..StructuredFinal:"structured-final",1:"sdk-request"))
     Do item.%Set("provider", ..Provider)

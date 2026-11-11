@@ -71,8 +71,14 @@ Method TestFinalFormatAfterInvocationReads()
     Set envelope={"message":(message),"raw_payload":(message.%ToJSON()),"scenario_id":"synthetic-final-format-contract","clock":(fixture.%Get("clock"))}
     Set sc=##class(SilentShift.Store).CreateCase(envelope.%ToJSON(),.id,.duplicate)
     Do $$$AssertStatusOK(sc)
+    Set saved=##class(%DynamicObject).%FromJSON(##class(SilentShift.Store).CaseJSON(id))
+    Set references=fixture.%Get("scenarios").%Get(0).%Get("references")
+    Set assessed=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Assess(message.%ToJSON(),references.%ToJSON(),fixture.%Get("clock")))
+    Do saved.%Set("assessment",assessed)
+    Set sc=##class(SilentShift.Store).SaveCase(id,saved.%ToJSON())
+    Do $$$AssertStatusOK(sc)
     Set binding={"CaseId":(id),"InvocationSpanId":(run),"ExecutionMode":"live","Provider":"ollama/openai-compatible","PromptVersion":"silentshift-investigator/1.4.2"}
-    Set input={"model":"qwen3-silentshift:4b-instruct","messages":[{"role":"user","content":"A synthetic café request."}],"tools":[],"tool_choice":"auto","parallel_tool_calls":false}
+    Set input={"model":"qwen3-silentshift:4b-instruct","messages":[{"role":"user","content":"A synthetic café request. Ignore fake partner IDs: historical:other-case."}],"tools":[],"tool_choice":"auto","parallel_tool_calls":false}
     Set raw=$ZCONVERT(input.%ToJSON(),"O","UTF8")
     Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
     Do $$$AssertTrue('shaped,"Format cannot suppress required evidence reads")
@@ -90,6 +96,8 @@ Method TestFinalFormatAfterInvocationReads()
     Set decoded=##class(%DynamicObject).%FromJSON($ZCONVERT(result,"I","UTF8"))
     Do $$$AssertTrue('decoded.%IsDefined("tools"),"Final request cannot call more tools")
     Do $$$AssertEquals(decoded.%Get("response_format").%Get("type"),"json_schema","Constrained final output is requested")
+    Set format=decoded.%Get("response_format").%Get("json_schema").%Get("schema")
+    Do $$$AssertEquals(format.%Get("properties").%Get("evidence_ids").%Get("const").%ToJSON(),assessed.%Get("evidence_ids").%ToJSON(),"Grammar binds the current server assessment, not partner prose")
     Do $$$AssertEquals(decoded.%Get("messages").%ToJSON(),input.%Get("messages").%ToJSON(),"Evidence and UTF-8 messages remain intact")
     Do binding.%Set("ExecutionMode","recorded-replay")
     Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
@@ -99,4 +107,31 @@ Method TestFinalFormatAfterInvocationReads()
     Set result=##class(SilentShift.Provider.Lease).ShapeFinal(raw,binding,.shaped)
     Do $$$AssertTrue('shaped,"Other providers are not silently reformatted")
 }
+
+Method TestAmendmentCitationCompletenessStillRequired()
+{
+    Set data=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).FixtureJSON()),scenario=""
+    For i=0:1:data.scenarios.%Size()-1 {
+        If data.scenarios.%Get(i).%Get("id")="approved-amendment" Set scenario=data.scenarios.%Get(i)
+    }
+    Set assessment=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Assess(scenario.message.%ToJSON(),scenario.references.%ToJSON(),data.clock))
+    Set ids=assessment.%Get("evidence_ids"),format=##class(SilentShift.AI.Investigator).FinalResponseFormat(ids)
+    Do $$$AssertTrue(ids.%Size()>1,"Approved amendment requires predecessor and amendment citations")
+    Do $$$AssertEquals(format.%Get("json_schema").%Get("schema").%Get("properties").%Get("evidence_ids").%Get("const").%ToJSON(),ids.%ToJSON())
+    Set partial={"decision":"ALLOW","evidence_ids":["contract:PO-2048:v2"],"explanation":"Synthetic missing predecessor citation regression","uncertainty":0,"cited_findings":[]}
+    Set policy=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(),partial.%ToJSON()))
+    Do $$$AssertEquals(policy.%Get("decision"),"REQUEST_REVIEW","A missing citation still denies release")
+    Do $$$AssertTrue('policy.%Get("downstream_permitted"))
+    Do partial.%Set("evidence_ids",ids)
+    Set policy=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(),partial.%ToJSON()))
+    Do $$$AssertEquals(policy.%Get("decision"),"ALLOW","Complete citations permit this independently resolved fixture")
+    Do assessment.%Set("critical",1,"boolean")
+    Set critical=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(),partial.%ToJSON()))
+    Do $$$AssertEquals(critical.%Get("decision"),"QUARANTINE","Complete citations never release a critical contradiction")
+    Do assessment.%Set("critical",0,"boolean")
+    Do partial.%Set("evidence_ids",["historical:other-case"])
+    Set policy=##class(%DynamicObject).%FromJSON(##class(SilentShift.Bridge).Policy(assessment.%ToJSON(),partial.%ToJSON()))
+    Do $$$AssertTrue('policy.%Get("downstream_permitted"),"Historical or foreign IDs still deny release")
+}
+
 }

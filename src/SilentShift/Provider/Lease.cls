@@ -132,7 +132,15 @@ ClassMethod ShapeFinal(raw As %String, binding As %DynamicObject, Output shaped 
     If '$DATA(reads("message")) || '$DATA(reads("contracts")) || '$DATA(reads("related")) || '$DATA(reads("precedents")) Return raw
     Set body=##class(%DynamicObject).%FromJSON($ZCONVERT(raw,"I","UTF8"))
     Do body.%Remove("tools"),body.%Remove("tool_choice"),body.%Remove("parallel_tool_calls")
-    Do body.%Set("response_format",##class(SilentShift.AI.Investigator).FinalResponseFormat())
+    // Read the server-owned assessment directly: no extra SQL privileges,
+    // Embedded Python callback, partner-provided IDs, or response mutation.
+    Set record=##class(SilentShift.Data.CaseRecord).%OpenId(binding.CaseId)
+    If '$ISOBJECT(record) Throw ##class(%Exception.General).%New("FINAL_FORMAT_CASE_UNAVAILABLE")
+    Set current=##class(%DynamicObject).%FromJSON(record.Body),assessment=current.%Get("assessment")
+    If '$ISOBJECT(assessment) Throw ##class(%Exception.General).%New("FINAL_FORMAT_CITATIONS_UNAVAILABLE")
+    Set ids=assessment.%Get("evidence_ids")
+    If '$ISOBJECT(ids) Throw ##class(%Exception.General).%New("FINAL_FORMAT_CITATIONS_UNAVAILABLE")
+    Do body.%Set("response_format",##class(SilentShift.AI.Investigator).FinalResponseFormat(ids))
     Set result=$ZCONVERT(body.%ToJSON(),"O","UTF8")
     If $LENGTH(result)>..#MAXBYTES Throw ##class(%Exception.General).%New("FINAL_FORMAT_REQUEST_BOUNDS")
     Set shaped=1
@@ -166,6 +174,7 @@ ClassMethod Claim(header As %String, raw As %String, Output request As SilentShi
         Set raw=..ShapeFinal(raw,binding,.shaped)
         If shaped Set tools="[]"
         Set request.StructuredFinal=shaped
+        If shaped Set request.FinalFormatVersion=##class(SilentShift.AI.Investigator).#FINALFORMATVERSION
         Set request.StartedAt = ##class(SilentShift.TraceEvent).UTC(), request.RequestBytes = $LENGTH(raw)
         Set request.ToolNamesJSON = tools
         Set call = request.CallId
