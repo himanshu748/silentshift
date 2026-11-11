@@ -1,3 +1,15 @@
+# Bonus evidence preparation — November 11, 2026 (IST)
+
+Prepared on `chore/bonus-claims-nov11` from main `3bacc61`. Embedded Python usage is now **Claimed for review**, using the actual in-IRIS assessment/policy call chain and historical live execution evidence; no technical disqualification was found. [Source audit](evidence/bonus-claims-nov11/embedded-python.json). This is not an awarded bonus or a new runtime test.
+
+The unchanged MP4 downloads anonymously with matching bytes. Public IPM manifest and OEX release read **0.3.1**, while the listing body still says **0.3.0**. Both articles are public and retain their OEX links. [Current readback](evidence/bonus-claims-nov11/public.json) · [MP4 receipt](evidence/bonus-claims-nov11/video.json). Only 154U ARM64 remains locally qualified.
+
+Prepared the claims PR diff, upload command, exact DC comment and optional PEX effort/risk plan. No push/PR, merge, asset upload, comment, branch deletion, IPM/OEX update, runtime change, model call or spending occurred. [Report and gates](agent-runs/bonus-claims-nov11.md). Java/.NET PEX, online demo and the Embedded Python bug remain Not claimed; no genuine second AI Hub bug is filing-ready.
+
+The dated checkpoints below are historical and do not supersede this status.
+
+---
+
 # Latest local landing checkpoint — 2026-11-10 22:03:08 IST
 
 The isolated `landing-demo-nov10` candidate adds a static recorded-evidence product

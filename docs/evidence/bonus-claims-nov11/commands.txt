@@ -1,0 +1,9 @@
+# Executed from the isolated worktree at main 3bacc61; read-only network calls.
+mkdir -p .local/bonus-review docs/evidence/bonus-claims-nov11
+gh issue view 17 --repo intersystems-community/ai-hub-eap-bugreports --json url,state,comments,labels,updatedAt > .local/bonus-review/issue17.json
+gh release view v0.3.1 --repo himanshu748/silentshift --json url,tagName,targetCommitish,assets > .local/bonus-review/release.json
+python3 docs/evidence/bonus-claims-nov11/readback.py
+# This pass did not upload the asset, publish a release, run a native test or post a comment.
+python3 -m py_compile docs/evidence/bonus-claims-nov11/readback.py
+python3 docs/evidence/bonus-claims-nov11/validate.py
+git diff --check
