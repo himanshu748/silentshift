@@ -5,7 +5,7 @@ LABEL silentshift.verified-iris-build="2026.3.0AI.154.0 ARM64 Community (154U)"
 COPY --chown=irisowner:irisowner src /opt/silentshift/src
 COPY --chown=irisowner:irisowner python /opt/silentshift/python
 COPY --chown=irisowner:irisowner fixtures /opt/silentshift/fixtures
-WORKDIR /opt/silentshift
+WORKDIR /home/irisowner
 
 COPY --chown=irisowner:irisowner java /opt/silentshift/java
 USER root
