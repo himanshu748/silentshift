@@ -1,0 +1,78 @@
+[
+  {
+    "command": [
+      "uv",
+      "run",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 20.28,
+    "output": ".local/voting-nov11-checks/0.txt"
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_java_core.py"
+    ],
+    "exit_code": 1,
+    "seconds": 3.77,
+    "output": ".local/voting-nov11-checks/1.txt"
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_java_core.py"
+    ],
+    "exit_code": 0,
+    "seconds": 2.05,
+    "output": ".local/voting-nov11-checks/1-retry.txt"
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "ci"
+    ],
+    "exit_code": 0,
+    "seconds": 2.65,
+    "output": ".local/voting-nov11-checks/2-retry.txt"
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.93,
+    "output": ".local/voting-nov11-checks/3-retry.txt"
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 1.48,
+    "output": ".local/voting-nov11-checks/4-retry.txt"
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "web",
+      "run",
+      "test:e2e"
+    ],
+    "exit_code": 0,
+    "seconds": 43.94,
+    "output": ".local/voting-nov11-checks/5-retry.txt"
+  }
+]

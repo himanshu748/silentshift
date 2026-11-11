@@ -1,3 +1,9 @@
+# Current public-package launcher — November 11, 2026 (IST)
+
+A fresh GitHub clone of launcher fix `3edf75a9021fb3aa1dc679f1f58107ca2d0c1584` installed **public native 0.3.2** using literal `zpm "install silentshift"` in a new **154U ARM64** container with no source mounts. Production startup, **8 native classes / 28 methods** and **two 12/12 recorded replays** passed in **146.23 seconds**. The release assertion source is pinned to v0.3.2's commit `cfc4c27`. No fresh inference or live five-case rerun is implied. [Receipt](evidence/voting-nov11-judge/summary.json) · [native output](evidence/voting-nov11-judge/native-tests.txt) · [exact launcher output](evidence/voting-nov11-judge/command-output.txt).
+
+The first attempt stopped at the unchanged disk guard after installation; its output is retained. Only the task-created container was stopped and the local VM disk expanded without deletion before the successful fresh-container retry. Host JUnit initially found an unconfigured Java launcher; selecting the already installed Homebrew JDK passed **7 tests**. **394 pytest**, TypeScript/build and **54 browser tests** passed. These setup failures are preserved, not relabeled as successful runs. Earlier public/archive/source checkpoints below retain their original scope.
+
 # Public native 0.3.2 — November 11, 2026 (IST)
 
 OEX now publicly shows **0.3.2**, and the public IPM archive downloads without authentication with manifest **0.3.2**. Its receipt-mode source matches the tested GitHub tag. [Publication and retained-link receipt](evidence/ipm-032-publication-nov11/publication.json) · [owner release screenshot](evidence/ipm-032-publication-nov11/oex-032-published.png).

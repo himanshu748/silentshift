@@ -188,7 +188,7 @@ The first seed indexed 15 actual resolved demo cases and one approved amendment.
 
 ### Package the native backend with IPM
 
-The public native package is **0.3.2**. [Current publication proof](evidence/ipm-032-publication-nov11/publication.json) confirms the archive manifest/source; a new public-registry 0.3.2 install has not been run. Use [INSTALL.md](../INSTALL.md) for installation and its optional public-package verification. [Package maintenance](IPM.md) documents manifest hooks, publishing and retained package evidence.
+The public native package is **0.3.2**. [Current publication proof](evidence/ipm-032-publication-nov11/publication.json) confirms the archive manifest/source; a [fresh public 0.3.2 gate](evidence/voting-nov11-judge/summary.json) subsequently passed startup, the native suite and both recorded replays. Use [INSTALL.md](../INSTALL.md) for installation and its optional public-package verification. [Package maintenance](IPM.md) documents manifest hooks, publishing and retained package evidence.
 
 ## API and data boundaries
 
