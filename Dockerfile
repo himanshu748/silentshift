@@ -8,4 +8,7 @@ COPY --chown=irisowner:irisowner fixtures /opt/silentshift/fixtures
 WORKDIR /opt/silentshift
 
 COPY --chown=irisowner:irisowner java /opt/silentshift/java
+USER root
+RUN mkdir -p /opt/silentshift-pex && chown irisowner:irisowner /opt/silentshift-pex
+USER irisowner
 RUN sh /opt/silentshift/java/build.sh /opt/silentshift/java /opt/silentshift-pex
