@@ -476,3 +476,10 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Current presentation checks: 394 pytest, 7 JUnit, 54 workbench browser, 18 Node tests; type/build and 33/39/38/47 inspector/tour/new-page/landing browser assertions pass. Final local Lighthouse landing mobile 93/100/100/100, desktop 100 throughout; tour/new page 100 throughout on both profiles. All earlier reports and preview failures remain in the [evidence bundle](../evidence/agent-value-nov11/summary.json); no general performance claim.
 - Prepared 2:20 script only, current native 0.3.2/React 0.2.1 copy and a gated docs-only OEX 0.3.3 proposal. No package/tag/release exists for that proposal; stop if OEX requires native/IPM publishing. Existing Java PEX comment 288628 was found anonymously; do not duplicate it.
 - No merge, Pages deployment, OEX edit/release, community post, YouTube/social action or spending. Hosted CI for this local branch is not yet run. [Report and exact next gates](agent-value-nov11.md).
+
+
+## November 12, 2026 — 00:05 IST — presentation branch review
+
+- Pushed `feat/agent-value-nov11` through evidence commit `14ef81d` and opened [draft PR #14](https://github.com/himanshu748/silentshift/pull/14), based on unchanged main `7ae03be`. The owner's current task permits review work and explicitly gates merging/publication. Readback: OPEN, draft, MERGEABLE; no merge attempted.
+- Push [CI run 43079176927](https://github.com/himanshu748/silentshift/actions/runs/43079176927) and PR [CI run 43079191278](https://github.com/himanshu748/silentshift/actions/runs/43079191278) started on `14ef81d`; they were in progress at this log entry. GitGuardian passed. This is not a completed-CI claim. Final review-head checks must be read back before an approved merge.
+- Main, native IPM 0.3.2, React 0.2.1, Pages and OEX remain unchanged. No public page deployment, listing edit/release, tag, package publication or post. The [publication order](../launch/gated-actions.md) remains a separate exact-submit gate for each action.
