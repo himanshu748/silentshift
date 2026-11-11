@@ -1,5 +1,13 @@
 # Native package maintenance and publication
 
+## Prepared 0.3.3 documentation release
+
+Public native/IPM/OEX and the latest GitHub release remain **0.3.2**. The candidate manifest, Python project metadata and lockfile agree on **0.3.3**; React remains **0.2.1**. **No native code changes.** This is a real matching package version intended for OEX/IPM publication after the owner's separate approvals, not a metadata-only OEX version.
+
+Before merge, build the candidate with IPM and install its inspected archive in a new isolated 154U ARM64 container. The local-filesystem verifier's `--install-latest` option exercises literal `zpm "install silentshift"` while network access is disabled, then explicitly requires the archive's installed version. A source `load` is a build step, not an install result. Keep production startup/native tests/recorded replays separate from the empty/stopped archive gate; no fresh inference is required.
+
+After approved merge and a matching **v0.3.3** GitHub release, enter **0.3.3** manually in the existing OEX app and retain Publish in Package Manager and contest registration. Never use 1.0.0. After publication, inspect the downloaded 0.3.3 registry archive and run a new public-registry installation; do not reuse a historical 0.3.2 receipt as current proof. [Prepared release notes](launch/release-notes.md) · [approval order](launch/gated-actions.md).
+
 ## Current verification — published 0.3.2
 
 The [public archive readback](evidence/ipm-032-publication-nov11/publication.json) confirms native **0.3.2** and the saved receipt-mode fix. A [fresh offline installation from the final GitHub tag](evidence/ipm-032-final-nov11/summary.json) used a separately generated native archive and left the application empty/stopped. No model call or production startup was executed in that archive check. The later [fresh public 0.3.2 gate](evidence/voting-nov11-judge/summary.json) separately passed installation, startup, the native suite and both recorded replays. Earlier live/source tests retain their separate scope.

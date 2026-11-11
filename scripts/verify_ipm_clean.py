@@ -146,6 +146,8 @@ def preflight(args) -> dict:
         raise ValueError('Choose a new container name beginning silentshift-ipm-clean-')
     if args.allow_model_calls and not args.activate_runtime:
         raise ValueError('--allow-model-calls requires --activate-runtime')
+    if args.allow_model_calls and getattr(args, 'execution_mode', 'live') != 'live':
+        raise ValueError('--allow-model-calls requires --execution-mode live')
     if not 1024 <= args.api_port <= 65535:
         raise ValueError('Use an unprivileged localhost API port')
     if (not all(math.isfinite(value) for value in (args.min_host_free_gib, args.min_vm_free_gib))
@@ -187,10 +189,12 @@ def preflight(args) -> dict:
         'archive': boundary, 'image_id': image['Id'], 'architecture': image['Architecture'],
         'image_version': labels['com.intersystems.platform-version'], 'namespace': 'SILENTSHIFT',
         'container': args.container, 'space': space(args),
-        'install_command': 'install LocalArchive/silentshift ' + boundary['version'] + ' -synchronous',
+        'install_command': ('install silentshift' if getattr(args, 'install_latest', False) else
+                            'install LocalArchive/silentshift ' + boundary['version'] + ' -synchronous'),
         'new_persistent_volumes': 0, 'source_mounts': 0, 'network_during_install': 'none',
         'estimated_extra_disk_gib': '0.8-1.3; estimate, not a measured bound',
         'activate_runtime': args.activate_runtime, 'native_five_requested': args.allow_model_calls,
+        'execution_mode': getattr(args, 'execution_mode', 'live') if args.activate_runtime else None,
         'resume_pristine': args.resume_pristine,
         'executed': False, 'clean_install_verified': False, 'registry_published': False}
 
@@ -249,6 +253,8 @@ def execute(args, plan: dict) -> dict:
             'CreateDatabase:Name=SILENTSHIFT,Directory=/usr/irissys/mgr/SILENTSHIFT,Resource=%DB_SILENTSHIFT\n'
             'CreateNamespace:Name=SILENTSHIFT,Globals=SILENTSHIFT,Routines=SILENTSHIFT,Interop=1\n')
         runtime = runtime_environment(args) if args.activate_runtime else {}
+        if runtime:
+            runtime['SILENTSHIFT_PROVIDER_MODE'] = getattr(args, 'execution_mode', 'live')
         if runtime:
             private_write(output / 'runtime.env', ''.join(key + '=' + value + '\n' for key, value in runtime.items()))
         # Recheck immediately before the first daemon mutation; never free space
@@ -311,7 +317,11 @@ def execute(args, plan: dict) -> dict:
                 'write "SS_COMMAND_OK",!', label, marker='SS_COMMAND_OK')
         phase = 'verifying installed assets and an empty stopped application'
         run([*docker, 'cp', str(ROOT / 'tests/iris/IPMChecks.cls'), container + ':' + RELEASE + '/IPMChecks.cls'], '16-copy-checks')
-        script = ('set sc=##class(SilentShift.IPM).RequireStopped()\n'
+        script = ('set installed=##class(%IPM.Storage.Module).NameOpen("silentshift")\n'
+            'if \'$isobject(installed) halt\n'
+            'if installed.VersionString\'=' + literal(plan['archive']['version']) + ' halt\n'
+            'write "SS_INSTALLED_VERSION=",installed.VersionString,!\n'
+            'set sc=##class(SilentShift.IPM).RequireStopped()\n'
             'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\n'
             'set sc=$system.OBJ.Load(' + literal(RELEASE + '/IPMChecks.cls') + ',"ck")\n'
             'if $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\n'
@@ -506,10 +516,14 @@ def main() -> int:
     parser.add_argument('--container', default='silentshift-ipm-clean-' + datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S'))
     parser.add_argument('--min-host-free-gib', type=float, default=1.8)
     parser.add_argument('--min-vm-free-gib', type=float, default=3)
+    parser.add_argument('--install-latest', action='store_true',
+        help='Install literal silentshift from the offline local repository and require the archive version')
     parser.add_argument('--execute', action='store_true', help='Create a NEW isolated runtime and perform actual IPM install')
     parser.add_argument('--resume-pristine', action='store_true',
         help='Resume only the exact owned container from its recorded pristine pre-namespace state')
     parser.add_argument('--activate-runtime', action='store_true', help='Explicitly configure security, seed references and start the NEW production/gateway')
+    parser.add_argument('--execution-mode', choices=['live', 'recorded-replay'], default='live',
+        help='Explicit provider mode for the newly activated instance; default preserves existing live setup')
     parser.add_argument('--env-file', type=Path, default=ROOT / '.env', help='Private runtime environment; used only with --activate-runtime')
     parser.add_argument('--api-port', type=int, default=52783)
     parser.add_argument('--allow-model-calls', action='store_true',

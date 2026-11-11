@@ -117,3 +117,11 @@ def test_default_source_gate_keeps_current_source_tests():
     assert selected['source'] == ROOT
     assert selected['tests'] == ROOT / 'tests/iris'
     assert selected['trace'] == ROOT / 'scripts/trace_example.py'
+
+
+def test_clean_replay_cannot_opt_into_model_calls_before_external_commands():
+    args = argparse.Namespace(container="silentshift-ipm-clean-mode-guard",
+                              allow_model_calls=True, activate_runtime=True,
+                              execution_mode="recorded-replay")
+    with pytest.raises(ValueError, match="requires --execution-mode live"):
+        clean.preflight(args)
