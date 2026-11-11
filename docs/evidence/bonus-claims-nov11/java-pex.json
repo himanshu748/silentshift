@@ -1,0 +1,172 @@
+{
+  "created_at_utc": "2026-11-11T06:16:35.897852+00:00",
+  "scope": "unpublished Java PEX source candidate; release gate blocked",
+  "branch": "feat/java-pex-nov11",
+  "base_main": "1c92e095dcc2e9bc7493f1ad5e4a9b9355d78ec1",
+  "native_source_clone_commit": "ddd01add213db99167444bbd742485ed12dbdeea",
+  "verification_harness_commit": "173d63e",
+  "direct_driver_test_commit": "46f36e2",
+  "candidate_native_version": "0.3.2",
+  "public_native_version_not_changed": "0.3.1",
+  "react_version_not_changed": "0.2.1",
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "gate_passed": false,
+  "failure": {
+    "case_id": "74E6DF76-DD96-11F1-A2D3-A50F91B4F850",
+    "scenario": "approved-amendment",
+    "expected": "DELIVERED",
+    "actual": "REVIEW",
+    "failed_policy_check": "EVIDENCE_COMPLETE",
+    "observed_agent_proposal": "ALLOW; evidence_ids contains only contract:PO-2048:v2",
+    "policy_or_prompt_changed_to_make_pass": false,
+    "failed_repeat_retried": false,
+    "evidence": "java-pex-objectscript-repeat.json"
+  },
+  "tests": {
+    "java_junit_public_dependencies": {
+      "passed": true,
+      "tests": 7,
+      "native_sdk_adapter_not_tested_by_this_ci_command": true
+    },
+    "java_junit_shipped_sdk": {
+      "passed": true,
+      "tests": 7,
+      "output": "java-pex-output.txt"
+    },
+    "native_source_compose": {
+      "passed": true,
+      "classes": 8,
+      "methods": 25,
+      "source": "ddd01add213db99167444bbd742485ed12dbdeea",
+      "elapsed_launcher_seconds": 29.796,
+      "runtime_image_id": "sha256:44cb84dee731740e984bcf40014bd58a10695ccdd8d4718250ba5693bb641c97",
+      "input_base_image_id": "sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713"
+    },
+    "native_installed_source": {
+      "passed": true,
+      "classes": 8,
+      "methods": 25,
+      "source_mounts": 0,
+      "installation": "fresh IPM source load; resumed network activation before first startup"
+    },
+    "recorded_replays": {
+      "passed": true,
+      "checks_each": [
+        12,
+        12
+      ],
+      "sessions": [
+        "2",
+        "87"
+      ],
+      "fresh_inference": false
+    },
+    "live_api_five": {
+      "passed": true,
+      "correct_routes": 5,
+      "total": 5,
+      "elapsed_seconds": 201.213,
+      "local_model": "qwen3-silentshift:4b-instruct",
+      "evidence": "java-pex-native-five.json"
+    },
+    "direct_objectscript_repeat": {
+      "passed": false,
+      "correct_routes": 4,
+      "total": 5,
+      "valid_java_receipts": 5,
+      "evidence": "java-pex-objectscript-repeat.json"
+    },
+    "independent_openssl_signatures": {
+      "passed": true,
+      "verified": 5,
+      "total": 5,
+      "evidence": "java-pex-signatures.json"
+    },
+    "pytest": {
+      "passed": true,
+      "count": 393,
+      "elapsed_seconds": 23.06
+    },
+    "typescript": {
+      "passed": true
+    },
+    "web_build": {
+      "passed": true,
+      "nonfatal_dependency_directive_warnings": true
+    },
+    "disconnected_browser": {
+      "passed": true,
+      "count": 54
+    },
+    "connected_browser": {
+      "passed": true,
+      "count": 16
+    },
+    "csv_browser": {
+      "passed": true,
+      "checks": 32,
+      "evidence": "java-pex-csv-ui.json"
+    },
+    "review_queue": {
+      "passed": true,
+      "assertions": 54,
+      "evidence": "java-pex-review-queue.json"
+    },
+    "hosted_branch_ci": {
+      "executed": false,
+      "reason": "branch push/PR requires exact submit; no approval consumed"
+    },
+    "existing_main_ci": {
+      "conclusion": "success",
+      "commit": "1c92e095dcc2e9bc7493f1ad5e4a9b9355d78ec1",
+      "url": "https://github.com/himanshu748/silentshift/actions/runs/42961225771",
+      "does_not_cover_candidate": true
+    }
+  },
+  "package": {
+    "manifest_version": "0.3.2",
+    "actual_ipm_load_and_export_passed": true,
+    "archive": {
+      "package": "silentshift",
+      "version": "0.3.2",
+      "artifact_sha256": "b4395bcf6b891ff1c71020bd8e82a10c52bc11f3664a2971a171ff9e76705a04",
+      "compressed_bytes": 96257,
+      "expanded_bytes": 399011,
+      "file_count": 66,
+      "class_count": 49,
+      "archive_boundary_verified": true,
+      "native_install_verified": false,
+      "registry_published": false
+    },
+    "second_pristine_archive_install_executed": false,
+    "reason_not_run": "stopped at failed direct native repeat",
+    "registry_published": false,
+    "tag_or_release_created": false
+  },
+  "captures": [
+    {
+      "file": "java-pex-trace.png",
+      "session": "87",
+      "mode": "recorded-replay",
+      "authenticated": true
+    },
+    {
+      "file": "java-pex-live-trace.png",
+      "session": "119",
+      "mode": "live-local-ollama",
+      "authenticated": true
+    }
+  ],
+  "portal_permissions_modified": false,
+  "policy_and_fixtures_unchanged": "java-pex-policy-identity.json",
+  "initial_case_receipt_checks": "java-pex-frozen-cases.json",
+  "review_outcome_exports": "java-pex-review-exports.json",
+  "limitations": [
+    "Synthetic orders and simulator delivery only.",
+    "Application-level append-only storage; operator must pin/retain its signing public key.",
+    "Export outage may leave a missing receipt; routing remains authoritative.",
+    "Not ready to merge/publish: a direct repeat failed and archive/hosted CI gates remain open.",
+    "No online demo started; no EAP/SDK/image/model bundle published."
+  ],
+  "public_actions_performed": []
+}

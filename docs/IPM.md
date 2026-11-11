@@ -1,5 +1,14 @@
 # Native package maintenance and publication
 
+## Current package boundary — Java PEX candidate
+
+Public native IPM/OEX are **0.3.1**. This branch prepares **0.3.2**, including the owned Java receipt-export sources/build script and native PEX messages/setup. The published 0.3.1 package does **not** contain Java PEX. The React workbench remains separately built **0.2.1**. No tag, package or listing was published in this pass.
+
+The qualified build-154 ARM64 image supplies Java 11 and the PEX/JDBC SDK. Explicit `SilentShift.Setup.Install()` compiles the installed Java source and configures the native managed `%Java Server`; activation alone remains inert. No vendor SDK, generated signing key or EAP image is redistributed. [Implementation, tests and exact publication gate order](JAVA_PEX.md).
+
+The sections below retain the earlier package preparation/publication history. Statements about a then-unpublished 0.3.1 or live 0.3.0 describe those checkpoints, not the current registry boundary.
+
+
 **Installing the application? Use [INSTALL.md](../INSTALL.md).** This file is for package maintainers. It is not part of the installation path.
 
 Public native package and OEX release **0.3.0** are published. The published 0.3.0 manifest and archive contain **45 classes and 11 assets**; every native source file/asset and the manifest matched the verified source. [Archive comparison](evidence/ship-030-public-artifact.json). A [fresh registry installation](evidence/ship-030-registry.json) passed native tests and both recorded replays. React workbench **0.2.1** has a separate version. The target remains **154U ARM64**, IPM 0.10.10 or newer and an interoperability-enabled `SILENTSHIFT` namespace. Package installation alone does not configure accounts or start the production.

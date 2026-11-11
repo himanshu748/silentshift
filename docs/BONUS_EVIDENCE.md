@@ -1,3 +1,15 @@
+# Java PEX source-candidate verification — November 11, 2026 (IST)
+
+**Java PEX: claim prepared (3 points), not submitted or awarded.** Native **0.3.2** is prepared but unpublished; public native IPM/OEX remain **0.3.1**, which lacks this operation. React remains **0.2.1**.
+
+The real [`SilentShift.PEX.ReceiptExporter`](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java) extends `com.intersystems.enslib.pex.BusinessOperation`. [`Production`](../src/SilentShift/Production.cls) hosts it through `EnsLib.PEX.BusinessOperation` and the native managed `%Java Server`. Destination and Quarantine call it after their existing store methods commit; errors preserve the original route. The [new receipt](evidence/bonus-claims-nov11/java-pex.json) separates fresh local Compose playback, clean source-loaded IPM/live cases, Java/native tests and archive verification. [Authenticated Visual Trace](evidence/bonus-claims-nov11/java-pex-trace.png) · [signed sample](evidence/bonus-claims-nov11/java-pex-receipt.json) · [five native cases](evidence/bonus-claims-nov11/java-pex-frozen-cases.json) · [independent signature checks](evidence/bonus-claims-nov11/java-pex-signatures.json).
+
+The tested environment remains **2026.3.0AI.154.0 / 154U ARM64**. Fixtures, assessment/policy bytes and safety vetoes are unchanged. The export is an integrity record with operator-held keys, not externally certified identity, guaranteed export or tamper-proof storage. [Detailed limits and reproduction](JAVA_PEX.md). No hosted demo, .NET implementation, new bug or organizer qualification is claimed. No public action was taken.
+
+**Release gate blocked:** the API five-case run passed 5/5, but an explicit ObjectScript repeat passed 4/5. The approved-amendment model output omitted required citations; the unchanged `EVIDENCE_COMPLETE` gate held it for review. All ten cases produced valid Java receipt responses. The failing assertion is retained, not weakened. No further model retry or policy/prompt change was made; the second fresh archive install and hosted branch CI remain unverified. [Failure](evidence/bonus-claims-nov11/java-pex-objectscript-repeat.json).
+
+## Earlier bonus review
+
 # Bonus-claim update — 2026-11-11 10:01:00 IST
 
 **Embedded Python: Claimed for organizer review (3 points), not awarded.** [`SilentShift.Bridge.Assess` and `.Policy`](../src/SilentShift/Bridge.cls) are `[Language = python]` methods. The native [`Semantic` process](../src/SilentShift/Process/Semantic.cls) calls them for assessment and routing. Their hashes, and the Python engine hash, match the [earlier source/live identity receipt](evidence/voting-finish-nov10/candidate-031-source-identity.json); the [live native receipt](evidence/voting-finish-nov10/fresh-live-five.json) records executed cases. [Current source audit](evidence/bonus-claims-nov11/embedded-python.json). This is evidence review, not a new native run.
@@ -6,7 +18,7 @@ The November 5 Not claimed decision was an explicit owner scope restriction. No 
 
 The [current README table](../README.md#contest-bonuses) and [checklist](SUBMISSION_CHECKLIST.md#every-bonus) request review of Docker, IPM, Workflow, PartnerJSON, Vector Search, Embedded Python, DPI-I-689, AI Hub issue #17, both articles, video and the already-submitted questionnaire. Public IPM/OEX are **0.3.1** and React is **0.2.1**; [anonymous readback](evidence/bonus-claims-nov11/public.json). Dedicated idea visibility is resolved, but idea/bug qualification and all awards remain unconfirmed.
 
-The unchanged video downloads anonymously with a matching local hash; [current full-file/media check](evidence/bonus-claims-nov11/video.json). Release-asset upload and the DC comment are prepared and **not sent**. Java/.NET PEX, online demo and the Embedded Python bug bonus stay **Not claimed**. [Exact draft and gated action order](agent-runs/bonus-claims-nov11.md).
+The unchanged video downloads anonymously with a matching local hash; [current full-file/media check](evidence/bonus-claims-nov11/video.json). Release-asset upload and the DC comment are prepared and **not sent**. At this earlier checkpoint Java/.NET PEX, online demo and the Embedded Python bug bonus stayed **Not claimed**; the newer Java source-candidate result above supersedes the Java status only. [Exact draft and gated action order](agent-runs/bonus-claims-nov11.md).
 
 ## Historical verification checkpoints
 

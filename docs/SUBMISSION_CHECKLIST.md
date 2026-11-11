@@ -1,3 +1,11 @@
+# Java PEX candidate — November 11, 2026 (IST)
+
+Native **0.3.2** is prepared locally on `feat/java-pex-nov11`, not published. Public native IPM/OEX remain **0.3.1**; React remains **0.2.1**. The Java PEX **claim is prepared, not submitted**, supported by [new execution evidence](evidence/bonus-claims-nov11/java-pex.json), not awarded. The owner explicitly requested keeping 0.3.2 unpublished. All other bonus qualifications retain their existing status. [Runtime, signing limits and publication gates](JAVA_PEX.md).
+
+**Release gate blocked:** the API five-case run passed 5/5, but an explicit ObjectScript repeat passed 4/5. The approved-amendment model output omitted required citations; the unchanged `EVIDENCE_COMPLETE` gate held it for review. All ten cases produced valid Java receipt responses. The failing assertion is retained, not weakened. No further model retry or policy/prompt change was made; the second fresh archive install and hosted branch CI remain unverified. [Failure](evidence/bonus-claims-nov11/java-pex-objectscript-repeat.json).
+
+The earlier checks below are preserved as dated history. The **Every bonus** table is updated for this source candidate; its current Java row does not imply that registry 0.3.1 contains the operation.
+
 # Current bonus-claim review — 2026-11-11 10:01:00 IST
 
 The owner now requests review of Embedded Python usage. **Claimed** means requested, not awarded; every organizer qualification remains unconfirmed. Public native IPM/OEX are **0.3.1**, React remains **0.2.1**. [Anonymous manifest, listing and article readback](evidence/bonus-claims-nov11/public.json). The public listing still contains older 0.3.0 body wording; no listing was edited in this pass.
@@ -33,14 +41,14 @@ The public installation passed production startup, **5 native classes / 12 metho
 
 The new description was saved and sent for approval; the older 0.2.0/source-only CSV text is still public pending moderation. At that November 8 checkpoint, dedicated public DPI-I-689 visibility and qualification were pending; visibility is now resolved, qualification remains unconfirmed. Contest/IPM selections, idea URL, video and both articles were preserved. SilentShift remains listed on [Contest 49](https://openexchange.intersystems.com/contest/49). Submission deadline: **November 8 at 23:59:59 EST / November 9 at 10:29:59 IST**. Only **2026.3.0AI.154.0 Community / 154U ARM64** is locally qualified. No newer build is claimed tested. No Git tag, paid service, runtime/policy/agent change, questionnaire resubmission or duplicate bug filing occurred.
 
-**Verified** means the linked behavior or publication was observed. **Organizer award: unconfirmed for every bonus.** Pending identifies a separate visibility, filing or qualification gate. Embedded Python usage is now Claimed under the current instruction; PEX, online demo and Embedded Python bug remain Not claimed.
+**Verified** means the linked behavior or publication was observed. **Organizer award: unconfirmed for every bonus.** Pending identifies a separate visibility, filing or qualification gate. Embedded Python usage is now Claimed under the current instruction; The Java PEX claim is prepared only in the unpublished 0.3.2 candidate; online demo and Embedded Python bug remain Not claimed.
 
 ## Every bonus
 
 | Bonus | Potential points | Status | Evidence and limit |
 | --- | ---: | --- | --- |
 | Questionnaire | 1 | Claimed; implementation/artifact verified | [Submitted confirmation](assets/questionnaire-submitted.png); do not submit again |
-| Java/.NET PEX | 3 | Not claimed | No Java or .NET production extension implemented |
+| Java PEX | 3 | Claim prepared; source implementation verified; release gate blocked | [Java exporter](../java/src/main/java/SilentShift/PEX/ReceiptExporter.java), [production wiring](../src/SilentShift/Production.cls), [native tests](../tests/iris/PEXChecks.cls), [executed receipt](evidence/bonus-claims-nov11/java-pex.json), [Visual Trace](evidence/bonus-claims-nov11/java-pex-trace.png). Unpublished 0.3.2 candidate; public IPM 0.3.1 lacks Java PEX |
 | Native Workflow Engine | 2 | Claimed; implementation/artifact verified | [Candidate approve/reject/concurrency receipt](evidence/candidate-030-review-ready.json), [actual UI approve/reject](evidence/review-ui.json) |
 | Custom interoperability adapter | 2 | Claimed; implementation/artifact verified | [Current file-intake/recovery receipt](evidence/final-pass-nov8-adapter.json), [earlier native captures](evidence/adapter.json), [walkthrough](PARTNER_INBOX.md) |
 | Find a bug in AI Hub | 2 for first, +1 for second | Claimed; qualification pending | [Quoted-method generator report](bug-reports/ai-hub-quoted-tool-name.md) reproduced on 154U and [filed as #17](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17); [filing receipt](evidence/ai-hub-bug-filed.json), [current open/no-reply readback](evidence/final-pass-nov8-issue.json). Vendor confirmation and organizer qualification remain pending |
