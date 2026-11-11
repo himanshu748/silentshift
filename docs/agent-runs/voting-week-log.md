@@ -305,3 +305,13 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Created desktop/mobile captures and an actual 19.96s scroll recording. Added a manual-only, main-only Pages workflow; no dispatch or configuration change.
 - Read-only Crashcart inspection confirms x86_64 versus the qualified ARM64 image; native deployment blocked. Root and healthz returned 200; no remote changes or spend. Public OEX is 0.3.1 but body still says native 0.3.0; fields untouched.
 - Decision: prepare local commits and PR copy, then stop for exact `submit` to push/open the PR only. [Report](landing-demo-nov10.md); [quality](../evidence/landing-demo-nov10/quality.json); [tests](../evidence/landing-demo-nov10/tests.json).
+
+### 2026-11-11 10:04:17 IST — Bonus claim evidence and video upload prepared
+
+- Created isolated local branch `chore/bonus-claims-nov11` from public main `3bacc61`, preserving the existing landing worktree and original uncommitted work. Read the full official technology-bonuses post and discussion, including entrant claims and staff replies.
+- Reclassified Embedded Python **usage** as Claimed under the owner's new explicit instruction: actual in-IRIS Language=python methods, production call sites and engine match the earlier native/live source hashes. The old exclusion was owner scope, not a technical failure. No new native/model test is implied. PEX, online demo and the Embedded Python bug remain Not claimed.
+- Anonymous raw MP4: HTTP 200, 3,561,558 bytes, exact source SHA-256 match, 150.000 seconds with captions. Existing v0.3.1 has no assets. Prepared adding only that MP4 to the existing release; no upload or new tag. Public native IPM manifest is 0.3.1; the OEX body still has older 0.3.0 wording. Both articles are public and retain OEX backlinks; issue #17 remains open without comments/labels.
+- Prepared a single README claim table, matching checklist/evidence updates, exact DC reply, and optional Java PEX effort/risk plan. No defensible second bug is filing-ready; historical signal-11 candidate remains unisolated. No post, message, OEX/IPM change, push/PR, merge, branch deletion or spending.
+- Document validation: 370 relative links resolve; JSON parses, the readback script compiles, and whitespace validation passes. Local draft screenshots and [report](bonus-claims-nov11.md) are prepared. Next gate: one exact submit to push this branch and open the claims PR only.
+
+- Refreshed the existing daily read-only monitor to the actual merged main/public 0.3.1/Pages baseline and the newly authorized local Embedded Python usage claim; preserved its schedule and gates. No duplicate automation or external communication.

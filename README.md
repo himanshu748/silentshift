@@ -71,7 +71,7 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 ### Published package and this branch
 
-Public native IPM and Open Exchange remain **0.3.0**; the separate React package remains **0.2.1**. The repository source prepares **native 0.3.1**, which is not a published package. It includes provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
+Public native IPM and Open Exchange publish **0.3.1**; the separate React package remains **0.2.1**. The [anonymous archive manifest readback](docs/evidence/bonus-claims-nov11/public.json) confirms publication, not a new public-registry installation test. This release includes provider/cited-evidence work and backend diagnostics. [Fresh candidate verification](docs/evidence/voting-finish-nov10/candidate-031-summary.json) covers native startup, tests and replay; [live source cases](docs/evidence/voting-finish-nov10/fresh-live-five.json) and [connected browser checks](docs/evidence/voting-finish-nov10/connected-final.json) retain their exact snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 
@@ -85,7 +85,7 @@ After starting the documented Colima profile and loading the official build-154 
 ./scripts/judge-replay.sh
 ```
 
-The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies the public package, not unpublished source runtime changes.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
+The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.0**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This deliberately verifies the pinned 0.3.0 package, not current 0.3.1 source.** No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
 
 The [fresh-main check](docs/evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, both **12/12** replays and **207 Python tests** on the declared build. Its exact clone and scope are recorded separately from the launcher check. For a port already in use, pass `--api-port 52983`; never replace an existing container or lower disk limits.
 
@@ -97,7 +97,7 @@ After the [image and Compose prerequisites](INSTALL.md#optional-source-workbench
 ./scripts/judge-compose.sh
 ```
 
-This starts the current-source IRIS production and React workbench with private generated local accounts, then proves the recorded hold with `checks=12/12; passed=true`. It prints the workbench and Visual Trace URLs. It uses dedicated volumes and refuses another running build-154 instance in the same Docker context. [Fresh-clone execution and browser proof](docs/evidence/voting-finish-nov10/compose-final.json). This is separate from installing public native 0.3.0 above; it invokes no LLM and establishes no hosted demo.
+This starts the current-source IRIS production and React workbench with private generated local accounts, then proves the recorded hold with `checks=12/12; passed=true`. It prints the workbench and Visual Trace URLs. It uses dedicated volumes and refuses another running build-154 instance in the same Docker context. [Fresh-clone execution and browser proof](docs/evidence/voting-finish-nov10/compose-final.json). This is separate from the deliberately pinned public native 0.3.0 replay above; it invokes no LLM and establishes no hosted demo.
 
 ## How the decision works
 
@@ -138,21 +138,27 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 
 ## Contest bonuses
 
-**Verified** means observed behavior or publication in the linked receipt, not awarded points. Every organizer qualification/award remains unconfirmed. [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md).
+**Claimed** means requested for organizer review, supported by the linked code or observed artifact. It does not mean points have been awarded. [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md#every-bonus). Only **2026.3.0AI.154.0 / 154U ARM64** is locally qualified.
 
-| Bonus | Status | One evidence link |
-| --- | --- | --- |
-| Native Workflow | Verified | [Queue, rejection and concurrent approval](docs/evidence/review-queue.json) |
-| Custom inbound adapter | Verified | [Native file intake and recovery](docs/evidence/adapter.json) |
-| IRIS Vector Search | Verified | [Native vectors and source bindings](docs/evidence/precedent-corpus.json) |
-| Docker | Verified | [Fresh no-source-mount public install](docs/evidence/voting-week-nov10/judge-main-nov10.json) |
-| Public IPM 0.3.0 | Verified | [Registry install, startup, tests and replays](docs/evidence/voting-week-nov10/judge-main-nov10.json) |
-| Developer Community articles | Verified | [Both live articles and OEX backlinks](docs/evidence/voting-week-nov10/public-readback.json) |
-| Downloadable demonstration video | Verified | [Anonymous full-file download](docs/evidence/voting-week-nov10/public-readback.json) |
-| Questionnaire | Verified | [Retained submitted confirmation](docs/assets/questionnaire-submitted.png); do not resubmit |
-| DPI-I-689 implementation | Pending qualification | [Native provider Body evidence](docs/evidence/provider-body-captures.json); dedicated OEX association is public |
-| AI Hub bug #17 | Pending vendor/organizer confirmation | [Filed reproduction](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) |
-| Embedded Python, Java/.NET PEX, online demo and Embedded Python bug bonus | Not claimed | [Scope and reasons](docs/SUBMISSION_CHECKLIST.md) |
+| Bonus | Points requested | Status | Direct evidence |
+| --- | ---: | --- | --- |
+| Docker | 2 | Claimed | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
+| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.1 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.1.tgz) · [manifest readback](docs/evidence/bonus-claims-nov11/public.json); [literal public install/startup/replays](docs/evidence/voting-week-nov10/judge-main-nov10.json) is the earlier 0.3.0 run |
+| Native Workflow Engine | 2 | Claimed | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
+| Custom adapter: PartnerJSON | 2 | Claimed | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
+| IRIS Vector Search | 2 | Claimed | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |
+| Embedded Python | 3 | Claimed | [Assessment and policy: Language = python](src/SilentShift/Bridge.cls) · [production call sites](src/SilentShift/Process/Semantic.cls) · [native execution/source audit](docs/evidence/bonus-claims-nov11/embedded-python.json) |
+| Community idea DPI-I-689 | 4 | Claimed; qualification pending | [Idea](https://ideas.intersystems.com/ideas/DPI-I-689) · [Visual Trace recipe and Langfuse comparison](#community-idea-dpi-i-689-llm-tracing-with-interoperability) · [native message bodies](docs/evidence/provider-body-captures.json) · [public OEX association](https://openexchange.intersystems.com/package/SilentShift) |
+| First AI Hub bug | 2 | Claimed; vendor/organizer confirmation pending | [Issue #17: standalone reproduction and compiler log](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) |
+| First Developer Community article | 2 | Claimed | [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) |
+| Second Developer Community article | 1 | Claimed | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
+| Video | 3 | Claimed | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
+| Questionnaire | 1 | Claimed | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
+| Java/.NET PEX | — | Not claimed | [Optional plan only](docs/agent-runs/bonus-claims-nov11.md#optional-java-pex-plan); no Java/.NET operation implemented |
+| Online demo | — | Not claimed | The published evidence tour is static recorded material, not a running native app |
+| Embedded Python bug | — | Not claimed | [Signal-11 candidate is not isolated or attributed](docs/bug-reports/callback-signal11-candidate.md) |
+
+[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score, ranking, newer build or live hosting is claimed.
 
 ## Developer Community articles
 

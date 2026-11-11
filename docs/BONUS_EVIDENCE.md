@@ -1,3 +1,17 @@
+# Bonus-claim update — 2026-11-11 10:01:00 IST
+
+**Embedded Python: Claimed for organizer review (3 points), not awarded.** [`SilentShift.Bridge.Assess` and `.Policy`](../src/SilentShift/Bridge.cls) are `[Language = python]` methods. The native [`Semantic` process](../src/SilentShift/Process/Semantic.cls) calls them for assessment and routing. Their hashes, and the Python engine hash, match the [earlier source/live identity receipt](evidence/voting-finish-nov10/candidate-031-source-identity.json); the [live native receipt](evidence/voting-finish-nov10/fresh-live-five.json) records executed cases. [Current source audit](evidence/bonus-claims-nov11/embedded-python.json). This is evidence review, not a new native run.
+
+The November 5 Not claimed decision was an explicit owner scope restriction. No technical disqualification was found. The owner's November 11 instruction supersedes that restriction for **usage only**. The [signal-11 candidate](bug-reports/callback-signal11-candidate.md) remains unisolated, unfiled and **Not claimed**; using Embedded Python and finding a reproducible vendor bug are separate criteria.
+
+The [current README table](../README.md#contest-bonuses) and [checklist](SUBMISSION_CHECKLIST.md#every-bonus) request review of Docker, IPM, Workflow, PartnerJSON, Vector Search, Embedded Python, DPI-I-689, AI Hub issue #17, both articles, video and the already-submitted questionnaire. Public IPM/OEX are **0.3.1** and React is **0.2.1**; [anonymous readback](evidence/bonus-claims-nov11/public.json). Dedicated idea visibility is resolved, but idea/bug qualification and all awards remain unconfirmed.
+
+The unchanged video downloads anonymously with a matching local hash; [current full-file/media check](evidence/bonus-claims-nov11/video.json). Release-asset upload and the DC comment are prepared and **not sent**. Java/.NET PEX, online demo and the Embedded Python bug bonus stay **Not claimed**. [Exact draft and gated action order](agent-runs/bonus-claims-nov11.md).
+
+## Historical verification checkpoints
+
+The dated sections below retain their original publication, scope and claim states; the current update above supersedes historical Not claimed wording for Embedded Python usage only.
+
 > **November 10 voting-week finish:** fresh GitHub candidate `7b3d5ef` is native **0.3.1, prepared but unpublished**. Native **7 classes / 22 methods**, both **12/12** replays, a separate clean archive install, **5/5** live source routes, **16/16** connected browser checks, **393 pytest** and hosted CI pass. The source Compose workbench passes **12/12** and real browser login. **40 Ruff findings remain individually explained**, not suppressed. [Scoped receipts](JUDGE_VERIFICATION.md#voting-week-finish--fresh-github-clones). Public native IPM/OEX stay **0.3.0**, React **0.2.1**; bonus statuses are unchanged.
 
 > **November 10 source-branch readback:** new [native held-case Body/Event Log captures](evidence/backend-polish-nov10/11-native-ui.json) are explicitly recorded replay on 154U ARM64, with temporary read permissions [restored exactly](evidence/backend-polish-nov10/11-permissions-restored.json). They add inspectable evidence, not bonus qualification or a new public package. The [current maintenance gate](JUDGE_VERIFICATION.md#current-local-branch-repeat) retains its incomplete delivered-case/connected-data checks. All bonus statuses below remain unchanged.
@@ -19,7 +33,7 @@ At the time of the earlier **same-instance 154U pass**, public native IPM was **
 
 SilentShift holds a technically valid order or payment when its business meaning conflicts with approved records. Sponsor technology must help the operator understand or safely resolve that hold. These are **local execution results, not awarded points**. Only synthetic messages and the IRIS destination simulator are used.
 
-**OEX/native IPM release: 0.3.0. Separate React workbench: 0.2.1. Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** Live evidence uses local `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings; recorded replay performs no new inference. No newer IRIS build is claimed. **Every organizer award remains unconfirmed**, including rows whose implementation or publication is Verified. The Embedded Python bonus is Not claimed under the owner’s latest instruction; its native execution evidence remains valid. The [submission checklist](SUBMISSION_CHECKLIST.md) is the current status index; dated experiments below retain their original version and results. The November 5 OEX description edit was submitted after the user authorized it; DC articles were unchanged.
+**OEX/native IPM release: 0.3.0. Separate React workbench: 0.2.1. Verified runtime: 2026.3.0AI.154.0 Community, ARM64 (154U).** Live evidence uses local `qwen3-silentshift:4b-instruct` and local `all-minilm:22m` embeddings; recorded replay performs no new inference. No newer IRIS build is claimed. **Every organizer award remains unconfirmed**, including rows whose implementation or publication is Verified. At that historical checkpoint the Embedded Python usage bonus was Not claimed under the owner’s November 5 instruction; the current claim update above supersedes it. Its native execution evidence remains valid. The [submission checklist](SUBMISSION_CHECKLIST.md) is the current status index; dated experiments below retain their original version and results. The November 5 OEX description edit was submitted after the user authorized it; DC articles were unchanged.
 
 | Requested extension | Potential points | Verified behavior / remaining gate |
 | --- | ---: | --- |
@@ -29,7 +43,7 @@ SilentShift holds a technically valid order or payment when its business meaning
 | Custom inbound adapter | 2 | VERIFIED: two files traversed the real adapter/service and four-tool investigation to DELIVERED / QUARANTINED. All 82 adapter assertions and full native 5/5 passed; authenticated Visual Trace captured. Award unconfirmed. |
 | IPM package | 2 | Verified: public native **0.3.0** installs with `zpm "install silentshift"` in a fresh build-154 container without source mounts. Explicit startup, full native suite and both recorded replays passed. [Registry receipt](evidence/ship-030-registry.json). Live five-case evidence is the separate source-candidate run. Award unconfirmed. |
 
-## Current freeze-pass check
+## Historical November 5 freeze-pass check
 
 The November 5 **fresh-clone README path passed** on declared build **154U**: public native **0.2.0** installation, explicit production startup, authenticated health, **5 native test classes / 12 methods**, and two **12/12** API replays. Sessions **24** and **58** each contain five provider pairs, four native tool reads and zero deliveries. No provider key, inference or embedding request was used. [Exact commands and output](JUDGE_VERIFICATION.md) · [receipt and message metadata](evidence/judge-clean-clone.json). Earlier disk and mount failures remain in the history; this new result closes that gate without changing runtime code.
 
