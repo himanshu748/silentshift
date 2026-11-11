@@ -1,7 +1,19 @@
 <!doctype html><html lang="en"><head>
+<link rel="preload" href="assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/ibm-plex-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Follow the evidence — SilentShift</title><meta name="description" content="Inspect two real recorded synthetic IRIS cases: an unsupported order is quarantined and an approved amendment is delivered. Read the actual proposal, policy and signed receipt."><link rel="icon" href="assets/mark.png"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="receipts.css"><link rel="stylesheet" href="evidence-tour.css"><script type="module" src="evidence-tour.mjs"></script></head><body>
 <a class="skip-link" href="#main">Skip to recorded cases</a><header class="site-header wrap"><a class="brand" href="./" aria-label="SilentShift home"><img src="assets/mark.png" width="32" height="32" alt=""><span>SilentShift<span class="brand-stop">.</span></span></a><nav aria-label="Primary navigation"><a href="receipts.html">Receipt inspector</a><a href="./#install">Run it locally ↗</a></nav></header>
 <main class="wrap tour-main" id="main"><div class="tour-intro"><p class="eyebrow">Two records. One routing policy.</p><h1>The evidence changes.<br><em>The boundary holds.</em></h1><p>Follow an unsupported order and an approved amendment through their actual saved proposal, policy and signed receipt.</p><p class="receipt-note">Recorded synthetic cases · historical live local-model runs · no new investigation or native writes</p></div>
+<aside class="heldout-summary" aria-label="Recorded held-out result">
+<p class="eyebrow">Recorded comparison · 48 synthetic orders</p>
+<p class="heldout-main"><strong>6/23 → 2–3/23</strong> wrong deliveries</p>
+<p>Rules-only release choices are counterfactual. Agent + policy counts actual simulator receipts in three trials.</p>
+<p><strong>Review: 12.5% → 21.5%</strong> (pooled agent trials).</p>
+<p class="heldout-limit"><strong>No overall accuracy gain:</strong> correct routes 33/48 → 33/48, 33/48, 30/48. Unstructured routing stays 1/16 in every trial.</p>
+<a href="https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/docs/EVAL_HELDOUT.md">Read the full comparison and every failure ↗</a>
+</aside>
+<section class="tour-agent-link" aria-label="Held-out prose evidence"><a class="button primary" href="agent-value.html#HO-045">What the agent saw that the rules missed ↗</a><p>Inspect three selected held-out cases: a cited concern reached native human review, with no simulator delivery. The final REQUEST_REVIEW remains incorrect against the frozen QUARANTINE label.</p></section>
 <noscript><p>JavaScript is required for step selection and local signature checks. <a href="assets/recorded-cases.json">Download both recorded cases</a> or <a href="https://github.com/himanshu748/silentshift/blob/main/docs/evidence/bonus-claims-nov11/java-pex-native-five.json">read the original native evidence</a>.</p></noscript>
 <div class="tour-case-choice" role="group" aria-label="Choose a recorded case"><button type="button" id="case-held" aria-pressed="true">Unsupported change<span>20 CASE vs approved 240 EA</span></button><button type="button" id="case-amended" aria-pressed="false">Approved amendment<span>20 CASE, with effective authority</span></button></div>
 <div id="tour-error" role="alert" hidden></div>

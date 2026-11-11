@@ -1,25 +1,21 @@
-# Open Exchange — prepared 0.3.2 description correction
+# Open Exchange — prepared description and docs-only release copy
 
-**Draft only: not saved or sent.** Native IPM/OEX **0.3.2** is already published; the separate source-built React workbench remains **0.2.1**. The saved listing body still says native 0.3.0. This bundle corrects that body and explains the Java exporter; it does not request another release or package publication.
+**Draft only. Do not save or publish without the owner's exact submit.** Public native IPM stays **0.3.2** and the source-built React workbench stays **0.2.1**. Proposed OEX metadata release **0.3.3** is a docs-only approval path, not a new native package. The native manifest is intentionally unchanged. Never use the editor's default **1.0.0**.
 
-Preserve the saved logo, DPI-I-689 association, IPM option/install command, existing contest registration, YouTube, MP4 and both article links. Leave Demo URL empty. Recheck the owner approval queue before editing; never cancel or duplicate a pending approval. OEX save/Send remains gated by a new exact **submit**. If correction requires a new release, stop rather than creating one.
+Deploy and verify the new static agent-value page before submitting this copy. Preserve the logo, dedicated DPI-I-689 association, IPM option/command, existing contest registration, Demo URL, video/MP4 and both article fields. Check for pending approval; never cancel or duplicate it. If OEX couples the metadata release to publishing a new native/IPM package, **stop**: that is outside this task, and no native 0.3.3 exists.
 
-The gallery below already exists on public main. Its November 10 recorded-replay scope stays unchanged. [Current publication proof](evidence/ipm-032-publication-nov11/publication.json).
+## Proposed release fields — prepare only
 
-## Fields to preserve
-
-- Name: SilentShift
-- Native version: 0.3.2 (already published; do not change the version)
-- Repository: https://github.com/himanshu748/silentshift
-- Video: https://youtu.be/a4dOcqu89EA
-- Downloadable video: https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4
-- Idea: https://ideas.intersystems.com/ideas/DPI-I-689
-- IPM: checked; command `zpm "install silentshift"`
-- Submit to Contest: preserve the existing registered selection; never untick
+- Current published OEX/native version: 0.3.2.
+- Proposed OEX docs-only version: **0.3.3**, typed manually; never accept 1.0.0.
+- Notes: “Judge-facing documentation and static evidence presentation: the recorded wrong-delivery/review trade-off and three source-linked prose examples. No agent, deterministic policy, native package or evaluation change. Native IPM remains 0.3.2; React workbench remains 0.2.1.”
+- No release date, Git tag, source release or native package publication has been created by this draft.
 
 ## Description body
 
 ### An order can arrive successfully and still be wrong
+On the existing **48 held-out synthetic orders**, wrong deliveries were **6/23 → 2–3/23**: rules-only counterfactual release choices versus agent + policy actual simulator receipts across three trials. Review rose **12.5% → 21.5%** (pooled agent trials). **No overall accuracy gain:** correct routes **33/48 → 33/48, 33/48 and 30/48**; unstructured exact routing stays **1/16** in each trial. [Full historical comparison](https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_HELDOUT.md) · [original summary](https://github.com/himanshu748/silentshift/blob/main/evidence/heldout/summary.json). This presents existing observations, not a new evaluation of current native 0.3.2.
+
 SilentShift is a validation workbench for integration operations teams running B2B order pipelines. It compares incoming business values with independently approved commitments, investigates discrepancies and gives the operator a reason, supporting records and a route for each case.
 An order arrives as **20 CASE**. The approved contract says **240 EA**. The message is valid JSON, but there is no approved conversion. SilentShift holds it before the included destination simulator accepts it. An effective approved amendment authorizing **20 CASE** changes the outcome. The decisive difference is the governing evidence.
 ### Follow a case from intake to resolution
@@ -30,6 +26,11 @@ A native IRIS AI Hub agent reads four case-scoped evidence tools and recommends 
 Each admitted provider exchange becomes a native request/response pair in the business case's Visual Trace. The messages expose model, provider, prompt version, timing, tool calls, outcome and available response usage. Unknown cost and provider retries remain null. [DPI-I-689](https://ideas.intersystems.com/ideas/DPI-I-689), the [reproducible example](https://github.com/himanshu748/silentshift#see-it-in-visual-trace) and [Langfuse comparison](https://github.com/himanshu748/silentshift#silentshift-iris-interoperability-vs-langfuse) explain the tracing design.
 ### Signed receipts after the routing decision
 Native 0.3.2 adds a Java PEX business operation called after each committed routing outcome. It hashes the case, decision and evidence, then signs an immutable JSON receipt using an instance-held key. Retries reuse the original receipt and its saved investigation mode. An export failure is visible in the native trace and leaves the committed route unchanged. Signatures establish integrity under that key, not business correctness or a certified identity. [Java operation and limits](https://github.com/himanshu748/silentshift/blob/main/docs/JAVA_PEX.md) · [live case Visual Trace](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/bonus-claims-nov11/java-pex-live-trace.png).
+### What the agent saw that the rules missed
+[Inspect three recorded prose cases](https://himanshu748.github.io/silentshift/agent-value.html#HO-045): an amended quantity, a cancelled order and a prohibited part. Each view links the original clause, rule result, cited AI recommendation, deterministic policy reason and pending native Workflow task. These are selected examples of reviewer assist: no simulator delivery, but REQUEST_REVIEW is still wrong against the frozen QUARANTINE label. No completed human resolution is claimed.
+
+[Explore the evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [verify a Java PEX receipt locally](https://himanshu748.github.io/silentshift/receipts.html) · [product landing](https://himanshu748.github.io/silentshift/). These static recorded tools perform no native investigation or public API writes; they are not a hosted native demo.
+
 ### Inspect the recorded source workbench
 
 These November 10 local captures show synthetic recorded replay on 154U ARM64, not new inference or a hosted app. The React interface is built separately from source and is not installed by the native IPM package.
@@ -48,4 +49,4 @@ These November 10 local captures show synthetic recorded replay on 154U ARM64, n
 [Install from one guide](https://github.com/himanshu748/silentshift/blob/main/INSTALL.md). Fresh investigations use local Ollama and local embeddings, without a paid provider key. The optional keyless replay runs the native production with recorded provider responses and performs no fresh inference. Both paths require a separately obtained licensed IRIS image.
 [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download the MP4 without signing in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4). The video demonstrates the earlier synthetic core workflow and predates CSV.
 Read the technical articles: [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) and [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery).
-**Open Exchange/native IPM 0.3.2; React workbench 0.2.1; tested runtime 2026.3.0AI.154.0 Community / 154U ARM64.** In a prepared namespace with IPM, the public native package installs with `zpm "install silentshift"`; account configuration and production startup are explicit setup steps. The 0.3.2 public archive was downloaded and its manifest/source inspected. A separately generated archive from the release tag passed a fresh offline installation with the application empty and stopped. The earlier public 0.3.0 install passed native tests and both recorded API replays; [the verification guide](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_VERIFICATION.md) keeps those historical results separate from the newer archive, live-source and browser checks. A later [fresh public 0.3.2 installation](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/voting-nov11-judge/summary.json) passed production startup, the full native suite and both keyless replays, without fresh inference. No newer build is claimed tested. All supplied examples are synthetic and delivery is per line to an IRIS simulator. There is no hosted demo, verified external ERP delivery, X12 support, whole-order completeness guarantee or production-readiness claim. Organizer bonus awards remain unconfirmed; [the checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) separates verified artifacts from pending qualification and Not claimed bonuses.
+**Native IPM 0.3.2; source-built React workbench 0.2.1; locally qualified runtime 2026.3.0AI.154.0 Community / 154U ARM64.** In a prepared namespace with IPM, install using `zpm "install silentshift"`; account configuration and production startup are explicit setup steps. A [fresh public native 0.3.2 install](https://github.com/himanshu748/silentshift/blob/main/docs/evidence/voting-nov11-judge/summary.json) passed production startup, the native suite and both keyless replays, with no new inference. [The verification guide](https://github.com/himanshu748/silentshift/blob/main/docs/JUDGE_VERIFICATION.md) separates current-install proof from historical model/evaluation evidence. No newer build is claimed tested. All supplied examples are synthetic and delivery is per line to an IRIS simulator. There is no hosted native demo, verified external ERP delivery, X12 support, whole-order completeness guarantee or production-readiness claim. Organizer bonus awards remain unconfirmed; [the checklist](https://github.com/himanshu748/silentshift/blob/main/docs/SUBMISSION_CHECKLIST.md) separates implementation evidence from qualification.

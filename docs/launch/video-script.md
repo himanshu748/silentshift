@@ -1,23 +1,30 @@
-# Supplementary demonstration — 2:45 script and shot list
+# Re-cut: the order, the concern, the consequence
 
-**Script only. No recording, generated narration, upload or video edit performed.** Use the real workbench/native records and static inspector. Keep a visible “Synthetic data · recorded evidence” label for historical footage, and “Recorded provider response · no new inference” for a new keyless replay. Never portray the static tour as a hosted native app. The existing public video stays unchanged at 2:30.
+**Target 2:20 (within 2:00–2:30). Script and shot list only.** No new recording, narration, evaluation or upload. Use the recorded sources below; never simulate a live investigation. Keep “Recorded synthetic evidence · simulator delivery” visible throughout. The historical held-out run predates current native 0.3.2 / React 0.2.1.
 
-| Time | Shot | Narration / caption |
+| Time | Picture / action | Narration |
 | --- | --- | --- |
-| 0:00–0:15 | Real incoming order and approved-reference capture | “The integration accepted this order. It says 20 CASE. The approved commitment says 240 EA. Without an approved conversion, transport success is not permission to deliver.” |
-| 0:15–0:35 | Guided tour, unsupported case, Intake then Authority | “These are saved native records. The sender's values and independent reference are separate. The original payload stays intact.” |
-| 0:35–0:58 | Decision step, actual ALLOW proposal and failed critical/resolution checks | “Here the model proposed ALLOW. That answer was wrong. The deterministic gate refused release, and the simulator received nothing. We keep that model error visible.” |
-| 0:58–1:18 | Select approved amendment, Authority then Decision | “This other case has an effective approved amendment. The evidence changes, the comparison resolves, and the simulator records one delivery. This is a demonstration, not an accuracy benchmark.” |
-| 1:18–1:38 | Real Visual Trace capture with native provider messages and Java PEX operation | “AI Hub runs inside the production. Provider calls and tool metadata remain in the case trace. Java PEX exports a signed receipt after the routing outcome commits.” |
-| 1:38–2:05 | Receipt inspector, actual signature success, edited-copy failure, restore sample | “This browser recomputes the payload hash and verifies the Java signature. Editing a local copy breaks the check. No saved case or file changes.” |
-| 2:05–2:22 | Clear expected fingerprint; show identity-unverified message | “A key inside a file cannot certify itself. Signature validity, signing identity and business correctness are three different questions.” |
-| 2:22–2:36 | Local terminal keyless launcher final output; capture both actual replay results | “The released 0.3.2 package has a keyless judge path. This is recorded provider playback through the native production, with no new inference.” |
-| 2:36–2:45 | Listing/repository/install guide links and limits | “Synthetic data, simulator delivery, build 154U ARM64. Follow the evidence, then run the native workflow from the install guide.” |
+| 0:00–0:18 | Evidence tour, unsupported order. Show 20 CASE beside approved 240 EA. | “A successful integration message can still mean the wrong thing. This order asks for 20 CASE. The independent approved record says 240 EA. There is no authorized conversion. SilentShift keeps the original message and checks the business commitment.” |
+| 0:18–0:36 | Actual recorded recommendation, evidence IDs and native provider message. Keep the original model error visible. | “An IRIS AI Hub agent investigates through case-scoped, read-only tools. Its proposal is evidence, not permission. In this recorded example, it said ALLOW. The interface keeps that mistake visible, alongside the references and native trace.” |
+| 0:36–0:54 | Policy checks, quarantined result, signed receipt; then briefly show the approved-amendment outcome. | “Deterministic policy refused the unresolved contradiction. No simulator delivery occurred. An effective approved amendment can change the authority and permit the order. The route is committed before Java PEX exports its signed receipt.” |
+| 0:54–1:16 | New agent-value view, HO-045. Show the whole original clause and highlight its existing 100 EA and 80 EA text by cursor selection only. | “Now inspect a held-out case the structured baseline missed. The table still says 100 EA. But its contract text contains a signed amendment reducing the commitment to 80 EA, with no over-delivery. The incoming order still requests 100.” |
+| 1:16–1:36 | HO-045 trial 1 recommendation, reference:H019:v1, policy reason and pending task 1184; open all-trials disclosure. | “Rules chose ALLOW. The agent cited that reference and recommended QUARANTINE. Policy retained the concern and created a native human-review task, with no simulator delivery. This is reviewer assist, not completed human resolution. REQUEST_REVIEW still differs from the frozen QUARANTINE label.” |
+| 1:36–2:00 | Existing summary beside the headline. Display all denominators and the three correct-route counts together. | “Across 48 held-out synthetic orders, rules would release six of 23 bad orders. Agent plus policy actually delivered two or three per trial to the simulator. Review rose from 12.5 to 21.5 percent. Overall accuracy did not improve: rules scored 33 of 48; the shipped arm scored 33, 33 and 30.” |
+| 2:00–2:20 | Static source links, receipt inspector edited-copy failure, single install guide. | “The same orders repeat across three trials; they are not independent production traffic. Unstructured exact routing did not improve. Read every failure and the original records, inspect the receipt, or run the keyless native replay. The agent can prepare a concern for a reviewer. Policy still owns the route.” |
 
-## Capture rules
+## Exact on-screen result card
 
-- Capture actual selected records and their real IDs; do not animate invented trace messages, receipts or success counters.
-- Sessions 59 and 119 in the historical tour belong to its original instance. A new replay has its own IDs; show the newly printed URL rather than substituting an old one.
-- Keep all benchmark limits visible in the repository. Do not replace them with an AI-superiority claim.
-- Use only Deepgram if narration is later authorized and credentials/credits exist. Do not substitute another voice provider. Captions can carry the entire script without generated audio.
-- Render H.264/AAC only after recording is authorized. Check exact runtime and signed-out download after a separately approved upload. Never upload an EAP image, model bundle, local credentials or native signing key.
+> Recorded v2 comparison · 48 synthetic orders
+> Wrong deliveries: **6/23 → 2–3/23**
+> Rules-only: counterfactual release choices. Agent + policy: actual simulator receipts across three trials.
+> Review: **12.5% → 21.5%** (6/48 versus pooled 31/144).
+> Correct routes: **33/48 → 33/48, 33/48, 30/48**. No overall accuracy gain.
+> Unstructured exact routing: **1/16** in every trial for both arms.
+
+## Source and production boundaries
+
+- Core recorded cases: [tour extract](../site/assets/recorded-cases.json), with original source/receipt hashes. Do not describe their model ALLOW as a correct recommendation.
+- Prose example: [HO-045, recorded trial 1](../../evidence/heldout/trial-1/HO-045.json); the other two trials remain accessible from the page. [Frozen label](../../fixtures/v2-heldout/scenarios.json).
+- Every benchmark number: [EVAL_HELDOUT.md](../EVAL_HELDOUT.md) and [original summary](../../evidence/heldout/summary.json). No new evaluation or current-release extrapolation.
+- Current software: native IPM 0.3.2; separate React workbench 0.2.1. Only 154U ARM64 is locally qualified. Static inspection is not a hosted native demo.
+- Any later narration uses Deepgram only with approved access. Recording, rendering and uploading are separate future actions; none occurred here. Keep the existing public video unchanged.

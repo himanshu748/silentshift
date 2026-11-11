@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+<link rel="preload" href="assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/ibm-plex-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -58,25 +61,33 @@
             missing check.
           </p>
           <h1 id="hero-title" class="hero-title">
-            Successful<br />messages.<br /><em>Correct meaning.</em>
+            Fewer wrong<br />deliveries.<br /><em>More review.</em>
           </h1>
           <p class="hero-description">
             Semantic integration checks for IRIS, with evidence-bound agent
             proposals and deterministic routing.
           </p>
+<aside class="heldout-summary" aria-label="Recorded held-out result">
+<p class="eyebrow">Recorded comparison · 48 synthetic orders</p>
+<p class="heldout-main"><strong>6/23 → 2–3/23</strong> wrong deliveries</p>
+<p>Rules-only release choices are counterfactual. Agent + policy counts actual simulator receipts in three trials.</p>
+<p><strong>Review: 12.5% → 21.5%</strong> (pooled agent trials).</p>
+<p class="heldout-limit"><strong>No overall accuracy gain:</strong> correct routes 33/48 → 33/48, 33/48, 30/48. Unstructured routing stays 1/16 in every trial.</p>
+<a href="https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/docs/EVAL_HELDOUT.md">Read the full comparison and every failure ↗</a>
+</aside>
           <div class="hero-actions">
             <a class="button primary magnetic" href="evidence-tour.html">Explore recorded cases <span aria-hidden="true">↗</span></a
             ><a class="button text-button magnetic" href="#film"
               ><span class="play-symbol" aria-hidden="true">▷</span> Watch
               2:30 video</a
-            >
+            ><a class="button text-button" href="agent-value.html#HO-045">What the agent saw ↗</a>
           </div>
           <p class="demo-status">
             <span aria-hidden="true">○</span> Public native demo not deployed.
             Recorded evidence below. <button class="demo-status-link" type="button" data-open-demo>Native demo status</button>
           </p>
           <div class="install-command">
-            <span class="mono-label">Install in a prepared IRIS namespace</span
+            <span class="mono-label">Native IPM 0.3.2 · React 0.2.1 from source<br />Install in a prepared IRIS namespace</span
             ><button
               class="copy-button"
               type="button"

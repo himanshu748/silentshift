@@ -1,0 +1,1356 @@
+{
+  "schema": "silentshift-agent-value/1",
+  "synthetic": true,
+  "scope": "Presentation of existing November 9 observations; not a new evaluation",
+  "sources": [
+    {
+      "path": "evidence/heldout/summary.json",
+      "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/summary.json",
+      "sha256": "49ffb2b6a0ff961566d03ab3345a1dce8e817e76692f703d4770869990093bca"
+    },
+    {
+      "path": "docs/EVAL_HELDOUT.md",
+      "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/docs/EVAL_HELDOUT.md",
+      "sha256": "006659486cc4d716102f54add3a34ae323189b7002db4ef44df940bbfb9cbefc"
+    },
+    {
+      "path": "fixtures/v2-heldout/scenarios.json",
+      "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/fixtures/v2-heldout/scenarios.json",
+      "sha256": "e02747e587495dd2587a3813277a15451c7715638d9ff9962186a09e8986ef55"
+    },
+    {
+      "path": "evidence/heldout/rules-only.json",
+      "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/rules-only.json",
+      "sha256": "3bff2aa7e6f68221f87c3a97afdf8dff305858d6b9fd3b344bc6db318de6760f"
+    }
+  ],
+  "runtime": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+  "historical_module_version": "0.3.0",
+  "source_commit": "124d5b23e3d79ba6e14542d94ffaaa97a1901d60",
+  "totals": {
+    "rules-only": {
+      "n": 48,
+      "correct": 33,
+      "wrong_deliveries": 6,
+      "bad_orders": 23,
+      "false_holds": 9,
+      "allow_eligible": 25,
+      "reviews": 6,
+      "review_rate": 0.125,
+      "invalid": 0,
+      "median_elapsed_ms": 0.1082875,
+      "timing_observations": 48,
+      "route_effect_discrepancies": 0
+    },
+    "agent-only": {
+      "n": 144,
+      "correct": 100,
+      "wrong_deliveries": 20,
+      "bad_orders": 69,
+      "false_holds": 23,
+      "allow_eligible": 75,
+      "reviews": 0,
+      "review_rate": 0.0,
+      "invalid": 5,
+      "median_elapsed_ms": 22416,
+      "timing_observations": 141,
+      "route_effect_discrepancies": 0
+    },
+    "agent+policy": {
+      "n": 144,
+      "correct": 96,
+      "wrong_deliveries": 8,
+      "bad_orders": 69,
+      "false_holds": 30,
+      "allow_eligible": 75,
+      "reviews": 31,
+      "review_rate": 0.2152777777777778,
+      "invalid": 0,
+      "median_elapsed_ms": 22416,
+      "timing_observations": 141,
+      "route_effect_discrepancies": 0
+    }
+  },
+  "trials": {
+    "agent-only": {
+      "1": {
+        "n": 48,
+        "correct": 35,
+        "wrong_deliveries": 6,
+        "bad_orders": 23,
+        "false_holds": 7,
+        "allow_eligible": 25,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 0,
+        "median_elapsed_ms": 19245.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "2": {
+        "n": 48,
+        "correct": 34,
+        "wrong_deliveries": 7,
+        "bad_orders": 23,
+        "false_holds": 7,
+        "allow_eligible": 25,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 0,
+        "median_elapsed_ms": 22304.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "3": {
+        "n": 48,
+        "correct": 31,
+        "wrong_deliveries": 7,
+        "bad_orders": 23,
+        "false_holds": 9,
+        "allow_eligible": 25,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 5,
+        "median_elapsed_ms": 33892,
+        "timing_observations": 45,
+        "route_effect_discrepancies": 0
+      }
+    },
+    "agent+policy": {
+      "1": {
+        "n": 48,
+        "correct": 33,
+        "wrong_deliveries": 2,
+        "bad_orders": 23,
+        "false_holds": 9,
+        "allow_eligible": 25,
+        "reviews": 10,
+        "review_rate": 0.20833333333333334,
+        "invalid": 0,
+        "median_elapsed_ms": 19245.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "2": {
+        "n": 48,
+        "correct": 33,
+        "wrong_deliveries": 3,
+        "bad_orders": 23,
+        "false_holds": 9,
+        "allow_eligible": 25,
+        "reviews": 9,
+        "review_rate": 0.1875,
+        "invalid": 0,
+        "median_elapsed_ms": 22304.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "3": {
+        "n": 48,
+        "correct": 30,
+        "wrong_deliveries": 3,
+        "bad_orders": 23,
+        "false_holds": 12,
+        "allow_eligible": 25,
+        "reviews": 12,
+        "review_rate": 0.25,
+        "invalid": 0,
+        "median_elapsed_ms": 33892,
+        "timing_observations": 45,
+        "route_effect_discrepancies": 0
+      }
+    }
+  },
+  "categories": {
+    "rules-only": {
+      "structured": {
+        "n": 16,
+        "correct": 16,
+        "wrong_deliveries": 0,
+        "bad_orders": 16,
+        "false_holds": 0,
+        "allow_eligible": 0,
+        "reviews": 4,
+        "review_rate": 0.25,
+        "invalid": 0,
+        "median_elapsed_ms": 0.11072499999999999,
+        "timing_observations": 16,
+        "route_effect_discrepancies": 0
+      },
+      "unstructured": {
+        "n": 16,
+        "correct": 1,
+        "wrong_deliveries": 6,
+        "bad_orders": 7,
+        "false_holds": 9,
+        "allow_eligible": 9,
+        "reviews": 2,
+        "review_rate": 0.125,
+        "invalid": 0,
+        "median_elapsed_ms": 0.110496,
+        "timing_observations": 16,
+        "route_effect_discrepancies": 0
+      },
+      "clean": {
+        "n": 16,
+        "correct": 16,
+        "wrong_deliveries": 0,
+        "bad_orders": 0,
+        "false_holds": 0,
+        "allow_eligible": 16,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 0,
+        "median_elapsed_ms": 0.1052045,
+        "timing_observations": 16,
+        "route_effect_discrepancies": 0
+      }
+    },
+    "agent-only": {
+      "structured": {
+        "n": 48,
+        "correct": 36,
+        "wrong_deliveries": 12,
+        "bad_orders": 48,
+        "false_holds": 0,
+        "allow_eligible": 0,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 0,
+        "median_elapsed_ms": 20858.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "unstructured": {
+        "n": 48,
+        "correct": 19,
+        "wrong_deliveries": 8,
+        "bad_orders": 21,
+        "false_holds": 20,
+        "allow_eligible": 27,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 2,
+        "median_elapsed_ms": 23059.0,
+        "timing_observations": 46,
+        "route_effect_discrepancies": 0
+      },
+      "clean": {
+        "n": 48,
+        "correct": 45,
+        "wrong_deliveries": 0,
+        "bad_orders": 0,
+        "false_holds": 3,
+        "allow_eligible": 48,
+        "reviews": 0,
+        "review_rate": 0.0,
+        "invalid": 3,
+        "median_elapsed_ms": 22686,
+        "timing_observations": 47,
+        "route_effect_discrepancies": 0
+      }
+    },
+    "agent+policy": {
+      "structured": {
+        "n": 48,
+        "correct": 48,
+        "wrong_deliveries": 0,
+        "bad_orders": 48,
+        "false_holds": 0,
+        "allow_eligible": 0,
+        "reviews": 12,
+        "review_rate": 0.25,
+        "invalid": 0,
+        "median_elapsed_ms": 20858.5,
+        "timing_observations": 48,
+        "route_effect_discrepancies": 0
+      },
+      "unstructured": {
+        "n": 48,
+        "correct": 3,
+        "wrong_deliveries": 8,
+        "bad_orders": 21,
+        "false_holds": 27,
+        "allow_eligible": 27,
+        "reviews": 16,
+        "review_rate": 0.3333333333333333,
+        "invalid": 0,
+        "median_elapsed_ms": 23059.0,
+        "timing_observations": 46,
+        "route_effect_discrepancies": 0
+      },
+      "clean": {
+        "n": 48,
+        "correct": 45,
+        "wrong_deliveries": 0,
+        "bad_orders": 0,
+        "false_holds": 3,
+        "allow_eligible": 48,
+        "reviews": 3,
+        "review_rate": 0.0625,
+        "invalid": 0,
+        "median_elapsed_ms": 22686,
+        "timing_observations": 47,
+        "route_effect_discrepancies": 0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "HO-045",
+      "title": "The quantity changed in prose",
+      "clause_field": "contract_text",
+      "category": "unstructured",
+      "truth": {
+        "decision": "QUARANTINE",
+        "reason": "The effective signed amendment replaces 100 EA with exactly 80 EA; the incoming 100 EA exceeds the new commitment."
+      },
+      "baseline": {
+        "scenario_id": "HO-045",
+        "decision": "ALLOW",
+        "assessment": {
+          "classification": "CLEAR",
+          "findings": [],
+          "evidence_ids": [
+            "reference:H019:v1"
+          ],
+          "active_reference_ids": [
+            "reference:H019:v1"
+          ],
+          "critical": false,
+          "schema_version": "silentshift-message/1"
+        },
+        "elapsed_ms": 0.09758
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "source": {
+            "path": "evidence/heldout/trial-1/HO-045.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-1/HO-045.json",
+            "sha256": "1b6f21cba753d48d9b57bf164d15674c77467cfa72647d31ea7be67e88896ff6"
+          },
+          "case_id": "5D9DCCA2-DC07-11F1-A103-A90DC9E483ED",
+          "session_id": "1383",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H019",
+            "correlation_id": "heldout-order-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "event_id": "heldout-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "100",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "contract_id": "PO-SYN-H019",
+              "contract_text": "Approved purchase order PO-SYN-H019: exactly 100 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment B, effective 8 November 2026: the exact quantity for this PO is reduced to 80 EA; the former 100 EA table entry is obsolete. No over-delivery is permitted.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H019:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "100",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H019:v1"
+            ],
+            "explanation": "Approved contract reduces quantity to 80 EA; 100 EA violates current authority.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T06:33:01.171683Z",
+            "completion_received": false,
+            "task_id": "1184",
+            "request_id": "1182",
+            "worklist_id": "1184||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T06:33:01.178730Z",
+            "source_session_id": 1383
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 2,
+          "source": {
+            "path": "evidence/heldout/trial-2/HO-045.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-2/HO-045.json",
+            "sha256": "d6169847090004a3619527aaa22ab76e8ef43d433391f0739c2515c420dcc5d5"
+          },
+          "case_id": "7038876A-DC0B-11F1-A405-EED9F2289F9B",
+          "session_id": "2709",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H019",
+            "correlation_id": "heldout-order-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "event_id": "heldout-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "100",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "contract_id": "PO-SYN-H019",
+              "contract_text": "Approved purchase order PO-SYN-H019: exactly 100 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment B, effective 8 November 2026: the exact quantity for this PO is reduced to 80 EA; the former 100 EA table entry is obsolete. No over-delivery is permitted.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H019:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "100",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H019:v1"
+            ],
+            "explanation": "Quantity exceeds approved 80 EA; critical contradiction found.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T07:02:10.686569Z",
+            "completion_received": false,
+            "task_id": "2298",
+            "request_id": "2296",
+            "worklist_id": "2298||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T07:02:10.693953Z",
+            "source_session_id": 2709
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 3,
+          "source": {
+            "path": "evidence/heldout/trial-3/HO-045.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-3/HO-045.json",
+            "sha256": "0f21feb9a6a870ac5db00b4653d7d059586321e40e3293e6d1679880782c38fd"
+          },
+          "case_id": "6B25A5FF-DC2B-11F1-9DB6-369FB6BCC8E5",
+          "session_id": "4020",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H019",
+            "correlation_id": "heldout-order-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "event_id": "heldout-019:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "100",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "contract_id": "PO-SYN-H019",
+              "contract_text": "Approved purchase order PO-SYN-H019: exactly 100 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them. Signed amendment B, effective 8 November 2026: the exact quantity for this PO is reduced to 80 EA; the former 100 EA table entry is obsolete. No over-delivery is permitted.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H019:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "100",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H019:v1"
+            ],
+            "explanation": "Quantity exceeds approved 80 EA; critical contradiction in contract.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T10:51:46.833216Z",
+            "completion_received": false,
+            "task_id": "3400",
+            "request_id": "3398",
+            "worklist_id": "3400||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T10:51:46.994478Z",
+            "source_session_id": 4020
+          },
+          "delivery_count": 0,
+          "review": null
+        }
+      ]
+    },
+    {
+      "id": "HO-030",
+      "title": "The buyer cancelled the order",
+      "clause_field": "buyer_po_note",
+      "category": "unstructured",
+      "truth": {
+        "decision": "QUARANTINE",
+        "reason": "The approved cancellation withdraws the 54 EA commitment before the event; dispatch of this order is prohibited."
+      },
+      "baseline": {
+        "scenario_id": "HO-030",
+        "decision": "ALLOW",
+        "assessment": {
+          "classification": "CLEAR",
+          "findings": [],
+          "evidence_ids": [
+            "reference:H021:v1"
+          ],
+          "active_reference_ids": [
+            "reference:H021:v1"
+          ],
+          "critical": false,
+          "schema_version": "silentshift-message/1"
+        },
+        "elapsed_ms": 0.186576
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "source": {
+            "path": "evidence/heldout/trial-1/HO-030.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-1/HO-030.json",
+            "sha256": "f343bdc56a7728d20b0614b366ac6eb9b08ebe8f7d113a92524c9c02b26e68c2"
+          },
+          "case_id": "B32F3862-DC06-11F1-A103-A90DC9E483ED",
+          "session_id": "970",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H021",
+            "correlation_id": "heldout-order-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "event_id": "heldout-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "54",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Approved buyer instruction, issued 8 November at 12:00 UTC for this PO: cancel the order in full. Do not dispatch any goods under the original 54 EA commitment.",
+              "contract_id": "PO-SYN-H021",
+              "contract_text": "Approved purchase order PO-SYN-H021: exactly 54 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H021:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "54",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H021:v1"
+            ],
+            "explanation": "Approved contract mandates full cancellation of original order commitment.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T06:28:15.296635Z",
+            "completion_received": false,
+            "task_id": "838",
+            "request_id": "836",
+            "worklist_id": "838||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T06:28:15.303890Z",
+            "source_session_id": 970
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 2,
+          "source": {
+            "path": "evidence/heldout/trial-2/HO-030.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-2/HO-030.json",
+            "sha256": "8e4a889c56e3dfcba7bad6d3418d65a67efd4213d7f8c4369b56e4c8d5ac2156"
+          },
+          "case_id": "ACE347EF-DC0A-11F1-A405-EED9F2289F9B",
+          "session_id": "2296",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H021",
+            "correlation_id": "heldout-order-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "event_id": "heldout-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "54",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Approved buyer instruction, issued 8 November at 12:00 UTC for this PO: cancel the order in full. Do not dispatch any goods under the original 54 EA commitment.",
+              "contract_id": "PO-SYN-H021",
+              "contract_text": "Approved purchase order PO-SYN-H021: exactly 54 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H021:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "54",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H021:v1"
+            ],
+            "explanation": "Approved contract mandates full cancellation of order; no dispatch allowed.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T06:56:42.843659Z",
+            "completion_received": false,
+            "task_id": "1952",
+            "request_id": "1950",
+            "worklist_id": "1952||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T06:56:42.850293Z",
+            "source_session_id": 2296
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 3,
+          "source": {
+            "path": "evidence/heldout/trial-3/HO-030.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-3/HO-030.json",
+            "sha256": "dd8844a96211a39ef58e06c7abf35928a897694b4ae526611cc702ce49eec8c0"
+          },
+          "case_id": "A37EE232-DC27-11F1-9DB5-369FB6BCC8E5",
+          "session_id": "3626",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H021",
+            "correlation_id": "heldout-order-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "event_id": "heldout-021:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-CERAMIC",
+            "quantity": "54",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Approved buyer instruction, issued 8 November at 12:00 UTC for this PO: cancel the order in full. Do not dispatch any goods under the original 54 EA commitment.",
+              "contract_id": "PO-SYN-H021",
+              "contract_text": "Approved purchase order PO-SYN-H021: exactly 54 EA of SKU-CERAMIC, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H021:v1",
+              "product_id": "SKU-CERAMIC",
+              "quantity": "54",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H021:v1"
+            ],
+            "explanation": "Approved contract explicitly cancels original 54 EA order; no dispatch allowed.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T10:24:13.647344Z",
+            "completion_received": false,
+            "task_id": "3070",
+            "request_id": "3068",
+            "worklist_id": "3070||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T10:24:13.811186Z",
+            "source_session_id": 3626
+          },
+          "delivery_count": 0,
+          "review": null
+        }
+      ]
+    },
+    {
+      "id": "HO-017",
+      "title": "The old part was explicitly prohibited",
+      "clause_field": "buyer_po_note",
+      "category": "unstructured",
+      "truth": {
+        "decision": "QUARANTINE",
+        "reason": "The effective buyer correction prohibits the old product; this order still supplies SKU-OLD-CLAMP."
+      },
+      "baseline": {
+        "scenario_id": "HO-017",
+        "decision": "ALLOW",
+        "assessment": {
+          "classification": "CLEAR",
+          "findings": [],
+          "evidence_ids": [
+            "reference:H022:v1"
+          ],
+          "active_reference_ids": [
+            "reference:H022:v1"
+          ],
+          "critical": false,
+          "schema_version": "silentshift-message/1"
+        },
+        "elapsed_ms": 0.10283
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "source": {
+            "path": "evidence/heldout/trial-1/HO-017.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-1/HO-017.json",
+            "sha256": "7b4c61831f2953e1c8c261762027346fb90c1d738c80910f77628b431c98e046"
+          },
+          "case_id": "1B3FF51D-DC06-11F1-A103-A90DC9E483ED",
+          "session_id": "611",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H022",
+            "correlation_id": "heldout-order-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "event_id": "heldout-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:1",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-OLD-CLAMP",
+            "quantity": "28",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Signed buyer correction, effective 8 November: replace SKU-OLD-CLAMP with SKU-NEW-CLAMP for all 28 EA. The old clamp must not be supplied. The table has not yet been refreshed.",
+              "contract_id": "PO-SYN-H022",
+              "contract_text": "Approved purchase order PO-SYN-H022: exactly 28 EA of SKU-OLD-CLAMP, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H022:v1",
+              "product_id": "SKU-OLD-CLAMP",
+              "quantity": "28",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H022:v1"
+            ],
+            "explanation": "Approved contract mandates no substitution; old clamp must not be supplied.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T06:24:02.441533Z",
+            "completion_received": false,
+            "task_id": "536",
+            "request_id": "534",
+            "worklist_id": "536||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T06:24:02.454660Z",
+            "source_session_id": 611
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 2,
+          "source": {
+            "path": "evidence/heldout/trial-2/HO-017.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-2/HO-017.json",
+            "sha256": "52262f7c1f0e622a552582d6bcd7988cc1600d3ed4971dc16b52da3526276717"
+          },
+          "case_id": "FD0C8536-DC09-11F1-A405-EED9F2289F9B",
+          "session_id": "1937",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H022",
+            "correlation_id": "heldout-order-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "event_id": "heldout-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:2",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-OLD-CLAMP",
+            "quantity": "28",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Signed buyer correction, effective 8 November: replace SKU-OLD-CLAMP with SKU-NEW-CLAMP for all 28 EA. The old clamp must not be supplied. The table has not yet been refreshed.",
+              "contract_id": "PO-SYN-H022",
+              "contract_text": "Approved purchase order PO-SYN-H022: exactly 28 EA of SKU-OLD-CLAMP, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H022:v1",
+              "product_id": "SKU-OLD-CLAMP",
+              "quantity": "28",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H022:v1"
+            ],
+            "explanation": "Contract mandates no substitution; request violates 'must not be supplied' clause.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T06:52:04.073435Z",
+            "completion_received": false,
+            "task_id": "1650",
+            "request_id": "1648",
+            "worklist_id": "1650||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T06:52:04.093067Z",
+            "source_session_id": 1937
+          },
+          "delivery_count": 0,
+          "review": null
+        },
+        {
+          "trial": 3,
+          "source": {
+            "path": "evidence/heldout/trial-3/HO-017.json",
+            "url": "https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/evidence/heldout/trial-3/HO-017.json",
+            "sha256": "9a2e99ed7312a8b0df9071e9a10aaad3144c56b0d202094323c903b439689124"
+          },
+          "case_id": "0B47BE2F-DC0D-11F1-A405-EED9F2289F9B",
+          "session_id": "3262",
+          "message": {
+            "business_unit": "SOUTH",
+            "contract_id": "PO-SYN-H022",
+            "correlation_id": "heldout-order-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "event_id": "heldout-022:3e2b0b86-58aa-457f-a7e0-c3ddadd40572:3",
+            "kind": "order",
+            "occurred_at": "2026-11-09T05:55:00Z",
+            "product_id": "SKU-OLD-CLAMP",
+            "quantity": "28",
+            "source": "synthetic-heldout-partner",
+            "timestamp_semantics": "event_time",
+            "unit": "EA"
+          },
+          "references": [
+            {
+              "authority": "approved",
+              "business_unit": "SOUTH",
+              "buyer_po_note": "Signed buyer correction, effective 8 November: replace SKU-OLD-CLAMP with SKU-NEW-CLAMP for all 28 EA. The old clamp must not be supplied. The table has not yet been refreshed.",
+              "contract_id": "PO-SYN-H022",
+              "contract_text": "Approved purchase order PO-SYN-H022: exactly 28 EA of SKU-OLD-CLAMP, business unit SOUTH, event-time terms. No substitutions or unit conversions unless an independently approved written change explicitly authorizes them.",
+              "effective_from": "2026-11-01T00:00:00Z",
+              "effective_to": null,
+              "id": "reference:H022:v1",
+              "product_id": "SKU-OLD-CLAMP",
+              "quantity": "28",
+              "timestamp_semantics": "event_time",
+              "unit": "EA"
+            }
+          ],
+          "recommendation": {
+            "decision": "QUARANTINE",
+            "evidence_ids": [
+              "reference:H022:v1"
+            ],
+            "explanation": "Contract explicitly prohibits substitution; old clamp must not be supplied.",
+            "uncertainty": 0.0
+          },
+          "policy": {
+            "checks": [
+              {
+                "code": "ASSESSMENT_VALID",
+                "passed": true,
+                "reason": "Deterministic assessment must be complete and valid."
+              },
+              {
+                "code": "NOT_DUPLICATE",
+                "passed": true,
+                "reason": "Duplicate event cannot create a second downstream effect."
+              },
+              {
+                "code": "NO_CRITICAL_CONTRADICTION",
+                "passed": true,
+                "reason": "Invalid messages and critical contradictions cannot be released."
+              },
+              {
+                "code": "RECOMMENDATION_VALID",
+                "passed": true,
+                "reason": "Agent output must satisfy the strict recommendation schema."
+              },
+              {
+                "code": "EVIDENCE_COMPLETE",
+                "passed": true,
+                "reason": "Every independently retrieved evidence record must be cited for release."
+              },
+              {
+                "code": "SEMANTICS_RESOLVED",
+                "passed": true,
+                "reason": "Only a resolved comparison to an approved contract can permit release."
+              },
+              {
+                "code": "UNCERTAINTY_BOUNDED",
+                "passed": true,
+                "reason": "Uncertainty above 0.35 requires human review."
+              }
+            ],
+            "decision": "REQUEST_REVIEW",
+            "downstream_permitted": false,
+            "policy_version": "silentshift-policy/1.1.0",
+            "reasons": [
+              "Agent concerns without a verified critical contradiction require human review."
+            ],
+            "release_eligible": true
+          },
+          "workflow": {
+            "engine": "native-iris-workflow",
+            "status": "pending",
+            "role": "ReviewWorklist",
+            "requested_at": "2026-11-09T07:13:46.330639Z",
+            "completion_received": false,
+            "task_id": "2764",
+            "request_id": "2762",
+            "worklist_id": "2764||ss-reviewer",
+            "created_case_version": 9,
+            "created_at": "2026-11-09T07:13:46.353593Z",
+            "source_session_id": 3262
+          },
+          "delivery_count": 0,
+          "review": null
+        }
+      ]
+    }
+  ]
+}
