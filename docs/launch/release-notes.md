@@ -1,16 +1,23 @@
-# Next source update — draft release notes
+# SilentShift 0.3.3 — prepared release notes
 
-**Not tagged, released or published. Version not assigned.** Native IPM remains 0.3.2 and the separately built React workbench remains 0.2.1. These changes do not alter the native package resources, routing policy or AI investigation semantics; a new IPM publication is not required merely to ship static Pages files or the launcher repair.
+**Candidate only; not tagged, released or published.** The current public native/IPM/OEX version remains 0.3.2. The candidate manifest, Python project metadata and lockfile agree on 0.3.3; React remains separately built 0.2.1.
 
-## A shorter path from a successful message to inspectable evidence
+## Documentation, recorded evidence and judge tooling
 
-- The keyless judge launcher now requests public native 0.3.2 and checks it with the corresponding release-pinned assertions. Previously it requested the latest package while expecting 0.3.0. Image validation, private credentials, disk guards and isolation remain intact.
-- A local browser receipt inspector recomputes the payload hash, checks the Java PEX RSA signature and distinguishes a valid embedded-key signature from an independently pinned signing identity. An edited-copy test demonstrates integrity failure without changing any native outcome or saved file.
-- A guided recorded tour compares an unsupported order with an approved amendment. It retains the actual model proposal, deterministic checks, native session and signed receipt, including the case where the model proposed ALLOW and policy quarantined it.
-- The static page's primary action describes recorded inspection rather than offering an unavailable live app. The existing captioned video is 2:30 and still predates CSV and Java PEX.
+**No native code changes.** The native classes, agent, deterministic policy, Java/Python runtime sources, fixtures and install hooks are unchanged from 0.3.2.
 
-## Verification boundary
+- Put the existing recorded wrong-delivery/review trade-off and its accuracy limits at the front of the README, landing and evidence tour. No new evaluation was run.
+- Add three source-linked prose examples showing the original clause, rule result, agent citation/recommendation and final policy hold. Pending review is not presented as a correct final route or a completed human decision.
+- Provide a guided recorded evidence tour and a browser receipt inspector. The inspector checks a real saved payload/signature and detects an edited copy; signing-key identity and business correctness remain separate questions.
+- Refresh the judge/install documentation and prepare a re-cut video script. Existing video and article links stay unchanged. These static recorded pages are not a hosted native demo.
+- Keep the public keyless launcher explicitly pinned to its verified 0.3.2 registry version, avoiding the old moving-latest/version-assertion conflict when 0.3.3 is published. Promote it only after 0.3.3 is independently installed. The isolated local-archive verifier can exercise literal `zpm "install silentshift"`; it now explicitly checks the installed manifest identity against the inspected archive.
 
-The public 0.3.2 gate in [the judge receipt](../evidence/voting-nov11-judge/summary.json) passed on build 154U ARM64. The static tools have their own cryptographic/provenance/browser checks. The final voting-week report records each feature's source SHA, full local suite, hosted CI and independent clean-container gate; do not relabel one as the other.
+## Candidate verification
 
-All examples are synthetic and downstream delivery is to a simulator. These two demonstrations do not establish improved accuracy over the deterministic baseline. Signing proves integrity under a key, not business correctness or certified identity. No hosted native demo, newly tested build, new benchmark result, awarded bonus or ranking is claimed.
+The independent pristine offline 0.3.3 installation passed. After the earlier disk stop, its retained instance completed a **resumed** runtime gate: API startup HTTP 200, **8 native classes / 28 methods**, and **two 12/12 recorded API replays** (sessions 56 and 92) in **17.38 seconds**. This duration covers resumption only, not the earlier build/install or pause. No fresh inference or new evaluation. [Scoped runtime receipt](../evidence/release-033-runtime-nov12/summary.json). The public 0.3.3 registry install remains a post-publication check.
+
+## Publication prerequisites
+
+The 0.3.3 candidate must pass CI and a fresh-container install of its locally built archive before merge. Then separately approve the matching v0.3.3 tag/GitHub release and OEX/IPM publication. Type 0.3.3 manually; never use 1.0.0. After publication, download the registry archive, compare its manifest/tag identity and run a new fresh public install before claiming that gate passed.
+
+Only IRIS 2026.3.0AI.154.0 Community / 154U ARM64 is locally qualified. Examples remain synthetic and downstream delivery is to a simulator. No new inference, accuracy improvement, hosted native demo, new-build qualification, awarded bonus or ranking is claimed.

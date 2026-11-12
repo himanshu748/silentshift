@@ -1,3 +1,19 @@
+# 0.3.3 candidate runtime gate completed — 2026-11-12T11:28:30.562367+05:30
+
+The earlier disk block is resolved for this check. On source **823ea8a**, the retained independent local-archive install passed a **resumed** runtime gate: API HTTP **200**, production running, **8 native classes / 28 methods**, and **two 12/12 recorded replays**, sessions **56 / 92**, in **17.38 seconds**. That time is the resumption only; installation was independently pristine/offline earlier. No reinstall, public-registry verification, fresh model call or new evaluation. [Actual receipts and outputs](evidence/release-033-runtime-nov12/summary.json).
+
+Native source and fixtures are unchanged. Candidate module/project/lockfile **0.3.3**, separate React **0.2.1**; public package/tag/OEX remain **0.3.2**. Release notes explicitly cover the launcher pin and verifier changes; “no native code changes” does not imply no tooling changes. PR #15 remains unmerged; this evidence/docs follow-up requires current-head CI before approval. No further deletion/pruning was needed with space restored. Support email remains an unsent draft under its own exact-submit gate.
+
+## Earlier checkpoints
+
+# Matching 0.3.3 candidate — 2026-11-12T01:10:28.083609+05:30
+
+**No native code changes.** Candidate source `56c21c0` agrees on manifest/project/lockfile **0.3.3**; public native/IPM/OEX and the latest tag remain **0.3.2**, React **0.2.1**. [Draft PR #15](https://github.com/himanshu748/silentshift/pull/15) passed push/PR CI: **395 pytest / 7 Java / 54 workbench browser**, types/build and **33/39/38** static browser checks. Later evidence-only commits require their own CI readback.
+
+A real local IPM archive installed as **0.3.3** in an independent pristine **154U ARM64** container using literal `install silentshift`, offline and with no source mounts. Installed checks passed **5 deterministic cases / 10 path rejections / 4 Python origins / 10 empty tables**. The resumed source builder's initial namespace error is retained. **The subsequent API startup check, full native suite and API replays are blocked by the unchanged macOS disk floor, not reported as passing.** No publication or new evaluation. [Receipts](evidence/release-033-nov12/summary.json) · [scope, failure and next steps](agent-runs/release-033-nov12.md).
+
+## Earlier checkpoints
+
 # Recorded agent-value presentation — November 12, 2026 — 00:03 IST
 
 Static/documentation snapshot **855e014** presents the existing held-out wrong-delivery/review trade-off and three original prose cases. It preserves the worse third trial and distinguishes pending human review from correct final routing. No new evaluation, native install, policy, agent, fixture or package change. Native IPM remains **0.3.2**, separate React **0.2.1**.

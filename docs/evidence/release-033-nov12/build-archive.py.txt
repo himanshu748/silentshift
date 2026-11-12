@@ -1,0 +1,34 @@
+from pathlib import Path
+import sys,json,subprocess,time,hashlib
+sys.path.insert(0,str(Path.cwd()/'scripts'))
+from package_ipm import ROOT,stage
+from verify_ipm_clean import command
+from verify_ipm_native import literal
+from fetch_ipm import SHA256,SIZE
+from inspect_ipm import inspect
+out=ROOT/'.local/release-033-nov12/builder';out.mkdir(parents=True,exist_ok=True)
+docker=['docker','--context','colima-silentshift'];container='silentshift-bonus-load-033-nov12';base='/home/irisowner/silentshift-bonus';start=time.monotonic()
+def run(args,label,**kw):return command(args,log=out/(label+'.txt'),**kw).stdout
+def session(script,label,namespace='SILENTSHIFT',marker=None):
+ result=run([*docker,'exec','-i',container,'iris','session','IRIS','-U',namespace],label,data=script+'\nhalt\n')
+ if marker and marker not in result.splitlines():raise RuntimeError('Missing status marker: '+label)
+ return result
+def cli(text,label):return session('set sc=##class(%IPM.Main).Shell('+literal(text)+')\nif $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_COMMAND_OK",!',label,marker='SS_COMMAND_OK')
+retry=json.loads((ROOT/'.local/release-033-nov12/namespace-retry.json').read_text());assert retry['exit_code']==0
+session('if ##class(%Dictionary.ClassDefinition).%ExistsId("SilentShift.Production") halt\nwrite "SS_BUILD_APP_ABSENT",!','01-pristine-app',marker='SS_BUILD_APP_ABSENT')
+session('set properties("Enabled")=1\nset sc=##class(Security.Services).Modify("%Service_CallIn",.properties)\nif $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_PYTHON_OK",!','02-python','%SYS','SS_PYTHON_OK')
+vendor=ROOT/'.local/ipm/vendor/zpm-0.10.10.xml';assert vendor.stat().st_size==SIZE and hashlib.sha256(vendor.read_bytes()).hexdigest()==SHA256
+run([*docker,'cp',str(vendor),container+':'+base+'/zpm.xml'],'03-copy-client')
+run([*docker,'exec','--user','0',container,'chown','51773:51773',base+'/zpm.xml'],'04-client-owner')
+session('set sc=$system.OBJ.Load('+literal(base+'/zpm.xml')+',"ck")\nif $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_CLIENT_OK",!','05-client',marker='SS_CLIENT_OK')
+cli('config set analytics 0','06-no-analytics')
+staged=stage(ROOT,out/'stage');assert staged['version']=='0.3.3'
+run([*docker,'cp',str(out/'stage'),container+':'+base+'/stage'],'07-copy-stage')
+print('Building the real native 0.3.3 package (resumed builder; no production/model start)...',flush=True)
+cli('load '+base+'/stage','08-load')
+session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\nif \'$isobject(module) halt\nif module.VersionString\'="0.3.3" halt\nwrite "SS_VERSION_OK",!','09-version',marker='SS_VERSION_OK')
+cli('package silentshift -path '+base+'/export/','10-export')
+archive=out/'silentshift-0.3.3.tgz';run([*docker,'cp',container+':'+base+'/export.tgz',str(archive)],'11-copy-archive')
+result=inspect(archive,ROOT)
+receipt={'scope':'Real IPM load/export in new task-owned builder, resumed after one namespace activation retry. Not a clean archive-install or full native-suite pass.','version':'0.3.3','source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'elapsed_seconds':round(time.monotonic()-start,2),'archive':str(archive),'inspection':result,'original_namespace_failure_retained':True,'namespace_retry':retry,'new_evaluation':False,'native_production_started':False,'published':False}
+(out/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt,indent=2))

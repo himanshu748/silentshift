@@ -1,0 +1,77 @@
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import argparse,hashlib,json,os,re,subprocess,sys,time
+root=Path.cwd();sys.path.insert(0,str(root/'scripts'))
+from bootstrap import read_env
+from verify_ipm_clean import command,space
+from verify_ipm_native import literal
+from verify_native import Client
+out=root/'.local/release-033-nov12/resumed-runtime-final';out.mkdir(parents=True,exist_ok=False)
+prior=root/'.local/ipm/clean-runs/silentshift-ipm-clean-033-nov12'
+container='silentshift-ipm-clean-033-nov12';docker=['docker','--context','colima-silentshift'];api='http://127.0.0.1:53123/silentshift/api'
+args=argparse.Namespace(vm_profile='silentshift',min_host_free_gib=1.8,min_vm_free_gib=3)
+start=time.monotonic();phase='identity';result={'started_at_ist':datetime.now(ZoneInfo('Asia/Kolkata')).isoformat(),'scope':'Resumed runtime gate on the retained independently pristine offline 0.3.3 install, after the earlier disk stop. No reinstall, fresh inference, new evaluation or public registry claim.','container':container,'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'passed':False}
+def run(argv,label,**kw):return command(argv,log=out/(label+'.txt'),**kw).stdout
+def session(text,label,marker=None):
+ value=run([*docker,'exec','-i',container,'iris','session','IRIS','-U','SILENTSHIFT'],label,data=text+'\nhalt\n',timeout=300)
+ if marker and marker not in value.splitlines():raise RuntimeError('Missing '+marker+' in '+label)
+ return value
+try:
+ result['space_before']=space(args)
+ original=json.loads((prior/'install-receipt.json').read_text());assert original['clean_install_verified'] and original['archive']['version']=='0.3.3'
+ ident=json.loads(subprocess.check_output([*docker,'inspect',container],text=True))[0]
+ assert ident['Id']==(prior/'01-create.log').read_text().strip() and ident['Image']==original['image_id'] and not ident['Mounts']
+ assert ident['Config']['Labels']['silentshift.scope']=='clean-ipm-verification'
+ assert 'SILENTSHIFT_PROVIDER_MODE=recorded-replay' in ident['Config']['Env']
+ net=json.loads(subprocess.check_output([*docker,'network','inspect',container],text=True))[0]
+ assert net['Id']==(prior/'18-network.log').read_text().strip()
+ assert container in ident['NetworkSettings']['Networks']
+ gateway=container+'-gateway'
+ assert subprocess.run([*docker,'inspect',gateway],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode!=0
+ assert (prior/'CSP.conf').read_bytes()==(root/'docker/CSP.conf').read_bytes()
+ runtime=read_env(prior/'runtime.env');assert runtime['SILENTSHIFT_PROVIDER_MODE']=='recorded-replay'
+ phase='start retained instance';run([*docker,'start',container],'01-start')
+ for attempt in range(40):
+  ready=run([*docker,'exec',container,'iris','qlist'],'02-ready-'+str(attempt),check=False,timeout=30)
+  if 'running' in ready.lower():break
+  time.sleep(1)
+ else:raise RuntimeError('IRIS did not become ready')
+ phase='verify installed identity and explicitly start configured production'
+ session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\nif \'$isobject(module) halt\nif module.VersionString\'="0.3.3" halt\nwrite "SS_INSTALLED_VERSION=",module.VersionString,!\nif ##class(SilentShift.Provider.Lease).ExecutionMode()\'="recorded-replay" halt\nwrite "SS_REPLAY_MODE_OK",!\nset sc=##class(SilentShift.Setup).Install()\nif $system.Status.IsError(sc) do $system.Status.DisplayError(sc) halt\nwrite "SS_RUNTIME_SETUP_OK",!','03-setup','SS_RUNTIME_SETUP_OK')
+ space(args);phase='new loopback-only gateway'
+ run([*docker,'run','-d','--pull','never','--init','--name',gateway,'--network',container,'--network-alias','gateway','--publish','127.0.0.1:53123:80','--env','ISC_CSP_CONF_FILE=/silentshift-gateway/CSP.conf','--env','ISC_CSP_INI_FILE=/silentshift-gateway/CSP.ini','--mount',f'type=bind,src={prior}/CSP.conf,dst=/silentshift-gateway/CSP.conf,readonly','--mount',f'type=bind,src={prior}/CSP.ini,dst=/silentshift-gateway/CSP.ini','--log-opt','max-size=10m','--log-opt','max-file=2','containers.intersystems.com/intersystems/webgateway:2026.1'],'04-gateway')
+ client=Client(api,runtime['SILENTSHIFT_IRIS_USERNAME'],runtime['SILENTSHIFT_IRIS_PASSWORD'])
+ for _ in range(30):
+  try:
+   status,health=client.call('/health')
+   if status==200 and isinstance(health,dict) and health.get('production',{}).get('running') is True:break
+  except OSError:pass
+  time.sleep(1)
+ else:raise RuntimeError('Loopback API startup check failed')
+ result['health']={'http_status':status,'production_running':True,'build':health.get('build')};(out/'health.json').write_text(json.dumps(result['health'],indent=2)+'\n')
+ print('Native API startup verified; installing only test assertions...',flush=True)
+ space(args);phase='full native suite'
+ base='/home/irisowner/silentshift-033-resume'
+ run([*docker,'exec',container,'mkdir','-p',base],'05-test-directory')
+ run([*docker,'cp',str(root/'tests/iris'),container+':'+base+'/tests'],'06-test-copy')
+ run([*docker,'exec','--user','0',container,'mkdir','-p','/var/opt/silentshift/partner-inbox'],'07-inbox')
+ run([*docker,'exec','--user','0',container,'chown','51773:51773','/var/opt/silentshift/partner-inbox'],'08-inbox-owner')
+ run([*docker,'exec',container,'chmod','700','/var/opt/silentshift/partner-inbox'],'09-inbox-mode')
+ unit=session('set ^UnitTestRoot='+literal(base+'/tests/')+'\nset manager=##class(%UnitTest.Manager).%New()\nset passed=manager.RunTest("","/nodelete")\nwrite "SS_UNIT_RESULT=",passed,!\nif \'passed halt\nwrite "SS_UNIT_OK",!','10-native-suite','SS_UNIT_OK')
+ assert '**FAILED**' not in unit and 'Some tests FAILED' not in unit
+ classes=re.findall(r'(SilentShift\.Test\.[A-Za-z]+) passed',unit);assert len(set(classes))==8
+ result['native_classes']=sorted(set(classes));result['native_suite_passed']=True
+ print('Full native suite passed. Running two recorded API replays...',flush=True)
+ child={**os.environ,**runtime};runs=[]
+ for i in [1,2]:
+  space(args);phase='recorded API replay '+str(i)
+  path=out/f'replay-{i}.json'
+  text=run([sys.executable,str(root/'scripts/trace_example.py'),'--api',api,'--context','colima-silentshift','--container',container,'--env-file',str(prior/'runtime.env'),'--output',str(path)],'11-replay-'+str(i),env=child,timeout=300)
+  r=json.loads(path.read_text());assert r['passed'];runs.append(r);print(text,flush=True)
+ result['replays']=runs;result['space_after']=space(args);result['passed']=True
+except BaseException as e:
+ result['failure_phase']=phase;result['error_type']=type(e).__name__;result['error']=str(e);raise
+finally:
+ result['elapsed_seconds']=round(time.monotonic()-start,2);result['finished_at_ist']=datetime.now(ZoneInfo('Asia/Kolkata')).isoformat()
+ (out/'summary.json').write_text(json.dumps(result,indent=2)+'\n')

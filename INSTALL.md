@@ -128,6 +128,8 @@ Stopping containers preserves their database. Do not delete volumes to troublesh
 
 ## Optional: check without a model
 
+The release replay explicitly installs native **0.3.2** with its matching assertion source. It does not request the moving registry latest. A 0.3.3 candidate/release can therefore coexist without changing this already verified path; promote the replay pin only after a separate public 0.3.3 gate passes.
+
 This alternative verifies the **public native IPM 0.3.2 backend**, not the full web installation. It uses recorded provider answers for the synthetic quantity-mismatch case. It performs no fresh inference, calls no paid provider and needs no Ollama model or API key.
 
 1. Start the existing Colima profile as in step 1. Load the separately obtained official **154U ARM64** image and Web Gateway as in step 2. No model, application `.env`, account website login or frontend build is needed for this check.

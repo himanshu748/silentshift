@@ -193,7 +193,7 @@ def test_private_credentials_and_recorded_commands_do_not_leak_live_environment(
     assert "pinned release tests/replay and current install orchestration" in output.out
     assert install[install.index("--version") + 1] == "0.3.2"
     assert install[install.index("--execution-mode") + 1] == "recorded-replay"
-    assert "--install-latest" in install and "--allow-model-calls" not in install
+    assert "--install-latest" not in install and "--allow-model-calls" not in install
     assert "--live" not in repeat
     assert install[install.index("--env-file") + 1] == repeat[repeat.index("--env-file") + 1] == str(env_file)
     assert all("pull" not in argv for argv, _ in calls)

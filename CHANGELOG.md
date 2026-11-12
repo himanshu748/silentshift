@@ -1,6 +1,16 @@
 # Changelog
 
-## 0.3.2 — prepared Java PEX candidate, not published
+## 0.3.3 — documentation release candidate, not published
+
+**No native code changes.** The manifest and Python project metadata advance together to 0.3.3 so a future OEX release matches the source package. Public native IPM/OEX and the latest GitHub release remain 0.3.2 until separately approved publication. React remains 0.2.1.
+
+- Put the existing held-out wrong-delivery/review trade-off beside its accuracy limits in the README, landing, evidence tour and prepared listing text. Preserve every original trial, failure and label; no new evaluation was run.
+- Add source-linked prose examples explaining reviewer assist, plus a static evidence tour and receipt inspector. These Pages tools are recorded synthetic evidence, not a hosted native investigation.
+- Pin the existing judge replay to its exact verified 0.3.2 registry version instead of requesting latest while asserting 0.3.2. New package publication no longer silently changes that replay path.
+- Refresh installation/judge documentation and prepare a re-cut video script only. No video upload or new inference is part of this release.
+- Keep native classes, Java/Python runtime sources, routing policy, agent behavior, packaged fixtures and install hooks unchanged from 0.3.2. Release verification must use a fresh local package install before merge and a fresh public-registry install after publication.
+
+## 0.3.2 — published; original preparation notes retained
 
 - Add a Java PEX `ReceiptExporter` Business Operation invoked by Destination and Quarantine after their existing routing commits. Native request/response bodies keep the export in the case's Visual Trace session.
 - Sign bounded outcome/evidence receipts with a per-instance RSA-2048 key. Atomic publication refuses replacement; repeated outcomes reuse the original receipt, and later review decisions append another record.
@@ -9,7 +19,7 @@
 - Build the owned Java JAR locally against build 154's shipped Java 11/PEX SDK. IPM includes the owned Java sources/build script, never vendor JARs, EAP images or signing keys. Explicit native setup compiles those assets; package activation still starts no production or model.
 - Retain the keyless Compose launcher, separate React 0.2.1 workbench and unchanged policy/fixture bytes. Add JUnit and real native gateway, retry and outage checks. See [scoped Java verification](docs/JAVA_PEX.md).
 
-Public IPM/OEX remain **0.3.1** until separately approved publication. This source manifest and Python project declare **0.3.2**; no v0.3.2 tag, registry package or OEX release was created by this preparation.
+At the original preparation checkpoint, public IPM/OEX remained **0.3.1** while the source declared **0.3.2**. Later [0.3.2 publication and archive readback](docs/evidence/ipm-032-publication-nov11/publication.json) and [fresh public install](docs/evidence/voting-nov11-judge/summary.json) supersede that unpublished state. The current 0.3.3 candidate is separate.
 
 ## 0.3.1 — published; original preparation notes retained
 
