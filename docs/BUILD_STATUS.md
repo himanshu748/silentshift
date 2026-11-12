@@ -1,3 +1,13 @@
+# Public 0.3.3 gate passed — November 12, 2026 (IST)
+
+The published **0.3.3** package installed from the public registry in a pristine **154U ARM64** container with no application source mounts. Tests came from a fresh clone of tag `v0.3.3` at `ed6c7cf`. Production startup returned HTTP **200**; **8 native classes / 28 methods** and **two 12/12 recorded API replays** passed, sessions **55 / 91**. [Receipt](evidence/public-033-nov12/summary.json) · [exact commands](evidence/public-033-nov12/commands.txt) · [judge verification and retained failure](JUDGE_VERIFICATION.md).
+
+The initial discovery failure came from copied private test-folder ownership. Correcting that copied folder allowed the suite and both replays to complete in the same newly installed instance. Original failure output remains; no runtime or assertion was changed. No fresh model inference, live five-case run or new evaluation. End-to-end wall time **182.32 seconds** includes the diagnosis; the successful continuation alone took **18.41 seconds**.
+
+GitHub/OEX/IPM identify native **0.3.3**; React remains separately built **0.2.1**. The current launcher still pins verified public **0.3.2**. Main release CI [43165837454](https://github.com/himanshu748/silentshift/actions/runs/43165837454) passed at `ed6c7cf`; it is separate from this local public-package gate. No new CI execution is implied by these documentation edits. OEX body correction remains prepared and unsaved.
+
+## Earlier dated checkpoints
+
 # 0.3.3 candidate runtime gate completed — 2026-11-12T11:28:30.562367+05:30
 
 The earlier disk block is resolved for this check. On source **823ea8a**, the retained independent local-archive install passed a **resumed** runtime gate: API HTTP **200**, production running, **8 native classes / 28 methods**, and **two 12/12 recorded replays**, sessions **56 / 92**, in **17.38 seconds**. That time is the resumption only; installation was independently pristine/offline earlier. No reinstall, public-registry verification, fresh model call or new evaluation. [Actual receipts and outputs](evidence/release-033-runtime-nov12/summary.json).

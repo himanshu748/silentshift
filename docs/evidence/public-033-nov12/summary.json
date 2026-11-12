@@ -1,0 +1,123 @@
+{
+  "scope": "Fresh public IPM 0.3.3 installation on verified 154U ARM64, followed by production startup, full native suite and two keyless recorded API replays. Same newly installed instance continued after a copied-test-folder ownership correction; no reinstallation or native code changes.",
+  "passed": true,
+  "started_at_ist": "2026-11-12T11:52:55.502631+05:30",
+  "finished_at_ist": "2026-11-12T11:55:57.826350+05:30",
+  "release_tag": "v0.3.3",
+  "release_commit": "ed6c7cfd880a8a2f03e3714df553ce5ef152d517",
+  "assertions_from_fresh_tagged_clone": true,
+  "image": {
+    "id": "sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713",
+    "architecture": "arm64",
+    "version": "2026.3.0AI.154.0com"
+  },
+  "container": "silentshift-bonus-registry-public-033-nov12",
+  "application_source_mounts": 0,
+  "install_source": "https://pm.community.intersystems.com/",
+  "executed_ipm_command": "install silentshift",
+  "installed_version": "0.3.3",
+  "production_startup": {
+    "http_status": 200,
+    "production_running": true,
+    "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT"
+  },
+  "native_suite": {
+    "passed": true,
+    "classes": 8,
+    "methods": 28,
+    "class_names": [
+      "SilentShift.Test.AdapterChecks",
+      "SilentShift.Test.BackendChecks",
+      "SilentShift.Test.CitedFindingsChecks",
+      "SilentShift.Test.PEXChecks",
+      "SilentShift.Test.ProviderChecks",
+      "SilentShift.Test.ReplayChecks",
+      "SilentShift.Test.RuntimeChecks",
+      "SilentShift.Test.TraceChecks"
+    ],
+    "method_names": [
+      "TestContracts",
+      "TestIterator",
+      "TestBoundedRedactedDiagnostic",
+      "TestCompactAcknowledgment",
+      "TestDefaultHostSettings",
+      "TestExactToolAllowlist",
+      "TestPromptBytes",
+      "TestSharedDefaultAndCatalog",
+      "TestAmendmentCitationCompletenessStillRequired",
+      "TestCitationContainment",
+      "TestFinalFormatAfterInvocationReads",
+      "TestProseCitationPaths",
+      "TestInvalidJavaRequestCannotCreateReceipt",
+      "TestLegacyAndInvalidExecutionModes",
+      "TestPersistedExecutionModeAndRetry",
+      "TestRealGatewayRoundTripAndRetry",
+      "TestUnavailableExporterPreservesRouting",
+      "TestAuthorizationRejectsUnknownCapability",
+      "TestExpiredCapability",
+      "TestMetadataOnlyMessages",
+      "TestPerCallModelTokensAndLatency",
+      "TestPlaybackCannotLookLikeLiveInference",
+      "TestTransportAuditReadPrivilege",
+      "TestPlaybackScopeAndCriticalPolicy",
+      "TestRecordedResponseProgression",
+      "TestApprovedReferenceLimit",
+      "TestPeerReferenceLimit",
+      "TestTypedMetadata"
+    ]
+  },
+  "recorded_replays": [
+    {
+      "case_id": "E69F5AE3-DE61-11F1-A031-F90FA0236B49",
+      "session_id": "55",
+      "visual_trace_url": "http://127.0.0.1:53133/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=55",
+      "checks_passed": 12,
+      "checks_total": 12,
+      "passed": true,
+      "route": "QUARANTINED",
+      "delivery_count": 0,
+      "execution_mode": "recorded-replay"
+    },
+    {
+      "case_id": "EA33FCF1-DE61-11F1-A031-F90FA0236B49",
+      "session_id": "91",
+      "visual_trace_url": "http://127.0.0.1:53133/csp/silentshift/EnsPortal.VisualTrace.zen?SESSIONID=91",
+      "checks_passed": 12,
+      "checks_total": 12,
+      "passed": true,
+      "route": "QUARANTINED",
+      "delivery_count": 0,
+      "execution_mode": "recorded-replay"
+    }
+  ],
+  "first_attempt": {
+    "elapsed_seconds": 92.18,
+    "install_and_startup_passed": true,
+    "failure_phase": "Native test discovery before any test methods ran",
+    "error": "IRIS ERROR #5037: copied private test folder not readable by IRIS process",
+    "original_test_folder_ownership": "501:20 700 /home/irisowner/silentshift-bonus/tests",
+    "failure_retained": "first-test-runner-failure.txt"
+  },
+  "correction": {
+    "scope": "Only the copied native test assertion directory; no runtime/package/policy changes or assertion weakening",
+    "operation": "chown -R 51773:51773 /home/irisowner/silentshift-bonus/tests",
+    "result": "51773:51773 700 /home/irisowner/silentshift-bonus/tests",
+    "continuation_elapsed_seconds": 18.41
+  },
+  "end_to_end_wall_seconds": 182.32,
+  "elapsed_scope": "Wall time includes install, test-driver failure, diagnosis and successful continuation. Original and continuation measured durations are recorded separately.",
+  "space_after": {
+    "host_free_bytes": 9422577664,
+    "vm_docker_free_bytes": 4195897344,
+    "host_floor_gib": 1.8,
+    "vm_floor_gib": 3
+  },
+  "fresh_model_inference": false,
+  "provider_keys_required": false,
+  "publication_or_listing_edit": false,
+  "code_or_package_edit": false,
+  "existing_containers_modified": false,
+  "retained_for_inspection": true,
+  "raw_evidence_directory": "docs/evidence/public-033-nov12",
+  "original_failures_retained": true
+}

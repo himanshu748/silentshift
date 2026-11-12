@@ -1,3 +1,11 @@
+# Public 0.3.3 — checked November 12, 2026 (IST)
+
+**Verified:** [fresh public registry install/startup/native/replays](evidence/public-033-nov12/summary.json), using tests from a fresh clone of `v0.3.3` at `ed6c7cf`: **8 classes / 28 methods**, **12/12 twice**, sessions **55 / 91**. [Exact commands](evidence/public-033-nov12/commands.txt), [retained initial test-driver failure](evidence/public-033-nov12/first-test-runner-failure.txt) and [publication identity](evidence/public-033-nov12/publication.json). The owner correction affected only the copied test folder; no native behavior or assertion changed.
+
+Native package/GitHub/OEX **0.3.3**, separate React **0.2.1**, only **154U ARM64** qualified. No new model run, held-out evaluation or organizer-qualified bonus. OEX is Published; its preserved description still contains 0.3.2 wording. The correction is prepared, **not saved**. Questionnaire must not be resubmitted; all bonus statuses and honest limits below remain unchanged.
+
+## Earlier dated checkpoints
+
 # Published native 0.3.2 — November 11, 2026 (IST)
 
 **Checked November 11, 2026 (IST).** GitHub release [v0.3.2](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2), OEX and the public IPM archive now identify native **0.3.2**; React remains **0.2.1**. [Anonymous publication/manifest/source readback](evidence/ipm-032-publication-nov11/publication.json). The archive includes Java PEX and the saved receipt-mode fix. Main release source is `cfc4c279853886a72772a92ad70c2e2c5eae3819`; [main CI passed](https://github.com/himanshu748/silentshift/actions/runs/42985826498).
@@ -73,7 +81,7 @@ The new description was saved and sent for approval; the older 0.2.0/source-only
 | Embedded Python | 3 | Claimed; qualification pending | [Language = python methods](../src/SilentShift/Bridge.cls), [production call sites](../src/SilentShift/Process/Semantic.cls), [source/native-execution audit](evidence/bonus-claims-nov11/embedded-python.json). The earlier owner scope exclusion is superseded; no technical disqualification found |
 | IRIS Vector Search | 2 | Claimed; implementation/artifact verified | [Current native-vector inspection](evidence/final-pass-nov8-precedents.json), [corpus evidence](evidence/precedent-corpus.json), [critical-policy veto](evidence/precedent-veto.json); the November 4 fresh live run indexed an amendment with local embeddings |
 | Docker | 2 | Claimed; implementation/artifact verified | [Fresh official 154U candidate containers](evidence/candidate-030.json), no application source mounts; separate live and recorded-replay modes. [Earlier public install](evidence/judge-current-nov8.json) remains distinct |
-| Public IPM package | 2 | Claimed; publication verified | [Current public 0.3.2 manifest/source](evidence/ipm-032-publication-nov11/publication.json). A [new public 0.3.2 install](evidence/voting-nov11-judge/summary.json) passed startup, the full native suite and both recorded replays; [fresh offline installation](evidence/ipm-032-final-nov11/summary.json) used a separately generated tagged archive. Literal `zpm "install silentshift"` installed **0.3.0** in a [fresh public-registry gate](evidence/ship-030-registry.json), including startup, the full native suite and both replays. [Installed CSV preview](evidence/ship-030-public-csv-preview.json); React frontend remains separate |
+| Public IPM package | 2 | Claimed; publication verified | [Current public 0.3.3 install/startup/native/replays](evidence/public-033-nov12/summary.json), [publication identity](evidence/public-033-nov12/publication.json). Earlier [public 0.3.2 manifest/source](evidence/ipm-032-publication-nov11/publication.json). A [new public 0.3.2 install](evidence/voting-nov11-judge/summary.json) passed startup, the full native suite and both recorded replays; [fresh offline installation](evidence/ipm-032-final-nov11/summary.json) used a separately generated tagged archive. Literal `zpm "install silentshift"` installed **0.3.0** in a [fresh public-registry gate](evidence/ship-030-registry.json), including startup, the full native suite and both replays. [Installed CSV preview](evidence/ship-030-public-csv-preview.json); React frontend remains separate |
 | Online demo | 2 | Not claimed | [Written contest-demo permission and historical licence review](HOSTING_REVIEW.md); four-hour trial approved, deployment not yet verified; no static mock claim |
 | Community idea DPI-I-689 | 4 | Claimed; qualification pending | Runtime tracing, [fresh-clone replay](JUDGE_VERIFICATION.md), [native Body screenshots](evidence/provider-body-captures.json) and [Langfuse comparison](../README.md#silentshift-iris-interoperability-vs-langfuse) verified. [Dated field/submission receipt](evidence/oex-submitted-nov5.json) records the saved idea URL; [historical anonymous readback](evidence/entry-readback-nov5.json) did not show the dedicated association. The [November 8 owner readback](evidence/oex-update-nov8.json) reconfirms the saved field. [November 9 public readback](evidence/top3-public-review.json) now shows the dedicated association. Organizer 4-point qualification remains unconfirmed |
 | Find a bug in Embedded Python | 2 for first, +1 for second | Not claimed | [Historical callback crash candidate](bug-reports/callback-signal11-candidate.md) lacks a standalone repro and attribution; not a confirmed Python defect |
@@ -84,6 +92,8 @@ The new description was saved and sent for approval; the older 0.2.0/source-only
 [Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score or ranking is claimed. The native implementation remains **2026.3.0AI.154.0 (Build 154U), ARM64**. No newer runtime is declared tested or compatible.
 
 ## Final technical gate
+
+**Current public 0.3.3 install: PASSED.** [Receipt](evidence/public-033-nov12/summary.json), [native output](evidence/public-033-nov12/native-suite.txt), [both keyless replays](evidence/public-033-nov12/replay-2.json). This does not rerun live scenarios or renew historical model-quality results. The earlier gates below retain their original versions.
 
 **Public 0.3.0 install: PASSED.** [Fresh registry receipt](evidence/ship-030-registry.json), [native output](evidence/ship-030-native-tests.txt), [repeat replay](evidence/ship-030-repeat.json), [installed CSV preview](evidence/ship-030-public-csv-preview.json). No new live inference or browser gate is implied.
 
@@ -111,7 +121,11 @@ This was an existing-instance source-upgrade/regression pass on **154U ARM64**, 
 
 ## Published vs main
 
-### Current publication state — November 11, 2026 (IST)
+### Current publication state — November 12, 2026 (IST)
+
+Release **v0.3.3** targets main merge `ed6c7cfd880a8a2f03e3714df553ce5ef152d517`. The registry and OEX now identify native **0.3.3**; [anonymous identity readback](evidence/public-033-nov12/publication.json) and the [fresh public-install receipt](evidence/public-033-nov12/summary.json) establish different parts of that claim. React remains separately built **0.2.1**. Native sources and frozen inputs are unchanged from 0.3.2; release changes cover metadata, documentation/recorded evidence and judge tooling. The launcher explicitly pins 0.3.2 until a separate verified follow-up changes it. These local receipt/docs edits neither alter the package nor constitute another publication. No new release is needed to record this verification.
+
+### Historical publication state — November 11, 2026 (IST)
 
 Release source/tag `cfc4c279853886a72772a92ad70c2e2c5eae3819` is merged on main and published as native **0.3.2** on GitHub, OEX and IPM. React remains **0.2.1**, built separately. [Publication receipt](evidence/ipm-032-publication-nov11/publication.json) and [fresh offline tag archive install](evidence/ipm-032-final-nov11/summary.json) cover different artifacts; the later [public gate](evidence/voting-nov11-judge/summary.json) independently installed 0.3.2 and passed native tests and replay. Later documentation-only commits do not renew runtime verification. The pinned keyless public-package launcher now verifies **0.3.2** with matching release assertions. No further package/tag/release is needed for this documentation correction.
 

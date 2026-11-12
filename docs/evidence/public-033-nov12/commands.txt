@@ -1,0 +1,53 @@
+Executed command transcript
+
+Paths are normalized: <checkout> is the driver checkout; <fresh-clone> is the clean v0.3.3 assertion clone. Private credentials are omitted; their generated env-file paths remain. The initial install/startup succeeded, but the first test-discovery run failed before any methods ran. The continuation corrected only the copied test-folder owner and completed all native tests and both replays.
+
+initial_attempt
+
+01-image
+docker --context colima-silentshift image inspect silentshift-iris:2026.3.0AI.154.0
+
+02-clone
+git -c credential.helper= -c http.extraHeader= clone --depth 1 --branch v0.3.3 https://github.com/himanshu748/silentshift.git '<fresh-clone>'
+
+03-clone-head
+git -C '<fresh-clone>' rev-parse HEAD
+
+04-public-install-native-first-replay
+'<checkout>/.venv/bin/python3' '<checkout>/scripts/verify_bonus_release.py' --source public-registry --install-latest --version 0.3.3 --execution-mode recorded-replay --container silentshift-bonus-registry-public-033-nov12 --api-port 53133 --context colima-silentshift --vm-profile silentshift --network-subnet 10.253.0.208/28 --verification-source '<fresh-clone>' --env-file '<checkout>/.local/judge/public033-nov12/runtime.env' --execute
+
+continuation
+
+01-installed-identity
+docker --context colima-silentshift exec -i silentshift-bonus-registry-public-033-nov12 iris session IRIS -U SILENTSHIFT
+
+02-test-permissions-before
+docker --context colima-silentshift exec --user 0 silentshift-bonus-registry-public-033-nov12 stat -c '%u:%g %a %n' /home/irisowner/silentshift-bonus/tests
+
+03-test-folder-owner
+docker --context colima-silentshift exec --user 0 silentshift-bonus-registry-public-033-nov12 chown -R 51773:51773 /home/irisowner/silentshift-bonus/tests
+
+04-test-permissions-after
+docker --context colima-silentshift exec --user 0 silentshift-bonus-registry-public-033-nov12 stat -c '%u:%g %a %n' /home/irisowner/silentshift-bonus/tests
+
+05-native-suite
+docker --context colima-silentshift exec -i silentshift-bonus-registry-public-033-nov12 iris session IRIS -U SILENTSHIFT
+
+06-replay-1
+'<checkout>/.venv/bin/python3' '<fresh-clone>/scripts/trace_example.py' --api http://127.0.0.1:53133/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-public-033-nov12 --env-file '<checkout>/.local/ipm/bonus-runs/silentshift-bonus-registry-public-033-nov12/runtime.env' --output '<checkout>/.local/release-033-nov12/public-registry-runtime/replay-1.json'
+
+06-replay-2
+'<checkout>/.venv/bin/python3' '<fresh-clone>/scripts/trace_example.py' --api http://127.0.0.1:53133/silentshift/api --context colima-silentshift --container silentshift-bonus-registry-public-033-nov12 --env-file '<checkout>/.local/ipm/bonus-runs/silentshift-bonus-registry-public-033-nov12/runtime.env' --output '<checkout>/.local/release-033-nov12/public-registry-runtime/replay-2.json'
+
+Executed IPM shell command: install silentshift
+ObjectScript invocation: set sc=##class(%IPM.Main).Shell("install silentshift")
+Native unit-suite input:
+set ^UnitTestRoot="/home/irisowner/silentshift-bonus/tests/"
+set manager=##class(%UnitTest.Manager).%New()
+set passed=manager.RunTest("","/nodelete")
+write "SS_UNIT_RESULT=",passed,!
+if 'passed halt
+write "SS_UNIT_OK",!
+halt
+
+Complete driver inputs are preserved in initial-runner.py.txt and continuation-runner.py.txt. Output files preserve both the first failure and successful continuation.

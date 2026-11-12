@@ -1,0 +1,50 @@
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import argparse,json,os,re,subprocess,sys,time
+root=Path.cwd();sys.path.insert(0,str(root/'scripts'))
+from verify_ipm_clean import command,space
+from verify_ipm_native import literal
+from bootstrap import read_env
+from judge_replay import child_environment
+out=root/'.local/release-033-nov12/public-registry-runtime';out.mkdir(mode=0o700,exist_ok=False)
+prior=root/'.local/ipm/bonus-runs/silentshift-bonus-registry-public-033-nov12';source=root/'.local/release-033-nov12/public-registry-final/source'
+container='silentshift-bonus-registry-public-033-nov12';docker=['docker','--context','colima-silentshift'];api='http://127.0.0.1:53133/silentshift/api';start=time.monotonic();phase='identity'
+r={'started_at_ist':datetime.now(ZoneInfo('Asia/Kolkata')).isoformat(),'passed':False,'scope':'Continuation of the same freshly installed public-registry 0.3.3 instance after correcting copied test-folder ownership. Original pre-test runner failure retained; no reinstall, package/source changes, fresh inference or publication.','source_commit':'ed6c7cfd880a8a2f03e3714df553ce5ef152d517','commands':[]}
+def run(argv,label,**kw):
+ r['commands'].append({'label':label,'argv':list(map(str,argv))})
+ return command(argv,log=out/(label+'.txt'),**kw).stdout
+def session(text,label,marker=None):
+ value=run([*docker,'exec','-i',container,'iris','session','IRIS','-U','SILENTSHIFT'],label,data=text+'\nhalt\n',timeout=300)
+ if marker and marker not in value.splitlines():raise RuntimeError('Missing '+marker+'; inspect '+label)
+ return value
+try:
+ args=argparse.Namespace(vm_profile='silentshift',min_host_free_gib=1.8,min_vm_free_gib=3);r['space_before']=space(args)
+ ident=json.loads(subprocess.check_output([*docker,'inspect',container],text=True))[0]
+ assert ident['Id']==(prior/'01-create.log').read_text().strip() and not ident['Mounts']
+ assert ident['Config']['Labels']['silentshift.scope']=='bonus-release-verification'
+ assert 'SILENTSHIFT_PROVIDER_MODE=recorded-replay' in ident['Config']['Env']
+ head=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip();assert head==r['source_commit']
+ session('set module=##class(%IPM.Storage.Module).NameOpen("silentshift")\nif \'$isobject(module) halt\nif module.VersionString\'="0.3.3" halt\nwrite "SS_INSTALLED_VERSION=",module.VersionString,!\nif ##class(SilentShift.Provider.Lease).ExecutionMode()\'="recorded-replay" halt\nwrite "SS_IDENTITY_OK",!','01-installed-identity','SS_IDENTITY_OK')
+ phase='test assertion folder owner correction'
+ r['before_test_permissions']=run([*docker,'exec','--user','0',container,'stat','-c','%u:%g %a %n','/home/irisowner/silentshift-bonus/tests'],'02-test-permissions-before').strip()
+ run([*docker,'exec','--user','0',container,'chown','-R','51773:51773','/home/irisowner/silentshift-bonus/tests'],'03-test-folder-owner')
+ r['after_test_permissions']=run([*docker,'exec','--user','0',container,'stat','-c','%u:%g %a %n','/home/irisowner/silentshift-bonus/tests'],'04-test-permissions-after').strip()
+ phase='full native suite'
+ unit=session('set ^UnitTestRoot="/home/irisowner/silentshift-bonus/tests/"\nset manager=##class(%UnitTest.Manager).%New()\nset passed=manager.RunTest("","/nodelete")\nwrite "SS_UNIT_RESULT=",passed,!\nif \'passed halt\nwrite "SS_UNIT_OK",!','05-native-suite','SS_UNIT_OK')
+ assert '**FAILED**' not in unit and 'Some tests FAILED' not in unit
+ classes=sorted(set(re.findall(r'(SilentShift\.Test\.[A-Za-z]+) passed',unit)));methods=re.findall(r'\b(Test[A-Za-z0-9_]+) passed',unit)
+ assert len(classes)==8 and len(methods)==28
+ r.update(native_classes=classes,native_methods=methods,native_class_count=len(classes),native_method_count=len(methods),native_suite_passed=True)
+ print('Native suite: 8 classes / 28 methods passed',flush=True)
+ child=child_environment();child.update(read_env(prior/'runtime.env'));child['SILENTSHIFT_API_KEY']='';runs=[]
+ for i in [1,2]:
+  space(args);phase='keyless recorded API replay '+str(i);path=out/('replay-'+str(i)+'.json')
+  text=run([sys.executable,str(source/'scripts/trace_example.py'),'--api',api,'--context','colima-silentshift','--container',container,'--env-file',str(prior/'runtime.env'),'--output',str(path)],'06-replay-'+str(i),env=child,timeout=300)
+  d=json.loads(path.read_text());assert d['passed'] and len(d['checks'])==12 and all(d['checks'].values());runs.append(d);print(text,flush=True)
+ r['replays']=runs;r['space_after']=space(args);r['passed']=True
+except BaseException as e:
+ r.update(failure_phase=phase,error_type=type(e).__name__,error=str(e));raise
+finally:
+ r.update(elapsed_seconds=round(time.monotonic()-start,2),finished_at_ist=datetime.now(ZoneInfo('Asia/Kolkata')).isoformat())
+ (out/'summary.json').write_text(json.dumps(r,indent=2)+'\n')

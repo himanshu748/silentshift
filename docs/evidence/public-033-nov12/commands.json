@@ -1,0 +1,187 @@
+{
+  "initial_attempt": [
+    {
+      "label": "01-image",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "image",
+        "inspect",
+        "silentshift-iris:2026.3.0AI.154.0"
+      ]
+    },
+    {
+      "label": "02-clone",
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "http.extraHeader=",
+        "clone",
+        "--depth",
+        "1",
+        "--branch",
+        "v0.3.3",
+        "https://github.com/himanshu748/silentshift.git",
+        "<fresh-clone>"
+      ]
+    },
+    {
+      "label": "03-clone-head",
+      "argv": [
+        "git",
+        "-C",
+        "<fresh-clone>",
+        "rev-parse",
+        "HEAD"
+      ]
+    },
+    {
+      "label": "04-public-install-native-first-replay",
+      "argv": [
+        "<checkout>/.venv/bin/python3",
+        "<checkout>/scripts/verify_bonus_release.py",
+        "--source",
+        "public-registry",
+        "--install-latest",
+        "--version",
+        "0.3.3",
+        "--execution-mode",
+        "recorded-replay",
+        "--container",
+        "silentshift-bonus-registry-public-033-nov12",
+        "--api-port",
+        "53133",
+        "--context",
+        "colima-silentshift",
+        "--vm-profile",
+        "silentshift",
+        "--network-subnet",
+        "10.253.0.208/28",
+        "--verification-source",
+        "<fresh-clone>",
+        "--env-file",
+        "<checkout>/.local/judge/public033-nov12/runtime.env",
+        "--execute"
+      ]
+    }
+  ],
+  "continuation": [
+    {
+      "label": "01-installed-identity",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "silentshift-bonus-registry-public-033-nov12",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "SILENTSHIFT"
+      ]
+    },
+    {
+      "label": "02-test-permissions-before",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "--user",
+        "0",
+        "silentshift-bonus-registry-public-033-nov12",
+        "stat",
+        "-c",
+        "%u:%g %a %n",
+        "/home/irisowner/silentshift-bonus/tests"
+      ]
+    },
+    {
+      "label": "03-test-folder-owner",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "--user",
+        "0",
+        "silentshift-bonus-registry-public-033-nov12",
+        "chown",
+        "-R",
+        "51773:51773",
+        "/home/irisowner/silentshift-bonus/tests"
+      ]
+    },
+    {
+      "label": "04-test-permissions-after",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "--user",
+        "0",
+        "silentshift-bonus-registry-public-033-nov12",
+        "stat",
+        "-c",
+        "%u:%g %a %n",
+        "/home/irisowner/silentshift-bonus/tests"
+      ]
+    },
+    {
+      "label": "05-native-suite",
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "silentshift-bonus-registry-public-033-nov12",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "SILENTSHIFT"
+      ]
+    },
+    {
+      "label": "06-replay-1",
+      "argv": [
+        "<checkout>/.venv/bin/python3",
+        "<fresh-clone>/scripts/trace_example.py",
+        "--api",
+        "http://127.0.0.1:53133/silentshift/api",
+        "--context",
+        "colima-silentshift",
+        "--container",
+        "silentshift-bonus-registry-public-033-nov12",
+        "--env-file",
+        "<checkout>/.local/ipm/bonus-runs/silentshift-bonus-registry-public-033-nov12/runtime.env",
+        "--output",
+        "<checkout>/.local/release-033-nov12/public-registry-runtime/replay-1.json"
+      ]
+    },
+    {
+      "label": "06-replay-2",
+      "argv": [
+        "<checkout>/.venv/bin/python3",
+        "<fresh-clone>/scripts/trace_example.py",
+        "--api",
+        "http://127.0.0.1:53133/silentshift/api",
+        "--context",
+        "colima-silentshift",
+        "--container",
+        "silentshift-bonus-registry-public-033-nov12",
+        "--env-file",
+        "<checkout>/.local/ipm/bonus-runs/silentshift-bonus-registry-public-033-nov12/runtime.env",
+        "--output",
+        "<checkout>/.local/release-033-nov12/public-registry-runtime/replay-2.json"
+      ]
+    }
+  ]
+}

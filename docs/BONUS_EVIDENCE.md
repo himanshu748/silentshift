@@ -1,3 +1,11 @@
+# Published native 0.3.3 — November 12, 2026 (IST)
+
+GitHub tag/release, the anonymous OEX release and public registry manifest identify **0.3.3**. A [fresh public registry install](evidence/public-033-nov12/summary.json) passed explicit startup, **8 native classes / 28 methods** and **two 12/12 keyless replays**, with release-matched assertions from a fresh `v0.3.3` clone. [Publication readback](evidence/public-033-nov12/publication.json) · [commands](evidence/public-033-nov12/commands.txt) · [test-driver correction and limits](JUDGE_VERIFICATION.md).
+
+Native runtime, agent, deterministic policy and frozen inputs are unchanged from 0.3.2; React remains **0.2.1**. No bonus status or organizer qualification changes from this installation check. Static evidence pages remain recorded material, not an online native demo. OEX's saved description still contains 0.3.2 wording; a separate correction is prepared, not saved.
+
+## Earlier dated checkpoints
+
 # Published native 0.3.2 — November 11, 2026 (IST)
 
 **Checked November 11, 2026 (IST).** GitHub release [v0.3.2](https://github.com/himanshu748/silentshift/releases/tag/v0.3.2), OEX and the public IPM archive now identify native **0.3.2**; React remains **0.2.1**. [Anonymous publication/manifest/source readback](evidence/ipm-032-publication-nov11/publication.json). The archive includes Java PEX and the saved receipt-mode fix. Main release source is `cfc4c279853886a72772a92ad70c2e2c5eae3819`; [main CI passed](https://github.com/himanshu748/silentshift/actions/runs/42985826498).

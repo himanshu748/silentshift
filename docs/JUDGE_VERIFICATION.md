@@ -1,3 +1,25 @@
+# Public 0.3.3 — fresh registry installation, November 12, 2026 (IST)
+
+A fresh GitHub clone of **v0.3.3**, commit **`ed6c7cfd880a8a2f03e3714df553ce5ef152d517`**, supplied the native tests and replay assertions. A new, pristine **2026.3.0AI.154.0 Community / 154U ARM64** container installed **public IPM 0.3.3** with literal `install silentshift`, not a local source load or offline archive. There were **no application source mounts**.
+
+| Executed check | Observed result | Evidence |
+| --- | --- | --- |
+| Public registry install and identity | Compile/activation passed; installed version **0.3.3** | [Install output](evidence/public-033-nov12/public-install.txt), [installed identity](evidence/public-033-nov12/installed-version.txt), [pristine namespace](evidence/public-033-nov12/pristine.txt) |
+| Explicit production startup | **HTTP 200**, production running | [Health](evidence/public-033-nov12/health.json) |
+| Full native suite | **8 classes / 28 methods passed** | [Native output](evidence/public-033-nov12/native-suite.txt) |
+| Keyless API replay, twice | **12/12** each; sessions **55 / 91**, quarantined, no simulator deliveries | [First](evidence/public-033-nov12/replay-1.json), [second](evidence/public-033-nov12/replay-2.json), [printed outputs](evidence/public-033-nov12/replay-1-output.txt) |
+| Public release identity | GitHub tag, anonymous OEX release and registry manifest **0.3.3** | [Publication readback](evidence/public-033-nov12/publication.json), [streamed public manifest inspection](evidence/public-033-nov12/public-manifest.json) |
+
+[Machine-readable receipt](evidence/public-033-nov12/summary.json) · [exact commands](evidence/public-033-nov12/commands.txt) · [command arguments](evidence/public-033-nov12/commands.json). Finished **11:55:57 IST**. End-to-end wall time was **182.32 seconds**, including the test-driver failure and diagnosis described below; the initial attempt took **92.18 seconds**, and the successful continuation **18.41 seconds**. These are different timing scopes.
+
+The first suite invocation ran **no methods**: Docker copied the private clone's test folder as owner `501:20`, mode `700`, and IRIS returned **ERROR #5037** during discovery. The driver's failure guard caught that error even though the native manager printed a success status marker. Only the copied assertion folder's owner changed to `51773:51773`; mode stayed `700`. The full suite and both replays then passed in the **same newly installed instance**, without reinstalling or changing native code, policy, tests or assertions. [Original failure](evidence/public-033-nov12/first-test-runner-failure.txt) and both driver inputs are retained.
+
+This verifies public package installation and recorded native execution. **No fresh inference, live five-case rerun, new evaluation or broader platform qualification** occurred. Historical live and held-out records below keep their own versions. React remains a separate **0.2.1** source build. The one-command public launcher deliberately remains pinned to **0.3.2**; this **0.3.3** check used the explicit registry verifier recorded above. Later evidence/docs edits do not renew this runtime snapshot.
+
+OEX is already **Published at 0.3.3**, not awaiting review at this readback. Its saved body still contains older **0.3.2** wording because the release submission explicitly preserved that field. The corrected description is prepared separately; it has not been saved or sent.
+
+## Earlier dated checkpoints
+
 # 0.3.3 candidate — resumed runtime gate, November 12, 2026 (IST)
 
 Source **`823ea8abbcc0130d5d480ca6308cfeecedab539e`** completed the runtime extension on the **same retained instance** that had independently installed the real local 0.3.3 archive in a pristine **154U ARM64** container. This is a resumed local-archive gate after the earlier disk stop, **not** a new clean clone, uninterrupted install, public-registry install, live five-case run or model-quality evaluation.
