@@ -1,8 +1,8 @@
 # Judge walkthrough: the same order, two different decisions
 
-**Public native IPM and OEX release: 0.3.2; separate React frontend: 0.2.1.** [Publication proof](evidence/ipm-032-publication-nov11/publication.json) checks the public manifest/source. A [fresh offline archive install from v0.3.2](evidence/ipm-032-final-nov11/summary.json) passed with production stopped; a [fresh public 0.3.2 gate](evidence/voting-nov11-judge/summary.json) subsequently passed startup, the native suite and both recorded replays. The [receipt-mode regression](evidence/receipt-mode-nov11/summary.json) and [live citation checks](evidence/citation-fix-nov11/summary.json) retain their separate snapshots. [Published-versus-main ledger](SUBMISSION_CHECKLIST.md#published-vs-main).
+**Public native IPM and OEX release: 0.3.3; separate React frontend: 0.2.1.** A [fresh public 0.3.3 install](evidence/public-033-nov12/summary.json), using assertions from the release tag, passed production startup, **8 native classes / 28 methods** and both **12/12 keyless replays**. [Commands, initial test-folder correction and scope](JUDGE_VERIFICATION.md). Historical live/model checks retain their own snapshots.
 
-For a model-free source workbench, use the [Compose option in the install guide](../INSTALL.md#optional-source-workbench-without-a-model). The public-package replay remains deliberately pinned to 0.3.0 and keeps its earlier native/replay proof. Historical walkthrough receipts below describe their original versions.
+For a model-free source workbench, use the [Compose option in the install guide](../INSTALL.md#optional-source-workbench-without-a-model). The one-command public-package replay is deliberately pinned to **0.3.2**, with its own earlier proof. The explicit registry verifier above checked current public **0.3.3**; package version and launcher target are separate.
 
 An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transport and JSON checks can succeed while the business commitment has changed. SilentShift helps the integration operator answer the next question: **is there approved evidence that makes this change legitimate?**
 

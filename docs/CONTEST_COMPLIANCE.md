@@ -1,3 +1,11 @@
+# Current release verification — November 12, 2026 (IST)
+
+Native **0.3.3** is published on GitHub, OEX and IPM. A [fresh public installation](evidence/public-033-nov12/summary.json) with release-matched assertions passed startup, **8 native classes / 28 methods** and **two 12/12 recorded replays** on **154U ARM64**. [Publication identity](evidence/public-033-nov12/publication.json). React remains **0.2.1**, built separately. No new inference, evaluation, award or bonus qualification is established. The package launcher still deliberately pins 0.3.2; no runtime or launcher change is included in this evidence update.
+
+The OEX release is Published; its description correction is prepared separately and remains unsaved. No questionnaire, bug filing or community submission is repeated. The historical reviews below retain their original dates, versions and limits.
+
+## Earlier dated checkpoints
+
 # Contest compliance
 
 ## Current publication and claim boundary — November 11, 2026 (IST)

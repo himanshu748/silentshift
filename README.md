@@ -79,13 +79,13 @@ SilentShift is for integration operations teams handling partner order feeds. It
 
 The public [receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) checks a real synthetic Java PEX export and demonstrates how an edited copy fails verification. It runs locally in your browser without IRIS or a model. [Scope and key-trust limits](docs/RECEIPT_INSPECTOR.md).
 
-The public [guided recorded-case tour](https://himanshu748.github.io/silentshift/evidence-tour.html) compares the unsupported-order hold and approved-amendment delivery, with actual proposals, policy checks and signed receipts. [Recorded scope](docs/RECORDED_TOUR.md). The new held-out prose view is prepared on this branch and needs its own Pages deployment; the existing public views do not yet contain this branch’s presentation changes.
+The public [guided recorded-case tour](https://himanshu748.github.io/silentshift/evidence-tour.html) compares the unsupported-order hold and approved-amendment delivery, with actual proposals, policy checks and signed receipts. [Recorded scope](docs/RECORDED_TOUR.md). The [held-out prose view](https://himanshu748.github.io/silentshift/agent-value.html#HO-045) is also live; it presents existing records without a new evaluation.
 
 ### Published package and this branch
 
-**Native IPM and Open Exchange publish 0.3.2, including the [Java PEX receipt exporter](docs/JAVA_PEX.md).** After a routing outcome is committed, the production requests an immutable signed receipt. Export failure preserves the existing route. The separately built React workbench remains **0.2.1**.
+**Native IPM and Open Exchange publish 0.3.3, including the [Java PEX receipt exporter](docs/JAVA_PEX.md).** After a routing outcome is committed, the production requests an immutable signed receipt. Export failure preserves the existing route. The separately built React workbench remains **0.2.1**.
 
-[Anonymous publication proof](docs/evidence/ipm-032-publication-nov11/publication.json) confirms the public archive's manifest and receipt-mode source. A [fresh offline archive install from the release tag](docs/evidence/ipm-032-final-nov11/summary.json) passed in an empty, stopped instance; the later [fresh public 0.3.2 gate](docs/evidence/voting-nov11-judge/summary.json) independently passed production startup, the native suite and both keyless replays. The [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) and [earlier live citation checks](docs/CITATION_COMPLETENESS.md) retain their separate source snapshots. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
+[Anonymous publication proof](docs/evidence/public-033-nov12/publication.json) and the [fresh public 0.3.3 install](docs/evidence/public-033-nov12/summary.json) cover release identity, production startup, **8 native classes / 28 methods** and **two 12/12 keyless replays**. The initial copied-test-folder ownership failure and correction are retained. Earlier [live citation checks](docs/CITATION_COMPLETENESS.md) keep their source snapshots; no new inference or evaluation was run. Only local Ollama is live-qualified; other provider adapters are configuration/protocol-tested. [Provider configuration](docs/PROVIDERS.md).
 
 ### Run it locally
 
@@ -157,7 +157,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Bonus | Points requested | Status | Direct evidence |
 | --- | ---: | --- | --- |
 | Docker | 2 | Claimed | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
-| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.2 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.2.tgz) · [manifest/source readback](docs/evidence/ipm-032-publication-nov11/publication.json); [fresh public 0.3.2 install/startup/replays](docs/evidence/voting-nov11-judge/summary.json) |
+| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.3 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.3.tgz) · [publication/manifest readback](docs/evidence/public-033-nov12/publication.json) · [fresh public install/startup/replays](docs/evidence/public-033-nov12/summary.json) |
 | Native Workflow Engine | 2 | Claimed | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
 | Custom adapter: PartnerJSON | 2 | Claimed | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
 | IRIS Vector Search | 2 | Claimed | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |

@@ -1,0 +1,56 @@
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import argparse,json,os,re,subprocess,sys,time
+root=Path.cwd();sys.path.insert(0,str(root/'scripts'))
+from judge_replay import child_environment,private_environment,unused_network_subnet,verified_image
+from verify_ipm_clean import space
+from bootstrap import read_env
+rootout=root/'.local/release-033-nov12/public-registry-final';rootout.mkdir(mode=0o700,exist_ok=False)
+expected='ed6c7cfd880a8a2f03e3714df553ce5ef152d517';container='silentshift-bonus-registry-public-033-nov12';api='http://127.0.0.1:53133/silentshift/api';docker=['docker','--context','colima-silentshift'];phase='preflight';started=time.monotonic()
+r={'started_at_ist':datetime.now(ZoneInfo('Asia/Kolkata')).isoformat(),'passed':False,'scope':'Fresh public-registry 0.3.3 install, production startup, full native suite, two keyless recorded API replays. No inference, package/source load or publication.','expected_release_commit':expected,'container':container,'commands':[],'fresh_inference':False,'published_or_edited':False}
+def run(argv,label,env=None,timeout=1200):
+    r['commands'].append({'label':label,'argv':list(map(str,argv))})
+    p=subprocess.run(argv,cwd=root,env=env,capture_output=True,text=True,timeout=timeout,umask=0o077)
+    (rootout/(label+'.txt')).write_text(p.stdout+p.stderr)
+    if p.stdout:print(p.stdout,flush=True)
+    if p.returncode:raise RuntimeError('Command failed: '+label+'; inspect private command output')
+    return p.stdout
+try:
+    args=argparse.Namespace(vm_profile='silentshift',min_host_free_gib=1.8,min_vm_free_gib=3)
+    r['space_before']=space(args)
+    image=verified_image(run([*docker,'image','inspect','silentshift-iris:2026.3.0AI.154.0'],'01-image',timeout=30))
+    r['image']={'id':image['Id'],'architecture':image['Architecture'],'version':image['Config']['Labels']['com.intersystems.platform-version']}
+    child=child_environment();child.update(GIT_TERMINAL_PROMPT='0',GIT_CONFIG_GLOBAL=os.devnull,GIT_CONFIG_NOSYSTEM='1')
+    source=rootout/'source';phase='fresh tagged-source assertion clone'
+    run(['git','-c','credential.helper=','-c','http.extraHeader=','clone','--depth','1','--branch','v0.3.3','https://github.com/himanshu748/silentshift.git',str(source)],'02-clone',env=child,timeout=300)
+    head=run(['git','-C',str(source),'rev-parse','HEAD'],'03-clone-head',env=child,timeout=30).strip()
+    assert head==expected;r['verification_source_commit']=head
+    subnet=unused_network_subnet(docker);r['network_subnet']=subnet
+    env_file=private_environment('public033-nov12');r['private_environment_created']=True
+    child.update(read_env(env_file));child['SILENTSHIFT_API_KEY']=''
+    phase='fresh registry install, production startup, native suite and first replay'
+    cmd=[sys.executable,str(root/'scripts/verify_bonus_release.py'),'--source','public-registry','--install-latest','--version','0.3.3','--execution-mode','recorded-replay','--container',container,'--api-port','53133','--context','colima-silentshift','--vm-profile','silentshift','--network-subnet',subnet,'--verification-source',str(source),'--env-file',str(env_file),'--execute']
+    run(cmd,'04-public-install-native-first-replay',env=child,timeout=1200)
+    original=root/'.local/ipm/bonus-runs'/container
+    first=json.loads((original/'replay.json').read_text());receipt=json.loads((original/'receipt.json').read_text())
+    assert receipt['registry_install_verified'] and receipt['install_command']=='install silentshift' and receipt['installed_version']=='0.3.3'
+    assert receipt['full_native_unit_suite_passed'] and first['passed'] and len(first['checks'])==12 and all(first['checks'].values())
+    r['install_receipt']=str(original/'receipt.json');r['first_replay']=first
+    r['space_after_first']=space(args)
+    phase='second recorded replay'
+    second=rootout/'second-replay.json'
+    run([sys.executable,str(source/'scripts/trace_example.py'),'--api',api,'--context','colima-silentshift','--container',container,'--env-file',str(env_file),'--output',str(second)],'05-second-replay',env=child,timeout=300)
+    second_data=json.loads(second.read_text());assert second_data['passed'] and len(second_data['checks'])==12 and all(second_data['checks'].values());r['second_replay']=second_data
+    unit=(original/'26-unit-tests.log').read_text();classes=sorted(set(re.findall(r'(SilentShift\.Test\.[A-Za-z]+) passed',unit)))
+    assert len(classes)==8 and '**FAILED**' not in unit and 'Some tests FAILED' not in unit
+    methods=re.findall(r'\b(Test[A-Za-z0-9_]+)\(\) passed',unit)
+    if not methods:methods=re.findall(r'\b(Test[A-Za-z0-9_]+) passed',unit)
+    r.update(native_classes=classes,native_class_count=len(classes),native_method_count=len(methods),native_methods=methods,health=json.loads((original/'22-runtime-health.json').read_text()),source_mounts=0)
+    r['space_after']=space(args);r['passed']=True
+    print(json.dumps({'passed':True,'native_class_count':len(classes),'native_method_count':len(methods),'replays':[(first['session_id'],'12/12'),(second_data['session_id'],'12/12')]}),flush=True)
+except BaseException as e:
+    r.update(failure_phase=phase,error_type=type(e).__name__,error=str(e));raise
+finally:
+    r.update(elapsed_seconds=round(time.monotonic()-started,2),finished_at_ist=datetime.now(ZoneInfo('Asia/Kolkata')).isoformat())
+    (rootout/'summary.json').write_text(json.dumps(r,indent=2)+'\n')
