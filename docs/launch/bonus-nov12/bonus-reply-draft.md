@@ -1,16 +1,19 @@
-# Draft: bonus follow-up reply (NOT POSTED)
+# New bonus items - draft, not posted
 
-Where: https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows, reply under my 11 Nov claim (thread "Himanshu Kumar, to Tatiana Tikhonova").
+Destination: reply under Himanshu Kumar's November 11 claim, comment 288606, on the original technology-bonuses post. Do not repeat the already-public Java PEX claim. Post only after the demo's outside-host scenario/receipt and reboot-reset checks pass and its URL is live. Recheck that this exact update has not already been posted. Each external action needs the owner's exact submit.
 
-Post only after the issues are filed. Replace `#EP1` and `#EP2` with the real numbers and delete any line whose action did not happen (for example the online demo).
+The URL below is the candidate origin, not a verified demo at this preparation checkpoint. Replace it if the verified deployment uses a different origin; do not post while Pending. Report filing is not vendor acceptance or bonus credit.
 
 ---
 
-Hi Tatiana, one more update for SilentShift's bonus review:
+Hi Tatiana, one update for SilentShift's bonus review, covering only the new items:
 
-- Find a bug in Embedded Python (2 + 1), both reproduced in fresh containers on 2026.3.0AI build 154U ARM64 with a standalone class and script:
-  - python-bugreports #EP1: an argument skipped in an ObjectScript call (`Py(,"Z")`) reaches a `[ Language = python ]` method as `None` instead of its declared default
-  - python-bugreports #EP2: a class rejected by the compiler because of a Python method stays installed and its other methods still run, unlike the same failure in ObjectScript
-- Online demo (2): <URL>, running the IRIS production in replay mode (recorded agent proposals, live IRIS policy and receipts; synthetic data, read-only, no API keys)
+- Embedded Python bug report (2): [#35](https://github.com/intersystems-community/python-bugreports/issues/35), where an explicitly skipped ObjectScript argument reaches a Python method as `None` instead of its declared default.
+- Second Embedded Python bug report (+1): [#36](https://github.com/intersystems-community/python-bugreports/issues/36), where rejecting a Python method with `ERROR #2607` also produces an `IndentationError` about generated code. Both reports include standalone classes and output from three fresh 154U ARM64 containers.
+- Online demo (2): https://34.239.152.223.sslip.io/ - replay mode, with recorded agent proposals and the IRIS production, deterministic policy and receipts executing on the host. Synthetic data; no fresh model inference or paid API calls. Public access is limited to fixed samples and read-only inspection.
 
-The README Contest bonuses table is updated with the same links. Thank you!
+Could you please review these additions? Thank you!
+
+---
+
+No second AI Hub bug is claimed. No questionnaire resubmission or duplicate issue filing. Existing public native IPM remains 0.3.3, React 0.2.1. This draft is not posted and the online demo remains Pending until verified.

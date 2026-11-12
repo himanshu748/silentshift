@@ -1,4 +1,20 @@
-# Online demo plan (2 pts): NOT DEPLOYED, waiting for go-ahead
+# Online demo plan (2 pts): Pending, not deployed
+
+## Takeover update: prepared, not deployed
+
+November 12, 2026: the owner's existing separate instance is `i-0219a4a1c1183a087`, t4g.medium, us-east-1, candidate origin `https://34.239.152.223.sslip.io`. It is running and incurring charges; no working hosted IRIS application is verified. Crashcart and its AWS resources are outside this task and will not be inspected or changed.
+
+- The owner verified Irene's November 8 email directly. Contest demo permission is established; the historical uncertainty below is superseded. Static Pages alone still does not qualify.
+- The private image upload is resuming with macOS-compatible `rsync --partial --inplace`. No image is sent to a registry. Compare the full SHA-256 with the retained `af5cfe11...` source hash before loading it.
+- The existing $10 AWS Budget has **zero notifications** at the takeover check. Prepare two email notifications, actual spend greater than $5 and forecast greater than $10. Do not create them before the owner's exact submit. A budget is an alert, not a spending cap.
+- Auto-stop is November 16, 2026 at **12:30 PM IST** (`1794812400`, `07:00 UTC`). Use a persistent systemd timer and retain instance-initiated shutdown behavior **stop**, never terminate. A stopped instance can still incur storage charges; later deletion is a separate owner decision.
+- Caddy is currently **disabled** at boot and inactive. Keep it disabled: `start.sh` must finish the private gateway health check successfully before explicitly starting Caddy. No Caddy ordering drop-in or unconditional boot start is planned.
+- The security group already contains public 80/443 rules from the earlier preparation; no service currently listens there. This is existing state, not a newly opened rule in this takeover. SSH is restricted to the owner's previously configured /32. Recheck the current IP before the gated deployment; never widen SSH to the world.
+- The local `start.sh` preparation now fails closed on gateway-health failure. New random credentials stay only on the host. Verify every installed IRIS user's password/disabled state, explicit replay mode, blocked admin/system routes, native-port isolation, rate limits, real scenario/receipt and reset after reboot before claiming the demo works.
+
+Gates: billing notifications first; public demo start second. Local source fixes and private transfer do not authorize either action. No IPM/OEX release or package change is needed.
+
+## Historical Cortex plan
 
 Prepared 12 Nov 2026. Nothing below has been created, changed or paid for.
 

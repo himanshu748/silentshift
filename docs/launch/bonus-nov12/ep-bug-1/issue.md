@@ -1,8 +1,8 @@
-# Draft: Embedded Python bug 1 (NOT FILED)
+# Embedded Python report 1: filed as https://github.com/intersystems-community/python-bugreports/issues/35
 
 Target: https://github.com/intersystems-community/python-bugreports/issues/new (template `bug_report.md`)
 
-Duplicate check (12 Nov 2026): all 33 issues read by title. Closest is #27 (default literals are pasted into the Python source and re-read with Python escape rules). #27 concerns the value of a default when it is used. This report is about the default not being used at all when an argument is skipped. No issue mentions skipped or omitted arguments.
+Filed on November 12, 2026. The earlier duplicate check preceded issue #34, which concerns UNIQUEIDENTIFIER columns. Issue #27 concerns escaping default literals rather than skipped arguments. Filing and reproduced behavior do not establish vendor acceptance or contest credit.
 
 ---
 

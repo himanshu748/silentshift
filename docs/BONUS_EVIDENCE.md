@@ -1,5 +1,9 @@
 # Published native 0.3.3 — November 12, 2026 (IST)
 
+## Current bonus review - November 12, 2026 (IST)
+
+The [official table](https://community.intersystems.com/post/technology-bonus-results-intersystems-programming-contest-ai-agents-interoperability-workflows) credits SilentShift with **29 technology-bonus points**, including **Java PEX (3)** and **Community Idea (4)**. This is separate from overall contest placement, prizes and vendor bug resolution. Embedded Python reports [#35](https://github.com/intersystems-community/python-bugreports/issues/35) and [#36](https://github.com/intersystems-community/python-bugreports/issues/36) are filed, with retained standalone reproductions in [the preparation folder](launch/bonus-nov12/findings.md); their additional credit remains unconfirmed. No second AI Hub defect was established. The online demo is **Pending**, with no credit claimed: an AWS instance and private transfer preparation do not establish a working hosted application. Native IPM stays **0.3.3**, React **0.2.1**, with no native-package or routing change.
+
 GitHub tag/release, the anonymous OEX release and public registry manifest identify **0.3.3**. A [fresh public registry install](evidence/public-033-nov12/summary.json) passed explicit startup, **8 native classes / 28 methods** and **two 12/12 keyless replays**, with release-matched assertions from a fresh `v0.3.3` clone. [Publication readback](evidence/public-033-nov12/publication.json) · [commands](evidence/public-033-nov12/commands.txt) · [test-driver correction and limits](JUDGE_VERIFICATION.md).
 
 Native runtime, agent, deterministic policy and frozen inputs are unchanged from 0.3.2; React remains **0.2.1**. No bonus status or organizer qualification changes from this installation check. Static evidence pages remain recorded material, not an online native demo. OEX's saved description still contains 0.3.2 wording; a separate correction is prepared, not saved.

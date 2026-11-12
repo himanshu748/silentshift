@@ -1,29 +1,30 @@
-# Draft: Embedded Python bug 2 (NOT FILED)
+# Embedded Python bug 2: filed as https://github.com/intersystems-community/python-bugreports/issues/36
 
-Target: https://github.com/intersystems-community/python-bugreports/issues/new (template `bug_report.md`)
-
-Duplicate check (12 Nov 2026): searched titles for 2605, 2607, compile, compilation, compiler. Hits (#5, #6, #26, #27) are unrelated. #27 mentions `ERROR #2605` only as a side effect of default literals; it doesn't cover what happens to the class after the failure.
-
-Severity note for us: lower impact than bug 1. A triager could call it intended ("partial compile"), but the ObjectScript control shows that IRIS normally does not leave a failed class runnable.
+Filed text below.
 
 ---
 
 ## Title
 
-A class rejected by the compiler because of a `[ Language = python ]` method is still installed: its other methods run, while the same failure in ObjectScript leaves `<CLASS DOES NOT EXIST>`
+After `ERROR #2607` on a `[ Language = python ]` method, the compiler also reports an `IndentationError` for generated code, and the rejected class stays callable
 
 ## Describe the bug
 
-When a class fails to compile because of one of its Python methods, `$system.OBJ.Load(..., "ck")` returns an error status and `IsUpToDate()` is 0, but the class is still installed. Its ObjectScript methods can be called and return normally. The broken Python method can also be called and raises a Python exception at run time.
+When the compiler rejects a `[ Language = python ]` method with `ERROR #2607` (here, an `Output` qualifier, which the documentation says is not allowed), it then reports a second error about generated code the user never wrote:
 
-A class that fails to compile because of an ObjectScript method is not runnable: every call raises `<CLASS DOES NOT EXIST>`.
+```
+ERROR #2607: Python method 'Bad', argument 'x' Output qualifier is not allowed.
+Compiling routine ZProbe.Rejected.1
+Python error: expected an indented block after class definition on line 1: class Rejected():
+```
 
-Two triggers show this:
+Calling the rejected method later raises that same `IndentationError`, not anything pointing at the `Output` qualifier:
 
-1. A documented compile error: `ByRef`/`Output` on a Python method (`ERROR #2607`). The compiler also prints a second, misleading error, `Python error: expected an indented block after class definition on line 1: class Rejected():`, because the generated Python class is left empty. That text is then what the caller sees when the rejected method is called.
-2. A Python syntax error in the method body.
+```
+<PYTHON EXCEPTION> 246 <class 'IndentationError'>: expected an indented block after class definition on line 1 (Rejected, line 1): class Rejected():
+```
 
-So deployment scripts and CI that check only for `<CLASS DOES NOT EXIST>`, or that call a smoke-test method, see a "working" class after a failed compile.
+A related observation: after the failed compile (`$system.OBJ.Load` returns an error status and `IsUpToDate()` is 0), the class's ObjectScript methods can still be called and return normally. The same happens after a Python syntax error in a method body. When an ObjectScript method causes the compile failure, the class is not callable (`<CLASS DOES NOT EXIST>`). I'm not sure whether the Python behaviour is intended, so I'm including it for comparison.
 
 ## iris version/image
 
@@ -36,10 +37,9 @@ Embedded Python 3.12.3 (`/usr/irissys/bin/irispython`)
 
 ## To Reproduce
 
-Three classes (attached). The one under test:
+Class under test ([`ZProbe.Rejected.cls`](https://github.com/himanshu748/silentshift/blob/0f47024b8f59d56bfcdd67c6d30b42cddce3d623/docs/launch/bonus-nov12/ep-bug-2/ZProbe.Rejected.cls)):
 
 ```objectscript
-/// Repro: the compiler rejects this class (ERROR #2607), but the class is still installed and runnable.
 Class ZProbe.Rejected
 {
 
@@ -56,9 +56,9 @@ ClassMethod Bad(Output x As %String) As %String [ Language = python ]
 }
 ```
 
-`ZProbe.RejectedSyntax` is the same with `Bad()` body `return (` (Python syntax error). `ZProbe.RejectedOS` is the control: the same shape with an ObjectScript `Bad()` body `quit (`.
+For comparison: [`ZProbe.RejectedSyntax.cls`](https://github.com/himanshu748/silentshift/blob/0f47024b8f59d56bfcdd67c6d30b42cddce3d623/docs/launch/bonus-nov12/ep-bug-2/ZProbe.RejectedSyntax.cls) is the same with a Python syntax error in `Bad()` (`return (`), and [`ZProbe.RejectedOS.cls`](https://github.com/himanshu748/silentshift/blob/0f47024b8f59d56bfcdd67c6d30b42cddce3d623/docs/launch/bonus-nov12/ep-bug-2/ZProbe.RejectedOS.cls) is the same with an ObjectScript error in `Bad()` (`quit (`).
 
-For each class, in a fresh container:
+In a fresh container, for each class:
 
 ```objectscript
 set sc=$system.OBJ.Load("/tmp/ZProbe.Rejected.cls","ck")
@@ -67,7 +67,7 @@ write ##class(ZProbe.Rejected).Good(), !
 write ##class(ZProbe.Rejected).Bad(), !
 ```
 
-(`repro.sh` runs all three in a throwaway container.)
+([`repro.sh`](https://github.com/himanshu748/silentshift/blob/0f47024b8f59d56bfcdd67c6d30b42cddce3d623/docs/launch/bonus-nov12/ep-bug-2/repro.sh) runs all three in a throwaway container.)
 
 ## Actual
 
@@ -91,8 +91,9 @@ ERROR: ZProbe.RejectedOS.cls(Bad+2) #1054: Invalid expression : '}' ...
 
 ## Expected
 
-A class whose compile failed behaves the same whichever language caused the failure: it is not installed (`<CLASS DOES NOT EXIST>`, as with `ZProbe.RejectedOS`). Also, `ERROR #2607` should be the only error reported, not followed by an `IndentationError` about generated code the user never wrote.
+- `ERROR #2607` is the only error reported for `ZProbe.Rejected`, and a call to `Bad()` doesn't surface an `IndentationError` about generated code.
+- A class whose compile failed is in the same state whichever language caused the failure (compare `ZProbe.RejectedOS`).
 
 ## Additional context
 
-Reproduced 3 times, each in a fresh container (output in `repro-output.txt`). Not tried on x86-64 or on 2026.2.
+Reproduced 3 times, each in a fresh container (output in [`repro-output.txt`](https://github.com/himanshu748/silentshift/blob/0f47024b8f59d56bfcdd67c6d30b42cddce3d623/docs/launch/bonus-nov12/ep-bug-2/repro-output.txt)). Not tried on x86-64 or on 2026.2.
