@@ -12,10 +12,9 @@ import argparse
 import datetime as dt
 import hashlib
 import json
-from pathlib import Path
 import subprocess
 import time
-
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 IMAGE = "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0"
@@ -35,7 +34,7 @@ def main() -> None:
 
     def command(tail: list[str], *, stdin: bytes | None = None, timeout: int = 120) -> bytes:
         full = docker + tail
-        run = subprocess.run(full, input=stdin, capture_output=True, timeout=timeout)
+        run = subprocess.run(full, input=stdin, capture_output=True, timeout=timeout, check=False)
         commands.append({"argv": full, "exit_code": run.returncode,
                          "stdout": run.stdout.decode("utf-8", errors="replace"),
                          "stderr": run.stderr.decode("utf-8", errors="replace")})
