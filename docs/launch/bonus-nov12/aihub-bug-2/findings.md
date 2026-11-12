@@ -1,13 +1,13 @@
 # AI Hub second-bug investigation
 
-Updated 2026-11-12T21:06:57.474365+05:30. **One reportable candidate found: character-stream tool values are not transported according to their advertised schema.** Draft only, unfiled, bonus qualification pending.
+Updated 2026-11-12T21:06:57.474365+05:30. **One reportable candidate found: character-stream tool values are not transported according to their advertised schema.** Filed as [AI Hub #28](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28); vendor review and bonus qualification pending. [Anonymous filing receipt](outputs/filing.json).
 
 ## Boundaries
 
 - Branch `research/aihub-bug2-nov12`, based on main `c4dca45c06c30235192057f6653442cdd71f762a` in a new local clone.
 - Research began November 12 at 20:53:06 IST; four-hour upper bound November 13 at 00:53:06 IST. Stopped the hunt early once one standalone, repeatable, apparently non-duplicate defect was established.
 - Only local Colima/IRIS containers ran. Network mode `none`, no published ports or source mounts. The optional fake provider runs on container loopback, makes no outgoing requests and performs no model inference.
-- No SilentShift main changes, release, IPM/OEX edit, DC post, issue filing, push or PR. No cloud resource or unrelated application was accessed. Four task containers are stopped and retained; no container was deleted.
+- The research run made no SilentShift main changes, release, IPM/OEX edit, DC post, issue filing, push or PR. A subsequent, separately approved action filed #28 on November 12 at 21:10:45 IST; no additional bonus credit is assumed. No cloud resource or unrelated application was accessed. Four task containers are stopped and retained; no container was deleted.
 
 ## Rules and existing claim
 
@@ -49,8 +49,8 @@ Current filing tracker snapshot: 27 open, 0 closed issues. Original EAP tracker:
 
 Closest reports checked: #17 (name quoting), #20 (input validation), #22 (nested schema), original #18 (MCP JSON framing) and original #45 (provider stream callback visibility). The standalone no-argument outbound mismatch is distinct from those reports. Refresh duplicate checks immediately before an authorized filing.
 
-## Next gates — none executed
+## Publication gates
 
-1. File the exact [issue draft](issue.md) in the designated tracker, after an exact `submit`; read back the issue signed out.
-2. Add the actual issue link as filed/review pending in the README bonus table, then push this branch and open a PR, after a separate exact `submit`. Do not merge main as part of this action.
+1. **Completed under separate approval:** filed the [report](issue.md) as [#28](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28), then verified HTTP 200 and the exact body without authentication. The GitHub connector first returned 403; the existing himanshu748 CLI login performed the single successful creation. [Receipt](outputs/filing.json).
+2. **Authorized next:** the README and current bonus ledgers now link #28 as Filed; review pending. Push this branch and open a PR after local checks. No merge is authorized by that approval.
 3. Reply under the existing DC bonus-results claim with only this second AI Hub bug and its issue link, asking for +1 eligibility review, after a separate exact `submit`. Do not duplicate the prior Embedded Python/demo request.

@@ -125,4 +125,4 @@ Checked both open and closed reports in `intersystems-community/ai-hub-eap-bugre
 - Original tracker #18: MCP calculator execution/JSON framing on build 162U. This repro is in-process on 154U, has no MCP transport, and successfully returns the wrong object.
 - Original tracker #45: streaming completion callback visibility. That is provider token streaming, not an ObjectScript character-stream tool value.
 
-No claim about newer builds or organizer bonus eligibility is made. This is an unfiled draft.
+No claim about newer builds or organizer bonus eligibility is made. Filed as [AI Hub issue #28](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28). [Anonymous readback and exact submitted-body hash](outputs/filing.json).
