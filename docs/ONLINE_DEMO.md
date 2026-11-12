@@ -1,4 +1,38 @@
-# Online demo status
+# Hosted replay demo
+
+Verified from outside the host on November 12, 2026 (IST): **[Open the guided demo](https://34.239.152.223.sslip.io/demo/)**. The root page also returns HTTP 200 and discloses replay mode. This runs native IRIS 2026.3.0AI.154.0 / 154U ARM64, including evidence reads, deterministic policy, routing and Java PEX receipt export. **The agent proposal is recorded; no fresh model inference or new evaluation is claimed.**
+
+The supported fixed sample is 20 CASE versus 240 EA without an approved conversion. Its native outcome is QUARANTINED with zero deliveries. Other samples are refused by the public admission layer: the shipped recording is intentionally scoped to this one synthetic case. An initial amendment attempt safely went to REVIEW after the provider rejected its replay scope; neither the policy nor that replay restriction was changed.
+
+## Try it
+
+1. Open the guided demo and press **Replay this investigation**.
+2. Inspect the native case, evidence and routing reason. The demo admits two investigations per address per ten minutes, with thirty admitted runs per host boot. A third same-address attempt returned HTTP 429 in this verification.
+3. For the workbench, use **Show read-only viewer login** on the guided page and the separate viewer account shown there. Never enter a personal InterSystems password. The reader cannot approve reviews, commit CSV imports or control production. Actual browser sign-in and persisted-case inspection passed; reviewer actions were disabled.
+
+The reset button clears only the visitor's journey selection. Host restart recreates the synthetic native database and gateway admission state. A real reboot was verified: the boot ID changed, the case list was empty, and a new native replay completed afterward.
+
+## Evidence and limits
+
+- [Dated summary](evidence/demo-nov12/summary.json): thirteen outside-host checks passed, including native production health, case inspection, management-path refusal and closed native ports.
+- [Admission checks](evidence/demo-nov12/guard-checks.json): unsupported sample refused; per-address run cap enforced.
+- [Actual native result](evidence/demo-nov12/after-reboot-job.json) and [signed Java PEX receipt](evidence/demo-nov12/after-reboot-pex-receipt.json). The receipt was read from the native export store; it is not a fabricated delivery receipt or an extra REST field. [Independent SHA-256/RSA verification](evidence/demo-nov12/after-reboot-pex-receipt-verification.json) returned `Verified OK`.
+- [Default-view capture](evidence/demo-nov12/guided-result-after-reboot.jpg) and [390 px mobile capture](evidence/demo-nov12/guided-mobile.jpg). The mobile viewport had no horizontal overflow.
+- Printable Visual Trace renders the native message graph, including ReceiptExporter. Its interactive HyperEvent calls raise a warning under the restricted gateway. This was observed twice and retained as a [known limitation](evidence/demo-nov12/native-trace-warning.jpg); no generic broker POST access was enabled to hide it. Use the case's retained evidence and policy for the reliable inspection path.
+
+The deployment adds only host-level disclosure, single-sample admission and resource limits. The native source, agent and deterministic policy match source commit `a5b5329a0cd0e558b4f6f55819861c918cf320c1`; no native package was changed or published for hosting. The public native package remains 0.3.3 and React remains 0.2.1.
+
+## Operating window and cost
+
+Automatic stop is scheduled for **16 November 2026, 12:30 PM IST** (`1794812400`). Shutdown behavior is **stop**, not terminate. Caddy is disabled at boot; the reset service explicitly starts it only after native production and gateway health pass. IRIS/default-account passwords are refreshed at startup and retained only in private host files; the intentionally shared reader is separate from the private scenario runner.
+
+The USD 10 budget has confirmed email subscribers for actual spend above USD 5 and forecast above USD 10. Alerts are not a hard cap, and delivery of an alert email has not been tested. Standard CPU credits disable surplus-credit billing. At the owner's planning rate of approximately USD 0.04 per compute hour, compute is estimated at USD 3.69 through the stop time, excluding storage, tax and transfer. Actual charges and credit coverage are unverified. Stopped storage remains billable and requires a separate cleanup decision.
+
+No online-demo points or organizer qualification are asserted by this deployment receipt. Adding its URL to PR #17, merging, updating OEX and posting a bonus reply remain separate owner gates. Crashcart and its AWS resources were not accessed.
+
+---
+
+# November 9 trial history
 
 **Not deployed. No live demo URL is verified, and the online-demo bonus is not claimed.** The November 9 AWS trial was stopped early after the direct/resumable archive transfer failed. Native installation never began and public application ingress never opened. AWS readback confirms the instance terminated and its root volume, security group and key pair were removed. The monitoring budget remains. [Closure receipt](evidence/top3-aws-trial-result.json).
 

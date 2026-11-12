@@ -1,0 +1,127 @@
+{
+  "origin": "https://34.239.152.223.sslip.io",
+  "phase": "after-reboot",
+  "started_utc": "2026-11-12T13:37:09Z",
+  "checks": [
+    {
+      "name": "anonymous root and replay disclosure",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "name": "guided page replay disclosure",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "name": "management portal refused",
+      "passed": true,
+      "http_status": 403
+    },
+    {
+      "name": "native port 52773 closed",
+      "passed": true,
+      "http_status": "000",
+      "returncode": 28
+    },
+    {
+      "name": "native port 1972 closed",
+      "passed": true,
+      "http_status": "000",
+      "returncode": 28
+    },
+    {
+      "name": "dedicated reader available",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "name": "native build and running production",
+      "passed": true,
+      "http_status": 200,
+      "health": {
+        "build": "IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT",
+        "production": {
+          "name": "SilentShift.Production",
+          "running": true,
+          "state_code": 1
+        },
+        "agent": {
+          "configured": true,
+          "last_success_at": null,
+          "availability": "not_probed",
+          "model": "qwen3-silentshift:4b-instruct"
+        },
+        "components": [
+          {
+            "name": "Partner",
+            "status": "not_probed"
+          },
+          {
+            "name": "Semantic",
+            "status": "not_probed"
+          },
+          {
+            "name": "References",
+            "status": "not_probed"
+          },
+          {
+            "name": "Investigator",
+            "status": "not_probed"
+          },
+          {
+            "name": "Destination",
+            "status": "not_probed"
+          },
+          {
+            "name": "Quarantine",
+            "status": "not_probed"
+          }
+        ],
+        "permissions": {
+          "review": false,
+          "csv_import": false
+        },
+        "scope": "synthetic single-tenant contest demonstrator"
+      }
+    },
+    {
+      "name": "arbitrary intake refused",
+      "passed": true,
+      "http_status": 403
+    },
+    {
+      "name": "CSV commit refused",
+      "passed": true,
+      "http_status": 403
+    },
+    {
+      "name": "new visitor has no job",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "name": "fixed sample admitted",
+      "passed": true,
+      "http_status": 202
+    },
+    {
+      "name": "real native quarantine replay",
+      "passed": true,
+      "case_id": "33D9D849-DE9E-11F1-87C0-62EC549B1C88",
+      "trace_id": "2",
+      "routing": "QUARANTINED",
+      "delivery_count": 0,
+      "execution_mode": "recorded-replay",
+      "seconds": 5.27,
+      "delivery_receipt": null
+    },
+    {
+      "name": "case inspection after native run",
+      "passed": true,
+      "http_status": 200
+    }
+  ],
+  "finished_utc": "2026-11-12T13:37:33Z",
+  "passed": true
+}

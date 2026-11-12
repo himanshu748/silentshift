@@ -14,7 +14,7 @@ A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every tra
 
 If an approved amendment *does* allow `20 CASE`, the same order goes through. **The difference between those two outcomes is the authority behind the order, and that's the decision the AI Hub agent helps make.**
 
-**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
+**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** (recorded proposal; native policy and receipts) · **[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
 ## Inspect the workflow without installing
 
@@ -146,7 +146,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 
 ## Honest limits
 
-- All orders are synthetic and deliver only to an IRIS simulator. There's no hosted native demo and no real ERP or bank connection.
+- All orders are synthetic and deliver only to an IRIS simulator. The hosted demo runs one fixed recorded proposal through native IRIS; it performs no fresh inference. There is no real ERP or bank connection.
 - Only **2026.3.0AI.154.0 Community / 154U ARM64** is qualified locally. Other builds and platforms are not claimed tested.
 - The held-out result above does not establish an overall accuracy improvement or better unstructured routing. The version used in that comparison missed genuine prose-authority cases; every failure remains in the report. Later pipeline changes are not evidence of a measured improvement.
 
@@ -169,7 +169,7 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Video | 3 | Credited in official table | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
 | Questionnaire | 1 | Credited in official table | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
 | Java PEX | 3 | Credited in official table | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
-| Online demo | 2 | Pending; not credited | Separate AWS host preparation is incomplete. The published evidence tour is static recorded material, not a running native app |
+| Online demo | 2 | Hosted replay verified; claim pending, not credited | [Open the running native replay](https://34.239.152.223.sslip.io/demo/) · [outside-host and reboot evidence](docs/evidence/demo-nov12/summary.json) · [scope, expiry and known trace warning](docs/ONLINE_DEMO.md). Recorded proposal; live native routing and signed receipt, no fresh model inference |
 | Embedded Python bug report 1 | 2 | Filed; review pending | [Issue #35](https://github.com/intersystems-community/python-bugreports/issues/35) · [standalone reproduction and retained output](docs/launch/bonus-nov12/ep-bug-1/) |
 | Embedded Python bug report 2 | 1 | Filed; review pending | [Issue #36: misleading generated-code error after rejected Python method](https://github.com/intersystems-community/python-bugreports/issues/36) · [reproduction and controls](docs/launch/bonus-nov12/ep-bug-2/) |
 

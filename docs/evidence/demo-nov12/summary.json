@@ -1,0 +1,85 @@
+{
+  "verified_at_utc": "2026-11-12T13:41:02.027079+00:00",
+  "origin": "https://34.239.152.223.sslip.io",
+  "guided_url": "https://34.239.152.223.sslip.io/demo/",
+  "source_commit": "a5b5329a0cd0e558b4f6f55819861c918cf320c1",
+  "native_source_changes": false,
+  "runtime": "2026.3.0AI.154.0 Community / 154U ARM64",
+  "execution_mode": "recorded-replay",
+  "fresh_inference": false,
+  "public_api_keys": false,
+  "outside_checks_passed": 13,
+  "outside_checks_total": 13,
+  "guard_checks": [
+    {
+      "name": "unsupported replay refused",
+      "status": 400,
+      "code": "FIXED_SAMPLE_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "per-address run cap enforced",
+      "status": 429,
+      "code": "INVESTIGATION_LIMIT",
+      "passed": true
+    }
+  ],
+  "case_id": "33D9D849-DE9E-11F1-87C0-62EC549B1C88",
+  "signed_receipt": {
+    "case_id": "33D9D849-DE9E-11F1-87C0-62EC549B1C88",
+    "decision": "QUARANTINED",
+    "execution_mode": "recorded-replay",
+    "synthetic": true,
+    "sha256_matches": true,
+    "rsa_signature_verified": "Verified OK",
+    "passed": true
+  },
+  "reset": {
+    "boot_id_before": "b54744c7-c152-4dba-989c-50380256bb69",
+    "boot_id_after": "d2e2446c-78df-49ca-ab51-ce4dce1d3452",
+    "case_count_before_first_post_reboot_run": 0
+  },
+  "caddy_enabled_at_boot": false,
+  "caddy_started_after_native_health": true,
+  "auto_stop_epoch": 1794812400,
+  "auto_stop_utc": "2026-11-16T07:00:00+00:00",
+  "shutdown_behavior": "stop",
+  "cpu_credit_mode": "standard",
+  "budget_usd": 10,
+  "alerts": {
+    "actual_above_usd": 5,
+    "forecast_above_usd": 10,
+    "email_subscriber_verified": true,
+    "delivery_verified": false
+  },
+  "cost": {
+    "basis": "owner planning allowance of approximately USD 0.04 per compute hour; not a pricing lookup or bill",
+    "compute_estimate_elapsed_usd": 0.12,
+    "compute_estimate_through_expiry_usd": 3.69,
+    "actual_charges_verified": false,
+    "storage_tax_transfer_excluded": true,
+    "stopped_storage_still_charged": true
+  },
+  "limitations": [
+    "Only quantity-mismatch recording is enabled.",
+    "No hosted live inference or new evaluation.",
+    "Printable native trace graph loads but interactive HyperEvent requests raise a warning under the restricted gateway.",
+    "Read-only viewer cannot approve reviews, commit imports or control production.",
+    "Not an organizer-qualified or awarded bonus."
+  ],
+  "browser": {
+    "native_viewer_sign_in": true,
+    "persisted_case_id": "5B20CBF9-DE9E-11F1-87C0-62EC549B1C88",
+    "review_buttons_disabled": true,
+    "agent_mode_visible": "native-ai-hub-recorded-replay",
+    "mobile_width": 390,
+    "mobile_scroll_width": 390
+  },
+  "native_source_digest": {
+    "file_count": 76,
+    "sha256": "93b64dd0c18ddd4f332858dfb5e6017d2ec7512f6737a1bb9caae3db0b720304"
+  },
+  "public_check_transport": "curl from operator Mac, normal TLS verification; no preexisting auth for front door",
+  "receipt_transport": "SSH read of native PEX JSON export followed by local openssl verification; no signing key copied",
+  "final_readback_utc": "2026-11-12T13:51:17.674576+00:00"
+}
