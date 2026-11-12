@@ -170,7 +170,8 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 | Questionnaire | 1 | Claimed | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
 | Java PEX | 3 | Claimed; published in native 0.3.2; qualification pending | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
 | Online demo | — | Not claimed | The published evidence tour is static recorded material, not a running native app |
-| Embedded Python bug | — | Not claimed | [Signal-11 candidate is not isolated or attributed](docs/bug-reports/callback-signal11-candidate.md) |
+| Embedded Python bug 1 | 2 | Prepared; not yet filed | [Skipped argument reaches a Python method as `None`, not its default: standalone repro, 3 fresh-container runs](docs/launch/bonus-nov12/ep-bug-1/) · issue link added after filing |
+| Embedded Python bug 2 | 1 | Prepared; not yet filed | [Class rejected for a Python method stays installed and runnable: standalone repro, 3 fresh-container runs](docs/launch/bonus-nov12/ep-bug-2/) · issue link added after filing |
 
 [Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score, ranking, newer build or live hosting is claimed.
 
