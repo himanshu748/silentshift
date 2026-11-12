@@ -1,0 +1,8 @@
+set provider=##class(%AI.Provider).Create("openai",{"api_key":"local-mock-not-a-credential","base_url":"http://127.0.0.1:8123/v1/"})
+set agent=##class(%AI.Agent).%New(provider)
+set sc=agent.%Init() write "AGENT_INIT_OK=",$system.Status.IsOK(sc),!
+set agent.Model="mock-model", agent.SystemPrompt="Use ReturnStream once."
+set sc=agent.ToolManager.AddTool(##class(BugProbe.StreamTools).%New()) write "TOOLS_OK=",$system.Status.IsOK(sc),!
+set session=agent.CreateSession({"max_iterations":2,"max_tokens":32})
+try { set response=agent.Chat(session,"Read the evidence stream.") write "AGENT_RESPONSE=",response.Content,! } catch e { write "AGENT_ERROR=",e.DisplayString(),! }
+halt

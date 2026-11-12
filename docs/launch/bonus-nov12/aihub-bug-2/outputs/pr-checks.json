@@ -1,0 +1,22 @@
+{
+  "checked_at_ist": "2026-11-12T21:14:07.737415+05:30",
+  "pytest": {
+    "command": "uv run pytest -q",
+    "passed": 395,
+    "duration_seconds": 22.52
+  },
+  "script_lint": {
+    "command": "uv run ruff check docs/launch/bonus-nov12/aihub-bug-2/*.py",
+    "result": "All checks passed"
+  },
+  "script_syntax": {
+    "command": "python3 -m py_compile docs/launch/bonus-nov12/aihub-bug-2/*.py",
+    "exit_code": 0
+  },
+  "evidence": {
+    "fresh_reproduction_output_hashes_verified": 3,
+    "local_report_links_exist": true,
+    "filing_receipt_anonymous_http_status": 200
+  },
+  "scope": "No application runtime, native package, policy, web, fixture or model changes. New standalone repro helpers and docs/evidence only. Native probe execution is the earlier retained three-container run, not a new application scenario suite."
+}

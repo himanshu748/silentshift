@@ -1,0 +1,8 @@
+set sc=$system.OBJ.Load("/tmp/ProbeTools.cls","ck") write "COMPILE_OK=",$system.Status.IsOK(sc),!
+set tm=##class(%AI.ToolMgr).%New() set sc=tm.RegisterToolSet("BugProbe.Tools") write "REGISTER_OK=",$system.Status.IsOK(sc),!
+for j="{""text"":""""}","{""text"":null}","{""text"":""\u00e9\ud83d\ude00\u202eRTL""}","{""text"":{""nested"":[1,true,null]}}" { try { set x=tm.ExecuteTool("Echo",{}.%FromJSON(j)) write "ECHO_INPUT=",j," OUTPUT=",x.%ToJSON(),! } catch e { write "ECHO_ERROR=",e.DisplayString(),! } }
+set args={"text":($justify("x",200000))} set x=tm.ExecuteTool("Echo",args) write "LONG_200000_MATCH=",(x.value=args.text),!
+for n=1:1:20 { set x=tm.ExecuteTool("Optional",{}) if (x.value.n'=7)||(x.value.word'="fallback") write "REPEAT_FAIL=",n,! } write "REPEAT_COUNT=20",!
+for name="ArrayEcho","ObjectEcho","BinaryEcho","QueryDefault" { try { set args={} set:name="ArrayEcho" args={"items":[1,"two",{"deep":[true,null]}]} set:name="ObjectEcho" args={"value":{"nested":{"items":[false,null,"ok"]}}} set:name="BinaryEcho" args={"data":"AAECA/8="} set x=tm.ExecuteTool(name,args) write name,"=",x.%ToJSON(),! } catch e { write name,"_ERROR=",e.DisplayString(),! } }
+set x=tm.ExecuteTool("Echo",{"text":"after-errors"}) write "AFTER_ERRORS=",x.%ToJSON(),!
+halt

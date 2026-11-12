@@ -1,0 +1,39 @@
+Native output with non-UTF-8 bytes escaped as \xNN. Original bytes retained locally in edge-controls.txt.
+
+
+Node: 3de8414ff1c6, Instance: IRIS
+
+USER>
+
+Load started on 11/12/2026 15:30:14
+Loading file /tmp/ProbeTools.cls as udl
+Compiling class BugProbe.Tools
+Compiling routine BugProbe.Tools.1
+Load finished successfully.
+COMPILE_OK=1
+
+USER>
+REGISTER_OK=1
+
+USER>
+ECHO_INPUT={"text":""} OUTPUT={"timing":0.000805183,"value":""}
+ECHO_INPUT={"text":null} OUTPUT={"timing":0.000102476,"value":""}
+ECHO_INPUT={"text":"\u00e9\ud83d\ude00\u202eRTL"} OUTPUT={"timing":0.000074388,"value":"\xe9???RTL"}
+ECHO_INPUT={"text":{"nested":[1,true,null]}} OUTPUT={"timing":0.000122521,"value":{"nested":[1,true,null]}}
+
+USER>
+LONG_200000_MATCH=1
+
+USER>
+REPEAT_COUNT=20
+
+USER>
+ArrayEcho={"timing":0.000084307,"value":[1,"two",{"deep":[true,null]}]}
+ObjectEcho={"timing":0.000108352,"value":{"nested":{"items":[false,null,"ok"]}}}
+BinaryEcho={"timing":0.000128105,"value":"AAECA/8="}
+QueryDefault={"timing":0.048105663,"value":{"columns":[{"name":"Value","type":"VARCHAR"}],"elapsed_ms":48,"row_count":1,"rows":[{"Value":null}],"truncated":false}}
+
+USER>
+AFTER_ERRORS={"timing":0.000129023,"value":"after-errors"}
+
+USER>

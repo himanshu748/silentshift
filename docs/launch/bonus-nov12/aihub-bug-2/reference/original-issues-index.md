@@ -1,0 +1,50 @@
+# Original EAP tracker duplicate-check snapshot
+
+2026-11-12T21:06:57.474365+05:30
+
+- [#48](https://github.com/intersystems-community/ai-hub-eap/issues/48) — open — Community 109 image logs missing SYS.ICM.Sharding during bare startup
+- [#47](https://github.com/intersystems-community/ai-hub-eap/issues/47) — closed — [docs] `%AI.MCP.Service`: build 109 renamed the `RESOURCE` parameter to `SECURITYRESOURCE`; a service written for build 154 silently loses its authorization, with no warning or error
+- [#46](https://github.com/intersystems-community/ai-hub-eap/issues/46) — open — [docs] `%AI.MCP.Service`: a web application without the "MCP Server" type bit is answered 404 by `iris-mcp-server`, reported as "did not identify itself"
+- [#45](https://github.com/intersystems-community/ai-hub-eap/issues/45) — open — %AI.Shell.StreamRenderer is marked internal (DO NOT USE) but is required for StreamChat()
+- [#44](https://github.com/intersystems-community/ai-hub-eap/issues/44) — open — [bug] `%AI.RAG.Embedding.FastEmbed`: the class description says the model is bundled and no network is needed; the first `Create()` downloads 87 MB and fails offline
+- [#43](https://github.com/intersystems-community/ai-hub-eap/issues/43) — closed — [enhancement] An exception inside `%AI.Policy.Audit.%LogExecution` is swallowed: no error to the caller, no log line
+- [#42](https://github.com/intersystems-community/ai-hub-eap/issues/42) — closed — [enhancement] Provider error text is written unredacted to the event log and to `Ens.MessageHeader.ErrorStatus`; when the provider echoes the key, the key is stored
+- [#41](https://github.com/intersystems-community/ai-hub-eap/issues/41) — open — [bug] Agent tool loop in `EnsLib.AI.Agent.PassthroughOperation` has no default bound and keeps running after the caller's `SendRequestSync` timeout
+- [#40](https://github.com/intersystems-community/ai-hub-eap/issues/40) — open — %AI.Policy.Audit receives call.arguments as a JSON string, while %AI.Policy.Authorization receives an object
+- [#39](https://github.com/intersystems-community/ai-hub-eap/issues/39) — open — iris-mcp-server 2.0.0: after a rejected server/discover, tools/list fails in the same session
+- [#37](https://github.com/intersystems-community/ai-hub-eap/issues/37) — open — Invoking an AI Hub Agent from an MCP Tool times out after 60 seconds
+- [#36](https://github.com/intersystems-community/ai-hub-eap/issues/36) — closed — Tool execution exceptions are hidden by the invoking
+- [#35](https://github.com/intersystems-community/ai-hub-eap/issues/35) — open — Feature request: expose reasoning/thinking effort control in the Agent SDK
+- [#34](https://github.com/intersystems-community/ai-hub-eap/issues/34) — open — Cannot connect to a remote MCP-server via https from IRIS AI SDK
+- [#33](https://github.com/intersystems-community/ai-hub-eap/issues/33) — closed — Config Store descriptors for AI.LLM and AI.MCP not found
+- [#32](https://github.com/intersystems-community/ai-hub-eap/issues/32) — open — agent.run() discards token usage — use agent.run_result() to get it, but this isn't documented
+- [#31](https://github.com/intersystems-community/ai-hub-eap/issues/31) — open — doc about env vars in SKD misleading
+- [#30](https://github.com/intersystems-community/ai-hub-eap/issues/30) — closed — Openrouter provider: default base_url is missing the /v1 segment
+- [#29](https://github.com/intersystems-community/ai-hub-eap/issues/29) — closed — Audit policy is not invoked when an authorization policy denies a tool call
+- [#28](https://github.com/intersystems-community/ai-hub-eap/issues/28) — closed — MCP-Server on Apple OS fails
+- [#27](https://github.com/intersystems-community/ai-hub-eap/issues/27) — closed — Remote MCP Discovery Hangs After Successful Initialization in Two-Container Setup
+- [#26](https://github.com/intersystems-community/ai-hub-eap/issues/26) — closed — Sub-agent with tools hangs the parent agent's tool loop
+- [#25](https://github.com/intersystems-community/ai-hub-eap/issues/25) — closed — ThinkingPrompt timer doesn't start from Message Time
+- [#24](https://github.com/intersystems-community/ai-hub-eap/issues/24) — closed — Sub-agents created from DelegateTask example hang indefinitely
+- [#23](https://github.com/intersystems-community/ai-hub-eap/issues/23) — closed — iris-mcp-server rejects Host headers other than localhost — breaks multi-container and reverse-proxy deployments
+- [#22](https://github.com/intersystems-community/ai-hub-eap/issues/22) — closed — HTTPS transport panics at startup: rustls "Could not automatically determine the process-level CryptoProvider"
+- [#21](https://github.com/intersystems-community/ai-hub-eap/issues/21) — closed — iris-mcp-server: service discovery failing with 403 Forbidden error
+- [#20](https://github.com/intersystems-community/ai-hub-eap/issues/20) — closed — %AI.ToolSet.%Discover() maps %DynamicArray parameters to {"type": "array"} with no items field, which fails JSON Schema validation in MCP clients
+- [#19](https://github.com/intersystems-community/ai-hub-eap/issues/19) — closed — mcp server hardcoded to use only 1972 port?
+- [#18](https://github.com/intersystems-community/ai-hub-eap/issues/18) — closed — MCP calculator tool returns JSON serialization/deserialization error when invoked from Claude
+- [#16](https://github.com/intersystems-community/ai-hub-eap/issues/16) — closed — Compilation error when with empty string as <query> argument
+- [#15](https://github.com/intersystems-community/ai-hub-eap/issues/15) — closed — error in docker run example
+- [#14](https://github.com/intersystems-community/ai-hub-eap/issues/14) — closed — Error trying demo in langchain_SDK.md
+- [#13](https://github.com/intersystems-community/ai-hub-eap/issues/13) — closed — Difficulties adding API Key to Agent
+- [#12](https://github.com/intersystems-community/ai-hub-eap/issues/12) — closed — Docs: Missing details on Discovery Policies
+- [#11](https://github.com/intersystems-community/ai-hub-eap/issues/11) — closed — wgproto failed to connect to IRIS in GCP VM
+- [#10](https://github.com/intersystems-community/ai-hub-eap/issues/10) — closed — Tool discovery return 0 tools with remote http transport
+- [#9](https://github.com/intersystems-community/ai-hub-eap/issues/9) — closed — error when using %AI.Toolset
+- [#8](https://github.com/intersystems-community/ai-hub-eap/issues/8) — closed — Inconsistent RBAC on remote MCP server
+- [#7](https://github.com/intersystems-community/ai-hub-eap/issues/7) — closed — Docs Issue: Tools defined in Toolsets should be ClassMethods not Methods
+- [#6](https://github.com/intersystems-community/ai-hub-eap/issues/6) — closed — `iris-mcp-server` v2.0.0 — background tool refresh sends empty LOGIN credentials on port 1972, causing service deregistration every `tool_refresh_interval_secs`
+- [#5](https://github.com/intersystems-community/ai-hub-eap/issues/5) — closed — .
+- [#4](https://github.com/intersystems-community/ai-hub-eap/issues/4) — closed — Make full use of the MCP schema when exposing tools via MCP
+- [#3](https://github.com/intersystems-community/ai-hub-eap/issues/3) — closed — Modifying a tool description does not expose the new description via MCP
+- [#2](https://github.com/intersystems-community/ai-hub-eap/issues/2) — closed — %AI.Tools.SQL RunQuery method safety check is far too trivial (security risk)
+- [#1](https://github.com/intersystems-community/ai-hub-eap/issues/1) — closed — Docs reference port 52773 as the SuperServer port for MCP Server configuration

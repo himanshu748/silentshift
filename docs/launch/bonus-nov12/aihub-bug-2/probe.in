@@ -1,0 +1,10 @@
+write "BUILD=",$zversion,!
+set sc=$system.OBJ.Load("/tmp/ProbeTools.cls","ck")
+write "COMPILED=",$system.Status.IsOK(sc),! do $system.Status.DisplayError(sc)
+set t=##class(BugProbe.Tools).%New()
+write "DISCOVERY=",t.%Discover().%ToJSON(),!
+set tm=##class(%AI.ToolMgr).%New() do tm.AddTool(t)
+for name="Optional","QueryDefault","ReturnStream","ReadStream","BinaryEcho" { try { set args={} set:name="ReadStream" args={"data":"hello stream"} set:name="BinaryEcho" args={"data":"aGVsbG8="} set x=tm.ExecuteTool(name,args) write name,"=",x.%ToJSON(),! } catch e { write name,"_ERROR=",e.DisplayString(),! } }
+set st=##class(%SQL.Statement).%New() set sc=st.%PrepareClassQuery("BugProbe.Tools","QueryDefault") write "PREPARE=",$system.Status.GetErrorText(sc),! set r=st.%Execute() do r.%Display()
+set r=st.%Execute("fallback") do r.%Display()
+halt

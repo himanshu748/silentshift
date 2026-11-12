@@ -503,3 +503,8 @@ The v3 labels were sealed before diagnosis and remain untouched; no sealed evalu
 ## November 12 separate hosted replay
 
 The owner-approved separate ARM64 154U host now serves [the guided replay](https://34.239.152.223.sslip.io/demo/). [Dated receipt](evidence/demo-nov12/summary.json): thirteen outside-host checks, two admission checks, actual reboot to empty cases, independently verified native PEX signature. The public viewer opened the persisted case in the actual browser; review actions were disabled. Guided mobile width 390 had no horizontal overflow. The native-source digest matches the local source; no agent, policy or native package change. Only the frozen quantity-mismatch recording is admitted. Interactive Visual Trace has a documented HyperEvent warning; no generic POST access was opened. No new evaluation or awarded online-demo bonus. Documentation remains local pending the next publication gate.
+
+
+## Local AI Hub codec investigation — November 12, 2026
+
+A separate local research branch reproduced a character-stream tool codec mismatch in three fresh 154U ARM64 containers. The standalone repro and controls use no SilentShift runtime classes or paid models. A loopback mock-provider check also retained the metadata-only tool result sent by the native agent. [Findings and exact outputs](launch/bonus-nov12/aihub-bug-2/findings.md). The report was filed under separate approval as [AI Hub #28](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28), with [anonymous readback](launch/bonus-nov12/aihub-bug-2/outputs/filing.json). Bonus qualification is pending; this does not change the native package or establish a new application-suite run.

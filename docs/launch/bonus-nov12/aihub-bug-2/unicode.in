@@ -1,0 +1,5 @@
+set tm=##class(%AI.ToolMgr).%New() set sc=tm.RegisterToolSet("BugProbe.Tools")
+set args={}.%FromJSON("{""text"":""\u00e9\ud83d\ude00\u202eRTL""}") set x=tm.ExecuteTool("Echo",args)
+write "UNICODE_ROUNDTRIP_MATCH=",(x.value=args.text),!
+write "UNICODE_SOURCE_LENGTH=",$length(args.text)," RESULT_LENGTH=",$length(x.value),!
+halt

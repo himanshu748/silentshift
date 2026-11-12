@@ -1,0 +1,17 @@
+write "BUILD=",$zversion,!
+write "CLASS_PRESENT_BEFORE_LOAD=",##class(%Dictionary.ClassDefinition).%ExistsId("BugProbe.StreamTools"),!
+set sc=$system.OBJ.Load("/tmp/StreamTools.cls","ck")
+write "COMPILE_OK=",$system.Status.IsOK(sc),! do $system.Status.DisplayError(sc)
+set tools=##class(BugProbe.StreamTools).%New()
+write "SCHEMA=",tools.%Discover().%ToJSON(),!
+set direct=tools.ReturnStream() write "DIRECT_STREAM_TEXT=",direct.Read(),!
+do direct.Rewind() write "DIRECT_READ_TEXT=",tools.ReadStream(direct),!
+set manager=##class(%AI.ToolMgr).%New() set sc=manager.AddTool(tools)
+write "REGISTER_OK=",$system.Status.IsOK(sc),!
+set control=manager.ExecuteTool("ReturnText",{}) write "CONTROL=",control.%ToJSON(),!
+set result=manager.ExecuteTool("ReturnStream",{}) write "STREAM_RESULT=",result.%ToJSON(),!
+write "STREAM_VALUE_TYPE=",result.%GetTypeOf("value"),!
+write "STREAM_PAYLOAD_MATCH=",($select($isobject(result.value):0,1:result.value=tools.ReturnText())),!
+try { set result=manager.ExecuteTool("ReadStream",{"data":"Approved amendment: 1 CASE = 12 EA."}) write "READ_STREAM=",result.%ToJSON(),! } catch e { write "READ_STREAM_ERROR=",e.DisplayString(),! }
+set control=manager.ExecuteTool("ReturnText",{}) write "CONTROL_AFTER_ERROR=",control.%ToJSON(),!
+halt

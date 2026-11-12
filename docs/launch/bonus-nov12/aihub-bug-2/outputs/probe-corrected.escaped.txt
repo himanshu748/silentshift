@@ -1,0 +1,47 @@
+Native output with non-UTF-8 bytes escaped as \xNN. Original bytes retained locally in probe-corrected.txt.
+
+
+Node: 3de8414ff1c6, Instance: IRIS
+
+USER>
+BUILD=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+
+USER>
+
+Load started on 11/12/2026 15:28:02
+Loading file /tmp/ProbeTools.cls as udl
+Compiling class BugProbe.Tools
+Compiling routine BugProbe.Tools.1
+Load finished successfully.
+
+USER>
+COMPILED=1
+
+USER>
+
+USER>
+DISCOVERY={"tools":[{"name":"ArrayEcho","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"items":{"type":"array","items":{"type":"string"}}},"required":["items"]},"returns":{"type":"array","items":{"type":"string"}}},{"name":"BinaryEcho","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"data":{"type":"string"}},"required":["data"]},"returns":{"type":"string"}},{"name":"Echo","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"text":{"type":"string"}},"required":["text"]},"returns":{"type":"string"}},{"name":"ObjectEcho","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"value":{"type":"object"}},"required":["value"]},"returns":{"type":"object"}},{"name":"Optional","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"n":{"type":"integer"},"word":{"type":"string"}},"required":[]},"returns":{"type":"object"}},{"name":"ReadStream","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"data":{"type":"string"}},"required":["data"]},"returns":{"type":"string"}},{"name":"ReturnStream","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{},"required":[]},"returns":{"type":"string"}},{"name":"QueryDefault","description":"","source":"iris","provider":"BugProbe.Tools","requires_auth":false,"stateful":false,"metadata":{"origin_class":"BugProbe.Tools","kind":"query"},"parameters":{"type":"object","properties":{"value":{"type":"string"}},"required":[]},"returns":{"type":"object","properties":{"columns":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"}},"required":["name","type"]}},"rows":{"type":"array","items":{"type":"object"}},"row_count":{"type":"integer"},"truncated":{"type":"boolean"},"elapsed_ms":{"type":"integer"}},"required":["columns","rows","row_count","truncated","elapsed_ms"]}}]}
+
+USER>
+
+USER>
+Optional={"timing":0.00288305,"value":{"n":7,"word":"fallback"}}
+QueryDefault_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [%Status]: 5540 (code: 5540) ? T\xfe; Stored Procedure 'BUGPROBE.TOOLS_QUERYDEFAULT' not found at OnAsStatus+1^%Exception.SQL.1
+ReturnStream={"timing":0.0019047,"value":{"%Location":"^CacheStream","AtEnd":false,"Id":"","LineTerminator":"\r\n","RemoveOnClose":false}}
+ReadStream_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [INVALID OREF]: <INVALID OREF>ReadStream+1^BugProbe.Tools.1, at source: 'Return data.Read() }' at loc: 1
+BinaryEcho={"timing":0.000090122,"value":"aGVsbG8="}
+
+USER>
+PREPARE=ERROR #5540: SQLCODE: -428 Message:  Stored Procedure 'BUGPROBE.TOOLS_QUERYDEFAULT' not found
+
+
+[SQLCODE: <-400>:<Fatal error occurred>]
+[%msg: <Exception caught during dSQL statement %Execute: 5540 p\xfeStatement not prepared>]
+0 Rows Affected
+USER>
+
+
+[SQLCODE: <-400>:<Fatal error occurred>]
+[%msg: <Exception caught during dSQL statement %Execute: 5540 p\xfeStatement not prepared>]
+0 Rows Affected
+USER>
