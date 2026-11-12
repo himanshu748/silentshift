@@ -23,7 +23,7 @@ function render(job) {
   el("run").disabled = !csrf || active || uncertain;
   el("reset").disabled = !job || active || uncertain;
   for (const input of el("samples").querySelectorAll("input")) input.disabled = active || uncertain;
-  if (!job) { el("status").textContent = "Ready. The next run invokes the native production and local model."; el("result").hidden = true; return; }
+  if (!job) { el("status").textContent = "Ready. The next run invokes the native production. Inspect the returned execution mode; a fresh model answer is not assumed."; el("result").hidden = true; return; }
   if (active) { el("status").textContent = "Investigation admitted. Waiting for the native result; no tool progress is simulated here."; return; }
   if (polling) { clearInterval(polling); polling = null; }
   if (uncertain) { el("status").textContent = "Native completion is unconfirmed. The attempt is retained and further investigations are blocked for reconciliation."; return; }
@@ -36,7 +36,12 @@ function render(job) {
   el("facts").replaceChildren(); el("result-links").replaceChildren();
   fact("Native case", record.id); fact("Simulator deliveries", record.delivery_count);
   fact("Agent outcome", agent.status || "Unavailable");
-  fact("Execution", agent.model_invoked === true && agent.status === "returned" ? "Native AI Hub returned a live local-model answer" : "Inspect the native invocation status; a completed answer is not assumed");
+  const execution = agent.execution_mode === "recorded-replay" && agent.status === "returned"
+    ? "Recorded agent proposal replayed through native IRIS AI Hub; no fresh inference"
+    : agent.execution_mode === "live" && agent.model_invoked === true && agent.status === "returned"
+      ? "Native AI Hub returned a live model answer"
+      : "Inspect the native invocation status; a completed answer is not assumed";
+  fact("Execution", execution);
   if (agent.model) fact("Model", agent.model);
   if (typeof agent.elapsed_ms === "number") fact("Native investigation time", (agent.elapsed_ms / 1000).toFixed(2)+" seconds");
   if (typeof job.finished === "number") fact("Gateway wall time", (job.finished-job.created).toFixed(2)+" seconds");
@@ -75,4 +80,4 @@ el("show-password").addEventListener("click", () => {
   const show = el("viewer-password").type === "password"; el("viewer-password").type = show ? "text" : "password";
   el("show-password").textContent = show ? "Hide demo password" : "Show demo password";
 });
-refresh().catch(e => { error(e.message); el("status").textContent = "The live demo could not be reached. No investigation was started."; });
+refresh().catch(e => { error(e.message); el("status").textContent = "The replay demo could not be reached. No investigation was started."; });

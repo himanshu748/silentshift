@@ -1,0 +1,102 @@
+### run 1
+IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+Load started on 11/12/2026 10:29:41
+Loading file /tmp/ZProbe.Rejected.cls as udl
+Compiling class ZProbe.Rejected
+ERROR #2607: Python method 'Bad', argument 'x' Output qualifier is not allowed.
+Compiling routine ZProbe.Rejected.1
+Python error: expected an indented block after class definition on line 1: class Rejected(): 
+Detected 2 errors during load.
+== ZProbe.Rejected: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'IndentationError'>: expected an indented block after class definition on line 1 (Rejected, line 1): class Rejected(): 
+Load started on 11/12/2026 10:29:42
+Loading file /tmp/ZProbe.RejectedSyntax.cls as udl
+Compiling class ZProbe.RejectedSyntax
+Compiling routine ZProbe.RejectedSyntax.1
+Python error: '(' was never closed: return (
+Detected 1 errors during load.
+== ZProbe.RejectedSyntax: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'SyntaxError'>: '(' was never closed (RejectedSyntax, line 3): return (
+Load started on 11/12/2026 10:29:42
+Loading file /tmp/ZProbe.RejectedOS.cls as udl
+Compiling class ZProbe.RejectedOS
+Compiling routine ZProbe.RejectedOS.1
+ERROR: ZProbe.RejectedOS.cls(Bad+2) #1054: Invalid expression : '}' : Offset:12 [Bad+1^ZProbe.RejectedOS.1]
+ TEXT:     quit ( }
+ERROR: ZProbe.RejectedOS.cls(Good) #1026: Invalid command : 'methodimpl {' : Offset:18 [Good^ZProbe.RejectedOS.1]
+ TEXT: Good() methodimpl {
+ERROR #5123: Unable to find entry point for method 'Good' in routine 'ZProbe.RejectedOS.1'
+Detected 3 errors during load.
+== ZProbe.RejectedOS: compile ok=0, IsUpToDate=0
+   Good() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS
+   Bad() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS
+### run 2
+IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+Load started on 11/12/2026 10:29:49
+Loading file /tmp/ZProbe.Rejected.cls as udl
+Compiling class ZProbe.Rejected
+ERROR #2607: Python method 'Bad', argument 'x' Output qualifier is not allowed.
+Compiling routine ZProbe.Rejected.1
+Python error: expected an indented block after class definition on line 1: class Rejected(): 
+Detected 2 errors during load.
+== ZProbe.Rejected: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'IndentationError'>: expected an indented block after class definition on line 1 (Rejected, line 1): class Rejected(): 
+Load started on 11/12/2026 10:29:49
+Loading file /tmp/ZProbe.RejectedSyntax.cls as udl
+Compiling class ZProbe.RejectedSyntax
+Compiling routine ZProbe.RejectedSyntax.1
+Python error: '(' was never closed: return (
+Detected 1 errors during load.
+== ZProbe.RejectedSyntax: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'SyntaxError'>: '(' was never closed (RejectedSyntax, line 3): return (
+Load started on 11/12/2026 10:29:49
+Loading file /tmp/ZProbe.RejectedOS.cls as udl
+Compiling class ZProbe.RejectedOS
+Compiling routine ZProbe.RejectedOS.1
+ERROR: ZProbe.RejectedOS.cls(Bad+2) #1054: Invalid expression : '}' : Offset:12 [Bad+1^ZProbe.RejectedOS.1]
+ TEXT:     quit ( }
+ERROR: ZProbe.RejectedOS.cls(Good) #1026: Invalid command : 'methodimpl {' : Offset:18 [Good^ZProbe.RejectedOS.1]
+ TEXT: Good() methodimpl {
+ERROR #5123: Unable to find entry point for method 'Good' in routine 'ZProbe.RejectedOS.1'
+Detected 3 errors during load.
+== ZProbe.RejectedOS: compile ok=0, IsUpToDate=0
+   Good() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS
+   Bad() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS
+### run 3
+IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+Load started on 11/12/2026 10:29:56
+Loading file /tmp/ZProbe.Rejected.cls as udl
+Compiling class ZProbe.Rejected
+ERROR #2607: Python method 'Bad', argument 'x' Output qualifier is not allowed.
+Compiling routine ZProbe.Rejected.1
+Python error: expected an indented block after class definition on line 1: class Rejected(): 
+Detected 2 errors during load.
+== ZProbe.Rejected: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'IndentationError'>: expected an indented block after class definition on line 1 (Rejected, line 1): class Rejected(): 
+Load started on 11/12/2026 10:29:56
+Loading file /tmp/ZProbe.RejectedSyntax.cls as udl
+Compiling class ZProbe.RejectedSyntax
+Compiling routine ZProbe.RejectedSyntax.1
+Python error: '(' was never closed: return (
+Detected 1 errors during load.
+== ZProbe.RejectedSyntax: compile ok=0, IsUpToDate=0
+   Good() -> Good() ran
+   Bad() -> <PYTHON EXCEPTION> 246 <class 'SyntaxError'>: '(' was never closed (RejectedSyntax, line 3): return (
+Load started on 11/12/2026 10:29:56
+Loading file /tmp/ZProbe.RejectedOS.cls as udl
+Compiling class ZProbe.RejectedOS
+Compiling routine ZProbe.RejectedOS.1
+ERROR: ZProbe.RejectedOS.cls(Bad+2) #1054: Invalid expression : '}' : Offset:12 [Bad+1^ZProbe.RejectedOS.1]
+ TEXT:     quit ( }
+ERROR: ZProbe.RejectedOS.cls(Good) #1026: Invalid command : 'methodimpl {' : Offset:18 [Good^ZProbe.RejectedOS.1]
+ TEXT: Good() methodimpl {
+ERROR #5123: Unable to find entry point for method 'Good' in routine 'ZProbe.RejectedOS.1'
+Detected 3 errors during load.
+== ZProbe.RejectedOS: compile ok=0, IsUpToDate=0
+   Good() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS
+   Bad() -> <CLASS DOES NOT EXIST> 150  ZProbe.RejectedOS

@@ -181,3 +181,10 @@ The first fresh Compose run on `2fc57f7` exhausted the shared 2 GiB VM while oth
 ## November 11 voting-week gate: hosted browser prerequisite failure
 
 Both branch run 43038036167 and PR run 43038076760 failed before browser execution while Ubuntu resolute package mirrors could not resolve (`archive.ubuntu.com`, `security.ubuntu.com`, `azure.archive.ubuntu.com`; apt exit 100). Preserved output in the new judge evidence. Do not keep retrying that unchanged installation step. Keep all desktop/mobile checks, pin the runner to ubuntu-24.04, verify its preinstalled Chrome version and select Playwright’s documented Chrome channel through a test-only environment option. The application runtime and routing remain unchanged. Local Chrome already passes the same browser suite; fresh hosted execution is still required before merge.
+
+
+### 2026-11-12T19:12:48+05:30 - hosted replay restriction retained
+
+The first public amendment attempt correctly fell back to REVIEW at provider-lease because Provider.Replay supports only the frozen quantity-mismatch case. The initial verifier incorrectly expected a delivery; its failed receipt remains private. The hosted gateway and guided page now admit only the supported recording, without changing native source or policy. After reboot, all thirteen outside-host checks passed and the native quarantine receipt independently verified.
+
+Printable Visual Trace's graph rendered, but its interactive HyperEvent warning recurred on Continue. Under the two-failure rule, further portal troubleshooting stopped. Generic native POST/broker access was not opened; the warning is documented in ONLINE_DEMO.md and its capture.

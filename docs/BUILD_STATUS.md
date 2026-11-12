@@ -1,3 +1,11 @@
+# Hosted replay verified - November 12, 2026 (IST)
+
+The [guided hosted replay](https://34.239.152.223.sslip.io/demo/) runs the supported recorded quantity-mismatch proposal through native 154U ARM64 policy, routing and signed Java PEX export. [Outside-host checks, reboot reset and source digest](evidence/demo-nov12/summary.json) and [independent signature verification](evidence/demo-nov12/after-reboot-pex-receipt-verification.json) passed. The separate reader opened the persisted case in the browser; review actions were disabled. The native trace graph renders with a documented interactive HyperEvent warning. No fresh inference or new evaluation is claimed. Online-demo submission and organizer review remain pending.
+
+The preceding source snapshot `a5b5329` passed local Python **395**, Java **7**, workbench browser **54**, TypeScript/build and static checks; [dated receipt](evidence/bonus-nov12-takeover/local-checks.json). Hosted runs [43223735940](https://github.com/himanshu748/silentshift/actions/runs/43223735940) and [43223743931](https://github.com/himanshu748/silentshift/actions/runs/43223743931) passed at that snapshot. PR #17 adds the verified hosting documentation and receipts; its current checks are shown on [the PR](https://github.com/himanshu748/silentshift/pull/17). No native runtime, policy, agent, package or evaluation change is included. Public native remains **0.3.3**. Both Embedded Python reports are filed, with additional credit unconfirmed. Visibility drafts remain local and unposted.
+
+## Earlier dated checkpoints
+
 # Public 0.3.3 gate passed — November 12, 2026 (IST)
 
 The published **0.3.3** package installed from the public registry in a pristine **154U ARM64** container with no application source mounts. Tests came from a fresh clone of tag `v0.3.3` at `ed6c7cf`. Production startup returned HTTP **200**; **8 native classes / 28 methods** and **two 12/12 recorded API replays** passed, sessions **55 / 91**. [Receipt](evidence/public-033-nov12/summary.json) · [exact commands](evidence/public-033-nov12/commands.txt) · [judge verification and retained failure](JUDGE_VERIFICATION.md).
@@ -490,3 +498,8 @@ The authenticated OEX Apply dialog showed no published application on this accou
 The new local push/top3 candidate changes native source and is **not covered by the earlier unchanged-source qualification**. Its Python suite passed 317 tests in 21.54 seconds; the operator-run native suite passed six classes / fifteen methods, and two keyless replays passed 12/12 each. The real live five-case core gate failed twice; the latest attempt had no successful agent/tool executions and held the approved amendment. The current repair is not verified or merge-ready. [Status and receipts](EVAL_SEALED.md).
 
 The v3 labels were sealed before diagnosis and remain untouched; no sealed evaluation or full tuned dev rerun was performed. Public packages, main and the remote draft PR remain unchanged. No hosted demo or measured accuracy improvement is claimed.
+
+
+## November 12 separate hosted replay
+
+The owner-approved separate ARM64 154U host now serves [the guided replay](https://34.239.152.223.sslip.io/demo/). [Dated receipt](evidence/demo-nov12/summary.json): thirteen outside-host checks, two admission checks, actual reboot to empty cases, independently verified native PEX signature. The public viewer opened the persisted case in the actual browser; review actions were disabled. Guided mobile width 390 had no horizontal overflow. The native-source digest matches the local source; no agent, policy or native package change. Only the frozen quantity-mismatch recording is admitted. Interactive Visual Trace has a documented HyperEvent warning; no generic POST access was opened. No new evaluation or awarded online-demo bonus. Documentation remains local pending the next publication gate.

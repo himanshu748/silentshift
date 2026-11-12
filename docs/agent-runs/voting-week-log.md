@@ -577,3 +577,40 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Prepared only the Full Description in the existing OEX editor; preserved all other form values and the logo/gallery sources. The apparent image-list difference was only OEX's newly shown unsaved-change indicator. Version 0.3.3, React 0.2.1, real public-install scope, existing measured trade-off and recorded tour/inspector/prose links are in the unsaved draft. No Save, Send, new release, push or PR was executed.
 - Review captures: `.local/release-033-nov12/oex-description-033-unsaved-hero.jpg` and `oex-description-033-unsaved-version.jpg`. The final screenshot visibly shows the 0.3.3 copy and “You have unsaved changes.” A last accessibility substring check used a diff-only tree and returned false for unchanged text; the screenshot and earlier complete tree, not that diff boolean, establish the visible unsaved state.
 - The selected preview text had two matches (Markdown and preview); retargeted the visible strong preview without altering content. The owner tab remains open for review. First push/PR, then merge, then any OEX save/approval action each still need separate owner authorization. No replacement release/version may be invented.
+
+### 2026-11-12T18:42:29.187922+05:30 - Cortex takeover and visibility preparation
+
+- Cortex branch 0f47024 and draft PR #17 were already public. It filed Embedded Python #35/#36. Those reports are not edited or duplicated in this continuation; local filed text and links are reconciled.
+- Task A corrections pushed to docs/bonus-nov12 as 53f2fb1 and a5b5329. PR #17 remains OPEN/DRAFT, not merged. Both hosted CI runs 43223735940 and 43223743931 succeeded at a5b5329; GitGuardian succeeded. Main is unchanged.
+- Local checks: 395 pytest (19.41 seconds), 7 Java, 18 static unit checks, TypeScript/build, 54 workbench browser checks (43.6 seconds), and static browser checks 33/39/38. Java initially needed the installed Homebrew JDK selected; Playwright initially needed the installed Chrome channel selected. Original local failures remain private; assertions were not weakened. Receipts: docs/evidence/bonus-nov12-takeover/.
+- Both staged source batches passed the secret scan with zero findings and no omitted files. Added Markdown lines passed the dash scan. No native build/inference/deployment/new evaluation was run here.
+- The separate owner-approved t4g.medium remains allocated. Caddy was disabled/inactive at last successful SSH read; only SSH listened publicly. Its $10 Budget had zero notifications. No budget notification, systemd timer, public start or firewall mutation was performed.
+- The private image transfer resumed using compatible rsync, then timed out when the owner's external IP changed. SSH remains restricted to the earlier /32; no world-open SSH workaround. Prepared 14 local 100 MiB-or-smaller parts, with a manifest and whole-file SHA-256 af5cfe11ba6ac15a89f3ab32eb7adcbb0f7cc084bc1f284f64d4d90b7eaf7360. Do not commit the image/parts.
+- Billing gate prepared: email notifications actual > USD 5 and forecast > USD 10 to the owner's Gmail. Not executed. Auto-stop plan is November 16 at 12:30 IST, instance shutdown behavior stop, not terminate; timer is prepared only. Caddy stays disabled at boot and start.sh must fail closed until gateway health passes. A stopped instance can still incur storage charges; no hard spending cap or actual bill is asserted.
+- Never access Crashcart or its AWS resources. The working online demo is Pending; a provisioned host, an upload or a static page is not deployment proof.
+- Visibility pack is local only: docs/launch/devto-draft.md (485 words), voting-push-drafts.md (DC/Discord/X) and x-intent.txt. All nine referenced URLs returned HTTP 200 anonymously. No unverified online-demo URL is included. Canonical URL points to the first DC article. The three draft files passed a separate staged-file secret/dash scan and were unstaged afterward; they were not committed or pushed. Copies are preserved outside /tmp in the owner's keep folder.
+- Next external gate is billing notifications only under exact submit. Demo start, PR readiness/merge, OEX description save, bonus comment, dev.to, Discord and X intent are separate gates. No package/release/OEX edit or visibility post occurred.
+
+### 2026-11-12T18:46:17.658684+05:30 - approved budget notifications created and read back
+
+- Used the owner exact submit only for the existing SilentShift demo budget email alerts: ACTUAL greater than USD 5 and FORECASTED greater than USD 10, both absolute thresholds. Initial list was empty; created exactly those two notifications.
+- AWS subscriber readback confirms both target the owner Gmail address. Private receipt: `.local/takeover-nov12/gates/billing-verification.json`, also preserved in the owner keep folder. Budget alerts are not a hard spending cap; email delivery and current charges remain unverified.
+- No public demo start, upload attempt, SSH/firewall/timer mutation, post, merge, release, listing edit or Crashcart access. Stop at the next gate.
+
+
+### 2026-11-12T19:12:48+05:30 - approved separate demo deployment and reboot verification
+
+- Consumed the next exact submit for the separate SilentShift demo only. No PR readiness/merge, public repo push, OEX save, release or post. Crashcart and its resources were not accessed.
+- Finished all private image chunks and verified the whole archive SHA-256 af5cfe11ba6ac15a89f3ab32eb7adcbb0f7cc084bc1f284f64d4d90b7eaf7360 before loading the same ARM64 154 image. No registry upload and no model bundle transfer.
+- https://34.239.152.223.sslip.io/demo/ is verified outside the host. Replay is labeled; native routing and PEX execute. All thirteen post-reboot outside checks and both admission checks passed. Independent receipt SHA-256/RSA verification returned Verified OK. Receipts: docs/evidence/demo-nov12/.
+- Reboot changed the boot ID and started with zero native cases. Caddy remains disabled at boot and was explicitly started only after health. All eleven existing IRIS users were refreshed, then a separate random reader was created. Only the public reader is intentionally exposed; runner/admin credentials stay on the host.
+- Timer is enabled for November 16 12:30 IST; instance shutdown behavior stop. Budget email thresholds actual > USD 5 and forecast > USD 10 read back correctly. Standard CPU credits confirmed. Cost is an estimate, not a bill; stopped volume charges remain.
+- Hosted admission supports only quantity-mismatch. Initial amendment scope rejection and restricted Visual Trace HyperEvent warning are retained honestly. No policy relaxation, native source change, live-inference claim, benchmark claim or awarded bonus.
+- Next gate: add verified demo evidence/URL to PR #17, mark ready and merge after current CI succeeds, only on another exact submit. Visibility drafts remain unposted.
+
+
+### 2026-11-12T19:23:12+05:30 - approved PR #17 update and merge gate
+
+- The owner exact submit authorizes publishing the verified demo link/evidence through existing PR #17, marking it ready and merging only after the updated checks pass. OEX, the bonus reply, visibility posts, releases, branch deletion and hosting changes are excluded.
+- Prepared README/checklist/evidence/operating-status updates and retained the signed receipt, outside-host checks, actual reboot proof and browser captures. No restricted image, signing key, account credential or model archive is staged. Native src/python/fixtures/java/module/Docker/Compose files are unchanged by this documentation update.
+- The initial CoCo PR description is obsolete; replace it with the filed #35/#36 status, verified hosted replay, retained limitations and exact validation scope before merge. The final merge SHA and hosted run results will be recorded by target readback; no success is assumed here.

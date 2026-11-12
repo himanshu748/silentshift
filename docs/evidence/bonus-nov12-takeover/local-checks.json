@@ -1,0 +1,51 @@
+{
+  "checked_at_ist": "2026-11-12T18:24:36.962772+05:30",
+  "base": "769e171b548f13d4b2b1bdf16d4c7e267af10d23",
+  "cortex_pushed_head": "0f47024b8f59d56bfcdd67c6d30b42cddce3d623",
+  "scope": "Local documentation and gateway display changes only; no native installation, inference, deployment or new evaluation.",
+  "checks": {
+    "pytest": {
+      "passed": 395,
+      "seconds": 19.41,
+      "command": "uv run pytest -q"
+    },
+    "java_core": {
+      "passed": 7,
+      "command": "PATH=/opt/homebrew/opt/openjdk/bin:$PATH uv run python scripts/test_java_core.py"
+    },
+    "static_unit": {
+      "passed": 18,
+      "command": "node --test tests/receipt-inspector.test.mjs tests/recorded-tour.test.mjs tests/agent-value.test.mjs"
+    },
+    "workbench_browser": {
+      "passed": 54,
+      "seconds": 43.6,
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome npm --prefix web run test:e2e"
+    },
+    "types": {
+      "passed": true,
+      "command": "npm --prefix web run check"
+    },
+    "build": {
+      "passed": true,
+      "command": "npm --prefix web run build"
+    },
+    "static_browser": {
+      "receipt_inspector": 33,
+      "evidence_tour": 39,
+      "agent_value": 38
+    }
+  },
+  "retained_local_environment_failures": [
+    "The first Java command found macOS Java launcher but no selected JDK; retry selected the existing Homebrew JDK.",
+    "The first browser commands expected an uninstalled Playwright Chromium; retries selected installed Chrome, matching CI."
+  ],
+  "native_or_policy_changes": false,
+  "issue_35_and_36_filed_not_qualified": true,
+  "demo_status": "Pending; no hosted app verified",
+  "billing_notifications_created": false,
+  "candidate_display_sha256": {
+    "demo_gateway/client.js": "66a49392c48deff5d933113fda91dbbbf0205eb0ccb0f5d664a484aa318fd9c9",
+    "demo_gateway/start.html": "db4bb434909cd80fff7e96be8840e943a88526ed09b5e3fd2f74cdfebf2172e8"
+  }
+}

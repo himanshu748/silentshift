@@ -14,7 +14,7 @@ A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every tra
 
 If an approved amendment *does* allow `20 CASE`, the same order goes through. **The difference between those two outcomes is the authority behind the order, and that's the decision the AI Hub agent helps make.**
 
-**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
+**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** (recorded proposal; native policy and receipts) · **[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
 ## Inspect the workflow without installing
 
@@ -146,33 +146,34 @@ This is the completed v2 comparison before later source-branch pipeline changes.
 
 ## Honest limits
 
-- All orders are synthetic and deliver only to an IRIS simulator. There's no hosted native demo and no real ERP or bank connection.
+- All orders are synthetic and deliver only to an IRIS simulator. The hosted demo runs one fixed recorded proposal through native IRIS; it performs no fresh inference. There is no real ERP or bank connection.
 - Only **2026.3.0AI.154.0 Community / 154U ARM64** is qualified locally. Other builds and platforms are not claimed tested.
 - The held-out result above does not establish an overall accuracy improvement or better unstructured routing. The version used in that comparison missed genuine prose-authority cases; every failure remains in the report. Later pipeline changes are not evidence of a measured improvement.
 
 ## Contest bonuses
 
-**Claimed** means requested for organizer review, supported by the linked code or observed artifact. It does not mean points have been awarded. [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md#every-bonus). Only **2026.3.0AI.154.0 / 154U ARM64** is locally qualified.
+**Published bonus credit: 29 points**, including Java PEX and Community Idea DPI-I-689, in the [official results table](https://community.intersystems.com/post/technology-bonus-results-intersystems-programming-contest-ai-agents-interoperability-workflows) checked November 12, 2026. This is technology-bonus credit, not an overall ranking or prize. **Filed; review pending** means a report exists but no additional points are assumed. [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md#every-bonus). Only **2026.3.0AI.154.0 / 154U ARM64** is locally qualified.
 
 | Bonus | Points requested | Status | Direct evidence |
 | --- | ---: | --- | --- |
-| Docker | 2 | Claimed | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
-| IPM deployment: `zpm "install silentshift"` | 2 | Claimed | [Public 0.3.3 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.3.tgz) · [publication/manifest readback](docs/evidence/public-033-nov12/publication.json) · [fresh public install/startup/replays](docs/evidence/public-033-nov12/summary.json) |
-| Native Workflow Engine | 2 | Claimed | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
-| Custom adapter: PartnerJSON | 2 | Claimed | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
-| IRIS Vector Search | 2 | Claimed | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |
-| Embedded Python | 3 | Claimed | [Assessment and policy: Language = python](src/SilentShift/Bridge.cls) · [production call sites](src/SilentShift/Process/Semantic.cls) · [native execution/source audit](docs/evidence/bonus-claims-nov11/embedded-python.json) |
-| Community idea DPI-I-689 | 4 | Claimed; qualification pending | [Idea](https://ideas.intersystems.com/ideas/DPI-I-689) · [Visual Trace recipe and Langfuse comparison](#community-idea-dpi-i-689-llm-tracing-with-interoperability) · [native message bodies](docs/evidence/provider-body-captures.json) · [public OEX association](https://openexchange.intersystems.com/package/SilentShift) |
-| First AI Hub bug | 2 | Claimed; vendor/organizer confirmation pending | [Issue #17: standalone reproduction and compiler log](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) |
-| First Developer Community article | 2 | Claimed | [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) |
-| Second Developer Community article | 1 | Claimed | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
-| Video | 3 | Claimed | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
-| Questionnaire | 1 | Claimed | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
-| Java PEX | 3 | Claimed; published in native 0.3.2; qualification pending | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
-| Online demo | — | Not claimed | The published evidence tour is static recorded material, not a running native app |
-| Embedded Python bug | — | Not claimed | [Signal-11 candidate is not isolated or attributed](docs/bug-reports/callback-signal11-candidate.md) |
+| Docker | 2 | Credited in official table | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
+| IPM deployment: `zpm "install silentshift"` | 2 | Credited in official table | [Public 0.3.3 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.3.tgz) · [publication/manifest readback](docs/evidence/public-033-nov12/publication.json) · [fresh public install/startup/replays](docs/evidence/public-033-nov12/summary.json) |
+| Native Workflow Engine | 2 | Credited in official table | [Native coordinator](src/SilentShift/Workflow/Coordinator.cls) · [approve/reject/concurrency execution](docs/evidence/review-queue.json) |
+| Custom adapter: PartnerJSON | 2 | Credited in official table | [Ens.InboundAdapter subclass](src/SilentShift/Adapter/PartnerJSON.cls) · [native file intake and recovery](docs/evidence/adapter.json) |
+| IRIS Vector Search | 2 | Credited in official table | [Native VECTOR column](src/SilentShift/Data/Precedent.cls) · [cosine retrieval](src/SilentShift/Precedents.cls) · [executed corpus](docs/evidence/precedent-corpus.json) |
+| Embedded Python | 3 | Credited in official table | [Assessment and policy: Language = python](src/SilentShift/Bridge.cls) · [production call sites](src/SilentShift/Process/Semantic.cls) · [native execution/source audit](docs/evidence/bonus-claims-nov11/embedded-python.json) |
+| Community idea DPI-I-689 | 4 | Credited in official table | [Idea](https://ideas.intersystems.com/ideas/DPI-I-689) · [Visual Trace recipe and Langfuse comparison](#community-idea-dpi-i-689-llm-tracing-with-interoperability) · [native message bodies](docs/evidence/provider-body-captures.json) · [public OEX association](https://openexchange.intersystems.com/package/SilentShift) |
+| First AI Hub bug | 2 | Credited in official table; vendor bug resolution separate | [Issue #17: standalone reproduction and compiler log](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) |
+| First Developer Community article | 2 | Credited in official table | [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) |
+| Second Developer Community article | 1 | Credited in official table | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
+| Video | 3 | Credited in official table | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
+| Questionnaire | 1 | Credited in official table | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
+| Java PEX | 3 | Credited in official table | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
+| Online demo | 2 | Hosted replay verified; claim pending, not credited | [Open the running native replay](https://34.239.152.223.sslip.io/demo/) · [outside-host and reboot evidence](docs/evidence/demo-nov12/summary.json) · [scope, expiry and known trace warning](docs/ONLINE_DEMO.md). Recorded proposal; live native routing and signed receipt, no fresh model inference |
+| Embedded Python bug report 1 | 2 | Filed; review pending | [Issue #35](https://github.com/intersystems-community/python-bugreports/issues/35) · [standalone reproduction and retained output](docs/launch/bonus-nov12/ep-bug-1/) |
+| Embedded Python bug report 2 | 1 | Filed; review pending | [Issue #36: misleading generated-code error after rejected Python method](https://github.com/intersystems-community/python-bugreports/issues/36) · [reproduction and controls](docs/launch/bonus-nov12/ep-bug-2/) |
 
-[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). No awarded score, ranking, newer build or live hosting is claimed.
+[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). The published bonus credit is recorded above; no overall ranking, prize, newer-build verification or live hosting is claimed.
 
 ## Developer Community articles
 
