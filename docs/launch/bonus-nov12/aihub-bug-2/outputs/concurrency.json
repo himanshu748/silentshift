@@ -1,0 +1,43 @@
+{
+  "command_argv": [
+    "docker",
+    "--context",
+    "colima-silentshift",
+    "exec",
+    "-i",
+    "aihub-bug2-discovery-nov12",
+    "iris",
+    "session",
+    "IRIS",
+    "-U",
+    "USER"
+  ],
+  "stdin": "set tm=##class(%AI.ToolMgr).%New() set sc=tm.RegisterToolSet(\"BugProbe.StreamTools\")\nset failures=0\nfor n=1:1:10 { set x=tm.ExecuteTool(\"ReturnText\",{}) if x.value'=\"Approved amendment: 1 CASE = 12 EA.\" set failures=failures+1 }\nwrite \"REPEAT_CONTROL_FAILURES=\",failures,!\nhalt\n",
+  "workers": [
+    {
+      "worker": 1,
+      "exit_code": 0,
+      "control_passed": true,
+      "calls": 10
+    },
+    {
+      "worker": 2,
+      "exit_code": 0,
+      "control_passed": true,
+      "calls": 10
+    },
+    {
+      "worker": 3,
+      "exit_code": 0,
+      "control_passed": true,
+      "calls": 10
+    },
+    {
+      "worker": 4,
+      "exit_code": 0,
+      "control_passed": true,
+      "calls": 10
+    }
+  ],
+  "elapsed_seconds": 0.121
+}

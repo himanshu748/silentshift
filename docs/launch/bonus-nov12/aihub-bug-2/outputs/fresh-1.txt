@@ -1,0 +1,55 @@
+
+Node: 2b6da6623f5d, Instance: IRIS
+
+USER>
+BUILD=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT
+
+USER>
+CLASS_PRESENT_BEFORE_LOAD=0
+
+USER>
+
+Load started on 11/12/2026 15:31:23
+Loading file /tmp/StreamTools.cls as udl
+Compiling class BugProbe.StreamTools
+Compiling routine BugProbe.StreamTools.1
+Load finished successfully.
+
+USER>
+COMPILE_OK=1
+
+USER>
+
+USER>
+SCHEMA={"tools":[{"name":"ReadStream","description":"Read an evidence stream, received from the tool caller.","source":"iris","provider":"BugProbe.StreamTools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{"data":{"type":"string"}},"required":["data"]},"returns":{"type":"string"}},{"name":"ReturnStream","description":"Return the complete evidence text as a character stream.","source":"iris","provider":"BugProbe.StreamTools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{},"required":[]},"returns":{"type":"string"}},{"name":"ReturnText","description":"Control: the same payload, returned as a string.","source":"iris","provider":"BugProbe.StreamTools","requires_auth":false,"stateful":true,"parameters":{"type":"object","properties":{},"required":[]},"returns":{"type":"string"}}]}
+
+USER>
+DIRECT_STREAM_TEXT=Approved amendment: 1 CASE = 12 EA.
+
+USER>
+DIRECT_READ_TEXT=Approved amendment: 1 CASE = 12 EA.
+
+USER>
+
+USER>
+REGISTER_OK=1
+
+USER>
+CONTROL={"timing":0.000948087,"value":"Approved amendment: 1 CASE = 12 EA."}
+
+USER>
+STREAM_RESULT={"timing":0.000952629,"value":{"%Location":"^CacheStream","AtEnd":false,"Id":"","LineTerminator":"\r\n","RemoveOnClose":false}}
+
+USER>
+STREAM_VALUE_TYPE=object
+
+USER>
+STREAM_PAYLOAD_MATCH=0
+
+USER>
+READ_STREAM_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [INVALID OREF]: <INVALID OREF>ReadStream+1^BugProbe.StreamTools.1, at source: 'Return data.Read() }' at loc: 4
+
+USER>
+CONTROL_AFTER_ERROR={"timing":0.000105713,"value":"Approved amendment: 1 CASE = 12 EA."}
+
+USER>

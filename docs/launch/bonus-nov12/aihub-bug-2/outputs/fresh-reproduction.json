@@ -1,0 +1,461 @@
+{
+  "started_at_utc": "2026-11-12T15:31:19.047735+00:00",
+  "finished_at_utc": "2026-11-12T15:31:34.210070+00:00",
+  "image": "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0",
+  "image_id": "sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713",
+  "architecture": "arm64",
+  "network": "none",
+  "ports_published": false,
+  "source_mounts": [],
+  "provider_requests": 0,
+  "paid_calls": 0,
+  "results": [
+    {
+      "run": 1,
+      "container": "aihub-stream-repro-nov12-1",
+      "container_id": "2b6da6623f5d860dcc1bdfcc053b880ef96848c902b8382fa46f3dfa6be51ea2",
+      "output": "outputs/fresh-1.txt",
+      "output_sha256": "7f06c948309c1cfa9d367d91c63934639941d6c6cc519d1049b42d9e02ad6446",
+      "observations": {
+        "fresh_class_absent": true,
+        "compile_ok": true,
+        "register_ok": true,
+        "direct_stream_ok": true,
+        "direct_read_ok": true,
+        "wrong_result_type": true,
+        "payload_missing": true,
+        "inbound_stream_error": true,
+        "control_after_error_ok": true
+      },
+      "reproduced": true
+    },
+    {
+      "run": 2,
+      "container": "aihub-stream-repro-nov12-2",
+      "container_id": "35b8621c7aa50a438569184d30c25c852fd081b1169158699abc352e92a67d45",
+      "output": "outputs/fresh-2.txt",
+      "output_sha256": "9ed904c373553df6cdc9c74542753eae7a85a119ad99b0bc3dc35355dea45035",
+      "observations": {
+        "fresh_class_absent": true,
+        "compile_ok": true,
+        "register_ok": true,
+        "direct_stream_ok": true,
+        "direct_read_ok": true,
+        "wrong_result_type": true,
+        "payload_missing": true,
+        "inbound_stream_error": true,
+        "control_after_error_ok": true
+      },
+      "reproduced": true
+    },
+    {
+      "run": 3,
+      "container": "aihub-stream-repro-nov12-3",
+      "container_id": "6defaf3ddf57cb2bf90efe6eec18752d8d43766407ffac0968a8be12e34ba846",
+      "output": "outputs/fresh-3.txt",
+      "output_sha256": "385b8ecb496a28c548ab103270e820685a254f9b7c2560c9077fa28150e8588d",
+      "observations": {
+        "fresh_class_absent": true,
+        "compile_ok": true,
+        "register_ok": true,
+        "direct_stream_ok": true,
+        "direct_read_ok": true,
+        "wrong_result_type": true,
+        "payload_missing": true,
+        "inbound_stream_error": true,
+        "control_after_error_ok": true
+      },
+      "reproduced": true
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "image",
+        "inspect",
+        "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0"
+      ],
+      "exit_code": 0,
+      "stdout": "[\n    {\n        \"Id\": \"sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713\",\n        \"RepoTags\": [\n            \"silentshift-iris:2026.3.0AI.154.0\",\n            \"docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0\"\n        ],\n        \"RepoDigests\": [\n            \"silentshift-iris@sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713\",\n            \"docker.iscinternal.com/docker-intersystems/intersystems/iris-community@sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713\"\n        ],\n        \"Comment\": \"FROM 6708598f38bf\",\n        \"Created\": \"2026-09-24T17:58:02.248251947Z\",\n        \"Config\": {\n            \"User\": \"51773\",\n            \"ExposedPorts\": {\n                \"1972/tcp\": {},\n                \"2188/tcp\": {},\n                \"52773/tcp\": {},\n                \"53773/tcp\": {},\n                \"54773/tcp\": {}\n            },\n            \"Env\": [\n                \"ISC_PACKAGE_IRISGROUP=irisowner\",\n                \"ISC_PACKAGE_IRISUSER=irisowner\",\n                \"ISC_PACKAGE_MGRGROUP=irisowner\",\n                \"ISC_PACKAGE_MGRUSER=irisowner\",\n                \"IRISSYS=/home/irisowner/irissys\",\n                \"TINI_VERSION=v0.19.0\",\n                \"ISC_PACKAGE_INSTANCENAME=IRIS\",\n                \"ISC_PACKAGE_INSTALLDIR=/usr/irissys\",\n                \"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/irisowner/bin\",\n                \"PYTHONPATH=/usr/irissys/mgr/python\",\n                \"LANG=en_US.UTF-8\",\n                \"LANGUAGE=en_US.UTF-8\",\n                \"LC_ALL=en_US.UTF-8\"\n            ],\n            \"Entrypoint\": [\n                \"/tini\",\n                \"--\",\n                \"/iris-main\"\n            ],\n            \"WorkingDir\": \"/home/irisowner\",\n            \"Labels\": {\n                \"com.intersystems.adhoc-info\": \"\",\n                \"com.intersystems.platform-version\": \"2026.3.0AI.154.0com\",\n                \"com.intersystems.ports.default.arbiter\": \"2188\",\n                \"com.intersystems.ports.default.superserver\": \"1972\",\n                \"com.intersystems.ports.default.webserver\": \"52773\",\n                \"com.intersystems.ports.default.xdbc\": \"53773\",\n                \"com.intersystems.product-name\": \"IRIS\",\n                \"com.intersystems.product-platform\": \"dockerubuntuarm64\",\n                \"com.intersystems.product-timestamp\": \"Thu Sep 24 2026 16:07:34 America\",\n                \"com.intersystems.product-timestamp.iso8601\": \"2026-09-24T16:07:34Z\",\n                \"description\": \"InterSystems IRIS is a complete cloud-first data platform that makes it easier to build and deploy high-performance, AI-enabled applications that connect data and application silos.\",\n                \"io.buildah.version\": \"1.26.2\",\n                \"maintainer\": \"InterSystems Worldwide Response Center <support@intersystems.com>\",\n                \"name\": \"IRIS\",\n                \"org.opencontainers.image.created\": \"2026-09-24T17:19:43Z\",\n                \"org.opencontainers.image.documentation\": \"https://docs.intersystems.com/\",\n                \"org.opencontainers.image.title\": \"releng-docker-unreleased-built-local/intersystems/iris-community\",\n                \"org.opencontainers.image.vendor\": \"InterSystems\",\n                \"org.opencontainers.image.version\": \"2026.3.0AI.154.0-0-linux-arm64v8\",\n                \"release\": \"2026.3.0AI.154.0-0-linux-arm64v8\",\n                \"summary\": \"InterSystems IRIS\",\n                \"vendor\": \"InterSystems\",\n                \"version\": \"2026.3.0AI.154.0com\"\n            }\n        },\n        \"Architecture\": \"arm64\",\n        \"Variant\": \"v8\",\n        \"Os\": \"linux\",\n        \"Size\": 3416890118,\n        \"RootFS\": {\n            \"Type\": \"layers\",\n            \"Layers\": [\n                \"sha256:8edaba05454265cd17270d38ec146446c640d1d25637413c3da64a3eff296c36\",\n                \"sha256:9c7347e962c836a9483a09308912f0e923070d4642728577eca925eb7bf77f58\",\n                \"sha256:0622e6e259f47dcf407ff2765d8df95eb6621b68b5ae06f40e871434e3d6b886\",\n                \"sha256:cad840908654bd01f00bd6d9f6cf947ef2d9ad68dedad8e849511eb4687b73af\",\n                \"sha256:a0d16f90e322189ea129c4b3fabe2c5d946246b2633fbdf6ec56485d6d6c3ca7\",\n                \"sha256:58586998931f8c3f79f4048f1f5677306a9c0fa9aeda1a7dfb6afe7d568cb491\",\n                \"sha256:740cc3ed767490ceea4bbd6d8a34c19c957a0fa0f9c228ae2d1f824d1d47ca4a\",\n                \"sha256:d65951edd00db678a8344d70ca865868a75ebc83036d64aef96d502fa7a24aec\"\n            ]\n        },\n        \"Metadata\": {\n            \"LastTagTime\": \"2026-11-02T09:47:00.05320044Z\"\n        },\n        \"Descriptor\": {\n            \"mediaType\": \"application/vnd.oci.image.manifest.v1+json\",\n            \"digest\": \"sha256:8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713\",\n            \"size\": 1479,\n            \"annotations\": {\n                \"io.containerd.image.name\": \"docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0\",\n                \"org.opencontainers.image.ref.name\": \"2026.3.0AI.154.0\"\n            }\n        },\n        \"Identity\": {\n            \"Pull\": [\n                {\n                    \"Repository\": \"docker.io/library/silentshift-iris\"\n                }\n            ]\n        }\n    }\n]\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "run",
+        "--pull=never",
+        "-d",
+        "--name",
+        "aihub-stream-repro-nov12-1",
+        "--network",
+        "none",
+        "--memory",
+        "2g",
+        "--cpus",
+        "2",
+        "--shm-size",
+        "256m",
+        "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0",
+        "--check-caps",
+        "false"
+      ],
+      "exit_code": 0,
+      "stdout": "2b6da6623f5d860dcc1bdfcc053b880ef96848c902b8382fa46f3dfa6be51ea2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-1"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-1"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-1"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-1"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n[INFO] Starting Control Process\nGlobal buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\nAllocated 1011MB shared memory\n512MB global buffers, 80MB routine buffers\nThis copy of InterSystems IRIS has been licensed for use exclusively by:\nInterSystems IRIS Community\nCopyright (c) 1986-2026 by InterSystems Corporation\nAny other use is a violation of your license agreement\n\n1 alert(s) during startup. See messages.log for details.\nStarting IRIS\n\n11/12/26-15:31:20:998 (433) 0 [Generic.Event] Global buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\n11/12/26-15:31:21:078 (433) 0 [Generic.Event] Allocated 1011MB shared memory\n11/12/26-15:31:21:078 (433) 0 [Generic.Event] 512MB global buffers, 80MB routine buffers, 64MB journal buffers, 34MB buffer descriptors, 300MB heap, 5MB ECP, 15MB miscellaneous\n11/12/26-15:31:21:079 (433) 0 [SIMD] SIMD optimization level: DEFAULT\n11/12/26-15:31:21:130 (433) 0 [WriteDaemon.UsingWIJFile] Using WIJ file: /usr/irissys/mgr/IRIS.WIJ\n11/12/26-15:31:21:130 (433) 0 [Generic.Event] No journaling info from prior system\n11/12/26-15:31:21:130 (433) 0 [WriteDaemon.CreatingNewWIJ] Creating a new WIJ file\n11/12/26-15:31:21:133 (433) 0 [WriteDaemon.CreatedNewWIJ] New WIJ file created\n11/12/26-15:31:21:135 (433) 0 [Generic.Event] \nStartup of InterSystems IRIS [IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT]\n\tin /usr/irissys/bin/\n\twith mgr: /usr/irissys/mgr\n\twith wij: /usr/irissys/mgr/IRIS.WIJ\n\tfrom: /usr/irissys/mgr/\n  OS=[Linux], version=[#117-Ubuntu SMP PREEMPT_DYNAMIC Thu May  7 17:26:37 UTC 2026], release=[6.8.0-117-generic], machine=[aarch64]\n  nodename=[2b6da6623f5d].\n  numasyncwijbuf: 8, wdwrite_asyncio_max: 64, wijdirectio: on, synctype: 3\n  System Initialized.\n11/12/26-15:31:21:145 (474) 0 [WriteDaemon.Started] Write daemon started.\n11/12/26-15:31:21:304 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/ (SFN 0) read-write.\n11/12/26-15:31:21:309 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:21:309 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:21:310 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:21:310 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:21:949 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/irislib/ (SFN 1) read-only. Database label is marked read-only. \n11/12/26-15:31:21:952 (485) 0 [Utility.Event] Instance 'IRIS' starting on node 2b6da6623f5d by user 'irisowner' on 11/12/2026 15:31:21.952 UTC\n11/12/26-15:31:21:952 (485) 0 [Utility.Event] Using parameters from file '/usr/irissys/iris.cpf'\n11/12/26-15:31:21:954 (485) 0 [Utility.Event] Loading DLLs\n11/12/26-15:31:21:955 (485) 0 [Utility.Event] Switching to temporary %SYS Namespace\n11/12/26-15:31:21:969 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irissecurity/ (SFN 2) read-write.\n11/12/26-15:31:21:971 (485) 0 [Utility.Event] Loading Locale enuw (English, United States, Unicode) from objects\n11/12/26-15:31:22:071 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irislocaldata/ (SFN 3) read-write.\n11/12/26-15:31:22:076 (485) 0 [Utility.Event] Using OpenSSL 3.0.13 30 Jan 2024\n11/12/26-15:31:22:122 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/iristemp/ (SFN 4) read-write.\n11/12/26-15:31:22:123 (485) 0 [Utility.Event] /usr/irissys/mgr/iristemp/ initialized as IRISTEMP\n11/12/26-15:31:22:125 (485) 0 [Utility.Event] Switching to default %SYS Namespace\n11/12/26-15:31:22:220 (486) 0 [Utility.Event] Log Monitor Started\n11/12/26-15:31:22:352 (487) 0 [Utility.Event] Clean Daemon Started\n11/12/26-15:31:22:359 (485) 0 [Utility.Event] No archives configured\n11/12/26-15:31:22:378 (485) 0 [Utility.Event] Performing Journal Recovery\n11/12/26-15:31:22:379 (485) 0 [Utility.Event] Graceful system shutdown, journal restore not required\n11/12/26-15:31:22:379 (485) 0 [Utility.Event] Graceful system shutdown, transaction rollback not required\n11/12/26-15:31:22:422 (485) 0 [Utility.Event] START: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:22:456 (485) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling started to: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:22:456 (485) 0 [Utility.Event] Journaling to /usr/irissys/mgr/journal/20261112.001 started.\n11/12/26-15:31:22:457 (485) 0 [Utility.Event] Processing WorkQueues section\n11/12/26-15:31:22:459 (485) 0 [Utility.Event] Processing Startup section\n11/12/26-15:31:22:479 (488) 0 [Utility.Event] Purging old application errors and old SQL diagnostic logs\n11/12/26-15:31:22:504 (485) 0 [Utility.Event] Processing config section\n11/12/26-15:31:22:505 (488) 0 [Utility.Event] Purging old SQL diagnostic logs\n11/12/26-15:31:22:522 (490) 0 [Utility.Event] LMF Info:  Licensed for 8 users.\n11/12/26-15:31:22:522 (490) 0 [Utility.Event] LMF Info: License Key Order Number is 54702\n11/12/26-15:31:22:539 (485) 0 [Utility.Event] Initializing Security system\n11/12/26-15:31:22:589 (485) 0 [Utility.Event] Processing Network section\n11/12/26-15:31:22:590 (485) 0 [Utility.Event] Activating Network\n11/12/26-15:31:22:603 (485) 0 [Utility.Event] Processing Databases section\n11/12/26-15:31:22:650 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irisaudit/ (SFN 5) read-write.\n11/12/26-15:31:22:658 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irismetrics/ (SFN 6) read-write.\n11/12/26-15:31:22:660 (485) 0 [Utility.Event] Processing Namespaces section\n11/12/26-15:31:22:660 (485) 0 [Utility.Event] Namespaces are up to date\n11/12/26-15:31:22:660 (485) 0 [Utility.Event] Activating namespaces\n11/12/26-15:31:22:660 (485) 0 [Utility.Event] Activating new namespace map\n11/12/26-15:31:22:671 (485) 0 [Utility.Event] Namespace changes have been activated\n11/12/26-15:31:22:680 (493) 0 [Utility.Event] Starting superserver on port 1972\n11/12/26-15:31:22:680 (485) 0 [Utility.Event] Network Lock Upload Phase Starting\n11/12/26-15:31:22:680 (485) 0 [Utility.Event] Lock Upload Phase Complete\n11/12/26-15:31:22:680 (485) 0 [Utility.Event] Processing Miscellaneous section\n11/12/26-15:31:22:697 (496) 0 [Utility.Event] Starting Servers\n11/12/26-15:31:22:698 (485) 0 [Utility.Event] Processing Devices section\n11/12/26-15:31:22:700 (485) 0 [Utility.Event] Processing DeviceSubTypes section\n11/12/26-15:31:22:700 (485) 0 [Utility.Event] Processing MagTape section\n11/12/26-15:31:22:701 (485) 0 [Utility.Event] Processing IO section\n11/12/26-15:31:22:702 (485) 0 [Utility.Event] Processing SQL section\n11/12/26-15:31:22:703 (485) 0 [Utility.Event] Processing Macro Pre-Processor (MPP) section\n11/12/26-15:31:22:703 (485) 0 [Utility.Event] Processing OS Package Requirements section\n11/12/26-15:31:22:735 (485) 0 [Generic.Event] Auditing to /usr/irissys/mgr/irisaudit/\n11/12/26-15:31:22:769 (485) 0 [Utility.Event] Rebuilding Extent index for namespace USER\n11/12/26-15:31:22:778 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/user/ (SFN 7) read-write.\n11/12/26-15:31:22:811 (496) 0 [Utility.Event] Private webserver started on 52773\n11/12/26-15:31:22:811 (496) 0 [Utility.Event] Processing Shadows section (this system as shadow)\n11/12/26-15:31:22:812 (496) 0 [Utility.Event] Processing Monitor section\n11/12/26-15:31:22:821 (648) 0 [Utility.Event] WorkQueue: Starting work queue daemon parent=496\n11/12/26-15:31:22:843 (496) 0 [Utility.Event] Processing Logging section\n11/12/26-15:31:22:846 (650) 0 [Utility.Event] [SYSTEM MONITOR] System Monitor started in %SYS\n11/12/26-15:31:22:853 (496) 0 [Utility.Event] Shard license: 0\n11/12/26-15:31:22:886 (476) 0 [Generic.Event] Journal log has been changed from edition 1 to 2\n11/12/26-15:31:22:891 (496) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling switched to: /usr/irissys/mgr/journal/20261112.002\n11/12/26-15:31:23:614 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/enslib/ (SFN 8) read-only. Database label is marked read-only. \n11/12/26-15:31:23:745 (484) 0 [Database.StartExpansion] Starting Expansion for database /usr/irissys/mgr/user/. 10 MB requested.\n11/12/26-15:31:23:748 (484) 0 [Database.FullExpansion] Expansion completed for database /usr/irissys/mgr/user/. Expanded by 10 MB. New size is 11 MB.\n11/12/26-15:31:23:749 (485) 0 [Utility.Event] Rebuild of Extent index completed\n11/12/26-15:31:23:749 (485) 0 [Utility.Event] Enabling logons\n11/12/26-15:31:23:750 (485) 0 [Utility.Event] Interoperability System including auto-start of productions Starting\n11/12/26-15:31:23:751 (485) 0 [Utility.Event] Initializing Interoperability during system startup\n11/12/26-15:31:23:755 (485) 0 [Utility.Event] Interoperability System Startup Complete\n11/12/26-15:31:23:755 (485) 2 [Utility.Event] Error: ERROR #5002: ObjectScript error: <METHOD DOES NOT EXIST>Sharding+2^STU *Sharding,SYS.ICM\n[INFO] ...started InterSystems IRIS instance IRIS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "cp",
+        "/Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift/docs/launch/bonus-nov12/aihub-bug-2/StreamTools.cls",
+        "aihub-stream-repro-nov12-1:/tmp/StreamTools.cls"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "aihub-stream-repro-nov12-1",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "USER"
+      ],
+      "exit_code": 0,
+      "stdout": "\nNode: 2b6da6623f5d, Instance: IRIS\n\nUSER>\nBUILD=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT\n\nUSER>\nCLASS_PRESENT_BEFORE_LOAD=0\n\nUSER>\n\nLoad started on 11/12/2026 15:31:23\nLoading file /tmp/StreamTools.cls as udl\nCompiling class BugProbe.StreamTools\nCompiling routine BugProbe.StreamTools.1\nLoad finished successfully.\n\nUSER>\nCOMPILE_OK=1\n\nUSER>\n\nUSER>\nSCHEMA={\"tools\":[{\"name\":\"ReadStream\",\"description\":\"Read an evidence stream, received from the tool caller.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"string\"}},\"required\":[\"data\"]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnStream\",\"description\":\"Return the complete evidence text as a character stream.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnText\",\"description\":\"Control: the same payload, returned as a string.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}}]}\n\nUSER>\nDIRECT_STREAM_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\nDIRECT_READ_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\n\nUSER>\nREGISTER_OK=1\n\nUSER>\nCONTROL={\"timing\":0.000948087,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\nSTREAM_RESULT={\"timing\":0.000952629,\"value\":{\"%Location\":\"^CacheStream\",\"AtEnd\":false,\"Id\":\"\",\"LineTerminator\":\"\\r\\n\",\"RemoveOnClose\":false}}\n\nUSER>\nSTREAM_VALUE_TYPE=object\n\nUSER>\nSTREAM_PAYLOAD_MATCH=0\n\nUSER>\nREAD_STREAM_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [INVALID OREF]: <INVALID OREF>ReadStream+1^BugProbe.StreamTools.1, at source: 'Return data.Read() }' at loc: 4\n\nUSER>\nCONTROL_AFTER_ERROR={\"timing\":0.000105713,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "stop",
+        "aihub-stream-repro-nov12-1"
+      ],
+      "exit_code": 0,
+      "stdout": "aihub-stream-repro-nov12-1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "run",
+        "--pull=never",
+        "-d",
+        "--name",
+        "aihub-stream-repro-nov12-2",
+        "--network",
+        "none",
+        "--memory",
+        "2g",
+        "--cpus",
+        "2",
+        "--shm-size",
+        "256m",
+        "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0",
+        "--check-caps",
+        "false"
+      ],
+      "exit_code": 0,
+      "stdout": "35b8621c7aa50a438569184d30c25c852fd081b1169158699abc352e92a67d45\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n[INFO] Starting Control Process\nGlobal buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\nAllocated 1011MB shared memory\n512MB global buffers, 80MB routine buffers\nThis copy of InterSystems IRIS has been licensed for use exclusively by:\nInterSystems IRIS Community\nCopyright (c) 1986-2026 by InterSystems Corporation\nAny other use is a violation of your license agreement\n\n1 alert(s) during startup. See messages.log for details.\nStarting IRIS\n\n11/12/26-15:31:24:805 (433) 0 [Generic.Event] Global buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\n11/12/26-15:31:24:841 (433) 0 [Generic.Event] Allocated 1011MB shared memory\n11/12/26-15:31:24:841 (433) 0 [Generic.Event] 512MB global buffers, 80MB routine buffers, 64MB journal buffers, 34MB buffer descriptors, 300MB heap, 5MB ECP, 15MB miscellaneous\n11/12/26-15:31:24:841 (433) 0 [SIMD] SIMD optimization level: DEFAULT\n11/12/26-15:31:24:875 (433) 0 [WriteDaemon.UsingWIJFile] Using WIJ file: /usr/irissys/mgr/IRIS.WIJ\n11/12/26-15:31:24:875 (433) 0 [Generic.Event] No journaling info from prior system\n11/12/26-15:31:24:875 (433) 0 [WriteDaemon.CreatingNewWIJ] Creating a new WIJ file\n11/12/26-15:31:24:879 (433) 0 [WriteDaemon.CreatedNewWIJ] New WIJ file created\n11/12/26-15:31:24:881 (433) 0 [Generic.Event] \nStartup of InterSystems IRIS [IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT]\n\tin /usr/irissys/bin/\n\twith mgr: /usr/irissys/mgr\n\twith wij: /usr/irissys/mgr/IRIS.WIJ\n\tfrom: /usr/irissys/mgr/\n  OS=[Linux], version=[#117-Ubuntu SMP PREEMPT_DYNAMIC Thu May  7 17:26:37 UTC 2026], release=[6.8.0-117-generic], machine=[aarch64]\n  nodename=[35b8621c7aa5].\n  numasyncwijbuf: 8, wdwrite_asyncio_max: 64, wijdirectio: on, synctype: 3\n  System Initialized.\n11/12/26-15:31:24:891 (474) 0 [WriteDaemon.Started] Write daemon started.\n11/12/26-15:31:25:086 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/ (SFN 0) read-write.\n11/12/26-15:31:25:089 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:25:089 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:25:089 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:25:089 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:26:495 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/irislib/ (SFN 1) read-only. Database label is marked read-only. \n11/12/26-15:31:26:497 (485) 0 [Utility.Event] Instance 'IRIS' starting on node 35b8621c7aa5 by user 'irisowner' on 11/12/2026 15:31:26.497 UTC\n11/12/26-15:31:26:497 (485) 0 [Utility.Event] Using parameters from file '/usr/irissys/iris.cpf'\n11/12/26-15:31:26:498 (485) 0 [Utility.Event] Loading DLLs\n11/12/26-15:31:26:498 (485) 0 [Utility.Event] Switching to temporary %SYS Namespace\n11/12/26-15:31:26:507 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irissecurity/ (SFN 2) read-write.\n11/12/26-15:31:26:508 (485) 0 [Utility.Event] Loading Locale enuw (English, United States, Unicode) from objects\n11/12/26-15:31:26:546 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irislocaldata/ (SFN 3) read-write.\n11/12/26-15:31:26:547 (485) 0 [Utility.Event] Using OpenSSL 3.0.13 30 Jan 2024\n11/12/26-15:31:26:588 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/iristemp/ (SFN 4) read-write.\n11/12/26-15:31:26:588 (485) 0 [Utility.Event] /usr/irissys/mgr/iristemp/ initialized as IRISTEMP\n11/12/26-15:31:26:589 (485) 0 [Utility.Event] Switching to default %SYS Namespace\n11/12/26-15:31:26:598 (486) 0 [Utility.Event] Log Monitor Started\n11/12/26-15:31:26:710 (487) 0 [Utility.Event] Clean Daemon Started\n11/12/26-15:31:26:714 (485) 0 [Utility.Event] No archives configured\n11/12/26-15:31:26:716 (485) 0 [Utility.Event] Performing Journal Recovery\n11/12/26-15:31:26:717 (485) 0 [Utility.Event] Graceful system shutdown, journal restore not required\n11/12/26-15:31:26:717 (485) 0 [Utility.Event] Graceful system shutdown, transaction rollback not required\n11/12/26-15:31:26:722 (485) 0 [Utility.Event] START: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:26:731 (485) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling started to: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:26:731 (485) 0 [Utility.Event] Journaling to /usr/irissys/mgr/journal/20261112.001 started.\n11/12/26-15:31:26:731 (485) 0 [Utility.Event] Processing WorkQueues section\n11/12/26-15:31:26:732 (485) 0 [Utility.Event] Processing Startup section\n11/12/26-15:31:26:736 (488) 0 [Utility.Event] Purging old application errors and old SQL diagnostic logs\n11/12/26-15:31:26:740 (485) 0 [Utility.Event] Processing config section\n11/12/26-15:31:26:741 (488) 0 [Utility.Event] Purging old SQL diagnostic logs\n11/12/26-15:31:26:745 (490) 0 [Utility.Event] LMF Info:  Licensed for 8 users.\n11/12/26-15:31:26:745 (490) 0 [Utility.Event] LMF Info: License Key Order Number is 54702\n11/12/26-15:31:26:749 (485) 0 [Utility.Event] Initializing Security system\n11/12/26-15:31:26:762 (485) 0 [Utility.Event] Processing Network section\n11/12/26-15:31:26:763 (485) 0 [Utility.Event] Activating Network\n11/12/26-15:31:26:766 (485) 0 [Utility.Event] Processing Databases section\n11/12/26-15:31:26:796 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irisaudit/ (SFN 5) read-write.\n11/12/26-15:31:26:802 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irismetrics/ (SFN 6) read-write.\n11/12/26-15:31:26:802 (485) 0 [Utility.Event] Processing Namespaces section\n11/12/26-15:31:26:802 (485) 0 [Utility.Event] Namespaces are up to date\n11/12/26-15:31:26:802 (485) 0 [Utility.Event] Activating namespaces\n11/12/26-15:31:26:803 (485) 0 [Utility.Event] Activating new namespace map\n11/12/26-15:31:26:809 (485) 0 [Utility.Event] Namespace changes have been activated\n11/12/26-15:31:26:813 (493) 0 [Utility.Event] Starting superserver on port 1972\n11/12/26-15:31:26:814 (485) 0 [Utility.Event] Network Lock Upload Phase Starting\n11/12/26-15:31:26:814 (485) 0 [Utility.Event] Lock Upload Phase Complete\n11/12/26-15:31:26:814 (485) 0 [Utility.Event] Processing Miscellaneous section\n11/12/26-15:31:26:823 (496) 0 [Utility.Event] Starting Servers\n11/12/26-15:31:26:823 (485) 0 [Utility.Event] Processing Devices section\n11/12/26-15:31:26:827 (485) 0 [Utility.Event] Processing DeviceSubTypes section\n11/12/26-15:31:26:827 (485) 0 [Utility.Event] Processing MagTape section\n11/12/26-15:31:26:830 (485) 0 [Utility.Event] Processing IO section\n11/12/26-15:31:26:830 (485) 0 [Utility.Event] Processing SQL section\n11/12/26-15:31:26:831 (485) 0 [Utility.Event] Processing Macro Pre-Processor (MPP) section\n11/12/26-15:31:26:832 (485) 0 [Utility.Event] Processing OS Package Requirements section\n11/12/26-15:31:26:859 (485) 0 [Generic.Event] Auditing to /usr/irissys/mgr/irisaudit/\n11/12/26-15:31:26:878 (485) 0 [Utility.Event] Rebuilding Extent index for namespace USER\n11/12/26-15:31:26:885 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/user/ (SFN 7) read-write.\n11/12/26-15:31:26:939 (496) 0 [Utility.Event] Private webserver started on 52773\n11/12/26-15:31:26:939 (496) 0 [Utility.Event] Processing Shadows section (this system as shadow)\n11/12/26-15:31:26:940 (496) 0 [Utility.Event] Processing Monitor section\n11/12/26-15:31:26:946 (648) 0 [Utility.Event] WorkQueue: Starting work queue daemon parent=496\n11/12/26-15:31:26:961 (496) 0 [Utility.Event] Processing Logging section\n11/12/26-15:31:26:962 (496) 0 [Utility.Event] Shard license: 0\n11/12/26-15:31:26:963 (650) 0 [Utility.Event] [SYSTEM MONITOR] System Monitor started in %SYS\n11/12/26-15:31:26:980 (476) 0 [Generic.Event] Journal log has been changed from edition 1 to 2\n11/12/26-15:31:26:983 (496) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling switched to: /usr/irissys/mgr/journal/20261112.002\n11/12/26-15:31:27:621 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/enslib/ (SFN 8) read-only. Database label is marked read-only. \n11/12/26-15:31:27:762 (484) 0 [Database.StartExpansion] Starting Expansion for database /usr/irissys/mgr/user/. 10 MB requested.\n11/12/26-15:31:27:765 (484) 0 [Database.FullExpansion] Expansion completed for database /usr/irissys/mgr/user/. Expanded by 10 MB. New size is 11 MB.\n11/12/26-15:31:27:765 (485) 0 [Utility.Event] Rebuild of Extent index completed\n11/12/26-15:31:27:766 (485) 0 [Utility.Event] Enabling logons\n11/12/26-15:31:27:767 (485) 0 [Utility.Event] Interoperability System including auto-start of productions Starting\n11/12/26-15:31:27:768 (485) 0 [Utility.Event] Initializing Interoperability during system startup\n11/12/26-15:31:27:772 (485) 0 [Utility.Event] Interoperability System Startup Complete\n11/12/26-15:31:27:772 (485) 2 [Utility.Event] Error: ERROR #5002: ObjectScript error: <METHOD DOES NOT EXIST>Sharding+2^STU *Sharding,SYS.ICM\n[INFO] ...started InterSystems IRIS instance IRIS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "cp",
+        "/Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift/docs/launch/bonus-nov12/aihub-bug-2/StreamTools.cls",
+        "aihub-stream-repro-nov12-2:/tmp/StreamTools.cls"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "aihub-stream-repro-nov12-2",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "USER"
+      ],
+      "exit_code": 0,
+      "stdout": "\nNode: 35b8621c7aa5, Instance: IRIS\n\nUSER>\nBUILD=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT\n\nUSER>\nCLASS_PRESENT_BEFORE_LOAD=0\n\nUSER>\n\nLoad started on 11/12/2026 15:31:28\nLoading file /tmp/StreamTools.cls as udl\nCompiling class BugProbe.StreamTools\nCompiling routine BugProbe.StreamTools.1\nLoad finished successfully.\n\nUSER>\nCOMPILE_OK=1\n\nUSER>\n\nUSER>\nSCHEMA={\"tools\":[{\"name\":\"ReadStream\",\"description\":\"Read an evidence stream, received from the tool caller.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"string\"}},\"required\":[\"data\"]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnStream\",\"description\":\"Return the complete evidence text as a character stream.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnText\",\"description\":\"Control: the same payload, returned as a string.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}}]}\n\nUSER>\nDIRECT_STREAM_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\nDIRECT_READ_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\n\nUSER>\nREGISTER_OK=1\n\nUSER>\nCONTROL={\"timing\":0.000778284,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\nSTREAM_RESULT={\"timing\":0.000865746,\"value\":{\"%Location\":\"^CacheStream\",\"AtEnd\":false,\"Id\":\"\",\"LineTerminator\":\"\\r\\n\",\"RemoveOnClose\":false}}\n\nUSER>\nSTREAM_VALUE_TYPE=object\n\nUSER>\nSTREAM_PAYLOAD_MATCH=0\n\nUSER>\nREAD_STREAM_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [INVALID OREF]: <INVALID OREF>ReadStream+1^BugProbe.StreamTools.1, at source: 'Return data.Read() }' at loc: 4\n\nUSER>\nCONTROL_AFTER_ERROR={\"timing\":0.000034293,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "stop",
+        "aihub-stream-repro-nov12-2"
+      ],
+      "exit_code": 0,
+      "stdout": "aihub-stream-repro-nov12-2\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "run",
+        "--pull=never",
+        "-d",
+        "--name",
+        "aihub-stream-repro-nov12-3",
+        "--network",
+        "none",
+        "--memory",
+        "2g",
+        "--cpus",
+        "2",
+        "--shm-size",
+        "256m",
+        "docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.154.0",
+        "--check-caps",
+        "false"
+      ],
+      "exit_code": 0,
+      "stdout": "6defaf3ddf57cb2bf90efe6eec18752d8d43766407ffac0968a8be12e34ba846\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "logs",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "[INFO] Writing status to file: /home/irisowner/irissys/iscagent.status\nReading configuration from file: /home/irisowner/irissys/iscagent.conf\nISCAgent[20]: Starting\nISCAgent[21]: Starting ApplicationServer on *:2188\n[INFO] Starting InterSystems IRIS instance IRIS...\n[INFO] Starting Control Process\nGlobal buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\nAllocated 1011MB shared memory\n512MB global buffers, 80MB routine buffers\nThis copy of InterSystems IRIS has been licensed for use exclusively by:\nInterSystems IRIS Community\nCopyright (c) 1986-2026 by InterSystems Corporation\nAny other use is a violation of your license agreement\n\n1 alert(s) during startup. See messages.log for details.\nStarting IRIS\n\n11/12/26-15:31:29:656 (433) 0 [Generic.Event] Global buffer setting requires attention.  Auto-selected 25% of the (2048 MB) total memory in this cgroup\n11/12/26-15:31:29:687 (433) 0 [Generic.Event] Allocated 1011MB shared memory\n11/12/26-15:31:29:687 (433) 0 [Generic.Event] 512MB global buffers, 80MB routine buffers, 64MB journal buffers, 34MB buffer descriptors, 300MB heap, 5MB ECP, 15MB miscellaneous\n11/12/26-15:31:29:687 (433) 0 [SIMD] SIMD optimization level: DEFAULT\n11/12/26-15:31:29:714 (433) 0 [WriteDaemon.UsingWIJFile] Using WIJ file: /usr/irissys/mgr/IRIS.WIJ\n11/12/26-15:31:29:714 (433) 0 [Generic.Event] No journaling info from prior system\n11/12/26-15:31:29:714 (433) 0 [WriteDaemon.CreatingNewWIJ] Creating a new WIJ file\n11/12/26-15:31:29:717 (433) 0 [WriteDaemon.CreatedNewWIJ] New WIJ file created\n11/12/26-15:31:29:718 (433) 0 [Generic.Event] \nStartup of InterSystems IRIS [IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT]\n\tin /usr/irissys/bin/\n\twith mgr: /usr/irissys/mgr\n\twith wij: /usr/irissys/mgr/IRIS.WIJ\n\tfrom: /usr/irissys/mgr/\n  OS=[Linux], version=[#117-Ubuntu SMP PREEMPT_DYNAMIC Thu May  7 17:26:37 UTC 2026], release=[6.8.0-117-generic], machine=[aarch64]\n  nodename=[6defaf3ddf57].\n  numasyncwijbuf: 8, wdwrite_asyncio_max: 64, wijdirectio: on, synctype: 3\n  System Initialized.\n11/12/26-15:31:29:728 (474) 0 [WriteDaemon.Started] Write daemon started.\n11/12/26-15:31:29:834 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/ (SFN 0) read-write.\n11/12/26-15:31:29:836 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:29:836 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:29:837 (485) 0 [Generic.Event] getsubclass: cannot load cls(%SYSTEM.Process) in an implied Namespace\n11/12/26-15:31:29:837 (485) 1 [Utility.Event] Error: <CLASS DOES NOT EXIST>GetCacheDirs+24^STU *%SYSTEM.Process getting IRISTEMP and IRISLOCALDATA directories, using defaults\n11/12/26-15:31:31:279 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/irislib/ (SFN 1) read-only. Database label is marked read-only. \n11/12/26-15:31:31:280 (485) 0 [Utility.Event] Instance 'IRIS' starting on node 6defaf3ddf57 by user 'irisowner' on 11/12/2026 15:31:31.280 UTC\n11/12/26-15:31:31:280 (485) 0 [Utility.Event] Using parameters from file '/usr/irissys/iris.cpf'\n11/12/26-15:31:31:280 (485) 0 [Utility.Event] Loading DLLs\n11/12/26-15:31:31:280 (485) 0 [Utility.Event] Switching to temporary %SYS Namespace\n11/12/26-15:31:31:297 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irissecurity/ (SFN 2) read-write.\n11/12/26-15:31:31:298 (485) 0 [Utility.Event] Loading Locale enuw (English, United States, Unicode) from objects\n11/12/26-15:31:31:353 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irislocaldata/ (SFN 3) read-write.\n11/12/26-15:31:31:354 (485) 0 [Utility.Event] Using OpenSSL 3.0.13 30 Jan 2024\n11/12/26-15:31:31:391 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/iristemp/ (SFN 4) read-write.\n11/12/26-15:31:31:391 (485) 0 [Utility.Event] /usr/irissys/mgr/iristemp/ initialized as IRISTEMP\n11/12/26-15:31:31:392 (485) 0 [Utility.Event] Switching to default %SYS Namespace\n11/12/26-15:31:31:400 (486) 0 [Utility.Event] Log Monitor Started\n11/12/26-15:31:31:507 (487) 0 [Utility.Event] Clean Daemon Started\n11/12/26-15:31:31:509 (485) 0 [Utility.Event] No archives configured\n11/12/26-15:31:31:511 (485) 0 [Utility.Event] Performing Journal Recovery\n11/12/26-15:31:31:511 (485) 0 [Utility.Event] Graceful system shutdown, journal restore not required\n11/12/26-15:31:31:511 (485) 0 [Utility.Event] Graceful system shutdown, transaction rollback not required\n11/12/26-15:31:31:515 (485) 0 [Utility.Event] START: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:31:521 (485) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling started to: /usr/irissys/mgr/journal/20261112.001\n11/12/26-15:31:31:521 (485) 0 [Utility.Event] Journaling to /usr/irissys/mgr/journal/20261112.001 started.\n11/12/26-15:31:31:521 (485) 0 [Utility.Event] Processing WorkQueues section\n11/12/26-15:31:31:522 (485) 0 [Utility.Event] Processing Startup section\n11/12/26-15:31:31:527 (488) 0 [Utility.Event] Purging old application errors and old SQL diagnostic logs\n11/12/26-15:31:31:529 (488) 0 [Utility.Event] Purging old SQL diagnostic logs\n11/12/26-15:31:31:530 (485) 0 [Utility.Event] Processing config section\n11/12/26-15:31:31:534 (490) 0 [Utility.Event] LMF Info:  Licensed for 8 users.\n11/12/26-15:31:31:534 (490) 0 [Utility.Event] LMF Info: License Key Order Number is 54702\n11/12/26-15:31:31:537 (485) 0 [Utility.Event] Initializing Security system\n11/12/26-15:31:31:549 (485) 0 [Utility.Event] Processing Network section\n11/12/26-15:31:31:550 (485) 0 [Utility.Event] Activating Network\n11/12/26-15:31:31:553 (485) 0 [Utility.Event] Processing Databases section\n11/12/26-15:31:31:574 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irisaudit/ (SFN 5) read-write.\n11/12/26-15:31:31:579 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/irismetrics/ (SFN 6) read-write.\n11/12/26-15:31:31:579 (485) 0 [Utility.Event] Processing Namespaces section\n11/12/26-15:31:31:579 (485) 0 [Utility.Event] Namespaces are up to date\n11/12/26-15:31:31:579 (485) 0 [Utility.Event] Activating namespaces\n11/12/26-15:31:31:579 (485) 0 [Utility.Event] Activating new namespace map\n11/12/26-15:31:31:585 (485) 0 [Utility.Event] Namespace changes have been activated\n11/12/26-15:31:31:590 (493) 0 [Utility.Event] Starting superserver on port 1972\n11/12/26-15:31:31:590 (485) 0 [Utility.Event] Network Lock Upload Phase Starting\n11/12/26-15:31:31:590 (485) 0 [Utility.Event] Lock Upload Phase Complete\n11/12/26-15:31:31:590 (485) 0 [Utility.Event] Processing Miscellaneous section\n11/12/26-15:31:31:598 (496) 0 [Utility.Event] Starting Servers\n11/12/26-15:31:31:598 (485) 0 [Utility.Event] Processing Devices section\n11/12/26-15:31:31:600 (485) 0 [Utility.Event] Processing DeviceSubTypes section\n11/12/26-15:31:31:601 (485) 0 [Utility.Event] Processing MagTape section\n11/12/26-15:31:31:601 (485) 0 [Utility.Event] Processing IO section\n11/12/26-15:31:31:602 (485) 0 [Utility.Event] Processing SQL section\n11/12/26-15:31:31:603 (485) 0 [Utility.Event] Processing Macro Pre-Processor (MPP) section\n11/12/26-15:31:31:604 (485) 0 [Utility.Event] Processing OS Package Requirements section\n11/12/26-15:31:31:623 (485) 0 [Generic.Event] Auditing to /usr/irissys/mgr/irisaudit/\n11/12/26-15:31:31:636 (485) 0 [Utility.Event] Rebuilding Extent index for namespace USER\n11/12/26-15:31:31:642 (485) 0 [Database.MountedRW] Mounted database /usr/irissys/mgr/user/ (SFN 7) read-write.\n11/12/26-15:31:31:708 (496) 0 [Utility.Event] Private webserver started on 52773\n11/12/26-15:31:31:708 (496) 0 [Utility.Event] Processing Shadows section (this system as shadow)\n11/12/26-15:31:31:709 (496) 0 [Utility.Event] Processing Monitor section\n11/12/26-15:31:31:716 (648) 0 [Utility.Event] WorkQueue: Starting work queue daemon parent=496\n11/12/26-15:31:31:727 (496) 0 [Utility.Event] Processing Logging section\n11/12/26-15:31:31:728 (496) 0 [Utility.Event] Shard license: 0\n11/12/26-15:31:31:728 (650) 0 [Utility.Event] [SYSTEM MONITOR] System Monitor started in %SYS\n11/12/26-15:31:31:751 (476) 0 [Generic.Event] Journal log has been changed from edition 1 to 2\n11/12/26-15:31:31:755 (496) 0 [Generic.Event] INTERSYSTEMS IRIS JOURNALING SYSTEM MESSAGE\nJournaling switched to: /usr/irissys/mgr/journal/20261112.002\n11/12/26-15:31:32:478 (485) 0 [Database.MountedRO] Mounted database /usr/irissys/mgr/enslib/ (SFN 8) read-only. Database label is marked read-only. \n11/12/26-15:31:32:617 (484) 0 [Database.StartExpansion] Starting Expansion for database /usr/irissys/mgr/user/. 10 MB requested.\n11/12/26-15:31:32:619 (484) 0 [Database.FullExpansion] Expansion completed for database /usr/irissys/mgr/user/. Expanded by 10 MB. New size is 11 MB.\n11/12/26-15:31:32:620 (485) 0 [Utility.Event] Rebuild of Extent index completed\n11/12/26-15:31:32:621 (485) 0 [Utility.Event] Enabling logons\n11/12/26-15:31:32:622 (485) 0 [Utility.Event] Interoperability System including auto-start of productions Starting\n11/12/26-15:31:32:623 (485) 0 [Utility.Event] Initializing Interoperability during system startup\n11/12/26-15:31:32:628 (485) 0 [Utility.Event] Interoperability System Startup Complete\n11/12/26-15:31:32:628 (485) 2 [Utility.Event] Error: ERROR #5002: ObjectScript error: <METHOD DOES NOT EXIST>Sharding+2^STU *Sharding,SYS.ICM\n[INFO] ...started InterSystems IRIS instance IRIS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "cp",
+        "/Users/himanshujha/Documents/Codex/2026-11-02/files-pasted-by-the-user-codex/outputs/silentshift/docs/launch/bonus-nov12/aihub-bug-2/StreamTools.cls",
+        "aihub-stream-repro-nov12-3:/tmp/StreamTools.cls"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "exec",
+        "-i",
+        "aihub-stream-repro-nov12-3",
+        "iris",
+        "session",
+        "IRIS",
+        "-U",
+        "USER"
+      ],
+      "exit_code": 0,
+      "stdout": "\nNode: 6defaf3ddf57, Instance: IRIS\n\nUSER>\nBUILD=IRIS for UNIX (Ubuntu Server LTS for ARM64 Containers) 2026.3.0AI (Build 154U) Thu Sep 24 2026 10:05:18 EDT\n\nUSER>\nCLASS_PRESENT_BEFORE_LOAD=0\n\nUSER>\n\nLoad started on 11/12/2026 15:31:33\nLoading file /tmp/StreamTools.cls as udl\nCompiling class BugProbe.StreamTools\nCompiling routine BugProbe.StreamTools.1\nLoad finished successfully.\n\nUSER>\nCOMPILE_OK=1\n\nUSER>\n\nUSER>\nSCHEMA={\"tools\":[{\"name\":\"ReadStream\",\"description\":\"Read an evidence stream, received from the tool caller.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"string\"}},\"required\":[\"data\"]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnStream\",\"description\":\"Return the complete evidence text as a character stream.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}},{\"name\":\"ReturnText\",\"description\":\"Control: the same payload, returned as a string.\",\"source\":\"iris\",\"provider\":\"BugProbe.StreamTools\",\"requires_auth\":false,\"stateful\":true,\"parameters\":{\"type\":\"object\",\"properties\":{},\"required\":[]},\"returns\":{\"type\":\"string\"}}]}\n\nUSER>\nDIRECT_STREAM_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\nDIRECT_READ_TEXT=Approved amendment: 1 CASE = 12 EA.\n\nUSER>\n\nUSER>\nREGISTER_OK=1\n\nUSER>\nCONTROL={\"timing\":0.000776698,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\nSTREAM_RESULT={\"timing\":0.000936661,\"value\":{\"%Location\":\"^CacheStream\",\"AtEnd\":false,\"Id\":\"\",\"LineTerminator\":\"\\r\\n\",\"RemoveOnClose\":false}}\n\nUSER>\nSTREAM_VALUE_TYPE=object\n\nUSER>\nSTREAM_PAYLOAD_MATCH=0\n\nUSER>\nREAD_STREAM_ERROR=ERROR <%AICore>ToolExecutionFailed: Tool execution failed: IRIS error [INVALID OREF]: <INVALID OREF>ReadStream+1^BugProbe.StreamTools.1, at source: 'Return data.Read() }' at loc: 4\n\nUSER>\nCONTROL_AFTER_ERROR={\"timing\":0.000132505,\"value\":\"Approved amendment: 1 CASE = 12 EA.\"}\n\nUSER>\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "--context",
+        "colima-silentshift",
+        "stop",
+        "aihub-stream-repro-nov12-3"
+      ],
+      "exit_code": 0,
+      "stdout": "aihub-stream-repro-nov12-3\n",
+      "stderr": ""
+    }
+  ]
+}
