@@ -2,7 +2,7 @@
 
 **Candidate only; not tagged, released or published.** The current public native/IPM/OEX version remains 0.3.2. The candidate manifest, Python project metadata and lockfile agree on 0.3.3; React remains separately built 0.2.1.
 
-## Documentation and static evidence presentation
+## Documentation, recorded evidence and judge tooling
 
 **No native code changes.** The native classes, agent, deterministic policy, Java/Python runtime sources, fixtures and install hooks are unchanged from 0.3.2.
 
@@ -11,6 +11,10 @@
 - Provide a guided recorded evidence tour and a browser receipt inspector. The inspector checks a real saved payload/signature and detects an edited copy; signing-key identity and business correctness remain separate questions.
 - Refresh the judge/install documentation and prepare a re-cut video script. Existing video and article links stay unchanged. These static recorded pages are not a hosted native demo.
 - Keep the public keyless launcher explicitly pinned to its verified 0.3.2 registry version, avoiding the old moving-latest/version-assertion conflict when 0.3.3 is published. Promote it only after 0.3.3 is independently installed. The isolated local-archive verifier can exercise literal `zpm "install silentshift"`; it now explicitly checks the installed manifest identity against the inspected archive.
+
+## Candidate verification
+
+The independent pristine offline 0.3.3 installation passed. After the earlier disk stop, its retained instance completed a **resumed** runtime gate: API startup HTTP 200, **8 native classes / 28 methods**, and **two 12/12 recorded API replays** (sessions 56 and 92) in **17.38 seconds**. This duration covers resumption only, not the earlier build/install or pause. No fresh inference or new evaluation. [Scoped runtime receipt](../evidence/release-033-runtime-nov12/summary.json). The public 0.3.3 registry install remains a post-publication check.
 
 ## Publication prerequisites
 

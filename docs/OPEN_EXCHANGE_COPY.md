@@ -13,7 +13,7 @@ PR #14 is merged and the new [agent-value page](https://himanshu748.github.io/si
 
 ## Release note
 
-Documentation and static evidence presentation update. No native code changes. The recorded held-out wrong-delivery/review trade-off and three source-linked prose examples are easier to inspect. Includes the recorded evidence tour and receipt inspector. Native package 0.3.3; separate React workbench 0.2.1. Agent, deterministic policy, runtime sources and frozen evaluation records are unchanged; no new evaluation was run.
+Documentation, recorded evidence and judge-tooling update. No native code changes. The keyless launcher now pins verified native 0.3.2 explicitly, so publishing a newer package cannot move its install target. The local candidate verifier supports an offline literal install and checks installed identity. The recorded held-out wrong-delivery/review trade-off and three source-linked prose examples are easier to inspect. Includes the recorded evidence tour and receipt inspector. Native package 0.3.3; separate React workbench 0.2.1. Agent, deterministic policy, runtime sources and frozen evaluation records are unchanged; no new evaluation was run.
 
 ## Description body — publish only with the matching 0.3.3 release
 

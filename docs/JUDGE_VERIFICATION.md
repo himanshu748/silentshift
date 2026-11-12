@@ -1,3 +1,13 @@
+# 0.3.3 candidate — resumed runtime gate, November 12, 2026 (IST)
+
+Source **`823ea8abbcc0130d5d480ca6308cfeecedab539e`** completed the runtime extension on the **same retained instance** that had independently installed the real local 0.3.3 archive in a pristine **154U ARM64** container. This is a resumed local-archive gate after the earlier disk stop, **not** a new clean clone, uninterrupted install, public-registry install, live five-case run or model-quality evaluation.
+
+Actual results: API startup **HTTP 200**, production running, **8 native classes / 28 methods passed**, and **two 12/12 recorded API replays**, sessions **56** and **92**, both quarantined with no simulator delivery. Resumption took **17.38 seconds**, excluding earlier build/install and the paused interval. Native code and fixtures remain byte-identical to v0.3.2; no new inference or evaluation. Public IPM/OEX and the latest tag remain **0.3.2** until separately approved publication.
+
+[Original pristine offline install](evidence/release-033-nov12/clean-install.json) · [resumed runtime receipt](evidence/release-033-runtime-nov12/summary.json) · [native output](evidence/release-033-runtime-nov12/native-suite.txt) · [first replay](evidence/release-033-runtime-nov12/replay-1.json) · [second replay](evidence/release-033-runtime-nov12/replay-2.json). The first local resumption attempt stopped on a duplicate private log filename before runtime validation; that runner error and its correction are retained with the receipt. Earlier namespace/disk failures remain in their original records.
+
+## Earlier checkpoints
+
 # Current public-package launcher — November 11, 2026 (IST)
 
 A fresh GitHub clone of launcher fix `3edf75a9021fb3aa1dc679f1f58107ca2d0c1584` installed **public native 0.3.2** using literal `zpm "install silentshift"` in a new **154U ARM64** container with no source mounts. Production startup, **8 native classes / 28 methods** and **two 12/12 recorded replays** passed in **146.23 seconds**. The release assertion source is pinned to v0.3.2's commit `cfc4c27`. No fresh inference or live five-case rerun is implied. [Receipt](evidence/voting-nov11-judge/summary.json) · [native output](evidence/voting-nov11-judge/native-tests.txt) · [exact launcher output](evidence/voting-nov11-judge/command-output.txt).

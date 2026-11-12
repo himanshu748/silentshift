@@ -4,6 +4,8 @@ The owner clarified that a **real IPM 0.3.3 publication is intended**. OEX, the 
 
 PR #14 was merged as `921b37d`. Its Pages publication and anonymous public checks passed. The [agent-value view](https://himanshu748.github.io/silentshift/agent-value.html#HO-045), [tour](https://himanshu748.github.io/silentshift/evidence-tour.html) and [receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) are already live; no further Pages deployment is needed for those links.
 
+The independent local 0.3.3 install and its resumed runtime extension have now passed: [receipt](../evidence/release-033-runtime-nov12/summary.json). Final review-head CI and owner approval remain required. This is not a public-registry install.
+
 ## Release order — one public action per exact submit
 
 1. Review the small 0.3.3 metadata/docs PR after CI and a fresh-container local-archive install pass. Merge with a merge commit; no squash or force push. Do not merge a blocked or failing native candidate.
