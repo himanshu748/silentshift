@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Run a fresh synthetic order through SilentShift's native IRIS AI Hub investigation and inspect the actual result.">
-  <title>Start a live investigation · SilentShift</title>
+  <meta name="description" content="Replay a fixed synthetic order through SilentShift's IRIS production: recorded agent proposals, live IRIS policy and receipts.">
+  <title>Replay an investigation · SilentShift</title>
   <link rel="icon" href="/favicon.svg">
   <!-- APP_STYLES -->
   <link rel="stylesheet" href="/demo/demo.css">
@@ -14,15 +14,16 @@
   <a class="skip" href="#demo-main">Skip to content</a>
   <header class="site-header"><div class="site-wrap demo-header">
     <a class="site-brand" href="/">SilentShift</a>
-    <span class="tag tag-agent">Live trial · synthetic orders</span>
+    <span class="tag tag-agent">Replay mode · synthetic orders</span>
     <a class="link" href="/#investigations">Read-only workbench</a>
   </div></header>
   <main id="demo-main" class="site-wrap demo-main" tabindex="-1">
     <p class="site-kicker">Start here</p>
+    <p class="demo-lead"><strong>Replay mode: recorded agent proposals, live IRIS policy and receipts.</strong></p>
     <h1>Same order.<br>Different authority.</h1>
     <p class="demo-lead">An order says <strong>20 CASE</strong>. Its approved contract says <strong>240 EA</strong>.
-      Run a fresh investigation to see whether the governing evidence permits delivery.</p>
-    <p>Native IRIS AI Hub reads the evidence. Deterministic policy decides the route.
+      Replay an investigation to see whether the governing evidence permits delivery.</p>
+    <p>The agent proposal is a recorded IRIS AI Hub response; no model is called and no API key is used. The IRIS production, deterministic policy, routing and receipts run live on every replay.
       These orders and their delivery destination are synthetic.</p>
     <section class="panel demo-controls" aria-labelledby="sample-heading">
       <h2 id="sample-heading">Choose the evidence</h2>
@@ -34,13 +35,13 @@
           <span><strong>An effective approved amendment</strong><span>The same 20 CASE order, now authorized by an independent amendment.</span></span></label>
       </fieldset>
       <div class="demo-actions">
-        <button id="run" type="button" class="btn btn-primary" disabled>Run a live investigation</button>
+        <button id="run" type="button" class="btn btn-primary" disabled>Replay this investigation</button>
         <button id="reset" type="button" class="btn btn-secondary" disabled>Reset journey</button>
       </div>
-      <p id="status" role="status" aria-live="polite">Connecting to the live demo…</p>
+      <p id="status" role="status" aria-live="polite">Connecting to the replay demo…</p>
       <p id="error" role="alert" hidden></p>
       <p class="small quiet">Reset clears this journey's selection, never native cases or delivery history.
-        One investigation runs at a time. Requests are limited; no model call is retried automatically.</p>
+        One investigation runs at a time. Requests are limited.</p>
     </section>
     <section id="result" class="panel demo-result" aria-labelledby="result-heading" hidden>
       <p class="kicker">Observed native result</p>
@@ -67,7 +68,7 @@
     </section>
     <section class="demo-limits" aria-label="Demo limits">
       <p id="limits"></p><p id="expires"></p>
-      <p>This is a time-limited live trial, not a production service. Only fixed synthetic samples are admitted.
+      <p>This is a time-limited replay demo, not a production service. Only fixed synthetic samples are admitted.
         Arbitrary intake, review actions and CSV commits are blocked at the demo boundary.</p>
       <p>The larger held-out comparison did not establish an overall AI accuracy improvement or improved
         unstructured routing. <a class="link" href="https://github.com/himanshu748/silentshift/blob/push/top3/docs/EVAL_HELDOUT.md">Read every result and limitation.</a></p>
