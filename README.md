@@ -1,14 +1,12 @@
 # SilentShift
 
-**Catch orders that are valid JSON but mean the wrong thing, before they're delivered.**
+SilentShift catches technically valid partner orders whose quantities contradict approved business commitments before delivery.
 
-**Recorded v2 comparison — 48 held-out synthetic orders:** wrong deliveries **6/23 → 2–3/23** (rules-only counterfactual release choices → agent + policy actual simulator receipts, three trials); review **12.5% → 21.5%** (pooled agent trials).
+**Safer, not more accurate:** in the historical synthetic comparison, agent + policy made fewer wrong simulator deliveries at the cost of more false holds and review. It did not improve overall correct routing, and one trial was worse. [Numbers and limits](#what-the-held-out-comparison-showed).
 
-**No overall accuracy gain:** correct routes **33/48 → 33/48, 33/48 and 30/48**; unstructured routing stays **1/16** in every trial. This is the existing historical comparison, not a new evaluation of the current release. [Full result and every failure](docs/EVAL_HELDOUT.md) · [Original summary](evidence/heldout/summary.json).
+**[What the agent saw that the rules missed](https://himanshu748.github.io/silentshift/agent-value.html)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. The Pages view is live and presents recorded evidence. [Sources and limits](docs/AGENT_VALUE.md).
 
-**[What the agent saw that the rules missed](docs/AGENT_VALUE.md)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. [Static interactive page source](docs/site/agent-value.html); the new public page requires the separately approved Pages deployment.
-
-Native IPM **0.3.2** · separate source-built React workbench **0.2.1**. [Evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [Receipt inspector](https://himanshu748.github.io/silentshift/receipts.html).
+Published native IPM **0.3.3** · separate source-built React workbench **0.2.1**. [Live Pages site](https://himanshu748.github.io/silentshift/) · [Evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [Receipt inspector](https://himanshu748.github.io/silentshift/receipts.html).
 
 A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every transport and schema check passes, yet the business meaning has changed and nothing approved that change. SilentShift is an IRIS Interoperability production that holds that order. An IRIS AI Hub agent investigates it, and the operator sees why it was held.
 
@@ -137,6 +135,8 @@ The dedicated Open Exchange idea association is now publicly visible; organizer 
 ## What the held-out comparison showed
 
 This is the completed v2 comparison before later source-branch pipeline changes. The newer sealed evaluation is incomplete; no sealed-set result or post-tuning improvement is claimed here.
+
+**Recorded comparison — 48 held-out synthetic orders:** wrong deliveries **6/23 → 2–3/23** (rules-only counterfactual release choices → agent + policy actual simulator receipts, three trials); review **12.5% → 21.5%** (pooled agent trials). This is historical evidence, not a new evaluation of the current release.
 
 - On **48 frozen synthetic orders**, rules-only produced **33/48** correct routes; agent + policy produced **33/48, 33/48 and 30/48** across three trials.
 - Rules recommended releasing **6/23** release-ineligible orders. The shipped arm made **2/23, 3/23 and 3/23 actual wrong simulator deliveries**, with more false holds: **9/25, 9/25 and 12/25**, versus the baseline's **9/25**.
