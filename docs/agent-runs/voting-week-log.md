@@ -656,3 +656,52 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Owner exact submit authorizes only pushing docs/demo-discovery-nov13 and opening one documentation PR. Main readback remains d4e01748fa2a5d1e5a41d539ff132b4099917faf; no existing PR was found for this branch. Merge, OEX, releases, posts and further host changes remain excluded.
 - Current local preflight: uv run pytest -q returned 395 passed in 20.82 seconds. Changed documentation relative targets resolve, both JSON receipts parse, anonymous demo and operational-guide URLs return HTTP 200, and git diff --check passes. Native suite/model investigation were not run for these docs-only changes.
 - The commit contains only README/docs/evidence and this log; private host scripts, backups, credentials, images and .local artifacts remain excluded. Push/PR target readback will be retained privately and reported after execution.
+
+
+### 2026-11-13T10:25:42.558340+05:30 - approved documentation branch pushed and PR #20 verified public
+
+- Committed 60ad9d20e81c8981b598cacd3e94ee561dacfaf1 and pushed only docs/demo-discovery-nov13. Opened https://github.com/himanshu748/silentshift/pull/20 against main; anonymous API confirms OPEN, not draft, not merged, exact head, intended seven docs/evidence files, and body matches prepared copy. Main remains d4e01748fa2a5d1e5a41d539ff132b4099917faf at readback.
+- Both hosted Local safety and workbench checks runs succeeded at that head: 43368341861 (pull_request), 43368296521 (push). GitGuardian passed. Local preflight 395 pytest in 20.82s; staged known-pattern secret scan 0 findings/0 omitted; docs links and JSON parse checks passed. Native/model checks were not rerun.
+- No merge, OEX, release, message, branch deletion or further host change. This post-publication readback is retained locally in the log and .local/voting-polish-nov13/demo-discovery/pr-public-readback.json; no second push was made. Stop before merge.
+
+
+### 2026-11-13T10:27:17.623868+05:30 - approved PR #20 merge verified anonymously
+
+- Rechecked PR #20 head 60ad9d2, main d4e0174, both successful CI runs, GitGuardian, clean mergeability and automatic branch deletion disabled. Used owner exact submit only for a merge commit, with exact-head guard.
+- Anonymous API confirms PR #20 merged, main fe4fdf5d77dece4ec38bcafd67df409488b96eb3, parents d4e0174 and 60ad9d2. Source branch remains. Anonymous raw main README has the replay link at line 5; operating guide says 22 November 12:30 IST; module remains 0.3.3 and latest GitHub release remains v0.3.3.
+- No branch deletion, OEX action, new release, hosting change, message or further push. Target receipt retained privately at .local/voting-polish-nov13/demo-discovery/merge-public-readback.json. This final log entry remains local; no second push.
+
+- 2026-11-13T10:29:37.222083+05:30: post-merge main CI 43368740441 succeeded at fe4fdf5, including Python/Java/Node, TypeScript/build, workbench browser and all three static browser checks. Anonymous Actions API readback retained in the merge receipt. No further public actions.
+
+
+### 2026-11-13T10:46:26.085452+05:30 - Semion mention and expiry correction prepared, not submitted
+
+- Public bonus table still shows 29; no Semion response under our additions was observed. Opened the owner edit form for existing comment #288676, retaining all six evidence links and other claim text; existing child reply #288681 / AI Hub #28 is untouched. No duplicate reply.
+- Prepared verified Semion mention (/user/semion-makarov, rendered mentions-32661) in the greeting. Replaced the old 16 November sentence with intent to keep the demo available through results and an explicit current safety stop of 22 November 12:30 IST. This does not promise hosting beyond the verified stop. Update reply has NOT been clicked. Screenshot/source/diff receipts are private at .local/voting-polish-nov13/semion-nudge/. Exact submit is still required for the single comment edit.
+- Anonymous GET recheck at 10:42 IST: HTTP root, /demo and /demo/ each returned 308 to their HTTPS counterpart; HTTPS root and /demo/ returned 200. The reported 500 was not reproduced; no proxy or host change was made. Raw headers and readback receipt retained privately.
+
+
+### 2026-11-13T10:52:57.480504+05:30 - approved existing bonus-comment edit published and verified anonymously
+
+- Used owner exact submit only to update existing bonus-results comment #288676 once. Compared the prepared editor blocks and all evidence links, then clicked Update reply once; site confirmed Comment has been updated. No duplicate reply.
+- Anonymous curl confirms the linked Semion mention (mentions-32661), removal of the old 16 November wording, and intent to keep the demo available through results with explicit current safety stop 22 November 12:30 IST. All six evidence links survived, and child comment #288681 with AI Hub #28 remains present.
+- Local preflight/verifier errors were corrected without additional submissions. Mention notification delivery and organizer credit remain unverified. Private source/screenshots/readback: .local/voting-polish-nov13/semion-nudge/posted-edit-receipt.json. No OEX, release, host, commit or push action.
+
+
+### 2026-11-13T11:23:56.293382+05:30 - hosted-replay landing CTA and README clarification prepared locally
+
+- Owner requested local work only: add hosted-replay button, clarify the two README sentences, test and prepare a PR, then stop before pushing/deploying. Created docs/hosted-replay-cta-nov13 from main fe4fdf5 and preserved the existing uncommitted run log.
+- Primary hero CTA now opens the separately hosted replay, before the frozen benchmark. Synthetic/recorded-proposal/native-policy disclosure stays beside it; recorded tour and 2:30 video remain. Replaced stale not-hosted status/dialog, retained admission limits and verified expiry, and corrected the native install label to 0.3.3. Existing fonts, palette, responsive layout, motion and reduced-motion behavior retained.
+- README now explicitly separates current public native 0.3.3 from the deliberately pinned 0.3.2 launcher and links the separately verified hosted deployment. No runtime, agent, deterministic policy, package/module or frozen-data changes.
+- Local verification: 58/58 updated static landing browser checks (baseline 47/47), 395 pytest in 21.79s, 18 static-data unit tests, TypeScript/check and build. No browser console/page errors or failed requests. Local link checks: 25 landing asset/relative targets, 70 README targets, all present. Anonymous hosted-demo GET returned 200; no scenario admitted.
+- Sequential idle local Lighthouse before/after: mobile 96/100/100/100, desktop 100/100/100/100, CLS 0. Earlier parallel preliminary audit retained separately; no hosted-performance guarantee. Native suites, models and evaluations were not rerun for presentation-only work.
+- Inspectable local screenshots and public-safe receipts prepared under docs/evidence/hosted-replay-cta-nov13/. PR body prepared at .local/hosted-replay-cta-nov13/PR_DRAFT.md. No commit/push/PR/deployment, OEX, release or host change. Stop at publication gate.
+
+- 2026-11-13T11:25:31.923310+05:30: additional 360px scope-dialog check passed 3/3 (viewport fit, reachable touch-sized hosted link, Escape restores focus); screenshot retained. Staged text secret scan passed with zero findings/omissions; generated synthetic UI screenshots are reviewed separately. No external publication or hosted scenario action.
+
+
+### 2026-11-13T11:27:48.729066+05:30 - hosted replay CTA push and PR authorized
+
+- Owner exact submit authorizes committing/pushing only docs/hosted-replay-cta-nov13 and opening one PR to main. Rechecked the exact staged file set and source hashes against the prepared candidate; no unstaged source changes or existing branch PR. Main readback is fe4fdf5.
+- Reuse the completed local gates: 395 pytest, 58 landing plus 3 mobile-dialog checks, 18 static-data tests, TypeScript/build, local links and unchanged paired Lighthouse scores. No native code/package/model/evaluation changes. Merge and manual Pages deployment remain separate approvals.
+- Public push/PR and current hosted checks will be confirmed by target readback. This entry records authorization/preflight, not an assumed external result.

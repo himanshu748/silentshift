@@ -1,8 +1,8 @@
 # Static judge-facing site
 
-This folder is the static GitHub Pages artifact. The landing, recorded evidence tour and receipt inspector were deployed November 11 from main 7ae03be. This branch prepares the agent-value view and headline correction; it has not deployed them.
+This folder is the static GitHub Pages artifact: the landing, recorded evidence tour, receipt inspector and agent-value view. The hosted-replay CTA change is prepared locally and has not been deployed.
 
-Everything is recorded synthetic evidence. There is no IRIS connection, fresh inference, evaluation run or hosted native demo. The new prose view copies existing held-out files and keeps pending Workflow tasks distinct from completed human review.
+These pages inspect recorded synthetic evidence and make no native API or model calls. The landing links to a **separate hosted replay** that executes native IRIS policy, routing and signed receipts using a recorded proposal; it performs no fresh model inference. [Hosted scope, limits and operating window](../ONLINE_DEMO.md). The prose view copies existing held-out files and keeps pending Workflow tasks distinct from completed human review.
 
 ## Preview and check
 
