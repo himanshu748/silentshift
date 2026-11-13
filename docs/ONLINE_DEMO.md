@@ -24,11 +24,11 @@ The deployment adds only host-level disclosure, single-sample admission and reso
 
 ## Operating window and cost
 
-Automatic stop is scheduled for **16 November 2026, 12:30 PM IST** (`1794812400`). Shutdown behavior is **stop**, not terminate. Caddy is disabled at boot; the reset service explicitly starts it only after native production and gateway health pass. IRIS/default-account passwords are refreshed at startup and retained only in private host files; the intentionally shared reader is separate from the private scenario runner.
+Automatic stop is scheduled for **22 November 2026, 12:30 PM IST** (`1795330800`), following the owner-approved extension verified on November 13. The systemd timer, startup expiry and running gateway expiry agree. The owner may stop it earlier after results. [Extension and outside-host readback](evidence/demo-stop-extension-nov13.json). Shutdown behavior is **stop**, not terminate. Caddy is disabled at boot; the reset service explicitly starts it only after native production and gateway health pass. IRIS/default-account passwords are refreshed at startup and retained only in private host files; the intentionally shared reader is separate from the private scenario runner.
 
-The USD 10 budget has confirmed email subscribers for actual spend above USD 5 and forecast above USD 10. Alerts are not a hard cap, and delivery of an alert email has not been tested. Standard CPU credits disable surplus-credit billing. At the owner's planning rate of approximately USD 0.04 per compute hour, compute is estimated at USD 3.69 through the stop time, excluding storage, tax and transfer. Actual charges and credit coverage are unverified. Stopped storage remains billable and requires a separate cleanup decision.
+The USD 10 budget has confirmed email subscribers for actual spend above USD 5 and forecast above USD 10. Alerts are not a hard cap, and delivery of an alert email has not been tested. Standard CPU credits disable surplus-credit billing. At the owner's planning allowance of approximately USD 0.04 per compute hour, the six-day extension adds an estimated USD 5.76 for 144 compute hours, excluding storage, tax and transfer. This is an extension estimate, not a total bill or current price quote. Actual charges and credit coverage are unverified. Stopped storage remains billable and requires a separate cleanup decision.
 
-No online-demo points or organizer qualification are asserted by this deployment receipt. Adding its URL to PR #17, merging, updating OEX and posting a bonus reply remain separate owner gates. Crashcart and its AWS resources were not accessed.
+The README and existing public bonus-results comment already link the demo. The OEX correction remains saved but unsent because its approval flow asks for a new release; the owner has declined that release. No additional points or organizer qualification are asserted by the stop extension. Crashcart and its AWS resources were not accessed.
 
 ---
 

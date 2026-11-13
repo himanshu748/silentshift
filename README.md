@@ -2,6 +2,8 @@
 
 SilentShift catches technically valid partner orders whose quantities contradict approved business commitments before delivery.
 
+**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
+
 **Safer, not more accurate:** in the historical synthetic comparison, agent + policy made fewer wrong simulator deliveries at the cost of more false holds and review. It did not improve overall correct routing, and one trial was worse. [Numbers and limits](#what-the-held-out-comparison-showed).
 
 **[What the agent saw that the rules missed](https://himanshu748.github.io/silentshift/agent-value.html)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. The Pages view is live and presents recorded evidence. [Sources and limits](docs/AGENT_VALUE.md).
@@ -12,7 +14,7 @@ A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every tra
 
 If an approved amendment *does* allow `20 CASE`, the same order goes through. **The difference between those two outcomes is the authority behind the order, and that's the decision the AI Hub agent helps make.**
 
-**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** (recorded proposal; native policy and receipts) · **[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
+**[Explore the recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html)** · [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift) · [Full install guide](INSTALL.md)
 
 ## Inspect the workflow without installing
 

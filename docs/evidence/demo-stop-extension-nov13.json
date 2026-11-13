@@ -1,0 +1,64 @@
+{
+  "status": "extended-and-verified",
+  "verified_at_utc": "2026-11-13T04:48:22.272241+00:00",
+  "old_expires_at": 1794812400,
+  "new_expires_at": 1795330800,
+  "next_stop_utc": "2026-11-22T07:00:00+00:00",
+  "next_stop_ist": "2026-11-22T12:30:00+05:30",
+  "timer_readback": "Sun 2026-11-22 07:00:00 UTC",
+  "timer_enabled": true,
+  "running_gateway_expiry": 1795330800,
+  "before_jobs": {
+    "total": 2,
+    "states": {
+      "completed": 2
+    },
+    "rows_sha256": "c0b31717057fdeefa5adf10c3c861297acfee2708c997ba9a4192bdf94756d06"
+  },
+  "after_jobs": {
+    "total": 2,
+    "states": {
+      "completed": 2
+    },
+    "rows_sha256": "c0b31717057fdeefa5adf10c3c861297acfee2708c997ba9a4192bdf94756d06"
+  },
+  "job_records_unchanged": true,
+  "boot_unchanged": true,
+  "native_container_unchanged": true,
+  "caddy_config_unchanged": true,
+  "credentials_unchanged": true,
+  "local_gateway_http_status": 200,
+  "new_scenario_executed": false,
+  "changed_components": [
+    "systemd safety-stop timer",
+    "startup expiry constant",
+    "gateway expiry environment setting"
+  ],
+  "outside_host": {
+    "checked_at_utc": "2026-11-13T04:48:50+00:00",
+    "https_status": 200,
+    "replay_mode_label": true,
+    "http_status": 308,
+    "http_location": "https://34.239.152.223.sslip.io/demo/",
+    "cookies_or_auth_supplied": false
+  },
+  "retained_initial_failure": {
+    "phase": "local loopback health verifier",
+    "cause": "Omitted configured Host header; gateway returned HTTP 400 HOST_REQUIRED",
+    "rollback": "Original three files and service settings restored before retry",
+    "correction": "Set the configured public Host header in the verifier; no application or policy change",
+    "successful_retry": true
+  },
+  "admission_limit_unchanged": 30,
+  "cost_approval": {
+    "additional_hours": 144,
+    "planning_compute_usd_per_hour": 0.04,
+    "estimated_additional_compute_usd": 5.76,
+    "excludes": [
+      "storage",
+      "tax",
+      "transfer"
+    ],
+    "actual_bill_and_credit_coverage_unverified": true
+  }
+}
