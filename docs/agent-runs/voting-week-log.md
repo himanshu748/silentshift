@@ -614,3 +614,45 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - The owner exact submit authorizes publishing the verified demo link/evidence through existing PR #17, marking it ready and merging only after the updated checks pass. OEX, the bonus reply, visibility posts, releases, branch deletion and hosting changes are excluded.
 - Prepared README/checklist/evidence/operating-status updates and retained the signed receipt, outside-host checks, actual reboot proof and browser captures. No restricted image, signing key, account credential or model archive is staged. Native src/python/fixtures/java/module/Docker/Compose files are unchanged by this documentation update.
 - The initial CoCo PR description is obsolete; replace it with the filed #35/#36 status, verified hosted replay, retained limitations and exact validation scope before merge. The final merge SHA and hosted run results will be recorded by target readback; no success is assumed here.
+
+
+### 2026-11-13T09:44:50.240641+05:30 - approved OEX Save only; changes remain unpublished
+
+- Owner exact submit used only for the description/DemoURL save gate. Existing corrected description already included the verified hosted replay and was preserved unchanged; filled the blank Demo URL with https://34.239.152.223.sslip.io/demo/.
+- Clicked Save once. UI reported application saved successfully. Reload confirms the URL persists and says You have unpublished changes; Send application for approval to publish them. No Send for approval, New release, version entry or IPM publication occurred.
+- Anonymous HTTP page still shows 0.3.3 and contains no hosted-demo URL. This was a saved draft, not a public update or awaiting-approval submission. Screenshots and receipt retained privately at .local/voting-polish-nov13/oex-demo-save/.
+- Stopped after the one approved save. No messages, host changes or other external actions.
+
+
+### 2026-11-13T09:46:24.486960+05:30 - approval preparation stopped at New release dialog
+
+- Owner authorized inspection only, preserving 0.3.3 and stopping if another release is requested. Clicked the editor Send for approval control to inspect its next step.
+- Dialog explicitly says New release, Current version 0.3.3 (disabled), New version 1.0.0 (default), Initial Release notes. No field was edited and final Send was not clicked. Captured the dialog, then closed it without submitting.
+- Editor still says Published with unpublished changes. No release, IPM publication, approval request, email, public save or version change was performed in this turn. Evidence: .local/voting-polish-nov13/oex-approval-blocked/receipt.json and screenshots.
+
+
+### 2026-11-13T09:52:57.770765+05:30 - closed OEX editor; prepared demo discovery and read-only host follow-up
+
+- No discard option was exposed in the editor or application menu. Closed the OEX tab and marked the archived description copy do-not-submit locally; no OEX writes or new approval request occurred.
+- Anonymous article comment #288686 and bonus-results comment #288676 already contain the hosted replay. No DC edit, duplicate comment or message was sent. Moved the existing README replay link to line 5 on local docs/demo-discovery-nov13, based on main d4e0174. No commit, push or PR.
+- Read-only host query returned 2/30 total jobs, both completed. Startup deletes state.sqlite*, confirming restart resets the cap. No reboot, reset or scenario execution. Current timer and gateway expiry remain 16 November 12:30 IST.
+- Anonymous curl from the Mac returned HTTP 308 to the HTTPS /demo/ URL and HTTPS 200. The reported HTTP-500 issue is not present; no Caddy change is needed.
+- Owner clarified requested host steps: extend the safety stop to 22 November 12:30 IST and fix HTTP redirect. Prepared the extension only: 144 extra compute hours, USD 5.76 at the existing USD 0.04/hour planning allowance, excluding storage/tax/transfer; actual price/bill/credits unverified. It requires its own exact-submit approval. No remote write or paid extension executed.
+- Validation: all 69 README relative targets exist; git diff --check. Receipts: docs/evidence/demo-discovery-nov13.json and private .local/voting-polish-nov13/demo-discovery/.
+
+
+### 2026-11-13T10:19:51.979909+05:30 - approved safety-stop extension verified; docs publication still gated
+
+- Consumed the owner exact submit only for extending the existing separate SilentShift demo stop, at the disclosed additional USD 5.76 compute planning estimate (144 hours at USD 0.04/hour; excludes storage/tax/transfer). No new resources, budget changes or Crashcart access.
+- Backed up the three exact files on the host with root-only access. Updated the timer to 22 November 07:00 UTC / 12:30 IST and epoch 1795330800 in startup and private gateway environment. Restarted only gateway/timer; no start.sh, reboot, native restart, scenario run or credential rotation.
+- Initial verifier omitted the configured Host header on its loopback health request, received HTTP 400 HOST_REQUIRED, and restored original files/services. Added the correct Host header to the local verifier and retried successfully. No security check, native code or policy was weakened. Both attempt outputs are retained privately.
+- Timer is enabled/active with next trigger Sun 2026-11-22 07:00:00 UTC; running gateway expiry is 1795330800. Job table hashes and counts match before/after: 2 completed runs, 28 of 30 remaining. Boot ID, native container, Caddy configuration and credentials unchanged.
+- Anonymous Mac curl after success: HTTPS /demo/ 200 with replay-mode label; HTTP /demo/ 308 to the matching HTTPS URL. No proxy change needed. Dated public-safe receipt prepared locally at docs/evidence/demo-stop-extension-nov13.json; current operational docs updated locally.
+- Stopped before documentation push/PR, OEX, releases, messages or any other external action.
+
+
+### 2026-11-13T10:21:57.117646+05:30 - documentation push/PR authorized; local preflight passed
+
+- Owner exact submit authorizes only pushing docs/demo-discovery-nov13 and opening one documentation PR. Main readback remains d4e01748fa2a5d1e5a41d539ff132b4099917faf; no existing PR was found for this branch. Merge, OEX, releases, posts and further host changes remain excluded.
+- Current local preflight: uv run pytest -q returned 395 passed in 20.82 seconds. Changed documentation relative targets resolve, both JSON receipts parse, anonymous demo and operational-guide URLs return HTTP 200, and git diff --check passes. Native suite/model investigation were not run for these docs-only changes.
+- The commit contains only README/docs/evidence and this log; private host scripts, backups, credentials, images and .local artifacts remain excluded. Push/PR target readback will be retained privately and reported after execution.

@@ -1,3 +1,11 @@
+# Demo discovery preparation — November 13, 2026 (IST)
+
+Local branch `docs/demo-discovery-nov13`, based on main `d4e0174`, moves the existing hosted-replay link directly below the README problem sentence. The public DC article update and bonus-results comment already link the demo; no duplicate comment or article edit is needed. OEX exposes no discard action in the checked editor/application menus. Its unsent draft is explicitly marked do-not-submit in the local copy; the editor tab was closed without publishing.
+
+Read-only host checks found **2/30 admitted runs**, both completed. Startup deletes the admission database, so a restart resets the cap; no reboot or scenario was run in this check. HTTP already returns **308** to HTTPS, which returns **200**. Those read-only checks preceded the separately approved extension: the stop timer, startup constant and running gateway now agree on **22 November, 12:30 PM IST**. Existing job records, boot, native container, proxy and credentials were preserved. Final anonymous HTTP/HTTPS checks passed. [Extension receipt, retained verifier failure and corrected retry](evidence/demo-stop-extension-nov13.json). [Dated scope and checks](evidence/demo-discovery-nov13.json). Publication preflight passed `uv run pytest -q`: **395 tests in 20.82 seconds**, `git diff --check`, both receipt JSON parses, and relative-link checks across the changed reader-facing docs. Anonymous demo and operational-guide links returned HTTP **200**. No runtime or package changes, new benchmark, native suite or fresh inference are claimed.
+
+## Earlier dated checkpoints
+
 # Docs and presentation polish — November 13, 2026 (IST)
 
 The branch based on main `6706b80` shortens the README opening, keeps the historical “safer, not more accurate” trade-off with its numbers below, corrects published native **0.3.3** and live Pages wording, adds a three-guide documentation entry point, and points the demo's benchmark link at main. The replay launcher deliberately remains pinned to its previously verified public **0.3.2**; that scoped wording is retained.

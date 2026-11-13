@@ -1,10 +1,12 @@
-# Open Exchange — prepared description correction for published 0.3.3
+# Open Exchange — archived 0.3.3 correction; do not submit
 
-**Unsaved draft.** GitHub tag/release, OEX and IPM now identify **0.3.3**; React remains **0.2.1**. [Public install and native/replay evidence](evidence/public-033-nov12/summary.json) · [anonymous publication/manifest readback](evidence/public-033-nov12/publication.json). The earlier 0.3.3 submission preserved the saved description, so its old 0.3.2 wording remains public. This draft corrects that body; it creates no new release and has not been saved or sent.
+**Do not save or submit this archived copy.** On November 13 the owner editor retained a saved, unsent correction with the hosted replay and Demo URL. Sending for approval opens a **New release** dialog: current **0.3.3**, default **1.0.0**. It was closed without sending. The owner has declined another release for this correction. No discard control was exposed in the editor or application actions menu; the editor tab is closed. Leave the draft unsent. [Current readback and scope](evidence/demo-discovery-nov13.json).
+
+GitHub tag/release, OEX and IPM identify **0.3.3**; React remains **0.2.1**. [Public install and native/replay evidence](evidence/public-033-nov12/summary.json) · [anonymous publication/manifest readback](evidence/public-033-nov12/publication.json). The body below is the earlier correction text, retained as history rather than the current saved owner draft.
 
 Preserve all other fields: logo, DPI-I-689, IPM option/command, contest registration, Demo URL, video/MP4, both articles and existing release notes. Do not cancel pending approval. Before any public save, push/merge these documentation receipts under separate approval so the existing verification-guide URL shows the new evidence. If OEX requires another release, close that dialog and report it; do not invent a version or publish another package.
 
-## Description body — replace only after separate owner approval
+## Archived description body — not an instruction to save or send
 
 ### An order can arrive successfully and still be wrong
 On the existing **48 held-out synthetic orders**, wrong deliveries were **6/23 → 2–3/23**: rules-only counterfactual release choices versus agent + policy actual simulator receipts across three trials. Review rose **12.5% → 21.5%** (pooled agent trials). **No overall accuracy gain:** correct routes **33/48 → 33/48, 33/48 and 30/48**; unstructured exact routing stays **1/16** in each trial. [Full historical comparison](https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_HELDOUT.md) · [original summary](https://github.com/himanshu748/silentshift/blob/main/evidence/heldout/summary.json). This presents existing observations, not a new evaluation of release 0.3.3.
