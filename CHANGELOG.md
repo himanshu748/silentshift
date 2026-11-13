@@ -1,14 +1,14 @@
 # Changelog
 
-## 0.3.3 — documentation release candidate, not published
+## 0.3.3 — published November 12, 2026
 
-**No native code changes.** The manifest and Python project metadata advance together to 0.3.3 so a future OEX release matches the source package. Public native IPM/OEX and the latest GitHub release remain 0.3.2 until separately approved publication. React remains 0.2.1.
+**No native code changes.** Native IPM, Open Exchange and the GitHub release publish 0.3.3; the separately built React workbench remains 0.2.1. [Publication readback](docs/evidence/public-033-nov12/publication.json) and the [fresh public install](docs/evidence/public-033-nov12/summary.json) retain their exact verification scope. The [Pages site](https://himanshu748.github.io/silentshift/), including the evidence tour, receipt inspector and prose examples, is live; its static historical records are separate from the hosted native replay.
 
 - Put the existing held-out wrong-delivery/review trade-off beside its accuracy limits in the README, landing, evidence tour and prepared listing text. Preserve every original trial, failure and label; no new evaluation was run.
 - Add source-linked prose examples explaining reviewer assist, plus a static evidence tour and receipt inspector. These Pages tools are recorded synthetic evidence, not a hosted native investigation.
 - Pin the existing judge replay to its exact verified 0.3.2 registry version instead of requesting latest while asserting 0.3.2. New package publication no longer silently changes that replay path.
 - Refresh installation/judge documentation and prepare a re-cut video script only. No video upload or new inference is part of this release.
-- Keep native classes, Java/Python runtime sources, routing policy, agent behavior, packaged fixtures and install hooks unchanged from 0.3.2. Release verification must use a fresh local package install before merge and a fresh public-registry install after publication.
+- Keep native classes, Java/Python runtime sources, routing policy, agent behavior, packaged fixtures and install hooks unchanged from 0.3.2. The retained fresh local archive and subsequent public-registry install checks are described in [judge verification](docs/JUDGE_VERIFICATION.md).
 
 ## 0.3.2 — published; original preparation notes retained
 
@@ -19,7 +19,7 @@
 - Build the owned Java JAR locally against build 154's shipped Java 11/PEX SDK. IPM includes the owned Java sources/build script, never vendor JARs, EAP images or signing keys. Explicit native setup compiles those assets; package activation still starts no production or model.
 - Retain the keyless Compose launcher, separate React 0.2.1 workbench and unchanged policy/fixture bytes. Add JUnit and real native gateway, retry and outage checks. See [scoped Java verification](docs/JAVA_PEX.md).
 
-At the original preparation checkpoint, public IPM/OEX remained **0.3.1** while the source declared **0.3.2**. Later [0.3.2 publication and archive readback](docs/evidence/ipm-032-publication-nov11/publication.json) and [fresh public install](docs/evidence/voting-nov11-judge/summary.json) supersede that unpublished state. The current 0.3.3 candidate is separate.
+At the original preparation checkpoint, public IPM/OEX remained **0.3.1** while the source declared **0.3.2**. Later [0.3.2 publication and archive readback](docs/evidence/ipm-032-publication-nov11/publication.json) and [fresh public install](docs/evidence/voting-nov11-judge/summary.json) supersede that unpublished state. The published 0.3.3 release above supersedes 0.3.2 as the current version.
 
 ## 0.3.1 — published; original preparation notes retained
 
