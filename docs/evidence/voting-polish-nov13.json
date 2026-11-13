@@ -1,0 +1,103 @@
+{
+  "checked_at_ist": "2026-11-13T09:17:53.497774+05:30",
+  "base_commit": "6706b80e825ea2b97bf7448a899543378707c5ec",
+  "branch": "docs/voting-polish-nov13",
+  "scope": "Local CI checks for docs and a static HTML link only. No native execution, inference, benchmark, release, package, host deployment or OEX change.",
+  "changed_content_sha256": {
+    "README.md": "0c0190e17799821055427224cc5065f0583ac97bb2f0447ad940d1f61a4963d9",
+    "CHANGELOG.md": "cc3971c8a53f69eabb1a2234683687830c130fb4c1e62235fe4e7f3c450b5aaf",
+    "docs/README.md": "52a7211ccc1820f7fe1cd06e9ebfdb94053a71a0789a2eb8b54afb6157acb430",
+    "demo_gateway/start.html": "e8f44a2f9aa3685ef341b84e15ba79a0b4ecfffb11a404275c8964d5420f1178"
+  },
+  "checks": [
+    {
+      "command": "uv sync --locked",
+      "status": "passed"
+    },
+    {
+      "command": "uv run pytest -q",
+      "status": "passed",
+      "passed": 395,
+      "elapsed_seconds": 27.28
+    },
+    {
+      "command": "node --test tests/receipt-inspector.test.mjs tests/recorded-tour.test.mjs tests/agent-value.test.mjs",
+      "status": "passed",
+      "passed": 18
+    },
+    {
+      "command": "PATH=/opt/homebrew/opt/openjdk/bin:$PATH uv run python scripts/test_java_core.py",
+      "status": "passed",
+      "passed": 7
+    },
+    {
+      "command": "npm ci --no-audit --no-fund (web/)",
+      "status": "passed"
+    },
+    {
+      "command": "npm run check && npm run build (web/)",
+      "status": "passed"
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome npm run test:e2e (web/)",
+      "status": "passed",
+      "passed": 54,
+      "reported_elapsed": "1.6m"
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_receipt_inspector.cjs",
+      "status": "passed",
+      "checks": 33
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_evidence_tour.cjs",
+      "status": "passed",
+      "checks": 39
+    },
+    {
+      "command": "SILENTSHIFT_CHROME_CHANNEL=chrome node scripts/check_agent_value.cjs",
+      "status": "passed",
+      "checks": 38
+    },
+    {
+      "command": "Relative-link existence check for README.md, CHANGELOG.md and docs/README.md",
+      "status": "passed"
+    },
+    {
+      "command": "git diff origin/main -- module.xml pyproject.toml uv.lock src python java fixtures web scripts compose.judge.yaml",
+      "status": "passed",
+      "output": "empty diff"
+    }
+  ],
+  "anonymous_link_checks": [
+    {
+      "url": "https://himanshu748.github.io/silentshift/",
+      "http_status": 200
+    },
+    {
+      "url": "https://himanshu748.github.io/silentshift/agent-value.html",
+      "http_status": 200
+    },
+    {
+      "url": "https://himanshu748.github.io/silentshift/evidence-tour.html",
+      "http_status": 200
+    },
+    {
+      "url": "https://himanshu748.github.io/silentshift/receipts.html",
+      "http_status": 200
+    },
+    {
+      "url": "https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_HELDOUT.md",
+      "http_status": 200
+    }
+  ],
+  "local_preflight_repairs": [
+    "macOS Java launcher initially found no runtime; reran successfully with existing Homebrew OpenJDK on PATH.",
+    "Initial static browser launch lacked cached Playwright headless shell; official cache installed and all static checks reran successfully using installed Chrome. No repository or assertion edits."
+  ],
+  "native_checks": {
+    "status": "not_run",
+    "reason": "Only Docker default context is configured; /var/run/docker.sock is absent. No running local IRIS daemon available. Historical native receipts retain their scope."
+  },
+  "hosted_ci": "Not yet run for this unpublished branch."
+}

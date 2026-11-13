@@ -1,3 +1,13 @@
+# Docs and presentation polish — November 13, 2026 (IST)
+
+The branch based on main `6706b80` shortens the README opening, keeps the historical “safer, not more accurate” trade-off with its numbers below, corrects published native **0.3.3** and live Pages wording, adds a three-guide documentation entry point, and points the demo's benchmark link at main. The replay launcher deliberately remains pinned to its previously verified public **0.3.2**; that scoped wording is retained.
+
+Local checks passed: **395 Python tests**, **7 Java tests**, **18 static-data tests**, **54 desktop/mobile workbench browser tests**, TypeScript/build, and **33 / 39 / 38** receipt-inspector, evidence-tour and agent-value browser checks. All changed relative documentation links resolve; the four advertised Pages URLs and the benchmark target returned anonymous HTTP **200**. [Commands, results and content hashes](evidence/voting-polish-nov13.json).
+
+Native integration checks were **not rerun**: the only configured Docker context has no running daemon. Native classes, policy, agent, Java/Python runtime, fixtures, package metadata, scripts and workbench source are unchanged. Prior native evidence below remains historical, not a new execution. The HTML change is prepared in source only; the hosted demo has not been redeployed. No new evaluation, package/release, OEX change or version bump. Current-branch hosted CI is reported separately on its PR.
+
+## Earlier dated checkpoints
+
 # Hosted replay verified - November 12, 2026 (IST)
 
 The [guided hosted replay](https://34.239.152.223.sslip.io/demo/) runs the supported recorded quantity-mismatch proposal through native 154U ARM64 policy, routing and signed Java PEX export. [Outside-host checks, reboot reset and source digest](evidence/demo-nov12/summary.json) and [independent signature verification](evidence/demo-nov12/after-reboot-pex-receipt-verification.json) passed. The separate reader opened the persisted case in the browser; review actions were disabled. The native trace graph renders with a documented interactive HyperEvent warning. No fresh inference or new evaluation is claimed. Online-demo submission and organizer review remain pending.
