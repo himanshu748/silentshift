@@ -48,19 +48,40 @@ function check(name, value, detail) {
       (await page.title()).startsWith("SilentShift"),
     );
     check(
-      "Native hosting limitation visible",
-      await page.locator(".demo-status").isVisible(),
+      "Hosted replay disclosure is visible beside the CTA",
+      await page.locator(".demo-status").isVisible() &&
+        (await page.locator(".demo-status").innerText()).includes("Recorded proposal") &&
+        (await page.locator(".demo-status").innerText()).includes("native IRIS policy") &&
+        (await page.locator(".demo-status").innerText()).includes("No fresh model inference"),
     );
-    check("Primary CTA goes to recorded evidence, not a pretend live run",
+    const hostedReplay = "https://34.239.152.223.sslip.io/demo/";
+    const primaryCTA = page.locator(".hero-actions .primary");
+    check("Primary CTA links to the separately hosted replay",
+      await primaryCTA.getAttribute("href") === hostedReplay &&
+        (await primaryCTA.innerText()).includes("Try hosted replay"));
+    check("Hosted CTA precedes the historical benchmark",
+      await primaryCTA.evaluate((e) => !!(e.compareDocumentPosition(document.querySelector(".heldout-summary")) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    await primaryCTA.focus();
+    check("Hosted CTA has visible keyboard focus",
+      await primaryCTA.evaluate((e) => e === document.activeElement && getComputedStyle(e).outlineStyle !== "none"));
+    await page.keyboard.press("Tab");
+    check("Keyboard continues to the recorded fallback",
+      await page.getByRole("link", { name: "Explore recorded cases" }).evaluate((e) => e === document.activeElement));
+    check("Recorded fallback remains available",
       await page.getByRole("link", { name: "Explore recorded cases" }).getAttribute("href") === "evidence-tour.html");
-    await page.getByRole("button", { name: "Native demo status" }).click();
+    await page.getByRole("button", { name: "Replay scope" }).click();
     check(
-      "Demo dialog opens without pretending to execute",
+      "Replay dialog discloses the fixed sample and recorded proposal",
       (await page.getByRole("dialog").isVisible()) &&
-        (await page.getByRole("dialog").innerText()).includes(
-          "isn’t hosted yet",
-        ),
+        (await page.getByRole("dialog").innerText()).includes("one fixed synthetic quantity mismatch") &&
+        (await page.getByRole("dialog").innerText()).includes("No fresh model inference") &&
+        (await page.getByRole("dialog").innerText()).includes("22 November 2026, 12:30 PM IST"),
     );
+    check("Replay dialog preserves admission limits",
+      (await page.getByRole("dialog").innerText()).includes("30 runs per host boot") &&
+        (await page.getByRole("dialog").innerText()).includes("two per address"));
+    check("Replay dialog links to the same hosted application",
+      await page.getByRole("link", { name: "Open hosted replay" }).getAttribute("href") === hostedReplay);
     await page.keyboard.press("Escape");
     check(
       "Escape closes dialog",
@@ -69,7 +90,7 @@ function check(name, value, detail) {
     check(
       "Dialog focus returns to opener",
       await page
-        .getByRole("button", { name: "Native demo status" })
+        .getByRole("button", { name: "Replay scope" })
         .evaluate((e) => e === document.activeElement),
     );
     await page.locator("[data-copy]").click();
@@ -195,6 +216,11 @@ function check(name, value, detail) {
           content: document.documentElement.scrollWidth,
         })),
       );
+      check(`Hosted CTA stays readable and touch-sized at ${width}px`,
+        await primaryCTA.evaluate((e) => {
+          const rect = e.getBoundingClientRect();
+          return rect.width > 0 && rect.left >= 0 && rect.right <= innerWidth && rect.height >= 44;
+        }));
       if (width === 360) {
         await tabs.nth(0).focus();
         await page.keyboard.press("End");
@@ -330,6 +356,10 @@ function check(name, value, detail) {
           .last()
           .isVisible()),
     );
+    check("No-JS hosted replay remains a normal usable link",
+      await plain.locator(".hero-actions .primary").isVisible() &&
+        await plain.locator(".hero-actions .primary").getAttribute("href") === hostedReplay &&
+        (await plain.locator(".demo-status").innerText()).includes("No fresh model inference"));
     await plain.keyboard.press("Tab");
     check(
       "Keyboard exposes skip link",

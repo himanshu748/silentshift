@@ -1,0 +1,78 @@
+{
+  "verified_at_ist": "2026-11-13T11:22:47.346937+05:30",
+  "branch": "docs/hosted-replay-cta-nov13",
+  "base_commit": "fe4fdf5d77dece4ec38bcafd67df409488b96eb3",
+  "scope": "Local static landing/README changes and test harness only. No native code/package, deployment, model or evaluation execution.",
+  "source_sha256": {
+    "README.md": "70d62231672c0846efecf8cd30ee7f0fbf54c94aa5a96445b5ea3f7e43f634f3",
+    "docs/site/index.html": "c5ef537402858ed5fa56f789bb81219f0869009b272a843260a41093fec7960e",
+    "docs/site/styles.css": "b88cf0d1b99ebfc44886099b760883872d730bc2447d701e79c1276464775600",
+    "docs/site/README.md": "9eea7f218b50d601219afef74059b3ae5f697f20c4d2997793d2139534959782",
+    "scripts/check_static_landing.cjs": "ec331e5362a8dfb404b8871d7a7dc5a4430cf86f8c6dfa49fefcb50a35c7c7e9"
+  },
+  "checks": {
+    "pytest": {
+      "command": "uv run pytest -q",
+      "passed": 395,
+      "seconds": 21.79,
+      "output": "pytest.txt"
+    },
+    "static_data": {
+      "command": "node --test tests/receipt-inspector.test.mjs tests/recorded-tour.test.mjs tests/agent-value.test.mjs",
+      "passed": 18,
+      "output": "static-data-tests.txt"
+    },
+    "typescript": {
+      "command": "npm --prefix web run check",
+      "exit_code": 0
+    },
+    "build": {
+      "command": "npm --prefix web run build",
+      "exit_code": 0,
+      "existing_warning": "lucide-react use client directive ignored by Vite; build succeeded"
+    },
+    "landing_browser": {
+      "command": "node scripts/check_static_landing.cjs http://127.0.0.1:5209/ .local/hosted-replay-cta-nov13/final-browser",
+      "passed": 58,
+      "total": 58,
+      "console_or_page_errors": [],
+      "output": "landing-browser.json",
+      "coverage": [
+        "hosted CTA and recorded-proposal disclosure",
+        "keyboard focus and fallback navigation",
+        "scope dialog, Escape and focus restoration",
+        "360/768/1280/1920 responsive widths",
+        "OS and manual reduced motion",
+        "no-JavaScript hosted link and fallbacks",
+        "gallery, copy, video/captions and local assets"
+      ]
+    },
+    "baseline_browser": {
+      "passed": 47,
+      "total": 47,
+      "scope": "Original baseline harness, before updates; raw report retained locally"
+    },
+    "links": {
+      "landing_local_targets_checked": 25,
+      "readme_relative_targets_checked": 70,
+      "missing": [],
+      "hosted_replay_anonymous_get_status": 200
+    },
+    "lighthouse": "lighthouse.json",
+    "mobile_dialog": {
+      "passed": 3,
+      "total": 3,
+      "output": "mobile-dialog.json"
+    }
+  },
+  "native_suite": "Not run; no native/runtime/package changes",
+  "fresh_inference": false,
+  "new_evaluation": false,
+  "published_or_deployed": false,
+  "external_scenario_executed": false,
+  "screenshots": [
+    "desktop-hero.png",
+    "mobile-hero.png",
+    "replay-scope-mobile.png"
+  ]
+}

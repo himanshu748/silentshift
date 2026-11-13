@@ -67,6 +67,17 @@
             Semantic integration checks for IRIS, with evidence-bound agent
             proposals and deterministic routing.
           </p>
+          <div class="hero-actions">
+            <a class="button primary magnetic" href="https://34.239.152.223.sslip.io/demo/">Try hosted replay <span aria-hidden="true">↗</span></a
+            ><a class="button text-button magnetic" href="evidence-tour.html">Explore recorded cases <span aria-hidden="true">↗</span></a
+            ><a class="button text-button magnetic" href="#film"
+              ><span class="play-symbol" aria-hidden="true">▷</span> Watch
+              2:30 video</a>
+          </div>
+          <p class="demo-status">
+            Synthetic sample. Recorded proposal; native IRIS policy and signed receipts.
+            No fresh model inference. <button class="demo-status-link" type="button" data-open-demo>Replay scope</button>
+          </p>
 <aside class="heldout-summary" aria-label="Recorded held-out result">
 <p class="eyebrow">Recorded comparison · 48 synthetic orders</p>
 <p class="heldout-main"><strong>6/23 → 2–3/23</strong> wrong deliveries</p>
@@ -74,20 +85,10 @@
 <p><strong>Review: 12.5% → 21.5%</strong> (pooled agent trials).</p>
 <p class="heldout-limit"><strong>No overall accuracy gain:</strong> correct routes 33/48 → 33/48, 33/48, 30/48. Unstructured routing stays 1/16 in every trial.</p>
 <a href="https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/docs/EVAL_HELDOUT.md">Read the full comparison and every failure ↗</a>
+<a href="agent-value.html#HO-045">What the agent saw ↗</a>
 </aside>
-          <div class="hero-actions">
-            <a class="button primary magnetic" href="evidence-tour.html">Explore recorded cases <span aria-hidden="true">↗</span></a
-            ><a class="button text-button magnetic" href="#film"
-              ><span class="play-symbol" aria-hidden="true">▷</span> Watch
-              2:30 video</a
-            ><a class="button text-button" href="agent-value.html#HO-045">What the agent saw ↗</a>
-          </div>
-          <p class="demo-status">
-            <span aria-hidden="true">○</span> Public native demo not deployed.
-            Recorded evidence below. <button class="demo-status-link" type="button" data-open-demo>Native demo status</button>
-          </p>
           <div class="install-command">
-            <span class="mono-label">Native IPM 0.3.2 · React 0.2.1 from source<br />Install in a prepared IRIS namespace</span
+            <span class="mono-label">Native IPM 0.3.3 · React 0.2.1 from source<br />Install in a prepared IRIS namespace</span
             ><button
               class="copy-button"
               type="button"
@@ -645,13 +646,13 @@
             <li>
               <span>01</span>
               <div>
-                <h3>Watch the concrete example.</h3>
+                <h3>Try the fixed sample.</h3>
                 <p>
-                  Start with the unsupported 20 CASE order, then the amendment
-                  that authorizes it.
+                  Replay the unsupported 20 CASE order. The proposal is recorded;
+                  native IRIS policy, routing and signed receipts execute on the host.
                 </p>
-                <a href="#film"
-                  >Play the captioned recording
+                <a href="https://34.239.152.223.sslip.io/demo/"
+                  >Open the guided replay
                   <span aria-hidden="true">↗</span></a
                 >
               </div>
@@ -756,9 +757,9 @@ cd silentshift
           </p>
           <p>
             <strong>Know the boundary.</strong> All supplied orders are
-            synthetic; delivery is to an IRIS simulator. No real ERP connection,
-            production-readiness, hosted native demo or awarded contest bonus is
-            claimed.
+            synthetic; delivery is to an IRIS simulator. The hosted replay uses
+            a recorded proposal, not fresh model inference. No real ERP connection,
+            production-readiness or awarded contest bonus is claimed.
           </p>
         </div>
       </section>
@@ -836,16 +837,22 @@ cd silentshift
       >
         ×
       </button>
-      <p class="eyebrow">Deployment status</p>
-      <h2 id="demo-dialog-title">The native demo<br />isn’t hosted yet.</h2>
+      <p class="eyebrow">Hosted replay scope</p>
+      <h2 id="demo-dialog-title">A recorded proposal.<br />A native policy decision.</h2>
       <p>
-        You can inspect the recorded workbench now, or run the actual keyless
-        IRIS production locally. The recorded captures are not a live hosted
-        service.
+        Run one fixed synthetic quantity mismatch through native IRIS policy,
+        routing and signed Java PEX receipt export. The agent proposal is recorded.
+        No fresh model inference or external delivery.
+      </p>
+      <p>
+        Admission is limited to 30 runs per host boot and two per address every
+        ten minutes. Current safety stop: 22 November 2026, 12:30 PM IST.
+        If the replay is unavailable, inspect the recorded evidence or run locally.
       </p>
       <div class="dialog-actions">
-        <a class="button primary" href="#workbench" data-close-demo
-          >Explore recorded evidence <span aria-hidden="true">↗</span></a
+        <a class="button primary" href="https://34.239.152.223.sslip.io/demo/" data-close-demo
+          >Open hosted replay <span aria-hidden="true">↗</span></a
+        ><a href="evidence-tour.html">Recorded evidence</a
         ><a
           href="https://github.com/himanshu748/silentshift/blob/main/INSTALL.md"
           >Run locally</a

@@ -1,3 +1,13 @@
+# Hosted replay CTA prepared — November 13, 2026 (IST)
+
+Local branch `docs/hosted-replay-cta-nov13`, based on main `fe4fdf5`, puts **Try hosted replay** before the historical benchmark on the landing page. The adjacent disclosure and scope dialog distinguish the recorded proposal from executing native policy/receipts, preserve admission limits and name the verified safety stop. Recorded evidence, video and local install remain available. The native install label says **0.3.3**; the README explicitly distinguishes the intentionally pinned **0.3.2** launcher from the separately evidenced hosted replay.
+
+Local verification passed **58 landing browser checks** plus **3 mobile-dialog checks**, **395 pytest tests in 21.79 seconds**, **18 static-data tests**, TypeScript/check and production build, link/asset checks and receipt parsing. Browser coverage includes keyboard focus, scope-dialog dismissal/focus restoration, responsive widths, reduced motion and no JavaScript; no console/page errors or failed requests. Sequential local Lighthouse before/after scores were unchanged: mobile **96/100/100/100**, desktop **100/100/100/100**, with CLS **0** in both profiles. These are local measurements, not hosted guarantees. [Commands, content hashes and receipts](evidence/hosted-replay-cta-nov13/summary.json) · [desktop](evidence/hosted-replay-cta-nov13/desktop-hero.png) · [mobile](evidence/hosted-replay-cta-nov13/mobile-hero.png).
+
+No native/runtime/package, deterministic policy, agent, provider or frozen-evaluation files changed. No new native suite, model call or evaluation was run. No commit, push, PR, Pages deployment, OEX, release or host change occurred for this preparation. Publication remains separately gated.
+
+## Earlier dated checkpoints
+
 # Demo discovery preparation — November 13, 2026 (IST)
 
 Local branch `docs/demo-discovery-nov13`, based on main `d4e0174`, moves the existing hosted-replay link directly below the README problem sentence. The public DC article update and bonus-results comment already link the demo; no duplicate comment or article edit is needed. OEX exposes no discard action in the checked editor/application menus. Its unsent draft is explicitly marked do-not-submit in the local copy; the editor tab was closed without publishing.

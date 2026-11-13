@@ -99,7 +99,7 @@ After starting the documented Colima profile and loading the official build-154 
 ./scripts/judge-replay.sh
 ```
 
-The launcher creates new isolated test containers and private local test credentials, installs **public native IPM 0.3.2**, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies public 0.3.2 using the assertion source pinned to its release tag; it does not install the current source checkout.** The registry version is pinned explicitly, so a later package publication does not change this replay path. No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
+**This launcher deliberately tests the older native 0.3.2; the current published native package is 0.3.3.** It creates new isolated test containers and private local test credentials, installs the pinned public package, starts the production, runs release-matched native tests and performs two recorded replays. It prints their session IDs and Visual Trace URLs. It selects a disjoint private Docker subnet, fetches release-pinned native assertions and the official IPM installer; it never downloads an IRIS image or calls a model. **This verifies public 0.3.2 using the assertion source pinned to its release tag; it does not install the current source checkout.** The registry version is pinned explicitly, so a later package publication does not change this replay path. No `.env` editing is needed for this replay. [Prerequisites, output and troubleshooting](INSTALL.md#optional-check-without-a-model).
 
 The [fresh-main check](docs/evidence/voting-week-nov10/judge-main-nov10.json) passed native **5 classes / 12 methods**, both **12/12** replays and **207 Python tests** on the declared build. Its exact clone and scope are recorded separately from the launcher check. For a port already in use, pass `--api-port 52983`; never replace an existing container or lower disk limits.
 
@@ -111,7 +111,7 @@ After the [image and Compose prerequisites](INSTALL.md#optional-source-workbench
 ./scripts/judge-compose.sh
 ```
 
-This starts the current-source IRIS production and React workbench with private generated local accounts, then proves the recorded hold with `checks=12/12; passed=true`. It prints the workbench and Visual Trace URLs. It uses dedicated volumes and refuses another running build-154 instance in the same Docker context. [Fresh-clone execution and browser proof](docs/evidence/voting-finish-nov10/compose-final.json). This is separate from the release-matched public native 0.3.2 replay above; it invokes no LLM and establishes no hosted demo.
+This starts the current-source IRIS production and React workbench with private generated local accounts, then proves the recorded hold with `checks=12/12; passed=true`. It prints the workbench and Visual Trace URLs. It uses dedicated volumes and refuses another running build-154 instance in the same Docker context. [Fresh-clone execution and browser proof](docs/evidence/voting-finish-nov10/compose-final.json). This check verifies local Compose execution with recorded responses and no LLM calls. The [hosted replay](https://34.239.152.223.sslip.io/demo/) has [separate deployment evidence](docs/evidence/demo-nov12/summary.json).
 
 ## How the decision works
 
