@@ -2,6 +2,8 @@
 
 SilentShift catches technically valid partner orders whose quantities contradict approved business commitments before delivery.
 
+**Why I built this.** Most integration failures I read about are loud: a schema error, a timeout, a rejected message. The scary ones are quiet. An order like `20 CASE` passes every check, but the contract says `240 EA`, and nobody notices until the wrong amount ships. I wanted an IRIS production that treats "valid but means something different" as a real failure: hold it, let an agent dig into why, and leave the final call to explicit policy, not the model.
+
 **The agent investigates and proposes; native IRIS policy decides.** On the historical held-out set, agent + policy cut wrong simulator deliveries from **6/23** to **2–3/23**, at the cost of more false holds (**9/25** up to **9–12/25**). It did not improve overall correct routing, and one trial was worse. [The agent's role and this trade-off](docs/AI_ROLE.md) · [Numbers and limits](docs/EVAL_HELDOUT.md).
 
 **[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
