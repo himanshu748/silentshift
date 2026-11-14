@@ -6,6 +6,8 @@ SilentShift catches technically valid partner orders whose quantities contradict
 
 **The agent investigates and proposes; native IRIS policy decides.** On the historical held-out set, agent + policy cut wrong simulator deliveries from **6/23** to **2–3/23**, at the cost of more false holds (**9/25** up to **9–12/25**). It did not improve overall correct routing, and one trial was worse. [The agent's role and this trade-off](docs/AI_ROLE.md) · [Numbers and limits](docs/EVAL_HELDOUT.md).
 
+**The registered-source v3 result was much weaker:** rules scored **24/36** in each trial; agent + policy scored **24/36, 24/36 and 25/36**, with **7–8/20** wrong simulator deliveries and **0–1/12** correct unstructured routes. It does not establish reliable prose understanding. [Sealed results, failures and scope](docs/EVAL_SEALED.md).
+
 **[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
 
 ## 5-minute judge path

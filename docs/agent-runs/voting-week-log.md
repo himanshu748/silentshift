@@ -705,3 +705,20 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Owner exact submit authorizes committing/pushing only docs/hosted-replay-cta-nov13 and opening one PR to main. Rechecked the exact staged file set and source hashes against the prepared candidate; no unstaged source changes or existing branch PR. Main readback is fe4fdf5.
 - Reuse the completed local gates: 395 pytest, 58 landing plus 3 mobile-dialog checks, 18 static-data tests, TypeScript/build, local links and unchanged paired Lighthouse scores. No native code/package/model/evaluation changes. Merge and manual Pages deployment remain separate approvals.
 - Public push/PR and current hosted checks will be confirmed by target readback. This entry records authorization/preflight, not an assumed external result.
+
+### 2026-11-14T22:26:33.596036+05:30 — Sealed v3 local setup, before case access
+
+- Owner authorized local live evaluation, evidence commit/push and one PR only; no merge, hosted-demo access, release or OEX/IPM action. Results branch `eval/v3-sealed-results` starts at main `588073ec01d00a723e8b54f244f87db13ee24902`. Protected existing worktrees left intact.
+- Execution uses the preregistered source `56ff2d6976e61ccb36b68e0632224e1234afaa3e` in a detached local worktree. Its historical source manifest is 0.3.0; this is not an installation or re-verification of public native 0.3.3.
+- Local ARM64 archive reloaded; exact image ID `8fa0ae85777d11ef113ec25a7ac2d1548edfa321a31bcbfa3e0a01ea7dbd8713`. Ollama pulls and alias recreation retained the required digest. Web Gateway 2026.1 pulled for local setup.
+- Fresh source load succeeded with no application source mounts. Original setup stopped because Docker default address pools were exhausted; continued the same instance on checked nonoverlapping subnet `10.253.1.0/28` without deleting other networks. Gateway bind initially failed because this Colima profile shares only the original clone; copied only private gateway configuration into its existing ignored shared directory, with no access expansion or runtime source change.
+- Fresh native unit suite: 6 classes / 16 methods, All PASSED. Runtime identity checks confirm live execution, 154U ARM64, prompt 1.4.2, policy 1.2.0 and matching engine SHA-256. Live five-case gate still executing. Sealed case file remains unopened.
+
+### 2026-11-14T23:24:17.269024+05:30 — Sealed v3 complete; results prepared
+
+- All 108 native attempts and 108 baseline executions retained. Runtime source/model identity unchanged; evaluated-outcome precedent count 0. No interruption or selective retry. One failed agent attempt (V3-S-01, trial 3, EVIDENCE_READ_INCOMPLETE) remains in the denominator.
+- Rules correct: 24/36 each; agent + policy: 24/36, 24/36, 25/36. Wrong deliveries: rules 8/20 each; native policy 8/20, 7/20, 7/20. Unstructured: rules 0/12 each; policy 0/12, 0/12, 1/12. The safety result is weaker than v2; no reliable prose-understanding claim.
+- Registered run elapsed 3164.154 seconds. Report generation initially rejected a relative source path; supplying the absolute path fixed reporting only, without new case execution. Matching frozen-source reporter used, followed by derived per-trial category tables. Raw attempt and baseline files remain byte-identical to runner output.
+- Results-branch pytest: 395 passed in 23.32 seconds. No runtime, fixture, prompt, policy, module.xml or release change. No hosted-demo access, cloud action or public post. Owner’s current task explicitly authorizes publishing results through one branch/PR, then stopping before merge.
+
+- Final pre-publication checks: staged-text secret scan 0 findings / 0 omissions, no missing relative links in changed reader docs, no native/Python/Java/fixture/script/module changes, no file over 50 MB.
