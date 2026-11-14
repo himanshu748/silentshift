@@ -2,13 +2,35 @@
 
 SilentShift catches technically valid partner orders whose quantities contradict approved business commitments before delivery.
 
-**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
-
 **The agent investigates and proposes; native IRIS policy decides.** On the historical held-out set, agent + policy cut wrong simulator deliveries from **6/23** to **2–3/23**, at the cost of more false holds (**9/25** up to **9–12/25**). It did not improve overall correct routing, and one trial was worse. [The agent's role and this trade-off](docs/AI_ROLE.md) · [Numbers and limits](docs/EVAL_HELDOUT.md).
 
-**[What the agent saw that the rules missed](https://himanshu748.github.io/silentshift/agent-value.html)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. The Pages view is live and presents recorded evidence. [Sources and limits](docs/AGENT_VALUE.md).
+**[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
 
-Published native IPM **0.3.3** · separate source-built React workbench **0.2.1**. [Live Pages site](https://himanshu748.github.io/silentshift/) · [Evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [Receipt inspector](https://himanshu748.github.io/silentshift/receipts.html).
+## 5-minute judge path
+
+The hosted page supports only this quantity-mismatch sample; other scenarios require the local live-model setup. Wait until the status is no longer **Connecting to the replay demo…** and **Replay this investigation** is enabled. The pre-selected sample is **No approved conversion**.
+
+1. Open the [hosted replay](https://34.239.152.223.sslip.io/demo/). Confirm the selected sample, **No approved conversion**, describes 20 CASE against 240 EA, and that the demonstrated policy holds the contradiction.
+2. Click **Replay this investigation**. While it runs, the status is **Investigation admitted. Waiting for the native result; no tool progress is simulated here.**
+3. When the status reads **The persisted native result is ready. Inspect the evidence before drawing a conclusion.**, look under **Observed native result**. For this sample the heading is **Held before delivery**, **Simulator deliveries** is `0`, **Agent outcome** is `returned`, and **Execution** is **Recorded agent proposal replayed through native IRIS AI Hub; no fresh inference**. The policy reason is: "Invalid messages and critical contradictions cannot be released. Only a resolved comparison to an approved contract can permit release."
+4. Click **Inspect this case** to compare the incoming value with the selected reference, or use **Open the workbench**. **Show read-only viewer login** reveals a dedicated public-demo account; do not enter a personal IRIS or InterSystems website password. That account can read cases and native Visual Trace; it cannot approve reviews, change production settings or commit imports. **Open native Visual Trace** may show a known HyperEvent warning under the restricted gateway; the case evidence and policy remain the reliable inspection path. **Reset journey** clears only this journey's selection, never native cases or delivery history. The demo admits 2 investigations per address in 10 minutes, and 30 total trial investigations; read-only inspection remains available.
+
+## Install
+
+Published native IPM **0.3.3** · separate source-built React workbench **0.2.1**. In a running InterSystems IRIS with IPM, install the published package with:
+
+```sh
+zpm "install silentshift"
+```
+
+That is the literal public IPM command for module `silentshift`. The current published native package is **0.3.3**. The command does not download the separately licensed IRIS image, create accounts, or start the production by itself. For prerequisites, the full local checklist, the keyless recorded replay, or the source workbench, use [INSTALL.md](INSTALL.md).
+
+## Go deeper
+
+- [What the agent saw that the rules missed](https://himanshu748.github.io/silentshift/agent-value.html) — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. The Pages view is live and presents recorded evidence. [Sources and limits](docs/AGENT_VALUE.md).
+- [Recorded evidence tour](https://himanshu748.github.io/silentshift/evidence-tour.html) · [Receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) · [Live Pages site](https://himanshu748.github.io/silentshift/)
+- [Watch the captioned demo](https://youtu.be/a4dOcqu89EA) · [Download MP4](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [Open Exchange](https://openexchange.intersystems.com/package/SilentShift)
+- [Judge walkthrough](docs/JUDGE_GUIDE.md) · [Features and API](docs/FEATURES.md) · [Architecture](ARCHITECTURE.md) · [CSV order import](docs/CSV_IMPORT.md) · [Full install guide](INSTALL.md)
 
 A B2B order arrives as `20 CASE`. The approved contract says `240 EA`. Every transport and schema check passes, yet the business meaning has changed and nothing approved that change. SilentShift is an IRIS Interoperability production that holds that order. An IRIS AI Hub agent investigates it, and the operator sees why it was held.
 
@@ -61,7 +83,7 @@ Session 58 records the model, provider, prompt version, recorded mode, timing an
 <a id="native-build-154-setup"></a>
 <a id="installation"></a>
 
-## For judges: two minutes, no installation
+## More to inspect without installing
 
 1. **[Read the HO-045 prose example](docs/AGENT_VALUE.md#ho-045).** The table says 100 EA; the amendment says 80 EA. Rules choose ALLOW, the agent cites the amendment, and policy creates a pending review hold. The raw agent is correct here; the final three-way route is still scored incorrect. All three original trials are linked.
 2. **Watch the first 90 seconds of the [captioned demo](https://youtu.be/a4dOcqu89EA).** Follow the unsupported `20 CASE` hold and approved amendment through the native workflow. The full existing recording is 2:30 and predates CSV and the newer interface.
