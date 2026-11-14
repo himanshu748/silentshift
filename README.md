@@ -162,7 +162,7 @@ The dedicated Open Exchange idea association is now publicly visible; organizer 
 
 ## What the held-out comparison showed
 
-This is the completed v2 comparison before later source-branch pipeline changes. The newer sealed evaluation is incomplete; no sealed-set result or post-tuning improvement is claimed here.
+This section reports the historical v2 comparison before later source-branch pipeline changes. The registered-source v3 evaluation was completed on 14 November 2026; its small, inconsistent gain and weaker wrong-delivery result are reported separately in [EVAL_SEALED.md](docs/EVAL_SEALED.md). Neither experiment requalifies the current published release.
 
 **Recorded comparison — 48 held-out synthetic orders:** wrong deliveries **6/23 → 2–3/23** (rules-only counterfactual release choices → agent + policy actual simulator receipts, three trials); review **12.5% → 21.5%** (pooled agent trials). This is historical evidence, not a new evaluation of the current release.
 
