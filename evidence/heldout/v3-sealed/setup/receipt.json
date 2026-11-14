@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-11-14T16:58:32.908188+00:00",
+  "results_branch_base": "588073ec01d00a723e8b54f244f87db13ee24902",
+  "evaluated_source": "56ff2d6976e61ccb36b68e0632224e1234afaa3e",
+  "evaluated_native_manifest_version": "0.3.0",
+  "public_native_package_not_modified": "0.3.3",
+  "scope": "fresh isolated source-load registered snapshot, no application source mounts, local live Ollama; not public-registry or current-main qualification",
+  "container": "silentshift-bonus-load-v3sealed-nov14",
+  "context": "colima-silentshift",
+  "api": "http://127.0.0.1:53143/silentshift/api",
+  "native_classes_passed": 6,
+  "native_methods_passed": 16,
+  "native_class_names": [
+    "SilentShift.Test.AdapterChecks",
+    "SilentShift.Test.CitedFindingsChecks",
+    "SilentShift.Test.ProviderChecks",
+    "SilentShift.Test.ReplayChecks",
+    "SilentShift.Test.RuntimeChecks",
+    "SilentShift.Test.TraceChecks"
+  ],
+  "live_core_gate_passed": true,
+  "live_core_scenarios": 5,
+  "identity_receipt": "identity.json",
+  "gate_receipt": "native-five.json",
+  "native_output": "native-unit-output.txt",
+  "ollama": {
+    "version": "0.31.1"
+  },
+  "pre_evaluation_gate_and_warmup_excluded_from_denominators": true,
+  "setup_failures": [
+    {
+      "stage": "activation network create",
+      "error": "all predefined address pools have been fully subnetted",
+      "resolution": "Same instance continued on verified nonoverlapping 10.253.1.0/28; no network pruning"
+    },
+    {
+      "stage": "gateway bind",
+      "error": "bind source path does not exist inside VM: detached worktree is outside existing Colima share",
+      "resolution": "Only private gateway config copied to ignored directory in existing shared original clone; no broader mount access"
+    }
+  ],
+  "frozen_runtime_source_modified": false,
+  "hosted_demo_accessed": false,
+  "paid_calls": false,
+  "execution_command": "uv run python scripts/run_sealed.py --dataset sealed --execute --open-sealed --source-commit 56ff2d6976e61ccb36b68e0632224e1234afaa3e --container silentshift-bonus-load-v3sealed-nov14 --output evidence/heldout/v3-sealed"
+}

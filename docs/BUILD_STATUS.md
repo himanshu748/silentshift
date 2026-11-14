@@ -1,3 +1,13 @@
+# Sealed v3 evaluation — November 14, 2026 (IST)
+
+The preregistered source `56ff2d6976e61ccb36b68e0632224e1234afaa3e` was freshly source-loaded into an isolated local 154U ARM64 container, passed **6 native classes / 16 methods** and the live **5/5** core gate, then completed all **108** sealed native investigations and **108** baseline executions. Runtime source, model digest, prompt, policy and labels stayed fixed. The final no-learning audit found **0** evaluated outcomes indexed. [Setup](../evidence/heldout/v3-sealed/setup/receipt.json) · [completion audit](../evidence/heldout/v3-sealed/completion-audit.json) · [full results](EVAL_SEALED.md).
+
+Rules-only scored **24/36** in each trial; agent + policy scored **24/36, 24/36 and 25/36**. Wrong deliveries were **8/20** versus **8/20, 7/20 and 7/20**; unstructured correct routes **0/12** versus **0/12, 0/12 and 1/12**. The single failed attempt is retained. This is a small, inconsistent contribution and a worse wrong-delivery rate than historical v2, not evidence of reliable prose understanding.
+
+The results branch passed **395 Python tests in 23.32 seconds**. [Output](../evidence/heldout/v3-sealed/setup/results-branch-pytest.txt). Raw attempts are byte-identical to runner output; all frozen labels and module.xml are unchanged. [Integrity check](../evidence/heldout/v3-sealed/integrity.json). The evaluated source manifest is historical **0.3.0**, distinct from public native **0.3.3**; this is not a new current-main or registry qualification. No hosted-demo access, paid calls, package change, release, OEX edit or merge occurred. Publication and PR status are recorded separately.
+
+## Earlier dated checkpoints
+
 # Hosted replay CTA prepared — November 13, 2026 (IST)
 
 Local branch `docs/hosted-replay-cta-nov13`, based on main `fe4fdf5`, puts **Try hosted replay** before the historical benchmark on the landing page. The adjacent disclosure and scope dialog distinguish the recorded proposal from executing native policy/receipts, preserve admission limits and name the verified safety stop. Recorded evidence, video and local install remain available. The native install label says **0.3.3**; the README explicitly distinguishes the intentionally pinned **0.3.2** launcher from the separately evidenced hosted replay.

@@ -1,0 +1,1143 @@
+{
+  "scenario_id": "V3-C-07",
+  "trial": 3,
+  "run_id": "07e13360-a050-4702-9183-988599187a4a",
+  "dataset_sha256": "415489ccebbe21b83ea870c862570eb6acc7bd1a59ea2394fa7f31cd27c962d6",
+  "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+  "trace_id": "2974",
+  "service_elapsed_ms": 27289,
+  "harness_elapsed_ms": 27749.664,
+  "record": {
+    "id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+    "event_id": "evt-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3",
+    "source": "birch-orbit",
+    "received_at": "2026-11-14T17:46:55.437216Z",
+    "message": {
+      "business_unit": "APAC-NORTH",
+      "contract_id": "C-506664",
+      "correlation_id": "corr-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3",
+      "event_id": "evt-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3",
+      "kind": "order",
+      "notes": "Synthetic partner order.",
+      "occurred_at": "2026-11-10T11:30:00Z",
+      "product_id": "ITEM-3244",
+      "quantity": "108",
+      "source": "birch-orbit",
+      "unit": "EA"
+    },
+    "raw_payload": "{\"event_id\":\"evt-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3\",\"correlation_id\":\"corr-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3\",\"source\":\"birch-orbit\",\"kind\":\"order\",\"occurred_at\":\"2026-11-10T11:30:00Z\",\"contract_id\":\"C-506664\",\"business_unit\":\"APAC-NORTH\",\"product_id\":\"ITEM-3244\",\"quantity\":\"108\",\"unit\":\"EA\",\"notes\":\"Synthetic partner order.\"}",
+    "scenario_id": "heldout:07e13360-a050-4702-9183-988599187a4a:3:V3-C-07",
+    "dataset_version": "silentshift-sealed/3.0.0",
+    "clock": "2026-11-10T12:00:00Z",
+    "references": [
+      {
+        "authority": "approved",
+        "business_unit": "APAC-NORTH",
+        "contract_id": "C-506664",
+        "effective_from": "2026-11-01T00:00:00Z",
+        "effective_to": null,
+        "id": "contract:C-506664:r1",
+        "product_id": "ITEM-3244",
+        "quantity": "108",
+        "text": "For a different product OTHER-ITEM-3244, a separate order uses 114 EA. This document confirms that ITEM-3244 remains 108 EA.",
+        "timestamp_semantics": "event_time",
+        "unit": "EA"
+      }
+    ],
+    "assessment": {
+      "active_reference_ids": [
+        "contract:C-506664:r1"
+      ],
+      "classification": "CLEAR",
+      "critical": false,
+      "evidence_ids": [
+        "contract:C-506664:r1"
+      ],
+      "findings": [],
+      "schema_version": "silentshift-message/1"
+    },
+    "recommendation": {
+      "cited_findings": [],
+      "decision": "ALLOW",
+      "evidence_ids": [
+        "contract:C-506664:r1"
+      ],
+      "explanation": "Approved contract confirms 108 EA for ITEM-3244; order matches operative terms.",
+      "uncertainty": 0
+    },
+    "agent": {
+      "mode": "native-ai-hub",
+      "status": "returned",
+      "model_invoked": true,
+      "usage_available": false,
+      "cost_status": "unavailable",
+      "prompt_version": "silentshift-investigator/1.4.2",
+      "tool_catalog_version": "silentshift-evidence-tools/3",
+      "execution_mode": "live",
+      "provider": "ollama/openai-compatible",
+      "model": "qwen3-silentshift:4b-instruct",
+      "provider_transport": {
+        "implementation": "native-interoperability",
+        "granularity": "provider_http_call",
+        "production_session_id": 2974,
+        "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "usage_scope": "actual_http_response_only",
+        "billing_cost": null,
+        "execution_mode": "live"
+      },
+      "limits": {
+        "max_iterations": 6,
+        "max_tokens": 512,
+        "extra_params": {
+          "reasoning_effort": "none"
+        },
+        "cache": true
+      },
+      "structured_final_output": "local Ollama only, after four invocation-scoped tool reads; no response repair",
+      "chat_started_at": "2026-11-14T17:46:55.635506Z",
+      "native_chat_invoked": true,
+      "inference_performed": true,
+      "provider_request_count": 2,
+      "native_chat_returned": true,
+      "chat_finished_at": "2026-11-14T17:47:22.688254Z",
+      "chat_elapsed_ms": 27053,
+      "tool_reads": {
+        "message": 1,
+        "contracts": 1,
+        "related": 1,
+        "precedents": 1
+      },
+      "tool_trace_capture_failures": 0,
+      "evidence_truncated": false,
+      "raw_response": "{\"cited_findings\":[],\"decision\":\"ALLOW\",\"evidence_ids\":[\"contract:C-506664:r1\"],\"explanation\":\"Approved contract confirms 108 EA for ITEM-3244; order matches operative terms.\",\"uncertainty\":0}",
+      "response_tool_call_count": 0,
+      "response_usage": {
+        "prompt_tokens": 1289,
+        "completion_tokens": 57,
+        "total_tokens": 1346
+      },
+      "elapsed_ms": 27065,
+      "usage_status": "session_totals_not_collected",
+      "trace": {
+        "mode": "native-interoperability",
+        "granularity": "agent_invocation_and_tool",
+        "invocation_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "enqueued_events": 10,
+        "enqueue_failures": 0,
+        "capture_failures": 0,
+        "persistence_status": "async_unverified",
+        "sdk_provider_round_metadata_available": false,
+        "provider_http_trace_available": true
+      },
+      "usage_scope": "final_response_only",
+      "session_totals": null,
+      "provider_round_usage": null,
+      "provider_retry_count": null,
+      "application_retry_count": 0,
+      "fallback_used": false
+    },
+    "policy": {
+      "checks": [
+        {
+          "code": "ASSESSMENT_VALID",
+          "passed": true,
+          "reason": "Deterministic assessment must be complete and valid."
+        },
+        {
+          "code": "NOT_DUPLICATE",
+          "passed": true,
+          "reason": "Duplicate event cannot create a second downstream effect."
+        },
+        {
+          "code": "NO_CRITICAL_CONTRADICTION",
+          "passed": true,
+          "reason": "Invalid messages and critical contradictions cannot be released."
+        },
+        {
+          "code": "RECOMMENDATION_VALID",
+          "passed": true,
+          "reason": "Agent output must satisfy the strict recommendation schema."
+        },
+        {
+          "code": "EVIDENCE_COMPLETE",
+          "passed": true,
+          "reason": "Every independently retrieved evidence record must be cited for release."
+        },
+        {
+          "code": "SEMANTICS_RESOLVED",
+          "passed": true,
+          "reason": "Only a resolved comparison to an approved contract can permit release."
+        },
+        {
+          "code": "UNCERTAINTY_BOUNDED",
+          "passed": true,
+          "reason": "Uncertainty above 0.35 requires human review."
+        }
+      ],
+      "decision": "ALLOW",
+      "downstream_permitted": true,
+      "policy_version": "silentshift-policy/1.2.0",
+      "reasons": [
+        "Recommendation satisfies all deterministic release gates."
+      ],
+      "release_eligible": true
+    },
+    "routing": "DELIVERED",
+    "version": 8,
+    "trace_id": "2974",
+    "review": null,
+    "synthetic": true,
+    "delivery_count": 1,
+    "runbook_context": {
+      "status": "retrieved",
+      "implementation": "IRIS VECTOR_COSINE",
+      "model": "all-minilm:22m",
+      "dimensions": 384,
+      "minimum_similarity": 0.35,
+      "matches": [],
+      "decision_authority": false,
+      "scope": "Supporting procedures only; approved contract evidence and deterministic policy remain authoritative."
+    },
+    "precedent_context": {
+      "status": "retrieved",
+      "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+      "implementation": "IRIS VECTOR_COSINE",
+      "model": "all-minilm:22m",
+      "dimensions": 384,
+      "matches": [],
+      "decision_authority": false
+    },
+    "policy_recommendation": {
+      "cited_findings": [],
+      "decision": "ALLOW",
+      "evidence_ids": [
+        "contract:C-506664:r1"
+      ],
+      "explanation": "Approved contract confirms 108 EA for ITEM-3244; order matches operative terms.",
+      "uncertainty": 0
+    },
+    "delivery_receipt": {
+      "destination": "iris-simulator",
+      "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+      "at": "2026-11-14T17:47:22.705058Z",
+      "policy_version": "silentshift-policy/1.2.0",
+      "authorized_case_version": 7
+    },
+    "events": [
+      {
+        "id": "3032",
+        "kind": "message_received",
+        "at": "2026-11-14T17:46:55.438555Z",
+        "detail": {
+          "source": "birch-orbit",
+          "event_id": "evt-v3-c-07:07e13360-a050-4702-9183-988599187a4a:3",
+          "synthetic": true
+        }
+      },
+      {
+        "id": "3033",
+        "kind": "schema_validated",
+        "at": "2026-11-14T17:46:55.443869Z",
+        "detail": {
+          "schema_version": "silentshift-message/1"
+        }
+      },
+      {
+        "id": "3034",
+        "kind": "semantic_check_started",
+        "at": "2026-11-14T17:46:55.443931Z",
+        "detail": {
+          "contract_id": "C-506664"
+        }
+      },
+      {
+        "id": "3035",
+        "kind": "references_retrieved",
+        "at": "2026-11-14T17:46:55.445564Z",
+        "detail": {
+          "contract_id": "C-506664",
+          "scenario_scope": "heldout:07e13360-a050-4702-9183-988599187a4a:3:V3-C-07",
+          "snapshot_immutable": true
+        }
+      },
+      {
+        "id": "3036",
+        "kind": "semantic_check_completed",
+        "at": "2026-11-14T17:46:55.447232Z",
+        "detail": {
+          "classification": "CLEAR",
+          "critical": false,
+          "schema_version": "silentshift-message/1"
+        }
+      },
+      {
+        "id": "3037",
+        "kind": "runbook_retrieved",
+        "at": "2026-11-14T17:46:55.553218Z",
+        "detail": {
+          "status": "retrieved",
+          "implementation": "IRIS VECTOR_COSINE",
+          "match_count": 0,
+          "decision_authority": false
+        }
+      },
+      {
+        "id": "3038",
+        "kind": "precedents_retrieved",
+        "at": "2026-11-14T17:46:55.622992Z",
+        "detail": {
+          "status": "retrieved",
+          "implementation": "IRIS VECTOR_COSINE",
+          "match_count": 0,
+          "decision_authority": false
+        }
+      },
+      {
+        "id": "3039",
+        "kind": "agent_invoked",
+        "at": "2026-11-14T17:46:55.623045Z",
+        "detail": {
+          "implementation": "native-ai-hub",
+          "timeout_seconds": 120,
+          "provider_cancellation_verified": false
+        }
+      },
+      {
+        "id": "3040",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:46:55.636454Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "invocation_started",
+          "span_kind": "agent_invocation",
+          "span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "started",
+          "started_at": "2026-11-14T17:46:55.635506Z",
+          "finished_at": "",
+          "duration_ms": null,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": false,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2982",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:46:55.636420Z"
+        }
+      },
+      {
+        "id": "3041",
+        "kind": "agent_tool_read",
+        "at": "2026-11-14T17:47:05.744456Z",
+        "detail": {
+          "tool": "GetCurrentMessage",
+          "scope": "current-case",
+          "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73"
+        }
+      },
+      {
+        "id": "3042",
+        "kind": "agent_tool_read",
+        "at": "2026-11-14T17:47:05.745864Z",
+        "detail": {
+          "tool": "GetApprovedContracts",
+          "scope": "current-case",
+          "record_count": 1,
+          "truncated": false,
+          "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73"
+        }
+      },
+      {
+        "id": "3043",
+        "kind": "agent_tool_read",
+        "at": "2026-11-14T17:47:05.747130Z",
+        "detail": {
+          "tool": "GetRelatedRecords",
+          "scope": "same-contract",
+          "peer_count": 0,
+          "truncated": false,
+          "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73"
+        }
+      },
+      {
+        "id": "3044",
+        "kind": "agent_tool_read",
+        "at": "2026-11-14T17:47:05.747396Z",
+        "detail": {
+          "tool": "find_similar_precedents",
+          "scope": "precomputed-current-case-context",
+          "record_count": 0,
+          "status": "retrieved",
+          "decision_authority": false,
+          "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73"
+        }
+      },
+      {
+        "id": "3045",
+        "kind": "native_chat_returned",
+        "at": "2026-11-14T17:47:22.688351Z",
+        "detail": {
+          "mode": "native-ai-hub",
+          "model": "qwen3-silentshift:4b-instruct"
+        }
+      },
+      {
+        "id": "3046",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.693856Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_started",
+          "span_kind": "tool",
+          "span_id": "68079312-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "started",
+          "started_at": "2026-11-14T17:47:05.742990Z",
+          "finished_at": "",
+          "duration_ms": null,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetCurrentMessage",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2987",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.693815Z"
+        }
+      },
+      {
+        "id": "3047",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.694816Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_completed",
+          "span_kind": "tool",
+          "span_id": "68079312-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "completed",
+          "started_at": "2026-11-14T17:47:05.742990Z",
+          "finished_at": "2026-11-14T17:47:05.744699Z",
+          "duration_ms": 2,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetCurrentMessage",
+          "record_count": 1,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2988",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.694790Z"
+        }
+      },
+      {
+        "id": "3048",
+        "kind": "agent_operation_finished",
+        "at": "2026-11-14T17:47:22.694939Z",
+        "detail": {
+          "status": "returned",
+          "failure_stage": "",
+          "model": "qwen3-silentshift:4b-instruct",
+          "tool_reads": {
+            "message": 1,
+            "contracts": 1,
+            "related": 1,
+            "precedents": 1
+          }
+        }
+      },
+      {
+        "id": "3049",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.695180Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_started",
+          "span_kind": "tool",
+          "span_id": "6807E60B-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "started",
+          "started_at": "2026-11-14T17:47:05.745151Z",
+          "finished_at": "",
+          "duration_ms": null,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetApprovedContracts",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2989",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.695156Z"
+        }
+      },
+      {
+        "id": "3050",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.695489Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_completed",
+          "span_kind": "tool",
+          "span_id": "6807E60B-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "completed",
+          "started_at": "2026-11-14T17:47:05.745151Z",
+          "finished_at": "2026-11-14T17:47:05.745973Z",
+          "duration_ms": 1,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetApprovedContracts",
+          "record_count": 1,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2990",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.695467Z"
+        }
+      },
+      {
+        "id": "3051",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.695953Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_started",
+          "span_kind": "tool",
+          "span_id": "68080E60-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "started",
+          "started_at": "2026-11-14T17:47:05.746184Z",
+          "finished_at": "",
+          "duration_ms": null,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetRelatedRecords",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2991",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.695931Z"
+        }
+      },
+      {
+        "id": "3052",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.696292Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_completed",
+          "span_kind": "tool",
+          "span_id": "68080E60-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "completed",
+          "started_at": "2026-11-14T17:47:05.746184Z",
+          "finished_at": "2026-11-14T17:47:05.747184Z",
+          "duration_ms": 1,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "GetRelatedRecords",
+          "record_count": 0,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2992",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.696271Z"
+        }
+      },
+      {
+        "id": "3053",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.696622Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_started",
+          "span_kind": "tool",
+          "span_id": "68083BCF-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "started",
+          "started_at": "2026-11-14T17:47:05.747347Z",
+          "finished_at": "",
+          "duration_ms": null,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "find_similar_precedents",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2993",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.696595Z"
+        }
+      },
+      {
+        "id": "3054",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.696948Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "tool_completed",
+          "span_kind": "tool",
+          "span_id": "68083BCF-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": false,
+          "status": "completed",
+          "started_at": "2026-11-14T17:47:05.747347Z",
+          "finished_at": "2026-11-14T17:47:05.747455Z",
+          "duration_ms": 0,
+          "usage_scope": "final_response_only",
+          "final_response_usage": null,
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "find_similar_precedents",
+          "record_count": 0,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": true,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2994",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.696924Z"
+        }
+      },
+      {
+        "id": "3055",
+        "kind": "ai_trace_event",
+        "at": "2026-11-14T17:47:22.697274Z",
+        "detail": {
+          "trace_schema": "silentshift-ai-trace/1",
+          "granularity": "agent_invocation_and_tool",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "production_session_id": 2974,
+          "event_kind": "invocation_completed",
+          "span_kind": "agent_invocation",
+          "span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+          "parent_span_id": "",
+          "model": "qwen3-silentshift:4b-instruct",
+          "prompt_version": "silentshift-investigator/1.4.2",
+          "attempt": 1,
+          "application_retry_count": 0,
+          "provider_retry_count": null,
+          "fallback_used": false,
+          "model_invoked": true,
+          "native_chat_returned": true,
+          "status": "returned",
+          "started_at": "2026-11-14T17:46:55.635506Z",
+          "finished_at": "2026-11-14T17:47:22.688254Z",
+          "duration_ms": 27053,
+          "usage_scope": "final_response_only",
+          "final_response_usage": {
+            "prompt_tokens": 1289,
+            "completion_tokens": 57,
+            "total_tokens": 1346
+          },
+          "session_totals": null,
+          "provider_round_usage": null,
+          "provider_round_count": null,
+          "billing_cost": null,
+          "cost_status": "unavailable",
+          "tool_name": "",
+          "record_count": null,
+          "evidence_truncated": false,
+          "failure_code": "",
+          "failure_stage": "",
+          "buffered_until_chat_exit": false,
+          "content_retained": false,
+          "execution_mode": "live",
+          "message_header_id": "2995",
+          "source_config": "Investigator",
+          "target_config": "AITrace",
+          "recorded_at": "2026-11-14T17:47:22.697246Z"
+        }
+      },
+      {
+        "id": "3056",
+        "kind": "agent_returned",
+        "at": "2026-11-14T17:47:22.700922Z",
+        "detail": {
+          "status": "returned",
+          "mode": "native-ai-hub",
+          "output_present": true
+        }
+      },
+      {
+        "id": "3057",
+        "kind": "policy_evaluated",
+        "at": "2026-11-14T17:47:22.701013Z",
+        "detail": {
+          "checks": [
+            {
+              "code": "ASSESSMENT_VALID",
+              "passed": true,
+              "reason": "Deterministic assessment must be complete and valid."
+            },
+            {
+              "code": "NOT_DUPLICATE",
+              "passed": true,
+              "reason": "Duplicate event cannot create a second downstream effect."
+            },
+            {
+              "code": "NO_CRITICAL_CONTRADICTION",
+              "passed": true,
+              "reason": "Invalid messages and critical contradictions cannot be released."
+            },
+            {
+              "code": "RECOMMENDATION_VALID",
+              "passed": true,
+              "reason": "Agent output must satisfy the strict recommendation schema."
+            },
+            {
+              "code": "EVIDENCE_COMPLETE",
+              "passed": true,
+              "reason": "Every independently retrieved evidence record must be cited for release."
+            },
+            {
+              "code": "SEMANTICS_RESOLVED",
+              "passed": true,
+              "reason": "Only a resolved comparison to an approved contract can permit release."
+            },
+            {
+              "code": "UNCERTAINTY_BOUNDED",
+              "passed": true,
+              "reason": "Uncertainty above 0.35 requires human review."
+            }
+          ],
+          "decision": "ALLOW",
+          "downstream_permitted": true,
+          "policy_version": "silentshift-policy/1.2.0",
+          "reasons": [
+            "Recommendation satisfies all deterministic release gates."
+          ],
+          "release_eligible": true
+        }
+      },
+      {
+        "id": "3058",
+        "kind": "message_delivered",
+        "at": "2026-11-14T17:47:22.709739Z",
+        "detail": {
+          "destination": "iris-simulator",
+          "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+          "at": "2026-11-14T17:47:22.705058Z",
+          "policy_version": "silentshift-policy/1.2.0",
+          "authorized_case_version": 7
+        }
+      }
+    ],
+    "audit_event_count": 27,
+    "events_truncated": false
+  },
+  "provider_export": {
+    "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+    "scenario_id": "heldout:07e13360-a050-4702-9183-988599187a4a:3:V3-C-07",
+    "trace_id": "2974",
+    "routing": "DELIVERED",
+    "delivery_count": 1,
+    "invocation_trace": {
+      "mode": "native-interoperability",
+      "granularity": "agent_invocation_and_tool",
+      "invocation_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+      "prompt_version": "silentshift-investigator/1.4.2",
+      "enqueued_events": 10,
+      "enqueue_failures": 0,
+      "capture_failures": 0,
+      "persistence_status": "async_unverified",
+      "sdk_provider_round_metadata_available": false,
+      "provider_http_trace_available": true
+    },
+    "native_headers": [
+      {
+        "id": "2983",
+        "session_id": 2974,
+        "corresponding_message_id": 2984,
+        "source": "ProviderIngress",
+        "target": "ProviderForwarder",
+        "body_class": "SilentShift.Provider.CallRequest",
+        "body_id": "2489",
+        "created_at": "2026-11-14 17:46:55.654",
+        "processed_at": "2026-11-14 17:47:05.736"
+      },
+      {
+        "id": "2984",
+        "session_id": 2974,
+        "corresponding_message_id": 2983,
+        "source": "ProviderForwarder",
+        "target": "ProviderIngress",
+        "body_class": "SilentShift.Provider.CallResponse",
+        "body_id": "2490",
+        "created_at": "2026-11-14 17:47:05.737",
+        "processed_at": "2026-11-14 17:47:05.738"
+      },
+      {
+        "id": "2985",
+        "session_id": 2974,
+        "corresponding_message_id": 2986,
+        "source": "ProviderIngress",
+        "target": "ProviderForwarder",
+        "body_class": "SilentShift.Provider.CallRequest",
+        "body_id": "2491",
+        "created_at": "2026-11-14 17:47:05.755",
+        "processed_at": "2026-11-14 17:47:22.682"
+      },
+      {
+        "id": "2986",
+        "session_id": 2974,
+        "corresponding_message_id": 2985,
+        "source": "ProviderForwarder",
+        "target": "ProviderIngress",
+        "body_class": "SilentShift.Provider.CallResponse",
+        "body_id": "2492",
+        "created_at": "2026-11-14 17:47:22.682",
+        "processed_at": "2026-11-14 17:47:22.683"
+      }
+    ],
+    "provider_messages": [
+      {
+        "trace_schema": "silentshift-provider-call/1",
+        "granularity": "provider_http_call",
+        "event_kind": "provider_request",
+        "call_id": "6203E10B-E053-11F1-BC22-F70D0068BB73",
+        "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+        "production_session_id": 2974,
+        "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "round": 1,
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "started_at": "2026-11-14T17:46:55.653658Z",
+        "request_bytes": 3559,
+        "tool_names": [
+          "GetApprovedContracts",
+          "GetCurrentMessage",
+          "GetRelatedRecords",
+          "find_similar_precedents"
+        ],
+        "application_retry_count": 0,
+        "provider_retry_count": null,
+        "fallback_used": false,
+        "content_retained": false,
+        "payload_storage": "IRISTEMP_nonjournaled_until_relay_completion",
+        "billing_cost": null,
+        "usage_scope": "actual_http_response_only",
+        "structured_final": false,
+        "request_phase": "sdk-request",
+        "provider": "ollama/openai-compatible",
+        "execution_mode": "live",
+        "replay_record_id": "",
+        "message_header_id": "2983"
+      },
+      {
+        "trace_schema": "silentshift-provider-call/1",
+        "granularity": "provider_http_call",
+        "event_kind": "provider_response",
+        "call_id": "6203E10B-E053-11F1-BC22-F70D0068BB73",
+        "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+        "production_session_id": 2974,
+        "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "round": 1,
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "started_at": "2026-11-14T17:46:55.655756Z",
+        "finished_at": "2026-11-14T17:47:05.735876Z",
+        "duration_ms": 10080,
+        "http_status": 200,
+        "upstream_http_status": 200,
+        "response_bytes": 844,
+        "error_code": "",
+        "tool_calls": [
+          {
+            "id": "vfVwFJo15ixD7YnSyS0bAfwQvYhCpCz0",
+            "name": "GetCurrentMessage",
+            "arguments_omitted": true
+          },
+          {
+            "id": "ltUGgcKtq6P73oeAsTeF5phlKXWy6qD4",
+            "name": "GetApprovedContracts",
+            "arguments_omitted": true
+          },
+          {
+            "id": "yGTy6NqE0f2RHjogTvwgDfyUmUQgXNCo",
+            "name": "GetRelatedRecords",
+            "arguments_omitted": true
+          },
+          {
+            "id": "2q8lwC20CXC7jr4RdVjQ7uR0R5FWdT7w",
+            "name": "find_similar_precedents",
+            "arguments_omitted": true
+          }
+        ],
+        "finish_reason": "tool_calls",
+        "application_retry_count": 0,
+        "provider_retry_count": null,
+        "fallback_used": false,
+        "content_retained": false,
+        "billing_cost": null,
+        "usage_scope": "actual_http_response_only",
+        "response_usage": {
+          "prompt_tokens": 814,
+          "completion_tokens": 70,
+          "total_tokens": 884
+        },
+        "provider": "ollama/openai-compatible",
+        "execution_mode": "live",
+        "replay_record_id": "",
+        "message_header_id": "2984"
+      },
+      {
+        "trace_schema": "silentshift-provider-call/1",
+        "granularity": "provider_http_call",
+        "event_kind": "provider_request",
+        "call_id": "6809576A-E053-11F1-BC22-F70D0068BB73",
+        "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+        "production_session_id": 2974,
+        "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "round": 2,
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "started_at": "2026-11-14T17:47:05.755232Z",
+        "request_bytes": 6294,
+        "tool_names": [],
+        "application_retry_count": 0,
+        "provider_retry_count": null,
+        "fallback_used": false,
+        "content_retained": false,
+        "payload_storage": "IRISTEMP_nonjournaled_until_relay_completion",
+        "billing_cost": null,
+        "usage_scope": "actual_http_response_only",
+        "structured_final": true,
+        "request_phase": "structured-final",
+        "provider": "ollama/openai-compatible",
+        "execution_mode": "live",
+        "replay_record_id": "",
+        "message_header_id": "2985"
+      },
+      {
+        "trace_schema": "silentshift-provider-call/1",
+        "granularity": "provider_http_call",
+        "event_kind": "provider_response",
+        "call_id": "6809576A-E053-11F1-BC22-F70D0068BB73",
+        "case_id": "61E30803-E053-11F1-BC22-F70D0068BB73",
+        "production_session_id": 2974,
+        "invocation_span_id": "61FF7472-E053-11F1-BC22-F70D0068BB73",
+        "round": 2,
+        "model": "qwen3-silentshift:4b-instruct",
+        "prompt_version": "silentshift-investigator/1.4.2",
+        "started_at": "2026-11-14T17:47:05.756445Z",
+        "finished_at": "2026-11-14T17:47:22.682065Z",
+        "duration_ms": 16926,
+        "http_status": 200,
+        "upstream_http_status": 200,
+        "response_bytes": 516,
+        "error_code": "",
+        "tool_calls": [],
+        "finish_reason": "stop",
+        "application_retry_count": 0,
+        "provider_retry_count": null,
+        "fallback_used": false,
+        "content_retained": false,
+        "billing_cost": null,
+        "usage_scope": "actual_http_response_only",
+        "response_usage": {
+          "prompt_tokens": 1289,
+          "completion_tokens": 57,
+          "total_tokens": 1346
+        },
+        "provider": "ollama/openai-compatible",
+        "execution_mode": "live",
+        "replay_record_id": "",
+        "message_header_id": "2986"
+      }
+    ],
+    "transient_call_count": 0
+  },
+  "semantic_inputs_match_frozen": true,
+  "resumed_existing_case": false
+}
