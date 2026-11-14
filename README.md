@@ -4,7 +4,7 @@ SilentShift catches technically valid partner orders whose quantities contradict
 
 **[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
 
-**Safer, not more accurate:** in the historical synthetic comparison, agent + policy made fewer wrong simulator deliveries at the cost of more false holds and review. It did not improve overall correct routing, and one trial was worse. [Numbers and limits](#what-the-held-out-comparison-showed).
+**The agent investigates and proposes; native IRIS policy decides.** On the historical held-out set, agent + policy cut wrong simulator deliveries from **6/23** to **2–3/23**, at the cost of more false holds (**9/25** up to **9–12/25**). It did not improve overall correct routing, and one trial was worse. [The agent's role and this trade-off](docs/AI_ROLE.md) · [Numbers and limits](docs/EVAL_HELDOUT.md).
 
 **[What the agent saw that the rules missed](https://himanshu748.github.io/silentshift/agent-value.html)** — three selected examples of reviewer assist, with original clauses, cited recommendations, policy reasons and pending Workflow tasks. The Pages view is live and presents recorded evidence. [Sources and limits](docs/AGENT_VALUE.md).
 
