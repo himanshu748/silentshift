@@ -1,3 +1,15 @@
+# Judge clarity preparation — November 15, 2026 (IST)
+
+Branch `docs/judge-clarity-nov15`, based on main `c8a2fb5`, prepares a contrasting-case journey: the same incoming `20 CASE`, an unsafe saved `ALLOW` refused by policy, and a legitimate approved amendment delivered to the simulator. The landing and recorded tour now show the completed sealed result before the separately labeled historical v2 comparison. The judge guide maps the five criteria to existing evidence. README and current bonus statuses are reconciled with the organizer's **35/35** category credit; this does not imply vendor acceptance of individual reports or an overall placement.
+
+Local checks passed: **395 pytest**, **7 Java core tests**, **21 static-data tests**, **54 disconnected workbench browser tests**, TypeScript/build, **58 landing**, **45 recorded-tour**, **38 agent-value**, **33 receipt-inspector** and **11 targeted static-preview checks**. The navigation regression caused by collapsing a historical result was fixed and its failed output retained. Keyboard, deep links, responsive widths, reduced motion, no-JavaScript content and signature/tamper inspection were exercised. [Commands, counts, source hashes and scope](evidence/judge-clarity-nov15/summary.json).
+
+Sequential local Lighthouse scores were unchanged: landing **96/100/100/100 mobile**, **100/100/100/100 desktop**; recorded tour **100/100/100/100** on both. Measured CLS was **0** in every profile. [Before/after measurements](evidence/judge-clarity-nov15/lighthouse.json) · [desktop contrast](evidence/judge-clarity-nov15/contrast-cards-desktop.png) · [mobile landing](evidence/judge-clarity-nov15/landing-390.png).
+
+Native/runtime/package, prompt, model, policy and frozen evaluation files are unchanged. No new native suite or model evaluation ran; prior native receipts retain their original scope. No host access, deployment, public CI execution, push, PR, merge, release or OEX change is claimed by this local preparation. Public native remains **0.3.3**, React **0.2.1**. Publishing requires separate exact-submit approvals.
+
+## Earlier dated checkpoints
+
 # Sealed v3 evaluation — November 14, 2026 (IST)
 
 The preregistered source `56ff2d6976e61ccb36b68e0632224e1234afaa3e` was freshly source-loaded into an isolated local 154U ARM64 container, passed **6 native classes / 16 methods** and the live **5/5** core gate, then completed all **108** sealed native investigations and **108** baseline executions. Runtime source, model digest, prompt, policy and labels stayed fixed. The final no-learning audit found **0** evaluated outcomes indexed. [Setup](../evidence/heldout/v3-sealed/setup/receipt.json) · [completion audit](../evidence/heldout/v3-sealed/completion-audit.json) · [full results](EVAL_SEALED.md).

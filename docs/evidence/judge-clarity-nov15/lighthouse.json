@@ -1,0 +1,238 @@
+{
+  "scope": "Sequential local runs against unchanged baseline and branch; not hosted measurements",
+  "profiles": {
+    "before-mobile": {
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:41:34.407Z",
+      "url": "http://127.0.0.1:53714/"
+    },
+    "before-desktop": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:43:50.051Z",
+      "url": "http://127.0.0.1:53714/"
+    },
+    "after-mobile": {
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:48:40.658Z",
+      "url": "http://127.0.0.1:53715/"
+    },
+    "after-desktop": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:48:51.428Z",
+      "url": "http://127.0.0.1:53715/"
+    },
+    "before-tour-mobile": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:48:20.008Z",
+      "url": "http://127.0.0.1:53714/evidence-tour.html"
+    },
+    "before-tour-desktop": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:48:30.382Z",
+      "url": "http://127.0.0.1:53714/evidence-tour.html"
+    },
+    "after-tour-mobile": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:49:02.091Z",
+      "url": "http://127.0.0.1:53715/evidence-tour.html"
+    },
+    "after-tour-desktop": {
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0,
+      "lighthouse_version": "13.6.0",
+      "fetch_time": "2026-11-15T04:49:12.431Z",
+      "url": "http://127.0.0.1:53715/evidence-tour.html"
+    }
+  },
+  "commands": [
+    {
+      "name": "before-tour-mobile",
+      "exit_code": 0,
+      "elapsed_seconds": 11.144,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53714/evidence-tour.html",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/before-tour-mobile.json",
+        "--chrome-flags=--headless=new"
+      ],
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    },
+    {
+      "name": "before-tour-desktop",
+      "exit_code": 0,
+      "elapsed_seconds": 10.288,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53714/evidence-tour.html",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/before-tour-desktop.json",
+        "--chrome-flags=--headless=new",
+        "--preset=desktop"
+      ],
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    },
+    {
+      "name": "after-mobile",
+      "exit_code": 0,
+      "elapsed_seconds": 10.718,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53715/",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/after-mobile.json",
+        "--chrome-flags=--headless=new"
+      ],
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    },
+    {
+      "name": "after-desktop",
+      "exit_code": 0,
+      "elapsed_seconds": 10.722,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53715/",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/after-desktop.json",
+        "--chrome-flags=--headless=new",
+        "--preset=desktop"
+      ],
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    },
+    {
+      "name": "after-tour-mobile",
+      "exit_code": 0,
+      "elapsed_seconds": 10.277,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53715/evidence-tour.html",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/after-tour-mobile.json",
+        "--chrome-flags=--headless=new"
+      ],
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    },
+    {
+      "name": "after-tour-desktop",
+      "exit_code": 0,
+      "elapsed_seconds": 10.321,
+      "command": [
+        "node",
+        "/Users/himanshujha/.npm/_npx/ba16b138af87a83e/node_modules/lighthouse/cli/index.js",
+        "http://127.0.0.1:53715/evidence-tour.html",
+        "--quiet",
+        "--only-categories=performance,accessibility,best-practices,seo",
+        "--output=json",
+        "--output-path=.local/judge-clarity-nov15/lighthouse/after-tour-desktop.json",
+        "--chrome-flags=--headless=new",
+        "--preset=desktop"
+      ],
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "cls": 0
+    }
+  ]
+}
