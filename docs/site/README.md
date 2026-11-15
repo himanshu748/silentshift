@@ -1,6 +1,6 @@
 # Static judge-facing site
 
-This folder is the static GitHub Pages artifact: the landing, recorded evidence tour, receipt inspector and agent-value view. The hosted-replay CTA change is prepared locally and has not been deployed.
+This folder is the static GitHub Pages artifact: the landing, recorded evidence tour, receipt inspector and agent-value view. The hosted-replay CTA is live. The contrasting-case and sealed-result presentation changes in this branch are local preparation until their separately approved Pages deployment.
 
 These pages inspect recorded synthetic evidence and make no native API or model calls. The landing links to a **separate hosted replay** that executes native IRIS policy, routing and signed receipts using a recorded proposal; it performs no fresh model inference. [Hosted scope, limits and operating window](../ONLINE_DEMO.md). The prose view copies existing held-out files and keeps pending Workflow tasks distinct from completed human review.
 
