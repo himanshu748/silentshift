@@ -722,3 +722,9 @@ Embedded Python, Java/.NET PEX and online-demo bonuses remain **Not claimed**. A
 - Results-branch pytest: 395 passed in 23.32 seconds. No runtime, fixture, prompt, policy, module.xml or release change. No hosted-demo access, cloud action or public post. Owner’s current task explicitly authorizes publishing results through one branch/PR, then stopping before merge.
 
 - Final pre-publication checks: staged-text secret scan 0 findings / 0 omissions, no missing relative links in changed reader docs, no native/Python/Java/fixture/script/module changes, no file over 50 MB.
+
+### 2026-11-15T10:22:27.381703+05:30 — Judge clarity local preparation
+
+- Prepared `docs/judge-clarity-nov15` from main `c8a2fb5` in an isolated worktree. Contrasting recorded cases, a current sealed-result panel and a criterion-to-evidence index adapt navigation patterns studied in rival documentation; no rival code or artwork copied.
+- Existing native/source/evaluation records are unchanged. Static-data tests bind displayed outcomes and sealed counts to retained JSON. Official category readback confirms 35/35; vendor resolution is separate.
+- Local suite and desktop/mobile checks passed; the hidden prose-link regression was fixed with the initial failed log retained. Lighthouse is unchanged. See `docs/evidence/judge-clarity-nov15/summary.json`. No public or paid action; push/PR, merge and Pages deployment remain individually gated.

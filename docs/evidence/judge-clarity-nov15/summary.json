@@ -1,0 +1,175 @@
+{
+  "checked_at_ist": "2026-11-15T10:20:05.059384+05:30",
+  "branch": "docs/judge-clarity-nov15",
+  "base_main": "c8a2fb525dd182fa5cd6bd1fc4a83e631e6f68d2",
+  "scope": "Local static presentation, documentation and browser/data harness only. Not a native run, evaluation or deployment.",
+  "browser_driver": "Browser plugin unavailable; repository Playwright via installed Chrome",
+  "commands": [
+    {
+      "name": "static-data",
+      "command": [
+        "node",
+        "--test",
+        "tests/receipt-inspector.test.mjs",
+        "tests/recorded-tour.test.mjs",
+        "tests/agent-value.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.598,
+      "output": "static-data.txt"
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.628,
+      "output": "typescript.txt"
+    },
+    {
+      "name": "web-build",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.955,
+      "output": "web-build.txt"
+    },
+    {
+      "name": "landing-browser",
+      "command": [
+        "node",
+        "scripts/check_static_landing.cjs",
+        "http://127.0.0.1:53715/",
+        ".local/judge-clarity-nov15/final-landing"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 17.561,
+      "output": "landing-browser.txt"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "uv",
+        "run",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 24.346,
+      "output": "pytest.txt"
+    },
+    {
+      "name": "receipt-browser",
+      "command": [
+        "node",
+        "scripts/check_receipt_inspector.cjs",
+        ".local/judge-clarity-nov15/receipts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.838,
+      "output": "receipt-browser.txt"
+    },
+    {
+      "name": "java-core",
+      "command": [
+        "python3",
+        "scripts/test_java_core.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.063,
+      "output": "java-core.txt"
+    },
+    {
+      "name": "agent-value-browser",
+      "command": [
+        "node",
+        "scripts/check_agent_value.cjs",
+        "http://127.0.0.1:53715/",
+        ".local/judge-clarity-nov15/final-agent-value"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.684,
+      "output": "agent-value-browser.txt"
+    },
+    {
+      "name": "workbench-browser",
+      "command": [
+        "npm",
+        "--prefix",
+        "web",
+        "run",
+        "test:e2e"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 64.673,
+      "output": "workbench-browser.txt"
+    },
+    {
+      "name": "tour-browser",
+      "command": [
+        "node",
+        "scripts/check_evidence_tour.cjs",
+        ".local/judge-clarity-nov15/final-tour"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.828,
+      "output": "tour-browser.txt"
+    }
+  ],
+  "results": {
+    "pytest": 395,
+    "java_core": 7,
+    "static_data": 21,
+    "workbench_browser_disconnected": 54,
+    "landing_browser": 58,
+    "recorded_tour_browser": 45,
+    "agent_value_browser": 38,
+    "receipt_inspector_browser": 33,
+    "targeted_static_preview": 11,
+    "typescript": "passed",
+    "web_build": "passed"
+  },
+  "retained_failure": {
+    "file": "retained-navigation-failure.txt",
+    "cause": "Historical result disclosure hid a still-advertised prose-evidence link.",
+    "fix": "Restored the link outside the collapsed disclosure; unchanged agent-value browser assertions then passed."
+  },
+  "native_package": "0.3.3 unchanged",
+  "react_package": "0.2.1 unchanged",
+  "no_new_evaluation": true,
+  "native_rerun": false,
+  "host_requests": false,
+  "public_actions": [],
+  "changed_content_sha256": {
+    "README.md": "a352e8e7501210c86897250f8f8c8a0a0886ae9a458c4589d59c7b3744b68364",
+    "docs/BONUS_EVIDENCE.md": "6ff9545be5d4cb7b8364dec0d1a0e5c49e05ff11a13e50118506b229aee5b1bc",
+    "docs/JUDGE_GUIDE.md": "bfdd1c468cf59a60e6ee13485034ec35cf186ad8074cbc39f3a65c6cc450b954",
+    "docs/SUBMISSION_CHECKLIST.md": "1c422254f9871d932817fa6b08e0120ce9f31cec947434a766139a01b1d0b8ce",
+    "docs/site/README.md": "2280b9b6e4b3badd36acb3891179b2c0aae6bd9ce97c7bf311641a13856dcca3",
+    "docs/site/evidence-tour.css": "f50ab2476ebd9de1a2bbef63a1081f0dbee81eff3e666c1c870b78cfb064e1f0",
+    "docs/site/evidence-tour.html": "188e9589321b547a5d0b7da3b419b20f515498579196d7edba069b622860e40b",
+    "docs/site/index.html": "24c8fa3ad4c6c5756078bf2128307877cf509d05e309006f4d00dab1054bd474",
+    "docs/site/styles.css": "260504952db40520f02cadb997549c42ddbc97ca467c1901526026ca6421fc83",
+    "scripts/check_evidence_tour.cjs": "63eea1c2841ad0993f50a50a46dff1b3f1d37d8230b3f503eacd2360e579f625",
+    "tests/agent-value.test.mjs": "28adc06816a38cb854bf9cae4785e03ce905b570966939143db167140d33e303",
+    "tests/recorded-tour.test.mjs": "895a781c3cf2e4738ed5612f596d6851a19204a05dc206f2f81d10848e145b04"
+  },
+  "verified_presentation_commit": "7314fca9eedfeddddec592427cfb25d7117b9156",
+  "secret_scan": {
+    "scope": "Full staged text blobs for presentation commit",
+    "findings": 0,
+    "files_omitted": 0,
+    "limits": "Known patterns only; no history or arbitrary untracked files."
+  },
+  "screenshot_review": "Local static synthetic records only; desktop, mobile and recorded policy screenshots inspected. Binary screenshots are not covered by the staged text secret scan."
+}

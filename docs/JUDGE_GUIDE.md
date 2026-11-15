@@ -8,6 +8,26 @@ An order arrives as `20 CASE`; its approved contract requires `240 EA`. Transpor
 
 Start with **Quantity mismatch**, which holds the unsupported change. Then inspect **Approved amendment**, which allows the same incoming value because an approved amendment is effective at event time. The difference is the authority behind the order. Follow that evidence to the policy decision and the simulator receipt.
 
+## Inspect the recorded contrast first
+
+No installation or model call is needed for these static records:
+
+1. [Unsupported change — decision](https://himanshu748.github.io/silentshift/evidence-tour.html?case=quantity-mismatch&step=2#recorded-case): the saved agent said `ALLOW`; policy quarantined the critical contradiction. Keep the wrong model explanation separate from the committed outcome.
+2. [Approved amendment — authority](https://himanshu748.github.io/silentshift/evidence-tour.html?case=approved-amendment&step=1#recorded-case): inspect `contract:PO-2048:v2`, then the delivered outcome and signed receipt.
+3. [Completed sealed experiment](EVAL_SEALED.md): read the small, inconsistent result and retained failure. The demonstrations do not establish reliable prose understanding.
+
+The [source records](site/assets/recorded-cases.json) are historical synthetic cases. The [separate hosted replay](ONLINE_DEMO.md) executes a fixed recorded proposal through native policy; it performs no fresh model inference.
+
+## Evidence for each judging criterion
+
+| Criterion | Start here | What to inspect |
+| --- | --- | --- |
+| Complexity | [Production wiring](../src/SilentShift/Production.cls) and [Visual Trace field map](AI_TRACING.md) | Native AI Hub, scoped tools, deterministic policy, Workflow and Java PEX; follow their actual boundaries. |
+| Clarity of Instructions | [INSTALL.md](../INSTALL.md) | One numbered guide, licensed ARM64 build-154 image prerequisite, keyless and live paths kept separate. |
+| Developer Experience | [Public 0.3.3 clean-install receipt](evidence/public-033-nov12/summary.json) | Earlier executed startup, native assertions and replays; no new execution is implied. |
+| Applicability | [Two recorded orders](site/assets/recorded-cases.json) | The incoming quantity is the same; the approved authority changes the permitted route. Synthetic orders, no customer savings measured. |
+| Usability | [Recorded tour](https://himanshu748.github.io/silentshift/evidence-tour.html) and [receipt inspector](https://himanshu748.github.io/silentshift/receipts.html) | Inspect evidence and receipt integrity without installation; an embedded public key does not independently establish identity. |
+
 ## Choose your path
 
 | What you want to assess | Start here | What it establishes |

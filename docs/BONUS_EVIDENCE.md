@@ -1,3 +1,13 @@
+# Current organizer credit — November 15, 2026 (IST)
+
+The [fresh anonymous official-table readback](evidence/judge-clarity-nov15/bonus-credit.json) credits SilentShift with **35/35 technology-bonus points**: AI Hub bug reports **3**, Embedded Python bug reports **3**, online demo **2**, Java PEX **3** and Community Idea **4**, alongside the other categories in the [README table](../README.md#contest-bonuses). These are organizer category credits, not an overall placement or individual vendor acceptance/resolution of the reports. The hosted demo is a recorded proposal with native policy execution, not fresh inference.
+
+Public native remains **0.3.3**, React **0.2.1**. This is a documentation readback, not a new native run or evaluation. The [completed sealed result](EVAL_SEALED.md) retains its registered historical source and weak, inconsistent result.
+
+## Historical checkpoints below
+
+The dated statements below describe their original checks; pending claims in those historical passages are superseded by the organizer readback above. Do not resubmit them.
+
 # Published native 0.3.3 — November 12, 2026 (IST)
 
 ## November 12 hosted replay verification

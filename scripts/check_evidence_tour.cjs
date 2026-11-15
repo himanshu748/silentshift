@@ -16,6 +16,11 @@ const root=path.resolve(__dirname,'../docs/site'),output=path.resolve(process.ar
    check(width+': starts with historical held case',(await page.locator('#recorded-id').innerText()).startsWith('EF61BAE2-'));
    check(width+': synthetic/recorded limit visible',(await page.locator('body').innerText()).includes('no new investigation'));
    check(width+': no horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+   check(width+': sealed result is visible before historical comparison',await page.locator('.sealed-summary').isVisible()&&!(await page.locator('.historical-result').getAttribute('open')));
+   const cards=page.locator('.comparison-card');check(width+': both contrasting outcomes are visible',await cards.count()===2&&(await cards.nth(0).innerText()).includes('incorrect explanation')&&(await cards.nth(1).innerText()).includes('DELIVERED'));
+   await page.getByRole('link',{name:'Inspect the held decision',exact:false}).click();await page.waitForFunction(()=>document.querySelector('#step-title').textContent.includes('Policy refused'));
+   check(width+': comparison link opens real held decision',await page.getByRole('tab',{name:'03 Decision'}).getAttribute('aria-selected')==='true'&&new URL(page.url()).hash==='#recorded-case');
+
    await page.getByRole('tab',{name:'03 Decision'}).click();
    check(width+': wrong ALLOW proposal is retained',(await page.locator('#step-title').innerText()).includes('Policy refused'));
    check(width+': final route stays quarantined',await page.locator('#recorded-route').innerText()==='QUARANTINED');

@@ -28,3 +28,15 @@ test('the model error and the legitimate amendment are retained rather than rewr
  assert.equal(approved.routing,'DELIVERED');assert.equal(approved.delivery_count,1);
  assert.ok(approved.assessment.active_reference_ids.includes('contract:PO-2048:v2'));
 });
+
+test('contrasting-case cards retain original authority, proposal, route and trace',async()=>{
+ const html=await read('docs/site/evidence-tour.html');
+ for(const record of selection.cases){
+  const card=html.match(new RegExp('<article class="comparison-card" data-case="'+record.scenario_id+'"[\\s\\S]*?<\\/article>'))?.[0];
+  assert.ok(card,record.scenario_id);
+  for(const value of [record.trace_id,record.recommendation.decision,record.routing,...record.assessment.active_reference_ids]) assert.ok(card.includes(String(value)),`${record.scenario_id}: ${value}`);
+  assert.ok(card.includes(`${record.delivery_count} simulator deliver`));
+ }
+ assert.ok(html.includes('ALLOW — an incorrect explanation'));
+ assert.ok(html.includes('not fresh investigations or an AI accuracy comparison'));
+});

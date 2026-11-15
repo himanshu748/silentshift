@@ -10,6 +10,14 @@ SilentShift catches technically valid partner orders whose quantities contradict
 
 **[Try the hosted replay](https://34.239.152.223.sslip.io/demo/)** — one synthetic quantity mismatch; a recorded agent proposal with native IRIS policy and signed receipts. No fresh model inference. [Scope and expiry](docs/ONLINE_DEMO.md).
 
+## Same order, different authority — no installation
+
+1. **[Inspect the unsupported change](https://himanshu748.github.io/silentshift/evidence-tour.html?case=quantity-mismatch&step=2#recorded-case).** The saved model proposed `ALLOW`; policy refused it because `20 CASE` contradicts the approved `240 EA` commitment. The incorrect explanation stays visible.
+2. **[Inspect the approved amendment](https://himanshu748.github.io/silentshift/evidence-tour.html?case=approved-amendment&step=1#recorded-case).** The same incoming `20 CASE` is legitimate under the effective amendment. Follow its recorded delivery and signed receipt.
+3. **[Read the sealed result](docs/EVAL_SEALED.md).** Those two historical synthetic cases explain the mechanism; the broader sealed result is small and inconsistent.
+
+The links inspect static saved records; they do not run a new investigation. The hosted path below separately executes a fixed recorded proposal through native IRIS policy and routing.
+
 ## 5-minute judge path
 
 The hosted page supports only this quantity-mismatch sample; other scenarios require the local live-model setup. Wait until the status is no longer **Connecting to the replay demo…** and **Replay this investigation** is enabled. The pre-selected sample is **No approved conversion**.
@@ -158,7 +166,7 @@ Business Service → Business Process → **IRIS AI Hub agent with scoped read-o
 
 Each AI Hub provider exchange is saved as a native request/response pair in the business session. It records model, provider, prompt version, timing, tool names, outcome and response-token usage when the provider reports it. Unknown cost stays null, and replay never counts recorded tokens as new usage. [How to read the trace](docs/FEATURES.md#see-it-in-visual-trace) · [Native Body capture](docs/assets/provider-success-body-safari.png) · [Field map](docs/FEATURES.md#native-provider-metadata) · [vs Langfuse](docs/FEATURES.md#silentshift-iris-interoperability-vs-langfuse)
 
-The dedicated Open Exchange idea association is now publicly visible; organizer qualification remains **unconfirmed**. [Anonymous readback and scope](docs/evidence/top3-public-review.json).
+The dedicated Open Exchange idea association is publicly visible, and the official table credits DPI-I-689 with **4 points**. [Dated organizer-category readback](docs/evidence/judge-clarity-nov15/bonus-credit.json). This is bonus credit, not an overall placement.
 
 ## What the held-out comparison showed
 
@@ -180,9 +188,9 @@ This section reports the historical v2 comparison before later source-branch pip
 
 ## Contest bonuses
 
-**Published bonus credit: 29 points**, including Java PEX and Community Idea DPI-I-689, in the [official results table](https://community.intersystems.com/post/technology-bonus-results-intersystems-programming-contest-ai-agents-interoperability-workflows) checked November 12, 2026. This is technology-bonus credit, not an overall ranking or prize. **Filed; review pending** means a report exists but no additional points are assumed. [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md#every-bonus). Only **2026.3.0AI.154.0 / 154U ARM64** is locally qualified.
+**Published bonus credit: 35/35 points**, including Java PEX and Community Idea DPI-I-689, in the [official results table](https://community.intersystems.com/post/technology-bonus-results-intersystems-programming-contest-ai-agents-interoperability-workflows) checked November 15, 2026. This is technology-bonus credit, not an overall ranking or prize. The AI Hub and Embedded Python bug categories are credited; that does not establish individual vendor acceptance or resolution. [Dated organizer readback](docs/evidence/judge-clarity-nov15/bonus-credit.json). [Full ledger and limits](docs/SUBMISSION_CHECKLIST.md#every-bonus). Only **2026.3.0AI.154.0 / 154U ARM64** is locally qualified.
 
-| Bonus | Points requested | Status | Direct evidence |
+| Bonus | Points | Status | Direct evidence |
 | --- | ---: | --- | --- |
 | Docker | 2 | Credited in official table | [Compose](compose.judge.yaml) · [fresh native container execution](docs/evidence/voting-finish-nov10/compose-final.json) |
 | IPM deployment: `zpm "install silentshift"` | 2 | Credited in official table | [Public 0.3.3 archive](https://pm.community.intersystems.com/download/silentshift/-/silentshift-0.3.3.tgz) · [publication/manifest readback](docs/evidence/public-033-nov12/publication.json) · [fresh public install/startup/replays](docs/evidence/public-033-nov12/summary.json) |
@@ -192,17 +200,17 @@ This section reports the historical v2 comparison before later source-branch pip
 | Embedded Python | 3 | Credited in official table | [Assessment and policy: Language = python](src/SilentShift/Bridge.cls) · [production call sites](src/SilentShift/Process/Semantic.cls) · [native execution/source audit](docs/evidence/bonus-claims-nov11/embedded-python.json) |
 | Community idea DPI-I-689 | 4 | Credited in official table | [Idea](https://ideas.intersystems.com/ideas/DPI-I-689) · [Visual Trace recipe and Langfuse comparison](#community-idea-dpi-i-689-llm-tracing-with-interoperability) · [native message bodies](docs/evidence/provider-body-captures.json) · [public OEX association](https://openexchange.intersystems.com/package/SilentShift) |
 | First AI Hub bug | 2 | Credited in official table; vendor bug resolution separate | [Issue #17: standalone reproduction and compiler log](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/17) |
-| Second AI Hub bug | 1 | Filed; review pending | [Issue #28: character-stream tool codec returns metadata instead of text](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28) · [standalone repro and findings](docs/launch/bonus-nov12/aihub-bug-2/findings.md) · [three fresh-container reproductions](docs/launch/bonus-nov12/aihub-bug-2/outputs/fresh-reproduction.json) · [anonymous filing verification](docs/launch/bonus-nov12/aihub-bug-2/outputs/filing.json) |
+| Second AI Hub bug | 1 | AI Hub category credited 3/3; vendor resolution separate | [Issue #28: character-stream tool codec returns metadata instead of text](https://github.com/intersystems-community/ai-hub-eap-bugreports/issues/28) · [standalone repro and findings](docs/launch/bonus-nov12/aihub-bug-2/findings.md) · [three fresh-container reproductions](docs/launch/bonus-nov12/aihub-bug-2/outputs/fresh-reproduction.json) · [anonymous filing verification](docs/launch/bonus-nov12/aihub-bug-2/outputs/filing.json) |
 | First Developer Community article | 2 | Credited in official table | [Catching semantic failures in an IRIS interoperability production](https://community.intersystems.com/post/catching-semantic-failures-iris-interoperability-production) |
 | Second Developer Community article | 1 | Credited in official table | [Recoverable human review in IRIS: from approval to one delivery](https://community.intersystems.com/post/recoverable-human-review-iris-approval-one-delivery) |
 | Video | 3 | Credited in official table | [YouTube](https://youtu.be/a4dOcqu89EA) · [download the same MP4 without sign-in](https://raw.githubusercontent.com/himanshu748/silentshift/main/evidence/video/silentshift-demo.mp4) · [full-file/hash/media check](docs/evidence/bonus-claims-nov11/video.json). The 2:30 synthetic-workflow recording predates CSV. |
 | Questionnaire | 1 | Credited in official table | [Submitted confirmation](docs/assets/questionnaire-submitted.png); already submitted, do not resubmit |
 | Java PEX | 3 | Credited in official table | [Java operation](java/src/main/java/SilentShift/PEX/ReceiptExporter.java) · [production wiring](src/SilentShift/Production.cls) · [native test](tests/iris/PEXChecks.cls) · [receipt-mode regression](docs/evidence/receipt-mode-nov11/summary.json) · [fresh offline install](docs/evidence/ipm-032-final-nov11/summary.json) · [live Visual Trace](docs/evidence/bonus-claims-nov11/java-pex-live-trace.png) |
-| Online demo | 2 | Hosted replay verified; claim pending, not credited | [Open the running native replay](https://34.239.152.223.sslip.io/demo/) · [outside-host and reboot evidence](docs/evidence/demo-nov12/summary.json) · [scope, expiry and known trace warning](docs/ONLINE_DEMO.md). Recorded proposal; live native routing and signed receipt, no fresh model inference |
-| Embedded Python bug report 1 | 2 | Filed; review pending | [Issue #35](https://github.com/intersystems-community/python-bugreports/issues/35) · [standalone reproduction and retained output](docs/launch/bonus-nov12/ep-bug-1/) |
-| Embedded Python bug report 2 | 1 | Filed; review pending | [Issue #36: misleading generated-code error after rejected Python method](https://github.com/intersystems-community/python-bugreports/issues/36) · [reproduction and controls](docs/launch/bonus-nov12/ep-bug-2/) |
+| Online demo | 2 | Credited in official table; recorded proposal disclosed | [Open the running native replay](https://34.239.152.223.sslip.io/demo/) · [outside-host and reboot evidence](docs/evidence/demo-nov12/summary.json) · [scope, expiry and known trace warning](docs/ONLINE_DEMO.md). Recorded proposal; live native routing and signed receipt, no fresh model inference |
+| Embedded Python bug report 1 | 2 | Embedded Python bug category credited 3/3; vendor resolution separate | [Issue #35](https://github.com/intersystems-community/python-bugreports/issues/35) · [standalone reproduction and retained output](docs/launch/bonus-nov12/ep-bug-1/) |
+| Embedded Python bug report 2 | 1 | Embedded Python bug category credited 3/3; vendor resolution separate | [Issue #36: misleading generated-code error after rejected Python method](https://github.com/intersystems-community/python-bugreports/issues/36) · [reproduction and controls](docs/launch/bonus-nov12/ep-bug-2/) |
 
-[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). The published bonus credit is recorded above; no overall ranking, prize, newer-build verification or live hosting is claimed.
+[Official criteria](https://community.intersystems.com/post/technology-bonuses-intersystems-programming-contest-ai-agents-interoperability-workflows). The published bonus credit is recorded above; no overall ranking, prize, newer-build verification or fresh hosted inference is claimed.
 
 ## Developer Community articles
 

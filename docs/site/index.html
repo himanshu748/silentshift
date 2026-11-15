@@ -61,7 +61,7 @@
             missing check.
           </p>
           <h1 id="hero-title" class="hero-title">
-            Fewer wrong<br />deliveries.<br /><em>More review.</em>
+            Same order.<br />Different<br /><em>authority.</em>
           </h1>
           <p class="hero-description">
             Semantic integration checks for IRIS, with evidence-bound agent
@@ -78,6 +78,15 @@
             Synthetic sample. Recorded proposal; native IRIS policy and signed receipts.
             No fresh model inference. <button class="demo-status-link" type="button" data-open-demo>Replay scope</button>
           </p>
+<section class="sealed-summary" aria-labelledby="sealed-title">
+<p class="eyebrow">Completed sealed evaluation · 36 synthetic orders</p>
+<h2 id="sealed-title">A small, inconsistent contribution.</h2>
+<dl class="sealed-metrics"><div><dt>Correct routes</dt><dd><span>Rules-only <strong>24/36</strong></span><span>Agent + policy <strong>24/36 · 24/36 · 25/36</strong></span></dd></div><div><dt>Wrong deliveries</dt><dd><span>Rules-only <strong>8/20</strong></span><span>Agent + policy <strong>8/20 · 7/20 · 7/20</strong></span></dd></div></dl>
+<p>Three trials. Rules releases are counterfactual; agent + policy counts actual simulator receipts. Unstructured routing: rules 0/12; agent + policy 0/12, 0/12, 1/12.</p>
+<p class="sealed-limit">One failed attempt remains counted. This does not establish reliable prose understanding. The registered historical source was evaluated, not the current release.</p>
+<a href="https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_SEALED.md">Read the sealed results and every failure ↗</a>
+</section>
+<details class="historical-result"><summary>Earlier v2 comparison · different data and source</summary>
 <aside class="heldout-summary" aria-label="Recorded held-out result">
 <p class="eyebrow">Recorded comparison · 48 synthetic orders</p>
 <p class="heldout-main"><strong>6/23 → 2–3/23</strong> wrong deliveries</p>
@@ -85,8 +94,10 @@
 <p><strong>Review: 12.5% → 21.5%</strong> (pooled agent trials).</p>
 <p class="heldout-limit"><strong>No overall accuracy gain:</strong> correct routes 33/48 → 33/48, 33/48, 30/48. Unstructured routing stays 1/16 in every trial.</p>
 <a href="https://github.com/himanshu748/silentshift/blob/7ae03be03ac6721639e83bdd9e3ed07a5350649e/docs/EVAL_HELDOUT.md">Read the full comparison and every failure ↗</a>
-<a href="agent-value.html#HO-045">What the agent saw ↗</a>
+
 </aside>
+</details>
+<p class="prose-evidence-link"><a href="agent-value.html#HO-045">What the agent saw ↗</a> <span>Selected historical prose cases; final review routes remain scored incorrect.</span></p>
           <div class="install-command">
             <span class="mono-label">Native IPM 0.3.3 · React 0.2.1 from source<br />Install in a prepared IRIS namespace</span
             ><button
@@ -639,52 +650,15 @@
           <div class="section-heading">
             <p class="eyebrow">08 / For judges</p>
             <h2 id="judges-title" class="reveal">
-              Two minutes.<br />Follow one decision.
+              Two minutes.<br />Compare the authority.
             </h2>
           </div>
           <ol class="judge-path">
-            <li>
-              <span>01</span>
-              <div>
-                <h3>Try the fixed sample.</h3>
-                <p>
-                  Replay the unsupported 20 CASE order. The proposal is recorded;
-                  native IRIS policy, routing and signed receipts execute on the host.
-                </p>
-                <a href="https://34.239.152.223.sslip.io/demo/"
-                  >Open the guided replay
-                  <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
-            <li>
-              <span>02</span>
-              <div>
-                <h3>Inspect the evidence.</h3>
-                <p>
-                  Read the policy, recorded agent evidence, native Workflow task
-                  and provider message.
-                </p>
-                <a href="#workbench"
-                  >Explore the real captures
-                  <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
-            <li>
-              <span>03</span>
-              <div>
-                <h3>Run the native replay.</h3>
-                <p>
-                  With the official image loaded, reproduce the keyless hold and
-                  open the printed Visual Trace.
-                </p>
-                <a href="#install"
-                  >Open the local path <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
+            <li><span>01</span><div><h3>Catch the unsupported change.</h3><p>The saved model proposed ALLOW. Inspect why policy refused it: 20 CASE contradicts the approved 240 EA contract.</p><a href="evidence-tour.html?case=quantity-mismatch&amp;step=2#recorded-case">Inspect the held decision <span aria-hidden="true">↗</span></a></div></li>
+            <li><span>02</span><div><h3>Change the authority, not the order.</h3><p>The same incoming 20 CASE is legitimate under an effective approved amendment. Follow its recorded delivery and signed receipt.</p><a href="evidence-tour.html?case=approved-amendment&amp;step=1#recorded-case">Inspect the approved amendment <span aria-hidden="true">↗</span></a></div></li>
+            <li><span>03</span><div><h3>Check what the experiment found.</h3><p>These two recorded cases demonstrate the mechanism. The completed sealed experiment found only a small, inconsistent gain.</p><a href="https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_SEALED.md">Read the complete measured result <span aria-hidden="true">↗</span></a></div></li>
           </ol>
+          <p class="judge-scope">The comparison above reads saved synthetic records; it does not run a model or write a case. <a href="https://34.239.152.223.sslip.io/demo/">Try the separate hosted replay</a> to execute the fixed proposal through native policy, or <a href="#install">reproduce it locally</a>.</p>
           <div class="limits">
             <h3>Read the measured limits</h3>
             <p>
@@ -692,8 +666,10 @@
               Rules-only routed 33/48 correctly; agent + policy routed 33/48,
               33/48 and 30/48 across three trials. Both achieved 1/16 correct
               routes on the unstructured split. This does not establish an
-              overall accuracy advantage. Later pipeline changes and an
-              incomplete sealed evaluation do not establish an improvement.
+              overall accuracy advantage. The completed registered-source v3
+              evaluation found only a small, inconsistent contribution; it does
+              not establish reliable prose understanding. These different sets
+              and source snapshots are not a controlled regression comparison.
             </p>
             <a
               href="https://github.com/himanshu748/silentshift/blob/main/docs/EVAL_HELDOUT.md"
